@@ -13,5 +13,4 @@
 //= require jquery
 //= require jquery_ujs
 //= require tabs
-//= require twitter/bootstrap
 //= require_tree .
