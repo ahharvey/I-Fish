@@ -1,0 +1,33 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  vessel_ref: MyString
+  vessel_name: MyString
+  grid_square: MyString
+  time_out: 2012-11-20 07:53:28
+  time_in: 2012-11-20 07:53:28
+  engine: MyString
+  fuel: MyString
+  sail: MyString
+  crew: MyString
+  boat_size: 1
+  gear_id: 1
+  quantity: 1
+  weight: 1
+  value: MyString
+
+two:
+  vessel_ref: MyString
+  vessel_name: MyString
+  grid_square: MyString
+  time_out: 2012-11-20 07:53:28
+  time_in: 2012-11-20 07:53:28
+  engine: MyString
+  fuel: MyString
+  sail: MyString
+  crew: MyString
+  boat_size: 1
+  gear_id: 1
+  quantity: 1
+  weight: 1
+  value: MyString

@@ -1,0 +1,39 @@
+<h1>Listing surveys</h1>
+
+<table>
+  <tr>
+    <th>Date</th>
+    <th>User</th>
+    <th>Start time</th>
+    <th>End time</th>
+    <th>Desa</th>
+    <th>Observer</th>
+    <th>Measure</th>
+    <th>Scribe</th>
+    <th>Fishery</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @surveys.each do |survey| %>
+  <tr>
+    <td><%= survey.date %></td>
+    <td><%= survey.user_id %></td>
+    <td><%= survey.start_time %></td>
+    <td><%= survey.end_time %></td>
+    <td><%= survey.desa_id %></td>
+    <td><%= survey.observer %></td>
+    <td><%= survey.measure %></td>
+    <td><%= survey.scribe %></td>
+    <td><%= survey.fishery %></td>
+    <td><%= link_to 'Show', survey %></td>
+    <td><%= link_to 'Edit', edit_survey_path(survey) %></td>
+    <td><%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Survey', new_survey_path %>

@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  family: MyString
+  genus: MyString
+  species: MyString
+  english_name: MyString
+  local_name: MyString
+  code: MyString
+
+two:
+  family: MyString
+  genus: MyString
+  species: MyString
+  english_name: MyString
+  local_name: MyString
+  code: MyString

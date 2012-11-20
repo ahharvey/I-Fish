@@ -1,0 +1,20 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Fish:</b>
+  <%= @catch.fish_id %>
+</p>
+
+<p>
+  <b>Length:</b>
+  <%= @catch.length %>
+</p>
+
+<p>
+  <b>Weight:</b>
+  <%= @catch.weight %>
+</p>
+
+
+<%= link_to 'Edit', edit_catch_path(@catch) %> |
+<%= link_to 'Back', catches_path %>

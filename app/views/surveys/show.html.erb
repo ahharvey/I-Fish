@@ -1,0 +1,50 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Date:</b>
+  <%= @survey.date %>
+</p>
+
+<p>
+  <b>User:</b>
+  <%= @survey.user_id %>
+</p>
+
+<p>
+  <b>Start time:</b>
+  <%= @survey.start_time %>
+</p>
+
+<p>
+  <b>End time:</b>
+  <%= @survey.end_time %>
+</p>
+
+<p>
+  <b>Desa:</b>
+  <%= @survey.desa_id %>
+</p>
+
+<p>
+  <b>Observer:</b>
+  <%= @survey.observer %>
+</p>
+
+<p>
+  <b>Measure:</b>
+  <%= @survey.measure %>
+</p>
+
+<p>
+  <b>Scribe:</b>
+  <%= @survey.scribe %>
+</p>
+
+<p>
+  <b>Fishery:</b>
+  <%= @survey.fishery %>
+</p>
+
+
+<%= link_to 'Edit', edit_survey_path(@survey) %> |
+<%= link_to 'Back', surveys_path %>

@@ -1,0 +1,15 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Code:</b>
+  <%= @gear.code %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%= @gear.name %>
+</p>
+
+
+<%= link_to 'Edit', edit_gear_path(@gear) %> |
+<%= link_to 'Back', gears_path %>

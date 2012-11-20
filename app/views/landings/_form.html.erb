@@ -1,0 +1,73 @@
+<%= form_for(@landing) do |f| %>
+  <% if @landing.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@landing.errors.count, "error") %> prohibited this landing from being saved:</h2>
+
+      <ul>
+      <% @landing.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :vessel_ref %><br />
+    <%= f.text_field :vessel_ref %>
+  </div>
+  <div class="field">
+    <%= f.label :vessel_name %><br />
+    <%= f.text_field :vessel_name %>
+  </div>
+  <div class="field">
+    <%= f.label :grid_square %><br />
+    <%= f.text_field :grid_square %>
+  </div>
+  <div class="field">
+    <%= f.label :time_out %><br />
+    <%= f.datetime_select :time_out %>
+  </div>
+  <div class="field">
+    <%= f.label :time_in %><br />
+    <%= f.datetime_select :time_in %>
+  </div>
+  <div class="field">
+    <%= f.label :engine %><br />
+    <%= f.text_field :engine %>
+  </div>
+  <div class="field">
+    <%= f.label :fuel %><br />
+    <%= f.text_field :fuel %>
+  </div>
+  <div class="field">
+    <%= f.label :sail %><br />
+    <%= f.text_field :sail %>
+  </div>
+  <div class="field">
+    <%= f.label :crew %><br />
+    <%= f.text_field :crew %>
+  </div>
+  <div class="field">
+    <%= f.label :boat_size %><br />
+    <%= f.number_field :boat_size %>
+  </div>
+  <div class="field">
+    <%= f.label :gear_id %><br />
+    <%= f.number_field :gear_id %>
+  </div>
+  <div class="field">
+    <%= f.label :quantity %><br />
+    <%= f.number_field :quantity %>
+  </div>
+  <div class="field">
+    <%= f.label :weight %><br />
+    <%= f.number_field :weight %>
+  </div>
+  <div class="field">
+    <%= f.label :value %><br />
+    <%= f.text_field :value %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

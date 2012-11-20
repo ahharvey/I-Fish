@@ -1,0 +1,25 @@
+<h1>Listing gears</h1>
+
+<table>
+  <tr>
+    <th>Code</th>
+    <th>Name</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @gears.each do |gear| %>
+  <tr>
+    <td><%= gear.code %></td>
+    <td><%= gear.name %></td>
+    <td><%= link_to 'Show', gear %></td>
+    <td><%= link_to 'Edit', edit_gear_path(gear) %></td>
+    <td><%= link_to 'Destroy', gear, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Gear', new_gear_path %>
