@@ -11,8 +11,7 @@
  *= require_self
  *= require base
  *= require layout
- *= require twitter/bootstrap
- *= require twitter/bootstrap-no-sprites
+ *= require twitter/bootstrap/
  *= require skeleton
  *= require_tree .
 */
