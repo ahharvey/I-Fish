@@ -1,3 +1,6 @@
+Desa.destroy_all
+Desa.create(name: "test1 desa")
+
 Fish.destroy_all
 Fish.create(family: "Squatinidae", genus: "Squatina", species: "australis", local_name: "Australian Angelshark", english_name: "Australian Angelshark", code: "111")
 Fish.create(family: "Muraenidae", genus: "Gymnothorax", species: "eurostus", local_name: "Abbott's Moray", english_name: "Abbott's Moray", code: "112")

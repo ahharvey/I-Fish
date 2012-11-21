@@ -54,5 +54,28 @@ class ImportExcelData
       end
     end
     
+    # Survey
+    if xls.sheets.include?('Survey')
+      xls.default_sheet = 'Survey'
+    
+      fishery = xls.cell(1,"B")
+      kabupaten = xls.cell(2,"B")
+      desa = xls.cell(3,"B")
+      date = xls.cell(4,"B")
+      start_time = xls.cell(5,"B")
+      end_time = xls.cell(6,"B")
+      fleet_observer = xls.cell(7,"B")
+      catch_scribe = xls.cell(8,"B")
+      catch_measure = xls.cell(9,"B")
+        
+      unless fishery.blank?
+        desa_id = Desa.where("name = ?", desa).first.id rescue nil
+        
+        Survey.create(fishery: fishery, desa_id: desa_id, date: date, 
+          start_time: start_time, end_time: end_time, observer: fleet_observer,
+        scribe: catch_scribe, measure: catch_measure)
+      end
+    end
+    
   end
 end

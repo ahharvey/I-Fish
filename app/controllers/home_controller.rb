@@ -1,5 +1,3 @@
-require 'import_excel_data'
-
 class HomeController < ApplicationController
   def index
   end
@@ -11,7 +9,6 @@ class HomeController < ApplicationController
   def process_upload_data
     excel_file = ExcelFile.new(file: params[:file])
     if excel_file.save
-      ImportExcelData.working_based_sheet(excel_file.id)
       flash[:success] = "Successfully upload data to database"
     else
       flash[:danger] = "Failed to upload data"
