@@ -13,7 +13,7 @@
 
   <div class="field">
     <%= f.label :fish_id %><br />
-    <%= f.number_field :fish_id %>
+    <%= f.select :fish_id, options_from_collection_for_select(@fish, 'id', 'english_name', @catch.fish_id) %>
   </div>
   <div class="field">
     <%= f.label :length %><br />

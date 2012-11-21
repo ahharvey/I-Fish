@@ -1,0 +1,26 @@
+<div style="border:1px solid #cdcdcd">
+  <h3>Upload file to database</h3>
+<%= form_tag home_process_upload_data_path, :class => "form-inline", multipart: true do %>
+  <%= file_field_tag "file" %>
+  <%= submit_tag "submit", :class => "btn btn-success"%>
+<% end %>
+</div>
+
+<h1>Listing uploaded files</h1>
+
+<table class="table-bordered table-striped table table-hover">
+  <tr>
+    <th>Filename</th>
+    <th>Filesize</th>
+  </tr>
+
+  <% @files.each do |file| %>
+    <tr>
+      <td><%= file.filename %></td>
+      <td><%= file.filesize %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+

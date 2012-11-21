@@ -1,23 +1,23 @@
 <h1>Listing gears</h1>
 
-<table>
+<table class="table-bordered table-striped table table-hover">
   <tr>
     <th>Code</th>
     <th>Name</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
-<% @gears.each do |gear| %>
-  <tr>
-    <td><%= gear.code %></td>
-    <td><%= gear.name %></td>
-    <td><%= link_to 'Show', gear %></td>
-    <td><%= link_to 'Edit', edit_gear_path(gear) %></td>
-    <td><%= link_to 'Destroy', gear, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-  </tr>
-<% end %>
+  <% @gears.each do |gear| %>
+    <tr>
+      <td><%= gear.code %></td>
+      <td><%= gear.name %></td>
+      <td>
+        <%= link_to 'Show', gear %>
+        <%= link_to 'Edit', edit_gear_path(gear) %>
+        <%= link_to 'Destroy', gear, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
 </table>
 
 <br />
