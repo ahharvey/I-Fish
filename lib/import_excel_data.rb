@@ -1,12 +1,13 @@
 class ImportExcelData
   def self.working_based_sheet(id)
     xl_file = ExcelFile.find(id)
-    xls = Excelx.new(xl_file.file.url)
+    xls = Excelx.new(xl_file.file.path)
     sheets = xls.sheets
 
     # form A
-    unless xls.sheets['Form A - Fleet'].blank?
-      xls.default_sheet = xls.sheets['Form A - Fleet']
+    
+    if xls.sheets.include?('Form A - Fleet')
+      xls.default_sheet = 'Form A - Fleet'
     
     
       for i in 2..xls.last_row
@@ -31,14 +32,14 @@ class ImportExcelData
       
           Landing.create(vessel_ref: reg, vessel_name: name, engine: engine, sail: sail,
             fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time,
-            time_out: dep_time, gear: gear_id)
+            time_out: dep_time, gear_id: gear_id)
         end
       end
     end
     
     # form B
-    unless xls.sheets['Form B - Catch'].blank?
-      xls.default_sheet = xls.sheets['Form B - Catch']
+    if xls.sheets.include?('Form B - Catch')
+      xls.default_sheet = 'Form B - Catch'
     
     
       for i in 2..xls.last_row
