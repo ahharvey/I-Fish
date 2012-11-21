@@ -7,7 +7,7 @@ ExportXls::Application.routes.draw do
   resources :gears
   resources :fish
 
-  devise_for :users
+  devise_for :users, :controllers => { :registrations => "registrations" }  
   
   get 'home/upload_data'
   post 'home/process_upload_data'
