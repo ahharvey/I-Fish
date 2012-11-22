@@ -1,5 +1,7 @@
 class HomeController < ApplicationController
   require 'mail'
+
+  skip_before_filter :authenticate_user!, :verify_authenticity_token, :only => [:import_mail]
     
   def index
   end
