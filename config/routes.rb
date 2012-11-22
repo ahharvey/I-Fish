@@ -11,6 +11,6 @@ ExportXls::Application.routes.draw do
   
   get 'home/upload_data'
   post 'home/process_upload_data'
-  match '/import_mail' => 'home/import_mail'
+  match '/import_mail' => 'home#import_mail'
   root :to => 'home#index'
 end
