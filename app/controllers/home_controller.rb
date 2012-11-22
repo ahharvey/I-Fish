@@ -10,12 +10,12 @@ class HomeController < ApplicationController
   
   def process_upload_data
     excel_file = ExcelFile.new(file: params[:file])
+
     if excel_file.save
       flash[:success] = "Successfully upload data to database"
     else
       flash[:danger] = "Failed to upload data"
     end
-    
     redirect_to home_upload_data_url
   end
 
@@ -32,6 +32,7 @@ class HomeController < ApplicationController
         excel_info = File.open(file)
         excel_file = ExcelFile.new(file: excel_info)
         excel_info.close
+        
         if excel_file.save
           logger.info("import by email : Successfully upload data to database")
           ["success", 200]
