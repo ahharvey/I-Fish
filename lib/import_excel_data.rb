@@ -1,7 +1,7 @@
 class ImportExcelData
   def self.working_based_sheet(id)
     xl_file = ExcelFile.find(id)
-    xls = Excelx.new(xl_file.file.path)
+    xls = Excelx.new(xl_file.file.path, :zip, :warning)
     sheets = xls.sheets
 
     # form A
