@@ -36,8 +36,7 @@ class HomeController < ApplicationController
             "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
           end
         end
-        encrypted = message.attachments.first.read
-        File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(encrypted) }
+        File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(message.attachments.first.read) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
         excel_file = ExcelFile.new(file: excel_info)
