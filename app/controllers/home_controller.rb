@@ -33,10 +33,11 @@ class HomeController < ApplicationController
           begin
             message.attachments.first.filename
           rescue
-            "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.xlsx"
+            "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
           end
         end
-        File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(attached.decoded) }
+        
+        File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(message.attachments.first.decoded) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
         excel_file = ExcelFile.new(file: excel_info)
