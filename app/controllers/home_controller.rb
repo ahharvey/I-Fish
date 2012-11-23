@@ -36,7 +36,7 @@ class HomeController < ApplicationController
             "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
           end
         end
-        logger.info(params[:message])
+        logger.info(params)
         encrypted = message.attachments.first.decoded
         File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(encrypted) }
         file = Rails.root+"/tmp/"+filename
