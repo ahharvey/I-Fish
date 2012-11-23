@@ -22,7 +22,7 @@ class HomeController < ApplicationController
   end
 
   def import_mail
-    params[:message] = Base64.encode64(params[:message]).encode('utf-8')
+#    message = Base64.encode64(params[:message]).encode('utf-8')
     message = Mail.new(params[:message])
     email = message.from.first
 
