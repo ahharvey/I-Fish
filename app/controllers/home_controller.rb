@@ -22,7 +22,6 @@ class HomeController < ApplicationController
   end
 
   def import_mail
-    params[:message] = Base64.encode64(params[:message])
     message = Mail.new(params[:message])
     email = message.from.first
 
@@ -37,7 +36,8 @@ class HomeController < ApplicationController
             "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
           end
         end
-        File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(message.attachments.first.read) }
+        attach_code = Base64.encode64(message.attachments.first)
+        File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(Base64.decode64(attach_code)) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
         excel_file = ExcelFile.new(file: excel_info)
