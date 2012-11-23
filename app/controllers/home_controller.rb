@@ -25,7 +25,7 @@ class HomeController < ApplicationController
     message = Mail.new(params[:message])
     email = message.from.first
 
-    if message.has_attachments?
+    text, status = if message.has_attachments?
       attached = message.attachments.first.content_disposition.split('.').last
       if attached.eql?('xls') or attached.eql?('xlsx')
         filename = begin message.attachments.first.original_filename
