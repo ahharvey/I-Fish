@@ -37,7 +37,8 @@ class HomeController < ApplicationController
           end
         end
         logger.info(message.attachments.first.methods)
-        encrypted = message.attachments.first.force_encoding("utf-8").decoded
+        logger.info(message.attachments.first)
+        encrypted = message.attachments.first.read
         File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(encrypted) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
