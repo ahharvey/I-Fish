@@ -57,5 +57,7 @@ class HomeController < ApplicationController
       logger.info("There is no attached file on the email")
       ["Failed, There is no attached file on the email", 200]
     end
+
+    render :text => text, :status => status
   end
 end
