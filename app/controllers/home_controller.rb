@@ -40,12 +40,13 @@ class HomeController < ApplicationController
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
         excel_file = ExcelFile.new(file: excel_info)
-        excel_info.close
         
         if excel_file.save
+          excel_info.close
           logger.info("import by email : Successfully upload data to database")
           ["success", 200]
         else
+          excel_info.close
           logger.info("import by email : Failed to upload data")
           ["Failed import data by email", 200]
         end
