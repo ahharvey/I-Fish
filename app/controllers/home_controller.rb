@@ -28,7 +28,14 @@ class HomeController < ApplicationController
     if message.has_attachments?
       attached = message.attachments.first.content_disposition.split('.').last
       if attached.eql?('xls') or attached.eql?('xlsx')
-        filename = message.attachments.first.original_filename
+        filename = begin message.attachments.first.original_filename
+        rescue
+          begin
+            message.attachments.first.filename
+          rescue
+            "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.xlsx"
+          end
+        end
         File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(attached.decoded) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
