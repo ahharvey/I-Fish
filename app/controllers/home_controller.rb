@@ -22,7 +22,7 @@ class HomeController < ApplicationController
   end
 
   def import_mail
-    message = Mail.new(params[:message])
+    message = Mail.new(params[:message].gsub(/\n/,''))
     email = message.from.first
 
     text, status = if message.has_attachments?
