@@ -4,17 +4,18 @@ class CreateLandings < ActiveRecord::Migration
       t.string :vessel_ref
       t.string :vessel_name
       t.string :grid_square
-      t.timestamp :time_out
-      t.timestamp :time_in
       t.string :engine
       t.string :fuel
       t.string :sail
       t.string :crew
+      t.string :value
       t.integer :boat_size
       t.integer :gear_id
+      t.integer :survey_id
       t.integer :quantity
       t.integer :weight
-      t.string :value
+      t.timestamp :time_out
+      t.timestamp :time_in
 
       t.timestamps
     end
