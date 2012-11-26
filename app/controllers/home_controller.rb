@@ -59,13 +59,13 @@ class HomeController < ApplicationController
           logger.info("import by email : Failed to upload data")
           ["Failed import data by email", 200]
         end
-      elsif email.blank?
-        logger.info("import by email : Failed to upload data")
-        ["The email address not registered on our app.", 200]
       else
         logger.info("There is no excel file on the email")
         ["Failed, There is no excel file on the email", 200]
       end
+    elsif email.blank?
+      logger.info("import by email : Failed to upload data")
+      ["The email address not registered on our app.", 200]
     else
       logger.info("There is no attached file on the email")
       ["Failed, There is no attached file on the email", 200]
@@ -74,7 +74,7 @@ class HomeController < ApplicationController
     render :text => text, :status => status
   end
 
-   def user_profile
+  def user_profile
     @surveys = current_user.surveys.order("date_published")
     1.upto(12) { |i| instance_variable_set("@month_#{i}", 0) }
     @surveys.each do |survey|
