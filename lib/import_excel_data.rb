@@ -22,7 +22,7 @@ class ImportExcelData
         sail = xls.cell(i,"J")
         fuel = xls.cell(i,"K")
         crew = xls.cell(i,"L")
-        gear = xls.cell(i,"M").downcase
+        gear = xls.cell(i,"M").downcase rescue ''
         weight = xls.cell(i,"N")
         qty = xls.cell(i,"O")
         value = xls.cell(i,"P")
@@ -43,7 +43,7 @@ class ImportExcelData
     
     
       for i in 2..xls.last_row
-        species = xls.cell(i,"B").downcase
+        species = xls.cell(i,"B").downcase  rescue ''
         length = xls.cell(i,"C")
         weight = xls.cell(i,"D")
         unless species.blank?
@@ -58,9 +58,9 @@ class ImportExcelData
     if xls.sheets.include?('Survey')
       xls.default_sheet = 'Survey'
     
-      fishery = xls.cell(1,"B").downcase
+      fishery = xls.cell(1,"B").downcase  rescue ''
       kabupaten = xls.cell(2,"B")
-      code_desa = xls.cell(3,"B").downcase
+      code_desa = xls.cell(3,"B").downcase  rescue ''
       date = xls.cell(4,"B")
       start_time = xls.cell(5,"B")
       end_time = xls.cell(6,"B")

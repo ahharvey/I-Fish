@@ -5,4 +5,6 @@ class Survey < ActiveRecord::Base
   belongs_to :user
   belongs_to :fishery
   belongs_to :desa
+
+  has_many :landings
 end
