@@ -83,7 +83,7 @@ class HomeController < ApplicationController
     @surveys = current_user.surveys.order("date_published")
     1.upto(12) { |i| instance_variable_set("@month_#{i}", 0) }
     @surveys.each do |survey|
-      instance_variable_set("@month_#{survey.date_published.month}", survey.landings.map(&:weight)/survey.landings.map(&:length))
+      instance_variable_set("@month_#{survey.date_published.month}", (survey.landings.map(&:weight).sum/survey.landings.map(&:length).sum rescue 0))
     end
   end
 end
