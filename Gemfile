@@ -3,7 +3,6 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'inherited_resources'
 gem 'pg'
-gem 'mysql2', '0.3.11'
 gem 'omniauth'
 gem 'devise'
 gem 'skeleton-rails'
@@ -19,4 +18,5 @@ end
 
 group :development do
   gem 'debugger'
+  gem 'mysql2', '0.3.11'
 end

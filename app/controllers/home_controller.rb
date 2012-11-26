@@ -24,9 +24,9 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message].gsub(/\n/,''))
-    email = message.from.first
+    email = User.where(:email => message.from.first)
 
-    text, status = if message.has_attachments?
+    text, status = if !email.blank? and message.has_attachments?
       attached = message.attachments.first.content_disposition.split('.').last
       if attached.eql?('xls') or attached.eql?('xlsx')
         filename = begin message.attachments.first.original_filename
@@ -39,12 +39,13 @@ class HomeController < ApplicationController
         end
         logger.info("testing... lihat aku woyyy"+message.attachments.first.content_transfer_encoding.to_s)
         attach_code = message.attachments.first.sub(/^\$*/, '').unpack('m').gsub(/\n/,'')
-#        attach_code = ActiveSupport::Base64.decode64(message.attachments.first).gsub(/\n/,'')
-#        attach_code = message.attachments.first.decoded.gsub(/\n/,'')
+        #        attach_code = ActiveSupport::Base64.decode64(message.attachments.first).gsub(/\n/,'')
+        #        attach_code = message.attachments.first.decoded.gsub(/\n/,'')
         File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(attach_code.gsub(/\n/,'')) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
-        excel_file = ExcelFile.new(file: excel_info)
+        parameters = {file: excel_info, user_id: email.id}
+        excel_file = ExcelFile.new(parameters)
         
         if excel_file.save
           excel_info.close
@@ -55,6 +56,9 @@ class HomeController < ApplicationController
           logger.info("import by email : Failed to upload data")
           ["Failed import data by email", 200]
         end
+      elsif email.blank?
+        logger.info("import by email : Failed to upload data")
+        ["The email address not registered on our app.", 200]
       else
         logger.info("There is no excel file on the email")
         ["Failed, There is no excel file on the email", 200]
