@@ -1,5 +1,5 @@
 class ImportExcelData
-  def self.working_based_sheet(id)
+  def self.working_based_sheet(id, user_id)
     xl_file = ExcelFile.find(id)
     xls = Excelx.new(xl_file.file.path)
     sheets = xls.sheets
@@ -30,7 +30,7 @@ class ImportExcelData
         unless reg.blank?
           gear_id = Gear.where("name = ?", gear).first.id rescue nil
       
-          Landing.create(vessel_ref: reg, vessel_name: name, engine: engine, sail: sail,
+          Landing.create(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail,
             fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time,
             time_out: dep_time, gear_id: gear_id)
         end
@@ -69,11 +69,12 @@ class ImportExcelData
       catch_measure = xls.cell(9,"B")
         
       unless fishery.blank?
-        desa_id = Desa.where("name = ?", desa).first.id rescue nil
-        
-        Survey.create(fishery: fishery, desa_id: desa_id, date: date, 
+        desa_id = Desa.where("name = ? AND kabupaten = ?", desa, kabupaten).first.id rescue nil
+        fishery_id = Fishery.where("name = ?", fishery).first.id rescue nil
+
+        Survey.create(fishery: fishery, fishery_id: fishery_id, desa_id: desa_id, date: date, 
           start_time: start_time, end_time: end_time, observer: fleet_observer,
-        scribe: catch_scribe, measure: catch_measure)
+        scribe: catch_scribe, measure: catch_measure, user_id: user_id)
       end
     end
     

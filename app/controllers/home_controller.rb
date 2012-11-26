@@ -11,7 +11,8 @@ class HomeController < ApplicationController
   end
   
   def process_upload_data
-    excel_file = ExcelFile.new(file: params[:file])
+    params = {file: params[:file], user_id: current_user.id}
+    excel_file = ExcelFile.new(params)
 
     if excel_file.save
       flash[:success] = "Successfully upload data to database"

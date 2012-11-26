@@ -1,5 +1,7 @@
 ExportXls::Application.routes.draw do
 
+  resources :fisheries
+
   resources :catches
   resources :landings
   resources :desas

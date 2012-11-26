@@ -1,10 +1,10 @@
-<%= form_for(@desa) do |f| %>
-  <% if @desa.errors.any? %>
+<%= form_for(@fishery) do |f| %>
+  <% if @fishery.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@desa.errors.count, "error") %> prohibited this desa from being saved:</h2>
+      <h2><%= pluralize(@fishery.errors.count, "error") %> prohibited this fishery from being saved:</h2>
 
       <ul>
-      <% @desa.errors.full_messages.each do |msg| %>
+      <% @fishery.errors.full_messages.each do |msg| %>
         <li><%= msg %></li>
       <% end %>
       </ul>
@@ -15,12 +15,10 @@
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </div>
-
   <div class="field">
-    <%= f.label :kabupaten %><br />
-    <%= f.text_field :kabupaten %>
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
   </div>
-
   <div class="actions">
     <%= f.submit %>
   </div>
