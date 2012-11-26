@@ -13,12 +13,9 @@
 
   <div class="field">
     <%= f.label :date %><br />
-    <%= f.date_select :date %>
+    <%= f.date_select :date_published %>
   </div>
-  <div class="field">
-    <%= f.label :user_id %><br />
-    <%= f.number_field :user_id %>
-  </div>
+    <%= f.hidden_field :user_id %>
   <div class="field">
     <%= f.label :start_time %><br />
     <%= f.datetime_select :start_time %>
@@ -28,8 +25,8 @@
     <%= f.datetime_select :end_time %>
   </div>
   <div class="field">
-    <%= f.label :desa_id %><br />
-    <%= f.number_field :desa_id %>
+    <%= "Desa" %><br />
+    <%= f.select :desa_id, options_for_select(Desa.all.collect {|d|[d.name, d.id]}) %>
   </div>
   <div class="field">
     <%= f.label :fleet_observer %><br />
@@ -44,8 +41,8 @@
     <%= f.text_field :catch_scribe %>
   </div>
   <div class="field">
-    <%= f.label :fishery %><br />
-    <%= f.text_field :fishery %>
+    <%= "Fishery" %><br />
+    <%= f.select :fishery_id, options_for_select(Fishery.all.collect {|d|[d.name, d.id]}) %>
   </div>
   <div class="actions">
     <%= f.submit %>

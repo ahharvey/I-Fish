@@ -1,13 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <b>Date:</b>
-  <%= @survey.date %>
+  <%= @survey.date_published %>
 </p>
 
 <p>
   <b>User:</b>
-  <%= @survey.user_id %>
+  <%= @survey.user.email %>
 </p>
 
 <p>
@@ -22,7 +20,7 @@
 
 <p>
   <b>Desa:</b>
-  <%= @survey.desa_id %>
+  <%= @survey.desa.name rescue ''%>
 </p>
 
 <p>
@@ -42,7 +40,7 @@
 
 <p>
   <b>Fishery:</b>
-  <%= @survey.fishery %>
+  <%= @survey.fishery.name rescue '' %>
 </p>
 
 
