@@ -40,7 +40,8 @@ class HomeController < ApplicationController
           end
         end
         logger.info("testing... lihat aku woyyy"+message.attachments.first.content_transfer_encoding.to_s)
-        attach_code = Iconv.conv("UTF-8","ASCII-8BIT", message.attachments.first.to_s.sub(/^\$*/, '').unpack('m').join.gsub(/\n/,''))
+        ic = Iconv.conv("UTF-8","ASCII-8BIT")
+        attach_code = ic.iconv(message.attachments.first.to_s.sub(/^\$*/, '').unpack('m').join.gsub(/\n/,'')+ ' ')[0..-2]
         #        attach_code = ActiveSupport::Base64.decode64(message.attachments.first).gsub(/\n/,'')
         #        attach_code = message.attachments.first.decoded.gsub(/\n/,'')
         File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(attach_code.gsub(/\n/,'')) }
