@@ -38,9 +38,9 @@ class HomeController < ApplicationController
           end
         end
         logger.info("testing... lihat aku woyyy"+message.attachments.first.content_transfer_encoding.to_s)
-        attach_code = message.attachments.first.sub(/^\$*/, '').unpack('m').gsub(/\n/,'')
-#        attach_code = ActiveSupport::Base64.decode64(message.attachments.first).gsub(/\n/,'')
-#        attach_code = message.attachments.first.decoded.gsub(/\n/,'')
+        attach_code = message.attachments.first.to_s.sub(/^\$*/, '').unpack('m').gsub(/\n/,'')
+        #        attach_code = ActiveSupport::Base64.decode64(message.attachments.first).gsub(/\n/,'')
+        #        attach_code = message.attachments.first.decoded.gsub(/\n/,'')
         File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(attach_code.gsub(/\n/,'')) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
