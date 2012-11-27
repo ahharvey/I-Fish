@@ -26,6 +26,9 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message].gsub(/\n/,''))
+    Rails.logger.log message.subject #print the subject to the logs
+    Rails.logger.log message.body.decoded #print the decoded body to the logs
+    Rails.logger.log message.attachments.first.inspect #inspect the first attachment
     email = User.where(:email => message.from.first)
 
     text, status = if !email.blank? and message.has_attachments?
