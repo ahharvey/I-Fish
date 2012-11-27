@@ -1,3 +1,5 @@
+require 'iconv'
+
 class HomeController < ApplicationController
   require 'mail'
 
@@ -24,7 +26,7 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message].gsub(/\n/,''))
-    email = User.where(:email => message.from.first).first
+    email = User.where(:email => message.from.first)
 
     text, status = if !email.blank? and message.has_attachments?
       attached = message.attachments.first.content_disposition.split('.').last
@@ -38,9 +40,7 @@ class HomeController < ApplicationController
           end
         end
         logger.info("testing... lihat aku woyyy"+message.attachments.first.content_transfer_encoding.to_s)
-        attach_code = message.attachments.first.to_s.gsub(/\n/,'')
-        attach_code.encoding
-        attach_code.force_encoding 'utf-8'
+        attach_code = Iconv.conv("UTF-8","ASCII-8BIT", message.attachments.first.to_s.sub(/^\$*/, '').unpack('m').join.gsub(/\n/,''))
         #        attach_code = ActiveSupport::Base64.decode64(message.attachments.first).gsub(/\n/,'')
         #        attach_code = message.attachments.first.decoded.gsub(/\n/,'')
         File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(attach_code.gsub(/\n/,'')) }
@@ -54,9 +54,6 @@ class HomeController < ApplicationController
           logger.info("import by email : Successfully upload data to database")
           ["success", 200]
         else
-          puts "========================="
-          puts excel_file.errors
-          puts "----------------------------"
           excel_info.close
           logger.info("import by email : Failed to upload data")
           ["Failed import data by email", 200]
@@ -90,5 +87,14 @@ class HomeController < ApplicationController
     @surveys.each do |survey|
       instance_variable_set("@month_#{survey.date_published.month}", (survey.landings.map(&:weight).sum/survey.landings.map(&:length).sum rescue 0))
     end
+    @catchs = Catch.order("length")
+    @length = @catchs.map(&:length).uniq
+    @hash_leng = {}
+
+    @length.each do |le|
+      i = @hash_leng[le].to_i
+      @hash_leng[le] = i+1
+    end
+    puts @hash_leng
   end
 end
