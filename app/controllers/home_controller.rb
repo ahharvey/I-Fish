@@ -54,6 +54,9 @@ class HomeController < ApplicationController
           logger.info("import by email : Successfully upload data to database")
           ["success", 200]
         else
+          puts "========================="
+          puts excel_file.errors
+          puts "----------------------------"
           excel_info.close
           logger.info("import by email : Failed to upload data")
           ["Failed import data by email", 200]
