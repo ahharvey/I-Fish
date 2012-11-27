@@ -29,8 +29,9 @@ class HomeController < ApplicationController
      logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
      logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
      logger.info(message.from.first)
-     logger.info(message.attachments.first.original_filename)
+     logger.info(message.attachments.first.methods)
      logger.info(message.attachments)
+     logger.info(params[:attachments][0])
     logger.info("===============================================================")
     email = User.where(:email => message.from.first)
 
