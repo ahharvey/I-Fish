@@ -1,5 +1,3 @@
-require 'iconv'
-
 class HomeController < ApplicationController
   require 'mail'
 
@@ -25,10 +23,15 @@ class HomeController < ApplicationController
   end
 
   def import_mail
-    message = Mail.new(params[:message].gsub(/\n/,''))
+    message = Mail.new(params[:message])
+    logger.info("===============================================================")
      logger.info(message.subject) #print the subject to the logs
-     logger.info(message.body.decoded) #print the decoded body to the logs
-     logger.info(message.attachments.first.inspect) #inspect the first attachment
+     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
+     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
+     logger.info(message.from.first)
+     logger.info(message.attachments.first.original_filename)
+     logger.info(message.attachments)
+    logger.info("===============================================================")
     email = User.where(:email => message.from.first)
 
     text, status = if !email.blank? and message.has_attachments?
@@ -42,11 +45,9 @@ class HomeController < ApplicationController
             "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
           end
         end
-        logger.info("testing... lihat aku woyyy"+message.attachments.first.content_transfer_encoding.to_s)
-        attach_code = Iconv.conv("UTF-8","ASCII-8BIT", message.attachments.first.to_s.sub(/^\$*/, '').unpack('m').join.gsub(/\n/,''))
-        #        attach_code = ActiveSupport::Base64.decode64(message.attachments.first).gsub(/\n/,'')
-        #        attach_code = message.attachments.first.decoded.gsub(/\n/,'')
-        File.open(Rails.root+"/tmp/"+filename, "w+") { |file| file.write(attach_code.gsub(/\n/,'')) }
+        logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
+        attach_code = message.attachments.first.decoded
+        File.open(Rails.root+"/tmp/"+filename, "wb") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
         parameters = {file: excel_info, user_id: email.id}
@@ -58,6 +59,7 @@ class HomeController < ApplicationController
           ["success", 200]
         else
           excel_info.close
+          logger.info(excel_file.errors)
           logger.info("import by email : Failed to upload data")
           ["Failed import data by email", 200]
         end
