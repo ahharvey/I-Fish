@@ -24,7 +24,7 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message].gsub(/\n/,''))
-    email = User.where(:email => message.from.first)
+    email = User.where(:email => message.from.first).first
 
     text, status = if !email.blank? and message.has_attachments?
       attached = message.attachments.first.content_disposition.split('.').last
