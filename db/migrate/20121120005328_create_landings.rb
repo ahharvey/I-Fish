@@ -1,6 +1,8 @@
 class CreateLandings < ActiveRecord::Migration
   def change
     create_table :landings do |t|
+      t.string :power
+      t.string :fishing_area
       t.string :vessel_ref
       t.string :vessel_name
       t.string :grid_square
