@@ -1,7 +1,6 @@
 class AddSomeFieldsToTables < ActiveRecord::Migration
   def change
     add_column :excel_files, :user_id, :integer
-    add_column :desas, :kabupaten, :string
     add_column :surveys, :fishery_id, :integer
     add_column :landings, :type, :string
     remove_column :surveys, :observer
