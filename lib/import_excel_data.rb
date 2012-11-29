@@ -4,7 +4,7 @@ class ImportExcelData
   def self.working_based_sheet(id, user_id)
     xl_file = ExcelFile.find(id)
     
-    if xl_file.file.file.extension
+    if xl_file.file.file.extension.eql?("xls")
       xls = Excel.new(xl_file.file.path)
     else
       xls = Excelx.new(xl_file.file.path)
@@ -79,9 +79,9 @@ class ImportExcelData
         desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
         fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
 
-        Survey.create(fishery: fishery, fishery_id: fishery_id, desa_id: desa_id, date: date, 
-          start_time: start_time, end_time: end_time, observer: fleet_observer,
-          scribe: catch_scribe, measure: catch_measure, user_id: user_id)
+        Survey.create(fishery_id: fishery_id, desa_id: desa_id, date_published: date, 
+          start_time: start_time, end_time: end_time, fleet_observer: fleet_observer,
+          catch_scribe: catch_scribe, catch_measure: catch_measure, user_id: user_id)
       end
     end
     

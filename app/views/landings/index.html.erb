@@ -1,5 +1,5 @@
 <h1>Listing landings</h1>
-
+<% begin %>
 <table class="table-bordered table-striped table table-hover">
   <tr>
     <th>Vessel reg</th>
@@ -47,5 +47,7 @@
 </table>
 
 <br />
+<% rescue %>
 
+<% end %>
 <%= link_to 'New Landing', new_landing_path %>
