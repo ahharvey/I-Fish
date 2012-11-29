@@ -51,7 +51,6 @@ class HomeController < ApplicationController
         end
         logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
         attach_code = message.attachments.first.decoded
-        logger.info(attach_code)
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
@@ -65,6 +64,7 @@ class HomeController < ApplicationController
           ["success", 200]
         else
           excel_info.close
+          logger.info(attach_code)
           logger.info(excel_file.errors)
           logger.info("import by email : Failed to upload data")
           ["Failed import data by email", 200]
