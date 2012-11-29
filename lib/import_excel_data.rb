@@ -1,7 +1,14 @@
+require 'iconv'
+
 class ImportExcelData
   def self.working_based_sheet(id, user_id)
     xl_file = ExcelFile.find(id)
-    xls = Excelx.new(xl_file.file.path)
+    
+    if xl_file.file.file.extension
+      xls = Excel.new(xl_file.file.path)
+    else
+      xls = Excelx.new(xl_file.file.path)
+    end
     sheets = xls.sheets
 
     # form A
@@ -74,7 +81,7 @@ class ImportExcelData
 
         Survey.create(fishery: fishery, fishery_id: fishery_id, desa_id: desa_id, date: date, 
           start_time: start_time, end_time: end_time, observer: fleet_observer,
-        scribe: catch_scribe, measure: catch_measure, user_id: user_id)
+          scribe: catch_scribe, measure: catch_measure, user_id: user_id)
       end
     end
     
