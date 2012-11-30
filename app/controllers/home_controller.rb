@@ -29,14 +29,14 @@ class HomeController < ApplicationController
     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
     logger.info(message.from.first)
-    logger.info(message.attachments.first.methods)
+#    logger.info(message.attachments.first.methods)
     logger.info(message.attachments.first.attachment?)
     logger.info(message.attachments.first.has_attachments?)
     logger.info(message.attachments.first.decode_body)
     logger.info(message.attachments.first.read)
     logger.info(message.attachments)
     logger.info(message.attachments.class)
-    logger.info(message.attachments.to_a)
+    logger.info(message.attachments.read.first)
     logger.info("===============================================================")
 #    email = User.where(:email => message.from.first)
 
@@ -87,7 +87,7 @@ class HomeController < ApplicationController
     #      ["Failed, There is no attached file on the email", 200]
     #    end
 
-    render :text => text, :status => status
+    render :text => "test", :status => status
   end
 
   def user_profile
