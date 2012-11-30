@@ -60,7 +60,6 @@ class HomeController < ApplicationController
         logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
         code_file = Base64.encode64(message.attachments.first)
         attach_code = Base64.decode64(code_file)
-        file = File.open("public/text.xlsx", "wb")
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
