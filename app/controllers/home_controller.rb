@@ -29,65 +29,60 @@ class HomeController < ApplicationController
     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
     logger.info(message.from.first)
-#    logger.info(message.attachments.first.methods)
-#    logger.info(message.attachments.first.attachment?)
-#    logger.info(message.attachments.first.has_attachments?)
+    logger.info(message.attachments.first.methods)
+    logger.info(message.attachments.first.attachment?)
+    logger.info(message.attachments.first.has_attachments?)
     logger.info(message.attachments.first.decode_body)
-#    logger.info(message.attachments.first.read)
+    logger.info(message.attachments.first.read)
     logger.info(message.attachments)
-    logger.info(message.attachments.class)
-    logger.info(message.attachments.first.read.first)
     logger.info("===============================================================")
-#    email = User.where(:email => message.from.first)
+    email = User.where(:email => message.from.first)
 
-    #    text, status = if !email.blank? and message.has_attachments?
-    #      attached = message.attachments.first.content_disposition.split('.').last
-    #      if attached.eql?('xls') or attached.eql?('xlsx') or !attached.blank?
-    #        filename = begin message.attachments.first.original_filename
-    #        rescue
-    #          begin
-    #            message.attachments.first.filename
-    #          rescue
-    #            "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
-    #          end
-    #        end
-    #        
-    #        logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
-    #        attach_code = message.attachments.first.decoded
-    #        logger.info("99999999999999999999")
-    #        logger.info(attach_code.class)
-    #        File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
-    #        file = Rails.root+"/tmp/"+filename
-    #        excel_info = File.open(file)
-    #        parameters = {file: excel_info, user_id: email.id}
-    #        excel_file = ExcelFile.new(parameters)
-    ##        logger.info(excel_file)
-    #        
-    #        if excel_file.save
-    #          excel_info.close
-    #          logger.info("import by email : Successfully upload data to database")
-    #          ["success", 200]
-    #        else
-    #          excel_info.close
-    #          logger.info(attach_code)
-    #          logger.info(excel_file.errors)
-    #          logger.info("import by email : Failed to upload data2")
-    #          ["Failed import data by email", 200]
-    #        end
-    #      else
-    #        logger.info("There is no excel file on the email")
-    #        ["Failed, There is no excel file on the email", 200]
-    #      end
-    #    elsif email.blank?
-    #      logger.info("blank")
-    #      logger.info("import by email : Failed to upload data")
-    #      ["The email address not registered on our app.", 200]
-    #    else
-    #      logger.info("There is no attached file on the email")
-    #      ["Failed, There is no attached file on the email", 200]
-    #    end
+    text, status = if !email.blank? and message.has_attachments?
+      attached = message.attachments.first.content_disposition.split('.').last
+      if attached.eql?('xls') or attached.eql?('xlsx')
+        filename = begin message.attachments.first.original_filename
+        rescue
+          begin
+            message.attachments.first.filename
+          rescue
+            "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
+          end
+        end
+        
+        logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
+        attach_code = message.attachments.first.decoded
+        File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
+        file = Rails.root+"/tmp/"+filename
+        excel_info = File.open(file)
+        parameters = {file: excel_info, user_id: email.id}
+        excel_file = ExcelFile.new(parameters)
+        logger.info(excel_file)
+        
+        if excel_file.save
+          excel_info.close
+          logger.info("import by email : Successfully upload data to database")
+          ["success", 200]
+        else
+          excel_info.close
+          logger.info(attach_code)
+          logger.info(excel_file.errors)
+          logger.info("import by email : Failed to upload data")
+          ["Failed import data by email", 200]
+        end
+      else
+        logger.info("There is no excel file on the email")
+        ["Failed, There is no excel file on the email", 200]
+      end
+    elsif email.blank?
+      logger.info("import by email : Failed to upload data")
+      ["The email address not registered on our app.", 200]
+    else
+      logger.info("There is no attached file on the email")
+      ["Failed, There is no attached file on the email", 200]
+    end
 
-    render :text => "test", :status => status
+    render :text => text, :status => status
   end
 
   def user_profile
