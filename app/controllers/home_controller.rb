@@ -29,15 +29,16 @@ class HomeController < ApplicationController
     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
     logger.info(message.from.first)
-    logger.info(message.attachments.first.methods.sort)
+#    logger.info(message.attachments.first.methods.sort)
     logger.info(message.attachments.first.attachment?)
     logger.info(message.attachments.first.has_attachments?)
     logger.info(message.attachments.first.decode_body)
     logger.info(message.attachments.first.read)
-    logger.info(message.attachments)
+    logger.info("class name : #{message.attachments.first.read.class}")
+#    logger.info(message.attachments)
     logger.info("===============================================================")
     email = User.where(:email => message.from.first)
-    logger.info(message.attachments.first.read)
+#    logger.info(message.attachments.first.read)
     logger.info("STOOOPPPPPPPPPPPPPPPPP")
     text, status = if !email.blank? and message.attachment?
       attached = message.attachments.first.content_disposition.split('.').last
