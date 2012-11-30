@@ -24,18 +24,18 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message])
-#    logger.info("===============================================================")
-#     logger.info(message.subject) #print the subject to the logs
-#     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
-#     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
-#     logger.info(message.from.first)
-#     logger.info(message.attachments.first.methods)
-#     logger.info(message.attachments.first.attachment?)
-#     logger.info(message.attachments.first.has_attachments?)
-#     logger.info(message.attachments.first.decode_body)
-#     logger.info(message.attachments.first.read)
-#     logger.info(message.attachments)
-#    logger.info("===============================================================")
+    logger.info("===============================================================")
+     logger.info(message.subject) #print the subject to the logs
+     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
+     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
+     logger.info(message.from.first)
+     logger.info(message.attachments.first.methods)
+     logger.info(message.attachments.first.attachment?)
+     logger.info(message.attachments.first.has_attachments?)
+     logger.info(message.attachments.first.decode_body)
+     logger.info(message.attachments.first.read)
+     logger.info(message.attachments)
+    logger.info("===============================================================")
     email = User.where(:email => message.from.first)
 
     text, status = if !email.blank? and message.has_attachments?
