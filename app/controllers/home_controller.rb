@@ -38,11 +38,11 @@ class HomeController < ApplicationController
     logger.info("===============================================================")
     email = User.where(:email => message.from.first)
 
-    text, status = if !email.blank? and message.has_attachments?
+    text, status = if !email.blank? and message.attachment?
       attached = message.attachments.first.content_disposition.split('.').last
       logger.info(attached)
       logger.info("-------------------")
-      if attached.eql?('xls') or attached.eql?('xlsx')
+      if attached.eql?('xls') or attached.eql?('xlsx') or !attached.blank?
         filename = begin message.attachments.first.original_filename
         rescue
           begin
