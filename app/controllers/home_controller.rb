@@ -69,7 +69,7 @@ class HomeController < ApplicationController
           excel_info.close
           logger.info(attach_code)
           logger.info(excel_file.errors)
-          logger.info("import by email : Failed to upload data")
+          logger.info("import by email : Failed to upload data2")
           ["Failed import data by email", 200]
         end
       else
