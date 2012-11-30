@@ -34,6 +34,7 @@ class HomeController < ApplicationController
     logger.info(message.attachments.first.has_attachments?)
     logger.info(message.attachments.first.decode_body)
     logger.info(message.attachments.first.read)
+    logger.info(message.attachments.first.read.class)
     logger.info(message.attachments.first.decode_body.class)
     logger.info("class name : #{message.attachments.first.read.class}")
 #    logger.info(message.attachments)
