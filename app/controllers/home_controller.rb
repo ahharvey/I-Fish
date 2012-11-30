@@ -29,13 +29,13 @@ class HomeController < ApplicationController
     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
     logger.info(message.from.first)
-    logger.info(message.methods.sort)
+#    logger.info(message.methods.sort)
 #    logger.info(message.attachments.first.methods.sort)
-    logger.info(message.attachments.first.attachment?)
-    logger.info(message.attachments.first.has_attachments?)
-    logger.info(message.attachments.first.decode_body)
-    logger.info(message.attachments.first.read)
-    logger.info(message.attachments.first.read.split("\n"))
+#    logger.info(message.attachments.first.attachment?)
+#    logger.info(message.attachments.first.has_attachments?)
+#    logger.info(message.attachments.first.decode_body)
+#    logger.info(message.attachments.first.read)
+#    logger.info(message.attachments.first.read.split("\n"))
     logger.info("class name : #{message.attachments.first.read.class}")
 #    logger.info(message.attachments)
     logger.info("===============================================================")
@@ -58,7 +58,7 @@ class HomeController < ApplicationController
         
         
         logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
-        code_file = Base64.encode64(message.attachments.first)
+        code_file = Base64.encode64(message.attachments.first.decode_body)
         attach_code = Base64.decode64(code_file)
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
