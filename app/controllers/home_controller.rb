@@ -51,13 +51,15 @@ class HomeController < ApplicationController
         end
         logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
         attach_code = message.attachments.first.decoded
+        logger.info("99999999999999999999")
+        logger.info(attach_code.class)
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
         parameters = {file: excel_info, user_id: email.id}
         excel_file = ExcelFile.new(parameters)
         logger.info(excel_file)
-
+        
         if excel_file.save
           excel_info.close
           logger.info("import by email : Successfully upload data to database")
