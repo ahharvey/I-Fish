@@ -24,23 +24,23 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message])
-    logger.info("===============================================================")
-     logger.info(message.subject) #print the subject to the logs
-     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
-     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
-     logger.info(message.from.first)
-     logger.info(message.attachments.first.methods)
-     logger.info(message.attachments.first.attachment?)
-     logger.info(message.attachments.first.has_attachments?)
-     logger.info(message.attachments.first.decode_body)
-     logger.info(message.attachments.first.read)
-     logger.info(message.attachments)
-    logger.info("===============================================================")
+#    logger.info("===============================================================")
+#     logger.info(message.subject) #print the subject to the logs
+#     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
+#     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
+#     logger.info(message.from.first)
+#     logger.info(message.attachments.first.methods)
+#     logger.info(message.attachments.first.attachment?)
+#     logger.info(message.attachments.first.has_attachments?)
+#     logger.info(message.attachments.first.decode_body)
+#     logger.info(message.attachments.first.read)
+#     logger.info(message.attachments)
+#    logger.info("===============================================================")
     email = User.where(:email => message.from.first)
 
     text, status = if !email.blank? and message.has_attachments?
       attached = message.attachments.first.content_disposition.split('.').last
-      if attached.eql?('xls') or attached.eql?('xlsx')
+      if attached.eql?('xls') or attached.eql?('xlsx') or !attached.blank?
         filename = begin message.attachments.first.original_filename
         rescue
           begin
@@ -49,7 +49,8 @@ class HomeController < ApplicationController
             "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
           end
         end
-        logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
+        
+#        logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
         attach_code = message.attachments.first.decoded
         logger.info("99999999999999999999")
         logger.info(attach_code.class)
@@ -58,7 +59,7 @@ class HomeController < ApplicationController
         excel_info = File.open(file)
         parameters = {file: excel_info, user_id: email.id}
         excel_file = ExcelFile.new(parameters)
-        logger.info(excel_file)
+#        logger.info(excel_file)
         
         if excel_file.save
           excel_info.close
