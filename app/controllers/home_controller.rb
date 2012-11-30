@@ -40,6 +40,8 @@ class HomeController < ApplicationController
 
     text, status = if !email.blank? and message.has_attachments?
       attached = message.attachments.first.content_disposition.split('.').last
+      logger.info(attached)
+      logger.info("-------------------")
       if attached.eql?('xls') or attached.eql?('xlsx')
         filename = begin message.attachments.first.original_filename
         rescue
