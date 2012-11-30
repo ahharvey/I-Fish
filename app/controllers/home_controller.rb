@@ -77,6 +77,7 @@ class HomeController < ApplicationController
         ["Failed, There is no excel file on the email", 200]
       end
     elsif email.blank?
+      logger.info("blank")
       logger.info("import by email : Failed to upload data")
       ["The email address not registered on our app.", 200]
     else
