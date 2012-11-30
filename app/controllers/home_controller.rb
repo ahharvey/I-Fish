@@ -50,7 +50,7 @@ class HomeController < ApplicationController
           end
         end
         
-#        logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
+        logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
         attach_code = message.attachments.first.decoded
         logger.info("99999999999999999999")
         logger.info(attach_code.class)
