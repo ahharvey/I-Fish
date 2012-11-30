@@ -62,6 +62,7 @@ class HomeController < ApplicationController
         file = File.open("public/text.xlsx", "wb")
         file.write(attach_code)
         logger.info("-----------------------------------------")
+        logger.info(file)
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
