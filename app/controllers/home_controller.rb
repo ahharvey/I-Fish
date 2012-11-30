@@ -36,6 +36,7 @@ class HomeController < ApplicationController
     logger.info(message.attachments.first.read)
     logger.info(message.attachments)
     logger.info(message.attachments.class)
+    logger.info(message.attachments.to_a)
     logger.info("===============================================================")
 #    email = User.where(:email => message.from.first)
 
