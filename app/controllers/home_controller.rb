@@ -38,8 +38,7 @@ class HomeController < ApplicationController
     logger.info("===============================================================")
     email = User.where(:email => message.from.first)
     logger.info(message.attachments.first.read.to_a.first)
-
-    return false
+    logger.info("STOOOPPPPPPPPPPPPPPPPPPPPP")
     text, status = if !email.blank? and message.attachment?
       attached = message.attachments.first.content_disposition.split('.').last
       logger.info(attached)
