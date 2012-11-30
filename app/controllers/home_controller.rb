@@ -29,23 +29,20 @@ class HomeController < ApplicationController
     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
     logger.info(message.from.first)
-#    logger.info(message.methods.sort)
-#    logger.info(message.attachments.first.methods.sort)
-#    logger.info(message.attachments.first.attachment?)
-#    logger.info(message.attachments.first.has_attachments?)
-#    logger.info(message.attachments.first.decode_body)
-#    logger.info(message.attachments.first.read)
-#    logger.info(message.attachments.first.read.split("\n"))
+    logger.info(message.methods.sort)
+    #    logger.info(message.attachments.first.methods.sort)
+    logger.info(message.attachments.first.attachment?)
+    logger.info(message.attachments.first.has_attachments?)
+    logger.info(message.attachments.first.decode_body)
+    logger.info(message.attachments.first.read)
+    logger.info(message.attachments.first.read.split("\n"))
     logger.info("class name : #{message.attachments.first.read.class}")
-#    logger.info(message.attachments)
     logger.info("===============================================================")
     email = User.where(:email => message.from.first)
-#    logger.info(message.attachments.first.read)
-    logger.info("STOOOPPPPPPPPPPPPPPP")
+    
     text, status = if !email.blank? and message.attachment?
+      logger.info("STOOOPPPPPPPPPPPPPPP")
       attached = message.attachments.first.content_disposition.split('.').last
-      logger.info(attached)
-      logger.info("-------------------")
       if attached.eql?('xls') or attached.eql?('xlsx') or !attached.blank?
         filename = begin message.attachments.first.original_filename
         rescue
@@ -56,16 +53,14 @@ class HomeController < ApplicationController
           end
         end
         
-        
         logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
-        code_file = Base64.encode64(message.attachments.first.decode_body)
-        attach_code = Base64.decode64(code_file)
+        attach_code = message.attachments.first.decoded
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
         parameters = {file: excel_info, user_id: email.id}
         excel_file = ExcelFile.new(parameters)
-        
+        logger.info(excel_file)
         
         if excel_file.save
           excel_info.close
