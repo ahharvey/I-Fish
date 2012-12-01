@@ -30,7 +30,7 @@ class HomeController < ApplicationController
     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
     logger.info(message.from.first)
     logger.info(message.methods.sort)
-    #    logger.info(message.attachments.first.methods.sort)
+    logger.info(message.attachments.first.methods.sort)
     logger.info(message.attachments.first.attachment?)
     logger.info(message.attachments.first.has_attachments?)
     logger.info(message.attachments.first.decode_body)
