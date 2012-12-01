@@ -38,8 +38,7 @@ class HomeController < ApplicationController
           end
         end
         
-        
-        attach_code = message.attachments.first.read
+                attach_code = message.attachments.first.read
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         file = Rails.root+"/tmp/"+filename
         excel_info = File.open(file)
