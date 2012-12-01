@@ -38,7 +38,7 @@ class HomeController < ApplicationController
           end
         end
         
-        attach_code = message.attachments.first.decoded
+#        attach_code = message.attachments.first.decoded
         #        File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
         #        file = Rails.root+"/tmp/"+filename
         #        excel_info = File.open(file)
@@ -57,7 +57,7 @@ class HomeController < ApplicationController
         catch_scribe = data[7].split("|").last
         catch_measure = data[8].split("|").last
         
-        unless fishery.blank?
+#        unless fishery.blank?
           desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
           fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
 
@@ -65,8 +65,10 @@ class HomeController < ApplicationController
             start_time: start_time, end_time: end_time, observer: fleet_observer,
             scribe: catch_scribe, measure: catch_measure, user_id: email.id)
 #        end      
-        end
+#        end
     
+        puts data
+        puts "=========="
         #        if excel_file.save
         #          excel_info.close
         #          logger.info("import by email : Successfully upload data to database")
