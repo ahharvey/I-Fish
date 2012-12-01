@@ -34,13 +34,12 @@ class HomeController < ApplicationController
     logger.info(message.attachments.first.has_attachments?)
     logger.info(message.attachments.first.decode_body)
     logger.info(message.attachments.first.read)
-    logger.info(message.attachments.first.read.split("\n"))
     logger.info("class name : #{message.attachments.first.read.class}")
     logger.info("===============================================================")
     email = User.where(:email => message.from.first)
     text, status = if !email.blank? and message.attachment?
       attached = message.attachments.first.content_disposition.split('.').last
-      if attached.eql?('xls') or attached.eql?('xlsx') or !attached.blank?
+      if attached.eql?('xls') or attached.eql?('xlsx')
         filename = begin message.attachments.first.original_filename
         rescue
           begin
