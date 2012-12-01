@@ -38,24 +38,46 @@ class HomeController < ApplicationController
           end
         end
         
-                attach_code = message.attachments.first.read
-        File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
-        file = Rails.root+"/tmp/"+filename
-        excel_info = File.open(file)
-        parameters = {file: excel_info, user_id: email.id}
-        excel_file = ExcelFile.new(parameters)
+        attach_code = message.attachments.first.decoded
+        #        File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
+        #        file = Rails.root+"/tmp/"+filename
+        #        excel_info = File.open(file)
+        #        parameters = {file: excel_info, user_id: email.id}
+        #        excel_file = ExcelFile.new(parameters)
+        data = message.attachments.first.read.split("\n")  
+      
+#        data.each_with_index do |datum, idx|
+        fishery = data[0].split("|").last.downcase  rescue ''
+        kabupaten = data[1].split("|").last
+        code_desa = data[2].split("|").last.downcase  rescue ''
+        date = data[3].split("|").last
+        start_time = data[4].split("|").last
+        end_time = data[5].split("|").last
+        fleet_observer = data[6].split("|").last
+        catch_scribe = data[7].split("|").last
+        catch_measure = data[8].split("|").last
         
-        if excel_file.save
-          excel_info.close
-          logger.info("import by email : Successfully upload data to database")
-          ["success", 200]
-        else
-          excel_info.close
-          logger.info(attach_code)
-          logger.info(excel_file.errors)
-          logger.info("import by email : Failed to upload data")
-          ["Failed import data by email", 200]
+        unless fishery.blank?
+          desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
+          fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
+
+          Survey.create(fishery: fishery, fishery_id: fishery_id, desa_id: desa_id, date: date, 
+            start_time: start_time, end_time: end_time, observer: fleet_observer,
+            scribe: catch_scribe, measure: catch_measure, user_id: email.id)
+#        end      
         end
+    
+        #        if excel_file.save
+        #          excel_info.close
+        #          logger.info("import by email : Successfully upload data to database")
+        #          ["success", 200]
+        #        else
+        #          excel_info.close
+        #          logger.info(attach_code)
+        #          logger.info(excel_file.errors)
+        #          logger.info("import by email : Failed to upload data")
+        #          ["Failed import data by email", 200]
+        #        end
       else
         logger.info("There is no excel file on the email")
         ["Failed, There is no excel file on the email", 200]
