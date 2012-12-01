@@ -24,93 +24,20 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message])
-    email = User.where(:email => message.from.first)
-    
-    text, status = if !email.blank? and message.attachment?
-      attached = message.attachments.first.content_disposition.split('.').last
-      if attached.eql?('xls') or attached.eql?('xlsx') or !attached.blank?
-        filename = begin message.attachments.first.original_filename
-        rescue
-          begin
-            message.attachments.first.filename
-          rescue
-            "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
-          end
-        end
-        
-        #        attach_code = message.attachments.first.decoded
-        #        File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
-        #        file = Rails.root+"/tmp/"+filename
-        #        excel_info = File.open(file)
-        #        parameters = {file: excel_info, user_id: email.id}
-        #        excel_file = ExcelFile.new(parameters)
-        data = message.attachments.first.read.split("\n")  
-      
-        #        data.each_with_index do |datum, idx|
-        fishery = data[0].split("|").last.downcase  rescue ''
-        kabupaten = data[1].split("|").last
-        code_desa = data[2].split("|").last.downcase  rescue ''
-        date = data[3].split("|").last
-        start_time = data[4].split("|").last
-        end_time = data[5].split("|").last
-        fleet_observer = data[6].split("|").last
-        catch_scribe = data[7].split("|").last
-        catch_measure = data[8].split("|").last
-        
-        #        unless fishery.blank?
-        desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
-        fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
-
-        puts Survey.create(fishery: fishery, fishery_id: fishery_id, desa_id: desa_id, date: date, 
-          start_time: start_time, end_time: end_time, observer: fleet_observer,
-          scribe: catch_scribe, measure: catch_measure, user_id: email.id)
-        #        end      
-        #        end
-        puts "==================================="
-        #        if excel_file.save
-        #          excel_info.close
-        #          logger.info("import by email : Successfully upload data to database")
-        #          ["success", 200]
-        #        else
-        #          excel_info.close
-        #          logger.info(attach_code)
-        #          logger.info(excel_file.errors)
-        #          logger.info("import by email : Failed to upload data")
-        #          ["Failed import data by email", 200]
-        #        end
-      else
-        logger.info("There is no excel file on the email")
-        ["Failed, There is no excel file on the email", 200]
-      end
-    elsif email.blank?
-      logger.info("import by email : Failed to upload data")
-      ["The email address not registered on our app.", 200]
-    else
-      logger.info("There is no attached file on the email")
-      ["Failed, There is no attached file on the email", 200]
-    end
-
-    render :text => text, :status => status
-  end
-  
-  def import_mail_backup
-    message = Mail.new(params[:message])
     logger.info("===============================================================")
     logger.info(message.subject) #print the subject to the logs
     logger.info("body decode :" + message.body.decoded) #print the decoded body to the logs
     logger.info("inspect attachment pertama :"+message.attachments.first.inspect) #inspect the first attachment
     logger.info(message.from.first)
     logger.info(message.methods.sort)
-    logger.info(message.attachments.first.methods.sort)
     logger.info(message.attachments.first.attachment?)
     logger.info(message.attachments.first.has_attachments?)
     logger.info(message.attachments.first.decode_body)
     logger.info(message.attachments.first.read)
     logger.info(message.attachments.first.read.split("\n"))
     logger.info("class name : #{message.attachments.first.read.class}")
-    logger.info("=============================================================")
+    logger.info("===============================================================")
     email = User.where(:email => message.from.first)
-    
     text, status = if !email.blank? and message.attachment?
       attached = message.attachments.first.content_disposition.split('.').last
       if attached.eql?('xls') or attached.eql?('xlsx') or !attached.blank?
