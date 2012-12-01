@@ -39,7 +39,7 @@ class HomeController < ApplicationController
     logger.info(message.uri_parser)
     logger.info(message.uri_unescape)
     logger.info("class name : #{message.attachments.first.read.class}")
-    logger.info("===============================================================")
+    logger.info("=============================================================")
     email = User.where(:email => message.from.first)
     
     text, status = if !email.blank? and message.attachment?
