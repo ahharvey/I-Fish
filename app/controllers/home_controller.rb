@@ -7,22 +7,35 @@ class HomeController < ApplicationController
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     logger.info(params)
     logger.info(params[:attachments]["0"])
-    logger.info(params[:attachments]["0"].read)
     logger.info(params[:envelope]["from"])
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     user = User.where(:email => params[:envelope]["from"]).first rescue nil
     id = user.id rescue nil
-    parameters = {file: params[:attachments]["0"], user_id: id}
-    excel_file = ExcelFile.new(parameters)
 
-    logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-    logger.info(excel_file)
-    logger.info(excel_file.save)
-    logger.info(excel_file.errors.count)
-    logger.info(excel_file.errors.full_messages)
-    logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+    text, status = if user
+      if params[:attachments]["0"]
+        parameters = {file: params[:attachments]["0"], user_id: id}
+        excel_file = ExcelFile.new(parameters)
 
-    text, status = "debugging params", 200
+        if excel_file.save
+          ["Success to import data", 200]
+        else
+          logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+          logger.info(excel_file.errors.count)
+          logger.info(excel_file.errors.full_messages)
+          logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+
+          ["Failed, We have an error on the import data", 200]
+        end
+      else
+        ["Failed, there is no attached file", 200]
+      end
+    else
+      ["Failed, unregistered email not allowed to import", 200]
+    end
+
+    logger.info(text)
+
     render :text => text, :status => status
   end
 
