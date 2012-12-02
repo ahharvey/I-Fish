@@ -6,8 +6,20 @@ class HomeController < ApplicationController
   def multipart_import
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     logger.info(params)
-    logger.info(params[:attachments])
+    logger.info(params[:attachments]["0"])
+    logger.info(params[:envelope]["from"])
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    user = User.where(:email => params[:envelope]["from"]).first rescue nil
+    id = user.id rescue nil
+    parameters = {file: params[:attachments]["0"], user_id: user.id}
+    excel_file = ExcelFile.new(parameters)
+
+    logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+    logger.info(excel_file)
+    logger.info(excel_file.save)
+    logger.info(excel_file.errors)
+    logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+
     text, status = "debugging params", 200
     render :text => text, :status => status
   end
