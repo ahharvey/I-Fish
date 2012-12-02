@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     message = Mail.new(params[:message])
     user_id = User.where(:email => message.from.first).first.user_id rescue nil
     text, status = if user_id
-      eval (message.attachments.first.read)
+      eval (message.attachments.first.read.decode)
       logger.info(Survey.import_from_email(@surveys, user_id))
       logger.info(Landing.import_from_email(@fleets, user_id))
       logger.info(Catch.import_from_email(@catches, user_id))
