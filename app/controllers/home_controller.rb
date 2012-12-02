@@ -25,17 +25,21 @@ class HomeController < ApplicationController
   def import_mail
     message = Mail.new(params[:message])
     user_id = User.where(:email => message.from.first).first.user_id rescue nil
-      
+    
+    text, status = if user_id
       logger.info("TEST EUY TEST TEST TEST")
       file = eval(message.attachments.first.read)
-      logger.info(Survey.import_from_email(@surveys, user_id))
-      logger.info(Landing.import_from_email(@fleets, user_id))
-      logger.info(Catch.import_from_email(@catches, user_id))
+      Survey.import_from_email(@surveys, user_id)
+      Landing.import_from_email(@fleets, user_id)
+      Catch.import_from_email(@catches, user_id)
       logger.info("--------------------")
 
+      ["success", 200]
+    else
+      ["failed import data from email", 500]
+    end
 
-    #render :text => text, :status => status
-    render nothing: true
+    render :text => text, :status => status
   end
   Landing
   def import_mail2
