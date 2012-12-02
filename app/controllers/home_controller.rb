@@ -28,6 +28,9 @@ class HomeController < ApplicationController
     logger.info(message.from.first)
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     logger.info(user_id)
+    logger.info(User.where(:email => message.from.first))
+    logger.info(User.pluck(:email))
+    logger.info("-------------------------------")
     text, status = if user_id
       logger.info("TEST EUY TEST TEST TEST")
       file = eval(message.attachments.first.read)
