@@ -17,7 +17,8 @@ class HomeController < ApplicationController
     logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
     logger.info(excel_file)
     logger.info(excel_file.save)
-    logger.info(excel_file.errors)
+    logger.info(excel_file.errors.count)
+    logger.info(excel_file.errors.full_messages)
     logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
 
     text, status = "debugging params", 200
