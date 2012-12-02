@@ -26,6 +26,7 @@ class HomeController < ApplicationController
     message = Mail.new(params[:message])
     user_id = User.where(:email => message.from.first).first.user_id rescue nil
     logger.info("TEST EUY TEST TEST TEST")
+    logger.info(message.attachments.first.read)
     logger.info("--------------------")
     text, status = if user_id
     #  eval (message.attachments.first.read.decode)
