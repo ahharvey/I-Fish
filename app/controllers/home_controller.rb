@@ -1,7 +1,16 @@
 class HomeController < ApplicationController
   require 'mail'
 
-  skip_before_filter :authenticate_user!, :verify_authenticity_token, :only => [:import_mail]
+  skip_before_filter :authenticate_user!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
+
+  def multipart_import
+    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    logger.info(params)
+    logger.info(params[:attachments])
+    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    text, status = "debugging params", 200
+    render :text => text, :status => status
+  end
 
   def index
   end
