@@ -41,12 +41,14 @@ class HomeController < ApplicationController
 
       ["success", 200]
     else
-      ["failed import data from email", 500]
+      ["failed import data from email -- not registered user email", 200]
     end
 
     render :text => text, :status => status
   end
-  Landing
+
+  #Landing
+
   def import_mail2
     message = Mail.new(params[:message])
     logger.info("===============================================================")
