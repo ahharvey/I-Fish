@@ -1,5 +1,5 @@
 Desa.destroy_all
-Desa.create(name: "test1 desa", name: "desa1")
+Desa.create(name: "test1 desa", name: "desa1", code: 'desa1')
 
 Fish.destroy_all
 Fish.create(family: "Squatinidae", genus: "Squatina", species: "australis", local_name: "Australian Angelshark", english_name: "Australian Angelshark", code: "111")
