@@ -26,9 +26,6 @@ class Landing < ActiveRecord::Base
 			qty = param[:qty]
 			value = param[:value]
 
-			puts "ieu urang euyyyyyyyyy.........."
-			puts reg
-			puts "wokeeeeeeeeeeeee"
 			unless reg.blank?
 				gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue nil
 
