@@ -11,7 +11,7 @@ class HomeController < ApplicationController
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     user = User.where(:email => params[:envelope]["from"]).first rescue nil
     id = user.id rescue nil
-    parameters = {file: params[:attachments]["0"], user_id: user.id}
+    parameters = {file: params[:attachments]["0"], user_id: id}
     excel_file = ExcelFile.new(parameters)
 
     logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
