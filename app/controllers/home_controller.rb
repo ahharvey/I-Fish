@@ -28,12 +28,12 @@ class HomeController < ApplicationController
     
     text, status = if user_id
       logger.info("TEST EUY TEST TEST TEST")
-      eval (message.attachments.first.read.decode)
+      file = eval(message.attachments.first.read)
       logger.info(Survey.import_from_email(@surveys, user_id))
       logger.info(Landing.import_from_email(@fleets, user_id))
       logger.info(Catch.import_from_email(@catches, user_id))
       logger.info("--------------------")
-      
+
       ["success", 200]
     else
       ["failed import data from email", 500]
