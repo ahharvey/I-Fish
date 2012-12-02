@@ -1,9 +1,25 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:
-  code: MyString
+  cat_ind: MyString
+  cat_eng: MyString
+  sub_cat_ind: MyString
+  sub_cat_eng: MyString
+  type_ind: MyString
+  type_eng: MyString
   name: MyString
+  alpha_code: MyString
+  num_code: MyString
+  fao_code: MyString
 
 two:
-  code: MyString
+  cat_ind: MyString
+  cat_eng: MyString
+  sub_cat_ind: MyString
+  sub_cat_eng: MyString
+  type_ind: MyString
+  type_eng: MyString
   name: MyString
+  alpha_code: MyString
+  num_code: MyString
+  fao_code: MyString

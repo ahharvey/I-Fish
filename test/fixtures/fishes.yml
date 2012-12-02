@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  order: MyString
+  family: MyString
+  scientific_name: MyString
+  fishbase_name: MyString
+  english_name: MyString
+  indonesia_name: MyString
+  code: MyString
+
+two:
+  order: MyString
+  family: MyString
+  scientific_name: MyString
+  fishbase_name: MyString
+  english_name: MyString
+  indonesia_name: MyString
+  code: MyString

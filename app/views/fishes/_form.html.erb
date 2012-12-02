@@ -1,0 +1,52 @@
+<% if params[:action].eql?('edit') %>
+  <% url = fish_path %>
+  <% method = :PUT %>
+<% else %>
+  <% url = fishes_path %>
+  <% method = :POST %>
+<% end %>
+<%= form_for(@fish, :url => url, :method => method) do |f| %>
+  <% if @fish.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@fish.errors.count, "error") %> prohibited this fish from being saved:</h2>
+
+      <ul>
+        <% @fish.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :order %><br />
+    <%= f.text_field :order %>
+  </div>
+  <div class="field">
+    <%= f.label :family %><br />
+    <%= f.text_field :family %>
+  </div>
+  <div class="field">
+    <%= f.label :scientific_name %><br />
+    <%= f.text_field :scientific_name %>
+  </div>
+  <div class="field">
+    <%= f.label :fishbase_name %><br />
+    <%= f.text_field :fishbase_name %>
+  </div>
+  <div class="field">
+    <%= f.label :english_name %><br />
+    <%= f.text_field :english_name %>
+  </div>
+  <div class="field">
+    <%= f.label :indonesia_name %><br />
+    <%= f.text_field :indonesia_name %>
+  </div>
+  <div class="field">
+    <%= f.label :code %><br />
+    <%= f.text_field :code %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
