@@ -7,6 +7,7 @@ class HomeController < ApplicationController
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     logger.info(params)
     logger.info(params[:attachments]["0"])
+    logger.info(params[:attachments]["0"].read)
     logger.info(params[:envelope]["from"])
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     user = User.where(:email => params[:envelope]["from"]).first rescue nil
