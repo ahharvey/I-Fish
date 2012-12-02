@@ -25,10 +25,8 @@ class HomeController < ApplicationController
   def import_mail
     message = Mail.new(params[:message])
     user_id = User.where(:email => message.from.first).first.user_id rescue nil
-    logger.info(message.attachments.first.decode_body)
-    logger.info(message.attachments.first.read)
+    logger.info("TEST EUY TEST TEST TEST")
     logger.info("--------------------")
-    logger.info(message.attachments.first.decode)
     text, status = if user_id
     #  eval (message.attachments.first.read.decode)
     #  logger.info(Survey.import_from_email(@surveys, user_id))
