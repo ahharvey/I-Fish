@@ -24,7 +24,7 @@ class HomeController < ApplicationController
 
   def import_mail
     message = Mail.new(params[:message])
-    user_id = User.where(:email => message.from.first).first.user_id rescue nil
+    user_id = User.where(:email => message.from.first).first.id rescue nil
     logger.info(message.from.first)
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     logger.info(user_id)
