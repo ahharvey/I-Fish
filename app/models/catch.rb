@@ -13,7 +13,7 @@ class Catch < ActiveRecord::Base
 			unless species.blank?
 				fish_id = Fish.where("LOWER(code) = ?", code_species).first.id rescue nil
 
-				Catch.create(fish_id: fish_id, length: length, weight: weight)
+				puts Catch.create(fish_id: fish_id, length: length, weight: weight)
 			end
 		end
 	end

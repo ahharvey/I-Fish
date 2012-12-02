@@ -20,14 +20,10 @@ class Survey < ActiveRecord::Base
 			catch_measure = param[:catch_measure] || ''
 
 			unless fishery.blank?
-				puts "IEU MODEL SUrvey"
-				puts code_desa
 				desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
-				puts Desa.pluck(:code)
-				puts "-----------------------------"
 				fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
 
-				Survey.create(fishery_id: fishery_id, desa_id: desa_id, date_published: date_published, 
+				puts Survey.create(fishery_id: fishery_id, desa_id: desa_id, date_published: date_published, 
 					start_time: start_time, end_time: end_time, fleet_observer: fleet_observer,
 					catch_scribe: catch_scribe, catch_measure: catch_measure, user_id: user_id)
 			end

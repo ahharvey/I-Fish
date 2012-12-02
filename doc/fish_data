@@ -45,7 +45,7 @@
 	[
 		reg: 'test1 reg',
 		name: 'test1 name',
-		type: 'Gear',
+		type: 'test1 type',
 		engine: 'test1 engine',
 		power: 'test1_power',
 		fishing_area: 'test1 fishing area',
