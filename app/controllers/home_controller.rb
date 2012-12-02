@@ -23,6 +23,15 @@ class HomeController < ApplicationController
   end
 
   def import_mail
+  message = Mail.new(params[:message])
+  eval (message.attachments.first.read)
+  Survey.import_from_email(@surveys)
+  Landing.import_from_email(@fleets)
+  Catch.import_from_email(@catches)
+
+  end
+Landing
+  def import_mail2
     message = Mail.new(params[:message])
     logger.info("===============================================================")
     logger.info(message.subject) #print the subject to the logs

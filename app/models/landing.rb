@@ -6,4 +6,11 @@ class Landing < ActiveRecord::Base
   belongs_to :survey
 
   has_many :catches, dependent: :destroy
+
+  
+  def self.import_from_email(params)
+  	puts "begin import surveys from email:"
+  	puts params
+  	puts "-----------------------------------"
+  end
 end

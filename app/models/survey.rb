@@ -5,6 +5,11 @@ class Survey < ActiveRecord::Base
   belongs_to :user
   belongs_to :fishery
   belongs_to :desa
-
   has_many :landings
+
+  def self.import_from_email(params)
+  	puts "begin import surveys from email:"
+  	puts params
+  	puts "-----------------------------------"
+  end
 end

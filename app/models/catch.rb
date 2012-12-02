@@ -3,4 +3,11 @@ class Catch < ActiveRecord::Base
   
   belongs_to :fish
   belongs_to :landing
+
+  
+  def self.import_from_email(params)
+  	puts "begin import surveys from email:"
+  	puts params
+  	puts "-----------------------------------"
+  end
 end
