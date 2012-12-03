@@ -11,7 +11,9 @@ class ExcelFile < ActiveRecord::Base
   private
   
   def import_excel_data
-    ImportExcelData.working_based_sheet(self.id, self.user_id)  
+    ActiveRecord::Base.transaction do
+      ImportExcelData.working_based_sheet(self.id, self.user_id)
+    end
   end
   
   def update_asset_attributes
