@@ -4,7 +4,7 @@ class ExcelFile < ActiveRecord::Base
   attr_accessible :file, :filename, :filesize, :user_id
   before_save :update_asset_attributes
   mount_uploader :file, ExcelFileUploader
-  after_save :import_excel_data
+#  after_save :import_excel_data
   validates :file, presence: true
 
 
