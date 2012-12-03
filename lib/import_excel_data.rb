@@ -39,7 +39,7 @@ class ImportExcelData
       
           Landing.create(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail,
             fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time,
-            time_out: dep_time, gear_id: gear_id)
+            time_out: dep_time, gear_id: gear_id.to_i)
         end
       end
     end
@@ -56,7 +56,7 @@ class ImportExcelData
         unless species.blank?
           fish_id = Fish.where("LOWER(code) = ?", species).first.id rescue nil
         
-          Catch.create(fish_id: fish_id, length: length, weight: weight)
+          Catch.create(fish_id: fish_id.to_i, length: length, weight: weight)
         end
       end
     end
@@ -79,7 +79,7 @@ class ImportExcelData
         desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
         fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
 
-        Survey.create(fishery: fishery, fishery_id: fishery_id, desa_id: desa_id, date: date, 
+        Survey.create(fishery: fishery, fishery_id: fishery_id.to_i, desa_id: desa_id.to_i, date: date,
           start_time: start_time, end_time: end_time, observer: fleet_observer,
           scribe: catch_scribe, measure: catch_measure, user_id: user_id)
       end
