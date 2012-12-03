@@ -17,29 +17,27 @@ class ImportExcelData
       xls.default_sheet = 'Form A - Fleet'
     
     
-      for i in 2..xls.last_row
-        reg = xls.cell(i,"B")
-        name = xls.cell(i,"C")
-        type = xls.cell(i,"D")
-        engine = xls.cell(i,"E")
-        power = xls.cell(i,"F")
-        fishing_area = xls.cell(i,"G")
-        dep_time = xls.cell(i,"H")
-        arr_time = xls.cell(i,"I")
-        sail = xls.cell(i,"J")
-        fuel = xls.cell(i,"K")
-        crew = xls.cell(i,"L")
-        gear = xls.cell(i,"M").downcase rescue ''
-        weight = xls.cell(i,"N")
-        qty = xls.cell(i,"O")
-        value = xls.cell(i,"P")
+      for d in 2..xls.last_row
+        reg = xls.cell(d,"B")
+        name = xls.cell(d,"C")
+        type = xls.cell(d,"D")
+        engine = xls.cell(d,"E")
+        power = xls.cell(d,"F")
+        fishing_area = xls.cell(d,"G")
+        dep_time = xls.cell(d,"H")
+        arr_time = xls.cell(d,"I")
+        sail = xls.cell(d,"J")
+        fuel = xls.cell(d,"K")
+        crew = xls.cell(d,"L")
+        gear = xls.cell(d,"M").downcase rescue ''
+        weight = xls.cell(d,"N")
+        qty = xls.cell(d,"O")
+        value = xls.cell(d,"P")
       
         unless reg.blank?
           gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue nil
       
-          Landing.create(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail,
-            fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time,
-            time_out: dep_time, gear_id: gear_id.to_i)
+          Landing.create(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
         end
       end
     end
