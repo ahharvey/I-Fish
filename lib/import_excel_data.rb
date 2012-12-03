@@ -3,8 +3,8 @@ require 'iconv'
 class ImportExcelData
   def self.working_based_sheet(id, user_id)
     xl_file = ExcelFile.find(id)
-    
-    if xl_file.file.file.extension
+
+    if xl_file.file.file.extension.eql?("xls")
       xls = Excel.new(xl_file.file.path)
     else
       xls = Excelx.new(xl_file.file.path)
