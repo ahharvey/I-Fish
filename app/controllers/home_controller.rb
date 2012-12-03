@@ -17,15 +17,17 @@ class HomeController < ApplicationController
         parameters = {file: params[:attachments]["0"], user_id: id}
         excel_file = ExcelFile.new(parameters)
 
-        if excel_file.save
-          ["Success to import data", 200]
-        else
-          logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-          logger.info(excel_file.errors.count)
-          logger.info(excel_file.errors.full_messages)
-          logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+        ActiveRecord::Base.transaction do
+          if excel_file.save
+            ["Success to import data", 200]
+          else
+            logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+            logger.info(excel_file.errors.count)
+            logger.info(excel_file.errors.full_messages)
+            logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
 
-          ["Failed, We have an error on the import data", 200]
+            ["Failed, We have an error on the import data", 200]
+          end
         end
       else
         ["Failed, there is no attached file", 200]
