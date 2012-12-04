@@ -39,6 +39,8 @@ class HomeController < ApplicationController
 
     logger.info(text)
 
+    logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+
     render :text => text, :status => status
   end
 
@@ -62,28 +64,28 @@ class HomeController < ApplicationController
   end
 
   def import_mail
-    message = Mail.new(params[:message])
-    user_id = User.where(:email => message.from.first).first.id rescue nil
-    logger.info(message.from.first)
-    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    logger.info(user_id)
-    logger.info(User.where(:email => message.from.first))
-    logger.info(User.pluck(:email))
-    logger.info("-------------------------------")
-    text, status = if user_id
-      logger.info("TEST EUY TEST TEST TEST")
-      file = eval(message.attachments.first.read)
-      Survey.import_from_email(@surveys, user_id)
-      Landing.import_from_email(@fleets, user_id)
-      Catch.import_from_email(@catches, user_id)
-      logger.info("--------------------")
+    # message = Mail.new(params[:message])
+    # user_id = User.where(:email => message.from.first).first.id rescue nil
+    # logger.info(message.from.first)
+    # logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    # logger.info(user_id)
+    # logger.info(User.where(:email => message.from.first))
+    # logger.info(User.pluck(:email))
+    # logger.info("-------------------------------")
+    # text, status = if user_id
+    #   logger.info("TEST EUY TEST TEST TEST")
+    #   file = eval(message.attachments.first.read)
+    #   Survey.import_from_email(@surveys, user_id)
+    #   Landing.import_from_email(@fleets, user_id)
+    #   Catch.import_from_email(@catches, user_id)
+    #   logger.info("--------------------")
 
-      ["success", 200]
-    else
-      ["failed import data from email -- not registered user email", 200]
-    end
+    #   ["success", 200]
+    # else
+    #   ["failed import data from email -- not registered user email", 200]
+    # end
 
-    render :text => text, :status => status
+    # render :text => text, :status => status
   end
 
   #Landing
