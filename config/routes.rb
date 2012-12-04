@@ -7,8 +7,11 @@ ExportXls::Application.routes.draw do
   resources :gears
   resources :fish
 
-  devise_for :users, :controllers => { :registrations => "registrations" }  
-  
+
+  devise_for :users do
+    get 'users', :to => 'devise/registrations#crop', :as => :user_root # Rails 3
+  end
+
   get 'home/upload_data'
   post 'home/process_upload_data'
   match '/import_mail' => 'home#import_mail'
