@@ -17,7 +17,7 @@ class HomeController < ApplicationController
         parameters = {file: params[:attachments]["0"], user_id: id}
         excel_file = ExcelFile.new(parameters)
 
-        #ActiveRecord::Base.transaction do
+        ActiveRecord::Base.transaction do
           if excel_file.save
             ImportExcelData.working_based_sheet(excel_file.id, id)
             ["Success to import data", 200]
@@ -29,7 +29,7 @@ class HomeController < ApplicationController
 
             ["Failed, We have an error on the import data", 200]
           end
-        #end
+        end
       else
         ["Failed, there is no attached file", 200]
       end
@@ -39,7 +39,7 @@ class HomeController < ApplicationController
 
     logger.info(text)
 
-    logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+    logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
 
     render :text => text, :status => status
   end
