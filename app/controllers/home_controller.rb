@@ -39,7 +39,7 @@ class HomeController < ApplicationController
 
     logger.info(text)
 
-    logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
+    logger.info("kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk")
 
     render :text => text, :status => status
   end
