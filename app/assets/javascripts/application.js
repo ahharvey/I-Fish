@@ -13,6 +13,9 @@
 //= require jquery
 //= require jquery_ujs
 //= require tabs
+//= require plugins/jquery.color
+//= require plugins/jquery.Jcrop
+//= require jcrop
 //= require_tree .
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!
@@ -35,7 +38,7 @@
                 top: function () {
                     return $window.width() <= 980 ? 290 : 210
                 }
-                , 
+                ,
                 bottom: 270
             }
         })
@@ -54,7 +57,7 @@
         if ($('#gridSystem').length) {
             $('#gridSystem').tooltip({
                 selector: '.show-grid > div'
-                , 
+                ,
                 title: function () {
                     return $(this).width() + 'px'
                 }
@@ -133,18 +136,18 @@
 
             $.ajax({
                 type: 'POST'
-                , 
+                ,
                 url: /\?dev/.test(window.location) ? 'http://localhost:3000' : 'http://bootstrap.herokuapp.com'
-                , 
+                ,
                 dataType: 'jsonpi'
-                , 
+                ,
                 params: {
                     js: js
-                    , 
+                    ,
                     css: css
-                    , 
+                    ,
                     vars: vars
-                    , 
+                    ,
                     img: img
                 }
             })
