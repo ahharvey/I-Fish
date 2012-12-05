@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120005405) do
+ActiveRecord::Schema.define(:version => 20121205185139) do
 
   create_table "catches", :force => true do |t|
     t.integer  "fish_id"
@@ -23,6 +23,14 @@ ActiveRecord::Schema.define(:version => 20121120005405) do
 
   create_table "desas", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "excel_files", :force => true do |t|
+    t.string   "filename"
+    t.string   "filesize"
+    t.string   "file"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -65,7 +73,7 @@ ActiveRecord::Schema.define(:version => 20121120005405) do
   end
 
   create_table "surveys", :force => true do |t|
-    t.date     "date"
+    t.string   "date"
     t.integer  "user_id"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -100,6 +108,7 @@ ActiveRecord::Schema.define(:version => 20121120005405) do
     t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "avatar"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
