@@ -8,7 +8,6 @@ gem 'devise'
 gem 'skeleton-rails'
 gem 'jquery-rails'
 gem 'rmagick'
-gem 'jcrop-rails'
 gem 'carrierwave'
 gem 'roo'
 
