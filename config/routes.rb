@@ -1,5 +1,7 @@
 ExportXls::Application.routes.draw do
 
+  get "omenk/index"
+
   resources :catches
   resources :landings
   resources :desas
@@ -8,8 +10,10 @@ ExportXls::Application.routes.draw do
   resources :fish
 
 
-  devise_for :users do
-    get 'users', :to => 'devise/registrations#crop', :as => :user_root # Rails 3
+  devise_for :users, :controllers => { :registrations => "registrations" }
+
+  devise_scope :user do
+    match 'crops' => 'registrations#crop', :as => :crop
   end
 
   get 'home/upload_data'
