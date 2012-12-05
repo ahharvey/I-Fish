@@ -35,7 +35,7 @@ class ImportExcelData
         value = xls.cell(d,"P")
       
         unless reg.blank?
-          gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue nil
+          gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue 0
 
           landing = Landing.new(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
           landing.save
@@ -53,7 +53,7 @@ class ImportExcelData
         length = xls.cell(i,"C")
         weight = xls.cell(i,"D")
         unless species.blank?
-          fish_id = Fish.where("LOWER(code) = ?", species).first.id rescue nil
+          fish_id = Fish.where("LOWER(code) = ?", species).first.id rescue 0
         
           catch = Catch.new(fish_id: fish_id.to_i, length: length, weight: weight)
           catch.save
@@ -76,8 +76,8 @@ class ImportExcelData
       catch_measure = xls.cell(9,"B")
         
       unless fishery.blank?
-        desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
-        fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
+        desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue 0
+        fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue 0
 
         survey = Survey.new(fishery_id: fishery_id.to_i, desa_id: desa_id.to_i, date_published: date, start_time: start_time, end_time: end_time, fleet_observer: fleet_observer, catch_scribe: catch_scribe, catch_measure: catch_measure, user_id: user_id.to_i)
         survey.save
