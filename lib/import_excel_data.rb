@@ -24,8 +24,8 @@ class ImportExcelData
         engine = xls.cell(d,"E")
         power = xls.cell(d,"F")
         fishing_area = xls.cell(d,"G")
-        dep_time = xls.cell(d,"H")
-        arr_time = xls.cell(d,"I")
+        dep_time = Time.now+xls.cell(d,"H") rescue Time.now
+        arr_time = Time.now+xls.cell(d,"I") rescue Time.now
         sail = xls.cell(d,"J")
         fuel = xls.cell(d,"K")
         crew = xls.cell(d,"L")
@@ -36,8 +36,9 @@ class ImportExcelData
       
         unless reg.blank?
           gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue nil
-      
-          Landing.create(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
+
+          landing = Landing.new(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
+          landing.save
         end
       end
     end
@@ -54,7 +55,8 @@ class ImportExcelData
         unless species.blank?
           fish_id = Fish.where("LOWER(code) = ?", species).first.id rescue nil
         
-          Catch.create(fish_id: fish_id.to_i, length: length, weight: weight)
+          catch = Catch.new(fish_id: fish_id.to_i, length: length, weight: weight)
+          catch.save
         end
       end
     end
@@ -66,9 +68,9 @@ class ImportExcelData
       fishery = xls.cell(1,"B").downcase  rescue ''
       kabupaten = xls.cell(2,"B")
       code_desa = xls.cell(3,"B").downcase  rescue ''
-      date = xls.cell(4,"B")
-      start_time = xls.cell(5,"B")
-      end_time = xls.cell(6,"B")
+      date = xls.cell(4,"B").to_time
+      start_time = date+xls.cell(5,"B")
+      end_time = date+xls.cell(6,"B")
       fleet_observer = xls.cell(7,"B")
       catch_scribe = xls.cell(8,"B")
       catch_measure = xls.cell(9,"B")
@@ -77,9 +79,8 @@ class ImportExcelData
         desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
         fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
 
-        Survey.create(fishery: fishery, fishery_id: fishery_id.to_i, desa_id: desa_id.to_i, date: date,
-          start_time: start_time, end_time: end_time, observer: fleet_observer,
-          scribe: catch_scribe, measure: catch_measure, user_id: user_id)
+        survey = Survey.new(fishery_id: fishery_id.to_i, desa_id: desa_id.to_i, date_published: date, start_time: start_time, end_time: end_time, fleet_observer: fleet_observer, catch_scribe: catch_scribe, catch_measure: catch_measure, user_id: user_id.to_i)
+        survey.save
       end
     end
     

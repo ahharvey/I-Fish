@@ -19,7 +19,6 @@ class HomeController < ApplicationController
 
         ActiveRecord::Base.transaction do
           if excel_file.save
-            ImportExcelData.working_based_sheet(excel_file.id, id)
             ["Success to import data", 200]
           else
             logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
