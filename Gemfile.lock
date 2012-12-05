@@ -122,6 +122,7 @@ GEM
       json (~> 1.4)
     responders (0.9.3)
       railties (~> 3.1)
+    rmagick (2.13.1)
     roo (1.10.1)
       choice (>= 0.1.4)
       google-spreadsheet-ruby (>= 0.1.5)
@@ -169,6 +170,7 @@ DEPENDENCIES
   omniauth
   pg
   rails (= 3.2.8)
+  rmagick
   roo
   sass-rails (~> 3.2.3)
   skeleton-rails
