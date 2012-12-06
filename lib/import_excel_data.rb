@@ -1,4 +1,4 @@
-require 'iconv'
+#require 'iconv'
 
 class ImportExcelData
   def self.working_based_sheet(id, user_id)
@@ -38,6 +38,7 @@ class ImportExcelData
           gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue 0
 
           landing = Landing.new(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
+          logger.info(landing.errors.full_messages)
           landing.save
         end
       end
