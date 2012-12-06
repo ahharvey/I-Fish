@@ -93,3 +93,8 @@
   height: 100px;
   overflow: hidden;
 }
+
+#preview {
+  /*Bootstrap's max-width: 100% broke Jcrop.*/
+  max-width: none !important;
+}
