@@ -1,4 +1,4 @@
-#require 'iconv'
+require 'iconv'
 
 class ImportExcelData
   def self.working_based_sheet(id, user_id)
@@ -18,28 +18,28 @@ class ImportExcelData
     
     
       for d in 2..xls.last_row
-        reg = xls.cell(d,"B")
+        reg = xls.cell(d,"B").to_s
         name = xls.cell(d,"C")
         type = xls.cell(d,"D")
-        engine = xls.cell(d,"E")
-        power = xls.cell(d,"F")
-        fishing_area = xls.cell(d,"G")
+        engine = xls.cell(d,"E").to_s
+        power = xls.cell(d,"F").to_s
+        fishing_area = xls.cell(d,"G").to_s
         dep_time = Time.now+xls.cell(d,"H") rescue Time.now
         arr_time = Time.now+xls.cell(d,"I") rescue Time.now
         sail = xls.cell(d,"J")
-        fuel = xls.cell(d,"K")
-        crew = xls.cell(d,"L")
+        fuel = xls.cell(d,"K").to_s
+        crew = xls.cell(d,"L").to_s
         gear = xls.cell(d,"M").downcase rescue ''
-        weight = xls.cell(d,"N")
-        qty = xls.cell(d,"O")
-        value = xls.cell(d,"P")
-      
+        weight = xls.cell(d,"N").to_i
+        qty = xls.cell(d,"O").to_i
+        value = xls.cell(d,"P").to_i
+
         unless reg.blank?
           gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue 0
 
           landing = Landing.new(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
-          logger.info(landing.errors.full_messages)
           landing.save
+          logger.info(landing.errors.full_messages)
         end
       end
     end
