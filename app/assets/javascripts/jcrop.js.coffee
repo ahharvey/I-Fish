@@ -1,6 +1,3 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 jQuery ->
   new AvatarCropper()
 
@@ -20,14 +17,7 @@ class AvatarCropper
     @updatePreview(coords)
 
   updatePreview: (coords) =>
-    console.log $('#cropbox').width()
     $('#preview').css
-      # width: Math.round(500/coords.w * $('#cropbox').width()) + 'px'
-      # height: Math.round(500/coords.h * $('#cropbox').height()) + 'px'
-      # marginLeft: '-' + coords.x + 'px'
-      # marginTop: '-' + coords.y + 'px'
-      # width: Math.round(coords.w / ($('#cropbox').width() - coords.x)) * 100 + 'px'
-      # height: Math.round(coords.h / ($('#cropbox').height() - coords.y)) * 100 + 'px'
       width: Math.round(100/coords.w * $('#cropbox').width()) + 'px'
       height: Math.round(100/coords.h * $('#cropbox').height()) + 'px'
       marginLeft: '-' + Math.round(100/coords.w * coords.x) + 'px'
