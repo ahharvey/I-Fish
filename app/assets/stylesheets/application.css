@@ -12,5 +12,6 @@
  *= require base
  *= require layout
  *= require skeleton
+ *= require jquery.Jcrop
  *= require_tree .
 */

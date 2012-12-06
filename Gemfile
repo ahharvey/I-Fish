@@ -7,6 +7,7 @@ gem 'omniauth'
 gem 'devise'
 gem 'skeleton-rails'
 gem 'jquery-rails'
+gem 'rmagick'
 gem 'carrierwave'
 gem 'roo'
 

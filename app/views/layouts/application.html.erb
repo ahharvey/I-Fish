@@ -46,7 +46,10 @@
             </ul>
             <ul class="nav secondary-nav" style="float: right">
               <% if user_signed_in? %>
-                <li >
+                <li>
+                  <%= link_to "Settings", edit_user_registration_path %>
+                </li>
+                <li>
                   <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
                 </li>
               <% end %>
