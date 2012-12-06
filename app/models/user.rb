@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :lockable, :timeoutable, :omniauthable #, :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :roles
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :roles, :desa_id
 
   validates :name, presence: true
   has_many :surveys, dependent: :destroy

@@ -29,6 +29,7 @@ ActiveRecord::Schema.define(:version => 20121206132943) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
     t.string   "name"
+    t.integer  "office_id"
   end
 
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
@@ -152,7 +153,6 @@ ActiveRecord::Schema.define(:version => 20121206132943) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.integer  "desa_id"
-    t.integer  "office_id"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

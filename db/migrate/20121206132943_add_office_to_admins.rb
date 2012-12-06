@@ -1,5 +1,5 @@
 class AddOfficeToAdmins < ActiveRecord::Migration
   def change
-  	add_column :users, :office_id, :integer
+  	add_column :admins, :office_id, :integer
   end
 end
