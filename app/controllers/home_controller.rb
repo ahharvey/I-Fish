@@ -1,15 +1,15 @@
 class HomeController < ApplicationController
   require 'mail'
 
-  skip_before_filter :authenticate_user!, :verify_authenticity_token, :only => [:import_mail]
-    
+  skip_before_filter :authenticate!, :verify_authenticity_token, :only => [:import_mail]
+
   def index
   end
-  
+
   def upload_data
     @files = ExcelFile.all
   end
-  
+
   def process_upload_data
     excel_file = ExcelFile.new(file: params[:file])
 
