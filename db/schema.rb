@@ -11,10 +11,11 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121120005405) do
+ActiveRecord::Schema.define(:version => 20121202170024) do
 
   create_table "catches", :force => true do |t|
     t.integer  "fish_id"
+    t.integer  "landing_id"
     t.integer  "length"
     t.integer  "weight"
     t.datetime "created_at", :null => false
@@ -23,59 +24,89 @@ ActiveRecord::Schema.define(:version => 20121120005405) do
 
   create_table "desas", :force => true do |t|
     t.string   "name"
+    t.string   "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
 
-  create_table "fish", :force => true do |t|
-    t.string   "family"
-    t.string   "genus"
-    t.string   "species"
-    t.string   "english_name"
-    t.string   "local_name"
+  create_table "excel_files", :force => true do |t|
+    t.string   "filename"
+    t.string   "filesize"
+    t.string   "file"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "user_id"
+  end
+
+  create_table "fisheries", :force => true do |t|
+    t.string   "name"
     t.string   "code"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "fishes", :force => true do |t|
+    t.string   "order"
+    t.string   "family"
+    t.string   "scientific_name"
+    t.string   "fishbase_name"
+    t.string   "english_name"
+    t.string   "indonesia_name"
+    t.string   "code"
+    t.datetime "created_at",      :null => false
+    t.datetime "updated_at",      :null => false
   end
 
   create_table "gears", :force => true do |t|
-    t.string   "code"
+    t.string   "cat_ind"
+    t.string   "cat_eng"
+    t.string   "sub_cat_ind"
+    t.string   "sub_cat_eng"
+    t.string   "type_ind"
+    t.string   "type_eng"
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
-  end
-
-  create_table "landings", :force => true do |t|
-    t.string   "vessel_ref"
-    t.string   "vessel_name"
-    t.string   "grid_square"
-    t.datetime "time_out"
-    t.datetime "time_in"
-    t.string   "engine"
-    t.string   "fuel"
-    t.string   "sail"
-    t.string   "crew"
-    t.integer  "boat_size"
-    t.integer  "gear_id"
-    t.integer  "quantity"
-    t.integer  "weight"
-    t.string   "value"
+    t.string   "alpha_code"
+    t.string   "num_code"
+    t.string   "fao_code"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "landings", :force => true do |t|
+    t.string   "power"
+    t.string   "fishing_area"
+    t.string   "vessel_ref"
+    t.string   "vessel_name"
+    t.string   "grid_square"
+    t.string   "engine"
+    t.string   "fuel"
+    t.string   "sail"
+    t.string   "crew"
+    t.string   "value"
+    t.integer  "boat_size"
+    t.integer  "gear_id"
+    t.integer  "survey_id"
+    t.integer  "quantity"
+    t.integer  "weight"
+    t.datetime "time_out"
+    t.datetime "time_in"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.string   "type"
+  end
+
   create_table "surveys", :force => true do |t|
-    t.date     "date"
+    t.date     "date_published"
     t.integer  "user_id"
+    t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.integer  "desa_id"
-    t.string   "observer"
-    t.string   "measure"
-    t.string   "scribe"
-    t.string   "fishery"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
+    t.integer  "fishery_id"
+    t.string   "fleet_observer"
+    t.string   "catch_scribe"
+    t.string   "catch_measure"
   end
 
   create_table "users", :force => true do |t|
