@@ -1,0 +1,38 @@
+<p>
+  <b>Order:</b>
+  <%= @fish.order %>
+</p>
+
+<p>
+  <b>Family:</b>
+  <%= @fish.family %>
+</p>
+
+<p>
+  <b>Scientific name:</b>
+  <%= @fish.scientific_name %>
+</p>
+
+<p>
+  <b>Fishbase name:</b>
+  <%= @fish.fishbase_name %>
+</p>
+
+<p>
+  <b>English name:</b>
+  <%= @fish.english_name %>
+</p>
+
+<p>
+  <b>Indonesia name:</b>
+  <%= @fish.indonesia_name %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @fish.code %>
+</p>
+
+
+<%= link_to 'Edit', edit_fish_path(@fish) %> |
+<%= link_to 'Back', fishes_path %>

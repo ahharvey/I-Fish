@@ -1,23 +1,39 @@
 <h1>Listing gears</h1>
 
-<table class="table-bordered table-striped table table-hover">
+<table class="table table-bordered table-striped">
   <tr>
-    <th>Code</th>
+    <th>Cat ind</th>
+    <th>Cat eng</th>
+    <th>Sub cat ind</th>
+    <th>Sub cat eng</th>
+    <th>Type ind</th>
+    <th>Type eng</th>
     <th>Name</th>
+    <th>Alpha code</th>
+    <th>Num code</th>
+    <th>Fao code</th>
+    <th></th>
+    <th></th>
     <th></th>
   </tr>
 
-  <% @gears.each do |gear| %>
-    <tr>
-      <td><%= gear.code %></td>
-      <td><%= gear.name %></td>
-      <td>
-        <%= link_to 'Show', gear %>
-        <%= link_to 'Edit', edit_gear_path(gear) %>
-        <%= link_to 'Destroy', gear, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </td>
-    </tr>
-  <% end %>
+<% @gears.each do |gear| %>
+  <tr>
+    <td><%= gear.cat_ind %></td>
+    <td><%= gear.cat_eng %></td>
+    <td><%= gear.sub_cat_ind %></td>
+    <td><%= gear.sub_cat_eng %></td>
+    <td><%= gear.type_ind %></td>
+    <td><%= gear.type_eng %></td>
+    <td><%= gear.name %></td>
+    <td><%= gear.alpha_code %></td>
+    <td><%= gear.num_code %></td>
+    <td><%= gear.fao_code %></td>
+    <td><%= link_to 'Show', gear %></td>
+    <td><%= link_to 'Edit', edit_gear_path(gear) %></td>
+    <td><%= link_to 'Destroy', gear, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  </tr>
+<% end %>
 </table>
 
 <br />
