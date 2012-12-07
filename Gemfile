@@ -18,5 +18,4 @@ end
 
 group :development do
   gem 'debugger'
-  gem 'mysql2', '0.3.11'
 end
