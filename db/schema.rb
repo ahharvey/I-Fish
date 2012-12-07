@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206132943) do
+ActiveRecord::Schema.define(:version => 20121207122648) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -52,6 +52,8 @@ ActiveRecord::Schema.define(:version => 20121206132943) do
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.float    "lat"
+    t.float    "lng"
   end
 
   create_table "excel_files", :force => true do |t|

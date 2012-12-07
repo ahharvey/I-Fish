@@ -1,6 +1,6 @@
 # Desas
-desa1 = Desa.create(name: "test1 desa")
-desa2 = Desa.create(name: "test1 desa")
+desa1 = Desa.create(name: "Jakarta", lat: -6.21154, lng: 106.84517)
+desa2 = Desa.create(name: "Bandung", lat: -6.91474, lng: 107.60981)
 
 # Fish
 Fish.create(family: "Squatinidae", genus: "Squatina", species: "australis", local_name: "Australian Angelshark", english_name: "Australian Angelshark", code: "111")
