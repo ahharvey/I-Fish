@@ -9,12 +9,12 @@ default: &default
   reconnect: true
   pool: 5
   host: localhost
-  username: admin2
-  password: admin2
 
 development:
   <<: *default
   database: xls_dev
+  username: admin
+  password: 
 
 production:
   <<: *default
