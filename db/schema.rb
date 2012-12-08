@@ -13,6 +13,7 @@
 
 ActiveRecord::Schema.define(:version => 20121202170024) do
 
+
   create_table "catches", :force => true do |t|
     t.integer  "fish_id"
     t.integer  "landing_id"
