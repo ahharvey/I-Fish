@@ -1,0 +1,64 @@
+#survey
+
+@surveys = [
+	[
+		fishery: 'test1',
+		kabupaten: 'test1 kabupaten',
+		code_desa: 'desa1',
+		date_published: '2012-11-21',
+		start_time: '11:20:2012 17:00:00',
+		end_time: '11:20:2012 19:00:00',
+		fleet_observer: 'test1 fleet',
+		catch_scribe: 'test1 scribe',
+		catch_measure: 'test1 measure'
+	]
+]
+
+#end survey
+
+
+
+#catch
+
+@catches = [
+	[
+		code_species: '111',
+		length: 20,
+		weight: 40
+	],
+
+	[
+		code_species: '112',
+		length: 24,
+		weight: 41
+	]
+
+]
+
+
+#end catch
+
+
+#fleet
+
+@fleets = [
+	[
+		reg: 'test1 reg',
+		name: 'test1 name',
+		type: 'Gear',
+		engine: 'test1 engine',
+		power: 'test1_power',
+		fishing_area: 'test1 fishing area',
+		dep_time: '11:20:2012 17:00:00',
+		arr_time: '11:20:2012 19:00:00',
+		sail: 'Y',
+		fuel: 100,
+		crew: 'test1 crew',
+		weight: 'gear1',
+		qty:2,
+		value: 40000
+	]
+]
+
+
+#end fleet

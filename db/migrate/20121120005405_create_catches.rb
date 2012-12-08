@@ -2,6 +2,7 @@ class CreateCatches < ActiveRecord::Migration
   def change
     create_table :catches do |t|
       t.integer :fish_id
+      t.integer :landing_id
       t.integer :length
       t.integer :weight
 

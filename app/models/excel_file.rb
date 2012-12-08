@@ -1,7 +1,7 @@
 require 'import_excel_data'
 
 class ExcelFile < ActiveRecord::Base
-  attr_accessible :file, :filename, :filesize
+  attr_accessible :file, :filename, :filesize, :user_id
   before_save :update_asset_attributes
   mount_uploader :file, ExcelFileUploader
   after_save :import_excel_data
@@ -11,7 +11,9 @@ class ExcelFile < ActiveRecord::Base
   private
   
   def import_excel_data
-    ImportExcelData.working_based_sheet(self.id)  
+    ActiveRecord::Base.transaction do
+      ImportExcelData.working_based_sheet(self.id, self.user_id)
+    end
   end
   
   def update_asset_attributes

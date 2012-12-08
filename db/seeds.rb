@@ -3,11 +3,17 @@ desa1 = Desa.create(name: "Jakarta", lat: -6.21154, lng: 106.84517)
 desa2 = Desa.create(name: "Bandung", lat: -6.91474, lng: 107.60981)
 
 # Fish
-Fish.create(family: "Squatinidae", genus: "Squatina", species: "australis", local_name: "Australian Angelshark", english_name: "Australian Angelshark", code: "111")
-Fish.create(family: "Muraenidae", genus: "Gymnothorax", species: "eurostus", local_name: "Abbott's Moray", english_name: "Abbott's Moray", code: "112")
-Fish.create(family: "Ceratodontidae", genus: "Neoceratodus", species: "forsteri", local_name: "Australian Lungfish", english_name: "Australian Lungfish", code: "113")
-Fish.create(family: "Centropomidae", genus: "Lates", species: "calcarifer", local_name: "Barramundi", english_name: "Barramundi", code: "114")
-Fish.create(family: "Serranidae", genus: "Chromileptes", species: "altivelis", local_name: "Barramundi Cod", english_name: "Barramundi Cod", code: "115")
+Fish.create(order: "SCOMBROIDEI", family: "Scombridae", scientific_name: "Auxis rochei", english_name: "Bullet tuna", indonesia_name: "Lisong", code: "BLT")
+Fish.create(order: "SCOMBROIDEI", family: "Scombridae", scientific_name: "Auxis thazard", english_name: "Firgate tuna", indonesia_name: "Tongkol krai", code: "FRI")
+Fish.create(order: "SCOMBROIDEI", family: "Scombridae", scientific_name: "Euthynnus affinis", fishbase_name: "Kawakawa", english_name: "Kawa kawa/Eastern little tuna", indonesia_name: "Tongkol komo", code: "KAW")
+Fish.create(scientific_name: "Katsuwanus pelamis", english_name: "Skipjack tuna", indonesia_name: "Cakalang")
+
+# Gears
+Gear.create(alpha_code: "PS1-K", cat_eng: "Surrounding nets", cat_ind: "Jaring lingkar", fao_code: "PS", name: "Pukat cincin pelagis kecil dengan satu kapal", num_code: "01.1.1.1", sub_cat_eng: "With purse lines/Purse seine", sub_cat_ind: "Jaring lingkar bertali kerut", type_ind: "Pukat cincin dengan satu kapal", type_eng: "One boat operated purse seines")
+Gear.create(alpha_code: "PS1-B", cat_eng: "Surrounding nets", cat_ind: "Jaring lingkar", fao_code: "PS", name: "Pukat cincin pelagis besar dengan satu kapal", num_code: "01.1.1.2", sub_cat_eng: "With purse lines/Purse seine", sub_cat_ind: "Jaring lingkar bertali kerut", type_ind: "Pukat cincin dengan satu kapal", type_eng: "One boat operated purse seines")
+Gear.create(alpha_code: "PS2-K", cat_eng: "Surrounding nets", cat_ind: "Jaring lingkar", fao_code: "PS", name: "Pukat cincin group pelagis kecil", num_code: "01.1.2.1", sub_cat_eng: "With purse lines/Purse seine", sub_cat_ind: "Jaring lingkar bertali kerut", type_ind: "Pukat cincin dengan satu kapal", type_eng: "Two boat operated purse seines")
+Gear.create(alpha_code: "PS2-B", cat_eng: "Surrounding nets", cat_ind: "Jaring lingkar", fao_code: "PS", name: "Pukat cincin group pelagis besar", num_code: "01.1.2.2", sub_cat_eng: "With purse lines/Purse seine", sub_cat_ind: "Jaring lingkar bertali kerut", type_ind: "Pukat cincin dengan satu kapal", type_eng: "Two boat operated purse seines")
+Gear.create(alpha_code: "LA", cat_eng: "Surrounding nets", cat_ind: "Jaring lingkar", fao_code: "LA", num_code: "01.2.0", sub_cat_eng: "Without purse lines/lampara", sub_cat_ind: "Jaring lingkar tanpa tali kerut")
 
 # Offices
 office1 = Office.create(name: "Test office 1")
@@ -62,19 +68,15 @@ user_supervisor2 = User.create(email: "supervisor2@fish.com",
 user_supervisor2.roles.push role_supervisor
 
 # Surveys
-survey1 = user_staff1.surveys.create!(:date => DateTime.now.to_s,
-	start_time: DateTime.now - 50,
-	start_time: DateTime.now + 50,
+survey1 = user_staff1.surveys.create!(start_time: DateTime.now - 50,
+	end_time: DateTime.now + 50,
 	desa_id: desa1.id,
-	observer: "Test observer1",
-	measure: "Test measure1",
-	scribe: "Test scribe1",
-	fishery: "Test fishery1")
-survey2 = user_staff2.surveys.create!(:date => DateTime.now.to_s,
-	start_time: DateTime.now - 50,
-	start_time: DateTime.now + 50,
+	fleet_observer: "Test observer1",
+	catch_measure: "Test measure1",
+	catch_scribe: "Test scribe1")
+survey2 = user_staff2.surveys.create!(start_time: DateTime.now - 50,
+	end_time: DateTime.now + 50,
 	desa_id: desa2.id,
-	observer: "Test observer2",
-	measure: "Test measure2",
-	scribe: "Test scribe2",
-	fishery: "Test fishery2")
+	fleet_observer: "Test observer2",
+	catch_measure: "Test measure2",
+	catch_scribe: "Test scribe2")

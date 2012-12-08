@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FishTest < ActiveSupport::TestCase
+class FishesTest < ActiveSupport::TestCase
   # test "the truth" do
   #   assert true
   # end
