@@ -1,16 +1,4 @@
-#to use aws s3 create file in /config/aws.yml
-#
-#development:
-#aws_access_key_id: "xxxxxxxxxxxxxx"
-#aws_secret_access_key: "xxxxxxxxxxxxxx"
-#directory : 'xxxxxxxxxxxxxx'
-#
-#production:
-#aws_access_key_id: "xxxxxxxxxxxxxx"
-#aws_secret_access_key: "xxxxxxxxxxxxxx"
-#directory : 'xxxxxxxxxxxxxx'
-
-AWS_CONFIG = YAML.load_file(Rails.root.join("config/aws.yml"))[Rails.env]
+AWS_CONFIG = YAML.load_file(Rails.root.join("config/credentials.yml"))[Rails.env]['aws']
 
 CarrierWave.configure do |config|
   config.fog_directory  = AWS_CONFIG['directory']
