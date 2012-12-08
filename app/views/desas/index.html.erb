@@ -1,12 +1,6 @@
 <% content_for :head do %>
+  <!-- Google Maps Initialisation -->
   <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <style type="text/css">
-    html { height: 100% }
-    body { height: 100%; margin: 0; padding: 0; }
-    #map_canvas { height: 400px; display: block; margin-left: auto; margin-right: auto; margin-top: auto; margin-bottom: auto; }
-    #mapCanvas img { max-width: none; }
-  </style>
-
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSJOWFctC1xrly6rlOAP0nccyTItgSemo&sensor=false"></script>
 <% end %>
 
@@ -43,3 +37,7 @@
 <br />
 
 <%= link_to 'New Desa', new_desa_path %>
+
+<ul id="desa_info">
+  <li>Desa Info</li>
+</ul>
