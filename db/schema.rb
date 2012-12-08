@@ -11,8 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121202170024) do
-
+ActiveRecord::Schema.define(:version => 20121208181736) do
 
   create_table "catches", :force => true do |t|
     t.integer  "fish_id"
@@ -132,6 +131,7 @@ ActiveRecord::Schema.define(:version => 20121202170024) do
     t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.string   "avatar"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
