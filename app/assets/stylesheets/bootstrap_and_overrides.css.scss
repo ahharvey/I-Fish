@@ -1,0 +1,20 @@
+// Set the correct sprite paths
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+$USAIDblue: #002A6C;
+$USAIDred: #C2113A;
+$USAIDblack: #000;
+$USAIDdgrey: #666666;
+$USAIDlgrey: #DDDDDD;
+$USAIDlblue: #336799;
+
+$navbarBackground: $USAIDblue;
+$navbarBackgroundHighlight: lighten($USAIDblue, 20%);
+
+$navbarLinkColor: $USAIDlgrey;
+$navbarLinkColorHover: $USAIDred;
+
+@import "bootstrap";
+
+@import "bootstrap-responsive";
