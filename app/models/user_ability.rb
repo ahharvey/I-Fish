@@ -9,11 +9,13 @@ class UserAbility
     if user.supervisor?
       # Supervisors can view and edit data owned by staff who share the same office.
       can :manage, Survey, :desa_id => user.desa.id
+      can :read, User, :desa_id => user.desa.id
     end
 
     if user.staff?
       # Staff can view and edit data they own, and profiles of users who share the same district
       can :manage, Survey, :user_id => user.id
+      can :read, User, :desa_id => user.desa.id
     end
 
     if user.public?
