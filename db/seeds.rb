@@ -73,10 +73,12 @@ survey1 = user_staff1.surveys.create!(start_time: DateTime.now - 50,
 	desa_id: desa1.id,
 	fleet_observer: "Test observer1",
 	catch_measure: "Test measure1",
-	catch_scribe: "Test scribe1")
+	catch_scribe: "Test scribe1",
+	date_published: DateTime.now)
 survey2 = user_staff2.surveys.create!(start_time: DateTime.now - 50,
 	end_time: DateTime.now + 50,
 	desa_id: desa2.id,
 	fleet_observer: "Test observer2",
 	catch_measure: "Test measure2",
-	catch_scribe: "Test scribe2")
+	catch_scribe: "Test scribe2",
+	date_published: DateTime.now - 100)

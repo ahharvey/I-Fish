@@ -1,43 +1,44 @@
-<% content_for :head do %>
-  <!-- Google Maps Initialisation -->
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSJOWFctC1xrly6rlOAP0nccyTItgSemo&sensor=false"></script>
-<% end %>
+  <% content_for :head do %>
+    <!-- Google Maps Initialisation -->
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSJOWFctC1xrly6rlOAP0nccyTItgSemo&sensor=false"></script>
+    <%= javascript_include_tag "desa_googlemaps/desas.js" %>
+  <% end %>
 
-<h1>Listing desa</h1>
+  <h1>Listing desa</h1>
 
-<div class="row">
-  <div class="span12">
-    <div id="map_canvas"></div>
+  <div class="row">
+    <div class="span12">
+      <div id="map_canvas"></div>
+    </div>
   </div>
-</div>
-<div class="row">
-  <div class="span12">
-    <table class="table-bordered table-striped table table-hover" id="desa_table">
-      <tr>
-        <th>Name</th>
-        <th></th>
-      </tr>
-
-      <% @desas.each do |desa| %>
+  <div class="row">
+    <div class="span12">
+      <table class="table-bordered table-striped table table-hover" id="desa_table">
         <tr>
-          <td><%= desa.name %></td>
-          <td style="display:none;"><%= desa.lat %></td>
-          <td style="display:none;"><%= desa.lng %></td>
-          <td>
-            <%= link_to 'Show', desa %>
-            <%= link_to 'Edit', edit_desa_path(desa) %>
-            <%= link_to 'Destroy', desa, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
+          <th>Name</th>
+          <th></th>
         </tr>
-      <% end %>
-    </table>
+
+        <% @desas.each do |desa| %>
+          <tr>
+            <td><%= desa.name %></td>
+            <td style="display:none;"><%= desa.lat %></td>
+            <td style="display:none;"><%= desa.lng %></td>
+            <td>
+              <%= link_to 'Show', desa %>
+              <%= link_to 'Edit', edit_desa_path(desa) %>
+              <%= link_to 'Destroy', desa, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </table>
+    </div>
   </div>
-</div>
-<br />
+  <br />
 
-<%= link_to 'New Desa', new_desa_path %>
+  <%= link_to 'New Desa', new_desa_path %>
 
-<ul id="desa_info">
-  <li>Desa Info</li>
-</ul>
+  <ul id="desa_info">
+    <li>Desa Info</li>
+  </ul>

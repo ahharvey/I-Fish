@@ -13,7 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require tabs
-//= require_tree .
+//= require_directory .
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!
 // ++++++++++++++++++++++++++++++++++++++++++
