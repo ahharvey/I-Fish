@@ -10,6 +10,7 @@ class UserAbility
       # Supervisors can view and edit data owned by staff who share the same office.
       can :manage, Survey, :desa_id => user.desa.id
       can :read, User, :desa_id => user.desa.id
+      can :read, Fishery
     end
 
     if user.staff?
