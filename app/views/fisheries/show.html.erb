@@ -51,12 +51,12 @@
   <button class="btn" id="btn_refresh">Refresh</button>
 </div>
 
-<div id="container"></div>
-
+<div id="graph_catch_per_effort_container"></div>
 <script type="text/javascript">
-	function update_chart(){
+	function update_catch_effort(){
 		console.log("Updating chart");
 		params = {
+			method: 'catch_per_effort',
 			month_from: $('#month_from').val(),
 			year_from: $('#year_from').val(),
 			month_to: $('#month_to').val(),
@@ -65,18 +65,36 @@
 
 		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
 			console.log(data);
-			render_chart('Catch per unit effort', 'Catch per unit effort over time', data.col_headers, data.month_counts);
+			render_chart('graph_catch_per_effort_container','Catch per unit effort', 'Catch per unit effort over time', 'line', data.col_headers, data.month_counts);
 		}, "json");
 	};
 
 	$(function () {
 		// Event handlers
 		$('#btn_refresh').click(function(){
-			update_chart();
+			update_catch_effort();
 		});
 
 		// Load chart with default values
-		update_chart();
+		update_catch_effort();
+	});
+</script>
+
+<div id="graph_length_frequency_container"></div>
+<script type="text/javascript">
+	function update_length_frequency(){
+		params = {
+			method: 'length_frequency',
+		}
+		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
+			console.log(data);
+			render_chart('graph_length_frequency_container', 'Length-frequency', 'Length', 'column', data.col_headers, data.length_counts);
+		}, "json");
+	};
+
+	$(function () {
+		// Load chart with default values
+		update_length_frequency();
 	});
 </script>
 

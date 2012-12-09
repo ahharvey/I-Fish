@@ -122,5 +122,17 @@ landing3 = Landing.create(gear_id: gear1.id,
 # catches
 catch1 = Catch.create(fish_id: fish1.id,
 	landing_id: landing1.id,
-	length: 50,
+	length: 11,
+	weight: 500)
+catch2 = Catch.create(fish_id: fish1.id,
+	landing_id: landing1.id,
+	length: 21,
+	weight: 500)
+catch3 = Catch.create(fish_id: fish1.id,
+	landing_id: landing1.id,
+	length: 23,
+	weight: 500)
+catch3 = Catch.create(fish_id: fish1.id,
+	landing_id: landing1.id,
+	length: 28,
 	weight: 500)

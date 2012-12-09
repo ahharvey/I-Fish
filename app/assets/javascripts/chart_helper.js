@@ -1,9 +1,9 @@
-function render_chart(title, y_axis_name, col_headers, counts){
+function render_chart(container, title, y_axis_name, chart_type, col_headers, counts){
 		var chart;
         window.user_chart = new Highcharts.Chart({
             chart: {
-                renderTo: 'container',
-                type: 'line',
+                renderTo: container,
+                type: chart_type,
                 marginRight: 130,
                 marginBottom: 25
             },
