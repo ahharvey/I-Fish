@@ -150,27 +150,8 @@ class HomeController < ApplicationController
   end
 
   def user_profile
-    @surveys = @currently_signed_in.surveys.order("date_published")
-    1.upto(12) { |i| instance_variable_set("@month_#{i}", 0) }
-    @surveys.each do |survey|
-      instance_variable_set("@month_#{survey.date_published.month}", instance_variable_get("@month_#{survey.date_published.month}")+1) rescue nil
-    end
   end
 
   def fishery_profile
-    @surveys = current_user.surveys.order("date_published")
-    1.upto(12) { |i| instance_variable_set("@month_#{i}", 0) }
-    @surveys.each do |survey|
-      instance_variable_set("@month_#{survey.date_published.month}", (survey.landings.map(&:weight).sum/survey.landings.map(&:length).sum rescue 0))
-    end
-    @catchs = Catch.order("length")
-    @length = @catchs.map(&:length).uniq
-    @hash_leng = {}
-
-    @length.each do |le|
-      i = @hash_leng[le].to_i
-      @hash_leng[le] = i+1
-    end
-    puts @hash_leng
   end
 end
