@@ -1,6 +1,10 @@
+# Districts
+district1 = District.create(name: "District1")
+district9 = District.create(name: "District Prawn")
+
 # Desas
-desa1 = Desa.create(name: "Jakarta", lat: -6.21154, lng: 106.84517)
-desa2 = Desa.create(name: "Bandung", lat: -6.91474, lng: 107.60981)
+desa1 = Desa.create(name: "Jakarta", lat: -6.21154, lng: 106.84517, district_id: district1.id)
+desa2 = Desa.create(name: "Bandung", lat: -6.91474, lng: 107.60981, district_id: district9.id)
 
 # Fish
 fish1 = Fish.create(order: "SCOMBROIDEI", family: "Scombridae", scientific_name: "Auxis rochei", english_name: "Bullet tuna", indonesia_name: "Lisong", code: "BLT")
@@ -22,8 +26,8 @@ gear4 = Gear.create(alpha_code: "PS2-B", cat_eng: "Surrounding nets", cat_ind: "
 gear5 = Gear.create(alpha_code: "LA", cat_eng: "Surrounding nets", cat_ind: "Jaring lingkar", fao_code: "LA", num_code: "01.2.0", sub_cat_eng: "Without purse lines/lampara", sub_cat_ind: "Jaring lingkar tanpa tali kerut")
 
 # Offices
-office1 = Office.create(name: "Test office 1")
-office2 = Office.create(name: "Test office 2")
+office1 = Office.create(name: "Test office 1", district_id: district1.id)
+office2 = Office.create(name: "Test office 2", district_id: district9.id)
 
 # Roles
 role_public = Role.create(name: "public")
@@ -37,49 +41,48 @@ admin1 = office1.admins.create(email: "admin@fish.com",
   password: "admin1",
   password_confirmation: "admin1")
 
+admin_staff1 = Admin.create(email: "staff1@fish.com",
+	name: "staff1",
+	password: "staff1",
+	password_confirmation: "staff1",
+	office_id: office1.id)
+admin_staff1.roles.push role_staff
+admin_staff2 = Admin.create(email: "staff2@fish.com",
+	name: "staff2",
+	password: "staff2",
+	password_confirmation: "staff2",
+	office_id: office2.id)
+admin_staff2.roles.push role_staff
+
+admin_supervisor1 = Admin.create(email: "supervisor1@fish.com",
+	name: "supervisor1",
+	password: "supervisor1",
+	password_confirmation: "supervisor1",
+	office_id: office1.id)
+admin_supervisor1.roles.push role_supervisor
+admin_supervisor2 = Admin.create(email: "supervisor2@fish.com",
+	name: "supervisor2",
+	password: "supervisor2",
+	password_confirmation: "supervisor2",
+	office_id: office2.id)
+admin_supervisor2.roles.push role_supervisor
+
+
 # Users
 user_public1 = desa1.users.create(email: "public1@fish.com",
   name: "Public McPublic 1",
   password: "public1",
-  password_confirmation: "public1")
+  password_confirmation: "public1",
+  desa_id: desa1.id)
 user_public2 = desa1.users.create(email: "public2@fish.com",
   name: "Public McPublic 2",
   password: "public2",
-  password_confirmation: "public2")
+  password_confirmation: "public2",
+  desa_id: desa2.id)
 
-
-user_staff1 = User.create(email: "staff1@fish.com",
-	name: "staff1",
-	password: "staff1",
-	password_confirmation: "staff1",
-	desa_id: desa1.id,
-	office_id: office1.id)
-user_staff1.roles.push role_staff
-user_staff2 = User.create(email: "staff2@fish.com",
-	name: "staff2",
-	password: "staff2",
-	password_confirmation: "staff2",
-	desa_id: desa2.id,
-	office_id: office2.id)
-user_staff2.roles.push role_staff
-
-user_supervisor1 = User.create(email: "supervisor1@fish.com",
-	name: "supervisor1",
-	password: "supervisor1",
-	password_confirmation: "supervisor1",
-	desa_id: desa2.id,
-	office_id: office1.id)
-user_supervisor1.roles.push role_supervisor
-user_supervisor2 = User.create(email: "supervisor2@fish.com",
-	name: "supervisor2",
-	password: "supervisor2",
-	password_confirmation: "supervisor2",
-	desa_id: desa2.id,
-	office_id: office2.id)
-user_supervisor2.roles.push role_supervisor
 
 # Surveys
-survey1 = user_staff1.surveys.create!(start_time: DateTime.now - 50,
+survey1 = admin_staff1.surveys.create!(start_time: DateTime.now - 50,
 	end_time: DateTime.now + 50,
 	desa_id: desa1.id,
 	fishery_id: fishery1.id,
@@ -87,7 +90,7 @@ survey1 = user_staff1.surveys.create!(start_time: DateTime.now - 50,
 	catch_measure: "Test measure1",
 	catch_scribe: "Test scribe1",
 	date_published: DateTime.now - 4.months)
-survey1 = user_staff1.surveys.create!(start_time: DateTime.now - 50,
+survey1 = admin_staff1.surveys.create!(start_time: DateTime.now - 50,
 	end_time: DateTime.now + 50,
 	desa_id: desa1.id,
 	fishery_id: fishery1.id,
@@ -95,7 +98,7 @@ survey1 = user_staff1.surveys.create!(start_time: DateTime.now - 50,
 	catch_measure: "Test measure1",
 	catch_scribe: "Test scribe1",
 	date_published: DateTime.now - 5.months)
-survey2 = user_staff2.surveys.create!(start_time: DateTime.now - 50,
+survey2 = admin_staff2.surveys.create!(start_time: DateTime.now - 50,
 	end_time: DateTime.now + 50,
 	desa_id: desa2.id,
 	fishery_id: fishery2.id,

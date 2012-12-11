@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121211125350) do
+ActiveRecord::Schema.define(:version => 20121211162928) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -52,10 +52,17 @@ ActiveRecord::Schema.define(:version => 20121211125350) do
   create_table "desas", :force => true do |t|
     t.string   "name"
     t.string   "code"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.float    "lat"
     t.float    "lng"
+    t.integer  "district_id"
+  end
+
+  create_table "districts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "excel_files", :force => true do |t|
@@ -126,8 +133,9 @@ ActiveRecord::Schema.define(:version => 20121211125350) do
 
   create_table "offices", :force => true do |t|
     t.string   "name"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "district_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -143,7 +151,6 @@ ActiveRecord::Schema.define(:version => 20121211125350) do
 
   create_table "surveys", :force => true do |t|
     t.date     "date_published"
-    t.integer  "user_id"
     t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -153,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20121211125350) do
     t.string   "fleet_observer"
     t.string   "catch_scribe"
     t.string   "catch_measure"
+    t.integer  "admin_id"
   end
 
   create_table "users", :force => true do |t|
@@ -178,7 +186,6 @@ ActiveRecord::Schema.define(:version => 20121211125350) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.integer  "desa_id"
-    t.integer  "office_id"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

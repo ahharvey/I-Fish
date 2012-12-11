@@ -1,5 +1,6 @@
 class Office < ActiveRecord::Base
-  has_many :admins
+  attr_accessible :name, :district_id
 
-  attr_accessible :name
+  has_many :admins
+  belongs_to :district
 end

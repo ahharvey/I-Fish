@@ -3,13 +3,11 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :lockable, :timeoutable, :omniauthable #, :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :roles, :desa_id, :office_id
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :roles, :desa_id
 
   validates :name, presence: true
-  has_many :surveys, dependent: :destroy
   has_and_belongs_to_many :roles
   belongs_to :desa
-  belongs_to :office
 
   after_create :set_default_role
 
@@ -24,11 +22,11 @@ class User < ActiveRecord::Base
   end
 
   def supervisor?
-  	has_role?("supervisor")
+  	false
   end
 
   def staff?
-  	has_role?("staff")
+  	false
   end
 
   def public?

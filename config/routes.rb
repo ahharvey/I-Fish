@@ -12,6 +12,7 @@ ExportXls::Application.routes.draw do
   resources :fishes
   resources :offices
   resources :users, :only => [:index, :show]
+  resources :admins, :only => [:index, :show]
 
   get 'home/upload_data'
   post 'home/process_upload_data'
