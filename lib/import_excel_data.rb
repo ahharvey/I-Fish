@@ -9,7 +9,7 @@ class ImportExcelData
     else
       xls = Excelx.new(xl_file.file.path)
     end
-    sheets = xls.sheets
+    mysheets = xls.sheets
 
     # form A
     
