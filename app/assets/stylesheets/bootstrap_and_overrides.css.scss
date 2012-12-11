@@ -2,6 +2,14 @@
 $iconSpritePath: image-path('glyphicons-halflings.png');
 $iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
 
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+$fontAwesomeEotPath: image-path('fontawesome-webfont.eot');
+$fontAwesomeWoffPath: image-path('fontawesome-webfont.woff');
+
+$fontAwesomeTtfPath: image-path('fontawesome-webfont.ttf');
+$fontAwesomeSvgzPath: image-path('fontawesome-webfont.svgz');
+$fontAwesomeSvgPath: image-path('fontawesome-webfont.svg');
+
 $USAIDblue: #002A6C;
 $USAIDred: #C2113A;
 $USAIDblack: #000;
@@ -13,8 +21,10 @@ $navbarBackground: $USAIDblue;
 $navbarBackgroundHighlight: lighten($USAIDblue, 20%);
 
 $navbarLinkColor: $USAIDlgrey;
-$navbarLinkColorHover: $USAIDred;
+$navbarLinkColorHover: $USAIDlgrey;
 
 @import "bootstrap";
 
 @import "bootstrap-responsive";
+
+@import "font-awesome";

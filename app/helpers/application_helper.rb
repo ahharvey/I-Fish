@@ -25,7 +25,15 @@ module ApplicationHelper
   end
   
   def upload_icon
-    content_tag(:i, "", :class=>'icon-upload icon-white')
+    content_tag(:i, "", class: 'icon-upload-alt icon-white')
+  end
+
+  def edit_profile_icon
+    content_tag(:i, "", class: 'icon-cogs icon-white')
+  end
+
+  def logout_icon
+    content_tag(:i, "", class: 'icon-signout icon-white')
   end
   
 end

@@ -39,9 +39,6 @@
                   <%= link_to "Surveys", surveys_path %>
                 </li>
                 <li>
-                  <%= link_to "Upload Data", home_upload_data_path %>
-                </li>
-                <li>
                   <%= link_to "User page", '/user_profile' %>
                 </li>
                 <li>
@@ -52,17 +49,24 @@
           </li>
 
         </ul>
+
+        <% if user_signed_in? %>
+          <%= link_to home_upload_data_path, class: "btn btn-danger" do %>
+            <%= upload_icon %>
+            Import
+          <% end %>
+        <% end %>
         
         <ul class="nav secondary-nav" style="float: right">
           <p class="navbar-text pull-right">
             <% if user_signed_in? %>
-              <%= image_tag current_user.avatar_url(:thumb), :width => "30px", :height => "30px" if current_user.avatar? %>
+              <%= image_tag current_user.avatar_url(:thumb), width: "30px", height: "30px" if current_user.avatar? %>
               <%= current_user.name %>
-              <%= link_to 'Edit profile', edit_user_registration_path, :class => 'navbar-link' %> |
-              <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>
+              <%= link_to edit_profile_icon, edit_user_registration_path, class: 'navbar-link', title: "Edit profile" %> |
+              <%= link_to logout_icon, destroy_user_session_path, method: :delete, class: 'navbar-link', title: "Sign out" %>
             <% else %>
-              <%= link_to "Sign up", new_user_registration_path, :class => 'navbar-link'  %> |
-              <%= link_to "Login", new_user_session_path, :class => 'navbar-link'  %>
+              <%= link_to "Sign up", new_user_registration_path, class: 'navbar-link'  %> |
+              <%= link_to "Login", new_user_session_path, class: 'navbar-link'  %>
             <% end %>
           </p>
         </ul>
