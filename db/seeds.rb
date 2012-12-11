@@ -23,6 +23,7 @@ gear5 = Gear.create(alpha_code: "LA", cat_eng: "Surrounding nets", cat_ind: "Jar
 
 # Offices
 office1 = Office.create(name: "Test office 1")
+office2 = Office.create(name: "Test office 2")
 
 # Roles
 role_public = Role.create(name: "public")
@@ -37,11 +38,11 @@ admin1 = office1.admins.create(email: "admin@fish.com",
   password_confirmation: "admin1")
 
 # Users
-user_public1 = desa1.users.create(email: "public@fish.com",
+user_public1 = desa1.users.create(email: "public1@fish.com",
   name: "Public McPublic 1",
   password: "public1",
   password_confirmation: "public1")
-user_public2 = desa1.users.create(email: "public@fish.com",
+user_public2 = desa1.users.create(email: "public2@fish.com",
   name: "Public McPublic 2",
   password: "public2",
   password_confirmation: "public2")
@@ -51,26 +52,30 @@ user_staff1 = User.create(email: "staff1@fish.com",
 	name: "staff1",
 	password: "staff1",
 	password_confirmation: "staff1",
-	desa_id: desa1.id)
+	desa_id: desa1.id,
+	office_id: office1.id)
 user_staff1.roles.push role_staff
 user_staff2 = User.create(email: "staff2@fish.com",
 	name: "staff2",
 	password: "staff2",
 	password_confirmation: "staff2",
-	desa_id: desa2.id)
+	desa_id: desa2.id,
+	office_id: office2.id)
 user_staff2.roles.push role_staff
 
 user_supervisor1 = User.create(email: "supervisor1@fish.com",
 	name: "supervisor1",
 	password: "supervisor1",
 	password_confirmation: "supervisor1",
-	desa_id: desa2.id)
+	desa_id: desa2.id,
+	office_id: office1.id)
 user_supervisor1.roles.push role_supervisor
 user_supervisor2 = User.create(email: "supervisor2@fish.com",
 	name: "supervisor2",
 	password: "supervisor2",
 	password_confirmation: "supervisor2",
-	desa_id: desa2.id)
+	desa_id: desa2.id,
+	office_id: office2.id)
 user_supervisor2.roles.push role_supervisor
 
 # Surveys

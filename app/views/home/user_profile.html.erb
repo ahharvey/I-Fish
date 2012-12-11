@@ -1,0 +1,71 @@
+<div id="graph_options">
+  <select id="month_from">
+    <option value="1">Jan</option>
+    <option value="2">Feb</option>
+    <option value="3">Mar</option>
+    <option value="4">Apr</option>
+    <option value="5">May</option>
+    <option value="6">Jun</option>
+    <option value="7">Jul</option>
+    <option value="8">Aug</option>
+    <option value="9">Sep</option>
+    <option value="10">Oct</option>
+    <option value="11">Nov</option>
+    <option value="12">Dec</option>
+  </select>
+  <select id="year_from">
+    <option value="2010">2010</option>
+    <option value="2011">2011</option>
+    <option value="2012" selected="selected">2012</option>
+  </select>
+  <select id="month_to">
+    <option value="1">Jan</option>
+    <option value="2">Feb</option>
+    <option value="3" selected="selected">Mar</option>
+    <option value="4">Apr</option>
+    <option value="5">May</option>
+    <option value="6">Jun</option>
+    <option value="7">Jul</option>
+    <option value="8">Aug</option>
+    <option value="9">Sep</option>
+    <option value="10">Oct</option>
+    <option value="11">Nov</option>
+    <option value="12">Dec</option>
+  </select>
+  <select id="year_to">
+    <option value="2010">2010</option>
+    <option value="2011">2011</option>
+    <option value="2012">2012</option>
+    <option value="2013" selected="selected">2013</option>
+  </select>
+  <button class="btn" id="btn_refresh">Refresh</button>
+</div>
+
+<div id="container"></div>
+
+<script type="text/javascript">
+	function update_chart(){
+		console.log("Updating chart");
+		params = {
+			month_from: $('#month_from').val(),
+			year_from: $('#year_from').val(),
+			month_to: $('#month_to').val(),
+			year_to: $('#year_to').val(),
+		}
+
+		$.get("/user_profile", params, function(data, textStatus, jqXHR){
+			console.log(data);
+			render_chart('container', 'Monthly Average Surveys', 'Surveys', 'line', data.col_headers, data.month_counts);
+		}, "json");
+	};
+
+	$(function () {
+		// Event handlers
+		$('#btn_refresh').click(function(){
+			update_chart();
+		});
+
+		// Load chart with default values
+		update_chart();
+	});
+</script>
