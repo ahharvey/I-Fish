@@ -3,12 +3,21 @@ source 'https://rubygems.org'
 gem 'rails', '3.2.8'
 gem 'inherited_resources'
 gem 'pg'
-gem 'omniauth'
+gem 'unicorn'
+
+
 gem 'devise'
+gem 'omniauth'
+
 gem 'skeleton-rails'
 gem 'jquery-rails'
-gem 'carrierwave'
 gem 'roo'
+gem 'fog'
+
+gem 'carrierwave'
+gem 'mini_magick'
+gem 'rmagick'
+gem 'simple_form'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -36,7 +36,6 @@ class ImportExcelData
 
         unless reg.blank?
           gear_id = Gear.where("LOWER(alpha_code) = ?", gear).first.id rescue 0
-
           landing = Landing.new(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
           landing.save
         end

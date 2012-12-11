@@ -3,10 +3,10 @@
 <div class="well">
   <%= form_tag home_process_upload_data_path, :class => "form-inline", multipart: true do %>
     <%= file_field_tag "file" %>
-	<%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
-		<%= upload_icon %>
-		Upload
-	<% end %>
+    <%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
+		  <%= upload_icon %>
+		  Upload
+    <% end %>
   <% end %>
 </div>
 
