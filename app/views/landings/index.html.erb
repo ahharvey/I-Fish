@@ -27,8 +27,8 @@
       <td><%= landing.vessel_name %></td>
       <td><%= landing.grid_square %></td>
       <td><%= landing.type %></td>
-      <td><%= landing.time_out %></td>
-      <td><%= landing.time_in %></td>
+      <td><%= landing.time_out.to_s(:timedate) %></td>
+      <td><%= landing.time_in.to_s(:timedate) %></td>
       <td><%= landing.engine %></td>
       <td><%= landing.fuel %></td>
       <td><%= landing.sail %></td>
