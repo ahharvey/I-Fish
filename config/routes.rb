@@ -21,6 +21,7 @@ ExportXls::Application.routes.draw do
     match 'crops' => 'registrations#crop', :as => :crop
   end
 
+  get 'home/index'
   get 'home/upload_data'
   post 'home/process_upload_data'
   match '/import_mail' => 'home#import_mail'
