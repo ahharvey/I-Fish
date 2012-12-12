@@ -1,25 +1,47 @@
 <% title "Desas" %>
 
-<table class="table table-striped table-condensed">
-  <tr>
-    <th>Name</th>
-    <th>Code</th>
-    <th></th>
-  </tr>
+<% content_for :head do %>
+  <!-- Google Maps Initialisation -->
+  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSJOWFctC1xrly6rlOAP0nccyTItgSemo&sensor=false"></script>
+  <%= javascript_include_tag "desa_googlemaps/desas.js" %>
+<% end %>
 
-  <% @desas.each do |desa| %>
-    <tr>
-      <td><%= desa.name %></td>
-      <td><%= desa.code %></td>
-      <td>
-        <%= link_to 'Show', desa %>
-        <%= link_to 'Edit', edit_desa_path(desa) %>
-        <%= link_to 'Destroy', desa, method: :delete, data: { confirm: 'Are you sure?' } %>
-      </td>
-    </tr>
-  <% end %>
-</table>
+<div class="row">
+  <div class="span12">
+    <div id="map_canvas"></div>
+  </div>
+</div>
 
+<div class="row">
+  <div class="span12">
+    <table class="table table-striped table-condensed" id="desa_table">
+      <tr>
+        <th>Name</th>
+        <th>Code</th>
+        <th></th>
+      </tr>
+
+      <% @desas.each do |desa| %>
+        <tr>
+          <td><%= desa.name %></td>
+          <td><%= desa.code %></td>
+          <td style="display:none;"><%= desa.lat %></td>
+          <td style="display:none;"><%= desa.lng %></td>
+          <td>
+            <%= link_to show_icon, desa %>
+            <%= link_to edit_icon, edit_desa_path(desa) %>
+            <%= link_to destroy_icon, desa, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+  </div>
+</div>
 <br />
 
 <%= link_to 'New Desa', new_desa_path %>
+
+<ul id="desa_info">
+  <li>Desa Info</li>
+</ul>

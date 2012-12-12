@@ -1,0 +1,23 @@
+<h1>Listing users</h1>
+<% begin %>
+<table class="table-bordered table-striped table table-hover">
+  <tr>
+    <th>Email</th>
+    <th>Name</th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.name %></td>
+      <td>
+        <%= link_to 'Show', user %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<% rescue %>
+
+<% end %>

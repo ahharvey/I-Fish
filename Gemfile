@@ -5,19 +5,19 @@ gem 'inherited_resources'
 gem 'pg'
 gem 'unicorn'
 
-
-gem 'devise'
-gem 'omniauth'
-
 gem 'skeleton-rails'
 gem 'jquery-rails'
-gem 'roo'
-gem 'fog'
+gem 'simple_form'
+
+gem 'devise'
+gem 'cancan'
+gem 'omniauth'
 
 gem 'carrierwave'
+gem 'fog'
+gem 'roo'
 gem 'mini_magick'
 gem 'rmagick'
-gem 'simple_form'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -28,5 +28,9 @@ group :assets do
 end
 
 group :development do
+  # Debugging
+  gem 'pry'
+  gem 'pry-debugger'
+  gem 'pry-stack_explorer'
   gem 'debugger'
 end

@@ -1,3 +1,4 @@
+
 desa = Desa.create([
   { name: "Ampenan", code: "001" },
   { name: "Banka Banka", code: "002" },
@@ -214,3 +215,50 @@ fish = Fish.create([
 	{ order: "", family: "", scientific_name: "Gracillia spp", fishbase_name: "", english_name: "Sea weeds", indonesia_name: "Rumput laut", code: "" },
 	{ order: "", family: "", scientific_name: "Aetomylaeus spp", fishbase_name: "", english_name: "Sea weeds", indonesia_name: "Rumput laut", code: "RJX" }
 ])
+
+# Districts
+district1 = District.create(name: "District1")
+district9 = District.create(name: "District Prawn")
+
+# Offices
+office1 = Office.create(name: "Test office 1", district_id: district1.id)
+office2 = Office.create(name: "Test office 2", district_id: district9.id)
+
+# Roles
+role_public = Role.create(name: "public")
+role_staff = Role.create(name: "staff")
+role_supervisor = Role.create(name: "supervisor")
+role_admin = Role.create(name: "administrator")
+
+# Administrators
+admin1 = office1.admins.create(email: "admin@fish.com",
+  name: "Admin Adminson",
+  password: "admin1",
+  password_confirmation: "admin1")
+
+admin_staff1 = Admin.create(email: "staff1@fish.com",
+	name: "staff1",
+	password: "staff1",
+	password_confirmation: "staff1",
+	office_id: office1.id)
+admin_staff1.roles.push role_staff
+admin_staff2 = Admin.create(email: "staff2@fish.com",
+	name: "staff2",
+	password: "staff2",
+	password_confirmation: "staff2",
+	office_id: office2.id)
+admin_staff2.roles.push role_staff
+
+admin_supervisor1 = Admin.create(email: "supervisor1@fish.com",
+	name: "supervisor1",
+	password: "supervisor1",
+	password_confirmation: "supervisor1",
+	office_id: office1.id)
+admin_supervisor1.roles.push role_supervisor
+admin_supervisor2 = Admin.create(email: "supervisor2@fish.com",
+	name: "supervisor2",
+	password: "supervisor2",
+	password_confirmation: "supervisor2",
+	office_id: office2.id)
+admin_supervisor2.roles.push role_supervisor
+

@@ -1,0 +1,23 @@
+<h1>Listing admins</h1>
+<% begin %>
+<table class="table-bordered table-striped table table-hover">
+  <tr>
+    <th>Email</th>
+    <th>Name</th>
+  </tr>
+
+  <% @admins.each do |admin| %>
+    <tr>
+      <td><%= admin.email %></td>
+      <td><%= admin.name %></td>
+      <td>
+        <%= link_to 'Show', admin %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<% rescue %>
+
+<% end %>

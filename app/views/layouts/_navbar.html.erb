@@ -13,31 +13,30 @@
           <li>
             <%= link_to "Home", root_path %>
           </li>
+          <li>
+            <%= link_to "Fisheries", fisheries_path %>
+          </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Main Menu <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Data<b class="caret"></b></a>
             <ul class="dropdown-menu">
               <% if user_signed_in? %>
+                
                 <li>
-                  <%= link_to "Catches", catches_path %>
-                </li>
-                <li>
-                  <%= link_to "Desa", desas_path %>
-                </li>
-                <li>
-                  <%= link_to "Fish", fishes_path %>
-                </li>
-                <li>
-                  <%= link_to "Fisheries", fisheries_path %>
-                </li>
-                <li>
-                  <%= link_to "Gears", gears_path %>
+                  <%= link_to "Surveys", surveys_path %>
                 </li>
                 <li>
                   <%= link_to "Landings", landings_path %>
                 </li>
                 <li>
-                  <%= link_to "Surveys", surveys_path %>
+                  <%= link_to "Catches", catches_path %>
                 </li>
+              <% end %>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Reports<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% if user_signed_in? %>
                 <li>
                   <%= link_to "User page", '/user_profile' %>
                 </li>
@@ -47,7 +46,28 @@
               <% end %>
             </ul>
           </li>
-
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Settings<b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% if user_signed_in? %>
+                <li>
+                  <%= link_to "Users", users_path %>
+                </li>
+                <li>
+                  <%= link_to "Admins", admins_path %>
+                </li>
+                <li>
+                  <%= link_to "Desa", desas_path %>
+                </li>
+                <li>
+                  <%= link_to "Fish", fishes_path %>
+                </li>
+                <li>
+                  <%= link_to "Gears", gears_path %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
         </ul>
 
         <% if user_signed_in? %>

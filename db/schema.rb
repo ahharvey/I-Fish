@@ -11,7 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208181736) do
+ActiveRecord::Schema.define(:version => 20121211162928) do
+
+  create_table "admins", :force => true do |t|
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.boolean  "god_mode",               :default => false
+    t.boolean  "reports_only",           :default => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "name"
+    t.integer  "office_id"
+  end
+
+  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
+  add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
+
+  create_table "admins_roles", :id => false, :force => true do |t|
+    t.integer "admin_id"
+    t.integer "role_id"
+  end
 
   create_table "catches", :force => true do |t|
     t.integer  "fish_id"
@@ -25,6 +52,15 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
   create_table "desas", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.float    "lat"
+    t.float    "lng"
+    t.integer  "district_id"
+  end
+
+  create_table "districts", :force => true do |t|
+    t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -95,9 +131,26 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.string   "type"
   end
 
+  create_table "offices", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "district_id"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
   create_table "surveys", :force => true do |t|
     t.date     "date_published"
-    t.integer  "user_id"
     t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -107,6 +160,7 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.string   "fleet_observer"
     t.string   "catch_scribe"
     t.string   "catch_measure"
+    t.integer  "admin_id"
   end
 
   create_table "users", :force => true do |t|
@@ -132,6 +186,7 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
     t.string   "avatar"
+    t.integer  "desa_id"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true

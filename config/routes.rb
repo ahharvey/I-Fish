@@ -1,25 +1,25 @@
 ExportXls::Application.routes.draw do
 
 
-  resources :gears
-
-  resources :fishes
-
-  resources :fisheries
-
-  get "omenk/index"
-
-  resources :catches
-  resources :landings
-  resources :desas
-  resources :surveys
-
-
+  devise_for :admins
   devise_for :users, :controllers => { :registrations => "registrations" }
 
   devise_scope :user do
     match 'crops' => 'registrations#crop', :as => :crop
   end
+
+    
+  resources :catches
+  resources :desas
+  resources :fisheries
+  resources :fishes
+  resources :gears
+  resources :landings  
+  resources :offices
+  resources :surveys
+
+  resources :users, :only => [:index, :show]
+  resources :admins, :only => [:index, :show]
 
   get 'home/index'
   get 'home/upload_data'
