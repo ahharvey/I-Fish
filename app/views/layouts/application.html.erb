@@ -1,83 +1,19 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>ExportXls</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body data-spy="scroll" data-target=".bs-docs-sidebar">
-  <div class="navbar navbar-inverse navbar-fixed-top">
-    <div class="navbar-inner">
-      <div class="container">
-        <button type="button" class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-        <div class="nav-collapse collapse">
-
-          <ul class="nav">
-
-            <li>
-              <%= link_to "Home", root_path %>
-            </li>
-            <li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Main Menu <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <% if user_signed_in? %>
-                <li>
-                  <%= link_to "Catches", catches_path %>
-                </li>
-                <li>
-                  <%= link_to "Desa", desas_path %>
-                </li>
-                <li>
-                  <%= link_to "Fish", fishes_path %>
-                </li>
-                <li>
-                  <%= link_to "Fisheries", fisheries_path %>
-                </li>
-                <li>
-                  <%= link_to "Gears", gears_path %>
-                </li>
-                <li>
-                  <%= link_to "Landings", landings_path %>
-                </li>
-                <li>
-                  <%= link_to "Surveys", surveys_path %>
-                </li>
-                <li>
-                  <%= link_to "Upload Data", home_upload_data_path %>
-                </li>
-                <li>
-                  <%= link_to "User page", '/user_profile' %>
-                </li>
-                <li>
-                  <%= link_to "Fishery profile", '/fishery_profile' %>
-                </li>
-                <% end %>
-              </ul>
-            </li>
-
-          </ul>
-          <ul class="nav secondary-nav" style="float: right">
-            <% if user_signed_in? %>
-            <li >
-              <%= link_to "Sign Out", destroy_user_session_path, :method => :delete %>
-            </li>
-            <% end %>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="container" style="margin-top:50px">
+  <head>
+    <title>FishStat | <%= yield (:title) || "" %></title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+    <%= render partial: "layouts/navbar" %>
+    <div class="container" style="margin-top:50px">
     <%= render partial: "shared/flash_messages" %>
-    <%= yield %>
-  </div>
-
-
-</body>
+      <div class="page-header">
+  	    <h1><%= yield (:title) || "FishStat" %></h1>
+      </div><!-- page-header -->
+      <%= yield %>
+    </div>
+  </body>
 </html>

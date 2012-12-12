@@ -3,6 +3,10 @@ class HomeController < ApplicationController
 
   skip_before_filter :authenticate_user!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
 
+  def index
+    @surveys = Survey.includes(:user, :desa, :fishery).all
+  end
+
   def multipart_import
     logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     logger.info(params)
@@ -39,9 +43,6 @@ class HomeController < ApplicationController
     logger.info(text)
 
     render :text => text, :status => status
-  end
-
-  def index
   end
 
   def upload_data
