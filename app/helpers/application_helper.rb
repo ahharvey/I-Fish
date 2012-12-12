@@ -35,5 +35,17 @@ module ApplicationHelper
   def logout_icon
     content_tag(:i, "", class: 'icon-signout icon-white')
   end
+
+  def show_icon
+    content_tag(:i, "", class: 'icon-paper-clip')
+  end
+
+  def edit_icon
+    content_tag(:i, "", class: 'icon-edit')
+  end
+
+  def destroy_icon
+    content_tag(:i, "", class: 'icon-trash')
+  end
   
 end
