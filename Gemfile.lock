@@ -80,6 +80,7 @@ GEM
       railties (>= 3.1.1)
       sass-rails (>= 3.1.1)
     formatador (0.2.4)
+    gmaps4rails (1.5.6)
     google-spreadsheet-ruby (0.3.0)
       google_drive (>= 0.3.0)
     google_drive (0.3.2)
@@ -225,6 +226,7 @@ DEPENDENCIES
   devise
   fog
   font-awesome-sass-rails
+  gmaps4rails
   inherited_resources
   jquery-rails
   mini_magick

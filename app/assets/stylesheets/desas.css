@@ -14,15 +14,3 @@
   position: relative;
 }
 
-#map_canvas {
-  height: 400px;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: auto;
-  margin-bottom: auto;
-}
-
-#mapCanvas img {
-  max-width: none;
-}

@@ -14,7 +14,9 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require tabs
-//= require_directory .
+//= require /gmaps4rails/gmaps4rails.base.js.coffee
+//= require /gmaps4rails/gmaps4rails.googlemaps
+//= require_tree .
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!
 // ++++++++++++++++++++++++++++++++++++++++++

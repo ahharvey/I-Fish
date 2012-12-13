@@ -1,17 +1,8 @@
 <% title "Desas" %>
 
-<% content_for :head do %>
-  <!-- Google Maps Initialisation -->
-  <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBSJOWFctC1xrly6rlOAP0nccyTItgSemo&sensor=false"></script>
-  <%= javascript_include_tag "desa_googlemaps/desas.js" %>
-<% end %>
 
-<div class="row">
-  <div class="span12">
-    <div id="map_canvas"></div>
-  </div>
-</div>
+
+<%= render partial: 'shared/maps/wide' %>
 
 <div class="row">
   <div class="span12">
