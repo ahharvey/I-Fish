@@ -1,9 +1,10 @@
-<h1>Listing admins</h1>
+<% title "Admins" %>
 <% begin %>
-<table class="table-bordered table-striped table table-hover">
+<table class="table table-striped table-condensed">
   <tr>
     <th>Email</th>
     <th>Name</th>
+    <th></th>
   </tr>
 
   <% @admins.each do |admin| %>
@@ -11,7 +12,7 @@
       <td><%= admin.email %></td>
       <td><%= admin.name %></td>
       <td>
-        <%= link_to 'Show', admin %>
+        <%= link_to show_icon, admin %>
       </td>
     </tr>
   <% end %>

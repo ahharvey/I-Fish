@@ -37,7 +37,7 @@ module ApplicationHelper
   end
 
   def show_icon
-    content_tag(:i, "", class: 'icon-paper-clip')
+    content_tag(:i, "", class: 'icon-eye-open')
   end
 
   def edit_icon

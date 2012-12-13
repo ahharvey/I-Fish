@@ -7,8 +7,10 @@
 
 <% for survey in @surveys %>
 	<div class="well">
-		<%= image_tag @currently_signed_in.avatar_url(:thumb), width: "50px", height: "50px" if @currently_signed_in.avatar? %>
-		<%= survey.user.name %> did a survey in <%= survey.desa.name %> for the <%= survey.fishery.name %> fishery.
+		<% if false %>
+			<%= image_tag @currently_signed_in.avatar_url(:thumb), width: "50px", height: "50px" if @currently_signed_in.avatar? %>
+		<% end %>
+		<%= survey.admin.name %> did a survey in <%= survey.desa.name %> for the <%= survey.fishery.name %> fishery.
 		
 	</div>
 <% end %>

@@ -1,8 +1,8 @@
 class Survey < ActiveRecord::Base
 	attr_accessible :date, :desa_id, :end_time, :fishery_id, :catch_measure,
-	:fleet_observer, :catch_scribe, :start_time, :admin_id, :date_published, :observer
+	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer
 
-	belongs_to :user
+	belongs_to :admin
 	belongs_to :fishery
 	belongs_to :desa
 	has_many :landings

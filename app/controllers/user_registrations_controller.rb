@@ -1,4 +1,4 @@
-class RegistrationsController < Devise::RegistrationsController
+class UserRegistrationsController < Devise::RegistrationsController
 
 
   protected
@@ -12,7 +12,7 @@ class RegistrationsController < Devise::RegistrationsController
   end
 
   def after_update_path_for(resource)
-    crop_path
+    user_crop_path
   end
 
 

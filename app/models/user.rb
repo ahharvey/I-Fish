@@ -7,7 +7,7 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_many :surveys, dependent: :destroy
+#  has_many :surveys, dependent: :destroy
   belongs_to :desa
   has_and_belongs_to_many :roles
 

@@ -1,14 +1,17 @@
 ExportXls::Application.routes.draw do
 
 
-  devise_for :admins
-  devise_for :users, :controllers => { :registrations => "registrations" }
+  devise_for :admins, :controllers => { :registrations => "admin_registrations" }
+  devise_for :users, :controllers => { :registrations => "user_registrations" }
 
   devise_scope :user do
-    match 'crops' => 'registrations#crop', :as => :crop
+    match 'user_crops' => 'user_registrations#crop', :as => :user_crop
   end
 
-    
+  devise_scope :admin do
+    match 'admin_crops' => 'admin_registrations#crop', :as => :admin_crop 
+  end
+      
   resources :catches
   resources :desas
   resources :fisheries

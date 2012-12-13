@@ -4,7 +4,7 @@ class HomeController < ApplicationController
   skip_before_filter :authenticate!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
 
   def index
-    @surveys = Survey.includes(:user, :desa, :fishery).all
+    @surveys = Survey.includes(:admin, :desa, :fishery).all
   end
 
   def multipart_import
@@ -50,7 +50,7 @@ class HomeController < ApplicationController
   end
 
   def process_upload_data
-    parameters = {file: params[:file], user_id: current_user.id}
+    parameters = {file: params[:file], user_id: @currently_signed_in.id}
     excel_file = ExcelFile.new(parameters)
 
     if excel_file.save
