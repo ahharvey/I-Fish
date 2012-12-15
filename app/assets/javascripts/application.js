@@ -12,10 +12,13 @@
 
 //= require jquery
 //= require jquery_ujs
+//= require jquery-ui
 //= require bootstrap
+//= require jquery.Jcrop
 //= require tabs
-//= require /gmaps4rails/gmaps4rails.base.js.coffee
-//= require /gmaps4rails/gmaps4rails.googlemaps
+//= require highcharts
+//= require gmaps4rails.base
+//= require gmaps4rails.googlemaps
 //= require_tree .
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!

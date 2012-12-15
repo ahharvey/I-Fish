@@ -65,7 +65,7 @@
 
 		$.get("/admins/<%= @admin.id %>", params, function(data, textStatus, jqXHR){
 			console.log(data);
-			render_chart('container', 'Monthly Average Surveys', 'Surveys', 'line', data.col_headers, data.month_counts);
+			render_chart('container', 'Survey Reports', 'No. of Surveys', 'line', data.col_headers, data.month_counts);
 		}, "json");
 	};
 

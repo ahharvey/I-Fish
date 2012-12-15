@@ -1,9 +1,9 @@
 
 desa = Desa.create([
-  { name: "Ampenan", code: "001" },
-  { name: "Banka Banka", code: "002" },
-  { name: "Seraya", code: "003" },
-  { name: "Kasamba", code: "004" }
+  { name: "Ampenan", code: "001", lat: -8.583333, lng: 116.116667, district_id: 1},
+  { name: "Banka Banka", code: "002", lat: -8.747771, lng: 115.864595, district_id: 1 },
+  { name: "Seraya", code: "003", lat: -8.349155, lng: 115.682927, district_id: 2 },
+  { name: "Kasamba", code: "004", lat: -8.569655, lng: 115.433475, district_id: 2 }
 ]) 
 
 fishery = Fishery.create([
