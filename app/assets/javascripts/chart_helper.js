@@ -1,4 +1,4 @@
-function render_chart(container, title, y_axis_name, chart_type, col_headers, counts){
+function render_chart(container, title, y_axis_name, x_axis_name, chart_type, col_headers, counts){
 		var chart;
         window.user_chart = new Highcharts.Chart({
             chart: {
@@ -16,6 +16,9 @@ function render_chart(container, title, y_axis_name, chart_type, col_headers, co
                 x: -20
             },
             xAxis: {
+                title: {
+                    text: x_axis_name
+                },
                 categories: col_headers
             },
             yAxis: {
@@ -42,9 +45,12 @@ function render_chart(container, title, y_axis_name, chart_type, col_headers, co
                 y: 100,
                 borderWidth: 0
             },
+            credits: {
+                enabled: false
+            },
             series: [{
                 name: 'Survey',
                 data: counts
-            }]
+            }]            
         });
 	};

@@ -65,7 +65,7 @@
 
 		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
 			console.log(data);
-			render_chart('graph_catch_per_effort_container','Catch per unit effort', 'Catch (kg)', 'line', data.col_headers, data.month_counts);
+			render_chart('graph_catch_per_effort_container','Catch per unit effort', 'Catch (kg)', '', 'line', data.col_headers, data.month_counts);
 		}, "json");
 	};
 
@@ -134,7 +134,7 @@
 		}
 		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
 			console.log(data);
-			render_chart('graph_length_frequency_container', 'Length Frequency', 'Frequency in Size Class', 'column', data.col_headers, data.length_counts);
+			render_chart('graph_length_frequency_container', 'Length Frequency', 'Frequency in Size Class', 'Size Class', 'column', data.col_headers, data.length_counts);
 		}, "json");
 	};
 

@@ -65,7 +65,7 @@
 
 		$.get("/users/<%= @user.id %>", params, function(data, textStatus, jqXHR){
 			console.log(data);
-			render_chart('container', 'Survey Reports', 'No. of Survey', 'line', data.col_headers, data.month_counts);
+			render_chart('container', 'Survey Reports', 'No. of Survey', '', 'line', data.col_headers, data.month_counts);
 		}, "json");
 	};
 
