@@ -50,7 +50,7 @@ class HomeController < ApplicationController
   end
 
   def process_upload_data
-    parameters = {file: params[:file], user_id: @currently_signed_in.id}
+    parameters = {file: params[:file], admin_id: @currently_signed_in.id}
     excel_file = ExcelFile.new(parameters)
 
     if excel_file.save

@@ -1,7 +1,7 @@
 require 'iconv'
 
 class ImportExcelData
-  def self.working_based_sheet(id, user_id)
+  def self.working_based_sheet(id, admin_id)
     xl_file = ExcelFile.find(id)
 
     if xl_file.file.file.extension.eql?("xls")
@@ -78,7 +78,7 @@ class ImportExcelData
         desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue 0
         fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue 0
 
-        survey = Survey.new(fishery_id: fishery_id.to_i, desa_id: desa_id.to_i, date_published: date, start_time: start_time, end_time: end_time, fleet_observer: fleet_observer, catch_scribe: catch_scribe, catch_measure: catch_measure, user_id: user_id.to_i)
+        survey = Survey.new(fishery_id: fishery_id.to_i, desa_id: desa_id.to_i, date_published: date, start_time: start_time, end_time: end_time, fleet_observer: fleet_observer, catch_scribe: catch_scribe, catch_measure: catch_measure, admin_id: admin_id)
         survey.save
       end
     end
