@@ -10,43 +10,24 @@
 
 <div id="graph_options">
   <select id="month_from">
-    <option value="1">Jan</option>
-    <option value="2">Feb</option>
-    <option value="3">Mar</option>
-    <option value="4">Apr</option>
-    <option value="5">May</option>
-    <option value="6">Jun</option>
-    <option value="7">Jul</option>
-    <option value="8">Aug</option>
-    <option value="9">Sep</option>
-    <option value="10">Oct</option>
-    <option value="11">Nov</option>
-    <option value="12">Dec</option>
+    <% @month_names.each_with_index do |v,i| %>
+      <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
+    <% end %>
   </select>
   <select id="year_from">
-    <option value="2010">2010</option>
-    <option value="2011">2011</option>
-    <option value="2012" selected="selected">2012</option>
+    <% (2010..2013).each do |y| %>
+      <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
+    <% end %>
   </select>
   <select id="month_to">
-    <option value="1">Jan</option>
-    <option value="2">Feb</option>
-    <option value="3" selected="selected">Mar</option>
-    <option value="4">Apr</option>
-    <option value="5">May</option>
-    <option value="6">Jun</option>
-    <option value="7">Jul</option>
-    <option value="8">Aug</option>
-    <option value="9">Sep</option>
-    <option value="10">Oct</option>
-    <option value="11">Nov</option>
-    <option value="12">Dec</option>
+    <% @month_names.each_with_index do |v,i| %>
+      <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
+    <% end %>
   </select>
   <select id="year_to">
-    <option value="2010">2010</option>
-    <option value="2011">2011</option>
-    <option value="2012">2012</option>
-    <option value="2013" selected="selected">2013</option>
+    <% (2010..2013).each do |y| %>
+      <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
+      <% end %>
   </select>
   <button class="btn" id="btn_refresh">Refresh</button>
 </div>

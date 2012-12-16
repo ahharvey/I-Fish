@@ -1,6 +1,5 @@
 ExportXls::Application.routes.draw do
 
-
   devise_for :admins, :controllers => { :registrations => "admin_registrations" }
   devise_for :users, :controllers => { :registrations => "user_registrations" }
 
@@ -11,13 +10,13 @@ ExportXls::Application.routes.draw do
   devise_scope :admin do
     match 'admin_crops' => 'admin_registrations#crop', :as => :admin_crop 
   end
-      
+
   resources :catches
   resources :desas
   resources :fisheries
   resources :fishes
   resources :gears
-  resources :landings  
+  resources :landings
   resources :offices
   resources :surveys
 

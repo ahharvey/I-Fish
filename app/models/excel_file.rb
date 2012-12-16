@@ -8,15 +8,14 @@ class ExcelFile < ActiveRecord::Base
   validates :file, presence: true
   belongs_to :admin
 
-
   private
-  
+
   def import_excel_data
     ActiveRecord::Base.transaction do
       ImportExcelData.working_based_sheet(self.id, self.admin_id)
     end
   end
-  
+
   def update_asset_attributes
     if file.present? && file_changed?
       self.filesize = file.file.size

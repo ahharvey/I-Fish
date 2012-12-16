@@ -4,6 +4,7 @@ class AdminsController < InheritedResources::Base
   def show
   	respond_to do |format|
   	  @admin = Admin.find(params[:id])
+      @month_names = Date::MONTHNAMES.slice(1,Date::MONTHNAMES.length)
       surveys = @admin.surveys.order("date_published")
 
       format.html { render }
