@@ -7,6 +7,7 @@ gem 'unicorn'
 
 gem 'skeleton-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'simple_form'
 
 gem 'devise'
@@ -31,8 +32,8 @@ end
 
 group :development do
   # Debugging
-  gem 'pry'
-  gem 'pry-debugger'
-  gem 'pry-stack_explorer'
+  # gem 'pry'
+  # gem 'pry-debugger'
+  # gem 'pry-stack_explorer'
   gem 'debugger'
 end

@@ -3,7 +3,8 @@ class FisheriesController < InheritedResources::Base
 
   def show
   	respond_to do |format|
-      @month_names = Date::MONTHNAMES.slice(1,Date::MONTHNAMES.length)
+      @date_from = (DateTime.now - 1.years).strftime("%d/%m/%Y")
+      @date_to = DateTime.now.strftime("%d/%m/%Y")
   	  @fishery = Fishery.find(params[:id])
 
       format.html { render }
@@ -21,8 +22,8 @@ class FisheriesController < InheritedResources::Base
   	@fisheries = Fishery.find(params[:id])
   	col_headers = []
 	  month_counts = []
-	  from = DateTime.new(Integer(params[:year_from]), Integer(params[:month_from]), 1)
-    to = DateTime.new(Integer(params[:year_to]), Integer(params[:month_to]), 1)
+	  from = DateTime.parse(params[:date_from])
+    to = DateTime.parse(params[:date_to])
     (from.year..to.year).each do |y|
       start_month = (from.year == y) ? from.month : 1
       end_month = (to.year == y) ? to.month : 12
@@ -43,8 +44,8 @@ class FisheriesController < InheritedResources::Base
 
   def graph_length_frequency
   	catches = []
-    from = DateTime.new(Integer(params[:year_from]), Integer(params[:month_from]), 1)
-    to = DateTime.new(Integer(params[:year_to]), Integer(params[:month_to]), 1)
+    from = DateTime.parse(params[:date_from])
+    to = DateTime.parse(params[:date_to])
   	@fisheries = Fishery.find(params[:id]).surveys.where(:date_published => from..to ).each do |s|
       s.landings.each do |l|
         catches.concat l.catches

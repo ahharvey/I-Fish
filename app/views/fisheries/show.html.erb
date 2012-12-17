@@ -11,28 +11,9 @@
   </p>
 </div>
 <div class="row">
-
   <div id="graph_options">
-    <select id="cpe_month_from">
-      <% @month_names.each_with_index do |v,i| %>
-        <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
-      <% end %>
-    </select>
-    <select id="cpe_year_from">
-      <% (2010..2013).each do |y| %>
-        <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
-      <% end %>
-    </select>
-    <select id="cpe_month_to">
-      <% @month_names.each_with_index do |v,i| %>
-        <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
-      <% end %>
-    </select>
-    <select id="cpe_year_to">
-      <% (2010..2013).each do |y| %>
-        <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
-      <% end %>
-    </select>
+    <%= text_field_tag "cpe_date_from", @date_from %>
+    <%= text_field_tag "cpe_date_to", @date_to %>
     <button class="btn" id="cpe_btn_refresh">Refresh</button>
   </div>
 </div>
@@ -43,10 +24,8 @@
   		console.log("Updating chart");
   		params = {
   			method: 'catch_per_effort',
-  			month_from: $('#cpe_month_from').val(),
-  			year_from: $('#cpe_year_from').val(),
-  			month_to: $('#cpe_month_to').val(),
-  			year_to: $('#cpe_year_to').val(),
+  			date_from: $('#cpe_date_from').val(),
+  			date_to: $('#cpe_date_to').val(),
   		}
 
   		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
@@ -61,6 +40,10 @@
   			update_catch_effort();
   		});
 
+      // Initialise date picker
+      $("#cpe_date_from").datepicker();
+      $("#cpe_date_to").datepicker();
+
   		// Load chart with default values
   		update_catch_effort();
   	});
@@ -68,26 +51,8 @@
 </div>
 <div class="row">
   <div id="graph_length_frequency_options">
-    <select id="lf_month_from">
-      <% @month_names.each_with_index do |v,i| %>
-        <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
-      <% end %>
-    </select>
-    <select id="lf_year_from">
-      <% (2010..2013).each do |y| %>
-        <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
-      <% end %>
-    </select>
-    <select id="lf_month_to">
-      <% @month_names.each_with_index do |v,i| %>
-        <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
-      <% end %>
-    </select>
-    <select id="lf_year_to">
-      <% (2010..2013).each do |y| %>
-        <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
-      <% end %>
-    </select>
+    <%= text_field_tag "lf_date_from", @date_from %>
+    <%= text_field_tag "lf_date_to", @date_to %>
     <button class="btn" id="btn_lf_refresh">Refresh</button>
   </div>
 </div>
@@ -97,10 +62,8 @@
   	function update_length_frequency(){
   		params = {
   			method: 'length_frequency',
-        month_from: $('#lf_month_from').val(),
-        year_from: $('#lf_year_from').val(),
-        month_to: $('#lf_month_to').val(),
-        year_to: $('#lf_year_to').val(),
+        date_from: $('#lf_date_from').val(),
+        date_to: $('#lf_date_to').val(),
   		}
   		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
   			console.log(data);
@@ -113,6 +76,10 @@
       $('#btn_lf_refresh').click(function(){
         update_length_frequency();
       });
+
+      // Initialise date pickers
+      $("#lf_date_from").datepicker();
+      $("#lf_date_to").datepicker();
 
   		// Load chart with default values
   		update_length_frequency();
