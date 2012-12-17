@@ -28,6 +28,18 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-upload-alt icon-white')
   end
 
+  def download_icon
+    content_tag(:i, "", class: 'icon-download-alt')
+  end
+
+  def email_icon
+    content_tag(:i, "", class: 'icon-envelope-alt')
+  end
+
+  def addressbook_icon
+    content_tag(:i, "", class: 'icon-book')
+  end
+
   def edit_profile_icon
     content_tag(:i, "", class: 'icon-cogs icon-white')
   end

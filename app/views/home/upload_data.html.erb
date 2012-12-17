@@ -7,7 +7,21 @@
 		  <%= upload_icon %>
 		  Upload
     <% end %>
+    <%= link_to "mailto:cecf547baa89408a3d5d@cloudmailin.net", class: "btn" do %>
+      <%= email_icon %>
+      Submit via email
+    <% end %>
+    <%= link_to "/addresscard.vcf", class: "btn" do %>
+      <%= addressbook_icon %>
+      Add to Addressbook
+    <% end %>
+    <%= link_to "/Database.template.xlsx", class: "btn" do %>
+      <%= download_icon %>
+      Download Template
+    <% end %>
   <% end %>
+  
+  
 </div>
 
 
