@@ -1,52 +1,26 @@
-<p>
-  <b>Cat ind:</b>
-  <%= @gear.cat_ind %>
-</p>
+<% title @gear.name %>
 
-<p>
-  <b>Cat eng:</b>
-  <%= @gear.cat_eng %>
-</p>
+<dl class="dl-horizontal">
+  
+  <dt>Category</dt>
+  <dd><%= @gear.cat_ind %> <small><%= @gear.cat_eng %></small></dd>
 
-<p>
-  <b>Sub cat ind:</b>
-  <%= @gear.sub_cat_ind %>
-</p>
+  <dt>Sub-category</dt>
+  <dd><%= @gear.sub_cat_ind %> <small><%= @gear.sub_cat_eng %></small></dd>
 
-<p>
-  <b>Sub cat eng:</b>
-  <%= @gear.sub_cat_eng %>
-</p>
+  <dt>Type</dt>
+  <dd><%= @gear.type_ind %> <small><%= @gear.type_eng %></small></dd>
 
-<p>
-  <b>Type ind:</b>
-  <%= @gear.type_ind %>
-</p>
+  <dt>Name</dt>
+  <dd><%= @gear.name %></dd>
 
-<p>
-  <b>Type eng:</b>
-  <%= @gear.type_eng %>
-</p>
+  <dt>MMAF code</dt>
+  <dd><%= @gear.alpha_code %></dd>
 
-<p>
-  <b>Name:</b>
-  <%= @gear.name %>
-</p>
+  <dt>FAO code</dt>
+  <dd><%= @gear.fao_code %></dd>
 
-<p>
-  <b>Alpha code:</b>
-  <%= @gear.alpha_code %>
-</p>
-
-<p>
-  <b>Num code:</b>
-  <%= @gear.num_code %>
-</p>
-
-<p>
-  <b>Fao code:</b>
-  <%= @gear.fao_code %>
-</p>
+ </dl> 
 
 
 <%= link_to 'Edit', edit_gear_path(@gear) %> |

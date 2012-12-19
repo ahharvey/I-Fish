@@ -16,7 +16,7 @@
     <td><%= fish.order %></td>
     <td><%= fish.family %></td>
     <td><%= fish.scientific_name %></td>
-    <td><%= fish.english_name %></td>
+    <td><%= link_to truncate(fish.english_name, length: 28), fish, title: fish.english_name %></td>
     <td><%= fish.indonesia_name %></td>
     <td><%= fish.code %></td>
     <td>
@@ -30,4 +30,4 @@
 
 <br />
 
-<%= link_to 'New Fishes', new_fish_path %>
+<%= link_to 'New Fish', new_fish_path %>

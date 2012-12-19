@@ -16,19 +16,19 @@
 
   <% @surveys.each do |survey| %>
     <tr>
-      <td><%= survey.date_published rescue '' %></td>
-      <td><%= survey.user.email rescue ''%></td>
-      <td><%= survey.start_time %></td>
-      <td><%= survey.end_time %></td>
+      <td><%= survey.date_published.to_s(:rfc822) rescue '' %></td>
+      <td><%= link_to survey.admin.name, survey.admin %></td>
+      <td><%= survey.start_time.to_s(:time) %></td>
+      <td><%= survey.end_time.to_s(:time) %></td>
       <td><%= survey.desa.name rescue '' %></td>
       <td><%= survey.fleet_observer %></td>
       <td><%= survey.catch_measure %></td>
       <td><%= survey.catch_scribe %></td>
       <td><%= survey.fishery.name rescue ''%></td>
       <td>
-        <%= link_to 'Show', survey %>
-        <%= link_to 'Edit', edit_survey_path(survey) %>
-        <%= link_to 'Destroy', survey, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to show_icon, survey %>
+        <%= link_to edit_icon, edit_survey_path(survey) %>
+        <%= link_to destroy_icon, survey, method: :delete, data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>
   <% end %>

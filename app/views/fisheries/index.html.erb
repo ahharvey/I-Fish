@@ -5,17 +5,17 @@
     <th>Name</th>
     <th>Code</th>
     <th></th>
-    <th></th>
-    <th></th>
   </tr>
 
 <% @fisheries.each do |fishery| %>
   <tr>
     <td><%= fishery.name %></td>
     <td><%= fishery.code %></td>
-    <td><%= link_to 'Show', fishery %></td>
-    <td><%= link_to 'Edit', edit_fishery_path(fishery) %></td>
-    <td><%= link_to 'Destroy', fishery, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td>
+      <%= link_to show_icon, fishery %>
+      <%= link_to edit_icon, edit_fishery_path(fishery) %>
+      <%= link_to destroy_icon, fishery, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
   </tr>
 <% end %>
 </table>

@@ -27,21 +27,21 @@
       <td><%= landing.vessel_name %></td>
       <td><%= landing.grid_square %></td>
       <td><%= landing.type %></td>
-      <td><%= landing.time_out.to_s(:timedate) %></td>
-      <td><%= landing.time_in.to_s(:timedate) %></td>
+      <td><%= landing.time_out.to_s(:triptime) %></td>
+      <td><%= landing.time_in.to_s(:triptime) %></td>
       <td><%= landing.engine %></td>
       <td><%= landing.fuel %></td>
       <td><%= landing.sail %></td>
       <td><%= landing.crew %></td>
       <td><%= landing.boat_size %></td>
-      <td><%= landing.gear_id %></td>
+      <td><%= link_to truncate(landing.gear.name, length: 20), landing.gear, title:landing.gear.name %></td>
       <td><%= landing.quantity %></td>
       <td><%= landing.weight %></td>
       <td><%= landing.value %></td>
       <td>
-        <%= link_to 'Show', landing %>
-        <%= link_to 'Edit', edit_landing_path(landing) %>
-        <%= link_to 'Destroy', landing, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to show_icon, landing %>
+        <%= link_to edit_icon, edit_landing_path(landing) %>
+        <%= link_to destroy_icon, landing, method: :delete, data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>
   <% end %>
