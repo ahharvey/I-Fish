@@ -5,7 +5,7 @@ function render_chart(container, title, y_axis_name, x_axis_name, chart_type, co
                 renderTo: container,
                 type: chart_type,
                 marginRight: 130,
-                marginBottom: 25
+                marginBottom: 70
             },
             title: {
                 text: title,
