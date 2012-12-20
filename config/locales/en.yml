@@ -38,7 +38,6 @@ en:
       catch:
         fish_id: "Fish"
         landing_id:	"Landing"
-        length: "Length"
         weight: "Weight"
       desa:
         name: "Name"
