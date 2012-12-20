@@ -37,12 +37,13 @@ class Admin < ActiveRecord::Base
   belongs_to :office
   has_many :surveys, dependent: :destroy
 
-  # after_create :set_default_role
 
-  # def set_default_role
-  # 	self.roles.push Role.find_by_name("administrator")
-  # 	self.save!
-  # end
+  after_create :set_default_role
+
+  def set_default_role
+    self.roles.push Role.find_by_name("public")
+    self.save!
+  end
 
   # Ability Methods
   def admin?
