@@ -35,7 +35,7 @@ class ApplicationController < ActionController::Base
     I18n.locale = params[:locale] if params[:locale].present?
   end
 
-  def default_url_options(options = {})
-    {locale: I18n.locale}
+  def self.default_url_options(options = {})
+    options.merge({locale: I18n.locale})
   end
 end
