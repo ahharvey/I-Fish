@@ -114,7 +114,7 @@ class Landing < ActiveRecord::Base
 		}
 	validates :time_out,
 		presence: true
-	validtates :time_in,
+	validates :time_in,
 		presence: true
 	validates :type,
 		presence: true
