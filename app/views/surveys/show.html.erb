@@ -1,48 +1,41 @@
-<dd>
-  <dt>Date:</dt>
-  <%= @survey.date_published %>
-</dd>
+<% title t ".title" %>
 
-<dd>
-  <dt>User:</dt>
-  <%= @survey.admin.name %>
-</dd>
+<dl class="dl-horizontal">
+  <dt><%= Survey.human_attribute_name(:date_published) %></dt>
+  <dd><%= @survey.date_published.to_s(:rfc822) %></dd>
 
-<dd>
-  <dt>Start time:</dt>
-  <%= @survey.start_time %>
-</dd>
 
-<dd>
-  <dt>End time:</dt>
-  <%= @survey.end_time %>
-</dd>
+  <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
+  <dd><%= @survey.admin.name %></dd>
 
-<dd>
-  <dt>Desa:</dt>
-  <%= @survey.desa.name rescue ''%>
-</dd>
 
-<dd>
-  <dt>Fleet Observer:</dt>
-  <%= @survey.fleet_observer %>
-</dd>
+  <dt><%= Survey.human_attribute_name(:start_time) %></dt>
+  <dd><%= @survey.start_time.to_s(:time) %></dd>
 
-<dd>
-  <dt>Catch Measure:</dt>
-  <%= @survey.catch_measure %>
-</dd>
 
-<dd>
-  <dt>Catch Scribe:</dt>
-  <%= @survey.catch_scribe %>
-</dd>
+  <dt><%= Survey.human_attribute_name(:end_time) %></dt>
+  <dd><%= @survey.end_time.to_s(:time) %></dd>
 
-<dd>
-  <dt>Fishery:</dt>
-  <%= @survey.fishery.name rescue '' %>
-</dd>
 
+  <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+  <dd><%= @survey.desa.name rescue ''%></dd>
+
+
+  <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
+  <dd><%= @survey.fleet_observer %></dd>
+
+
+  <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
+  <dd><%= @survey.catch_measure %></dd>
+
+
+  <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
+  <dd><%= @survey.catch_scribe %></dd>
+
+
+  <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
+  <dd><%= @survey.fishery.name rescue '' %></dd>
+</dl>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>

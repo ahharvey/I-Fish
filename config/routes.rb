@@ -1,5 +1,6 @@
 ExportXls::Application.routes.draw do
-  scope ":locale", locale: /#{I18n.available_locales.join("|")}/, defaults: { locale: "en" }  do
+  
+  scope ":locale", locale: /#{I18n.available_locales.join("|")}/  do
 
     devise_for :admins, :controllers => { :registrations => "admin_registrations" }
     devise_for :users, :controllers => { :registrations => "user_registrations" }
@@ -31,6 +32,21 @@ ExportXls::Application.routes.draw do
     match '/multipart_import' => 'home#multipart_import'
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'
-    root :to => 'home#index'
+
+    # handles /valid-locale
+    root to: 'home#index', as: "localized_root"
+    # handles /valid-locale/fake-path
+    match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
+
   end
+
+  # handles /
+  root to: redirect("/#{I18n.default_locale}")
+
+  # handles /bad-locale|anything/valid-path
+  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  
+  # handles /anything|valid-path-but-no-locale
+  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+
 end

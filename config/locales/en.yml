@@ -6,18 +6,42 @@ en:
     title: "Admins"
   catches:
     title: "Catch Composition"
+    index:
+      title: "Catch Composition"
+    show:
+      title: "Catch Report"
   desas:
     title: "Villages"
+    index:
+      title: "Villages"
+    show:
+      title: "Village Report"
   fisheries:
     title: "Fisheries"
+    index:
+      title: "Fisheries"
+    show:
+      title: "Fishery Report"
   fishes:
     title: "Fish"
+    index:
+      title: "Fish"
   gears:
     title: "Gears"
+    index:
+      title: "Gears"
   landings:
     title: "Landings"
+    index:
+      title: "Landings"
+    show:
+      title: "Landing Report"
   surveys:
     title: "Surveys"
+    index:
+      title: "Surveys"
+    show:
+      title: "Survey Report"
   users:
     title: "Users"
   navbar:
@@ -36,6 +60,10 @@ en:
   activerecord:
     attributes:
       catch:
+        fish_id: "Fish"
+        landing_id: "Landing"
+        length: "Length"
+        width: "Width"
       desa:
         name: "Name"
         code: "Code"

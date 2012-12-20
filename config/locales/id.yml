@@ -6,19 +6,42 @@ id:
     title: "Admins"
   catches:
     title: "Komposisi Penangkapan"
+    index:
+      title: "Komposisi Penangkapan"
+    show:
+      title: "Laporan Penangkapan"
   desas:
     title: "Desas"
+    index:
+      title: "Desas"
+    show:
+      title: "Laporan Desa"
   fisheries:
     title: "Perikanan"
-    title_html: "Hello"
+    index:
+      title: "Perikanan Perikanan"
+    show:
+      title: "Laporan Perikanan"
   fishes:
-    title: "Ikan Ikan"
+    title: "Ikan"
+    index:
+      title: "Ikan Ikan"
   gears:
     title: "Alat Tangkap"
+    index:
+      title: "Alat Tangkap"
   landings:
     title: "Landings"
+    index:
+      title: "Landings"
+    show:
+      title: "Laporan Landing"
   surveys:
     title: "Surveys"
+    index:
+      title: "Surveys"
+    show:
+      title: "Laporan Survey"
   users:
     title: "Users"
   navbar:
@@ -37,6 +60,10 @@ id:
   activerecord:
     attributes:
       catch:
+        fish_id: "Ikan"
+        landing_id: "Tangkap"
+        length: "Panjang"
+        weight: "Barat"
       desa:
         name: "Nama"
         code: "Kode"

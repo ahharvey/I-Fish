@@ -1,77 +1,67 @@
-<p>
-  <b>Vessel ref:</b>
-  <%= @landing.vessel_ref %>
-</p>
+<% title t ".title" %>
 
-<p>
-  <b>Vessel name:</b>
-  <%= @landing.vessel_name %>
-</p>
+<dl class="dl-horizontal">
 
-<p>
-  <b>Type:</b>
-  <%= @landing.type %>
-</p>
+  <dt>Vessel ref:</dt>
+  <dd><%= @landing.vessel_ref %></dd>
 
-<p>
-  <b>Grid square:</b>
-  <%= @landing.grid_square %>
-</p>
 
-<p>
-  <b>Time out:</b>
-  <%= @landing.time_out %>
-</p>
+  <dt>Vessel name:</dt>
+  <dd><%= @landing.vessel_name %></dd>
 
-<p>
-  <b>Time in:</b>
-  <%= @landing.time_in %>
-</p>
 
-<p>
-  <b>Engine:</b>
-  <%= @landing.engine %>
-</p>
+  <dt>Type:</dt>
+  <dd><%= @landing.type %></dd>
 
-<p>
-  <b>Fuel:</b>
-  <%= @landing.fuel %>
-</p>
 
-<p>
-  <b>Sail:</b>
-  <%= @landing.sail %>
-</p>
+  <dt>Grid square:</dt>
+  <dd><%= @landing.grid_square %></dd>
 
-<p>
-  <b>Crew:</b>
-  <%= @landing.crew %>
-</p>
 
-<p>
-  <b>Boat size:</b>
-  <%= @landing.boat_size %>
-</p>
+  <dt>Time out:</dt>
+  <dd><%= @landing.time_out %></dd>
 
-<p>
-  <b>Gear:</b>
-  <%= @landing.gear_id %>
-</p>
 
-<p>
-  <b>Quantity:</b>
-  <%= @landing.quantity %>
-</p>
+  <dt>Time in:</dt>
+  <dd><%= @landing.time_in %></dd>
 
-<p>
-  <b>Weight:</b>
-  <%= @landing.weight %>
-</p>
 
-<p>
-  <b>Value:</b>
-  <%= @landing.value %>
-</p>
+  <dt>Engine:</dt>
+  <dd><%= @landing.engine %></dd>
+
+
+  <dt>Fuel:</dt>
+  <dd><%= @landing.fuel %></dd>
+
+
+  <dt>Sail:</dt>
+  <dd><%= @landing.sail %></dd>
+
+
+  <dt>Crew:</dt>
+  <dd><%= @landing.crew %></dd>
+
+
+  <dt>Boat size:</dt>
+  <dd><%= @landing.boat_size %></dd>
+
+
+  <dt>Gear:</dt>
+  <dd><%= @landing.gear_id %></dd>
+
+
+  <dt>Quantity:</dt>
+  <dd><%= @landing.quantity %></dd>
+
+
+  <dt>Weight:</dt>
+  <dd><%= @landing.weight %></dd>
+
+
+  <dt>Value:</dt>
+  <dd><%= @landing.value %></dd>
+
+</dl>
 
 
 <%= link_to 'Edit', edit_landing_path(@landing) %> |
