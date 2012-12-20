@@ -36,9 +36,6 @@ en:
   activerecord:
     attributes:
       catch:
-        fish_id: "Fish"
-        landing_id:	"Landing"
-        weight: "Weight"
       desa:
         name: "Name"
         code: "Code"
