@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
-  before_filter :authenticate!
   before_filter :set_locale
+  before_filter :authenticate!
 
   # Override default Cancan current ability to fetch a specific one
   def current_ability

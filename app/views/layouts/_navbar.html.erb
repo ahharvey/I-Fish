@@ -79,8 +79,8 @@
         <ul class="nav secondary-nav" style="float: right">
           <p class="navbar-text pull-right">
             
-            <%= link_to_unless_current flag_en, locale: "en", title: "English" %>
-            <%= link_to_unless_current flag_id, locale: "id", title: "Bahasa Indonesia" %>
+            <%= link_to_unless_current flag_en, {locale: "en"}, {title: "English"} %>
+            <%= link_to_unless_current flag_id, {locale: "id"}, {title: "Bahasa Indonesia"} %>
 
             <% if admin_signed_in? || user_signed_in? %>
             
