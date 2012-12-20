@@ -37,10 +37,6 @@ id:
   activerecord:
     attributes:
       catch:
-        fish_id: "Ikan"
-        landing_id:	"Tangkap"
-        length: "Panjang"
-        weight: "Barat"
       desa:
         name: "Nama"
         code: "Kode"

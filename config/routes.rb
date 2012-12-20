@@ -1,5 +1,5 @@
 ExportXls::Application.routes.draw do
-  scope ":locale", locale: /#{I18n.available_locales.join("|")}/ do
+  scope ":locale", locale: /#{I18n.available_locales.join("|")}/, defaults: { locale: "en" }  do
 
     devise_for :admins, :controllers => { :registrations => "admin_registrations" }
     devise_for :users, :controllers => { :registrations => "user_registrations" }
