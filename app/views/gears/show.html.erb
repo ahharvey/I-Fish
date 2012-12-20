@@ -2,22 +2,22 @@
 
 <dl class="dl-horizontal">
   
-  <dt>Category</dt>
+  <dt><%= Gear.human_attribute_name(:cat_ind) %></dt>
   <dd><%= @gear.cat_ind %> <small><%= @gear.cat_eng %></small></dd>
 
-  <dt>Sub-category</dt>
+  <dt><%= Gear.human_attribute_name(:sub_cat_ind) %></dt>
   <dd><%= @gear.sub_cat_ind %> <small><%= @gear.sub_cat_eng %></small></dd>
 
-  <dt>Type</dt>
+  <dt><%= Gear.human_attribute_name(:type_ind) %></dt>
   <dd><%= @gear.type_ind %> <small><%= @gear.type_eng %></small></dd>
 
-  <dt>Name</dt>
+  <dt><%= Gear.human_attribute_name(:name) %></dt>
   <dd><%= @gear.name %></dd>
 
-  <dt>MMAF code</dt>
+  <dt><%= Gear.human_attribute_name(:alpha_code) %></dt>
   <dd><%= @gear.alpha_code %></dd>
 
-  <dt>FAO code</dt>
+  <dt><%= Gear.human_attribute_name(:fao_code) %></dt>
   <dd><%= @gear.fao_code %></dd>
 
  </dl> 

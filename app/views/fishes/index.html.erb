@@ -1,13 +1,13 @@
-<% title "Fish" %>
+<% title t "fishes.title" %>
 
 <table  class="table table-striped table-condensed">
   <tr>
-    <th>Order</th>
-    <th>Family</th>
-    <th>Scientific name</th>
-    <th>English name</th>
-    <th>Indonesia name</th>
-    <th>Code</th>
+    <th><%= Fish.human_attribute_name(:order) %></th>
+    <th><%= Fish.human_attribute_name(:family) %></th>
+    <th><%= Fish.human_attribute_name(:scientific_name) %></th>
+    <th><%= Fish.human_attribute_name(:english_name) %></th>
+    <th><%= Fish.human_attribute_name(:indonesian_name) %></th>
+    <th><%= Fish.human_attribute_name(:code) %></th>
     <th></th>
   </tr>
 

@@ -1,47 +1,47 @@
-<p>
-  <b>Date:</b>
+<dd>
+  <dt>Date:</dt>
   <%= @survey.date_published %>
-</p>
+</dd>
 
-<p>
-  <b>User:</b>
-  <%= @survey.user.email %>
-</p>
+<dd>
+  <dt>User:</dt>
+  <%= @survey.admin.name %>
+</dd>
 
-<p>
-  <b>Start time:</b>
+<dd>
+  <dt>Start time:</dt>
   <%= @survey.start_time %>
-</p>
+</dd>
 
-<p>
-  <b>End time:</b>
+<dd>
+  <dt>End time:</dt>
   <%= @survey.end_time %>
-</p>
+</dd>
 
-<p>
-  <b>Desa:</b>
+<dd>
+  <dt>Desa:</dt>
   <%= @survey.desa.name rescue ''%>
-</p>
+</dd>
 
-<p>
-  <b>Fleet Observer:</b>
+<dd>
+  <dt>Fleet Observer:</dt>
   <%= @survey.fleet_observer %>
-</p>
+</dd>
 
-<p>
-  <b>Catch Measure:</b>
+<dd>
+  <dt>Catch Measure:</dt>
   <%= @survey.catch_measure %>
-</p>
+</dd>
 
-<p>
-  <b>Catch Scribe:</b>
+<dd>
+  <dt>Catch Scribe:</dt>
   <%= @survey.catch_scribe %>
-</p>
+</dd>
 
-<p>
-  <b>Fishery:</b>
+<dd>
+  <dt>Fishery:</dt>
   <%= @survey.fishery.name rescue '' %>
-</p>
+</dd>
 
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |

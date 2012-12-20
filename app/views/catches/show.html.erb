@@ -1,18 +1,14 @@
-<p>
-  <b>Fish:</b>
-  <%= @catch.fish_id %>
-</p>
+<dl class="dl-horizontal">
+  
+  <dt><%= Catch.human_attribute_name(:fish_id) %></dt>
+  <dd><i><%= @catch.fish.scientific_name %></i></dd>
 
-<p>
-  <b>Length:</b>
-  <%= @catch.length %>
-</p>
+  <dt><%= Catch.human_attribute_name(:length) %></dt>
+  <dd><%= @catch.length %> mm</dd>
 
-<p>
-  <b>Weight:</b>
-  <%= @catch.weight %>
-</p>
-
+  <dt><%= Catch.human_attribute_name(:weight) %></dt>
+  <dd><%= @catch.weight %> g</dd>
+</dl>
 
 <%= link_to 'Edit', edit_catch_path(@catch) %> |
 <%= link_to 'Back', catches_path %>

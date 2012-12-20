@@ -52,3 +52,12 @@ $navbarLinkColorHover: $USAIDlgrey;
   margin-top: auto;
   margin-bottom: auto;
 }
+
+.flag {
+  width: 16px;
+  height: 11px;
+  background:url(flags.png) no-repeat
+}
+
+.flag.flag-gb {background-position: -16px 0}
+.flag.flag-id {background-position: 0 -11px}

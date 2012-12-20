@@ -1,16 +1,16 @@
-<% title "Surveys" %>
+<% title t "surveys.title" %>
 
 <table class="table table-striped table-condensed">
   <tr>
-    <th>Date</th>
-    <th>User</th>
-    <th>Start time</th>
-    <th>End time</th>
-    <th>Desa</th>
-    <th>Fleet Observer</th>
-    <th>Catch Measure</th>
-    <th>Catch Scribe</th>
-    <th>Fishery</th>
+    <th><%= Survey.human_attribute_name(:date_published) %></th>
+    <th><%= Survey.human_attribute_name(:admin_id) %></th>
+    <th><%= Survey.human_attribute_name(:start_time) %></th>
+    <th><%= Survey.human_attribute_name(:end_time) %></th>
+    <th><%= Survey.human_attribute_name(:desa_id) %></th>
+    <th><%= Survey.human_attribute_name(:fleet_observer) %></th>
+    <th><%= Survey.human_attribute_name(:catch_measure) %></th>
+    <th><%= Survey.human_attribute_name(:catch_scribe) %></th>
+    <th><%= Survey.human_attribute_name(:fishery_id) %></th>
     <th></th>
   </tr>
 

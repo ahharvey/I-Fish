@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :authenticate!
+  before_filter :set_locale
 
   # Override default Cancan current ability to fetch a specific one
   def current_ability
@@ -26,4 +27,14 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
+
+  def default_url_options(options = {})
+    {locale: I18n.locale}
+  end
+
+  private
+  def set_locale
+    I18n.locale = params[:locale] if params[:locale].present?
+  end
+
 end

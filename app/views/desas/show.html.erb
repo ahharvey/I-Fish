@@ -1,12 +1,11 @@
-<p>
-  <b>Name:</b>
-  <%= @desa.name %>
-</p>
+<dl class="dl-horizontal">
+	<dt><%= Desa.human_attribute_name(:name) %></dt>
+	<dd><%= @desa.name %></dd>
 
-<p>
-  <b>Code: </b>
-  <%= @desa.code %>
-</p>
+	<dt><%= Desa.human_attribute_name(:code) %></dt>
+	<dd><%= @desa.code %></dd>
+
+</dl>
 
 
 <%= link_to 'Edit', edit_desa_path(@desa) %> |

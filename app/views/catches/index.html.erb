@@ -1,10 +1,10 @@
-<% title "Catch Composition" %>
+<% title t "catches.title" %>
 
 <table class="table table-striped table-condensed">
   <tr>
-    <th>Species</th>
-    <th>Length (mm)</th>
-    <th>Weight (g)</th>
+    <th><%= Catch.human_attribute_name(:fish_id) %></th>
+    <th><%= Catch.human_attribute_name(:length) %> (mm)</th>
+    <th><%= Catch.human_attribute_name(:weight) %> (g)</th>
     <th></th>
   </tr>
 

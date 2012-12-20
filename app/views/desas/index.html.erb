@@ -1,4 +1,4 @@
-<% title "Desas" %>
+<% title t "desas.title" %>
 
 
 
@@ -8,8 +8,8 @@
   <div class="span12">
     <table class="table table-striped table-condensed" id="desa_table">
       <tr>
-        <th>Name</th>
-        <th>Code</th>
+        <th><%= Desa.human_attribute_name(:name) %></th>
+        <th><%= Desa.human_attribute_name(:code) %></th>
         <th></th>
       </tr>
 

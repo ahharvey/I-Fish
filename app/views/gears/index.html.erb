@@ -1,14 +1,14 @@
-<% title "Gears" %>
+<% title t "gears.title" %>
 
 <table class="table table-striped table-condensed">
   <tr>
-    <th>Category</th>
-    <th>Sub-category</th>
-    <th>Type</th>
-    <th>Name</th>
-    <th>KKP Code</th>
-    <th>FAO Code</th>
-    <th>Num Code</th>
+    <th><%= Gear.human_attribute_name(:cat_ind) %></th>
+    <th><%= Gear.human_attribute_name(:sub_cat_ind) %></th>
+    <th><%= Gear.human_attribute_name(:type_ind) %></th>
+    <th><%= Gear.human_attribute_name(:name) %></th>
+    <th><%= Gear.human_attribute_name(:alpha_code) %></th>
+    <th><%= Gear.human_attribute_name(:fao_code) %></th>
+    <th><%= Gear.human_attribute_name(:num_code) %></th>
     <th></th>
   </tr>
 

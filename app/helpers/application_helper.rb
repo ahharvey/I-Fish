@@ -24,6 +24,10 @@ module ApplicationHelper
     end
   end
   
+  def home_icon
+    content_tag(:i, "", class: 'icon-home icon-white')
+  end
+
   def upload_icon
     content_tag(:i, "", class: 'icon-upload-alt icon-white')
   end
@@ -59,5 +63,13 @@ module ApplicationHelper
   def destroy_icon
     content_tag(:i, "", class: 'icon-trash')
   end
-  
+
+  def flag_en
+    content_tag(:img, "", src: "blank.gif", class: "flag flag-gb", alt: "English")
+  end
+
+  def flag_id
+    content_tag(:img, "", src: "blank.gif", class: "flag flag-id", alt: "Indonesian")
+  end
+
 end

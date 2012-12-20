@@ -1,5 +1,107 @@
 # Sample localization file for English. Add more files in this directory for other locales.
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
 en:
-  hello: "Hello world"
+  admins:
+    title: "Admins"
+  catches:
+    title: "Catch Composition"
+  desas:
+    title: "Villages"
+  fisheries:
+    title: "Fisheries"
+  fishes:
+    title: "Fish"
+  gears:
+    title: "Gears"
+  landings:
+    title: "Landings"
+  surveys:
+    title: "Surveys"
+  users:
+    title: "Users"
+  navbar:
+    home: "Home"
+    data: "Data"
+    reports: "Reports"
+    settings: "Settings"
+    user_profile: "User profile"
+    fishery_profile: "Fishery profile"
+    upload: "Import"
+  devise:
+    signin: "Sign in"
+    signout: "Sign out"
+    edit: "Edit profile"
+    signup: "Sign up"
+  activerecord:
+    attributes:
+      catch:
+        fish_id: "Fish"
+        landing_id:	"Landing"
+        length: "Length"
+        weight: "Weight"
+      desa:
+        name: "Name"
+        code: "Code"
+        lat: "Latitude"
+        lng: "Longitude"
+        district_id: "District"
+      district:
+        name: "Name"
+      fishery:
+        name: "Name"
+        code: "Code"
+      fish:
+        order: "Order"
+        family: "Family"
+        scientific_name: "Binomial name"
+        fishbase_name: "Fishbase name"
+        english_name: "English Name"
+        indonesia_name: "Indonesian Name"
+        code: "Code"
+      gear:
+        cat_ind: "Category"
+        cat_eng: "Category"
+        sub_cat_ind: "Sub-Category"
+        sub_cat_eng: "Sub-Category"
+        type_ind: "Type"
+        type_eng: "Type"
+        name: "Name"
+        alpha_code: "MMAF Code"
+        num_code: "Number"
+        fao_code: "FAO Code"
+      landing:
+        power: "Power"
+        fishing_area: "Area"
+        vessel_ref: "Vessel number"
+        vessel_name: "Vessel name"
+        grid_square: "Grid"
+        engine: "Engine"
+        fuel: "Fuel"
+        sail: "Sail"
+        crew: "Crew"
+        value: "Value"
+        boat_size: "Boat size"
+        gear_id: "Gear"
+        survey_id: "Survey"
+        quantity: "Quantity"
+        weight: "Weight"
+        time_out: "Time dep"
+        time_in: "Time arr"
+        type: "Type"
+      office:
+        name: "Name"
+        district_id: "District"
+      survey:
+        date_published: "Date"
+        desa_id: "Village"
+        start_time: "Start time"
+        end_time: "End time"
+        fishery_id: "Fishery"
+        fleet_observer: "Fleet observer"
+        catch_scribe: "Catch scribe"
+        catch_measure: "Catch measurer"
+        admin_id: "Admin"

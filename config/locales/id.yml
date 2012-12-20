@@ -1,0 +1,105 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+id:
+  admins:
+    title: "Admins"
+  catches:
+    title: "Komposisi Penangkapan"
+  desas:
+    title: "Desas"
+  fisheries:
+    title: "Perikanan"
+    title_html: "Hello"
+  fishes:
+    title: "Ikan Ikan"
+  gears:
+    title: "Alat Tangkap"
+  landings:
+    title: "Landings"
+  surveys:
+    title: "Surveys"
+  users:
+    title: "Users"
+  navbar:
+    home: "Pulang"
+    data: "Data"
+    reports: "Laporan"
+    settings: "Settings"
+    user_profile: "User profile"
+    fishery_profile: "Fishery profile"
+    upload: "Mengupload"
+  devise:
+    signin: "Sign in"
+    signout: "Sign out"
+    edit: "Mengedit profil"
+    signup: "Ikut"
+  activerecord:
+    attributes:
+      catch:
+        fish_id: "Ikan"
+        landing_id:	"Tangkap"
+        length: "Panjang"
+        weight: "Barat"
+      desa:
+        name: "Nama"
+        code: "Kode"
+        lat: "Lintang"
+        lng: "Bujur"
+        district_id: "Kabupaten"
+      district:
+        name: "Nama"
+      fishery:
+        name: "Nama"
+        code: "Kode"
+      fish:
+        order: "Order"
+        family: "Keluaga"
+        scientific_name: "Nama Latin"
+        fishbase_name: "Nama Fishbase"
+        english_name: "Nama Ingriss"
+        indonesia_name: "Nama Nasional"
+        code: "Kode"
+      gear:
+        cat_ind: "Kategory"
+        cat_eng: "Kategory"
+        sub_cat_ind: "Subkategory"
+        sub_cat_eng: "Subkategory"
+        type_ind: "Tipe"
+        type_eng: "Tipe"
+        name: "Nama"
+        alpha_code: "Kode KKP"
+        num_code: "Nomor"
+        fao_code: "Kode FAO"
+      landing:
+        power: "PK"
+        fishing_area: "Area"
+        vessel_ref: "Nomor kapal"
+        vessel_name: "Nama kapal"
+        grid_square: "Grid"
+        engine: "Mesin"
+        fuel: "BBM"
+        sail: "Layar"
+        crew: "ABK"
+        value: "Nilai"
+        boat_size: "Ukuran kapal"
+        gear_id: "Alat"
+        survey_id: "Survey"
+        quantity: "Kuantitas"
+        weight: "Barat"
+        time_out: "Jam brangkat"
+        time_in: "Jam pulang"
+        type: "Jenis kapal"
+      office:
+        name: "Nama"
+        district_id: "Kabupaten"
+      survey:
+        date_published: "Tanggal"
+        desa_id: "Desa"
+        start_time: "Jam mulai"
+        end_time: "Jam selasi"
+        fishery_id: "Perikanan"
+        fleet_observer: "Fleet observer"
+        catch_scribe: "Catch scribe"
+        catch_measure: "Catch measurer"
+        admin_id: "Admin"
