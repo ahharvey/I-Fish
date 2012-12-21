@@ -16,6 +16,10 @@ id:
       title: "Desas"
     show:
       title: "Laporan Desa"
+    edit:
+      title: "Edit Desa"
+    new:
+      title: "Desa Baru"
   fisheries:
     title: "Perikanan"
     index:

@@ -8,4 +8,31 @@ class DesasController < InheritedResources::Base
       	marker.json({ :id => desa.id })
   	end
   end
+
+  def edit
+  	@placemarks = @desa.to_gmaps4rails do |desa, marker|
+      
+      marker.title   desa.name
+      marker.json({ :id => desa.id })
+    end
+  end
+
+  def new
+  	@placemarks = @desa.to_gmaps4rails do |desa, marker|
+      
+      marker.title   desa.name
+      marker.json({ :id => desa.id })
+    end
+  end
+
+  def show
+  	@placemarks = @desa.to_gmaps4rails do |desa, marker|
+      
+      marker.title   desa.name
+      marker.json({ :id => desa.id })
+    end
+  end
+
+
+
 end

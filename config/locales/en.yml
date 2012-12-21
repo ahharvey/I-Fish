@@ -16,6 +16,10 @@ en:
       title: "Villages"
     show:
       title: "Village Report"
+    edit:
+      title: "Edit village"
+    new:
+      title: "New village"
   fisheries:
     title: "Fisheries"
     index:
