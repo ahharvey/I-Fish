@@ -1,0 +1,12 @@
+<div id="RoleList" >
+  
+  <ul>
+    <% @roles.each do |role| %>
+      <li>
+        <%= role.name %>
+        <%= link_to 'x', [:panel, role], :method=>:delete, :confirm=>'You sure?' %>
+      </li>
+    <% end %>
+  </ul>
+
+</div>
