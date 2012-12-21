@@ -3,6 +3,8 @@ ExportXls::Application.routes.draw do
   
 
 
+  get "roles/index"
+
   get "users/index"
 
   get "users/show"
@@ -27,6 +29,7 @@ ExportXls::Application.routes.draw do
           delete :delete_role
         end
       end
+      resources :roles, :only=>[:index, :create, :destroy]
     end
 
     resources :catches
