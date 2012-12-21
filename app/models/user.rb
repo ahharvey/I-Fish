@@ -39,7 +39,7 @@ class User < ActiveRecord::Base
 
 #  has_many :surveys, dependent: :destroy
   belongs_to :desa
-  has_and_belongs_to_many :roles
+  has_and_belongs_to_many :roles, :before_add => :validates_role
 
   
   mount_uploader :avatar, AvatarUploader
@@ -89,5 +89,9 @@ class User < ActiveRecord::Base
 
   def has_role?(role)
   	self.roles.select{ |r| r.name == role }.count > 0
+  end
+
+  def validates_role(role)
+    raise ActiveRecord::Rollback if self.roles.include? role
   end
 end

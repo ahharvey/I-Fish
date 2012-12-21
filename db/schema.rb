@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121216112227) do
+ActiveRecord::Schema.define(:version => 20121221092230) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -40,6 +40,8 @@ ActiveRecord::Schema.define(:version => 20121216112227) do
     t.integer "admin_id"
     t.integer "role_id"
   end
+
+  add_index "admins_roles", ["admin_id", "role_id"], :name => "by_admin_and_role", :unique => true
 
   create_table "catches", :force => true do |t|
     t.integer  "fish_id"
@@ -149,6 +151,8 @@ ActiveRecord::Schema.define(:version => 20121216112227) do
     t.integer "role_id"
     t.integer "user_id"
   end
+
+  add_index "roles_users", ["user_id", "role_id"], :name => "by_user_and_role", :unique => true
 
   create_table "surveys", :force => true do |t|
     t.date     "date_published"

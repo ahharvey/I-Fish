@@ -33,7 +33,7 @@ class Admin < ActiveRecord::Base
 
   validates :name, presence: true
 
-  has_and_belongs_to_many :roles
+  has_and_belongs_to_many :roles, :before_add => :validates_role
   belongs_to :office
   has_many :surveys, dependent: :destroy
 
@@ -75,11 +75,21 @@ class Admin < ActiveRecord::Base
     avatar.recreate_versions! if crop_x.present?
   end
   
+  #enables change avatar without password
   def update_with_password(params={})
     if params[:password].blank?
       params.delete(:password)
       params.delete(:password_confirmation) if params[:password_confirmation].blank?
     end
     update_attributes(params)
+  end
+
+  #rollsback new role if exists
+  def validates_role(role)
+    
+    if self.roles.include? role
+      errors[:base] << "error in value enter male or female"
+      raise ActiveRecord::Rollback 
+    end
   end
 end

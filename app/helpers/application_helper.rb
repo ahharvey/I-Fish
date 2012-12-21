@@ -64,6 +64,14 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-trash')
   end
 
+  def add_icon
+    content_tag(:i, "", class: 'icon-plus')
+  end
+
+  def remove_icon
+    content_tag(:i, "", class: 'icon-remove')
+  end
+
   def flag_en
     content_tag(:img, "", src: "blank.gif", class: "flag flag-gb", alt: "English")
   end

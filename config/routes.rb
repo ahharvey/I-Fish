@@ -3,6 +3,10 @@ ExportXls::Application.routes.draw do
   
 
 
+  get "users/index"
+
+  get "users/show"
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
     devise_for :admins, :controllers => { :registrations => "admin_registrations" }
@@ -14,6 +18,15 @@ ExportXls::Application.routes.draw do
 
     devise_scope :admin do
       match 'admin_crops' => 'admin_registrations#crop', :as => :admin_crop 
+    end
+
+    namespace :panel do
+      resources :users do
+        member do
+          post :add_role
+          delete :delete_role
+        end
+      end
     end
 
     resources :catches

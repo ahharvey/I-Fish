@@ -15,13 +15,15 @@ $USAIDred: #C2113A;
 $USAIDblack: #000;
 $USAIDdgrey: #666666;
 $USAIDlgrey: #DDDDDD;
-$USAIDlblue: #336799;
+$USAIDlblue: #A5BAE0;
 
 $navbarBackground: $USAIDblue;
 $navbarBackgroundHighlight: lighten($USAIDblue, 20%);
 
 $navbarLinkColor: $USAIDlgrey;
 $navbarLinkColorHover: $USAIDlgrey;
+
+$dropdownLinkBackgroundHover: $USAIDlblue;
 
 @import "bootstrap";
 
@@ -61,3 +63,8 @@ $navbarLinkColorHover: $USAIDlgrey;
 
 .flag.flag-gb {background-position: -16px 0}
 .flag.flag-id {background-position: 0 -11px}
+
+.panel {border: 1px #ccc solid; padding:10px; @include border-radius(5px);}
+.new {background-color: $USAIDred; transition: background-color 1s linear; }
+
+.typeahead .active > a, .typeahead .active > a:hover { background-color: $USAIDred; }
