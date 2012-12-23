@@ -3,7 +3,7 @@
     <% @user.roles.each do |role| %>
       <li>
 				<%= role.name %>
-    		<%= link_to remove_icon, delete_role_panel_user_path(@user, :role=>role.id), :method=>:delete, :confirm=>'Are you sure?', :remote=>true %>
+    		<%= link_to remove_icon, delete_role_panel_user_path(@user, :role=>role.id), method: :delete, confirm: 'Are you sure?', remote: true %>
       </li>
     <% end %>
   </ul>

@@ -3,6 +3,10 @@ ExportXls::Application.routes.draw do
   
 
 
+  get "admins/index"
+
+  get "admins/show"
+
   get "roles/index"
 
   get "users/index"
@@ -24,6 +28,12 @@ ExportXls::Application.routes.draw do
 
     namespace :panel do
       resources :users do
+        member do
+          post :add_role
+          delete :delete_role
+        end
+      end
+      resources :admins do
         member do
           post :add_role
           delete :delete_role

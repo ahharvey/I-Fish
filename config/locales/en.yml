@@ -56,6 +56,7 @@ en:
     user_profile: "User profile"
     fishery_profile: "Fishery profile"
     upload: "Import"
+    panel: "Panel"
   devise:
     signin: "Sign in"
     signout: "Sign out"

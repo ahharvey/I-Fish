@@ -1,9 +1,18 @@
 <% title "Roles" %>
 
-<%= render partial: 'role_list' %>
+<div class="row">
+	<div class="panel span4">
 
-<%= form_for [:panel, @new_role] do |f| %>
-  <%= f.label :name, 'Name of new role:' %>
-  <%= f.text_field :name %>
-  <%= f.submit %>
- <% end %>
+		<%= simple_form_for [:panel, @new_role], remote: true do |f| %>
+			<%= f.error_notification  %>
+  
+  		<%= f.input :name, :wrapper => :append, label: false do %>
+    		<%= f.input_field :name, placeholder: "Add a new role..." %><%= button_tag add_icon, type: 'submit', class: 'btn btn-success' %>
+  		<% end %>
+
+		<% end %>
+
+		<%= render partial: 'role_list' %>
+	</div>
+</div>
+

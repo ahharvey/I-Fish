@@ -56,6 +56,7 @@ id:
     user_profile: "User profile"
     fishery_profile: "Fishery profile"
     upload: "Mengupload"
+    panel: "Panel"
   devise:
     signin: "Sign in"
     signout: "Sign out"
