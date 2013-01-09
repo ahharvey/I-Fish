@@ -19,9 +19,9 @@ class ImportExcelData
         reg = xls.cell(d,"B").to_s
         name = xls.cell(d,"C")
         type = xls.cell(d,"D")
-        engine = xls.cell(d,"E").to_s
+        engine = xls.cell(d,"E").downcase rescue ''
         power = xls.cell(d,"F").to_s
-        fishing_area = xls.cell(d,"G").to_s
+        graticule = xls.cell(d,"G").downcase rescue ''
         dep_time = Time.now+xls.cell(d,"H") rescue Time.now
         arr_time = Time.now+xls.cell(d,"I") rescue Time.now
         sail = xls.cell(d,"J")
@@ -34,7 +34,24 @@ class ImportExcelData
 
         unless reg.blank?
           gear_id = Gear.where("LOWER(alpha_code) = ?", gear).first.id rescue 0
-          landing = Landing.new(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail, fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time, time_out: dep_time, gear_id: gear_id.to_i)
+          engine_id = Engine.where("LOWER(code) = ?", engine).first.id rescue 0
+          graticule_id = Graticule.where("LOWER(code) = ?", graticule).first.id rescue 0
+          landing = Landing.new(  power: power, 
+                                  #graticule_id: graticule_id.to_i, 
+                                  type: type, 
+                                  vessel_ref: reg, 
+                                  vessel_name: name, 
+                                  #engine_id: engine_id.to_i, 
+                                  sail: sail, 
+                                  fuel: fuel, 
+                                  crew: crew, 
+                                  weight: weight, 
+                                  quantity: qty, 
+                                  value: value, 
+                                  time_in: arr_time, 
+                                  time_out: dep_time, 
+                                  gear_id: gear_id.to_i
+                                )
           landing.save
         end
       end

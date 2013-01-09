@@ -11,6 +11,12 @@ fishery = Fishery.create([
   { name: "Lombok Strait large pelagic", code: "LOM-PL" }
 ]) 
 
+engine = Engine.create([
+  { name: "Outboard", code: "OB" },
+  { name: "Longtail", code: "LT" },
+  { name: "Inboard", code: "IB" }
+]) 
+
 gear = Gear.create([
 	{ cat_ind: "Jaring lingkar", cat_eng: "Surrounding nets", sub_cat_ind: "Jaring lingkar bertali kerut", sub_cat_eng: "With purse lines/Purse seine", type_ind: "Pukat cincin dengan satu kapal", type_eng: "One boat operated purse seines", name: "Pukat cincin pelagis kecil dengan satu kapal", alpha_code: "PS1-K", num_code: "01.1.1.1", fao_code: "PS" },
 	{ cat_ind: "Jaring lingkar", cat_eng: "Surrounding nets", sub_cat_ind: "Jaring lingkar bertali kerut", sub_cat_eng: "With purse lines/Purse seine", type_ind: "Pukat cincin dengan satu kapal", type_eng: "One boat operated purse seines", name: "Pukat cincin pelagis besar dengan satu kapal", alpha_code: "PS1-B", num_code: "01.1.1.2", fao_code: "PS" },
@@ -216,9 +222,12 @@ fish = Fish.create([
 	{ order: "", family: "", scientific_name: "Aetomylaeus spp", fishbase_name: "", english_name: "Sea weeds", indonesia_name: "Rumput laut", code: "RJX" }
 ])
 
+province = Province.create([
+  { name: "NTB", code: "51" }
+]) 
 # Districts
-district1 = District.create(name: "District1")
-district9 = District.create(name: "District Prawn")
+district1 = District.create(name: "District1", province_id: 1)
+district9 = District.create(name: "District Prawn", province_id: 1)
 
 # Offices
 office1 = Office.create(name: "Test office 1", district_id: district1.id)
@@ -232,7 +241,8 @@ role_admin = Role.create(name: "administrator")
 
 # Administrators
 admin1 = office1.admins.create(email: "admin@fish.com",
-  name: "Admin Adminson",
+  name: "Admin Adminson"
+  office_id: office1.id,
   password: "admin1",
   password_confirmation: "admin1")
 

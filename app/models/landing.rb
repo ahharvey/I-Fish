@@ -26,13 +26,15 @@
 #
 
 class Landing < ActiveRecord::Base
-	attr_accessible :boat_size, :crew, :engine, :fuel, :gear_id, :grid_square, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
-	:power, :fishing_area, :survey_id
+	attr_accessible :boat_size, :crew, :fuel, :gear_id, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
+	:power, :graticule_id, :engine_id, :survey_id
 
 	set_inheritance_column nil
 
 	belongs_to :gear
 	belongs_to :survey
+	belongs_to :graticule
+	belongs_to :engine
 
 	has_many :catches, dependent: :destroy
 
@@ -44,17 +46,14 @@ class Landing < ActiveRecord::Base
 		inclusion: {
 			in: 1..999
 		}
-	validates :fishing_area,
-		presence: true
+#	validates :graticule_id,
+#		presence: true
 	validates :vessel_ref,
 		presence: true
 	validates :vessel_name,
 		presence: true
-	validates :engine,
-		presence: true,
-		inclusion: {
-			in: %w(outboard inboard long-tail)
-		}
+#	validates :engine_id,
+#		presence: true
 	validates :fuel,
 		presence: true,
 		numericality: {
@@ -127,7 +126,7 @@ class Landing < ActiveRecord::Base
 			type = param[:type]
 			engine = param[:engine]
 			power = param[:power]
-			fishing_area = param[:fishing_area]
+			graticule_id = param[:graticule_id]
 			dep_time = param[:dep_time]
 			arr_time = param[:arr_time]
 			sail = param[:sail]
@@ -141,7 +140,7 @@ class Landing < ActiveRecord::Base
 			unless reg.blank?
 				gear_id = Gear.where("LOWER(code) = ?", gear).first.id rescue nil
 
-				puts Landing.create(power: power, fishing_area: fishing_area, type: type, vessel_ref: reg, vessel_name: name, engine: engine, sail: sail,
+				puts Landing.create(power: power, graticule_id: graticule_id, type: type, vessel_ref: reg, vessel_name: name, engine_id: engine_id, sail: sail,
 					fuel: fuel, crew: crew, weight: weight, quantity: qty, value: value, time_in: arr_time,
 					time_out: dep_time, gear_id: gear_id)
 			end

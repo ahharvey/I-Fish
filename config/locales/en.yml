@@ -20,6 +20,16 @@ en:
       title: "Edit village"
     new:
       title: "New village"
+  engines:
+    title: "Engines"
+    index:
+      title: "Engines"
+    show:
+      title: "Engine Details"
+    edit:
+      title: "Edit engine"
+    new:
+      title: "New engine"
   fisheries:
     title: "Fisheries"
     index:
@@ -34,6 +44,16 @@ en:
     title: "Gears"
     index:
       title: "Gears"
+  graticules:
+    title: "Graticules"
+    index:
+      title: "Graticules"
+    show:
+      title: "Graticule"
+    edit:
+      title: "Edit graticule"
+    new:
+      title: "New graticule"
   landings:
     title: "Landings"
     index:
@@ -77,6 +97,9 @@ en:
         district_id: "District"
       district:
         name: "Name"
+      engine:
+        name: "Name"
+        code: "Code"
       fishery:
         name: "Name"
         code: "Code"
@@ -99,6 +122,8 @@ en:
         alpha_code: "MMAF Code"
         num_code: "Number"
         fao_code: "FAO Code"
+      gear:
+        code: "Code"
       landing:
         power: "Power"
         fishing_area: "Area"

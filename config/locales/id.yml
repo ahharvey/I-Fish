@@ -20,6 +20,16 @@ id:
       title: "Edit Desa"
     new:
       title: "Desa Baru"
+  engines:
+    title: "Mesin Mesin"
+    index:
+      title: "Mesin Mesin"
+    show:
+      title: "Mesin"
+    edit:
+      title: "Edit mesin"
+    new:
+      title: "Mesin baru"
   fisheries:
     title: "Perikanan"
     index:
@@ -34,6 +44,16 @@ id:
     title: "Alat Tangkap"
     index:
       title: "Alat Tangkap"
+  graticules:
+    title: "Graticules"
+    index:
+      title: "Graticules"
+    show:
+      title: "Graticule"
+    edit:
+      title: "Edit graticule"
+    new:
+      title: "New graticule"
   landings:
     title: "Landings"
     index:
@@ -77,6 +97,9 @@ id:
         district_id: "Kabupaten"
       district:
         name: "Nama"
+      engine:
+        name: "Nama"
+        code: "Kode"
       fishery:
         name: "Nama"
         code: "Kode"

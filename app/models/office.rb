@@ -14,6 +14,7 @@ class Office < ActiveRecord::Base
 
   has_many :admins
   belongs_to :district
+  has_one :province, through: :district
 
   validates :name,
   	presence: true

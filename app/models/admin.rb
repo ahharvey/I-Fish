@@ -35,6 +35,8 @@ class Admin < ActiveRecord::Base
 
   has_and_belongs_to_many :roles, :before_add => :validates_role
   belongs_to :office
+  has_one :district, through: :office
+  has_one :province, through: :office
   has_many :surveys, dependent: :destroy
 
 

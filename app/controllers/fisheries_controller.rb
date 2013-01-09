@@ -1,6 +1,8 @@
 class FisheriesController < InheritedResources::Base
   load_and_authorize_resource
 
+  respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
+
   def show
   	respond_to do |format|
       @date_from = (DateTime.now - 1.years).strftime("%d/%m/%Y")

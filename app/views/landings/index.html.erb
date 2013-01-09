@@ -25,11 +25,11 @@
     <tr>
       <td><%= landing.vessel_ref %></td>
       <td><%= landing.vessel_name %></td>
-      <td><%= landing.grid_square %></td>
+      <td><%= landing.graticule.code %></td>
       <td><%= landing.type %></td>
       <td><%= landing.time_out.to_s(:triptime) %></td>
       <td><%= landing.time_in.to_s(:triptime) %></td>
-      <td><%= landing.engine %></td>
+      <td><%= landing.engine.name %></td>
       <td><%= landing.fuel %></td>
       <td><%= landing.sail %></td>
       <td><%= landing.crew %></td>

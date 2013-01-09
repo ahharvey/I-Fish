@@ -1,6 +1,8 @@
 class DesasController < InheritedResources::Base
   load_and_authorize_resource
 
+  respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
+
   def index
   	@placemarks = Desa.all.to_gmaps4rails do |desa, marker|
   		marker.infowindow render_to_string(:partial => "/desas/popup", :locals => { :object => desa})

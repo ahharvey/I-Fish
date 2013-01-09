@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121221092230) do
+ActiveRecord::Schema.define(:version => 20130109104525) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -64,6 +64,14 @@ ActiveRecord::Schema.define(:version => 20121221092230) do
 
   create_table "districts", :force => true do |t|
     t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "province_id"
+  end
+
+  create_table "engines", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -111,13 +119,16 @@ ActiveRecord::Schema.define(:version => 20121221092230) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "graticules", :force => true do |t|
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "landings", :force => true do |t|
     t.string   "power"
-    t.string   "fishing_area"
     t.string   "vessel_ref"
     t.string   "vessel_name"
-    t.string   "grid_square"
-    t.string   "engine"
     t.string   "fuel"
     t.string   "sail"
     t.string   "crew"
@@ -132,6 +143,8 @@ ActiveRecord::Schema.define(:version => 20121221092230) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "type"
+    t.integer  "engine_id"
+    t.integer  "graticule_id"
   end
 
   create_table "offices", :force => true do |t|
@@ -141,11 +154,20 @@ ActiveRecord::Schema.define(:version => 20121221092230) do
     t.integer  "district_id"
   end
 
+  create_table "provinces", :force => true do |t|
+    t.string   "name"
+    t.integer  "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "roles", :force => true do |t|
     t.string   "name"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name", :unique => true
 
   create_table "roles_users", :id => false, :force => true do |t|
     t.integer "role_id"
@@ -199,5 +221,12 @@ ActiveRecord::Schema.define(:version => 20121221092230) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+
+  create_table "vessel_types", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

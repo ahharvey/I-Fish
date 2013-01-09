@@ -9,10 +9,13 @@
 #
 
 class District < ActiveRecord::Base
-  attr_accessible :name
+  attr_accessible :name, :province_id
 
   has_many :desas
   has_many :offices
+  has_many :admins, through: :offices
+
+  belongs_to :province
 
   validates :name,
   	presence: true

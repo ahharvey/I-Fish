@@ -1,18 +1,6 @@
 ExportXls::Application.routes.draw do
   
   
-
-
-  get "admins/index"
-
-  get "admins/show"
-
-  get "roles/index"
-
-  get "users/index"
-
-  get "users/show"
-
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
     devise_for :admins, :controllers => { :registrations => "admin_registrations" }
@@ -50,6 +38,10 @@ ExportXls::Application.routes.draw do
     resources :landings
     resources :offices
     resources :surveys
+    resources :engines
+    resources :graticules
+    resources :vessel_types
+    resources :provinces
 
     resources :users, :only => [:index, :show]
     resources :admins, :only => [:index, :show]

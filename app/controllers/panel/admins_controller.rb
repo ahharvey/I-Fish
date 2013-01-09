@@ -13,7 +13,7 @@ class Panel::AdminsController < ApplicationController
   end
 
   def add_role
-    role = Role.find_by_name params[:role]
+    role = Role.find_by_name params[:get_role]
     if role
     	@admin.roles.push role unless @admin.roles.include?(role)
     end
