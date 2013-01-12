@@ -40,6 +40,7 @@ class User < ActiveRecord::Base
 #  has_many :surveys, dependent: :destroy
   belongs_to :desa
   has_and_belongs_to_many :roles, :before_add => :validates_role
+  has_many :logbooks
 
   
   mount_uploader :avatar, AvatarUploader

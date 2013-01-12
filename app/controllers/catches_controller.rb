@@ -8,6 +8,11 @@ class CatchesController < InheritedResources::Base
   
   def index
     @catches = Catch.includes(:fish).all
+    respond_to do |format|
+    	format.html
+    	format.json { render :json=>@catches }
+    	format.xml { render :xml=>@catches }
+    end
   end
 
   def load_fish

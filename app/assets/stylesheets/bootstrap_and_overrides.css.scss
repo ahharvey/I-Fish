@@ -69,3 +69,8 @@ $dropdownLinkBackgroundActive: $USAIDlblue;
 .new {background-color: $USAIDred; transition: background-color 1s linear; }
 
 .typeahead .active > a, .typeahead .active > a:hover { background-color: $USAIDred; }
+
+
+.modal-icon {float: left; width:60px; font-size:40px; color:$USAIDlblue; text-align:center; }
+.modal-text {margin-left:80px;}
+.modal-text a:hover {color:$black; background-color:$USAIDred;}

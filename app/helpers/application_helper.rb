@@ -23,6 +23,10 @@ module ApplicationHelper
       type.to_s
     end
   end
+
+  def current_url(new_params)
+    url_for params.merge(new_params)
+  end
   
   def home_icon
     content_tag(:i, "", class: 'icon-home icon-white')
@@ -68,6 +72,14 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-plus')
   end
 
+  def excel_icon
+    content_tag(:i, "", class: 'icon-table')
+  end
+
+  def doc_icon
+    content_tag(:i, "", class: 'icon-file')
+  end
+
   def remove_icon
     content_tag(:i, "", class: 'icon-remove')
   end
@@ -79,5 +91,7 @@ module ApplicationHelper
   def flag_id
     content_tag(:img, "", src: "blank.gif", class: "flag flag-id", alt: "Indonesian")
   end
+
+  
 
 end

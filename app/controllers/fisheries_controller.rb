@@ -10,7 +10,7 @@ class FisheriesController < InheritedResources::Base
   	  @fishery = Fishery.find(params[:id])
 
       format.html { render }
-
+      format.xml { render :xml=>@landings }
       format.json do
   	  	graph_catch_per_effort() if params[:method] == "catch_per_effort"
   	  	graph_length_frequency() if params[:method] == "length_frequency"

@@ -1,6 +1,8 @@
 class AdminsController < InheritedResources::Base
   load_and_authorize_resource
 
+  respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
+
   def show
   	respond_to do |format|
   	  @admin = Admin.find(params[:id])

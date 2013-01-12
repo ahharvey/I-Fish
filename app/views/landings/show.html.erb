@@ -1,5 +1,7 @@
 <% title t ".title" %>
 
+<%= render partial: "shared/api_links" %>
+
 <dl class="dl-horizontal">
 
   <dt>Vessel ref:</dt>
@@ -15,7 +17,7 @@
 
 
   <dt>Grid square:</dt>
-  <dd><%= @landing.grid_square %></dd>
+  <dd><%= @landing.graticule.try(:code) %></dd>
 
 
   <dt>Time out:</dt>

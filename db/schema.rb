@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130109104525) do
+ActiveRecord::Schema.define(:version => 20130111032735) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -145,7 +145,48 @@ ActiveRecord::Schema.define(:version => 20130109104525) do
     t.string   "type"
     t.integer  "engine_id"
     t.integer  "graticule_id"
+    t.integer  "fish_id"
   end
+
+  add_index "landings", ["fish_id"], :name => "index_landings_on_fish_id"
+
+  create_table "logbooks", :force => true do |t|
+    t.date     "date"
+    t.integer  "admin_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "fishery_id"
+  end
+
+  add_index "logbooks", ["admin_id"], :name => "index_logbooks_on_admin_id"
+  add_index "logbooks", ["fishery_id"], :name => "index_logbooks_on_fishery_id"
+  add_index "logbooks", ["user_id"], :name => "index_logbooks_on_user_id"
+
+  create_table "logged_days", :force => true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "gear_time"
+    t.integer  "fuel"
+    t.boolean  "sail"
+    t.boolean  "net"
+    t.boolean  "line"
+    t.integer  "quantity"
+    t.integer  "weight"
+    t.integer  "value"
+    t.integer  "condition"
+    t.integer  "moon"
+    t.integer  "fish_id"
+    t.integer  "graticule_id"
+    t.integer  "logbook_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "crew"
+  end
+
+  add_index "logged_days", ["fish_id"], :name => "index_logged_days_on_fish_id"
+  add_index "logged_days", ["graticule_id"], :name => "index_logged_days_on_graticule_id"
+  add_index "logged_days", ["logbook_id"], :name => "index_logged_days_on_logbook_id"
 
   create_table "offices", :force => true do |t|
     t.string   "name"
@@ -159,6 +200,7 @@ ActiveRecord::Schema.define(:version => 20130109104525) do
     t.integer  "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "alpha_code"
   end
 
   create_table "roles", :force => true do |t|

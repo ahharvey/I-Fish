@@ -60,6 +60,18 @@ id:
       title: "Landings"
     show:
       title: "Laporan Landing"
+  logbooks:
+    title: "Logbooks"
+    index:
+      title: "Kumpulan Logbooks"
+    show:
+      title: "Laporan Logbook"
+  logged_days:
+    title: "Logged Days"
+    index:
+      title: "Logged Days"
+    show:
+      title: "Logged Day"
   surveys:
     title: "Surveys"
     index:
@@ -82,6 +94,22 @@ id:
     signout: "Sign out"
     edit: "Mengedit profil"
     signup: "Ikut"
+  modal:
+    download:
+      survey:
+        form:
+          title: "Download Survey Forms"
+          text: "These forms are used to record landing site survey data."
+        spreadsheet:
+          title: "Download Survey Template"
+          text: "This spreadsheet is used to enter and submit landing site survey data."
+      logbook:
+        form:
+          title: "Download Logbook Form"
+          text: "This form is used by fishers to record their daily logbook."
+        spreadsheet:
+          title: "Download Logbook Template"
+          text: "This spreadsheet is used to enter and submit fishers' logbook data."
   activerecord:
     attributes:
       catch:
@@ -122,6 +150,7 @@ id:
         alpha_code: "Kode KKP"
         num_code: "Nomor"
         fao_code: "Kode FAO"
+        code: "Kode"
       landing:
         power: "PK"
         fishing_area: "Area"
@@ -141,6 +170,25 @@ id:
         time_out: "Jam brangkat"
         time_in: "Jam pulang"
         type: "Jenis kapal"
+      logbook:
+        date: "Date"
+        user: "User"
+        admin: "Admin"
+      logged_day:
+        date: "Tanggal"
+        start_time: "Jam brangkat"
+        end_time:  "Jam pulang"
+        gear_time: "Jam kerja"
+        fuel: "BBM"
+        sail: "Layar"
+        net: "Jaring"
+        line: "Pancing"
+        fish: "Jenis Ikan"
+        quantity: "Jumlah"
+        weight: "Barat"
+        value: "Nila"
+        condition: "Kondisi"
+        moon: "Bulan"
       office:
         name: "Nama"
         district_id: "Kabupaten"

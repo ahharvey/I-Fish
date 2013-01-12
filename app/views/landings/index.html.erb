@@ -1,5 +1,7 @@
 <% title t ".title" %>
 
+<%= render partial: "shared/api_links" %>
+
 <% begin %>
 <table class="table table-striped table-condensed">
   <tr>
@@ -25,16 +27,16 @@
     <tr>
       <td><%= landing.vessel_ref %></td>
       <td><%= landing.vessel_name %></td>
-      <td><%= landing.graticule.code %></td>
+      <td><%= landing.graticule %></td>
       <td><%= landing.type %></td>
       <td><%= landing.time_out.to_s(:triptime) %></td>
       <td><%= landing.time_in.to_s(:triptime) %></td>
-      <td><%= landing.engine.name %></td>
+      <td><%= link_to landing.engine.code, "#", title: landing.engine.name %></td>
       <td><%= landing.fuel %></td>
       <td><%= landing.sail %></td>
       <td><%= landing.crew %></td>
       <td><%= landing.boat_size %></td>
-      <td><%= link_to truncate(landing.gear.name, length: 20), landing.gear, title:landing.gear.name %></td>
+      <td><%= link_to landing.gear.alpha_code, landing.gear, title:landing.gear.name %></td>
       <td><%= landing.quantity %></td>
       <td><%= landing.weight %></td>
       <td><%= landing.value %></td>

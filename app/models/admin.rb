@@ -38,6 +38,7 @@ class Admin < ActiveRecord::Base
   has_one :district, through: :office
   has_one :province, through: :office
   has_many :surveys, dependent: :destroy
+  has_many :logbooks
 
 
   after_create :set_default_role

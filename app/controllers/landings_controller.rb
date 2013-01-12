@@ -5,5 +5,10 @@ class LandingsController < InheritedResources::Base
 
   def index
     @landings = Landing.all
+    respond_to do |format|
+    	format.html
+    	format.json { render :json=>@landings }
+    	format.xml { render :xml=>@landings }
+    end
   end
 end

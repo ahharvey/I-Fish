@@ -11,14 +11,17 @@
       <%= email_icon %>
       Submit via email
     <% end %>
+
     <%= link_to "/addresscard.vcf", class: "btn" do %>
       <%= addressbook_icon %>
       Add to Addressbook
     <% end %>
-    <%= link_to "/Database.template.xlsx", class: "btn" do %>
+    <%= link_to "#", class: "btn", data: { toggle: "modal", target: "#templates_modal" } do %>
       <%= download_icon %>
-      Download Template
+      Download Templates
     <% end %>
+
+    
   <% end %>
   
   
@@ -34,7 +37,7 @@
 
   <% @files.each do |file| %>
     <tr>
-      <td><%= file.filename %></td>
+      <td><%= link_to file.filename, file %></td>
       <td><%= file.filesize %></td>
     </tr>
   <% end %>
@@ -42,3 +45,4 @@
 
 <br />
 
+<%= render partial: 'home/templates_modal' %>

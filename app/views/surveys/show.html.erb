@@ -1,5 +1,7 @@
 <% title t ".title" %>
 
+<%= render partial: "shared/api_links" %>
+
 <dl class="dl-horizontal">
   <dt><%= Survey.human_attribute_name(:date_published) %></dt>
   <dd><%= @survey.date_published.to_s(:rfc822) %></dd>
@@ -36,6 +38,31 @@
   <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
   <dd><%= @survey.fishery.name rescue '' %></dd>
 </dl>
+
+<% for landing in @survey.landings %>
+  <tr>
+      <td><%= landing.vessel_ref %></td>
+      <td><%= landing.vessel_name %></td>
+      <td><%= landing.graticule %></td>
+      <td><%= landing.type %></td>
+      <td><%= landing.time_out.to_s(:triptime) %></td>
+      <td><%= landing.time_in.to_s(:triptime) %></td>
+      <td><%= link_to landing.engine.code, "#", title: landing.engine.name %></td>
+      <td><%= landing.fuel %></td>
+      <td><%= landing.sail %></td>
+      <td><%= landing.crew %></td>
+      <td><%= landing.boat_size %></td>
+      <td><%= link_to landing.gear.alpha_code, landing.gear, title:landing.gear.name %></td>
+      <td><%= landing.quantity %></td>
+      <td><%= landing.weight %></td>
+      <td><%= landing.value %></td>
+      <td>
+        <%= link_to show_icon, landing %>
+        <%= link_to edit_icon, edit_landing_path(landing) %>
+        <%= link_to destroy_icon, landing, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+<% end %>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>

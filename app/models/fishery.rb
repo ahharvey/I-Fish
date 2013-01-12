@@ -13,6 +13,7 @@ class Fishery < ActiveRecord::Base
   attr_accessible :code, :name
   
   has_many :surveys, dependent: :destroy
+  has_many :logbooks
 
   validates :name,
   	presence: true

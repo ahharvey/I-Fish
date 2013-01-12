@@ -1,6 +1,10 @@
 ExportXls::Application.routes.draw do
   
   
+  
+
+  
+
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
     devise_for :admins, :controllers => { :registrations => "admin_registrations" }
@@ -42,6 +46,9 @@ ExportXls::Application.routes.draw do
     resources :graticules
     resources :vessel_types
     resources :provinces
+    resources :logbooks
+    resources :logged_days
+    resources :excel_files
 
     resources :users, :only => [:index, :show]
     resources :admins, :only => [:index, :show]

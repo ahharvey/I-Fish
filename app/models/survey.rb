@@ -25,24 +25,24 @@ class Survey < ActiveRecord::Base
 	belongs_to :desa
 	has_many :landings
 
-	validates :date_published,
-		presence: true
-	validates :desa_id,
-		presence: true
-	validates :start_time,
-		presence: true
-	validates :end_time,
-		presence: true
-	validates :fishery_id,
-		presence: true
-	validates :fleet_observer,
-		presence: true
-	validates :catch_scribe,
-		presence: true
-	validates :catch_measure,
-		presence: true
-	validates :admin_id,
-		presence: true
+#	validates :date_published,
+#		presence: true
+#	validates :desa_id,
+#		presence: true
+#	validates :start_time,
+#		presence: true
+#	validates :end_time,
+#		presence: true
+#	validates :fishery_id,
+#		presence: true
+#	validates :fleet_observer,
+#		presence: true
+#	validates :catch_scribe,
+#		presence: true
+#	validates :catch_measure,
+#		presence: true
+#	validates :admin_id,
+#		presence: true
 
 	def self.import_from_email(params,user_id)
 		params.flatten.each do |param|

@@ -20,6 +20,8 @@ class Fish < ActiveRecord::Base
   attr_accessible :code, :english_name, :family, :fishbase_name, :indonesia_name, :order, :scientific_name
 
   has_many :catches, dependent: :destroy
+  has_many :logged_days
+  has_many :landings
 
   validates :code,
   	presence: true

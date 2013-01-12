@@ -27,7 +27,7 @@
 
 class Landing < ActiveRecord::Base
 	attr_accessible :boat_size, :crew, :fuel, :gear_id, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
-	:power, :graticule_id, :engine_id, :survey_id
+	:power, :graticule_id, :engine_id, :survey_id, :fish_id
 
 	set_inheritance_column nil
 
@@ -35,6 +35,7 @@ class Landing < ActiveRecord::Base
 	belongs_to :survey
 	belongs_to :graticule
 	belongs_to :engine
+	belongs_to :fish
 
 	has_many :catches, dependent: :destroy
 
@@ -46,16 +47,17 @@ class Landing < ActiveRecord::Base
 		inclusion: {
 			in: 1..999
 		}
-#	validates :graticule_id,
-#		presence: true
+	validates :graticule_id,
+		presence: true
 	validates :vessel_ref,
 		presence: true
 	validates :vessel_name,
 		presence: true
-#	validates :engine_id,
-#		presence: true
+	validates :boat_size,
+		presence: true
+	validates :engine_id,
+		presence: true
 	validates :fuel,
-		presence: true,
 		numericality: {
 			only_integer: true
 		},
@@ -63,12 +65,10 @@ class Landing < ActiveRecord::Base
 			in: 1..999
 		}
 	validates :sail,
-		presence: true,
 		inclusion: {
 			in: %w(Y N)
 		}
 	validates :crew,
-		presence: true,
 		numericality: {
 			only_integer: true
 		},
@@ -76,27 +76,25 @@ class Landing < ActiveRecord::Base
 			in: 1..49
 		}
 	validates :value,
-		presence: true,
 		numericality: {
 			only_integer: true
 		},
 		inclusion: {
 			in: 1..999999999
 		}
-	validates :boat_size,
-		presence: true,
-		numericality: {
-			only_integer: true
-		},
-		inclusion: {
-			in: 1..999
-		}
+#	validates :boat_size,
+#		presence: true,
+#		numericality: {
+#			only_integer: true
+#		},
+#		inclusion: {
+#			in: 1..999
+#		}
 	validates :gear_id,
 		presence: true
 	validates :survey_id,
 		presence: true
 	validates :quantity,
-		presence: true,
 		numericality: {
 			only_integer: true
 		},
@@ -104,7 +102,6 @@ class Landing < ActiveRecord::Base
 			in: 1..9999
 		}
 	validates :weight,
-		presence: true,
 		numericality: {
 			only_integer: true
 		},
@@ -115,8 +112,8 @@ class Landing < ActiveRecord::Base
 		presence: true
 	validates :time_in,
 		presence: true
-	validates :type,
-		presence: true
+#	validates :type,
+#		presence: true
 
 
 	def self.import_from_email(params, user_id)
