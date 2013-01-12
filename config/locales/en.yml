@@ -73,11 +73,11 @@ en:
     show:
       title: "Logged Day"
   surveys:
-    title: "Surveys"
+    title: "Landing Site Surveys"
     index:
-      title: "Surveys"
+      title: "Landing Site Surveys"
     show:
-      title: "Survey Report"
+      title: "Landing Site Survey Report"
   users:
     title: "Users"
   navbar:

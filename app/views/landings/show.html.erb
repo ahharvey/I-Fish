@@ -65,6 +65,28 @@
 
 </dl>
 
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Catch.human_attribute_name(:fish_id) %></th>
+    <th><%= Catch.human_attribute_name(:length) %> (mm)</th>
+    <th><%= Catch.human_attribute_name(:weight) %> (g)</th>
+    <th></th>
+  </tr>
+
+  <% @landing.catches.each do |catch| %>
+    <tr>
+      <td><%= link_to catch.fish.english_name, catch.fish %></td>
+      <td><%= catch.length %></td>
+      <td><%= catch.weight %></td>
+      <td>
+        <%= link_to show_icon, catch %>
+        <%= link_to edit_icon, edit_catch_path(catch) %>
+        <%= link_to destroy_icon, catch, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
 
 <%= link_to 'Edit', edit_landing_path(@landing) %> |
 <%= link_to 'Back', landings_path %>
