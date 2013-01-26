@@ -1,4 +1,25 @@
 
+Admin.delete_all
+Catch.delete_all
+Desa.delete_all
+District.delete_all
+Engine.delete_all
+ExcelFile.delete_all
+Fish.delete_all
+Fishery.delete_all
+Gear.delete_all
+Graticule.delete_all
+Landing.delete_all
+Logbook.delete_all
+LoggedDay.delete_all
+Office.delete_all
+Province.delete_all
+Role.delete_all
+Survey.delete_all
+User.delete_all
+VesselType.delete_all
+
+
 desa = Desa.create([
   { name: "Ampenan", code: "001", lat: -8.583333, lng: 116.116667, district_id: 1},
   { name: "Banka Banka", code: "002", lat: -8.747771, lng: 115.864595, district_id: 1 },
@@ -241,7 +262,7 @@ role_admin = Role.create(name: "administrator")
 
 # Administrators
 admin1 = office1.admins.create(email: "admin@fish.com",
-  name: "Admin Adminson"
+  name: "Admin Adminson",
   office_id: office1.id,
   password: "admin1",
   password_confirmation: "admin1")
@@ -259,7 +280,7 @@ admin_staff2 = Admin.create(email: "staff2@fish.com",
 	office_id: office2.id)
 admin_staff2.roles.push role_staff
 
-admin_supervisor1 = Admin.create(email: "supervisor1@fish.com",
+admin_supervisor1 = Admin.create(email: "supervisor1@fish.Common",
 	name: "supervisor1",
 	password: "supervisor1",
 	password_confirmation: "supervisor1",

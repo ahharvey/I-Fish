@@ -47,16 +47,17 @@ class HomeController < ApplicationController
 
   def upload_data
     @files = ExcelFile.all
+    @excel_file = ExcelFile.new
   end
 
   def process_upload_data
     parameters = {file: params[:file], admin_id: @currently_signed_in.id}
-    excel_file = ExcelFile.new(parameters)
+    @excel_file = ExcelFile.new(parameters)
 
-    if excel_file.save
+    if @excel_file.save
       flash[:success] = "Successfully upload data to database"
     else
-      flash[:danger] = "Failed to upload data"
+      flash[:danger] = "Failed to upload data. \n" + @excel_file.errors.messages[:base].join(". ")
     end
     redirect_to home_upload_data_url
   end
