@@ -42,7 +42,6 @@ class ExcelFile < ActiveRecord::Base
 
   def save_excel_data
     ActiveRecord::Base.transaction do
-      binding.pry
       @excel_data.save_models!
     end
   end

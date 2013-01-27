@@ -38,7 +38,6 @@ class ImportExcelData
           admin_id: xl_file.admin.id
         )
         excel_data.add_model(survey, {:sheet => "Survey", :model_type => "Survey"})
-        # survey.save
       end
 
       # parses and imports survey landing data from Form A tab
@@ -88,7 +87,6 @@ class ImportExcelData
               survey_id: survey.id
             )
             excel_data.add_model(landing, {:sheet => "Form A - Fleet", :model_type => "Landing", :row => d})
-            # landing.save
           end
         end
         # parses and imports survey catch data from Form B tab
@@ -107,7 +105,6 @@ class ImportExcelData
                 landing_id: landing.id
               )
               excel_data.add_model(catch, {:sheet => "Form B - Catch", :model_type => "Catch", :row => i})
-              # catch.save
             end
           end
         end
@@ -130,7 +127,6 @@ class ImportExcelData
         date: Date.new(year,month,1)
         )
       excel_data.add_model(logbook, {:sheet => "Logbook", :model_type => "Logbook"})
-      # logbook.save
 
       for j in 4..xls.last_row
         day = xls.cell(j,"A").to_i
@@ -175,7 +171,6 @@ class ImportExcelData
               graticule_id: graticule_id.to_i
               )
             excel_data.add_model(logged_day, {:sheet => "Logbook", :model_type => "LoggedDay", :row => j})
-            # logged_day.save
           end
         end
       end
