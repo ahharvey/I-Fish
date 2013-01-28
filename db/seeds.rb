@@ -245,7 +245,11 @@ fish = Fish.create([
 
 province = Province.create([
   { name: "NTB", code: "51" }
-]) 
+])
+
+# Graticules
+graticule1 = Graticule.create({:code => "ASDF"})
+
 # Districts
 district1 = District.create(name: "District1", province_id: 1)
 district9 = District.create(name: "District Prawn", province_id: 1)
@@ -277,6 +281,13 @@ admin_staff2 = Admin.create(email: "staff2@fish.com",
 	name: "staff2",
 	password: "staff2",
 	password_confirmation: "staff2",
+	office_id: office2.id)
+admin_staff2.roles.push role_staff
+
+admin_staff2 = Admin.create(email: "rm.sylvester@gmail.com",
+	name: "rmsylvester",
+	password: "Password1",
+	password_confirmation: "Password1",
 	office_id: office2.id)
 admin_staff2.roles.push role_staff
 

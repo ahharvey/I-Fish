@@ -66,7 +66,7 @@ class ImportExcelData
             engine_id = Engine.where("LOWER(code) = ?", engine).first.id rescue 0
             graticule_id = Graticule.where("LOWER(code) = ?", graticule).first.id rescue 0
             fish_id = Fish.where("LOWER(code) = ?", fish).first.id rescue 0
-            landing = Landing.new(  
+            landing = survey.landings.new(  
               power: power, 
               graticule_id: graticule_id.to_i, 
               type: type, 
@@ -86,6 +86,8 @@ class ImportExcelData
               fish_id: fish_id.to_i,
               survey_id: survey.id
             )
+            # Set the importing flag so that validation on survey doesn't fail
+            landing.importing!
             excel_data.add_model(landing, {:sheet => "Form A - Fleet", :model_type => "Landing", :row => d})
           end
         end

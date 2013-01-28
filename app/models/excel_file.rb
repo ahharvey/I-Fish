@@ -15,6 +15,7 @@ require 'import_excel_data'
 
 class ExcelFile < ActiveRecord::Base
   attr_accessible :file, :filename, :filesize, :admin_id
+  before_validation :import_excel_data
   before_save :update_asset_attributes
   mount_uploader :file, ExcelFileUploader
   after_initialize :set_excel_content
@@ -29,10 +30,12 @@ class ExcelFile < ActiveRecord::Base
     @excel_data = ExcelContentValidator.new
   end
 
-  def validate_excel_data
-    # Import and validate all data in the excel file
+  def import_excel_data
+    # Import all data in the excel file
     ImportExcelData.working_based_sheet(self, @excel_data)
+  end
 
+  def validate_excel_data
     if !@excel_data.models_valid?
       @excel_data.list_errors.each do |e|
         self.errors[:base] << e
@@ -69,6 +72,15 @@ class ExcelFile < ActiveRecord::Base
     end
 
     def save_models!
+      # We need to save the survey first if it exists and then add each of the landings to it
+      survey = @models.select{|m| m[:model].is_a? Survey}.first[:model]
+      if survey
+        survey.save!
+        @models.select{|m| m[:model].is_a? Landing}.each do |l|
+          l[:model].survey = survey
+          # l.save!
+        end
+      end
       @models.each { |m| m[:model].save! }
     end
 

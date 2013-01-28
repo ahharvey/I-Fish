@@ -25,24 +25,32 @@ class Survey < ActiveRecord::Base
 	belongs_to :desa
 	has_many :landings
 
-#	validates :date_published,
-#		presence: true
-#	validates :desa_id,
-#		presence: true
-#	validates :start_time,
-#		presence: true
-#	validates :end_time,
-#		presence: true
-#	validates :fishery_id,
-#		presence: true
-#	validates :fleet_observer,
-#		presence: true
-#	validates :catch_scribe,
-#		presence: true
-#	validates :catch_measure,
-#		presence: true
-#	validates :admin_id,
-#		presence: true
+	validates :date_published,
+		presence: true
+	validates :desa_id,
+		presence: true
+	validates :start_time,
+		presence: true
+	validates :end_time,
+		presence: true
+	validates :fishery_id,
+		presence: true
+	validates :fleet_observer,
+		presence: true
+	validates :catch_scribe,
+		presence: true
+	validates :catch_measure,
+		presence: true
+	validates :admin_id,
+		presence: true
+	validate :uniqueness_of_survey
+
+	def uniqueness_of_survey
+		# TODO: Is there a better way of doing this?
+		if Survey.where(self.attributes.slice(:date_published, :desa_id, :start_time, :end_time, :fishery_id, :start_time)).count != 0
+			errors.add(:base, "Survey has been uploaded already.")
+		end
+	end
 
 	def self.import_from_email(params,user_id)
 		params.flatten.each do |param|

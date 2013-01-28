@@ -27,7 +27,7 @@
 
 class Landing < ActiveRecord::Base
 	attr_accessible :boat_size, :crew, :fuel, :gear_id, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
-	:power, :graticule_id, :engine_id, :survey_id, :fish_id
+	:power, :graticule_id, :engine_id, :survey_id, :fish_id, :importing?
 
 	set_inheritance_column nil
 
@@ -92,8 +92,11 @@ class Landing < ActiveRecord::Base
 #		}
 	validates :gear_id,
 		presence: true
+	# Do not validate presence of survey_id if this model is being imported from an excel file
+	# as the parent survey will be saved later and currently doesn't have an ID.
 	validates :survey_id,
-		presence: true
+		presence: true,
+		:if => :not_importing
 	validates :quantity,
 		numericality: {
 			only_integer: true
@@ -115,6 +118,13 @@ class Landing < ActiveRecord::Base
 #	validates :type,
 #		presence: true
 
+	def importing!
+		@importing = true
+	end
+
+	def not_importing
+		!@importing
+	end
 
 	def self.import_from_email(params, user_id)
 		params.flatten.each do |param|
