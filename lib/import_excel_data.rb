@@ -135,7 +135,7 @@ class ImportExcelData
         start_time = xls.cell(j,"B")
         end_time = xls.cell(j,"C")
         gear_time = xls.cell(j,"D").to_i
-        graticule_id = xls.cell(j,"E").downcase  rescue ''
+        graticule_id = xls.cell(j,"E") rescue ''
         crew = xls.cell(j,"F").to_i
         fuel = xls.cell(j,"G").to_i
         sail = xls.cell(j,"H").downcase rescue ''
@@ -155,8 +155,8 @@ class ImportExcelData
             graticule_id = Graticule.where("LOWER(code) = ?", graticule_id).first.id rescue 0
             #user_id = User.where("LOWER(code) = ?", user).first.id rescue 0
             logged_day = LoggedDay.new(
-              start_time: date+start_time,
-              end_time: date+end_time,
+              start_time: start_time,
+              end_time: end_time,
               gear_time: gear_time,
               crew: crew,
               fuel: fuel,

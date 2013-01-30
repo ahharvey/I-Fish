@@ -73,14 +73,23 @@ class ExcelFile < ActiveRecord::Base
 
     def save_models!
       # We need to save the survey first if it exists and then add each of the landings to it
-      survey = @models.select{|m| m[:model].is_a? Survey}.first[:model]
-      if survey
+      if @models.select{|m| m[:model].is_a? Survey}.count > 0
+        survey = @models.select{|m| m[:model].is_a? Survey}.first[:model]
         survey.save!
         @models.select{|m| m[:model].is_a? Landing}.each do |l|
           l[:model].survey = survey
-          # l.save!
         end
       end
+
+      # We need to save the logbook first if it exists and then add each of the landings to it
+      if @models.select{|m| m[:model].is_a? Logbook}.count > 0
+        logbook = @models.select{|m| m[:model].is_a? Logbook}.first[:model]
+        logbook.save!
+        @models.select{|m| m[:model].is_a? LoggedDay}.each do |l|
+          l[:model].logbook = logbook
+        end
+      end
+
       @models.each { |m| m[:model].save! }
     end
 
@@ -90,7 +99,7 @@ class ExcelFile < ActiveRecord::Base
       @models.each do |m|
         if !m[:model].valid?
           m[:model].errors.each do |e|
-            error_messages << "#{m[:meta][:sheet]}, row #{m[:meta][:row]} - #{e.to_s} #{m[:model].errors[e][0]}"
+            error_messages << "#{m[:meta][:sheet]}, row #{m[:meta][:row] or 'N/A'} - \"#{e.to_s} #{m[:model].errors[e][0]}\""
           end
         end
       end

@@ -264,6 +264,10 @@ role_staff = Role.create(name: "staff")
 role_supervisor = Role.create(name: "supervisor")
 role_admin = Role.create(name: "administrator")
 
+# Users
+desa1 = Desa.first
+user1 = desa1.users.create(name: "user1", email: "user1@fish.com", password: "password1", password_confirmation: "password1")
+
 # Administrators
 admin1 = office1.admins.create(email: "admin@fish.com",
   name: "Admin Adminson",
