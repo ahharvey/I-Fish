@@ -1,0 +1,25 @@
+<% title t ".title" %>
+
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Code</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @graticules.each do |graticule| %>
+  <tr>
+    <td><%= graticule.code %></td>
+    <td>
+      <%= link_to show_icon, graticule %>
+      <%= link_to edit_icon, edit_graticule_path(graticule) %>
+      <%= link_to destroy_icon, graticule, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Graticule', new_graticule_path %>

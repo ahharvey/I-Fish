@@ -1,0 +1,22 @@
+
+<% title @admin.name %>
+
+<%= @admin.email %>
+
+<div class="row">
+	<div class="panel span4">
+		<h4>Roles:</h4>
+
+		<%= form_tag [:add_role, :panel, @admin], class: "form", :remote=>true do %>
+		  <div class="input-append">
+			
+		    <%= text_field_tag :get_role, "", class: "span2", placeholder: "Assign a role...", autocomplete: "off", data: { provide: "typeahead", source: Role.order(:name).map(&:name) } %>
+		    <%= button_tag add_icon, class: "btn btn-success" %>
+		  </div>
+		<% end %>
+
+		<%= render :partial=>'role_list' %>
+	</div>
+</div>
+
+<%= link_to 'Return to Admin List', [:panel, Admin] %>

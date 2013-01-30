@@ -1,0 +1,204 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+id:
+  admins:
+    title: "Admins"
+  catches:
+    title: "Komposisi Penangkapan"
+    index:
+      title: "Komposisi Penangkapan"
+    show:
+      title: "Laporan Penangkapan"
+  desas:
+    title: "Desas"
+    index:
+      title: "Desas"
+    show:
+      title: "Laporan Desa"
+    edit:
+      title: "Edit Desa"
+    new:
+      title: "Desa Baru"
+  engines:
+    title: "Mesin Mesin"
+    index:
+      title: "Mesin Mesin"
+    show:
+      title: "Mesin"
+    edit:
+      title: "Edit mesin"
+    new:
+      title: "Mesin baru"
+  fisheries:
+    title: "Perikanan"
+    index:
+      title: "Perikanan Perikanan"
+    show:
+      title: "Laporan Perikanan"
+  fishes:
+    title: "Ikan"
+    index:
+      title: "Ikan Ikan"
+  gears:
+    title: "Alat Tangkap"
+    index:
+      title: "Alat Tangkap"
+  graticules:
+    title: "Graticules"
+    index:
+      title: "Graticules"
+    show:
+      title: "Graticule"
+    edit:
+      title: "Edit graticule"
+    new:
+      title: "New graticule"
+  landings:
+    title: "Landings"
+    index:
+      title: "Landings"
+    show:
+      title: "Laporan Landing"
+  logbooks:
+    title: "Logbooks"
+    index:
+      title: "Kumpulan Logbooks"
+    show:
+      title: "Laporan Logbook"
+  logged_days:
+    title: "Logged Days"
+    index:
+      title: "Logged Days"
+    show:
+      title: "Logged Day"
+  surveys:
+    title: "Surveys"
+    index:
+      title: "Surveys"
+    show:
+      title: "Laporan Survey"
+  users:
+    title: "Users"
+  navbar:
+    home: "Pulang"
+    data: "Data"
+    reports: "Laporan"
+    settings: "Settings"
+    user_profile: "User profile"
+    fishery_profile: "Fishery profile"
+    upload: "Mengupload"
+    panel: "Panel"
+  devise:
+    signin: "Sign in"
+    signout: "Sign out"
+    edit: "Mengedit profil"
+    signup: "Ikut"
+  modal:
+    download:
+      survey:
+        form:
+          title: "Download Survey Forms"
+          text: "These forms are used to record landing site survey data."
+        spreadsheet:
+          title: "Download Survey Template"
+          text: "This spreadsheet is used to enter and submit landing site survey data."
+      logbook:
+        form:
+          title: "Download Logbook Form"
+          text: "This form is used by fishers to record their daily logbook."
+        spreadsheet:
+          title: "Download Logbook Template"
+          text: "This spreadsheet is used to enter and submit fishers' logbook data."
+  activerecord:
+    attributes:
+      catch:
+        fish_id: "Ikan"
+        landing_id: "Tangkap"
+        length: "Panjang"
+        weight: "Barat"
+      desa:
+        name: "Nama"
+        code: "Kode"
+        lat: "Lintang"
+        lng: "Bujur"
+        district_id: "Kabupaten"
+      district:
+        name: "Nama"
+      engine:
+        name: "Nama"
+        code: "Kode"
+      fishery:
+        name: "Nama"
+        code: "Kode"
+      fish:
+        order: "Order"
+        family: "Keluaga"
+        scientific_name: "Nama Latin"
+        fishbase_name: "Nama Fishbase"
+        english_name: "Nama Ingriss"
+        indonesia_name: "Nama Nasional"
+        code: "Kode"
+      gear:
+        cat_ind: "Kategory"
+        cat_eng: "Kategory"
+        sub_cat_ind: "Subkategory"
+        sub_cat_eng: "Subkategory"
+        type_ind: "Tipe"
+        type_eng: "Tipe"
+        name: "Nama"
+        alpha_code: "Kode KKP"
+        num_code: "Nomor"
+        fao_code: "Kode FAO"
+        code: "Kode"
+      landing:
+        power: "PK"
+        fishing_area: "Area"
+        vessel_ref: "Nomor kapal"
+        vessel_name: "Nama kapal"
+        grid_square: "Grid"
+        engine: "Mesin"
+        fuel: "BBM"
+        sail: "Layar"
+        crew: "ABK"
+        value: "Nilai"
+        boat_size: "Ukuran kapal"
+        gear_id: "Alat"
+        survey_id: "Survey"
+        quantity: "Kuantitas"
+        weight: "Barat"
+        time_out: "Jam brangkat"
+        time_in: "Jam pulang"
+        type: "Jenis kapal"
+      logbook:
+        date: "Date"
+        user: "User"
+        admin: "Admin"
+      logged_day:
+        date: "Tanggal"
+        start_time: "Jam brangkat"
+        end_time:  "Jam pulang"
+        gear_time: "Jam kerja"
+        fuel: "BBM"
+        sail: "Layar"
+        net: "Jaring"
+        line: "Pancing"
+        fish: "Jenis Ikan"
+        quantity: "Jumlah"
+        weight: "Barat"
+        value: "Nila"
+        condition: "Kondisi"
+        moon: "Bulan"
+      office:
+        name: "Nama"
+        district_id: "Kabupaten"
+      survey:
+        date_published: "Tanggal"
+        desa_id: "Desa"
+        start_time: "Jam mulai"
+        end_time: "Jam selasi"
+        fishery_id: "Perikanan"
+        fleet_observer: "Fleet observer"
+        catch_scribe: "Catch scribe"
+        catch_measure: "Catch measurer"
+        admin_id: "Admin"

@@ -1,3 +1,21 @@
+# == Schema Information
+#
+# Table name: surveys
+#
+#  id             :integer          not null, primary key
+#  date_published :date
+#  desa_id        :integer
+#  start_time     :datetime
+#  end_time       :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  fishery_id     :integer
+#  fleet_observer :string(255)
+#  catch_scribe   :string(255)
+#  catch_measure  :string(255)
+#  admin_id       :integer
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

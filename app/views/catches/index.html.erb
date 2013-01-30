@@ -1,22 +1,24 @@
-<% title "Catch Composition" %>
+<% title t ".title" %>
+
+<%= render partial: "shared/api_links" %>
 
 <table class="table table-striped table-condensed">
   <tr>
-    <th>Species</th>
-    <th>Length (mm)</th>
-    <th>Weight (g)</th>
+    <th><%= Catch.human_attribute_name(:fish_id) %></th>
+    <th><%= Catch.human_attribute_name(:length) %> (mm)</th>
+    <th><%= Catch.human_attribute_name(:weight) %> (g)</th>
     <th></th>
   </tr>
 
   <% @catches.each do |catch| %>
   	<tr>
-      <td><%= catch.fish.english_name %></td>
+      <td><%= link_to catch.fish.english_name, catch.fish %></td>
       <td><%= catch.length %></td>
       <td><%= catch.weight %></td>
       <td>
-        <%= link_to 'Show', catch %>
-        <%= link_to 'Edit', edit_catch_path(catch) %>
-        <%= link_to 'Destroy', catch, method: :delete, data: { confirm: 'Are you sure?' } %>
+        <%= link_to show_icon, catch %>
+        <%= link_to edit_icon, edit_catch_path(catch) %>
+        <%= link_to destroy_icon, catch, method: :delete, data: { confirm: 'Are you sure?' } %>
       </td>
     </tr>
   <% end %>

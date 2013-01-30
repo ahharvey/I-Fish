@@ -1,0 +1,27 @@
+<% title "Users" %>
+
+<%= render partial: "shared/api_links" %>
+
+<% begin %>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Email</th>
+    <th>Name</th>
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td><%= user.email %></td>
+      <td><%= user.name %></td>
+      <td>
+        <%= link_to show_icon, user %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<% rescue %>
+
+<% end %>
