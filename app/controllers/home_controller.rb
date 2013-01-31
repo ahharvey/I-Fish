@@ -46,19 +46,20 @@ class HomeController < ApplicationController
   end
 
   def upload_data
-    @files = ExcelFile.all
+    render_upload_data
   end
 
   def process_upload_data
     parameters = {file: params[:file], admin_id: @currently_signed_in.id}
-    excel_file = ExcelFile.new(parameters)
+    @model = ExcelFile.new(parameters)
 
-    if excel_file.save
+    if @model.save
       flash[:success] = "Successfully upload data to database"
+      redirect_to home_upload_data_url
     else
-      flash[:danger] = "Failed to upload data"
+      flash[:danger] = "Failed to upload data"# + @model.errors.messages[:base].join(". ")
+      render_upload_data
     end
-    redirect_to home_upload_data_url
   end
 
   def import_mail
@@ -127,12 +128,14 @@ class HomeController < ApplicationController
         if excel_file.save
           excel_info.close
           logger.info("import by email : Successfully upload data to database")
+          UserMailer.data_upload_success(@currently_signed_in, @model)
           ["success", 200]
         else
           excel_info.close
           logger.info(attach_code)
           logger.info(excel_file.errors)
           logger.info("import by email : Failed to upload data")
+          UserMailer.data_upload_failure(@currently_signed_in, @model)
           ["Failed import data by email", 200]
         end
       else
@@ -154,5 +157,12 @@ class HomeController < ApplicationController
   end
 
   def fishery_profile
+  end
+
+  private
+
+  def render_upload_data
+    @files = ExcelFile.all
+    render :action => "upload_data"
   end
 end

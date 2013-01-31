@@ -27,21 +27,21 @@ class LoggedDay < ActiveRecord::Base
   belongs_to :fish
   belongs_to :graticule
   belongs_to :logbook
-  attr_accessible :condition, 
+  attr_accessible :condition,
                   :crew,
-                  :end_time, 
-                  :fuel, 
-                  :gear_time, 
-                  :line, 
-                  :moon, 
-                  :net, 
-                  :quantity, 
-                  :sail, 
-                  :start_time, 
-                  :value, 
-                  :weight, 
-                  :fish_id, 
-                  :logbook_id, 
+                  :end_time,
+                  :fuel,
+                  :gear_time,
+                  :line,
+                  :moon,
+                  :net,
+                  :quantity,
+                  :sail,
+                  :start_time,
+                  :value,
+                  :weight,
+                  :fish_id,
+                  :logbook_id,
                   :graticule_id
 
   @@condition_data = { 1 => "Calm" , 2 => "Moderate" , 3 => "High" }

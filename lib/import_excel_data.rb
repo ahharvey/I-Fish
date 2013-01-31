@@ -1,8 +1,8 @@
 require 'iconv'
 
 class ImportExcelData
-  def self.working_based_sheet(id, admin_id)
-    xl_file = ExcelFile.find(id)
+  def self.working_based_sheet(xl_file, excel_data)
+    # xl_file = ExcelFile.find(id)
 
     if xl_file.file.file.extension.eql?("xls")
       xls = Excel.new(xl_file.file.path)
@@ -35,9 +35,9 @@ class ImportExcelData
           fleet_observer: fleet_observer, 
           catch_scribe: catch_scribe, 
           catch_measure: catch_measure,
-          admin_id: admin_id
+          admin_id: xl_file.admin.id
         )
-        survey.save
+        excel_data.add_model(survey, {:sheet => "Survey", :model_type => "Survey"})
       end
 
       # parses and imports survey landing data from Form A tab
@@ -66,7 +66,7 @@ class ImportExcelData
             engine_id = Engine.where("LOWER(code) = ?", engine).first.id rescue 0
             graticule_id = Graticule.where("LOWER(code) = ?", graticule).first.id rescue 0
             fish_id = Fish.where("LOWER(code) = ?", fish).first.id rescue 0
-            landing = Landing.new(  
+            landing = survey.landings.new(  
               power: power, 
               graticule_id: graticule_id.to_i, 
               type: type, 
@@ -86,7 +86,9 @@ class ImportExcelData
               fish_id: fish_id.to_i,
               survey_id: survey.id
             )
-            landing.save
+            # Set the importing flag so that validation on survey doesn't fail
+            landing.importing!
+            excel_data.add_model(landing, {:sheet => "Form A - Fleet", :model_type => "Landing", :row => d})
           end
         end
         # parses and imports survey catch data from Form B tab
@@ -99,21 +101,17 @@ class ImportExcelData
             unless species.blank?
               fish_id = Fish.where("LOWER(code) = ?", species).first.id rescue 0
               catch = Catch.new(
-                fish_id: fish_id.to_i, 
-                length: length, 
+                fish_id: fish_id.to_i,
+                length: length,
                 weight: weight,
                 landing_id: landing.id
               )
-              catch.save
+              excel_data.add_model(catch, {:sheet => "Form B - Catch", :model_type => "Catch", :row => i})
             end
           end
         end
       end
     end
-
-    
-
-    
 
     # parses and imports logbook data from logbook tab
     if xls.sheets.include?('Logbook')
@@ -126,20 +124,18 @@ class ImportExcelData
       fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue 0
       logbook = Logbook.new(
         user_id: user_id,
-        admin_id: admin_id,
+        admin_id: xl_file.admin.id,
         fishery_id: fishery_id.to_i,
         date: Date.new(year,month,1)
         )
-      logbook.save
-
-
+      excel_data.add_model(logbook, {:sheet => "Logbook", :model_type => "Logbook"})
 
       for j in 4..xls.last_row
         day = xls.cell(j,"A").to_i
         start_time = xls.cell(j,"B")
         end_time = xls.cell(j,"C")
         gear_time = xls.cell(j,"D").to_i
-        graticule_id = xls.cell(j,"E").downcase  rescue ''
+        graticule_id = xls.cell(j,"E") rescue ''
         crew = xls.cell(j,"F").to_i
         fuel = xls.cell(j,"G").to_i
         sail = xls.cell(j,"H").downcase rescue ''
@@ -159,15 +155,15 @@ class ImportExcelData
             graticule_id = Graticule.where("LOWER(code) = ?", graticule_id).first.id rescue 0
             #user_id = User.where("LOWER(code) = ?", user).first.id rescue 0
             logged_day = LoggedDay.new(
-              start_time: date+start_time, 
-              end_time: date+end_time, 
-              gear_time: gear_time, 
+              start_time: start_time,
+              end_time: end_time,
+              gear_time: gear_time,
               crew: crew,
-              fuel: fuel, 
-              sail: sail.to_bool, 
-              net: net.to_bool, 
-              line: line.to_bool, 
-              fish_id: fish_id.to_i, 
+              fuel: fuel,
+              sail: sail.to_bool,
+              net: net.to_bool,
+              line: line.to_bool,
+              fish_id: fish_id.to_i,
               quantity: quantity,
               weight: weight,
               value: value,
@@ -175,13 +171,12 @@ class ImportExcelData
               moon: moon,
               logbook_id: logbook.id,
               graticule_id: graticule_id.to_i
-              )          
-            logged_day.save
+              )
+            excel_data.add_model(logged_day, {:sheet => "Logbook", :model_type => "LoggedDay", :row => j})
           end
         end
       end
     end
 
-    
   end
 end
