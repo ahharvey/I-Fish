@@ -5,28 +5,35 @@
 <table class="table table-striped table-condensed">
   <tr>
     <th><%= Survey.human_attribute_name(:date_published) %></th>
-    <th><%= Survey.human_attribute_name(:admin_id) %></th>
     <th><%= Survey.human_attribute_name(:start_time) %></th>
     <th><%= Survey.human_attribute_name(:end_time) %></th>
+    <th><%= Survey.human_attribute_name(:fishery_id) %></th>
     <th><%= Survey.human_attribute_name(:desa_id) %></th>
     <th><%= Survey.human_attribute_name(:fleet_observer) %></th>
     <th><%= Survey.human_attribute_name(:catch_measure) %></th>
     <th><%= Survey.human_attribute_name(:catch_scribe) %></th>
-    <th><%= Survey.human_attribute_name(:fishery_id) %></th>
+    <th><%= Survey.human_attribute_name(:admin_id) %></th>
+    
     <th></th>
   </tr>
 
   <% @surveys.each do |survey| %>
     <tr>
       <td><%= survey.date_published.to_s(:rfc822) rescue '' %></td>
-      <td><%= link_to survey.admin.name, survey.admin %></td>
       <td><%= survey.start_time.to_s(:time) %></td>
       <td><%= survey.end_time.to_s(:time) %></td>
+      <td><%= survey.fishery.name rescue ''%></td>
       <td><%= survey.desa.name rescue '' %></td>
       <td><%= survey.fleet_observer %></td>
       <td><%= survey.catch_measure %></td>
       <td><%= survey.catch_scribe %></td>
-      <td><%= survey.fishery.name rescue ''%></td>
+      <td><%= link_to image_tag(survey.admin.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: survey.admin.name, 
+          alt: survey.admin.name),
+          survey.admin %></td>
+      
       <td>
         <%= link_to show_icon, survey %>
         <%= link_to edit_icon, edit_survey_path(survey) %>

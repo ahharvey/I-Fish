@@ -24,6 +24,8 @@ class Survey < ActiveRecord::Base
 	belongs_to :fishery
 	belongs_to :desa
 	has_many :landings
+	has_one :district, through: :desa
+	has_one :province, through: :district
 
 #	validates :date_published,
 #		presence: true

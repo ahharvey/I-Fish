@@ -3,7 +3,7 @@
 
 en:
   admins:
-    title: "Admins"
+    title: "Officers"
   catches:
     title: "Catch Composition"
     index:
@@ -20,6 +20,16 @@ en:
       title: "Edit village"
     new:
       title: "New village"
+  districts:
+    title: "Districts"
+    index:
+      title: "Districts"
+    show:
+      title: "District Report"
+    edit:
+      title: "Edit district"
+    new:
+      title: "New district"
   engines:
     title: "Engines"
     index:
@@ -72,6 +82,16 @@ en:
       title: "Logged Days"
     show:
       title: "Logged Day"
+  provinces:
+    title: "Provinces"
+    index:
+      title: "Provinces"
+    show:
+      title: "Province Report"
+    edit:
+      title: "Edit province"
+    new:
+      title: "New province"
   surveys:
     title: "Landing Site Surveys"
     index:
@@ -79,7 +99,7 @@ en:
     show:
       title: "Landing Site Survey Report"
   users:
-    title: "Users"
+    title: "Fishers"
   navbar:
     home: "Home"
     data: "Data"
@@ -193,6 +213,10 @@ en:
       office:
         name: "Name"
         district_id: "District"
+      province:
+        name: "Province"
+        alpha_code: "Abbr."
+        code: "Code"
       survey:
         date_published: "Date"
         desa_id: "Village"

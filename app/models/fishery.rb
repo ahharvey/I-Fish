@@ -14,6 +14,7 @@ class Fishery < ActiveRecord::Base
   
   has_many :surveys, dependent: :destroy
   has_many :logbooks
+  has_many :provinces, through: :surveys
 
   validates :name,
   	presence: true

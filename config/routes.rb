@@ -35,7 +35,9 @@ ExportXls::Application.routes.draw do
     end
 
     resources :catches
-    resources :desas
+    resources :desas do
+      resources :surveys
+    end
     resources :fisheries
     resources :fishes
     resources :gears
@@ -45,6 +47,7 @@ ExportXls::Application.routes.draw do
     resources :engines
     resources :graticules
     resources :vessel_types
+    resources :districts
     resources :provinces
     resources :logbooks
     resources :logged_days

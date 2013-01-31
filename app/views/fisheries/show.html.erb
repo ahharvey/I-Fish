@@ -15,11 +15,11 @@
   </p>
 </div>
 <div class="row">
-  <div id="graph_options">
-    <%= text_field_tag "cpe_date_from", @date_from %>
-    <%= text_field_tag "cpe_date_to", @date_to %>
+  <form class="form-inline" id="graph_options">
+    <%= text_field_tag "cpe_date_from", @date_from, class: "span2" %>
+    <%= text_field_tag "cpe_date_to", @date_to, class: "span2" %>
     <button class="btn" id="cpe_btn_refresh">Refresh</button>
-  </div>
+  </form>
 </div>
 <div class="row">
   <div id="graph_catch_per_effort_container"></div>
@@ -34,7 +34,7 @@
 
   		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
   			console.log(data);
-  			render_chart('graph_catch_per_effort_container','Catch per unit effort', 'Catch (kg)', '', 'line', data.col_headers, data.month_counts);
+  			render_chart('graph_catch_per_effort_container','Catch per unit effort', 'average kg per hour', '', 'line', data.col_headers, data.month_counts);
   		}, "json");
   	};
 
@@ -56,11 +56,11 @@
 
 </div>
 <div class="row">
-  <div id="graph_length_frequency_options">
-    <%= text_field_tag "lf_date_from", @date_from %>
-    <%= text_field_tag "lf_date_to", @date_to %>
+  <form class="form-inline" id="graph_length_frequency_options">
+    <%= text_field_tag "lf_date_from", @date_from, class: "span2" %>
+    <%= text_field_tag "lf_date_to", @date_to, class: "span2" %>
     <button class="btn" id="btn_lf_refresh">Refresh</button>
-  </div>
+  </form>
 </div>
 <div class="row">
   <div id="graph_length_frequency_container"></div>
@@ -73,7 +73,7 @@
   		}
   		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
   			console.log(data);
-  			render_chart('graph_length_frequency_container', 'Length Frequency', 'Frequency in Size Class', 'Size Class', 'column', data.col_headers, data.length_counts);
+  			render_chart('graph_length_frequency_container', 'Length Frequency', 'Frequency', 'Size Class', 'column', data.col_headers, data.length_counts);
   		}, "json");
   	};
 

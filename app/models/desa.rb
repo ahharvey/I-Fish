@@ -18,6 +18,7 @@ class Desa < ActiveRecord::Base
   has_many :surveys, dependent: :destroy
   has_many :users
   belongs_to :district
+  has_one :province, through: :district
 
   acts_as_gmappable :lat => 'lat', 
                     :lng => 'lng',

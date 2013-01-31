@@ -35,12 +35,12 @@ class FisheriesController < InheritedResources::Base
         landings = []
         surveys = @fisheries.surveys.select{ |s| s.date_published.year == y && s.date_published.month == m}.each do |s|
           landings.concat(s.landings)
+        end
+        res = landings.map{ |l| l.weight / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)}.inject(0, :+)
+        res = res / landings.count if landings.count > 0
+        month_counts.push res
       end
-      res = landings.map{ |l| l.weight / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)}.inject(0, :+)
-      res = res / landings.count if landings.count > 0
-      month_counts.push res
     end
-  end
 		render json: {:col_headers => col_headers, :month_counts => month_counts }
   end
 
@@ -54,6 +54,7 @@ class FisheriesController < InheritedResources::Base
       end
     end
     step = 5
+    catches = catches.sort_by &:length
     lengths = catches.map{ |c| c.length - (c.length % step) }.uniq
     length_counts = lengths.map{ |l| catches.select{ |c| c.length - (c.length % step) == l }.count}
 

@@ -13,7 +13,7 @@
             <%= link_to home_icon, root_path, title: t("navbar.home")  %>
           </li>
           <li>
-            <%= link_to t("fisheries.title"), fisheries_path %>
+            
           </li>
           <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t("navbar.data") %><b class="caret"></b></a>
@@ -34,10 +34,22 @@
             <ul class="dropdown-menu">
               <% if admin_signed_in? || user_signed_in? %>
                 <li>
-                  <%= link_to t("navbar.user_profile"), '/user_profile' %>
+                  <%= link_to t("fisheries.title"), fisheries_path %>
                 </li>
                 <li>
-                  <%= link_to t("navbar.fishery_profile"), '/fishery_profile' %>
+                  <%= link_to t("desas.title"), desas_path %>
+                </li>
+                <li>
+                  <%= link_to t("districts.title"), districts_path %>
+                </li>
+                <li>
+                  <%= link_to t("provinces.title"), provinces_path %>
+                </li>
+                <li>
+                  <%= link_to t("users.title"), users_path %>
+                </li>
+                <li>
+                  <%= link_to t("admins.title"), admins_path %>
                 </li>
               <% end %>
             </ul>
@@ -46,15 +58,6 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t("navbar.settings") %><b class="caret"></b></a>
             <ul class="dropdown-menu">
               <% if admin_signed_in? || user_signed_in? %>
-                <li>
-                  <%= link_to t("users.title"), users_path %>
-                </li>
-                <li>
-                  <%= link_to t("admins.title"), admins_path %>
-                </li>
-                <li>
-                  <%= link_to t("desas.title"), desas_path %>
-                </li>
                 <li>
                   <%= link_to t("fishes.title"), fishes_path %>
                 </li>

@@ -37,4 +37,5 @@ group :development do
   # gem 'pry-stack_explorer'
   gem 'debugger'
   gem 'annotate'
+  gem 'hirb'
 end

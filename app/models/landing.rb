@@ -4,11 +4,8 @@
 #
 #  id           :integer          not null, primary key
 #  power        :string(255)
-#  fishing_area :string(255)
 #  vessel_ref   :string(255)
 #  vessel_name  :string(255)
-#  grid_square  :string(255)
-#  engine       :string(255)
 #  fuel         :string(255)
 #  sail         :string(255)
 #  crew         :string(255)
@@ -23,6 +20,9 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  type         :string(255)
+#  engine_id    :integer
+#  graticule_id :integer
+#  fish_id      :integer
 #
 
 class Landing < ActiveRecord::Base

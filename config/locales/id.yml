@@ -3,7 +3,7 @@
 
 id:
   admins:
-    title: "Admins"
+    title: "Staf Staf"
   catches:
     title: "Komposisi Penangkapan"
     index:
@@ -20,6 +20,16 @@ id:
       title: "Edit Desa"
     new:
       title: "Desa Baru"
+  districts:
+    title: "Districts"
+    index:
+      title: "Districts"
+    show:
+      title: "District Report"
+    edit:
+      title: "Edit district"
+    new:
+      title: "New district"
   engines:
     title: "Mesin Mesin"
     index:
@@ -72,6 +82,16 @@ id:
       title: "Logged Days"
     show:
       title: "Logged Day"
+  provinces:
+    title: "Provinces"
+    index:
+      title: "Provinces"
+    show:
+      title: "Province Report"
+    edit:
+      title: "Edit province"
+    new:
+      title: "New province"
   surveys:
     title: "Surveys"
     index:
@@ -79,7 +99,7 @@ id:
     show:
       title: "Laporan Survey"
   users:
-    title: "Users"
+    title: "Nelayan Nelayan"
   navbar:
     home: "Pulang"
     data: "Data"
@@ -192,6 +212,10 @@ id:
       office:
         name: "Nama"
         district_id: "Kabupaten"
+      province:
+        name: "Propinsi"
+        alpha_code: "Abbr."
+        code: "Kode"
       survey:
         date_published: "Tanggal"
         desa_id: "Desa"
