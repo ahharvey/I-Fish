@@ -1,0 +1,35 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_time: 2013-01-10 19:13:24
+  end_time: 2013-01-10 19:13:24
+  gear_time: 1
+  fuel: 1
+  sail: false
+  net: false
+  line: false
+  quantity: 1
+  weight: 1
+  value: 1
+  condition: MyString
+  moon: MyString
+  fish: 
+  graticule: 
+  user: 
+
+two:
+  start_time: 2013-01-10 19:13:24
+  end_time: 2013-01-10 19:13:24
+  gear_time: 1
+  fuel: 1
+  sail: false
+  net: false
+  line: false
+  quantity: 1
+  weight: 1
+  value: 1
+  condition: MyString
+  moon: MyString
+  fish: 
+  graticule: 
+  user: 

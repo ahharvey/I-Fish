@@ -1,10 +1,10 @@
 class HomeController < ApplicationController
   require 'mail'
 
-  skip_before_filter :authenticate_user!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
+  skip_before_filter :authenticate!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
 
   def index
-    @surveys = Survey.includes(:user, :desa, :fishery).all
+    @surveys = Survey.includes(:admin, :desa, :fishery).all
   end
 
   def multipart_import
@@ -46,19 +46,20 @@ class HomeController < ApplicationController
   end
 
   def upload_data
-    @files = ExcelFile.all
+    render_upload_data
   end
 
   def process_upload_data
-    parameters = {file: params[:file], user_id: current_user.id}
-    excel_file = ExcelFile.new(parameters)
+    parameters = {file: params[:file], admin_id: @currently_signed_in.id}
+    @model = ExcelFile.new(parameters)
 
-    if excel_file.save
+    if @model.save
       flash[:success] = "Successfully upload data to database"
+      redirect_to home_upload_data_url
     else
-      flash[:danger] = "Failed to upload data"
+      flash[:danger] = "Failed to upload data"# + @model.errors.messages[:base].join(". ")
+      render_upload_data
     end
-    redirect_to home_upload_data_url
   end
 
   def import_mail
@@ -127,12 +128,14 @@ class HomeController < ApplicationController
         if excel_file.save
           excel_info.close
           logger.info("import by email : Successfully upload data to database")
+          UserMailer.data_upload_success(@currently_signed_in, @model)
           ["success", 200]
         else
           excel_info.close
           logger.info(attach_code)
           logger.info(excel_file.errors)
           logger.info("import by email : Failed to upload data")
+          UserMailer.data_upload_failure(@currently_signed_in, @model)
           ["Failed import data by email", 200]
         end
       else
@@ -151,27 +154,15 @@ class HomeController < ApplicationController
   end
 
   def user_profile
-    @surveys = current_user.surveys.order("date_published")
-    1.upto(12) { |i| instance_variable_set("@month_#{i}", 0) }
-    @surveys.each do |survey|
-      instance_variable_set("@month_#{survey.date_published.month}", instance_variable_get("@month_#{survey.date_published.month}")+1) rescue nil
-    end
   end
 
   def fishery_profile
-    @surveys = current_user.surveys.order("date_published")
-    1.upto(12) { |i| instance_variable_set("@month_#{i}", 0) }
-    @surveys.each do |survey|
-      instance_variable_set("@month_#{survey.date_published.month}", (survey.landings.map(&:weight).sum/survey.landings.map(&:length).sum rescue 0))
-    end
-    @catchs = Catch.order("length")
-    @length = @catchs.map(&:length).uniq
-    @hash_leng = {}
+  end
 
-    @length.each do |le|
-      i = @hash_leng[le].to_i
-      @hash_leng[le] = i+1
-    end
-    puts @hash_leng
+  private
+
+  def render_upload_data
+    @files = ExcelFile.all
+    render :action => "upload_data"
   end
 end

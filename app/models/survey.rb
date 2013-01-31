@@ -1,11 +1,56 @@
+# == Schema Information
+#
+# Table name: surveys
+#
+#  id             :integer          not null, primary key
+#  date_published :date
+#  desa_id        :integer
+#  start_time     :datetime
+#  end_time       :datetime
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  fishery_id     :integer
+#  fleet_observer :string(255)
+#  catch_scribe   :string(255)
+#  catch_measure  :string(255)
+#  admin_id       :integer
+#
+
 class Survey < ActiveRecord::Base
 	attr_accessible :date, :desa_id, :end_time, :fishery_id, :catch_measure,
-	:fleet_observer, :catch_scribe, :start_time, :user_id, :date_published
+	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer
 
-	belongs_to :user
+	belongs_to :admin
 	belongs_to :fishery
 	belongs_to :desa
 	has_many :landings
+
+	validates :date_published,
+		presence: true
+	validates :desa_id,
+		presence: true
+	validates :start_time,
+		presence: true
+	validates :end_time,
+		presence: true
+	validates :fishery_id,
+		presence: true
+	validates :fleet_observer,
+		presence: true
+	validates :catch_scribe,
+		presence: true
+	validates :catch_measure,
+		presence: true
+	validates :admin_id,
+		presence: true
+	validate :uniqueness_of_survey
+
+	def uniqueness_of_survey
+		# TODO: Is there a better way of doing this?
+		if Survey.where(self.attributes.slice(:date_published, :desa_id, :start_time, :end_time, :fishery_id, :start_time)).count != 0
+			errors.add(:base, "Survey has been uploaded already.")
+		end
+	end
 
 	def self.import_from_email(params,user_id)
 		params.flatten.each do |param|

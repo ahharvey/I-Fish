@@ -9,64 +9,108 @@
       <div class="nav-collapse collapse">
 
         <ul class="nav">
-
           <li>
-            <%= link_to "Home", root_path %>
+            <%= link_to home_icon, root_path, title: t("navbar.home")  %>
+          </li>
+          <li>
+            <%= link_to t("fisheries.title"), fisheries_path %>
           </li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Main Menu <b class="caret"></b></a>
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t("navbar.data") %><b class="caret"></b></a>
             <ul class="dropdown-menu">
-              <% if user_signed_in? %>
+              <% if admin_signed_in? || user_signed_in? %>
+                
                 <li>
-                  <%= link_to "Catches", catches_path %>
+                  <%= link_to t("surveys.title"), surveys_path %>
                 </li>
                 <li>
-                  <%= link_to "Desa", desas_path %>
-                </li>
-                <li>
-                  <%= link_to "Fish", fishes_path %>
-                </li>
-                <li>
-                  <%= link_to "Fisheries", fisheries_path %>
-                </li>
-                <li>
-                  <%= link_to "Gears", gears_path %>
-                </li>
-                <li>
-                  <%= link_to "Landings", landings_path %>
-                </li>
-                <li>
-                  <%= link_to "Surveys", surveys_path %>
-                </li>
-                <li>
-                  <%= link_to "User page", '/user_profile' %>
-                </li>
-                <li>
-                  <%= link_to "Fishery profile", '/fishery_profile' %>
+                  <%= link_to t("logbooks.title"), logbooks_path %>
                 </li>
               <% end %>
             </ul>
           </li>
-
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t("navbar.reports") %><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% if admin_signed_in? || user_signed_in? %>
+                <li>
+                  <%= link_to t("navbar.user_profile"), '/user_profile' %>
+                </li>
+                <li>
+                  <%= link_to t("navbar.fishery_profile"), '/fishery_profile' %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+          <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t("navbar.settings") %><b class="caret"></b></a>
+            <ul class="dropdown-menu">
+              <% if admin_signed_in? || user_signed_in? %>
+                <li>
+                  <%= link_to t("users.title"), users_path %>
+                </li>
+                <li>
+                  <%= link_to t("admins.title"), admins_path %>
+                </li>
+                <li>
+                  <%= link_to t("desas.title"), desas_path %>
+                </li>
+                <li>
+                  <%= link_to t("fishes.title"), fishes_path %>
+                </li>
+                <li>
+                  <%= link_to t("gears.title"), gears_path %>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+          <% if admin_signed_in? %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown"><%= t("navbar.panel") %><b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                
+                <li>
+                  <%= link_to "Admins", panel_admins_path %>
+                </li>
+                <li>
+                  <%= link_to "Users", panel_users_path %>
+                </li>
+                <li>
+                  <%= link_to "Roles", panel_roles_path %>
+                </li>
+                
+              </ul>
+            </li>
+          <% end %>
         </ul>
 
-        <% if user_signed_in? %>
+        <% if admin_signed_in? %>
           <%= link_to home_upload_data_path, class: "btn btn-danger" do %>
             <%= upload_icon %>
-            Import
+            <%= t("navbar.upload") %>
           <% end %>
         <% end %>
         
         <ul class="nav secondary-nav" style="float: right">
           <p class="navbar-text pull-right">
-            <% if user_signed_in? %>
-              <%= image_tag current_user.avatar_url(:thumb), width: "30px", height: "30px" if current_user.avatar? %>
-              <%= current_user.name %>
-              <%= link_to edit_profile_icon, edit_user_registration_path, class: 'navbar-link', title: "Edit profile" %> |
-              <%= link_to logout_icon, destroy_user_session_path, method: :delete, class: 'navbar-link', title: "Sign out" %>
+            
+            <%= link_to_unless_current flag_en, {locale: "en"}, {title: "English"} %>
+            <%= link_to_unless_current flag_id, {locale: "id"}, {title: "Bahasa Indonesia"} %>
+
+            <% if admin_signed_in? || user_signed_in? %>
+            
+              <%= image_tag @currently_signed_in.avatar_url(:thumb), width: "30px", height: "30px" if @currently_signed_in.avatar? %>
+              <%= @currently_signed_in.name %>
+              <% if admin_signed_in? %>
+                <%= link_to edit_profile_icon, edit_admin_registration_path, class: 'navbar-link', title: t("devise.edit") %> |
+                <%= link_to logout_icon, destroy_admin_session_path, method: :delete, class: 'navbar-link', title: t("devise.signout") %>
+              <% else %>
+                <%= link_to edit_profile_icon, edit_user_registration_path, class: 'navbar-link', title: t("devise.edit") %> |
+                <%= link_to logout_icon, destroy_user_session_path, method: :delete, class: 'navbar-link', title: t("devise.signout") %>
+              <% end %>
             <% else %>
-              <%= link_to "Sign up", new_user_registration_path, class: 'navbar-link'  %> |
-              <%= link_to "Login", new_user_session_path, class: 'navbar-link'  %>
+              <%= link_to t("devise.signup"), new_user_registration_path, class: 'navbar-link'  %> |
+              <%= link_to t("devise.signin"), new_user_session_path, class: 'navbar-link'  %>
             <% end %>
           </p>
         </ul>

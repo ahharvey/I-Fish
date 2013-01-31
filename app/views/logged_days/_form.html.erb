@@ -1,0 +1,25 @@
+<%= simple_form_for(@logged_day) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :start_time %>
+    <%= f.input :end_time %>
+    <%= f.input :gear_time %>
+    <%= f.input :fuel %>
+    <%= f.input :sail %>
+    <%= f.input :net %>
+    <%= f.input :line %>
+    <%= f.input :quantity %>
+    <%= f.input :weight %>
+    <%= f.input :value %>
+    <%= f.input :condition %>
+    <%= f.input :moon %>
+    <%= f.association :fish %>
+    <%= f.association :graticule %>
+    <%= f.association :user %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

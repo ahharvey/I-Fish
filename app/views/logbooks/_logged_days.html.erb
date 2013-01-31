@@ -1,0 +1,48 @@
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= LoggedDay.human_attribute_name(:date) %></th>
+    <th><%= LoggedDay.human_attribute_name(:start_time) %></th>
+    <th><%= LoggedDay.human_attribute_name(:end_time) %></th>
+    <th><%= LoggedDay.human_attribute_name(:gear_time) %></th>
+    <th><%= LoggedDay.human_attribute_name(:graticule) %></th>
+    <th><%= LoggedDay.human_attribute_name(:fuel) %></th>
+    <th><%= LoggedDay.human_attribute_name(:sail) %></th>
+    <th><%= LoggedDay.human_attribute_name(:net) %></th>
+    <th><%= LoggedDay.human_attribute_name(:line) %></th>
+    <th><%= LoggedDay.human_attribute_name(:fish) %></th>
+    <th><%= LoggedDay.human_attribute_name(:quantity) %></th>
+    <th><%= LoggedDay.human_attribute_name(:weight) %></th>
+    <th><%= LoggedDay.human_attribute_name(:value) %></th>
+    <th><%= LoggedDay.human_attribute_name(:condition) %></th>
+    <th><%= LoggedDay.human_attribute_name(:moon) %></th>
+    <th></th>
+  </tr>
+
+	<% for logged_day in @logbook.logged_days.order("start_time ASC") %>
+
+		<tr>
+      <td><%= logged_day.start_time.to_date.strftime("%d") %></td>
+      <td><%= logged_day.start_time.to_s(:time) %></td>
+      <td><%= logged_day.end_time.to_s(:time) %></td>
+      <td><%= logged_day.gear_time %></td>
+      <td><%= logged_day.graticule %></td>
+      <td><%= logged_day.fuel %></td>
+      <td><%= logged_day.sail.yn %></td>
+      <td><%= logged_day.net.yn %></td>
+      <td><%= logged_day.line.yn %></td>
+      <td><%= link_to truncate(logged_day.fish.english_name, length: 28), logged_day.fish, title: logged_day.fish.english_name %></td>
+      <td><%= logged_day.quantity %></td>
+      <td><%= logged_day.weight %></td>
+      <td><%= logged_day.value %></td>
+      <td><%= logged_day.condition_as_text %></td>
+      <td><%= logged_day.moon_as_text %></td>
+      <td>
+          <%= link_to show_icon, logged_day %>
+          <%= link_to edit_icon, edit_logged_day_path(logged_day) %>
+          <%= link_to destroy_icon, logged_day, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+
+	<% end %>
+
+</table>

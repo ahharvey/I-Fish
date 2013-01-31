@@ -1,13 +1,41 @@
+
+Admin.delete_all
+Catch.delete_all
+Desa.delete_all
+District.delete_all
+Engine.delete_all
+ExcelFile.delete_all
+Fish.delete_all
+Fishery.delete_all
+Gear.delete_all
+Graticule.delete_all
+Landing.delete_all
+Logbook.delete_all
+LoggedDay.delete_all
+Office.delete_all
+Province.delete_all
+Role.delete_all
+Survey.delete_all
+User.delete_all
+VesselType.delete_all
+
+
 desa = Desa.create([
-  { name: "Ampenan", code: "001" },
-  { name: "Banka Banka", code: "002" },
-  { name: "Seraya", code: "003" },
-  { name: "Kasamba", code: "004" }
+  { name: "Ampenan", code: "001", lat: -8.583333, lng: 116.116667, district_id: 1},
+  { name: "Banka Banka", code: "002", lat: -8.747771, lng: 115.864595, district_id: 1 },
+  { name: "Seraya", code: "003", lat: -8.349155, lng: 115.682927, district_id: 2 },
+  { name: "Kasamba", code: "004", lat: -8.569655, lng: 115.433475, district_id: 2 }
 ]) 
 
 fishery = Fishery.create([
   { name: "Lombok Strait small pelagic", code: "LOM-PS" },
   { name: "Lombok Strait large pelagic", code: "LOM-PL" }
+]) 
+
+engine = Engine.create([
+  { name: "Outboard", code: "OB" },
+  { name: "Longtail", code: "LT" },
+  { name: "Inboard", code: "IB" }
 ]) 
 
 gear = Gear.create([
@@ -214,3 +242,69 @@ fish = Fish.create([
 	{ order: "", family: "", scientific_name: "Gracillia spp", fishbase_name: "", english_name: "Sea weeds", indonesia_name: "Rumput laut", code: "" },
 	{ order: "", family: "", scientific_name: "Aetomylaeus spp", fishbase_name: "", english_name: "Sea weeds", indonesia_name: "Rumput laut", code: "RJX" }
 ])
+
+province = Province.create([
+  { name: "NTB", code: "51" }
+])
+
+# Graticules
+graticule1 = Graticule.create({:code => "ASDF"})
+
+# Districts
+district1 = District.create(name: "District1", province_id: 1)
+district9 = District.create(name: "District Prawn", province_id: 1)
+
+# Offices
+office1 = Office.create(name: "Test office 1", district_id: district1.id)
+office2 = Office.create(name: "Test office 2", district_id: district9.id)
+
+# Roles
+role_public = Role.create(name: "public")
+role_staff = Role.create(name: "staff")
+role_supervisor = Role.create(name: "supervisor")
+role_admin = Role.create(name: "administrator")
+
+# Users
+desa1 = Desa.first
+user1 = desa1.users.create(name: "user1", email: "user1@fish.com", password: "password1", password_confirmation: "password1")
+
+# Administrators
+admin1 = office1.admins.create(email: "admin@fish.com",
+  name: "Admin Adminson",
+  office_id: office1.id,
+  password: "admin1",
+  password_confirmation: "admin1")
+
+admin_staff1 = Admin.create(email: "staff1@fish.com",
+	name: "staff1",
+	password: "staff1",
+	password_confirmation: "staff1",
+	office_id: office1.id)
+admin_staff1.roles.push role_staff
+admin_staff2 = Admin.create(email: "staff2@fish.com",
+	name: "staff2",
+	password: "staff2",
+	password_confirmation: "staff2",
+	office_id: office2.id)
+admin_staff2.roles.push role_staff
+
+admin_staff2 = Admin.create(email: "rm.sylvester@gmail.com",
+	name: "rmsylvester",
+	password: "Password1",
+	password_confirmation: "Password1",
+	office_id: office2.id)
+admin_staff2.roles.push role_staff
+
+admin_supervisor1 = Admin.create(email: "supervisor1@fish.Common",
+	name: "supervisor1",
+	password: "supervisor1",
+	password_confirmation: "supervisor1",
+	office_id: office1.id)
+admin_supervisor1.roles.push role_supervisor
+admin_supervisor2 = Admin.create(email: "supervisor2@fish.com",
+	name: "supervisor2",
+	password: "supervisor2",
+	password_confirmation: "supervisor2",
+	office_id: office2.id)
+admin_supervisor2.roles.push role_supervisor
+

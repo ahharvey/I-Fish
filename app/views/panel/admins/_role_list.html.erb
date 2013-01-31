@@ -1,0 +1,10 @@
+<div id="RoleList">
+  <ul>
+    <% @admin.roles.each do |role| %>
+      <li>
+				<%= role.name %>
+    		<%= link_to remove_icon, delete_role_panel_admin_path(@admin, :role=>role.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+      </li>
+    <% end %>
+  </ul>
+</div>

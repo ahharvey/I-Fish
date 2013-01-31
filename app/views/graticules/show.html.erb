@@ -1,0 +1,12 @@
+<% title t ".title" %>
+
+<dl class="dl-horizontal">
+  
+  <dt><%= Graticule.human_attribute_name(:code) %></dt>
+  <dd><%= @graticule.code %></dd>
+
+</dl>
+
+
+<%= link_to 'Edit', edit_graticule_path(@graticule) %> |
+<%= link_to 'Back', graticules_path %>

@@ -2,4 +2,204 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
+  admins:
+    title: "Admins"
+  catches:
+    title: "Catch Composition"
+    index:
+      title: "Catch Composition"
+    show:
+      title: "Catch Report"
+  desas:
+    title: "Villages"
+    index:
+      title: "Villages"
+    show:
+      title: "Village Report"
+    edit:
+      title: "Edit village"
+    new:
+      title: "New village"
+  engines:
+    title: "Engines"
+    index:
+      title: "Engines"
+    show:
+      title: "Engine Details"
+    edit:
+      title: "Edit engine"
+    new:
+      title: "New engine"
+  fisheries:
+    title: "Fisheries"
+    index:
+      title: "Fisheries"
+    show:
+      title: "Fishery Report"
+  fishes:
+    title: "Fish"
+    index:
+      title: "Fish"
+  gears:
+    title: "Gears"
+    index:
+      title: "Gears"
+  graticules:
+    title: "Graticules"
+    index:
+      title: "Graticules"
+    show:
+      title: "Graticule"
+    edit:
+      title: "Edit graticule"
+    new:
+      title: "New graticule"
+  landings:
+    title: "Landings"
+    index:
+      title: "Landings"
+    show:
+      title: "Landing Report"
+  logbooks:
+    title: "Logbooks"
+    index:
+      title: "Logbooks"
+    show:
+      title: "Logbook Report"
+  logged_days:
+    title: "Logged Days"
+    index:
+      title: "Logged Days"
+    show:
+      title: "Logged Day"
+  surveys:
+    title: "Landing Site Surveys"
+    index:
+      title: "Landing Site Surveys"
+    show:
+      title: "Landing Site Survey Report"
+  users:
+    title: "Users"
+  navbar:
+    home: "Home"
+    data: "Data"
+    reports: "Reports"
+    settings: "Settings"
+    user_profile: "User profile"
+    fishery_profile: "Fishery profile"
+    upload: "Import"
+    panel: "Panel"
+  devise:
+    signin: "Sign in"
+    signout: "Sign out"
+    edit: "Edit profile"
+    signup: "Sign up"
+  modal:
+    download:
+      survey:
+        form:
+          title: "Download Survey Forms"
+          text: "These forms are used to record landing site survey data."
+        spreadsheet:
+          title: "Download Survey Template"
+          text: "This spreadsheet is used to enter and submit landing site survey data."
+      logbook:
+        form:
+          title: "Download Logbook Form"
+          text: "This form is used by fishers to record their daily logbook."
+        spreadsheet:
+          title: "Download Logbook Template"
+          text: "This spreadsheet is used to enter and submit fishers' logbook data."
+  activerecord:
+    attributes:
+      catch:
+        fish_id: "Fish"
+        landing_id: "Landing"
+        length: "Length"
+        width: "Width"
+      desa:
+        name: "Name"
+        code: "Code"
+        lat: "Latitude"
+        lng: "Longitude"
+        district_id: "District"
+      district:
+        name: "Name"
+      engine:
+        name: "Name"
+        code: "Code"
+      fishery:
+        name: "Name"
+        code: "Code"
+      fish:
+        order: "Order"
+        family: "Family"
+        scientific_name: "Binomial name"
+        fishbase_name: "Fishbase name"
+        english_name: "English Name"
+        indonesia_name: "Indonesian Name"
+        code: "Code"
+      gear:
+        cat_ind: "Category"
+        cat_eng: "Category"
+        sub_cat_ind: "Sub-Category"
+        sub_cat_eng: "Sub-Category"
+        type_ind: "Type"
+        type_eng: "Type"
+        name: "Name"
+        alpha_code: "MMAF Code"
+        num_code: "Number"
+        fao_code: "FAO Code"
+        code: "Code"
+      landing:
+        power: "Power"
+        fishing_area: "Area"
+        vessel_ref: "Vessel number"
+        vessel_name: "Vessel name"
+        grid_square: "Grid"
+        engine: "Engine"
+        fuel: "Fuel"
+        sail: "Sail"
+        crew: "Crew"
+        value: "Value"
+        boat_size: "Boat size"
+        gear_id: "Gear"
+        survey_id: "Survey"
+        quantity: "Quantity"
+        weight: "Weight"
+        time_out: "Time dep"
+        time_in: "Time arr"
+        type: "Type"
+      logbook:
+        date: "Date"
+        user: "User"
+        admin: "Admin"
+      logged_day:
+        date: "Date"
+        start_time: "Time dep"
+        end_time:  "Time arr"
+        gear_time: "Gear hours"
+        graticule: "Graticule"
+        fuel: "Fuel"
+        sail: "Sail"
+        net: "Net"
+        line: "Line"
+        fish: "Species"
+        quantity: "Quantity"
+        weight: "Weight"
+        value: "Value"
+        condition: "Conditions"
+        moon: "Moon"
+      office:
+        name: "Name"
+        district_id: "District"
+      survey:
+        date_published: "Date"
+        desa_id: "Village"
+        start_time: "Start time"
+        end_time: "End time"
+        fishery_id: "Fishery"
+        fleet_observer: "Fleet observer"
+        catch_scribe: "Catch scribe"
+        catch_measure: "Catch measurer"
+        admin_id: "Admin"

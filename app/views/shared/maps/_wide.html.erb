@@ -1,0 +1,25 @@
+<%= gmaps(	map_options: { 	
+				id: defined?(id) ? id : "map",
+				container_class: "map_container_wide",
+				class: "gmaps4rails_map_wide",
+				type: "TERRAIN", 
+				center_latitude: defined?(latitude) ? latitude : 0 ,
+				center_longitude: defined?(longitude) ? longitude : 0 ,
+				auto_adjust: defined?(auto_adjust) ? auto_adjust : true, 
+				auto_zoom: defined?(auto_zoom) ? auto_zoom : true, 
+				zoom: 10,
+				minZoom: 1,
+				mapTypeControl: defined?(controls) ? controls : true
+			},
+          	markers: { 
+				data: @placemarks,
+				options: {
+					do_clustering: true,
+					clusterer_gridSize: 50,
+					clusterer_maxZoom: 10,
+					clusterer_minZoom: false
+				}
+			},
+			last_map: defined?(last_map) ? last_map : true
+			) 
+%>
