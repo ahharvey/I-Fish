@@ -11,6 +11,7 @@
     <%= render partial: "layouts/navbar" %>
     <div class="container" style="margin-top:50px">
       <%= render partial: "shared/flash_messages" %>
+      <%= render partial: "shared/model_error_messages" %>
       <div class="page-header">
   	    <h1><%= yield (:title) || "FishStat" %></h1>
       </div><!-- page-header -->
