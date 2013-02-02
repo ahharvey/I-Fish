@@ -38,4 +38,7 @@ group :development do
   gem 'debugger'
   gem 'annotate'
   gem 'hirb'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+  gem 'meta_request'
 end
