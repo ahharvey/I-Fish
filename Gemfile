@@ -32,9 +32,9 @@ end
 
 group :development do
   # Debugging
-  gem 'pry'
-  gem 'pry-debugger'
-  gem 'pry-stack_explorer'
+  #gem 'pry'
+  #gem 'pry-debugger'
+  #gem 'pry-stack_explorer'
   gem 'debugger'
   gem 'annotate'
   gem 'hirb'
