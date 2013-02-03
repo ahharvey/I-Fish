@@ -22,6 +22,8 @@ class Fish < ActiveRecord::Base
   has_many :catches, dependent: :destroy
   has_many :logged_days
   has_many :landings
+  has_many :provinces, through: :landings
+  has_many :districts, through: :landings
 
   validates :code,
   	presence: true

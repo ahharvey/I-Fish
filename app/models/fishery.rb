@@ -13,8 +13,10 @@ class Fishery < ActiveRecord::Base
   attr_accessible :code, :name
   
   has_many :surveys, dependent: :destroy
+  has_many :landings, through: :surveys
   has_many :logbooks
   has_many :provinces, through: :surveys
+  has_many :districts, through: :surveys
 
   validates :name,
   	presence: true

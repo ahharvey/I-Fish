@@ -27,7 +27,7 @@
 
 class Landing < ActiveRecord::Base
 	attr_accessible :boat_size, :crew, :fuel, :gear_id, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
-	:power, :graticule_id, :engine_id, :survey_id, :fish_id, :importing?
+	:power, :graticule_id, :engine_id, :survey_id, :fish_id, :importing?, :cpue
 
 	set_inheritance_column nil
 
@@ -36,6 +36,9 @@ class Landing < ActiveRecord::Base
 	belongs_to :graticule
 	belongs_to :engine
 	belongs_to :fish
+	has_one :district, through: :survey
+	has_one :fishery, through: :survey
+	has_one :desa, through: :survey
 
 	has_many :catches, dependent: :destroy
 

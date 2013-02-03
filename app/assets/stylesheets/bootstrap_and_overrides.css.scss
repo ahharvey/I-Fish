@@ -74,3 +74,15 @@ $dropdownLinkBackgroundActive: $USAIDlblue;
 .modal-icon {float: left; width:60px; font-size:40px; color:$USAIDlblue; text-align:center; }
 .modal-text {margin-left:80px;}
 .modal-text a:hover {color:$black; background-color:$USAIDred;}
+
+.rotated_cell { height:50px; vertical-align:bottom!important; margin-bottom:5px!important;}
+.rotate_text { 
+  -moz-transform:rotate(-45deg); 
+  -moz-transform-origin: top left;
+  -webkit-transform: rotate(-45deg);
+  -webkit-transform-origin: top left;
+  -o-transform: rotate(-45deg);
+  -o-transform-origin:  top left;
+  position:relative;
+  top:20px;
+}
