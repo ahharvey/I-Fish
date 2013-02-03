@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130202125249) do
+ActiveRecord::Schema.define(:version => 20130203184002) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -132,7 +132,6 @@ ActiveRecord::Schema.define(:version => 20130202125249) do
     t.string   "fuel"
     t.string   "sail"
     t.string   "crew"
-    t.string   "value"
     t.integer  "boat_size"
     t.integer  "gear_id"
     t.integer  "survey_id"
@@ -147,6 +146,7 @@ ActiveRecord::Schema.define(:version => 20130202125249) do
     t.integer  "graticule_id"
     t.integer  "fish_id"
     t.integer  "cpue"
+    t.integer  "value"
   end
 
   add_index "landings", ["fish_id"], :name => "index_landings_on_fish_id"

@@ -1,1 +1,12 @@
-APP_CONFIG = YAML.load_file(Rails.root.join("config/credentials.yml"))[Rails.env]
+if Rails.env.development?
+	MAILER_CONFIG = YAML.load_file(Rails.root.join("config/credentials.yml"))[Rails.env]['mailer']
+	MAILER_ADDRESS = MAILER_CONFIG['address']
+	MAILER_USERNAME = MAILER_CONFIG['username']
+	MAILER_PASSWORD = MAILER_CONFIG['password']
+	MAILER_SERVER = MAILER_CONFIG['server']
+else
+	MAILER_ADDRESS = ENV['MAILER_ADDRESS']
+	MAILER_USERNAME = ENV['MAILER_USERNAME']
+	MAILER_PASSWORD = ENV['MAILER_PASSWORD']
+	MAILER_SERVER = ENV['MAILER_PASSWORD']
+end

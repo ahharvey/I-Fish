@@ -78,7 +78,7 @@ class FisheriesController < InheritedResources::Base
         surveys = @fisheries.surveys.select{ |s| s.date_published.year == y && s.date_published.month == m}.each do |s|
           landings.concat(s.landings)
         end
-        res = landings.map{ |l| l.value }.inject(0, :+)
+        res = landings.map{ |l| l.value/ ((l.time_in.to_time - l.time_out.to_time) / 1.hour) }.inject(0, :+)
         res = res / landings.count if landings.count > 0
         month_counts.push res
       end
