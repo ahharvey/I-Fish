@@ -1,0 +1,26 @@
+<% title t ".title" %>
+
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Name</th>
+    <th>Code</th>
+    <th></th>
+    <th></th>
+  </tr>
+
+<% @engines.each do |engine| %>
+  <tr>
+    <td><%= engine.name %></td>
+    <td><%= engine.code %></td>
+    <td>
+      <%= link_to show_icon, engine %>
+      <%= link_to edit_icon, edit_engine_path(engine) %>
+      <%= link_to destroy_icon, engine, method: :delete, data: { confirm: 'Are you sure?' } %>
+    </td>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Engine', new_engine_path %>

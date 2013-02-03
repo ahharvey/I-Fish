@@ -1,0 +1,7 @@
+<% if @model %>
+  <% @model.errors.each do |type, message| %>
+    <div class="alert alert-<%= twitterized_type(type) %> fade in" data-alert="alert" style="margin-top:17px">
+      <p><%= message %></p>
+    </div>
+  <% end %>
+<% end %>

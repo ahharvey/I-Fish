@@ -1,3 +1,19 @@
+# == Schema Information
+#
+# Table name: fishes
+#
+#  id              :integer          not null, primary key
+#  order           :string(255)
+#  family          :string(255)
+#  scientific_name :string(255)
+#  fishbase_name   :string(255)
+#  english_name    :string(255)
+#  indonesia_name  :string(255)
+#  code            :string(255)
+#  created_at      :datetime         not null
+#  updated_at      :datetime         not null
+#
+
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
 
 one:

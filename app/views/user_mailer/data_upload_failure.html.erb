@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Excel spreadsheet upload failure</h1>
+    <p>
+      Upload of file <%= @excel_file.filename %> failed with the following errors:<br/>
+    </p>
+    <% @excel_file.errors.each do |type, message| %>
+      <p>
+        <%= message %>
+      </p>
+    <% end %>
+  </body>
+</html>

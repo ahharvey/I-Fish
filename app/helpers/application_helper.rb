@@ -23,9 +23,29 @@ module ApplicationHelper
       type.to_s
     end
   end
+
+  def current_url(new_params)
+    url_for params.merge(new_params)
+  end
   
+  def home_icon
+    content_tag(:i, "", class: 'icon-home icon-white')
+  end
+
   def upload_icon
     content_tag(:i, "", class: 'icon-upload-alt icon-white')
+  end
+
+  def download_icon
+    content_tag(:i, "", class: 'icon-download-alt')
+  end
+
+  def email_icon
+    content_tag(:i, "", class: 'icon-envelope-alt')
+  end
+
+  def addressbook_icon
+    content_tag(:i, "", class: 'icon-book')
   end
 
   def edit_profile_icon
@@ -37,7 +57,7 @@ module ApplicationHelper
   end
 
   def show_icon
-    content_tag(:i, "", class: 'icon-paper-clip')
+    content_tag(:i, "", class: 'icon-eye-open')
   end
 
   def edit_icon
@@ -47,5 +67,31 @@ module ApplicationHelper
   def destroy_icon
     content_tag(:i, "", class: 'icon-trash')
   end
+
+  def add_icon
+    content_tag(:i, "", class: 'icon-plus')
+  end
+
+  def excel_icon
+    content_tag(:i, "", class: 'icon-table')
+  end
+
+  def doc_icon
+    content_tag(:i, "", class: 'icon-file')
+  end
+
+  def remove_icon
+    content_tag(:i, "", class: 'icon-remove')
+  end
+
+  def flag_en
+    content_tag(:img, "", src: "blank.gif", class: "flag flag-gb", alt: "English")
+  end
+
+  def flag_id
+    content_tag(:img, "", src: "blank.gif", class: "flag flag-id", alt: "Indonesian")
+  end
+
   
+
 end

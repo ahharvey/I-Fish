@@ -1,0 +1,26 @@
+<% title t ".title" %>
+
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Province.human_attribute_name(:code) %></th>
+    <th><%= Province.human_attribute_name(:name) %></th>
+    <th><%= Province.human_attribute_name(:alpha_code) %></th>
+    <th></th>
+  </tr>
+  <% @provinces.each do |province| %>
+    <tr>
+      <td><%= province.code %></td>
+      <td><%= province.name %></td>
+      <td><%= province.alpha_code %></td>
+      <td>
+        <%= link_to show_icon, province %>
+        <%= link_to edit_icon, edit_province_path(province) %>
+        <%= link_to destroy_icon, province, method: :delete, data: { confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+
+<%= link_to 'New Province', new_province_path %>

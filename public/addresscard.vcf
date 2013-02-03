@@ -1,0 +1,10 @@
+BEGIN:VCARD
+VERSION:3.0
+PRODID:-//Apple Inc.//Mac OS X 10.8.2//EN
+N:;;;;
+FN:FishStat Staging
+ORG:FishStat Staging;
+EMAIL;type=INTERNET;type=WORK;type=pref:cecf547baa89408a3d5d@cloudmailin.net
+X-ABShowAs:COMPANY
+X-ABUID:FFDDE52C-C3D1-4BBD-B531-D5A2C9CF6741:ABPerson
+END:VCARD

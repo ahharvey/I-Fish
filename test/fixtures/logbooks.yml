@@ -1,0 +1,48 @@
+# == Schema Information
+#
+# Table name: logbooks
+#
+#  id         :integer          not null, primary key
+#  date       :date
+#  admin_id   :integer
+#  user_id    :integer
+#  created_at :datetime         not null
+#  updated_at :datetime         not null
+#  fishery_id :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  date: 2013-01-10
+  stime: 2013-01-10 10:05:51
+  ttime: 2013-01-10 10:05:51
+  optime: 2013-01-10 10:05:51
+  fuel: 1
+  sail: MyString
+  net: MyString
+  line: MyString
+  fish: 
+  quantity: 1
+  weight: 1
+  value: 1
+  conditions: 1
+  moon: 1
+  user: 
+
+two:
+  date: 2013-01-10
+  stime: 2013-01-10 10:05:51
+  ttime: 2013-01-10 10:05:51
+  optime: 2013-01-10 10:05:51
+  fuel: 1
+  sail: MyString
+  net: MyString
+  line: MyString
+  fish: 
+  quantity: 1
+  weight: 1
+  value: 1
+  conditions: 1
+  moon: 1
+  user: 

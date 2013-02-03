@@ -1,0 +1,14 @@
+<% title t ".title" %>
+
+<dl class="dl-horizontal">
+  
+  <dt><%= Engine.human_attribute_name(:code) %></dt>
+  <dd><%= @engine.code %></dd>
+
+  <dt><%= Engine.human_attribute_name(:name) %></dt>
+  <dd><%= @engine.name %></dd>
+
+</dl>
+
+<%= link_to 'Edit', edit_engine_path(@engine) %> |
+<%= link_to 'Back', engines_path %>

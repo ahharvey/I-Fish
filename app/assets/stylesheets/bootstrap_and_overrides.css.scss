@@ -15,7 +15,7 @@ $USAIDred: #C2113A;
 $USAIDblack: #000;
 $USAIDdgrey: #666666;
 $USAIDlgrey: #DDDDDD;
-$USAIDlblue: #336799;
+$USAIDlblue: #A5BAE0;
 
 $navbarBackground: $USAIDblue;
 $navbarBackgroundHighlight: lighten($USAIDblue, 20%);
@@ -23,8 +23,66 @@ $navbarBackgroundHighlight: lighten($USAIDblue, 20%);
 $navbarLinkColor: $USAIDlgrey;
 $navbarLinkColorHover: $USAIDlgrey;
 
+$dropdownLinkBackgroundHover: $USAIDlblue;
+$dropdownLinkBackgroundActive: $USAIDlblue;
+
 @import "bootstrap";
 
 @import "bootstrap-responsive";
 
 @import "font-awesome";
+
+#map img { 
+  max-width: none;
+}
+#map label { 
+  width: auto; display:inline; 
+} 
+
+.map_container_wide {
+  height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+.gmaps4rails_map_wide {
+	 height: 400px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.flag {
+  width: 16px;
+  height: 11px;
+  background:url(flags.png) no-repeat
+}
+
+.flag.flag-gb {background-position: -16px 0}
+.flag.flag-id {background-position: 0 -11px}
+
+.panel {border: 1px #ccc solid; padding:10px; @include border-radius(5px);}
+.new {background-color: $USAIDred; transition: background-color 1s linear; }
+
+.typeahead .active > a, .typeahead .active > a:hover { background-color: $USAIDred; }
+
+
+.modal-icon {float: left; width:60px; font-size:40px; color:$USAIDlblue; text-align:center; }
+.modal-text {margin-left:80px;}
+.modal-text a:hover {color:$black; background-color:$USAIDred;}
+
+.rotated_cell { height:50px; vertical-align:bottom!important; margin-bottom:5px!important;}
+.rotate_text { 
+  -moz-transform:rotate(-45deg); 
+  -moz-transform-origin: top left;
+  -webkit-transform: rotate(-45deg);
+  -webkit-transform-origin: top left;
+  -o-transform: rotate(-45deg);
+  -o-transform-origin:  top left;
+  position:relative;
+  top:20px;
+}

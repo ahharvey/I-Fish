@@ -23,4 +23,3 @@ production:
 test:
   <<: *default
   database: xls_test
-

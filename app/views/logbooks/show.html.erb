@@ -1,0 +1,43 @@
+<% title t ".title" %>
+
+<%= render partial: "shared/api_links" %>
+
+<div class="pull-right">
+  <dl class="dl-horizontal">
+    <dt>Admin:</dt>
+    <dd>
+      <%= link_to image_tag(@logbook.admin.avatar.url(:thumb), 
+        width: "30px", 
+        height: "30px", 
+        title: @logbook.admin.name, 
+        alt: @logbook.admin.name),
+        @logbook.admin %>
+    </dd>
+  </dl>
+</div>
+
+<dl class="dl-horizontal">
+
+  <dt>User:</dt>
+  <dd>
+    <%= link_to image_tag(@logbook.user.avatar.url(:thumb), 
+      width: "30px", 
+      height: "30px", 
+      title: @logbook.user.name, 
+      alt: @logbook.user.name), 
+      @logbook.user %>
+  </dd>
+
+  <dt>Date:</dt>
+  <dd><%= @logbook.date.strftime("%B %Y") %></dd>
+  
+
+</dl>
+
+
+
+<%= render partial: "logbooks/logged_days" %>
+
+
+<%= link_to 'Edit', edit_logbook_path(@logbook) %> |
+<%= link_to 'Back', logbooks_path %>

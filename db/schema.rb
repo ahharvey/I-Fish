@@ -11,8 +11,37 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121208181736) do
+ActiveRecord::Schema.define(:version => 20130203184002) do
 
+  create_table "admins", :force => true do |t|
+    t.string   "email",                  :default => "",    :null => false
+    t.string   "encrypted_password",     :default => "",    :null => false
+    t.string   "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.integer  "sign_in_count",          :default => 0
+    t.datetime "current_sign_in_at"
+    t.datetime "last_sign_in_at"
+    t.string   "current_sign_in_ip"
+    t.string   "last_sign_in_ip"
+    t.boolean  "god_mode",               :default => false
+    t.boolean  "reports_only",           :default => false
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
+    t.string   "name"
+    t.integer  "office_id"
+    t.string   "avatar"
+  end
+
+  add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
+  add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
+
+  create_table "admins_roles", :id => false, :force => true do |t|
+    t.integer "admin_id"
+    t.integer "role_id"
+  end
+
+  add_index "admins_roles", ["admin_id", "role_id"], :name => "by_admin_and_role", :unique => true
 
   create_table "catches", :force => true do |t|
     t.integer  "fish_id"
@@ -26,6 +55,23 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
   create_table "desas", :force => true do |t|
     t.string   "name"
     t.string   "code"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.float    "lat"
+    t.float    "lng"
+    t.integer  "district_id"
+  end
+
+  create_table "districts", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "province_id"
+  end
+
+  create_table "engines", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
   end
@@ -36,7 +82,7 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.string   "file"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-    t.integer  "user_id"
+    t.integer  "admin_id"
   end
 
   create_table "fisheries", :force => true do |t|
@@ -73,17 +119,19 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.datetime "updated_at",  :null => false
   end
 
+  create_table "graticules", :force => true do |t|
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
   create_table "landings", :force => true do |t|
     t.string   "power"
-    t.string   "fishing_area"
     t.string   "vessel_ref"
     t.string   "vessel_name"
-    t.string   "grid_square"
-    t.string   "engine"
     t.string   "fuel"
     t.string   "sail"
     t.string   "crew"
-    t.string   "value"
     t.integer  "boat_size"
     t.integer  "gear_id"
     t.integer  "survey_id"
@@ -94,11 +142,85 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.string   "type"
+    t.integer  "engine_id"
+    t.integer  "graticule_id"
+    t.integer  "fish_id"
+    t.integer  "cpue"
+    t.integer  "value"
   end
+
+  add_index "landings", ["fish_id"], :name => "index_landings_on_fish_id"
+
+  create_table "logbooks", :force => true do |t|
+    t.date     "date"
+    t.integer  "admin_id"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.integer  "fishery_id"
+  end
+
+  add_index "logbooks", ["admin_id"], :name => "index_logbooks_on_admin_id"
+  add_index "logbooks", ["fishery_id"], :name => "index_logbooks_on_fishery_id"
+  add_index "logbooks", ["user_id"], :name => "index_logbooks_on_user_id"
+
+  create_table "logged_days", :force => true do |t|
+    t.datetime "start_time"
+    t.datetime "end_time"
+    t.integer  "gear_time"
+    t.integer  "fuel"
+    t.boolean  "sail"
+    t.boolean  "net"
+    t.boolean  "line"
+    t.integer  "quantity"
+    t.integer  "weight"
+    t.integer  "value"
+    t.integer  "condition"
+    t.integer  "moon"
+    t.integer  "fish_id"
+    t.integer  "graticule_id"
+    t.integer  "logbook_id"
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.integer  "crew"
+  end
+
+  add_index "logged_days", ["fish_id"], :name => "index_logged_days_on_fish_id"
+  add_index "logged_days", ["graticule_id"], :name => "index_logged_days_on_graticule_id"
+  add_index "logged_days", ["logbook_id"], :name => "index_logged_days_on_logbook_id"
+
+  create_table "offices", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
+    t.integer  "district_id"
+  end
+
+  create_table "provinces", :force => true do |t|
+    t.string   "name"
+    t.integer  "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+    t.string   "alpha_code"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  add_index "roles", ["name"], :name => "index_roles_on_name", :unique => true
+
+  create_table "roles_users", :id => false, :force => true do |t|
+    t.integer "role_id"
+    t.integer "user_id"
+  end
+
+  add_index "roles_users", ["user_id", "role_id"], :name => "by_user_and_role", :unique => true
 
   create_table "surveys", :force => true do |t|
     t.date     "date_published"
-    t.integer  "user_id"
     t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
@@ -108,6 +230,7 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.string   "fleet_observer"
     t.string   "catch_scribe"
     t.string   "catch_measure"
+    t.integer  "admin_id"
   end
 
   create_table "users", :force => true do |t|
@@ -132,6 +255,7 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
     t.string   "authentication_token"
     t.datetime "created_at",                             :null => false
     t.datetime "updated_at",                             :null => false
+    t.integer  "desa_id"
     t.string   "avatar"
   end
 
@@ -140,5 +264,12 @@ ActiveRecord::Schema.define(:version => 20121208181736) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+
+  create_table "vessel_types", :force => true do |t|
+    t.string   "name"
+    t.string   "code"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
 end

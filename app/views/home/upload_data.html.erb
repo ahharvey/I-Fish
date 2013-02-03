@@ -7,7 +7,24 @@
 		  <%= upload_icon %>
 		  Upload
     <% end %>
+    <%= link_to "mailto:#{MAILER_ADDRESS}", class: "btn btn-info" do %>
+      <%= email_icon %>
+      Submit via email
+    <% end %>
+
+    <%= link_to "/addresscard.vcf", class: "btn" do %>
+      <%= addressbook_icon %>
+      Add to Addressbook
+    <% end %>
+    <%= link_to "#", class: "btn", data: { toggle: "modal", target: "#templates_modal" } do %>
+      <%= download_icon %>
+      Download Templates
+    <% end %>
+
+    
   <% end %>
+  
+  
 </div>
 
 
@@ -20,7 +37,7 @@
 
   <% @files.each do |file| %>
     <tr>
-      <td><%= file.filename %></td>
+      <td><%= link_to file.filename, file %></td>
       <td><%= file.filesize %></td>
     </tr>
   <% end %>
@@ -28,3 +45,4 @@
 
 <br />
 
+<%= render partial: 'home/templates_modal' %>

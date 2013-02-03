@@ -1,13 +1,143 @@
-<p>
-  <b>Name:</b>
-  <%= @fishery.name %>
-</p>
+<% title t ".title" %>
 
-<p>
-  <b>Code:</b>
-  <%= @fishery.code %>
-</p>
+<%= render partial: "shared/api_links" %>
+
+<div class="container">
+<div class="row">
+  <p>
+    <b>Name:</b>
+    <%= @fishery.name %>
+  </p>
+
+  <p>
+    <b>Code:</b>
+    <%= @fishery.code %>
+  </p>
+</div>
+<div class="row">
+  <form class="form-inline" id="graph_options">
+    <%= text_field_tag "cpe_date_from", @date_from, class: "span2" %>
+    <%= text_field_tag "cpe_date_to", @date_to, class: "span2" %>
+    <button class="btn" id="cpe_btn_refresh">Refresh</button>
+  </form>
+</div>
+<div class="row">
+  <div id="graph_catch_per_effort_container"></div>
+  <script type="text/javascript">
+  	function update_catch_effort(){
+  		console.log("Updating chart");
+  		params = {
+  			method: 'catch_per_effort',
+  			date_from: $('#cpe_date_from').val(),
+  			date_to: $('#cpe_date_to').val(),
+  		}
+
+  		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
+  			console.log(data);
+  			render_chart('graph_catch_per_effort_container','Catch per unit effort', 'av. kg / person / hour', '', 'line', data.col_headers, data.month_counts);
+  		}, "json");
+  	};
+
+  	$(function () {
+  		// Event handlers
+  		$('#cpe_btn_refresh').click(function(){
+  			update_catch_effort();
+  		});
+
+      // Initialise date picker
+      $("#cpe_date_from").datepicker();
+      $("#cpe_date_to").datepicker();
 
 
-<%= link_to 'Edit', edit_fishery_path(@fishery) %> |
-<%= link_to 'Back', fisheries_path %>
+  		// Load chart with default values
+  		update_catch_effort();
+  	});
+  </script>
+
+</div>
+<div class="row">
+  <form class="form-inline" id="graph_length_frequency_options">
+    <%= text_field_tag "lf_date_from", @date_from, class: "span2" %>
+    <%= text_field_tag "lf_date_to", @date_to, class: "span2" %>
+    <button class="btn" id="btn_lf_refresh">Refresh</button>
+  </form>
+</div>
+<div class="row">
+  <div id="graph_length_frequency_container"></div>
+  <script type="text/javascript">
+  	function update_length_frequency(){
+  		params = {
+  			method: 'length_frequency',
+        date_from: $('#lf_date_from').val(),
+        date_to: $('#lf_date_to').val(),
+  		}
+  		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
+  			console.log(data);
+  			render_chart('graph_length_frequency_container', 'Length Frequency', 'Frequency', 'Size Class (cm)', 'column', data.col_headers, data.length_counts);
+  		}, "json");
+  	};
+
+  	$(function () {
+      // Event handlers
+      $('#btn_lf_refresh').click(function(){
+        update_length_frequency();
+      });
+
+      // Initialise date pickers
+      $("#lf_date_from").datepicker();
+      $("#lf_date_to").datepicker();
+
+  		// Load chart with default values
+  		update_length_frequency();
+  	});
+  </script>
+
+</div>
+  
+<div class="row">
+  <form class="form-inline" id="graph_options">
+    <%= text_field_tag "val_date_from", @date_from, class: "span2" %>
+    <%= text_field_tag "val_date_to", @date_to, class: "span2" %>
+    <button class="btn" id="val_btn_refresh">Refresh</button>
+  </form>
+</div>
+<div class="row">
+  <div id="graph_val_container"></div>
+  <script type="text/javascript">
+    function update_value(){
+      console.log("Updating chart");
+      params = {
+        method: 'value',
+        date_from: $('#val_date_from').val(),
+        date_to: $('#val_date_to').val(),
+      }
+
+      $.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
+        console.log(data);
+        render_chart('graph_value_container','Value per Hour', 'IDR', '', 'line', data.col_headers, data.month_counts);
+      }, "json");
+    };
+
+    $(function () {
+      // Event handlers
+      $('#val_btn_refresh').click(function(){
+        update_value();
+      });
+
+      // Initialise date picker
+      $("#val_date_from").datepicker();
+      $("#val_date_to").datepicker();
+
+
+      // Load chart with default values
+      update_value();
+    });
+  </script>
+
+</div>
+
+  <div class="row">
+    <%= link_to 'Edit', edit_fishery_path(@fishery) %> |
+    <%= link_to 'Back', fisheries_path %>
+  </div>
+</div>

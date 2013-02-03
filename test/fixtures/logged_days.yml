@@ -1,0 +1,60 @@
+# == Schema Information
+#
+# Table name: logged_days
+#
+#  id           :integer          not null, primary key
+#  start_time   :datetime
+#  end_time     :datetime
+#  gear_time    :integer
+#  fuel         :integer
+#  sail         :boolean
+#  net          :boolean
+#  line         :boolean
+#  quantity     :integer
+#  weight       :integer
+#  value        :integer
+#  condition    :integer
+#  moon         :integer
+#  fish_id      :integer
+#  graticule_id :integer
+#  logbook_id   :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  crew         :integer
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  start_time: 2013-01-10 19:13:24
+  end_time: 2013-01-10 19:13:24
+  gear_time: 1
+  fuel: 1
+  sail: false
+  net: false
+  line: false
+  quantity: 1
+  weight: 1
+  value: 1
+  condition: MyString
+  moon: MyString
+  fish: 
+  graticule: 
+  user: 
+
+two:
+  start_time: 2013-01-10 19:13:24
+  end_time: 2013-01-10 19:13:24
+  gear_time: 1
+  fuel: 1
+  sail: false
+  net: false
+  line: false
+  quantity: 1
+  weight: 1
+  value: 1
+  condition: MyString
+  moon: MyString
+  fish: 
+  graticule: 
+  user: 
