@@ -103,7 +103,7 @@
             <% if admin_signed_in? || user_signed_in? %>
             
               <%= image_tag @currently_signed_in.avatar_url(:thumb), width: "30px", height: "30px" if @currently_signed_in.avatar? %>
-              <%= @currently_signed_in.name %>
+              <%= link_to @currently_signed_in.name, @currently_signed_in %>
               <% if admin_signed_in? %>
                 <%= link_to edit_profile_icon, edit_admin_registration_path, class: 'navbar-link', title: t("devise.edit") %> |
                 <%= link_to logout_icon, destroy_admin_session_path, method: :delete, class: 'navbar-link', title: t("devise.signout") %>

@@ -18,10 +18,12 @@
 #
 
 class Gear < ActiveRecord::Base
+  default_scope order('num_code ASC')
   attr_accessible :alpha_code, :cat_eng, :cat_ind, :fao_code, :name, :num_code, :sub_cat_eng, :sub_cat_ind, :type_eng, :type_ind
 
   has_many :landings, dependent: :destroy
   has_many :provinces, through: :landings
   has_many :districts, through: :landings
+  has_many :fisheries, through: :landings
 
 end

@@ -9,6 +9,7 @@ gem 'skeleton-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'
+gem 'kaminari'
 
 gem 'devise'
 gem 'cancan'

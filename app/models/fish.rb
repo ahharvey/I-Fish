@@ -15,6 +15,7 @@
 #
 
 class Fish < ActiveRecord::Base
+  default_scope order('fishes.order ASC, family ASC, scientific_name ASC')
   set_table_name "fishes"
 
   attr_accessible :code, :english_name, :family, :fishbase_name, :indonesia_name, :order, :scientific_name
@@ -24,6 +25,7 @@ class Fish < ActiveRecord::Base
   has_many :landings
   has_many :provinces, through: :landings
   has_many :districts, through: :landings
+  has_many :fisheries, through: :landings
 
   validates :code,
   	presence: true
@@ -35,5 +37,8 @@ class Fish < ActiveRecord::Base
   	presence: true
   validates :english_name,
   	presence: true
+
+  
+
 
 end

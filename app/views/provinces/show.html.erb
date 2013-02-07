@@ -1,20 +1,28 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links" %>
+<%= render partial: "shared/api_links", :locals => { files: true } %>
+
+Select report year: <%= select_year(2013) %>
 
 <h5>Effort by Gear (kg per person per hour)</h5>
 <table class="table table-striped table-condensed">
   <tr>
-    <th><%= Fishery.human_attribute_name(:name) %></th>
-    <% for gear in @province.gears.uniq %>
-      <th class="rotated_cell"><div class="rotate_text"><%= link_to gear.alpha_code, gear, title: gear.name %></div></th>
+    <th><%= Gear.human_attribute_name(:name) %></th>
+    <% for fishery in @fisheries %>
+      <th class="rotated-cell">
+        <div class="rotate-text">
+          <%= link_to fishery.code, fishery, title: fishery.name %>
+        </div>
+      </th>
     <% end %>
   </tr>
-  <% for fishery in @province.fisheries.uniq %>
+  <% for gear in @gears %>
     <tr>
-      <td><%= fishery.name %></td>
-      <% for gear in @province.gears.uniq %>
-        <td><%= gear.landings.average(:cpue).round(2) %></td>
+      <td><%= link_to gear.name, gear %></td>
+      <% for fishery in @fisheries %>
+        <td class="data-cell">
+          <%= @fishery_av_cpue_by_gears[[fishery.id, fishery.name, gear.id]] || "-" %>
+        </td>
       <% end %>
     </tr>
   <% end %>
@@ -26,16 +34,22 @@
 <h5>Effort by Species (kg per person per hour)</h5>
 <table class="table table-striped table-condensed">
   <tr>
-    <th><%= Fishery.human_attribute_name(:name) %></th>
-    <% for fish in @province.fishes.uniq %>
-      <th><%= link_to fish.code, fish, title: fish.scientific_name %></th>
+    <th><%= Fish.human_attribute_name(:scientific_name) %></th>
+    <% for fishery in @fisheries %>
+      <th class="rotated-cell">
+        <div class="rotate-text">
+          <%= link_to fishery.code, fishery, title: fishery.name %>
+        </div>
+      </th>
     <% end %>
   </tr>
-  <% for fishery in @province.fisheries.uniq %>
+  <% for fish in @fishes %>
     <tr>
-      <td><%= fishery.name %></td>
-      <% for fish in @province.fishes.uniq %>
-        <td><%= fish.landings.average(:cpue).round(2) %></td>
+      <td><%= link_to fish.scientific_name, fish %></td>
+      <% for fishery in @fisheries %>
+        <td class="data-cell">
+          <%= @fishery_av_cpue_by_species[[fish.id, fish.scientific_name, fishery.id]] || "-" %>
+        </td>
       <% end %>
     </tr>
   <% end %>
@@ -47,16 +61,22 @@
 <h5>Effort by Gear (kg per person per hour)</h5>
 <table class="table table-striped table-condensed">
   <tr>
-    <th><%= District.human_attribute_name(:name) %></th>
-    <% for gear in @province.gears.uniq %>
-      <th><%= link_to gear.alpha_code, gear, title: gear.name %></th>
+    <th><%= Gear.human_attribute_name(:name) %></th>
+    <% for district in @districts %>
+      <th class="rotated-cell">
+        <div class="rotate-text">
+          <%= link_to district.name, district, title: district.name %>
+        </div>
+      </th>
     <% end %>
   </tr>
-  <% for district in @province.districts.uniq %>
+  <% for gear in @gears %>
     <tr>
-      <td><%= district.name %></td>
-      <% for gear in @province.gears.uniq %>
-        <td><%= gear.landings.average(:cpue).round(2) %></td>
+      <td><%= link_to gear.name, gear %></td>
+      <% for district in @districts %>
+        <td class="data-cell">
+          <%= @district_av_cpue_by_gears[[gear.id, gear.name, district.id]] || "-" %>
+        </td>
       <% end %>
     </tr>
   <% end %>
@@ -68,16 +88,22 @@
 <h5>Effort by Species (kg per person per hour)</h5>
 <table class="table table-striped table-condensed">
   <tr>
-    <th><%= District.human_attribute_name(:name) %></th>
-    <% for fish in @province.fishes.uniq %>
-      <th><%= link_to fish.code, fish, title: fish.scientific_name %></th>
+    <th><%= Fish.human_attribute_name(:scientific_name) %></th>
+    <% for district in @districts %>
+      <th class="rotated-cell">
+        <div class="rotate-text">
+          <%= link_to district.name, district, title: district.name %>
+        </div>
+      </th>
     <% end %>
   </tr>
-  <% for district in @province.districts.uniq %>
+  <% for fish in @fishes %>
     <tr>
-      <td><%= district.name %></td>
-      <% for fish in @province.fishes.uniq %>
-        <td><%= fish.landings.average(:cpue).round(2) %></td>
+      <td><%= link_to fish.scientific_name, fish %></td>
+      <% for district in @districts %>
+        <td class="data-cell">
+          <%= @district_av_cpue_by_species[[fish.id, fish.scientific_name, district.id]] || "-" %>
+        </td>
       <% end %>
     </tr>
   <% end %>

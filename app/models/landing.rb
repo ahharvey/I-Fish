@@ -36,6 +36,7 @@ class Landing < ActiveRecord::Base
 	belongs_to :graticule
 	belongs_to :engine
 	belongs_to :fish
+	has_one :province, through: :survey
 	has_one :district, through: :survey
 	has_one :fishery, through: :survey
 	has_one :desa, through: :survey

@@ -14,9 +14,14 @@ class Fishery < ActiveRecord::Base
   
   has_many :surveys, dependent: :destroy
   has_many :landings, through: :surveys
+  has_many :gears, through: :landings
+  has_many :fishes, through: :landings
+  has_many :engines, through: :landings
   has_many :logbooks
   has_many :provinces, through: :surveys
   has_many :districts, through: :surveys
+
+
 
   validates :name,
   	presence: true

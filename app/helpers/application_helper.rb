@@ -92,6 +92,12 @@ module ApplicationHelper
     content_tag(:img, "", src: "blank.gif", class: "flag flag-id", alt: "Indonesian")
   end
 
-  
+  def excel_image
+    image_tag("excel.png", class: "", alt: "Excel", width: 16)
+  end
+
+  def pdf_image
+    image_tag("pdf.png", class: "", alt: "PDF", width: 16)
+  end
 
 end

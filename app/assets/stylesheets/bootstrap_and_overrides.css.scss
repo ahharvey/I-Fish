@@ -75,8 +75,8 @@ $dropdownLinkBackgroundActive: $USAIDlblue;
 .modal-text {margin-left:80px;}
 .modal-text a:hover {color:$black; background-color:$USAIDred;}
 
-.rotated_cell { height:50px; vertical-align:bottom!important; margin-bottom:5px!important;}
-.rotate_text { 
+.rotated-cell { height:50px; vertical-align:bottom!important; margin-bottom:5px!important;}
+.rotate-text { 
   -moz-transform:rotate(-45deg); 
   -moz-transform-origin: top left;
   -webkit-transform: rotate(-45deg);
@@ -85,4 +85,12 @@ $dropdownLinkBackgroundActive: $USAIDlblue;
   -o-transform-origin:  top left;
   position:relative;
   top:20px;
+}
+
+.data-cell {text-align:right!important;width:150px;}
+
+.report-button {
+  text-align:center;
+  text-transform: uppercase;
+  background:$USAIDlblue;
 }
