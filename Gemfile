@@ -22,6 +22,7 @@ gem 'mini_magick'
 gem 'rmagick'
 
 gem 'gmaps4rails'
+gem 'jquery-datatables-rails'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -26,31 +26,16 @@
 		<div class="span6 offset3">
 			<h5>Recent Activity</h5>
 
-			<% for survey in @surveys %>
-				<div class="row">
-					<div class="well well-large">
-						<div class="media">
-							<%= link_to survey.admin, class: "pull-left" do %>
-								<%= image_tag survey.admin.avatar_url(:thumb), width: "50px", height: "50px", class:"media-object" if survey.admin.avatar? %>
-							<% end %>
-							<div class="media-body">
-								<%= link_to survey.admin.name, survey.admin %> did a survey in <%= link_to survey.desa.name, survey.desa %> for the <%= link_to survey.fishery.name, survey.fishery %> fishery.
-							</div>
-						</div>				
-					</div>
-				</div>
-			<% end %>
+			
+			<div id="surveys">
+				<%= render @surveys %>
+			</div>
+			
+			
 			<div class="row">
-				<div class="pagination">
-					<ul>
-						<li>
-							<%= link_to_previous_page @surveys, 'Previous Page', :remote => true %>
-						</li>
-						<li>
-							<%= link_to_next_page @surveys, 'Next Page', :remote => true %>
-						</li>
-						
-					</ul>
+				<div class="pull-right pagination">
+					<%= render partial: 'home/pagination' %>
+					
 				</div>
 				
 			</div>

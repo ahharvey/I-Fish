@@ -1,0 +1,3 @@
+$('#surveys').html('<%= escape_javascript render(@surveys) %>');
+$('#pagination_next').html('<%= escape_javascript(link_to_next_page @surveys, 'Next Page', remote: true) %>');
+$('#pagination_previous').html('<%= escape_javascript(link_to_previous_page @surveys, 'Previous Page', remote: true) %>');
