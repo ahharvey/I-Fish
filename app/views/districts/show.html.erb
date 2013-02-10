@@ -1,6 +1,6 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links", locals: { files: true } %>
+<%= render partial: "shared/api_links", :locals => { xls: true, pdf: true, csv: false, json: true, xml: true } %>
 
 <h5>Effort by Gear (kg per person per hour)</h5>
 <table class="table table-striped table-condensed">

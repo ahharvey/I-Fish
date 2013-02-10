@@ -9,6 +9,8 @@ class DistrictsController < InheritedResources::Base
   		format.html { render }
   		format.xml { render xml: @district.to_xml(include: { :surveys => {include: :landings}} ) }
       format.json { render json: @district.to_json(include: { :surveys => {include: :landings}} ) }
+      format.csv { render text: @district.to_csv }
+      format.xls
     end
   end
 end

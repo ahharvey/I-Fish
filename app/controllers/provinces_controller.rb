@@ -1,7 +1,7 @@
 class ProvincesController < InheritedResources::Base
 	load_and_authorize_resource
 
-  respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
+  respond_to :html, :xml, :json, :csv, :xls, :except => [ :edit, :new, :update, :create ]
 
   def show
     @province = Province.includes(:surveys, :landings).find(params[:id])
@@ -30,6 +30,20 @@ class ProvincesController < InheritedResources::Base
       format.html { render }
       format.xml { render xml: @province.to_xml(include: { :surveys => {include: :landings}} ) }
       format.json { render json: @province.to_json(include: { :surveys => {include: :landings}} ) }
+      format.csv { render text: @province.to_csv }
+      format.xls
+      format.pdf {
+        render :pdf => "Province_#{@province.name}_#{DateTime.now.strftime('%Y#m')}", 
+        :header => { 
+          :font_size => '8', 
+          :right => "FishNet | Province Report | #{@province.name} - #{DateTime.now.strftime("%M-%Y")}"
+        }, 
+        :footer => {
+          :font_size => '8', 
+          :right => '[page] of [toPage]' 
+        }
+      }
+
   	end
   end
 	

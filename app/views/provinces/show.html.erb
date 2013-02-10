@@ -1,6 +1,6 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links", :locals => { files: true } %>
+<%= render partial: "shared/api_links", :locals => { xls: true, pdf: true, csv: false, json: true, xml: true } %>
 
 Select report year: <%= select_year(2013) %>
 

@@ -22,6 +22,9 @@ gem 'roo'
 gem 'mini_magick'
 gem 'rmagick'
 
+gem "wicked_pdf"
+gem "wkhtmltopdf-heroku"
+
 gem 'gmaps4rails'
 gem 'jquery-datatables-rails'
 
