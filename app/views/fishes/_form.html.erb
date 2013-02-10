@@ -2,6 +2,24 @@
 <%= simple_form_for @fish, html: {class: 'form form-horizontal'} do |f| %>
   
   <div class="row">
+    <div class="span5 offset3">
+
+      <div class="control-group">
+        <%= f.label :threatened, class: "toggle-label" %>
+        
+        <div class="controls toggle switch switch-large" 
+          data-toggleButton-label-enabled="Yes" 
+          data-toggleButton-label-disabled="No" 
+          data-toggleButton-style-enabled="danger" 
+          data-toggleButton-style-disabled="" 
+          data-toggleButton-height="40"> 
+            <%= f.check_box :threatened %>
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="row">
 
     <div class="span6">
   
@@ -16,8 +34,12 @@
       <%= f.input :english_name %>
     
       <%= f.input :indonesia_name %>
-    
+
       <%= f.input :code %>
+
+    </div>
+
+    <div class="span6">
 
       <%= f.input :a %>
    
@@ -29,20 +51,6 @@
 
       <%= f.input :opt %>
   
-    </div>
-
-    <div class="span6">
-
-
-
-      
-      <div class="control-group">
-        <%= f.label :threatened, class: "toggle-label" %>
-        <div class="controls toggle switch switch-large" data-on-label="Yes" data-off-label="No" data-on-color="danger" data-off-color="" > 
-            <%= f.check_box :threatened %>
-        </div>
-      </div>
-
     </div>
 
   </div>
