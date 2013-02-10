@@ -94,3 +94,7 @@ $dropdownLinkBackgroundActive: $USAIDlblue;
   text-transform: uppercase;
   background:$USAIDlblue;
 }
+
+label.boolean.optional.control-label.toggle-label {
+  padding-left: 0;
+}

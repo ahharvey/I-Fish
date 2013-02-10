@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'
 gem 'kaminari'
+gem 'rails-bootstrap-toggle-buttons'
 
 gem 'devise'
 gem 'cancan'
@@ -23,6 +24,7 @@ gem 'rmagick'
 
 gem 'gmaps4rails'
 gem 'jquery-datatables-rails'
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

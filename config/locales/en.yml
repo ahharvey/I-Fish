@@ -49,6 +49,10 @@ en:
     title: "Fish"
     index:
       title: "Fish"
+    edit:
+      title: "Edit Fish"
+    new:
+      title: "New Fish"
   gears:
     title: "Gears"
     index:
@@ -158,6 +162,11 @@ en:
         english_name: "English Name"
         indonesia_name: "Indonesian Name"
         code: "Code"
+        a: "a"
+        b: "b"
+        max: "Max. length"
+        mat:  "Mat. length"
+        opt:  "Opt. length"
       gear:
         cat_ind: "Category"
         cat_eng: "Category"

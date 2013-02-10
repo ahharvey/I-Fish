@@ -22,6 +22,7 @@
 //= require gmaps4rails.googlemaps
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
+//= require bootstrap-toggle-buttons
 //= require_tree .
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!

@@ -164,6 +164,7 @@ GEM
       activesupport (= 3.2.11)
       bundler (~> 1.0)
       railties (= 3.2.11)
+    rails-bootstrap-toggle-buttons (0.0.6)
     railties (3.2.11)
       actionpack (= 3.2.11)
       activesupport (= 3.2.11)
@@ -250,6 +251,7 @@ DEPENDENCIES
   omniauth
   pg
   rails (~> 3.2.11)
+  rails-bootstrap-toggle-buttons
   rmagick
   roo
   sass-rails (~> 3.2.3)

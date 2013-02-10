@@ -48,6 +48,10 @@ id:
     title: "Ikan"
     index:
       title: "Ikan Ikan"
+    edit:
+      title: "Edit Ikan"
+    new:
+      title: "Ikan Baru"
   gears:
     title: "Alat Tangkap"
     index:
@@ -157,6 +161,11 @@ id:
         english_name: "Nama Ingriss"
         indonesia_name: "Nama Nasional"
         code: "Kode"
+        a: "a"
+        b: "b"
+        max: "Max. length"
+        mat:  "Mat. length"
+        opt:  "Opt. length"
       gear:
         cat_ind: "Kategory"
         cat_eng: "Kategory"

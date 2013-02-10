@@ -1,52 +1,65 @@
-<% if params[:action].eql?('edit') %>
-  <% url = fish_path %>
-  <% method = :PUT %>
-<% else %>
-  <% url = fishes_path %>
-  <% method = :POST %>
-<% end %>
-<%= form_for(@fish, :url => url, :method => method) do |f| %>
-  <% if @fish.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@fish.errors.count, "error") %> prohibited this fish from being saved:</h2>
 
-      <ul>
-        <% @fish.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
+<%= simple_form_for @fish, html: {class: 'form form-horizontal'} do |f| %>
+  
+  <div class="row">
+
+    <div class="span6">
+  
+      <%= f.input :order %>
+    
+      <%= f.input :family %>
+    
+      <%= f.input :scientific_name %>
+    
+      <%= f.input :fishbase_name %>
+    
+      <%= f.input :english_name %>
+    
+      <%= f.input :indonesia_name %>
+    
+      <%= f.input :code %>
+
+      <%= f.input :a %>
+   
+      <%= f.input :b %>
+
+      <%= f.input :max %>
+
+      <%= f.input :mat %>
+
+      <%= f.input :opt %>
+  
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :order %><br />
-    <%= f.text_field :order %>
+    <div class="span6">
+
+
+
+      
+      <div class="control-group">
+        <%= f.label :threatened, class: "toggle-label" %>
+        <div class="controls toggle switch switch-large" data-on-label="Yes" data-off-label="No" data-on-color="danger" data-off-color="" > 
+            <%= f.check_box :threatened %>
+        </div>
+      </div>
+
+    </div>
+
   </div>
-  <div class="field">
-    <%= f.label :family %><br />
-    <%= f.text_field :family %>
-  </div>
-  <div class="field">
-    <%= f.label :scientific_name %><br />
-    <%= f.text_field :scientific_name %>
-  </div>
-  <div class="field">
-    <%= f.label :fishbase_name %><br />
-    <%= f.text_field :fishbase_name %>
-  </div>
-  <div class="field">
-    <%= f.label :english_name %><br />
-    <%= f.text_field :english_name %>
-  </div>
-  <div class="field">
-    <%= f.label :indonesia_name %><br />
-    <%= f.text_field :indonesia_name %>
-  </div>
-  <div class="field">
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+    
+
+  <div class="form-actions">
+
+    <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+      Save
+    <% end %>
+
+
+    <% if !f.object.new_record? %>
+      <%= link_to "Cancel", @fish, :class=>"btn pull-right" %>
+
+    <% else %>
+      <%= link_to "Cancel", fishes_path, :class=>"btn pull-right" %>
+    <% end %> 
   </div>
 <% end %>
