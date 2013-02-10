@@ -223,6 +223,9 @@ GEM
       raindrops (~> 0.7)
     warden (1.2.1)
       rack (>= 1.0)
+    wicked_pdf (0.9.4)
+      rails
+    wkhtmltopdf-heroku (1.0.0)
 
 PLATFORMS
   ruby
@@ -259,3 +262,5 @@ DEPENDENCIES
   skeleton-rails
   uglifier (>= 1.0.3)
   unicorn
+  wicked_pdf
+  wkhtmltopdf-heroku
