@@ -36,7 +36,7 @@ class ProvincesController < InheritedResources::Base
         render :pdf => "Province_#{@province.name}_#{DateTime.now.strftime('%Y#m')}", 
         :header => { 
           :font_size => '8', 
-          :right => "FishNet | Province Report | #{@province.name} - #{DateTime.now.strftime("%M-%Y")}"
+          :right => "FishNet | Province Report"
         }, 
         :footer => {
           :font_size => '8', 
