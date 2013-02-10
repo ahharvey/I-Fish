@@ -11,6 +11,17 @@ class DistrictsController < InheritedResources::Base
       format.json { render json: @district.to_json(include: { :surveys => {include: :landings}} ) }
       format.csv { render text: @district.to_csv }
       format.xls
+      format.pdf {
+        render :pdf => "District_#{@district.name}_#{DateTime.now.strftime('%Y#m')}", 
+        :header => { 
+          :font_size => '8', 
+          :right => "FishNet | District Report"
+        }, 
+        :footer => {
+          :font_size => '8', 
+          :right => '[page] of [toPage]' 
+        }
+      }
     end
   end
 end
