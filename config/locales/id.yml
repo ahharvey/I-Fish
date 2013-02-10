@@ -165,9 +165,9 @@ id:
         type_ind: "Tipe"
         type_eng: "Tipe"
         name: "Nama"
-        alpha_code: "Kode KKP"
-        num_code: "Nomor"
-        fao_code: "Kode FAO"
+        alpha_code: "KKP"
+        num_code: "ISSCF"
+        fao_code: "FAO"
         code: "Kode"
       landing:
         power: "PK"

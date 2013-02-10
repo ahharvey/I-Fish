@@ -24,7 +24,11 @@
         <td><%= gear.alpha_code %></td>
         <td><%= gear.fao_code %></td>
         <td><%= gear.num_code %></td>
-        <td><%= gear.name %></td>
+        <td>
+          <%= gear.cat_ind? ? gear.cat_ind : "" %><%= gear.cat_ind? && gear.type_ind? ? ", " : "" %>
+          <%= gear.type_ind? ? gear.type_ind : "" %><%= gear.type_ind? && gear.name? ? ", " : "" %>
+          <%= gear.name? ? gear.name : "" %>
+        </td>
         <td>
             <%= link_to show_icon, gear %>
             <%= link_to edit_icon, edit_gear_path(gear) %>

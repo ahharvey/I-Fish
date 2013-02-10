@@ -166,9 +166,9 @@ en:
         type_ind: "Type"
         type_eng: "Type"
         name: "Name"
-        alpha_code: "MMAF Code"
-        num_code: "Number"
-        fao_code: "FAO Code"
+        alpha_code: "MMAF"
+        num_code: "ISSCF"
+        fao_code: "FAO"
         code: "Code"
       landing:
         power: "Power"
