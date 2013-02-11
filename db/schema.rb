@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130210104124) do
+ActiveRecord::Schema.define(:version => 20130210173134) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(:version => 20130210104124) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "province_id"
+    t.integer  "code"
   end
 
   create_table "engines", :force => true do |t|
@@ -153,6 +154,9 @@ ActiveRecord::Schema.define(:version => 20130210104124) do
     t.integer  "fish_id"
     t.integer  "cpue"
     t.integer  "value"
+    t.integer  "cpue_kg"
+    t.integer  "cpue_idr"
+    t.integer  "cpue_fuel"
   end
 
   add_index "landings", ["fish_id"], :name => "index_landings_on_fish_id"

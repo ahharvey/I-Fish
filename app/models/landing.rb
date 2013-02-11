@@ -43,6 +43,8 @@ class Landing < ActiveRecord::Base
 
 	has_many :catches, dependent: :destroy
 
+	before_save :calculate_cpue
+
 	validates :power,
 		presence: true,
 		numericality: {
@@ -121,6 +123,12 @@ class Landing < ActiveRecord::Base
 		presence: true
 #	validates :type,
 #		presence: true
+
+	def calculate_cpue
+		self.cpue_kg = self.weight.to_i / ( ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour ) * self.crew.to_i )
+		self.cpue_idr = ( self.value.to_i * self.weight.to_i ) / ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour )
+		self.cpue_fuel = self.weight.to_i / self.fuel.to_i
+	end
 
 	def importing!
 		@importing = true
