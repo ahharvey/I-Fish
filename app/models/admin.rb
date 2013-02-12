@@ -39,7 +39,9 @@ class Admin < ActiveRecord::Base
   has_one :district, through: :office
   has_one :province, through: :office
   has_many :surveys, dependent: :destroy
+  has_many :approved_surveys, :class_name => 'Survey', :foreign_key => 'approver_id'
   has_many :logbooks
+  has_many :approved_logbooks, :class_name => 'Logbook', :foreign_key => 'approver_id'
 
 
   after_create :set_default_role

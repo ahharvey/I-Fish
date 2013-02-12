@@ -9,4 +9,15 @@ class SurveysController < InheritedResources::Base
     create!
   end
 
+  def set_approved
+	  @survey = Survey.find( params[:id] )
+	  @survey.update_column :approved, params[:approved]
+	  if @survey.approved == true
+	  	@survey.update_column :approver_id, current_admin.id
+	  else
+	  	@survey.update_column :approver_id, ""
+	  end
+	  render nothing: true
+	end
+
 end

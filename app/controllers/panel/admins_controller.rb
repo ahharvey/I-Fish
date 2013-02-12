@@ -30,7 +30,7 @@ class Panel::AdminsController < ApplicationController
     redisplay_roles
   end
 
-  def approve
+  def set_approved
     @admin = Admin.find(params[:id])
     @admin.update_column :approved, params[:approved]
     render nothing: true

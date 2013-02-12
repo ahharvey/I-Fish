@@ -6,4 +6,13 @@ jQuery ->
 
 jQuery ->
   $('.toggle').toggleButtons()
-    
+  
+jQuery ->
+  $('.approve-toggle:checkbox').change ->
+    $.ajax
+      type: 'PUT'
+      url: $(this).data('href')
+      dataType: 'html'
+      data: 
+      	approved: $(this).is(':checked')
+      success: -> alert('Record updated')  

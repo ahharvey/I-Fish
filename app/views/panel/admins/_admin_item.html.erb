@@ -13,7 +13,7 @@
           data-toggleButton-style-disabled="danger" 
           data-toggleButton-height="20"
           data-toggleButton-width="80"> 
-            <%= check_box_tag :approved, admin.id, admin.approved?, class: 'admin-approve-cb', data: { href: approve_panel_admin_path(admin) } %>
+            <%= check_box_tag :approved, admin.id, admin.approved?, class: 'approve-toggle', data: { href: set_approved_panel_admin_path(admin) } %>
         </div>
     </td>
     <td>

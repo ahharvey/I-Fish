@@ -18,7 +18,7 @@
   </tr>
 
   <% @surveys.each do |survey| %>
-    <tr>
+    <tr class=<%= survey.approved == false ? 'error' : '' %> >
       <td><%= survey.date_published.to_s(:rfc822) rescue '' %></td>
       <td><%= survey.start_time.to_s(:time) %></td>
       <td><%= survey.end_time.to_s(:time) %></td>
@@ -44,5 +44,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Survey', new_survey_path %>

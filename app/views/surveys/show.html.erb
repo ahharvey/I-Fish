@@ -1,89 +1,168 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+<div class="row">
 
-<dl class="dl-horizontal">
-  <dt><%= Survey.human_attribute_name(:date_published) %></dt>
-  <dd><%= @survey.date_published.to_s(:rfc822) %></dd>
+  <div class="span1 offset5">
+
+    <div class="controls toggle switch" 
+      data-toggleButton-label-enabled="Approved" 
+      data-toggleButton-label-disabled="Not Approved" 
+      data-toggleButton-style-enabled="success" 
+      data-toggleButton-style-disabled="danger" 
+      data-toggleButton-height="40"
+      data-toggleButton-width="250"> 
+    <%= check_box_tag :approved, @survey.id, @survey.approved?, class: 'approve-toggle', data: { href: set_approved_survey_path(@survey) } %>
+    </div>
+
+  </div>
+
+  <div class="span6">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
+
+</div>
+
+<div class="row">
+  <div class="span4">
+
+    <dl class="dl-horizontal">
+      
+      <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
+      <dd><%= @survey.fishery.name rescue '' %></dd>
+
+      <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+      <dd><%= @survey.desa.name rescue ''%></dd>
+
+      <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+      <dd><%= @survey.district.name rescue ''%></dd>
+
+      <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+      <dd><%= @survey.province.name rescue ''%></dd>
+      
+    </dl>
+
+  </div>
+
+  <div class="span4">
+
+    <dl class="dl-horizontal">
+
+      <dt><%= Survey.human_attribute_name(:date_published) %></dt>
+      <dd><%= @survey.date_published.to_s(:rfc822) %></dd>
+
+      <dt><%= Survey.human_attribute_name(:start_time) %></dt>
+      <dd><%= @survey.start_time.to_s(:time) %></dd>
 
 
-  <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
-  <dd><%= @survey.admin.name %></dd>
+      <dt><%= Survey.human_attribute_name(:end_time) %></dt>
+      <dd><%= @survey.end_time.to_s(:time) %></dd>
+
+    </dl>
+
+  </div>
+
+  <div class="span4">
+
+    <dl class="dl-horizontal">
+
+      
+      <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
+      <dd><%= @survey.admin.name rescue ''%></dd>
 
 
-  <dt><%= Survey.human_attribute_name(:start_time) %></dt>
-  <dd><%= @survey.start_time.to_s(:time) %></dd>
+      <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
+      <dd><%= @survey.fleet_observer %></dd>
 
 
-  <dt><%= Survey.human_attribute_name(:end_time) %></dt>
-  <dd><%= @survey.end_time.to_s(:time) %></dd>
+      <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
+      <dd><%= @survey.catch_measure %></dd>
 
 
-  <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
-  <dd><%= @survey.desa.name rescue ''%></dd>
+      <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
+      <dd><%= @survey.catch_scribe %></dd>
 
+    </dl>
 
-  <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
-  <dd><%= @survey.fleet_observer %></dd>
+  </div>
+</div>
 
+<div class="row">
 
-  <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
-  <dd><%= @survey.catch_measure %></dd>
-
-
-  <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
-  <dd><%= @survey.catch_scribe %></dd>
-
-
-  <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
-  <dd><%= @survey.fishery.name rescue '' %></dd>
-</dl>
-
-<table class="table table-striped table-condensed">
-  <tr>
-    <th><%= Landing.human_attribute_name(:vessel_ref) %></th>
-    <th><%= Landing.human_attribute_name(:vessel_name) %></th>
-    <th><%= Landing.human_attribute_name(:grid_square) %></th>
-    <th><%= Landing.human_attribute_name(:type) %></th>
-    <th><%= Landing.human_attribute_name(:time_out) %></th>
-    <th><%= Landing.human_attribute_name(:time_in) %></th>
-    <th><%= Landing.human_attribute_name(:engine) %></th>
-    <th><%= Landing.human_attribute_name(:fuel) %></th>
-    <th><%= Landing.human_attribute_name(:sail) %></th>
-    <th><%= Landing.human_attribute_name(:crew) %></th>
-    <th><%= Landing.human_attribute_name(:boat_size) %></th>
-    <th><%= Landing.human_attribute_name(:gear_id) %></th>
-    <th><%= Landing.human_attribute_name(:quantity) %></th>
-    <th><%= Landing.human_attribute_name(:weight) %></th>
-    <th><%= Landing.human_attribute_name(:value) %></th>
-    <th></th>
-  </tr>
-
-  <% for landing in @survey.landings %>
-    <tr>
-        <td><%= landing.vessel_ref %></td>
-        <td><%= landing.vessel_name %></td>
-        <td><%= landing.graticule %></td>
-        <td><%= landing.type %></td>
-        <td><%= landing.time_out.to_s(:triptime) %></td>
-        <td><%= landing.time_in.to_s(:triptime) %></td>
-        <td><%= link_to landing.engine.code, "#", title: landing.engine.name %></td>
-        <td><%= landing.fuel %></td>
-        <td><%= landing.sail %></td>
-        <td><%= landing.crew %></td>
-        <td><%= landing.boat_size %></td>
-        <td><%= link_to landing.gear.alpha_code, landing.gear, title:landing.gear.name %></td>
-        <td><%= landing.quantity %></td>
-        <td><%= landing.weight %></td>
-        <td><%= landing.value %></td>
-        <td>
-          <%= link_to show_icon, landing %>
-          <%= link_to edit_icon, edit_landing_path(landing) %>
-          <%= link_to destroy_icon, landing, method: :delete, data: { confirm: 'Are you sure?' } %>
-        </td>
+    <table class="table table-striped table-condensed">
+      <tr>
+        <th><%= Landing.human_attribute_name(:vessel_ref) %></th>
+        <th><%= Landing.human_attribute_name(:vessel_name) %></th>
+        <th><%= Landing.human_attribute_name(:grid_square) %></th>
+        <th><%= Landing.human_attribute_name(:type) %></th>
+        <th><%= Landing.human_attribute_name(:time_out) %></th>
+        <th><%= Landing.human_attribute_name(:time_in) %></th>
+        <th><%= Landing.human_attribute_name(:engine) %></th>
+        <th><%= Landing.human_attribute_name(:fuel) %></th>
+        <th><%= Landing.human_attribute_name(:sail) %></th>
+        <th><%= Landing.human_attribute_name(:crew) %></th>
+        <th><%= Landing.human_attribute_name(:boat_size) %></th>
+        <th><%= Landing.human_attribute_name(:gear_id) %></th>
+        <th><%= Landing.human_attribute_name(:quantity) %></th>
+        <th><%= Landing.human_attribute_name(:weight) %></th>
+        <th><%= Landing.human_attribute_name(:value) %></th>
+        <th></th>
       </tr>
-  <% end %>
-</table
+
+      <% for landing in @survey.landings %>
+        <tr>
+            <td><%= landing.vessel_ref %></td>
+            <td><%= landing.vessel_name %></td>
+            <td><%= landing.graticule %></td>
+            <td><%= landing.type %></td>
+            <td><%= landing.time_out.to_s(:triptime) %></td>
+            <td><%= landing.time_in.to_s(:triptime) %></td>
+            <td><%= link_to landing.engine.code, "#", title: landing.engine.name %></td>
+            <td><%= landing.fuel %></td>
+            <td><%= landing.sail %></td>
+            <td><%= landing.crew %></td>
+            <td><%= landing.boat_size %></td>
+            <td><%= link_to landing.gear.alpha_code, landing.gear, title:landing.gear.name %></td>
+            <td><%= landing.quantity %></td>
+            <td><%= landing.weight %></td>
+            <td><%= landing.value %></td>
+            <td>
+              <%= link_to show_icon, landing %>
+              <%= link_to edit_icon, edit_landing_path(landing) %>
+              <%= link_to destroy_icon, landing, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+      <% end %>
+    </table>
+</div>
+
+<div class="row">
+
+  <div class="span6 offset3">
+
+    <table class="table table-striped table-condensed">
+      <tr>
+        <th><%= Catch.human_attribute_name(:fish_id) %></th>
+        <th><%= Catch.human_attribute_name(:length) %> (mm)</th>
+        <th><%= Catch.human_attribute_name(:weight) %> (g)</th>
+        <th></th>
+      </tr>
+
+      <% @survey.catches.each do |catch| %>
+        <tr>
+          <td><%= link_to catch.fish.english_name, catch.fish %></td>
+          <td><%= catch.length %></td>
+          <td><%= catch.weight %></td>
+          <td>
+            <%= link_to show_icon, catch %>
+            <%= link_to edit_icon, edit_catch_path(catch) %>
+            <%= link_to destroy_icon, catch, method: :delete, data: { confirm: 'Are you sure?' } %>
+          </td>
+        </tr>
+      <% end %>
+    </table>
+
+  </div>
+</div>
 
 <%= link_to 'Edit', edit_survey_path(@survey) %> |
 <%= link_to 'Back', surveys_path %>

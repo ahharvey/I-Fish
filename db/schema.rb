@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130211074938) do
+ActiveRecord::Schema.define(:version => 20130212084633) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -167,12 +167,16 @@ ActiveRecord::Schema.define(:version => 20130211074938) do
     t.date     "date"
     t.integer  "admin_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "fishery_id"
+    t.integer  "approver_id"
+    t.boolean  "approved",    :default => false, :null => false
   end
 
   add_index "logbooks", ["admin_id"], :name => "index_logbooks_on_admin_id"
+  add_index "logbooks", ["approved"], :name => "index_logbooks_on_approved"
+  add_index "logbooks", ["approver_id"], :name => "index_logbooks_on_approver_id"
   add_index "logbooks", ["fishery_id"], :name => "index_logbooks_on_fishery_id"
   add_index "logbooks", ["user_id"], :name => "index_logbooks_on_user_id"
 
@@ -236,14 +240,19 @@ ActiveRecord::Schema.define(:version => 20130211074938) do
     t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "fishery_id"
     t.string   "fleet_observer"
     t.string   "catch_scribe"
     t.string   "catch_measure"
     t.integer  "admin_id"
+    t.boolean  "approved",       :default => false, :null => false
+    t.integer  "approver_id"
   end
+
+  add_index "surveys", ["approved"], :name => "index_surveys_on_approved"
+  add_index "surveys", ["approver_id"], :name => "index_surveys_on_approver_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
