@@ -3,6 +3,11 @@
 en:
   admins:
     title: "Officers"
+    edit:
+      title: "Edit Profile"
+    registrations:
+      edit:
+        title: "Security"
   catches:
     title: "Catch Composition"
     index:

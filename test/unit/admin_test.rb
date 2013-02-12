@@ -20,6 +20,7 @@
 #  name                   :string(255)
 #  office_id              :integer
 #  avatar                 :string(255)
+#  approved               :boolean          default(FALSE), not null
 #
 
 require 'test_helper'

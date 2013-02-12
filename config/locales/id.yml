@@ -2,6 +2,11 @@
 id:
   admins:
     title: "Staf Staf"
+    edit:
+      title: "Edit Profil"
+    registrations:
+      edit:
+        title: "Security"
   catches:
     title: "Komposisi Penangkapan"
     index:

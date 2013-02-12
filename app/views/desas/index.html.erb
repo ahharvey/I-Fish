@@ -4,28 +4,36 @@
 
 <%= render partial: 'shared/maps/wide' %>
 
+<br />
+<br />
+<br />
+
 <div class="row">
   <div class="span12">
     <table class="table table-striped table-condensed" id="desa_table">
-      <tr>
-        <th><%= Desa.human_attribute_name(:name) %></th>
-        <th><%= Desa.human_attribute_name(:code) %></th>
-        <th></th>
-      </tr>
-
-      <% @desas.each do |desa| %>
+      <thead>
         <tr>
-          <td><%= desa.name %></td>
-          <td><%= desa.code %></td>
-          <td style="display:none;"><%= desa.lat %></td>
-          <td style="display:none;"><%= desa.lng %></td>
-          <td>
-            <%= link_to show_icon, desa %>
-            <%= link_to edit_icon, edit_desa_path(desa) %>
-            <%= link_to destroy_icon, desa, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
+          <th><%= Desa.human_attribute_name(:name) %></th>
+          <th><%= Desa.human_attribute_name(:code) %></th>
+          <th></th>
         </tr>
-      <% end %>
+      </thead>
+      <tbody>
+
+        <% @desas.each do |desa| %>
+          <tr>
+            <td><%= desa.name %></td>
+            <td><%= desa.code %></td>
+            <td style="display:none;"><%= desa.lat %></td>
+            <td style="display:none;"><%= desa.lng %></td>
+            <td>
+              <%= link_to show_icon, desa %>
+              <%= link_to edit_icon, edit_desa_path(desa) %>
+              <%= link_to destroy_icon, desa, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
     </table>
   </div>
 </div>

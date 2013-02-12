@@ -3,13 +3,8 @@
 # Table name: landings
 #
 #  id           :integer          not null, primary key
-#  power        :string(255)
 #  vessel_ref   :string(255)
 #  vessel_name  :string(255)
-#  fuel         :string(255)
-#  sail         :string(255)
-#  crew         :string(255)
-#  value        :string(255)
 #  boat_size    :integer
 #  gear_id      :integer
 #  survey_id    :integer
@@ -23,6 +18,15 @@
 #  engine_id    :integer
 #  graticule_id :integer
 #  fish_id      :integer
+#  cpue         :integer
+#  value        :integer
+#  cpue_kg      :integer
+#  cpue_idr     :integer
+#  cpue_fuel    :integer
+#  sail         :boolean
+#  fuel         :integer
+#  power        :integer
+#  crew         :integer
 #
 
 class Landing < ActiveRecord::Base

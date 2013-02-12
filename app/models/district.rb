@@ -7,6 +7,7 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  province_id :integer
+#  code        :integer
 #
 
 class District < ActiveRecord::Base

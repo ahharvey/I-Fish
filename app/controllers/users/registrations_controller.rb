@@ -1,4 +1,4 @@
-class UserRegistrationsController < Devise::RegistrationsController
+class Users::RegistrationsController < Devise::RegistrationsController
 
 
   protected

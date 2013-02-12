@@ -12,6 +12,12 @@
 #  code            :string(255)
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
+#  a               :integer
+#  b               :integer
+#  mat             :integer
+#  max             :integer
+#  opt             :integer
+#  threatened      :boolean          default(FALSE)
 #
 
 class Fish < ActiveRecord::Base

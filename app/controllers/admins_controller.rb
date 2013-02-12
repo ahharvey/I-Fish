@@ -1,7 +1,8 @@
 class AdminsController < InheritedResources::Base
   load_and_authorize_resource
 
-  respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
+  actions :index, :show, :edit, :update
+  respond_to :html, :xml, :json
 
   def show
   	respond_to do |format|
@@ -31,4 +32,10 @@ class AdminsController < InheritedResources::Base
   	  end
   	end
   end
+
+  if params[:user][:password].blank?
+    params[:user].delete(:password)
+    params[:user].delete(:password_confirmation)
+  end
+
 end
