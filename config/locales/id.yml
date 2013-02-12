@@ -7,6 +7,16 @@ id:
     registrations:
       edit:
         title: "Security"
+      security:
+        title: "Security"
+      settings:
+        title: "Settings"
+      avatar:
+        title: "Avatar"
+      crop:
+        title: "Crop Avatar"
+      welcome:
+        title: "Welcome"
   catches:
     title: "Komposisi Penangkapan"
     index:
@@ -109,7 +119,7 @@ id:
     title: "Nelayan Nelayan"
   navbar:
     home: "Pulang"
-    data: "Data"
+    data: "Review"
     reports: "Laporan"
     settings: "Settings"
     user_profile: "User profile"

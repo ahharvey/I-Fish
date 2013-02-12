@@ -8,6 +8,16 @@ en:
     registrations:
       edit:
         title: "Security"
+      security:
+        title: "Security"
+      settings:
+        title: "Settings"
+      avatar:
+        title: "Avatar"
+      crop:
+        title: "Crop Avatar"
+      welcome:
+        title: "Welcome"
   catches:
     title: "Catch Composition"
     index:
@@ -110,12 +120,12 @@ en:
     title: "Fishers"
   navbar:
     home: "Home"
-    data: "Data"
-    reports: "Reports"
+    data: "Review"
+    reports: "Report"
     settings: "Settings"
     user_profile: "User profile"
     fishery_profile: "Fishery profile"
-    upload: "Import"
+    upload: "Data Entry"
     panel: "Panel"
   devise:
     signin: "Sign in"

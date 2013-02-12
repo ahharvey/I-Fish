@@ -767,6 +767,7 @@ role_public = Role.create(name: "public")
 role_staff = Role.create(name: "staff")
 role_supervisor = Role.create(name: "supervisor")
 role_admin = Role.create(name: "administrator")
+role_enumerator = Role.create(name: "enumerator")
 
 # Users
 desa1 = Desa.first

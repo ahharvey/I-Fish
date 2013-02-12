@@ -52,7 +52,7 @@ class Admin < ActiveRecord::Base
 
   # sets default role to public
   def set_default_role
-    self.roles.push Role.find_by_name("public")
+    self.roles.push Role.find_by_name("enumerator")
     self.save!
   end
 
@@ -72,6 +72,10 @@ class Admin < ActiveRecord::Base
 
   def staff?
   	has_role?("staff")
+  end
+
+  def enumerator?
+    has_role?("enumerator")
   end
 
   def public?

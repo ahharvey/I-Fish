@@ -1,0 +1,16 @@
+<% title t ".title" %>
+
+<%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:method => :put, :multipart => true, class: 'form form-horizontal'}) do |f| %>
+    <%= devise_error_messages! %>
+    
+    <%= f.input :password %>
+    <%= f.input :password_confirmation %>
+
+    <div class="form-actions">
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+        Save
+      <% end %>
+      <%= link_to "Cancel", :back, class: "btn pull-right" %>
+    </div>
+
+<% end %>
