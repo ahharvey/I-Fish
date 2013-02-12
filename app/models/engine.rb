@@ -10,6 +10,9 @@
 #
 
 class Engine < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :name, :code
 
   has_many :landings

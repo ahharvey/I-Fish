@@ -1,6 +1,7 @@
 class Panel::AdminsController < ApplicationController
   before_filter :load_admin, :except=>[:index]
 
+  
   def index
    
     if params[:approved] == "false"

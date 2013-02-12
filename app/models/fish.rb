@@ -21,6 +21,9 @@
 #
 
 class Fish < ActiveRecord::Base
+  
+  has_paper_trail
+
   default_scope order('fishes.order ASC, family ASC, scientific_name ASC')
   set_table_name "fishes"
 

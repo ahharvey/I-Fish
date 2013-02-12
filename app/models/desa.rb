@@ -13,6 +13,9 @@
 #
 
 class Desa < ActiveRecord::Base
+  
+  has_paper_trail
+  
   attr_accessible :name, :kabupaten, :code, :lat, :lng, :district_id
 
   has_many :surveys, dependent: :destroy

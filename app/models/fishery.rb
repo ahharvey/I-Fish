@@ -10,6 +10,9 @@
 #
 
 class Fishery < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :code, :name
   
   has_many :surveys, dependent: :destroy

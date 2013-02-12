@@ -17,6 +17,9 @@
 #
 
 class Survey < ActiveRecord::Base
+	
+	has_paper_trail
+
 	attr_accessible :date, :desa_id, :end_time, :fishery_id, :catch_measure,
 	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer
 

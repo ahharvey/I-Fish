@@ -10,5 +10,8 @@
 #
 
 class VesselType < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :name, :code
 end

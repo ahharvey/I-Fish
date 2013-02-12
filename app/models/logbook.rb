@@ -12,6 +12,9 @@
 #
 
 class Logbook < ActiveRecord::Base
+  
+  has_paper_trail
+
   belongs_to :user
   belongs_to :admin
   belongs_to :approver, :class_name => 'Admin'

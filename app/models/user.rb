@@ -29,6 +29,9 @@
 #
 
 class User < ActiveRecord::Base
+  
+  has_paper_trail
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :token_authenticatable, :lockable, :timeoutable, :omniauthable #, :confirmable

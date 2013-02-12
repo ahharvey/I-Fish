@@ -9,6 +9,9 @@
 #
 
 class Graticule < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :code
 
   has_many :landings

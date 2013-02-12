@@ -5,6 +5,8 @@
   <%= @vessel_type.name %>
 </p>
 
+<%= render partial: 'shared/audit_table', locals: { parent: @vessel_type } %>
+
 
 <%= link_to 'Edit', edit_vessel_type_path(@vessel_type) %> |
 <%= link_to 'Back', vessel_types_path %>

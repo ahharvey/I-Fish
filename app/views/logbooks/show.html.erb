@@ -58,6 +58,7 @@
 
 <%= render partial: "logbooks/logged_days" %>
 
+<%= render partial: 'shared/audit_table', locals: { parent: @logbook } %>
 
 <%= link_to 'Edit', edit_logbook_path(@logbook) %> |
 <%= link_to 'Back', logbooks_path %>

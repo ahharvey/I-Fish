@@ -22,6 +22,8 @@ gem 'roo'
 gem 'mini_magick'
 gem 'rmagick'
 
+gem 'paper_trail', '~> 2'
+
 gem "wicked_pdf"
 gem "wkhtmltopdf-heroku"
 

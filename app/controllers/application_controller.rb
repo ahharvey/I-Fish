@@ -2,7 +2,6 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
   before_filter :authenticate!
-
   # Override default Cancan current ability to fetch a specific one
   def current_ability
   	@current_ability ||= case
@@ -22,6 +21,10 @@ class ApplicationController < ActionController::Base
   	  authenticate_user!
   	  @currently_signed_in = current_user
   	end
+  end
+
+  def user_for_paper_trail
+    admin_signed_in? ? current_admin : 'Guest'  # or whatever
   end
 
   rescue_from CanCan::AccessDenied do |exception|

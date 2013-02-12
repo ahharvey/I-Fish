@@ -10,6 +10,9 @@
 #
 
 class Office < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :name, :district_id
 
   has_many :admins

@@ -24,6 +24,9 @@
 #
 
 class LoggedDay < ActiveRecord::Base
+  
+  has_paper_trail
+
   belongs_to :fish
   belongs_to :graticule
   belongs_to :logbook

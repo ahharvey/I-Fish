@@ -11,6 +11,9 @@
 #
 
 class District < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :name, :province_id
 
   has_many :desas
