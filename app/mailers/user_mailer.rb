@@ -13,7 +13,7 @@ class UserMailer < ActionMailer::Base
     mail(:to => @user.email, :subject => "Excel Spreadsheet upload failure")
   end
 
-  def welcome_email(admin)
+  def new_admin_waiting_for_approval(admin)
     @admin = admin
     @url  = new_admin_session_url
     mail(:to => admin.email, :subject => "APPROVAL REQUEST :: New Team Member")

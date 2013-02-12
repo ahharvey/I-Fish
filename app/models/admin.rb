@@ -58,7 +58,7 @@ class Admin < ActiveRecord::Base
 
   # sends approval email to Supervisor
   def send_admin_mail
-    AdminMailer.new_admin_waiting_for_approval(self).deliver
+    UserMailer.new_admin_waiting_for_approval(self).deliver
   end
 
   # Ability Methods

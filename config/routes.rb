@@ -101,10 +101,10 @@ ExportXls::Application.routes.draw do
   match '/multipart_import' => 'home#multipart_import'
 
   # handles /bad-locale|anything/valid-path
-  #match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
   
   # handles /anything|valid-path-but-no-locale
-  #match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
 
   # handles /
   #root to: redirect("/#{I18n.default_locale}")

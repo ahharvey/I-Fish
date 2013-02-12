@@ -3,18 +3,25 @@
 <%= simple_form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => {:multipart => true, class: 'form form-horizontal'}) do |f| %>
     <%= devise_error_messages! %>
 
-    <%= f.input :avatar %>
-    
-    <%= f.input :name %>
+    <div class="row">
+			<div class="span6">
+				<%= f.input :name %>
 
-    <%= f.input :email %>
+				<%= f.input :email %>
 
-    <%= f.input :password %>
+				<%= f.association :office %>
 
-    <%= f.input :password_confirmation %>
+				<%= f.input :password %>
+
+    		<%= f.input :password_confirmation %>
+			</div>
+			<div class="span6">
+				<%= f.input :avatar %>
+			</div>
+		</div>
 
     <div class="form-actions">
-      <%= f.submit "Sign up"  %>
+      <%= f.submit "Submit for Approval", class: "btn btn-primary"  %>
     </div>
 <% end %>
 
