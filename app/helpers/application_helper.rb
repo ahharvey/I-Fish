@@ -29,11 +29,23 @@ module ApplicationHelper
   end
   
   def home_icon
-    content_tag(:i, "", class: 'icon-home icon-white')
+    content_tag(:i, "", class: 'icon-home icon-white icon-2x')
   end
 
   def upload_icon
-    content_tag(:i, "", class: 'icon-upload-alt icon-white')
+    content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-2x')
+  end
+
+  def upload_icon_large
+    content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-large')
+  end
+
+  def approve_icon
+    content_tag(:i, "", class: 'icon-ok icon-white icon-2x')
+  end
+
+  def report_icon
+    content_tag(:i, "", class: 'icon-bar-chart icon-white icon-2x')
   end
 
   def download_icon
@@ -49,11 +61,23 @@ module ApplicationHelper
   end
 
   def edit_profile_icon
-    content_tag(:i, "", class: 'icon-cogs icon-white')
+    content_tag(:i, "", class: 'icon-cogs')
+  end
+
+  def settings_icon
+    content_tag(:i, "", class: 'icon-cog icon-white icon-2x')
+  end
+
+  def security_icon
+    content_tag(:i, "", class: 'icon-key')
+  end
+
+  def avatar_icon
+    content_tag(:i, "", class: 'icon-user')
   end
 
   def logout_icon
-    content_tag(:i, "", class: 'icon-signout icon-white')
+    content_tag(:i, "", class: 'icon-signout')
   end
 
   def show_icon
@@ -92,6 +116,12 @@ module ApplicationHelper
     content_tag(:img, "", src: "blank.gif", class: "flag flag-id", alt: "Indonesian")
   end
 
-  
+  def excel_image
+    image_tag("excel.png", class: "", alt: "Excel", width: 16)
+  end
+
+  def pdf_image
+    image_tag("pdf.png", class: "", alt: "PDF", width: 16)
+  end
 
 end

@@ -9,6 +9,9 @@
 #
 
 class Role < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :name
 
   validates :name, 

@@ -9,6 +9,8 @@ gem 'skeleton-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'
+gem 'kaminari'
+gem 'rails-bootstrap-toggle-buttons'
 
 gem 'devise'
 gem 'cancan'
@@ -20,7 +22,14 @@ gem 'roo'
 gem 'mini_magick'
 gem 'rmagick'
 
+gem 'paper_trail', '~> 2'
+
+gem "wicked_pdf"
+gem "wkhtmltopdf-heroku"
+
 gem 'gmaps4rails'
+gem 'jquery-datatables-rails'
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

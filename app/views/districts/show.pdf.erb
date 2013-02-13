@@ -1,0 +1,161 @@
+<h1><%= @district.name %>
+
+<h5>Effort by Gear (kg per person per hour)</h5>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Gear.human_attribute_name(:name) %></th>
+    <th class="data-cell">Q1</th>
+    <th class="data-cell">Q2</th>
+    <th class="data-cell">Q3</th>
+    <th class="data-cell">Q4</th>
+  </tr>
+  <% for gear in @district.gears.uniq %>
+    <tr>
+    	<td><%= gear.name %></td>
+    	<td class="data-cell"><%= gear.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= gear.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= gear.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= gear.landings.average(:cpue).round(2) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<br />
+
+<h5>Effort by Vessel Type (kg per person per hour)</h5>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th>Vessel Type</th>
+    <th class="data-cell">Q1</th>
+    <th class="data-cell">Q2</th>
+    <th class="data-cell">Q3</th>
+    <th class="data-cell">Q4</th>
+  </tr>
+  
+  <% for engine in @district.engines.uniq %>
+    <tr>
+    	<td><%= engine.name %></td>
+    	<td class="data-cell"><%= engine.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= engine.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= engine.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= engine.landings.average(:cpue).round(2) %></td>
+    </tr>
+  <% end %>
+
+</table>
+
+<br />
+<br />
+
+<h5>Effort by Species (kg per person per hour)</h5>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Fish.human_attribute_name(:name) %></th>
+    <th class="data-cell">Q1</th>
+    <th class="data-cell">Q2</th>
+    <th class="data-cell">Q3</th>
+    <th class="data-cell">Q4</th>
+  </tr>
+  <% for fish in @district.fishes.uniq %>
+    <tr>
+    	<td><%= fish.scientific_name %></td>
+    	<td class="data-cell"><%= fish.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= fish.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= fish.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= fish.landings.average(:cpue).round(2) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<br />
+
+<h5>Average Value by Fishery (IDR per kg)</h5>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Fishery.human_attribute_name(:name) %></th>
+    <th class="data-cell">Q1</th>
+    <th class="data-cell">Q2</th>
+    <th class="data-cell">Q3</th>
+    <th class="data-cell">Q4</th>
+  </tr>
+  <% for fishery in @district.fisheries.uniq %>
+    <tr>
+    	<td><%= fishery.name %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue).round(2) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue).round(2) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<br />
+
+<h5>Estimated Average Total Daily Effort (active vessels)</h5>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Desa.human_attribute_name(:name) %></th>
+    <th class="data-cell">Q1</th>
+    <th class="data-cell">Q2</th>
+    <th class="data-cell">Q3</th>
+    <th class="data-cell">Q4</th>
+  </tr>
+  <% for desa in @district.desas.uniq %>
+    <tr>
+    	<td><%= desa.name %></td>
+    	<td class="data-cell"><%= desa.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= desa.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= desa.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= desa.landings.average(:cpue) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<br />
+
+<h5>Estimated Total Value (IDR)</h5>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Fishery.human_attribute_name(:name) %></th>
+    <th class="data-cell">Q1</th>
+    <th class="data-cell">Q2</th>
+    <th class="data-cell">Q3</th>
+    <th class="data-cell">Q4</th>
+  </tr>
+  <% for fishery in @district.fisheries.uniq %>
+    <tr>
+    	<td><%= fishery.name %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    </tr>
+  <% end %>
+</table>
+
+<br />
+<br />
+
+<h5>Estimated Total Production (kg)</h5>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th><%= Fishery.human_attribute_name(:name) %></th>
+    <th class="data-cell">Q1</th>
+    <th class="data-cell">Q2</th>
+    <th class="data-cell">Q3</th>
+    <th class="data-cell">Q4</th>
+  </tr>
+  <% for fishery in @district.fisheries.uniq %>
+    <tr>
+    	<td><%= fishery.name %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    	<td class="data-cell"><%= fishery.landings.average(:cpue) %></td>
+    </tr>
+  <% end %>
+</table>

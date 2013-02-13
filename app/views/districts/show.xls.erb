@@ -1,0 +1,148 @@
+headers["Content-Disposition"] = "attachment; filename=\"testname\"" 
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="CPUE by Gear">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Gear.human_attribute_name(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String">Q1</Data></Cell>
+        <Cell><Data ss:Type="String">Q2</Data></Cell>
+        <Cell><Data ss:Type="String">Q3</Data></Cell>
+        <Cell><Data ss:Type="String">Q4</Data></Cell>
+      </Row>
+    <% @district.gears.uniq.each do |gear| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= gear.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= gear.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= gear.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= gear.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= gear.landings.average(:cpue).round(2) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="CPUE by Vessel Type">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Engine.human_attribute_name(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String">Q1</Data></Cell>
+        <Cell><Data ss:Type="String">Q2</Data></Cell>
+        <Cell><Data ss:Type="String">Q3</Data></Cell>
+        <Cell><Data ss:Type="String">Q4</Data></Cell>
+      </Row>
+    <% @district.engines.uniq.each do |engine| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= engine.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= engine.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= engine.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= engine.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= engine.landings.average(:cpue).round(2) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="CPUE by Species">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Fish.human_attribute_name(:scientific_name) %></Data></Cell>
+        <Cell><Data ss:Type="String">Q1</Data></Cell>
+        <Cell><Data ss:Type="String">Q2</Data></Cell>
+        <Cell><Data ss:Type="String">Q3</Data></Cell>
+        <Cell><Data ss:Type="String">Q4</Data></Cell>
+      </Row>
+    <% @district.fishes.uniq.each do |fish| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= fish.scientific_name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fish.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fish.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fish.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fish.landings.average(:cpue).round(2) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Value by Fishery">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Fishery.human_attribute_name(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String">Q1</Data></Cell>
+        <Cell><Data ss:Type="String">Q2</Data></Cell>
+        <Cell><Data ss:Type="String">Q3</Data></Cell>
+        <Cell><Data ss:Type="String">Q4</Data></Cell>
+      </Row>
+    <% @district.fisheries.uniq.each do |fishery| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= fishery.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Daily effort by landing site">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Desa.human_attribute_name(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String">Q1</Data></Cell>
+        <Cell><Data ss:Type="String">Q2</Data></Cell>
+        <Cell><Data ss:Type="String">Q3</Data></Cell>
+        <Cell><Data ss:Type="String">Q4</Data></Cell>
+      </Row>
+    <% @district.desas.uniq.each do |desa| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= desa.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= desa.landings.average(:cpue) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= desa.landings.average(:cpue) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= desa.landings.average(:cpue) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= desa.landings.average(:cpue) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Total value by fishery">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Fishery.human_attribute_name(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String">Q1</Data></Cell>
+        <Cell><Data ss:Type="String">Q2</Data></Cell>
+        <Cell><Data ss:Type="String">Q3</Data></Cell>
+        <Cell><Data ss:Type="String">Q4</Data></Cell>
+      </Row>
+    <% @district.fisheries.uniq.each do |fishery| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= fishery.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Total production by fishery">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Fishery.human_attribute_name(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String">Q1</Data></Cell>
+        <Cell><Data ss:Type="String">Q2</Data></Cell>
+        <Cell><Data ss:Type="String">Q3</Data></Cell>
+        <Cell><Data ss:Type="String">Q4</Data></Cell>
+      </Row>
+    <% @district.fisheries.uniq.each do |fishery| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= fishery.name %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= fishery.landings.average(:cpue).round(2) %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

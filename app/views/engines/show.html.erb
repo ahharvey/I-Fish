@@ -10,5 +10,7 @@
 
 </dl>
 
+<%= render partial: 'shared/audit_table', locals: { parent: @engine } %>
+
 <%= link_to 'Edit', edit_engine_path(@engine) %> |
 <%= link_to 'Back', engines_path %>

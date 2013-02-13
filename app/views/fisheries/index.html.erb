@@ -6,26 +6,30 @@
 <% end %>
 
 
-<%= render partial: "shared/api_links" %>
+<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
 
-<table class="table table-striped table-condensed">
-  <tr>
-    <th><%= Fishery.human_attribute_name(:name) %></th>
-    <th><%= Fishery.human_attribute_name(:code) %></th>
-    <th></th>
-  </tr>
+<table class="table table-striped table-condensed datatable">
+  <thead>
+    <tr>
+      <th><%= Fishery.human_attribute_name(:name) %></th>
+      <th><%= Fishery.human_attribute_name(:code) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
 
-<% @fisheries.each do |fishery| %>
-  <tr>
-    <td><%= fishery.name %></td>
-    <td><%= fishery.code %></td>
-    <td>
-      <%= link_to show_icon, fishery %>
-      <%= link_to edit_icon, edit_fishery_path(fishery) %>
-      <%= link_to destroy_icon, fishery, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </td>
-  </tr>
-<% end %>
+    <% @fisheries.each do |fishery| %>
+      <tr>
+        <td><%= fishery.name %></td>
+        <td><%= fishery.code %></td>
+        <td>
+          <%= link_to show_icon, fishery %>
+          <%= link_to edit_icon, edit_fishery_path(fishery) %>
+          <%= link_to destroy_icon, fishery, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

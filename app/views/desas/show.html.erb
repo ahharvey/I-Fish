@@ -1,6 +1,6 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links" %>
+<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
 
 <%= render partial: 'shared/maps/wide' %>
 
@@ -14,6 +14,8 @@
 	<dd><%= @desa.code %></dd>
 
 </dl>
+
+<%= render partial: 'shared/audit_table', locals: { parent: @desa } %>
 
 
 <%= link_to 'Edit', edit_desa_path(@desa) %> |

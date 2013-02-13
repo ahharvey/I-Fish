@@ -7,9 +7,13 @@
 #  created_at  :datetime         not null
 #  updated_at  :datetime         not null
 #  province_id :integer
+#  code        :integer
 #
 
 class District < ActiveRecord::Base
+  
+  has_paper_trail
+
   attr_accessible :name, :province_id
 
   has_many :desas

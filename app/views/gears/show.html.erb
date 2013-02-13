@@ -1,6 +1,6 @@
 <% title @gear.name %>
 
-<%= render partial: "shared/api_links" %>
+<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
 
 <dl class="dl-horizontal">
   
@@ -24,6 +24,7 @@
 
  </dl> 
 
+<%= render partial: 'shared/audit_table', locals: { parent: @gear } %>
 
 <%= link_to 'Edit', edit_gear_path(@gear) %> |
 <%= link_to 'Back', gears_path %>

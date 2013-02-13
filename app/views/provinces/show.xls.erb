@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Fishery CPUE by Gear">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Gear.human_attribute_name(:name) %></Data></Cell>
+        <% for fishery in @fisheries %>
+	        <Cell><Data ss:Type="String"><%= fishery.code %></Data></Cell>
+	      <% end %>
+      </Row>
+    <% @gears.each do |gear| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= gear.name %></Data></Cell>
+        <% for fishery in @fisheries %>
+        	<Cell><Data ss:Type="Number"><%= @fishery_av_cpue_by_gears[[fishery.id, fishery.name, gear.id]] || "" %></Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="Fishery CPUE by Species">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Fish.human_attribute_name(:scientific_name) %></Data></Cell>
+        <% for fishery in @fisheries %>
+	        <Cell><Data ss:Type="String"><%= fishery.code %></Data></Cell>
+	      <% end %>
+      </Row>
+    <% @fishes.each do |fish| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= fish.scientific_name %></Data></Cell>
+        <% for fishery in @fisheries %>
+        	<Cell><Data ss:Type="Number"><%= @fishery_av_cpue_by_species[[fishery.id, fishery.name, fish.id]] || "" %></Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="District CPUE by Gear">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Gear.human_attribute_name(:name) %></Data></Cell>
+        <% for district in @districts %>
+	        <Cell><Data ss:Type="String"><%= district.name %></Data></Cell>
+	      <% end %>
+      </Row>
+    <% @gears.each do |gear| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= gear.name %></Data></Cell>
+        <% for district in @districts %>
+        	<Cell><Data ss:Type="Number"><%= @district_av_cpue_by_gears[[gear.id, gear.name, district.id]] || "" %></Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+  <Worksheet ss:Name="District CPUE by Species">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String"><%= Fish.human_attribute_name(:scientific_name) %></Data></Cell>
+        <% for district in @districts %>
+	        <Cell><Data ss:Type="String"><%= district.name %></Data></Cell>
+	      <% end %>
+      </Row>
+    <% @fishes.each do |fish| %>
+      <Row>
+        <Cell><Data ss:Type="String"><%= fish.scientific_name %></Data></Cell>
+        <% for district in @districts %>
+        	<Cell><Data ss:Type="Number"><%= @district_av_cpue_by_species[[fish.id, fish.scientific_name, district.id]] || "" %></Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

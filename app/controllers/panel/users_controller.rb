@@ -1,6 +1,5 @@
 class Panel::UsersController < ApplicationController
   before_filter :load_user, :except=>[:index]
-
   def index
     @users = User.all
   end

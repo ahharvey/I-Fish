@@ -1,4 +1,5 @@
 class Panel::RolesController < ApplicationController
+
   def index
     @roles = Role.all
     @new_role = Role.new

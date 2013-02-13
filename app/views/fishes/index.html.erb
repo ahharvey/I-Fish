@@ -5,36 +5,39 @@
   NEW
 <% end %>
 
-<%= render partial: "shared/api_links" %>
+<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
 
 
 
-<table  class="table table-striped table-condensed">
-  <tr>
-    <th><%= Fish.human_attribute_name(:order) %></th>
-    <th><%= Fish.human_attribute_name(:family) %></th>
-    <th><%= Fish.human_attribute_name(:scientific_name) %></th>
-    <th><%= Fish.human_attribute_name(:english_name) %></th>
-    <th><%= Fish.human_attribute_name(:indonesian_name) %></th>
-    <th><%= Fish.human_attribute_name(:code) %></th>
-    <th></th>
-  </tr>
-
-<% @fishes.each do |fish| %>
-  <tr>
-    <td><%= fish.order %></td>
-    <td><%= fish.family %></td>
-    <td><%= fish.scientific_name %></td>
-    <td><%= link_to truncate(fish.english_name, length: 28), fish, title: fish.english_name %></td>
-    <td><%= fish.indonesia_name %></td>
-    <td><%= fish.code %></td>
-    <td>
-        <%= link_to show_icon, fish %> 
-        <%= link_to edit_icon, edit_fish_path(fish) %> 
-        <%= link_to destroy_icon, fish, method: :delete, data: { confirm: 'Are you sure?' } %>
-    </td>
-  </tr>
-<% end %>
+<table  class="table table-striped table-condensed datatable">
+  <thead>
+    <tr>
+      <th><%= Fish.human_attribute_name(:order) %></th>
+      <th><%= Fish.human_attribute_name(:family) %></th>
+      <th><%= Fish.human_attribute_name(:scientific_name) %></th>
+      <th><%= Fish.human_attribute_name(:english_name) %></th>
+      <th><%= Fish.human_attribute_name(:indonesian_name) %></th>
+      <th><%= Fish.human_attribute_name(:code) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @fishes.each do |fish| %>
+      <tr>
+        <td><%= fish.order %></td>
+        <td><%= fish.family %></td>
+        <td><%= fish.scientific_name %></td>
+        <td><%= link_to truncate(fish.english_name, length: 28), fish, title: fish.english_name %></td>
+        <td><%= fish.indonesia_name %></td>
+        <td><%= fish.code %></td>
+        <td>
+            <%= link_to show_icon, fish %> 
+            <%= link_to edit_icon, edit_fish_path(fish) %> 
+            <%= link_to destroy_icon, fish, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
 </table>
 
 <br />

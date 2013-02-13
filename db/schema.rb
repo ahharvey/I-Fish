@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130203184002) do
+ActiveRecord::Schema.define(:version => 20130212093558) do
 
   create_table "admins", :force => true do |t|
     t.string   "email",                  :default => "",    :null => false
@@ -31,8 +31,10 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
     t.string   "name"
     t.integer  "office_id"
     t.string   "avatar"
+    t.boolean  "approved",               :default => false, :null => false
   end
 
+  add_index "admins", ["approved"], :name => "index_admins_on_approved"
   add_index "admins", ["email"], :name => "index_admins_on_email", :unique => true
   add_index "admins", ["reset_password_token"], :name => "index_admins_on_reset_password_token", :unique => true
 
@@ -67,6 +69,7 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
     t.integer  "province_id"
+    t.integer  "code"
   end
 
   create_table "engines", :force => true do |t|
@@ -100,8 +103,14 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
     t.string   "english_name"
     t.string   "indonesia_name"
     t.string   "code"
-    t.datetime "created_at",      :null => false
-    t.datetime "updated_at",      :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+    t.integer  "a"
+    t.integer  "b"
+    t.integer  "mat"
+    t.integer  "max"
+    t.integer  "opt"
+    t.boolean  "threatened",      :default => false
   end
 
   create_table "gears", :force => true do |t|
@@ -126,12 +135,8 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
   end
 
   create_table "landings", :force => true do |t|
-    t.string   "power"
     t.string   "vessel_ref"
     t.string   "vessel_name"
-    t.string   "fuel"
-    t.string   "sail"
-    t.string   "crew"
     t.integer  "boat_size"
     t.integer  "gear_id"
     t.integer  "survey_id"
@@ -147,6 +152,13 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
     t.integer  "fish_id"
     t.integer  "cpue"
     t.integer  "value"
+    t.integer  "cpue_kg"
+    t.integer  "cpue_idr"
+    t.integer  "cpue_fuel"
+    t.boolean  "sail"
+    t.integer  "fuel"
+    t.integer  "power"
+    t.integer  "crew"
   end
 
   add_index "landings", ["fish_id"], :name => "index_landings_on_fish_id"
@@ -155,12 +167,16 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
     t.date     "date"
     t.integer  "admin_id"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
     t.integer  "fishery_id"
+    t.integer  "approver_id"
+    t.boolean  "approved",    :default => false, :null => false
   end
 
   add_index "logbooks", ["admin_id"], :name => "index_logbooks_on_admin_id"
+  add_index "logbooks", ["approved"], :name => "index_logbooks_on_approved"
+  add_index "logbooks", ["approver_id"], :name => "index_logbooks_on_approver_id"
   add_index "logbooks", ["fishery_id"], :name => "index_logbooks_on_fishery_id"
   add_index "logbooks", ["user_id"], :name => "index_logbooks_on_user_id"
 
@@ -224,14 +240,19 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
     t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",     :null => false
-    t.datetime "updated_at",     :null => false
+    t.datetime "created_at",                        :null => false
+    t.datetime "updated_at",                        :null => false
     t.integer  "fishery_id"
     t.string   "fleet_observer"
     t.string   "catch_scribe"
     t.string   "catch_measure"
     t.integer  "admin_id"
+    t.boolean  "approved",       :default => false, :null => false
+    t.integer  "approver_id"
   end
+
+  add_index "surveys", ["approved"], :name => "index_surveys_on_approved"
+  add_index "surveys", ["approver_id"], :name => "index_surveys_on_approver_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false
@@ -264,6 +285,17 @@ ActiveRecord::Schema.define(:version => 20130203184002) do
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
+
+  create_table "versions", :force => true do |t|
+    t.string   "item_type",  :null => false
+    t.integer  "item_id",    :null => false
+    t.string   "event",      :null => false
+    t.string   "whodunnit"
+    t.text     "object"
+    t.datetime "created_at"
+  end
+
+  add_index "versions", ["item_type", "item_id"], :name => "index_versions_on_item_type_and_item_id"
 
   create_table "vessel_types", :force => true do |t|
     t.string   "name"

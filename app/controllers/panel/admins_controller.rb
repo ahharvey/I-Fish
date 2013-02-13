@@ -1,8 +1,14 @@
 class Panel::AdminsController < ApplicationController
   before_filter :load_admin, :except=>[:index]
 
+  
   def index
-    @admins = Admin.all
+   
+    if params[:approved] == "false"
+      @admins = Admin.find_all_by_approved(false)
+    else
+      @admins = Admin.all
+    end
   end
 
   def show
@@ -25,6 +31,12 @@ class Panel::AdminsController < ApplicationController
     redisplay_roles
   end
 
+  def set_approved
+    @admin = Admin.find(params[:id])
+    @admin.update_column :approved, params[:approved]
+    render nothing: true
+  end
+
   private
 
   def load_admin
@@ -37,4 +49,6 @@ class Panel::AdminsController < ApplicationController
       format.js { render :redisplay_roles }
     end
   end
+
+  
 end

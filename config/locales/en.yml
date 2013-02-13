@@ -3,6 +3,21 @@
 en:
   admins:
     title: "Officers"
+    edit:
+      title: "Edit Profile"
+    registrations:
+      edit:
+        title: "Security"
+      security:
+        title: "Security"
+      settings:
+        title: "Settings"
+      avatar:
+        title: "Avatar"
+      crop:
+        title: "Crop Avatar"
+      welcome:
+        title: "Welcome"
   catches:
     title: "Catch Composition"
     index:
@@ -49,6 +64,10 @@ en:
     title: "Fish"
     index:
       title: "Fish"
+    edit:
+      title: "Edit Fish"
+    new:
+      title: "New Fish"
   gears:
     title: "Gears"
     index:
@@ -101,12 +120,12 @@ en:
     title: "Fishers"
   navbar:
     home: "Home"
-    data: "Data"
-    reports: "Reports"
+    data: "Review"
+    reports: "Report"
     settings: "Settings"
     user_profile: "User profile"
     fishery_profile: "Fishery profile"
-    upload: "Import"
+    upload: "Data Entry"
     panel: "Panel"
   devise:
     signin: "Sign in"
@@ -158,6 +177,11 @@ en:
         english_name: "English Name"
         indonesia_name: "Indonesian Name"
         code: "Code"
+        a: "a"
+        b: "b"
+        max: "Max. length"
+        mat:  "Mat. length"
+        opt:  "Opt. length"
       gear:
         cat_ind: "Category"
         cat_eng: "Category"
@@ -166,9 +190,9 @@ en:
         type_ind: "Type"
         type_eng: "Type"
         name: "Name"
-        alpha_code: "MMAF Code"
-        num_code: "Number"
-        fao_code: "FAO Code"
+        alpha_code: "MMAF"
+        num_code: "ISSCF"
+        fao_code: "FAO"
         code: "Code"
       landing:
         power: "Power"
@@ -226,3 +250,10 @@ en:
         catch_scribe: "Catch scribe"
         catch_measure: "Catch measurer"
         admin_id: "Admin"
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "..."

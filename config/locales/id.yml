@@ -2,6 +2,21 @@
 id:
   admins:
     title: "Staf Staf"
+    edit:
+      title: "Edit Profil"
+    registrations:
+      edit:
+        title: "Security"
+      security:
+        title: "Security"
+      settings:
+        title: "Settings"
+      avatar:
+        title: "Avatar"
+      crop:
+        title: "Crop Avatar"
+      welcome:
+        title: "Welcome"
   catches:
     title: "Komposisi Penangkapan"
     index:
@@ -48,6 +63,10 @@ id:
     title: "Ikan"
     index:
       title: "Ikan Ikan"
+    edit:
+      title: "Edit Ikan"
+    new:
+      title: "Ikan Baru"
   gears:
     title: "Alat Tangkap"
     index:
@@ -100,7 +119,7 @@ id:
     title: "Nelayan Nelayan"
   navbar:
     home: "Pulang"
-    data: "Data"
+    data: "Review"
     reports: "Laporan"
     settings: "Settings"
     user_profile: "User profile"
@@ -157,6 +176,11 @@ id:
         english_name: "Nama Ingriss"
         indonesia_name: "Nama Nasional"
         code: "Kode"
+        a: "a"
+        b: "b"
+        max: "Max. length"
+        mat:  "Mat. length"
+        opt:  "Opt. length"
       gear:
         cat_ind: "Kategory"
         cat_eng: "Kategory"
@@ -165,9 +189,9 @@ id:
         type_ind: "Tipe"
         type_eng: "Tipe"
         name: "Nama"
-        alpha_code: "Kode KKP"
-        num_code: "Nomor"
-        fao_code: "Kode FAO"
+        alpha_code: "KKP"
+        num_code: "ISSCF"
+        fao_code: "FAO"
         code: "Kode"
       landing:
         power: "PK"
@@ -224,3 +248,10 @@ id:
         catch_scribe: "Catch scribe"
         catch_measure: "Catch measurer"
         admin_id: "Admin"
+  views:
+    pagination:
+      first: "&laquo; First"
+      last: "Last &raquo;"
+      previous: "&lsaquo; Prev"
+      next: "Next &rsaquo;"
+      truncate: "..."

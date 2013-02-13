@@ -1,8 +1,45 @@
-<% title "Home" %>
-
-<% for survey in @surveys %>
-	<div class="well">
-		<%= image_tag @currently_signed_in.avatar_url(:thumb), width: "50px", height: "50px" if @currently_signed_in.avatar? %>
-		<%= survey.admin.name %> did a survey in <%= survey.desa.name %> for the <%= survey.fishery.name %> fishery.
+<% title "FishNet" %>
+<div class="container">
+	<div class="row">
+		<%= link_to provinces_path do %>
+		  <div class="span2 offset1 well well-large report-button">
+		  	Province Reports
+		  </div>
+		<% end %>
+		<%= link_to districts_path do %>
+		  <div class="span2 well well-large report-button">
+		  	District Reports
+		  </div>
+		<% end %>
+		<%= link_to fisheries_path do %>
+		  <div class="span2 well well-large report-button">
+		  	Fishery Reports
+		  </div>
+		<% end %>
+		<%= link_to provinces_path do %>
+		  <div class="span2 well well-large report-button">
+		  	Supervisor Reports
+		  </div>
+		<% end %>
 	</div>
-<% end %>
+	<div class="row">
+		<div class="span6 offset3">
+			<h5>Recent Activity</h5>
+
+			
+			<div id="surveys">
+				<%= render @surveys %>
+			</div>
+			
+			
+			<div class="row">
+				<div class="pull-right pagination">
+					<%= render partial: 'home/pagination' %>
+					
+				</div>
+				
+			</div>
+		</div>
+		
+	</div>
+</div>

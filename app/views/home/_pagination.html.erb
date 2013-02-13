@@ -1,0 +1,8 @@
+<ul>
+	<li id="pagination_previous">
+		<%= link_to_previous_page @surveys, '<< Previous', remote: true %>
+	</li>
+	<li id="pagination_next">
+		<%= link_to_next_page @surveys, 'Next >>', remote: true %>
+	</li>
+</ul>

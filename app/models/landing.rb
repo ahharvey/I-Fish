@@ -3,13 +3,8 @@
 # Table name: landings
 #
 #  id           :integer          not null, primary key
-#  power        :string(255)
 #  vessel_ref   :string(255)
 #  vessel_name  :string(255)
-#  fuel         :string(255)
-#  sail         :string(255)
-#  crew         :string(255)
-#  value        :string(255)
 #  boat_size    :integer
 #  gear_id      :integer
 #  survey_id    :integer
@@ -23,9 +18,21 @@
 #  engine_id    :integer
 #  graticule_id :integer
 #  fish_id      :integer
+#  cpue         :integer
+#  value        :integer
+#  cpue_kg      :integer
+#  cpue_idr     :integer
+#  cpue_fuel    :integer
+#  sail         :boolean
+#  fuel         :integer
+#  power        :integer
+#  crew         :integer
 #
 
 class Landing < ActiveRecord::Base
+	
+	has_paper_trail
+
 	attr_accessible :boat_size, :crew, :fuel, :gear_id, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
 	:power, :graticule_id, :engine_id, :survey_id, :fish_id, :importing?, :cpue
 
@@ -36,11 +43,14 @@ class Landing < ActiveRecord::Base
 	belongs_to :graticule
 	belongs_to :engine
 	belongs_to :fish
+	has_one :province, through: :survey
 	has_one :district, through: :survey
 	has_one :fishery, through: :survey
 	has_one :desa, through: :survey
 
 	has_many :catches, dependent: :destroy
+
+	before_save :calculate_cpue
 
 	validates :power,
 		presence: true,
@@ -68,9 +78,7 @@ class Landing < ActiveRecord::Base
 			in: 1..999
 		}
 	validates :sail,
-		inclusion: {
-			in: %w(Y N)
-		}
+		presence: true
 	validates :crew,
 		numericality: {
 			only_integer: true
@@ -120,6 +128,12 @@ class Landing < ActiveRecord::Base
 		presence: true
 #	validates :type,
 #		presence: true
+
+	def calculate_cpue
+		self.cpue_kg = self.weight.to_i / ( ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour ) * self.crew.to_i )
+		self.cpue_idr = ( self.value.to_i * self.weight.to_i ) / ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour )
+		self.cpue_fuel = self.weight.to_i / self.fuel.to_i
+	end
 
 	def importing!
 		@importing = true

@@ -17,13 +17,18 @@
 #
 
 class Survey < ActiveRecord::Base
+	
+	has_paper_trail
+
 	attr_accessible :date, :desa_id, :end_time, :fishery_id, :catch_measure,
 	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer
 
 	belongs_to :admin
+	belongs_to :approver, :class_name => 'Admin'
 	belongs_to :fishery
 	belongs_to :desa
 	has_many :landings
+	has_many :catches, through: :landings
 	has_one :district, through: :desa
 	has_one :province, through: :district
 

@@ -1,24 +1,26 @@
 <% title "Admins" %>
 
-<table class="table table-striped table-condensed">
-  <tr>
-  	<th></th>
-    <th>Name</th>
-    <th>Office</th>
-    <th>District</th>
-    <th>Province</th>
-  	<th></th>
-  </tr>
-  <% for admin in @admins %>
-  <tr>
-  	<td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
-    <td><%= link_to admin.name, [:panel, admin] %></td>
-    <td><%= admin.office.name %></td>
-    <td><%= admin.district.name %></td>
-    <td><%= admin.province.name %></td>
-    <td>
-      <%= link_to show_icon, [:panel, admin] %>
-    </td>
-  </tr>
-  <% end %>
+<div class="btn-group pull-right">
+  <%= link_to "All", { :action => "index" }, class: "btn btn-mini", remote: true %>
+  <%= link_to "Awaiting approval", { :action => "index", :approved => "false" }, class: "btn btn-mini", remote: true %>
+</div>
+
+<br />
+<br />
+
+<table class="table table-striped table-condensed datatable">
+  <thead>
+    <tr>
+    	<th></th>
+      <th>Name</th>
+      <th>Office</th>
+      <th>District</th>
+      <th>Province</th>
+      <th>Approved</th>
+    	<th></th>
+    </tr>
+  </thead>
+  <tbody id="admins_body">
+    <%= render partial: "panel/admins/admin_item" %>
+  </tbody>
  </table>

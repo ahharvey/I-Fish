@@ -61,6 +61,14 @@ class ImportExcelData
           weight = xls.cell(d,"P").to_i
           qty = xls.cell(d,"Q").to_i
           value = xls.cell(d,"R").to_i
+
+          if sail == "Y"
+            sail_bool = true
+          elsif sail == "N"
+            sail_bool = false
+          else
+            sail_bool = ""
+          end
           unless reg.blank?
             gear_id = Gear.where("LOWER(alpha_code) = ?", gear).first.id rescue 0
             engine_id = Engine.where("LOWER(code) = ?", engine).first.id rescue 0
@@ -74,7 +82,7 @@ class ImportExcelData
               vessel_name: name, 
               boat_size: length,
               engine_id: engine_id.to_i, 
-              sail: sail, 
+              sail: sail_bool, 
               fuel: fuel, 
               crew: crew, 
               weight: weight, 

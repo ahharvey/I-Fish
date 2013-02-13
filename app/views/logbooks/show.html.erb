@@ -1,6 +1,26 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links" %>
+<div class="row">
+
+  <div class="span1 offset5">
+
+    <div class="controls toggle switch" 
+      data-toggleButton-label-enabled="Approved" 
+      data-toggleButton-label-disabled="Not Approved" 
+      data-toggleButton-style-enabled="success" 
+      data-toggleButton-style-disabled="danger" 
+      data-toggleButton-height="40"
+      data-toggleButton-width="250"> 
+    <%= check_box_tag :approved, @logbook.id, @logbook.approved?, class: 'approve-toggle', data: { href: set_approved_logbook_path(@logbook) } %>
+    </div>
+
+  </div>
+
+  <div class="span6">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
+
+</div>
 
 <div class="pull-right">
   <dl class="dl-horizontal">
@@ -38,6 +58,7 @@
 
 <%= render partial: "logbooks/logged_days" %>
 
+<%= render partial: 'shared/audit_table', locals: { parent: @logbook } %>
 
 <%= link_to 'Edit', edit_logbook_path(@logbook) %> |
 <%= link_to 'Back', logbooks_path %>
