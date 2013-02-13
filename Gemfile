@@ -5,7 +5,6 @@ gem 'inherited_resources'
 gem 'pg'
 gem 'unicorn'
 
-gem 'skeleton-rails'
 gem 'jquery-rails'
 gem 'jquery-ui-rails'
 gem 'simple_form'

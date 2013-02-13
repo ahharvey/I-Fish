@@ -16,7 +16,6 @@
 //= require jquery.ui.datepicker
 //= require bootstrap
 //= require jquery.Jcrop
-//= require tabs
 //= require highcharts
 //= require gmaps4rails.base
 //= require gmaps4rails.googlemaps
