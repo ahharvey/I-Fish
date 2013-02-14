@@ -135,4 +135,13 @@ class Admin < ActiveRecord::Base
     end
     recoverable
   end
+
+  def team_members
+    Admin.where( office_id: self.office_id )
+  end
+
+  def supervised_surveys
+    Survey.where( admin_id: self.team_members.each{|t| t.id } )
+  end
+
 end

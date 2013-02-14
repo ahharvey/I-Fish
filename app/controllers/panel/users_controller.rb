@@ -14,13 +14,19 @@ class Panel::UsersController < ApplicationController
   def add_role
     role = Role.find_by_name params[:get_role]
     if role
-    	@user.roles.push role unless @user.roles.include?(role)
+      if @user.roles.include?(role)
+        flash[:error]= I18n.t("panel.roles.exists")
+      else
+       @user.roles.push role
+       flash[:success]= I18n.t("panel.roles.exists")
+      end 
     end
     redisplay_roles
   end
 
   def delete_role
     @user.roles.delete(Role.find params[:role])
+    flash[:success]= I18n.t("panel.roles.exists")
     redisplay_roles
   end
 

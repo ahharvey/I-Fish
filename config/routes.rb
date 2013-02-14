@@ -65,6 +65,13 @@ ExportXls::Application.routes.draw do
       resources :roles, :only=>[:index, :create, :destroy]
     end
 
+    namespace :supervisor do
+      resources :surveys
+      resources :logbooks
+      resources :admins
+      resources :dashboard
+    end
+
     resources :catches
     resources :desas do
       resources :surveys

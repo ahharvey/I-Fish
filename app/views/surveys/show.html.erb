@@ -1,19 +1,23 @@
 <% title t ".title" %>
 
 <div class="row">
-
-  <div class="span1 offset5">
-
-    <div class="controls toggle switch" 
-      data-toggleButton-label-enabled="Approved" 
-      data-toggleButton-label-disabled="Not Approved" 
-      data-toggleButton-style-enabled="success" 
-      data-toggleButton-style-disabled="danger" 
-      data-toggleButton-height="40"
-      data-toggleButton-width="250"> 
-    <%= check_box_tag :approved, @survey.id, @survey.approved?, class: 'approve-toggle', data: { href: set_approved_survey_path(@survey) } %>
-    </div>
-
+  <div class="span2">
+    <% if can? :update, @survey %>
+      <%= link_to "<< Back to Dashboard", supervisor_dashboard_index_path %>
+    <% end %>
+  </div>
+  <div class="span1 offset3">
+    <% if can? :update, @survey %>
+      <div class="controls toggle switch" 
+        data-toggleButton-label-enabled="Approved" 
+        data-toggleButton-label-disabled="Not Approved" 
+        data-toggleButton-style-enabled="success" 
+        data-toggleButton-style-disabled="danger" 
+        data-toggleButton-height="40"
+        data-toggleButton-width="250"> 
+      <%= check_box_tag :approved, @survey.id, @survey.approved?, class: 'approve-toggle', data: { href: set_approved_survey_path(@survey) } %>
+      </div>
+    <% end %>
   </div>
 
   <div class="span6">

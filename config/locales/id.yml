@@ -1,5 +1,17 @@
 # Indonesian loalization file
 id:
+  panel:
+    roles:
+      exists: "This person already has the role"
+      removed: "Role removed"
+      added: "Role added"
+  supervisor:
+    dashboard:
+      index:
+        title: "Dashboard"
+    unapproved:
+      survey: "Surveys have been added and are awaiting your approval"
+      team: "New team members have signed up and are awaiting your approval"
   admins:
     title: "Staf Staf"
     edit:

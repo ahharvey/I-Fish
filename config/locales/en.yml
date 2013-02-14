@@ -1,6 +1,18 @@
 # English localization file.
 
 en:
+  panel:
+    roles:
+      exists: "This person already has the role"
+      removed: "Role removed"
+      added: "Role added"
+  supervisor:
+    dashboard:
+      index:
+        title: "Dashboard"
+    unapproved:
+      survey: "Surveys have been added and are awaiting your approval"
+      team: "New team members have signed up and are awaiting your approval"
   admins:
     title: "Officers"
     edit:
@@ -250,6 +262,8 @@ en:
         catch_scribe: "Catch scribe"
         catch_measure: "Catch measurer"
         admin_id: "Admin"
+        supervisor:
+          unapproved: "Some are unapproved!!"
   views:
     pagination:
       first: "&laquo; First"
