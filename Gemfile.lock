@@ -200,7 +200,6 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
-    skeleton-rails (0.0.2)
     spreadsheet (0.7.4)
       ruby-ole (>= 1.0)
     sprockets (2.2.2)
@@ -263,7 +262,6 @@ DEPENDENCIES
   roo
   sass-rails (~> 3.2.3)
   simple_form
-  skeleton-rails
   uglifier (>= 1.0.3)
   unicorn
   wicked_pdf

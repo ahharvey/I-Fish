@@ -99,6 +99,6 @@ label.boolean.optional.control-label.toggle-label {
   padding-left: 0;
 }
 
-.navbar-green {background: $green;}
-.navbar-yellow {background: $orange;}
-.navbar-red {background: $red;}
+.navbar-green { @include gradientBar($green, darken($green,20%) );}
+.navbar-yellow { @include gradientBar($orange,darken($orange,20%));}
+.navbar-red { @include gradientBar($red, darken($red,20%));}

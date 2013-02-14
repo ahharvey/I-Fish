@@ -68,6 +68,10 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-cog icon-white icon-2x')
   end
 
+  def profile_icon
+    content_tag(:i, "", class: 'icon-user icon-white icon-2x')
+  end
+
   def security_icon
     content_tag(:i, "", class: 'icon-key')
   end

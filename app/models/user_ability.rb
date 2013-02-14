@@ -2,15 +2,13 @@ class UserAbility
   include CanCan::Ability
 
   def initialize(user)
-    # Define abilities for the passed in user here. For example:
+    @user = user || User.new # for guest
+    @user.roles.each { |role| send(role) }
 
-    user ||= User.new # guest user (not logged in)
-
-    if user.public?
-      # Users can view users and fisheries and edit their own profile data.
-      can :read, User
-      can :manage, User, :id => user.id
-      can :read, Fishery
+    if @user.roles.size == 0
+      can :read, :all #for guest without roles
     end
   end
+
+
 end

@@ -18,12 +18,12 @@ class Panel::RolesController < ApplicationController
   private
 
   def redisplay_roles
-  respond_to do |format|
-    format.html { redirect_to panel_roles_path }
-    format.js {
-      @roles = Role.all
-      render :redisplay_roles
-    }
+    respond_to do |format|
+      format.html { redirect_to panel_roles_path }
+      format.js {
+        @roles = Role.all
+        render :redisplay_roles
+      }
+    end
   end
-end
 end

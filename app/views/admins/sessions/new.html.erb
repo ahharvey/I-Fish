@@ -10,7 +10,9 @@
   <% end -%>
 
   <div class="form-actions">
-  	<%= f.submit "Sign in"  %>
+  	<%= content_tag :button, type: :submit, class: 'btn btn-primary', style:"margin-left:20px" do %>
+        Sign in
+      <% end %>
   </div>
 <% end %>
 

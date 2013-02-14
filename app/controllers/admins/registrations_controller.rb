@@ -29,6 +29,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
   protected
 
     def after_sign_up_path_for(resource)
+      flash.keep[:alert] = "Approval sent"
       new_admin_session_path
     end
 

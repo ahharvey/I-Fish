@@ -1,6 +1,7 @@
-<% flash.each do |type, message| %>
-  <div class="alert alert-<%= twitterized_type(type) %> fade in" data-alert="alert" style="margin-top:17px">
-    <a class="close" href="#" onclick="$('.alert').remove();">×</a>
-    <p><%= message %></p>
-  </div>
-<% end %>
+
+	<% flash.each do |type, message| %>
+	  <div class="alert alert-<%= twitterized_type(type) %> fade in" data-alert="alert" style="margin-top:17px">
+	    <a class="close" href="#" onclick="$('.alert').remove();">×</a>
+	    <p><%= message %></p>
+	  </div>
+	<% end %>
