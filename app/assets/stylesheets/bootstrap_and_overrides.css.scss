@@ -102,3 +102,11 @@ label.boolean.optional.control-label.toggle-label {
 .navbar-green { @include gradientBar($green, darken($green,20%) );}
 .navbar-yellow { @include gradientBar($orange,darken($orange,20%));}
 .navbar-red { @include gradientBar($red, darken($red,20%));}
+
+.box {
+  margin-top: 20px;
+  padding: 10px 20px 20px 20px;
+  border-radius: 4px;
+  background: #256c93;
+  box-shadow: 0 0 2px #033b40 inset;
+}

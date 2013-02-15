@@ -1,6 +1,7 @@
 class FisheriesController < InheritedResources::Base
   load_and_authorize_resource
-
+  skip_before_filter :authenticate!
+  
   respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
 
   def show

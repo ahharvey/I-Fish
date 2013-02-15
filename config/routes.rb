@@ -100,6 +100,7 @@ ExportXls::Application.routes.draw do
 
     get 'home/index'
     get 'home/upload_data'
+    get '/reports' => 'home#reports'
     post 'home/process_upload_data'
     match '/import_mail' => 'home#import_mail'
     

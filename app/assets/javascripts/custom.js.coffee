@@ -18,8 +18,8 @@ jQuery ->
       success: -> alert('Record updated')  
 
 show_ajax_message = (msg, type) ->
-  $("#flash-message").html "<div id='flash-#{type}'>#{msg}</div>"
-  $("#flash-#{type}").delay(5000).slideUp 'slow'
+  $(".flash-container").html "<div class='alert alert-#{type} fade in' data-alert='alert' style='margin-top:17px'>#{msg}</div>"
+  $(".alert-#{type}").delay(5000).slideUp 'slow'
  
 $(document).ajaxComplete (event, request) ->
   msg = request.getResponseHeader("X-Message")

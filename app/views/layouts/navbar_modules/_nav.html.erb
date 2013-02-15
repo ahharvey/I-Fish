@@ -14,29 +14,9 @@
 	  </li>
   <% end %>   
   <li class="dropdown navbar-green">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title=<%= t("navbar.reports") %> ><%= report_icon %><b class="caret"></b></a>
-    <ul class="dropdown-menu pull-right">
-      <% if admin_signed_in? || user_signed_in? %>
-        <li>
-          <%= link_to t("fisheries.title"), fisheries_path %>
-        </li>
-        <li>
-          <%= link_to t("desas.title"), desas_path %>
-        </li>
-        <li>
-          <%= link_to t("districts.title"), districts_path %>
-        </li>
-        <li>
-          <%= link_to t("provinces.title"), provinces_path %>
-        </li>
-        <li>
-          <%= link_to t("users.title"), users_path %>
-        </li>
-        <li>
-          <%= link_to t("admins.title"), admins_path %>
-        </li>
-      <% end %>
-    </ul>
+    <%= link_to reports_path, class: "", title: t("navbar.reports") do %>
+      <%= report_icon %>
+    <% end %>
   </li>
   <li class="divider-vertical"></li>
   <% if admin_signed_in? || user_signed_in? %>
