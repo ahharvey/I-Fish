@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>APPROVAL REQUEST :: New Survey Data</h1>
+
+    <h3><%= @data.fishery.name %></h3>
+    <p><%= @data.date %></p>
+    
+    <p>A team member has uploaded new survey data to FishNet.</p>
+
+    <p>Please login and approve this survey.</p>
+
+    <p><%= link_to "LOG IN", @url %></p>
+
+  </body>
+</html>
