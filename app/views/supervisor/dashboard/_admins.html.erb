@@ -17,7 +17,7 @@
 	    <% for admin in @admins %>
 			  <tr>
 			  	<td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
-			    <td><%= link_to admin.name, [:panel, admin] %></td>
+			    <td><%= link_to admin.name, panel_admin_path(admin) %></td>
 			    <td>
 			      <div class="controls toggle switch" 
 			          data-toggleButton-label-enabled="Yes" 
