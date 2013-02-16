@@ -32,8 +32,12 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-home icon-white icon-2x')
   end
 
-  def upload_icon
+  def upload_icon_menu
     content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-2x')
+  end
+
+  def upload_icon
+    content_tag(:i, "", class: 'icon-cloud-upload icon-white')
   end
 
   def upload_icon_large

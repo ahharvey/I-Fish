@@ -29,13 +29,14 @@ class HomeController < ApplicationController
 
         ActiveRecord::Base.transaction do
           if excel_file.save
+            UserMailer.data_upload_success(@currently_signed_in, @model)
             ["Success to import data", 200]
           else
             logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
             logger.info(excel_file.errors.count)
             logger.info(excel_file.errors.full_messages)
             logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-
+            UserMailer.data_upload_failure(@currently_signed_in, @model)
             ["Failed, We have an error on the import data", 200]
           end
         end
