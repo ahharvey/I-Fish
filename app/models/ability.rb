@@ -8,10 +8,14 @@ class Ability
 
     if user_or_admin.class == User
       abilities_for_all_users(user_or_admin)
-      user_or_admin.roles.each { |role| send(role.name) }
-    elsif @admin = user_or_admin.class == Admin
+      user_or_admin.roles.each do |role| 
+        send(role.name, user_or_admin)
+      end
+    elsif user_or_admin.class == Admin
       abilities_for_all_admins(user_or_admin)
-      user_or_admin.roles.each { |role| send(role.name) }
+      user_or_admin.roles.each do |role| 
+        send(role.name, user_or_admin)
+      end
     end
     
   end
@@ -35,30 +39,30 @@ class Ability
   	can :manage, Admin, id: admin.id
   end
 
-  def public
+  def public(admin)
     can :read, User
-    can :manage, Admin, :id => @admin.id
+    can :manage, Admin, :id => admin.id
     can :read, Fishery
   end
 
-  def enumerator
+  def enumerator(admin)
     # Staff can view and edit data they own, and profiles of users who share the same district
-    can :manage, Logbook, :admin_id => @admin.id #Can manage own data
-    can :manage, Survey, :admin_id => @admin.id #Can manage own data
+    can :manage, Logbook, :admin_id => admin.id #Can manage own data
+    can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :read, Fishery # To view summarised fishery data
     can :read, User
-    can :manage, Admin, :id => @admin.id
+    can :manage, Admin, :id => admin.id
   end
 
-  def staff
+  def staff(admin)
     # Staff can view and edit data they own, and profiles of users who share the same district
-    can :manage, Survey, :admin_id => @admin.id #Can manage own data
+    can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :read, Fishery # To view summarised fishery data
     can :read, User
-    can :read, Admin, :id => @admin.id
+    can :read, Admin, :id => admin.id
   end
 
-  def supervisor
+  def supervisor(admin)
     #Supervissors inherit abilities of enuemerators
      
     
@@ -66,20 +70,20 @@ class Ability
     # Supervisors can view and edit data owned by staff who share the same office.
     can :read, User
     can :manage, User do |user|
-      user.desa.district_id == @admin.office.district_id
+      user.desa.district_id == admin.office.district_id
     end
-    can :read, Admin, Admin.includes(:roles).where(:roles => {:name => "staff"}, :office_id => @admin.office_id) do |a|
+    can :read, Admin, Admin.includes(:roles).where(:roles => {:name => "staff"}, :office_id => admin.office_id) do |a|
     end
-    can :manage, Survey, Survey.includes(:desa).where(:desas => {:district_id => @admin.office.district_id}) do |survey|
+    can :manage, Survey, Survey.includes(:desa).where(:desas => {:district_id => admin.office.district_id}) do |survey|
     end
     can :read, Fishery # To view summarised fishery data
   end
 
-  def leader
+  def leader(admin)
     
   end
 
-  def administrator
+  def administrator(admin)
     
     can :manage, :all
   end
