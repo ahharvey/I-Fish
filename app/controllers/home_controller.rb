@@ -14,11 +14,11 @@ class HomeController < ApplicationController
  
 
   def multipart_import
-    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    logger.info(params)
-    logger.info(params[:attachments]["0"])
-    logger.info(params[:envelope]["from"])
-    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    #logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    #logger.info(params)
+    #logger.info(params[:attachments]["0"])
+    #logger.info(params[:envelope]["from"])
+    #logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
     admin = Admin.where(:email => params[:envelope]["from"]).first rescue nil
     id = admin.id rescue nil
 
@@ -32,10 +32,10 @@ class HomeController < ApplicationController
             UserMailer.data_upload_success(admin, excel_file)
             ["Success to import data", 200]
           else
-            logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-            logger.info(excel_file.errors.count)
-            logger.info(excel_file.errors.full_messages)
-            logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+            #logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+            #logger.info(excel_file.errors.count)
+            #logger.info(excel_file.errors.full_messages)
+            #logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
             UserMailer.data_upload_failure(admin, excel_file)
             ["Failed, We have an error on the import data", 200]
           end
