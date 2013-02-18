@@ -24,19 +24,19 @@ class HomeController < ApplicationController
 
     text, status = if admin
       if params[:attachments]["0"]
-        parameters = {file: params[:attachments]["0"], user_id: id}
+        parameters = {file: params[:attachments]["0"], admin_id: id}
         excel_file = ExcelFile.new(parameters)
 
         ActiveRecord::Base.transaction do
           if excel_file.save
-            UserMailer.data_upload_success(@currently_signed_in, @model)
+            UserMailer.data_upload_success(admin, excel_file)
             ["Success to import data", 200]
           else
             logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
             logger.info(excel_file.errors.count)
             logger.info(excel_file.errors.full_messages)
             logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-            UserMailer.data_upload_failure(@currently_signed_in, @model)
+            UserMailer.data_upload_failure(admin, excel_file)
             ["Failed, We have an error on the import data", 200]
           end
         end

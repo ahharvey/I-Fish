@@ -4,20 +4,28 @@
   <% if admin_signed_in? %>
   	<li class="navbar-red">
 	    <%= link_to home_upload_data_path, class: "", title: t("navbar.upload") do %>
-	      <%= upload_icon_menu %>
+	      <%= upload_icon_nav %>
 	    <% end %>
     </li>
-	  <li class="dropdown navbar-yellow">
+	  <li class="navbar-yellow">
       <%= link_to supervisor_dashboard_index_path, class: "", title: t("navbar.upload") do %>
         <%= approve_icon %>
       <% end %>
 	  </li>
   <% end %>   
-  <li class="dropdown navbar-green">
+  <li class="navbar-green">
     <%= link_to reports_path, class: "", title: t("navbar.reports") do %>
       <%= report_icon %>
     <% end %>
   </li>
+  <li class="divider-vertical"></li>
+  <li>
+    <%= link_to "#", class: "", title: t("navbar.download"), data: { toggle: "modal", target: "#templates_modal" } do %>
+      <%= download_icon_nav %>    
+    <% end %>
+  </li>
+
+  
   <li class="divider-vertical"></li>
   <% if admin_signed_in? || user_signed_in? %>
 	  <li class="dropdown">

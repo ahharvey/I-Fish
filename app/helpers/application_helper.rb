@@ -32,7 +32,7 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-home icon-white icon-2x')
   end
 
-  def upload_icon_menu
+  def upload_icon_nav
     content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-2x')
   end
 
@@ -52,8 +52,8 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-bar-chart icon-white icon-2x')
   end
 
-  def download_icon
-    content_tag(:i, "", class: 'icon-download-alt')
+  def download_icon_nav
+    content_tag(:i, "", class: 'icon-cloud-download icon-white icon-2x')
   end
 
   def email_icon
