@@ -9,7 +9,7 @@ gem 'jquery-rails', '~> 2.2.1'
 gem 'jquery-ui-rails', '~> 4.0.1'
 gem 'simple_form', '~> 2.0.4'
 gem 'kaminari', '~> 0.14.1'
-gem 'rails-bootstrap-toggle-buttons', '~> 0.0.6'
+#gem 'rails-bootstrap-toggle-buttons', '~> 0.0.6'
 
 gem 'devise', '~> 2.2.3'
 gem 'cancan', '~> 1.6.9'
