@@ -1,7 +1,7 @@
 class HomeController < ApplicationController
   require 'mail'
   authorize_resource :class => false
-  #skip_before_filter :authenticate!#, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
+  skip_before_filter :authenticate!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
 
   def index
     @surveys = Survey.includes(:admin, :desa, :fishery).page(params[:page]).per(15)
