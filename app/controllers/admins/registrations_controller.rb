@@ -1,4 +1,5 @@
 class Admins::RegistrationsController < Devise::RegistrationsController
+  layout "signin"
 
 
   def avatar

@@ -110,3 +110,16 @@ label.boolean.optional.control-label.toggle-label {
   background: #256c93;
   box-shadow: 0 0 2px #033b40 inset;
 }
+
+.signin-container {
+  background: $USAIDlblue
+}
+.signin-panel {
+  margin-top:40px;
+  background: $white;
+}
+
+#preview {
+  max-width: none !important; /* fix for Bootstrap's max-width: 100% breaking Jcrop.*/
+}
+

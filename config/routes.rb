@@ -10,7 +10,8 @@ ExportXls::Application.routes.draw do
     devise_for :users,  
       path_prefix: 'session',
       controllers: { 
-        registrations: 'users#registrations'
+        registrations: 'users/registrations',
+        sessions: 'users/sessions'
       },
       path_names: {  
         sign_in: 'signin',
