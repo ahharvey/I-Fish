@@ -115,7 +115,7 @@ ExportXls::Application.routes.draw do
 
   end
 
-  match '/multipart_import' => 'home#multipart_import'
+  match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
 
   # handles /bad-locale|anything/valid-path
   match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
