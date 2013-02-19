@@ -1,16 +1,16 @@
 class UserMailer < ActionMailer::Base
   default from: "fishnet@imacsindonesia.com"
 
-  def data_upload_success(user, excel_file)
-    @user = user
+  def data_upload_success(admin, excel_file)
+    @admin = admin
     @excel_file = excel_file
-    mail(:to => @user.email, :subject => "Excel Spreadsheet upload succesful")
+    mail(:to => @admin.email, :subject => "Excel Spreadsheet upload succesful")
   end
 
-  def data_upload_failure(user, excel_file)
-    @user = user
+  def data_upload_failure(admin, excel_file)
+    @admin = admin
     @excel_file = excel_file
-    mail(:to => @user.email, :subject => "Excel Spreadsheet upload failure")
+    mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
   end
 
   def new_admin_waiting_for_approval(new_admin, supervisors)
@@ -26,5 +26,15 @@ class UserMailer < ActionMailer::Base
     @supervisors = data.admin.supervisors
     @url = supervisor_dashboard_index_url
     mail(:to => @supervisors.all.map(&:email), :subject => "APPROVAL REQUEST :: New Survey Data")
+  end
+  
+  def data_upload_failure_no_attachment(admin)
+    @admin = admin
+    mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
+  end
+
+  def data_upload_failure_email_not_recognized(admin)
+    @admin = admin
+    mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
   end
 end

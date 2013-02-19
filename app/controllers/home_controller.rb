@@ -43,9 +43,11 @@ class HomeController < ApplicationController
           end
         end
       else
+        UserMailer.data_upload_failure_no_attachment(admin)
         ["Failed, there is no attached file", 200]
       end
     else
+      UserMailer.data_upload_failure_email_not_recognized(admin)
       ["Failed, unregistered email not allowed to import", 200]
     end
 
