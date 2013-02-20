@@ -6,13 +6,8 @@
 
       <div class="control-group">
         <%= f.label :threatened, class: "toggle-label" %>
-        
-        <div class="controls toggle switch switch-large" 
-          data-toggleButton-label-enabled="Yes" 
-          data-toggleButton-label-disabled="No" 
-          data-toggleButton-style-enabled="danger" 
-          data-toggleButton-style-disabled="" 
-          data-toggleButton-height="40"> 
+
+        <div class="controls switch switch-large" data-on= "danger" data-off="" data-on-label="YES" data-off-label= "NO">
             <%= f.check_box :threatened %>
         </div>
       </div>
