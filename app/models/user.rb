@@ -44,6 +44,7 @@ class User < ActiveRecord::Base
   belongs_to :desa
   has_and_belongs_to_many :roles, :before_add => :validates_role
   has_many :logbooks
+  has_many :activities, as: :ownable
 
   
   mount_uploader :avatar, AvatarUploader

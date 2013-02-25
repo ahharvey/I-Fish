@@ -6,10 +6,13 @@ class LogbooksController < InheritedResources::Base
   def set_approved
   	@logbook = Logbook.find params[:id]
   	@logbook.update_column :approved, params[:approved]
-  	if @logbook.approved == true
+  	if @logbook.approved?
+  		track_activity @survey
 	  	@logbook.update_column :approver_id, current_admin.id
+	  	flash[:success] = "Approved"
 	  else
-	  	@logbook.update_column :approver_id, ""
+	  	@logbook.update_column :approver_id, nil
+	  	flash[:error] = "Not Approved"
 	  end
 	  render nothing: true
 	end

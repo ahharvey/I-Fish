@@ -41,6 +41,11 @@ class Panel::AdminsController < ApplicationController
   def set_approved
     @admin = Admin.find(params[:id])
     @admin.update_column :approved, params[:approved]
+    if @admin.approved?
+      flash[:success] = "Approved"
+    else
+      flash[:error] = "Not Approved"
+    end
     render nothing: true
   end
 

@@ -1,8 +1,4 @@
 ExportXls::Application.routes.draw do
-  
-  
-
-  
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
@@ -95,6 +91,7 @@ ExportXls::Application.routes.draw do
     end
     resources :logged_days
     resources :excel_files
+    resources :activities
 
     resources :users, :only => [:index, :show, :edit, :update]
     resources :admins, :only => [:index, :show, :edit, :update]
@@ -108,6 +105,8 @@ ExportXls::Application.routes.draw do
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'
 
+    match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
+
     # handles /valid-locale
     root to: 'home#index'
     # handles /valid-locale/fake-path
@@ -115,7 +114,7 @@ ExportXls::Application.routes.draw do
 
   end
 
-  match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
+ 
 
   # handles /bad-locale|anything/valid-path
   match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")

@@ -41,6 +41,10 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
+
+  def track_activity(trackable, action = params[:action])
+    @currently_signed_in.activities.create! action: action, trackable: trackable 
+  end
   
 
   private
@@ -61,13 +65,13 @@ class ApplicationController < ActionController::Base
   end
 
   def flash_message
-    [:error, :warning, :notice].each do |type|
+    [:alert, :error, :notice, :success].each do |type|
       return flash[type] unless flash[type].blank?
     end
   end
 
   def flash_type
-    [:error, :warning, :notice].each do |type|
+    [:alert, :error, :notice, :success].each do |type|
       return type unless flash[type].blank?
     end
   end

@@ -45,6 +45,7 @@ class Admin < ActiveRecord::Base
   has_many :approved_surveys, :class_name => 'Survey', :foreign_key => 'approver_id'
   has_many :logbooks
   has_many :approved_logbooks, :class_name => 'Logbook', :foreign_key => 'approver_id'
+  has_many :activities, as: :ownable
 
 
   after_create :set_default_role

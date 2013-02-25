@@ -6,7 +6,7 @@
     <td><%= admin.district.name %></td>
     <td><%= admin.province.name %></td>
     <td>
-      <div class="controls switch switch-mini" data-on= "success" data-off="danger" data-on-label="<i class='icon-ok icon-white'></i>" data-off-label= "<i class='icon-remove icon-white'></i>">
+      <div class="controls toggle switch switch-mini" data-toggleButton-style-enabled= "success" data-toggleButton-style-disabled="danger" data-toggleButton-label-enabled="YES" data-toggleButton-label-disabled="NO" data-toggleButton-height="20" data-toggleButton-width="80">
         <%= check_box_tag :approved, admin.id, admin.approved?, class: 'approve-toggle', data: { href: set_approved_panel_admin_path(admin) } %>
       </div>
     </td>

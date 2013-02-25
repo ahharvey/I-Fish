@@ -132,4 +132,12 @@ module ApplicationHelper
     image_tag("pdf.png", class: "", alt: "PDF", width: 16)
   end
 
+  def approve_icon2
+    content_tag(:i, "", class: 'icon-ok icon-white icon-large')
+  end
+
+  def unapprove_icon2
+    content_tag(:i, "", class: 'icon-remove icon-white icon-large')
+  end
+
 end

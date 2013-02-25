@@ -7,7 +7,7 @@
   <b>Approved:</b>
 </div>
 <div class="span1">
-  <div class="controls switch switch-large" data-on= "success" data-off="danger" data-on-label="<i class='icon-ok icon-white icon-large'></i>" data-off-label= "<i class='icon-remove icon-white icon-large'></i>">
+  <div class="controls toggle switch switch-large" data-toggleButton-style-enabled= "success" data-toggleButton-style-disabled="danger" data-toggleButton-label-enabled="YES" data-toggleButton-label-disabled="NO" >
   	<%= check_box_tag :approved, @survey.id, @survey.approved?, class: 'approve-toggle', data: { href: set_approved_survey_path(@survey) } %>
   </div>
 </div>

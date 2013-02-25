@@ -1,0 +1,25 @@
+<% title "Activity Feed" %>
+
+
+
+
+<div class="container">
+	<div class="row-fluid">
+		<div class="span6 offset3">
+			<h5>Recent Activity</h5>
+
+			
+			<div id="surveys">
+				<% @activities.each do |activity| %>
+					<%= ActivityPresenter.new(activity, self).render_activity %>
+				<% end %>
+			</div>
+			
+			<div class="row">
+				
+				
+			</div>
+		</div>
+		
+	</div>
+</div>

@@ -50,7 +50,7 @@ class Survey < ActiveRecord::Base
 		presence: true
 	validates :admin_id,
 		presence: true
-	validate :uniqueness_of_survey
+#	validate :uniqueness_of_survey
 
 	def uniqueness_of_survey
 		# TODO: Is there a better way of doing this?
