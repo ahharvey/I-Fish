@@ -2,7 +2,7 @@ require 'iconv'
 
 class ImportExcelData
   def self.working_based_sheet(xl_file, excel_data)
-    # xl_file = ExcelFile.find(id)
+    #xl_file = ExcelFile.find(id)
 
     if xl_file.file.file.extension.eql?("xls")
       xls = Excel.new(xl_file.file.path)

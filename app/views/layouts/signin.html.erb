@@ -10,10 +10,10 @@
   <body data-spy="scroll" data-target=".bs-docs-sidebar" class="signin-container">
     <%= render partial: "layouts/navbar" %>
     <div class="container" style="margin-top:50px">
-      <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
-      <%= render partial: "shared/model_error_messages" %>
       <div class="row">
       	<div class="span6 offset3 well signin-panel">
+          <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
+          <%= render partial: "shared/model_error_messages" %>
 		      <div class="page-header">
 		  	    <h3><%= yield (:title) || "FishStat" %></h3>
 		      </div><!-- page-header -->

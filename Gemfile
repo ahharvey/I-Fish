@@ -17,7 +17,7 @@ gem 'omniauth', '~> 1.1.3'
 
 gem 'carrierwave', '~> 0.8.0'
 gem 'fog', '~> 1.9.0'
-gem 'roo', '~> 1.10.2'
+gem 'roo', '< 1.10.2'
 gem 'mini_magick', '~> 3.5.0'
 gem 'rmagick', '~> 2.13.2'
 
@@ -44,6 +44,7 @@ group :development do
   #gem 'pry-debugger'
   #gem 'pry-stack_explorer'
   gem 'debugger'
+
   gem 'annotate'
   gem 'hirb'
   gem 'better_errors'
