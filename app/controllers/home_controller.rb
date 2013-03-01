@@ -21,7 +21,8 @@ class HomeController < ApplicationController
     #logger.info(params[:attachments]["0"])
     #logger.info(params[:envelope]["from"])
     #logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    admin = Admin.where(:email => params[:envelope]["from"]).first rescue nil
+    email = params[:envelope]["from"]
+    admin = Admin.where(:email => email).first rescue nil
     id = admin.id rescue nil
 
     text, status = if admin
@@ -47,7 +48,7 @@ class HomeController < ApplicationController
         ["Failed, there is no attached file", 200]
       end
     else
-      UserMailer.data_upload_failure_email_not_recognized(admin)
+      UserMailer.data_upload_failure_email_not_recognized(email)
       ["Failed, unregistered email not allowed to import", 200]
     end
 

@@ -33,8 +33,8 @@ class UserMailer < ActionMailer::Base
     mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
   end
 
-  def data_upload_failure_email_not_recognized(admin)
-    @admin = admin
-    mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
+  def data_upload_failure_email_not_recognized(email)
+    @email = email
+    mail(:to => @email, :subject => "Excel Spreadsheet upload failure")
   end
 end
