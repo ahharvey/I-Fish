@@ -16,11 +16,16 @@ class HomeController < ApplicationController
 
   def multipart_import
     #authorize! :multipart_import, :home
-    #logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    #logger.info(params)
-    #logger.info(params[:attachments]["0"])
-    #logger.info(params[:envelope]["from"])
-    #logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    logger.info(params)
+    logger.info(params[:attachments]["0"])
+    logger.info(params[:envelope]["from"])
+    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    puts "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+    puts params
+    puts params[:attachments]["0"]
+    puts params[:envelope]["from"]
+    puts "HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
     email = params[:envelope]["from"]
     admin = Admin.where(:email => email).first rescue nil
     id = admin.id rescue nil
