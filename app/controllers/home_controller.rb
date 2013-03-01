@@ -39,6 +39,7 @@ class HomeController < ApplicationController
           if excel_file.save
             UserMailer.data_upload_success(admin, excel_file)
             ["Success to import data", 200]
+            puts "Success to import data"
           else
             #logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
             #logger.info(excel_file.errors.count)
@@ -46,15 +47,18 @@ class HomeController < ApplicationController
             #logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
             UserMailer.data_upload_failure(admin, excel_file)
             ["Failed, We have an error on the import data", 200]
+            puts "Failed, We have an error on the import data"
           end
         end
       else
         UserMailer.data_upload_failure_no_attachment(admin)
         ["Failed, there is no attached file", 200]
+        puts "Failed, there is no attached file"
       end
     else
       UserMailer.data_upload_failure_email_not_recognized(email)
       ["Failed, unregistered email not allowed to import", 200]
+      puts "Failed, unregistered email not allowed to import"
     end
 
     logger.info(text)
