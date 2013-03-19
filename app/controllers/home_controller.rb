@@ -37,7 +37,7 @@ class HomeController < ApplicationController
 
         ActiveRecord::Base.transaction do
           if excel_file.save
-            UserMailer.data_upload_success(admin, excel_file)
+            UserMailer.data_upload_success(admin, excel_file).deliver
             ["Success to import data", 200]
             puts "Success to import data"
           else
@@ -45,18 +45,18 @@ class HomeController < ApplicationController
             #logger.info(excel_file.errors.count)
             #logger.info(excel_file.errors.full_messages)
             #logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-            UserMailer.data_upload_failure(admin, excel_file)
+            UserMailer.data_upload_failure(admin, excel_file).deliver
             ["Failed, We have an error on the import data", 200]
             puts "Failed, We have an error on the import data"
           end
         end
       else
-        UserMailer.data_upload_failure_no_attachment(admin)
+        UserMailer.data_upload_failure_no_attachment(admin).deliver
         ["Failed, there is no attached file", 200]
         puts "Failed, there is no attached file"
       end
     else
-      UserMailer.data_upload_failure_email_not_recognized(email)
+      UserMailer.data_upload_failure_email_not_recognized(email).deliver
       ["Failed, unregistered email not allowed to import", 200]
       puts "Failed, unregistered email not allowed to import"
     end
@@ -149,14 +149,14 @@ class HomeController < ApplicationController
         if excel_file.save
           excel_info.close
           logger.info("import by email : Successfully upload data to database")
-          UserMailer.data_upload_success(@currently_signed_in, @model)
+          UserMailer.data_upload_success(@currently_signed_in, @model).deliver
           ["success", 200]
         else
           excel_info.close
           logger.info(attach_code)
           logger.info(excel_file.errors)
           logger.info("import by email : Failed to upload data")
-          UserMailer.data_upload_failure(@currently_signed_in, @model)
+          UserMailer.data_upload_failure(@currently_signed_in, @model).deliver
           ["Failed import data by email", 200]
         end
       else
