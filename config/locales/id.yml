@@ -138,6 +138,7 @@ id:
     fishery_profile: "Fishery profile"
     upload: "Mengupload"
     panel: "Panel"
+    download: "Download templates"
   devise:
     signin: "Sign in"
     signout: "Sign out"

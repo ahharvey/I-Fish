@@ -10,7 +10,8 @@ ExportXls::Application.routes.draw do
     devise_for :users,  
       path_prefix: 'session',
       controllers: { 
-        registrations: 'users#registrations'
+        registrations: 'users/registrations',
+        sessions: 'users/sessions'
       },
       path_names: {  
         sign_in: 'signin',
@@ -100,6 +101,7 @@ ExportXls::Application.routes.draw do
 
     get 'home/index'
     get 'home/upload_data'
+    get '/reports' => 'home#reports'
     post 'home/process_upload_data'
     match '/import_mail' => 'home#import_mail'
     
@@ -113,7 +115,7 @@ ExportXls::Application.routes.draw do
 
   end
 
-  match '/multipart_import' => 'home#multipart_import'
+  match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
 
   # handles /bad-locale|anything/valid-path
   match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")

@@ -48,7 +48,7 @@ class Admin < ActiveRecord::Base
 
 
   after_create :set_default_role
-  after_create :send_admin_mail
+  after_create :send_approval_mail
 
   # sets default role to public
   def set_default_role
@@ -57,8 +57,8 @@ class Admin < ActiveRecord::Base
   end
 
   # sends approval email to Supervisor
-  def send_admin_mail
-    UserMailer.new_admin_waiting_for_approval(self).deliver
+  def send_approval_mail
+    UserMailer.new_admin_waiting_for_approval(self, self.supervisors).deliver
   end
 
   # Ability Methods
@@ -138,6 +138,10 @@ class Admin < ActiveRecord::Base
 
   def team_members
     Admin.where( office_id: self.office_id )
+  end
+
+  def supervisors
+    Admin.joins(:roles).where(roles: {name: ["supervisor", "leader", "administrator"]}).where(office_id: self.office_id)
   end
 
   def supervised_surveys

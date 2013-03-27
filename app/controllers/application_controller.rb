@@ -1,15 +1,17 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   before_filter :set_locale
-  before_filter :authenticate!
+  #before_filter :authenticate!
+  before_filter :set_currently_signed_in
   after_filter :flash_to_headers
   # Override default Cancan current ability to fetch a specific one
   def current_ability
   	@current_ability ||= case
   	  when current_user
-  	  	UserAbility.new(current_user)
+  	  	Ability.new(current_user)
   	  when current_admin
-  	  	AdminAbility.new(current_admin)
+  	  	Ability.new(current_admin)
+      else Ability.new(User.new) 
   	  end
   end
 
@@ -22,6 +24,14 @@ class ApplicationController < ActionController::Base
   	  authenticate_user!
   	  @currently_signed_in = current_user
   	end
+  end
+
+  def set_currently_signed_in
+    if admin_signed_in?
+      @currently_signed_in = current_admin
+    else
+      @currently_signed_in = current_user
+    end
   end
 
   def user_for_paper_trail

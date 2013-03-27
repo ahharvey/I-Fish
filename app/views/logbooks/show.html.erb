@@ -1,26 +1,19 @@
 <% title t ".title" %>
 
 <div class="row">
-
-  <div class="span1 offset5">
-
-    <div class="controls toggle switch" 
-      data-toggleButton-label-enabled="Approved" 
-      data-toggleButton-label-disabled="Not Approved" 
-      data-toggleButton-style-enabled="success" 
-      data-toggleButton-style-disabled="danger" 
-      data-toggleButton-height="40"
-      data-toggleButton-width="250"> 
-    <%= check_box_tag :approved, @logbook.id, @logbook.approved?, class: 'approve-toggle', data: { href: set_approved_logbook_path(@logbook) } %>
-    </div>
-
+  <div class="span7">
+    <% if can? :update, @logbook %>
+      <%= render partial: "logbooks/supervisor_controls" %>
+    <% end %>
   </div>
-
-  <div class="span6">
+  <div class="span5">
     <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
   </div>
 
 </div>
+
+<br />
+<br />
 
 <div class="pull-right">
   <dl class="dl-horizontal">

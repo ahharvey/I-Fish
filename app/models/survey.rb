@@ -58,6 +58,11 @@ class Survey < ActiveRecord::Base
 			errors.add(:base, "Survey has been uploaded already.")
 		end
 	end
+	
+	after_create :send_approval_mail
+	def send_approval_mail
+    UserMailer.new_data_waiting_for_approval(self).deliver
+  end
 
 	def self.import_from_email(params,user_id)
 		params.flatten.each do |param|

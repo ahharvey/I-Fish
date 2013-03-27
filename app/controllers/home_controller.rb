@@ -1,43 +1,53 @@
 class HomeController < ApplicationController
   require 'mail'
-
+  authorize_resource :class => false
   skip_before_filter :authenticate!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
+  skip_authorize_resource :only => :multipart_import
 
   def index
     @surveys = Survey.includes(:admin, :desa, :fishery).page(params[:page]).per(15)
-      
   end
 
-  def multipart_import
-    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    logger.info(params)
-    logger.info(params[:attachments]["0"])
-    logger.info(params[:envelope]["from"])
-    logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
-    user = User.where(:email => params[:envelope]["from"]).first rescue nil
-    id = user.id rescue nil
+  def reports
+    authorize! :reports, :home
+  end
 
-    text, status = if user
+ 
+
+  def multipart_import
+    #authorize! :multipart_import, :home
+    #logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    #logger.info(params)
+    #logger.info(params[:attachments]["0"])
+    #logger.info(params[:envelope]["from"])
+    #logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+    admin = Admin.where(:email => params[:envelope]["from"]).first rescue nil
+    id = admin.id rescue nil
+
+    text, status = if admin
       if params[:attachments]["0"]
-        parameters = {file: params[:attachments]["0"], user_id: id}
+        parameters = {file: params[:attachments]["0"], admin_id: id}
         excel_file = ExcelFile.new(parameters)
 
         ActiveRecord::Base.transaction do
           if excel_file.save
+            UserMailer.data_upload_success(admin, excel_file).deliver
             ["Success to import data", 200]
           else
-            logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-            logger.info(excel_file.errors.count)
-            logger.info(excel_file.errors.full_messages)
-            logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
-
+            #logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+            #logger.info(excel_file.errors.count)
+            #logger.info(excel_file.errors.full_messages)
+            #logger.info("SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS")
+            UserMailer.data_upload_failure(admin, excel_file).deliver
             ["Failed, We have an error on the import data", 200]
           end
         end
       else
+        UserMailer.data_upload_failure_no_attachment(admin).deliver
         ["Failed, there is no attached file", 200]
       end
     else
+      UserMailer.data_upload_failure_email_not_recognized(admin).deliver
       ["Failed, unregistered email not allowed to import", 200]
     end
 
@@ -129,14 +139,14 @@ class HomeController < ApplicationController
         if excel_file.save
           excel_info.close
           logger.info("import by email : Successfully upload data to database")
-          UserMailer.data_upload_success(@currently_signed_in, @model)
+          UserMailer.data_upload_success(@currently_signed_in, @model).deliver
           ["success", 200]
         else
           excel_info.close
           logger.info(attach_code)
           logger.info(excel_file.errors)
           logger.info("import by email : Failed to upload data")
-          UserMailer.data_upload_failure(@currently_signed_in, @model)
+          UserMailer.data_upload_failure(@currently_signed_in, @model).deliver
           ["Failed import data by email", 200]
         end
       else
