@@ -33,7 +33,7 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :rememberable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :office_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :approved, :office_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
 
   validates :name, presence: true
 

@@ -778,43 +778,53 @@ admin1 = office1.admins.create(email: "admin@fish.com",
   name: "Admin Adminson",
   office_id: office1.id,
   password: "admin1",
-  password_confirmation: "admin1")
+  password_confirmation: "admin1",
+  approved: true)
+admin1.roles.push role_admin
+admin1.roles.push role_staff
 
 admin_staff1 = Admin.create(email: "staff1@fish.com",
 	name: "staff1",
 	password: "staff1",
 	password_confirmation: "staff1",
+	approved: true,
 	office_id: office1.id)
+admin_staff1.roles.push role_admin
 admin_staff1.roles.push role_staff
+
 admin_staff2 = Admin.create(email: "staff2@fish.com",
 	name: "staff2",
 	password: "staff2",
 	password_confirmation: "staff2",
+	approved: true,
 	office_id: office2.id)
+admin_staff2.roles.push role_admin
 admin_staff2.roles.push role_staff
 
 admin_staff2 = Admin.create(email: "rm.sylvester@gmail.com",
 	name: "rmsylvester",
 	password: "Password1",
 	password_confirmation: "Password1",
+	approved: true,
 	office_id: office2.id)
+admin_staff2.roles.push role_admin
 admin_staff2.roles.push role_staff
 
-admin_supervisor1 = Admin.create(email: "supervisor1@fish.Common",
+admin_supervisor1 = Admin.create(email: "supervisor1@fish.com",
 	name: "supervisor1",
 	password: "supervisor1",
 	password_confirmation: "supervisor1",
+	approved: true,
 	office_id: office1.id)
+admin_supervisor1.roles.push role_admin
 admin_supervisor1.roles.push role_supervisor
+
 admin_supervisor2 = Admin.create(email: "supervisor2@fish.com",
 	name: "supervisor2",
 	password: "supervisor2",
 	password_confirmation: "supervisor2",
+	approved: true,
 	office_id: office2.id)
+admin_supervisor2.roles.push role_admin
 admin_supervisor2.roles.push role_supervisor
 
-
-
-
-
-								
