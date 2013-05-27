@@ -4,12 +4,12 @@ class DesasController < InheritedResources::Base
   respond_to :html, :xml, :json
 
   def index
-  	@desas = Desa.all 
+    @desas = Desa.all 
     @placemarks = @desas.to_gmaps4rails do |desa, marker|
-  		marker.infowindow render_to_string(:partial => "/desas/popup", :locals => { :object => desa})
-  		marker.title   desa.name
-      	marker.json({ :id => desa.id })
-  	end
+      marker.infowindow render_to_string(:partial => "/desas/popup", :locals => { :object => desa})
+      marker.title   desa.name
+        marker.json({ :id => desa.id })
+    end
 
     respond_to do |format|
       format.html
@@ -19,7 +19,7 @@ class DesasController < InheritedResources::Base
   end
 
   def edit
-  	@placemarks = @desa.to_gmaps4rails do |desa, marker|
+    @placemarks = @desa.to_gmaps4rails do |desa, marker|
       
       marker.title   desa.name
       marker.json({ :id => desa.id })
@@ -27,7 +27,7 @@ class DesasController < InheritedResources::Base
   end
 
   def new
-  	@placemarks = @desa.to_gmaps4rails do |desa, marker|
+    @placemarks = @desa.to_gmaps4rails do |desa, marker|
       
       marker.title   desa.name
       marker.json({ :id => desa.id })

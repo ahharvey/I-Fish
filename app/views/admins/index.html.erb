@@ -6,16 +6,12 @@
   <tr>
     <th>Email</th>
     <th>Name</th>
-    <th></th>
   </tr>
 
   <% @admins.each do |admin| %>
     <tr>
       <td><%= admin.email %></td>
       <td><%= admin.name %></td>
-      <td>
-        <%= link_to show_icon, admin %>
-      </td>
     </tr>
   <% end %>
 </table>

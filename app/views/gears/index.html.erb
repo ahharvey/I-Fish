@@ -9,7 +9,8 @@
 
 <table class="table table-striped table-condensed datatable">
   <thead>
-    <tr>    
+    <tr>   
+      <th></th> 
       <th><%= Gear.human_attribute_name(:alpha_code) %></th>
       <th><%= Gear.human_attribute_name(:fao_code) %></th>
       <th><%= Gear.human_attribute_name(:num_code) %></th>
@@ -21,6 +22,7 @@
 
     <% @gears.each do |gear| %>
       <tr>
+        <td><%= link_to show_icon, gear %></td>
         <td><%= gear.alpha_code %></td>
         <td><%= gear.fao_code %></td>
         <td><%= gear.num_code %></td>
@@ -30,9 +32,9 @@
           <%= gear.name? ? gear.name : "" %>
         </td>
         <td>
-            <%= link_to show_icon, gear %>
+            
             <%= link_to edit_icon, edit_gear_path(gear) %>
-            <%= link_to destroy_icon, gear, method: :delete, data: { confirm: 'Are you sure?' } %>
+            <%= link_to destroy_icon, gear, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>
         </td>
       </tr>
     <% end %>

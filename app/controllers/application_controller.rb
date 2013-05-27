@@ -6,24 +6,24 @@ class ApplicationController < ActionController::Base
   after_filter :flash_to_headers
   # Override default Cancan current ability to fetch a specific one
   def current_ability
-  	@current_ability ||= case
-  	  when current_user
-  	  	Ability.new(current_user)
-  	  when current_admin
-  	  	Ability.new(current_admin)
+    @current_ability ||= case
+      when current_user
+        Ability.new(current_user)
+      when current_admin
+        Ability.new(current_admin)
       else Ability.new(User.new) 
-  	  end
+      end
   end
 
   # Custom authenticate to handle current user or admin
   def authenticate!
-  	if admin_signed_in?
+    if admin_signed_in?
       authenticate_admin!
       @currently_signed_in = current_admin
     else
-  	  authenticate_user!
-  	  @currently_signed_in = current_user
-  	end
+      authenticate_user!
+      @currently_signed_in = current_user
+    end
   end
 
   def set_currently_signed_in
