@@ -2,13 +2,15 @@
 #
 # Table name: logbooks
 #
-#  id         :integer          not null, primary key
-#  date       :date
-#  admin_id   :integer
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  fishery_id :integer
+#  id          :integer          not null, primary key
+#  date        :date
+#  admin_id    :integer
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  fishery_id  :integer
+#  approver_id :integer
+#  approved    :boolean          default(FALSE), not null
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html

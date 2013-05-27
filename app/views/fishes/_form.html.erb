@@ -7,9 +7,15 @@
       <div class="control-group">
         <%= f.label :threatened, class: "toggle-label" %>
 
-        <div class="controls toggle switch switch-large" data-toggleButton-style-enabled="danger" data-toggleButton-style-disabled="success" data-toggleButton-label-enabled="YES" data-toggleButton-label-disabled="NO" data-toggleButton-width="120" data-toggleButton-height="60">
+        <%= content_tag :div, class: "controls switch switch-large", 
+          data: {
+            on: "danger",
+            off: "success",
+            "on-label" => "YES",
+            "off-label" => "NO"
+          } do %>
             <%= f.check_box :threatened %>
-        </div>
+        <% end %>
       </div>
 
     </div>

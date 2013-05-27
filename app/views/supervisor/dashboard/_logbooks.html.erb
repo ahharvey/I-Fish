@@ -11,8 +11,7 @@
 
   <%if @logbooks.empty? %>
 		<tr>
-			<td></td>
-			<td><i>NO UNAPPROVED LOGBOOKS</i></td>
+			<td colspan="5" style="text-align:center;"><i>NO UNAPPROVED LOGBOOKS</i></td>
 		</tr>
 	<% else %>  
     <% @logbooks.each do |logbook| %>

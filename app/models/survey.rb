@@ -14,6 +14,8 @@
 #  catch_scribe   :string(255)
 #  catch_measure  :string(255)
 #  admin_id       :integer
+#  approved       :boolean          default(FALSE), not null
+#  approver_id    :integer
 #
 
 class Survey < ActiveRecord::Base
@@ -21,7 +23,7 @@ class Survey < ActiveRecord::Base
 	has_paper_trail
 
 	attr_accessible :date, :desa_id, :end_time, :fishery_id, :catch_measure,
-	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer
+	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer, :approved
 
 	belongs_to :admin
 	belongs_to :approver, :class_name => 'Admin'

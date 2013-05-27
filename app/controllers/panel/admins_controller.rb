@@ -15,7 +15,7 @@ class Panel::AdminsController < ApplicationController
   end
 
   def get_role
-  	role.try(:name)
+    role.try(:name)
   end
 
 
@@ -25,7 +25,7 @@ class Panel::AdminsController < ApplicationController
       if @admin.roles.include?(role)
         flash[:error]= I18n.t("panel.roles.exists")
       else
-    	 @admin.roles.push role
+       @admin.roles.push role
        flash[:success]= I18n.t("panel.roles.exists")
       end 
     end

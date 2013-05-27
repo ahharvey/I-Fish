@@ -1,14 +1,21 @@
 <% for admin in @admins %>
   <tr>
-  	<td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
+    <td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
     <td><%= link_to admin.name, [:panel, admin] %></td>
-    <td><%= admin.office.name %></td>
-    <td><%= admin.district.name %></td>
-    <td><%= admin.province.name %></td>
+    <td><%= admin.office.try(:name) %></td>
+    <td><%= admin.district.try(:name) %></td>
+    <td><%= admin.province.try(:name) %></td>
     <td>
-      <div class="controls toggle switch switch-mini" data-toggleButton-style-enabled= "success" data-toggleButton-style-disabled="danger" data-toggleButton-label-enabled="YES" data-toggleButton-label-disabled="NO" data-toggleButton-height="20" data-toggleButton-width="80">
+      <%= content_tag :div, 
+        class: "controls switch switch-mini", 
+        data: { 
+          on: "success", 
+          off: "danger", 
+          "on-label" => "YES", 
+          "off-label" => "NO"
+        } do %>
         <%= check_box_tag :approved, admin.id, admin.approved?, class: 'approve-toggle', data: { href: set_approved_panel_admin_path(admin) } %>
-      </div>
+      <% end %>
     </td>
     <td>
       <%= link_to show_icon, [:panel, admin] %>

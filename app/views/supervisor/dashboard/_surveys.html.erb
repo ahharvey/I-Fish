@@ -13,8 +13,7 @@
 
   <%if @surveys.empty? %>
 		<tr>
-			<td></td>
-			<td><i>NO UNAPPROVED SURVEYS</i></td>
+			<td colspan="7" style="text-align:center;"><i>NO UNAPPROVED SURVEYS</i></td>
 		</tr>
 	<% else %>
     <% @surveys.each do |survey| %>

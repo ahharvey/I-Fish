@@ -19,9 +19,21 @@
           <td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
           <td><%= link_to admin.name, [:panel, admin] %></td>
           <td>
-            <div class="controls toggle switch switch-mini" data-toggleButton-style-enabled= "success" data-toggleButton-style-disabled="danger" data-toggleButton-label-enabled="YES" data-toggleButton-label-disabled="NO" data-toggleButton-height="20" data-toggleButton-width="80">
-            <%= check_box_tag :approved, admin.id, admin.approved?, class: 'approve-toggle', data: { href: set_approved_panel_admin_path(admin) } %>
-            </div>
+            <%= content_tag :div, class: "controls toggle switch switch-mini",
+              data: {
+                on: "success",
+                off: "danger",
+                "on-label" => "YES",
+                "off-label" => "NO"
+                } do %>
+
+              <%= check_box_tag :approved, admin.id, 
+                admin.approved?, 
+                class: 'approve-toggle', 
+                data: { 
+                  href: set_approved_panel_admin_path(admin) 
+                } %>
+            <% end %>
           </td>
         </tr>
 			<% end %>
