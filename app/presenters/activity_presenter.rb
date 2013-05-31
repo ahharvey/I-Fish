@@ -11,12 +11,12 @@ class ActivityPresenter < SimpleDelegator
 		content_tag(:div, class: "row") do
 			div_for(activity, class: "") do
 				content_tag(:div, class: "media") do
-					link_to(activity.ownable, class: "pull-left") do
+					html = link_to(activity.ownable, class: "pull-left") do
 						image_tag(activity.ownable.avatar_url(:thumb), width: "50", height: "50", class: "media-object") if activity.ownable.avatar?
 					end
-					#content_tag(:div, class: "media-body") do
-					#	link_to(activity.ownable.name, activity.ownable) #+ " " + render_partial 
-					#end
+					html += content_tag(:div, class: "media-body") do
+						link_to(activity.ownable.name, activity.ownable) + " " + render_partial 
+					end
 				end
 			end
 		end

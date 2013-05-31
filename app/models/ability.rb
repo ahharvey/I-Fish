@@ -51,8 +51,6 @@ class Ability
     can :manage, Logbook, :admin_id => admin.id #Can manage own data
     can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :read, Fishery # To view summarised fishery data
-    can :read, User
-    can :manage, Admin, :id => admin.id
   end
 
   def staff(admin)
@@ -69,10 +67,9 @@ class Ability
     
     #AND#
     # Supervisors can view and edit data owned by staff who share the same office.
-    can :read, User
-    can :manage, User do |user|
-      user.desa.district_id == admin.office.district_id
-    end
+   
+    can :manage, User, desa: { district_id: admin.office.district_id}
+
     can :read, Admin, Admin.includes(:roles).where(:roles => {:name => "staff"}, :office_id => admin.office_id) do |a|
     end
     can :manage, Survey, Survey.includes(:desa).where(:desas => {:district_id => admin.office.district_id}) do |survey|
@@ -85,7 +82,6 @@ class Ability
   end
 
   def administrator(admin)
-    
     can :manage, :all
   end
 end

@@ -7,10 +7,10 @@ class SurveysController < InheritedResources::Base
     @survey = Survey.new(params[:survey])
     @survey.admin_id = @currently_signed_in.id
     if @survey.save 
-    	track_activity @recipe
-    	redirect_to @survey
+      track_activity @recipe
+      redirect_to @survey
     else
-    	render :new
+      render :new
     end
   end
 
@@ -25,17 +25,17 @@ class SurveysController < InheritedResources::Base
   end
 
   def set_approved
-	  @survey = Survey.find( params[:id] )
-	  @survey.update_column :approved, params[:approved]
-	  if @survey.approved?
-	  	track_activity @survey
-	  	@survey.update_column :approver_id, current_admin.id
-	  	flash[:success] = "Approved"
-	  else
-	  	@survey.update_column :approver_id, nil
-	  	flash[:error] = "Not Approved"
-	  end
-	  render nothing: true
-	end
+    @survey = Survey.find( params[:id] )
+    @survey.update_column :approved, params[:approved]
+    if @survey.approved?
+      track_activity @survey
+      @survey.update_column :approver_id, current_admin.id
+      flash[:success] = "Approved"
+    else
+      @survey.update_column :approver_id, nil
+      flash[:error] = "Not Approved"
+    end
+    render nothing: true
+  end
 
 end

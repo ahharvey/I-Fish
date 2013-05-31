@@ -17,7 +17,6 @@
 //= require bootstrap
 //= require bootstrap-switch
 //= require jquery.Jcrop
-//= require highcharts
 //= require gmaps4rails.base
 //= require gmaps4rails.googlemaps
 //= require dataTables/jquery.dataTables

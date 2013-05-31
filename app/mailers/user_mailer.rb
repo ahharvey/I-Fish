@@ -1,14 +1,14 @@
 class UserMailer < ActionMailer::Base
   default from: "fishnet@imacsindonesia.com"
 
-  def data_upload_success(admin, excel_file)
-    @admin = admin
-    @excel_file = excel_file
+  def data_upload_success(admin_id, excel_file_id)
+    @admin = Admin.find(admin_id)
+    @excel_file = Excel_file.find(excel_file_id)
     mail(:to => @admin.email, :subject => "Excel Spreadsheet upload succesful")
   end
 
-  def data_upload_failure(admin, excel_file)
-    @admin = admin
+  def data_upload_failure(admin_id, excel_file)
+    @admin = Admin.find(admin_id)
     @excel_file = excel_file
     mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
   end
@@ -28,13 +28,14 @@ class UserMailer < ActionMailer::Base
     mail(:to => @supervisors.all.map(&:email), :subject => "APPROVAL REQUEST :: New Survey Data")
   end
   
-  def data_upload_failure_no_attachment(admin)
-    @admin = admin
+  def data_upload_failure_no_attachment(admin_id, options= {} )
+    @admin = Admin.find(admin_id)
+    @attachments = options[:attachments].blank? ? [] : options[:attachments]
     mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
   end
 
-  def data_upload_failure_email_not_recognized(email)
-    @email = email
+  def data_upload_failure_email_not_recognized(sender)
+    @email = sender
     mail(:to => @email, :subject => "Excel Spreadsheet upload failure")
   end
 end

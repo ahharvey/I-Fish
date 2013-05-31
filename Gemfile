@@ -9,7 +9,6 @@ gem 'jquery-rails', '~> 2.2.1'
 gem 'jquery-ui-rails', '~> 4.0.1'
 gem 'simple_form', '~> 2.0.4'
 gem 'kaminari', '~> 0.14.1'
-#gem 'rails-bootstrap-toggle-buttons', '~> 0.0.6'
 gem 'bootstrap-switch-rails', '~> 0.1.1' #toggle buttons for Twitter Bootsterap
 
 gem 'devise', '~> 2.2.3'
@@ -21,6 +20,7 @@ gem 'fog', '~> 1.9.0'
 gem 'roo', '< 1.10.2'
 gem 'mini_magick', '~> 3.5.0'
 gem 'rmagick', '~> 2.13.2'
+gem 'griddler', '~> 0.5.0'  #Mandril API for incoming email handling
 
 gem 'paper_trail', '~> 2'
 
