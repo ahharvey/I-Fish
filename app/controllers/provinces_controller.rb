@@ -28,8 +28,8 @@ class ProvincesController < InheritedResources::Base
   	  
 
       format.html { render }
-      format.xml { render xml: @province.to_xml(include: { :surveys => {include: :landings => { include: :catches }}} ) }
-      format.json { render json: @province.to_json(include: { :surveys => {include: :landings => { include: :catches }}} ) }
+      format.xml { render xml: @province.to_xml(include: { :surveys => {include: { :landings => { include: :catches }}}} ) }
+      format.json { render json: @province.to_json(include: { :surveys => {include: { :landings => {include: :catches }}}} ) }
       format.csv { render text: @province.to_csv }
       format.xls
       format.pdf {
