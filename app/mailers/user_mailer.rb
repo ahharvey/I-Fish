@@ -14,10 +14,12 @@ class UserMailer < ActionMailer::Base
   end
 
   def new_admin_waiting_for_approval(new_admin, supervisors)
-    @admin = new_admin
-    @supervisors = supervisors
-    @url  = new_admin_session_url  
-    mail(:to => @supervisors.all.map(&:email), :subject => "APPROVAL REQUEST :: New Team Member")
+    if supervisors.length > 0
+      @admin = new_admin
+      @supervisors = supervisors
+      @url  = new_admin_session_url
+      mail(:to => @supervisors.all.map(&:email), :subject => "APPROVAL REQUEST :: New Team Member")
+    end
   end
 
   def new_data_waiting_for_approval(data)
