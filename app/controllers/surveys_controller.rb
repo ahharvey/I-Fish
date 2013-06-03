@@ -7,7 +7,7 @@ class SurveysController < InheritedResources::Base
     @survey = Survey.new(params[:survey])
     @survey.admin_id = @currently_signed_in.id
     if @survey.save 
-      track_activity @recipe
+      track_activity @survey
       redirect_to @survey
     else
       render :new
