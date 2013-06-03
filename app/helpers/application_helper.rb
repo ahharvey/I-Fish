@@ -117,11 +117,11 @@ module ApplicationHelper
   end
 
   def flag_en
-    content_tag(:img, "", src: "/assets/blank.gif", class: "flag flag-gb", alt: "English")
+    content_tag(:img, "", src: "#", class: "flag flag-gb", alt: "English")
   end
 
   def flag_id
-    content_tag(:img, "", src: "/assets/blank.gif", class: "flag flag-id", alt: "Indonesian")
+    content_tag(:img, "", src: "#", class: "flag flag-id", alt: "Indonesian")
   end
 
   def excel_image

@@ -4,7 +4,7 @@ class ProvincesController < InheritedResources::Base
   respond_to :html, :xml, :json, :csv, :xls, :except => [ :edit, :new, :update, :create ]
 
   def show
-    @province = Province.includes(:surveys, :landings, :catches).find(params[:id])
+    @province = Province.includes(:surveys, landings: { :catches } ).find(params[:id])
     @districts = @province.districts.uniq
     @fisheries = @province.fisheries.uniq
 
