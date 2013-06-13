@@ -77,8 +77,6 @@ class Landing < ActiveRecord::Base
 		inclusion: {
 			in: 1..999
 		}
-	validates :sail,
-		presence: true
 	validates :crew,
 		numericality: {
 			only_integer: true
