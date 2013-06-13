@@ -15,7 +15,7 @@
 		</tr>
 	<% else %>  
     <% @logbooks.each do |logbook| %>
-      <tr>
+      <tr class=<%= logbook.approved == false ? 'error' : ''%> >
         <td><%= logbook.date.to_s(:rfc822) %></td>
         <td><%= logbook.fishery.name %></td>
         <td>

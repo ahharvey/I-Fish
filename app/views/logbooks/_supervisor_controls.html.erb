@@ -16,5 +16,5 @@
     } do %>
 
     <%= check_box_tag :approved, @logbook.id, @logbook.approved?, class: 'approve-toggle', data: { href: set_approved_logbook_path(@logbook) } %>
-  <% end %>>
+  <% end %>
 </div>
