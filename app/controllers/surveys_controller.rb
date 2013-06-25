@@ -3,6 +3,9 @@ class SurveysController < InheritedResources::Base
 
   respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
 
+  def index
+  end
+  
   def create
     @survey = Survey.new(params[:survey])
     @survey.admin_id = @currently_signed_in.id
