@@ -6,7 +6,9 @@
 
 			
 			<div id="surveys">
-				<%= render @surveys %>
+				<% @activities.each do |activity| %>
+					<%= ActivityPresenter.new(activity, self).render_activity %>
+				<% end %>
 			</div>
 			
 			

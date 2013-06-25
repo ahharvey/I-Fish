@@ -8,18 +8,17 @@ class ActivityPresenter < SimpleDelegator
 	end
 
 	def render_activity
-		content_tag(:div, class: "row") do
-			div_for(activity, class: "") do
-				content_tag(:div, class: "media") do
-					html = link_to(activity.ownable, class: "pull-left") do
-						image_tag(activity.ownable.avatar_url(:thumb), width: "50", height: "50", class: "media-object") if activity.ownable.avatar?
-					end
-					html += content_tag(:div, class: "media-body") do
-						link_to(activity.ownable.name, activity.ownable) + " " + render_partial 
-					end
-				end
-			end
-		end
+		div_for activity, class: "media feed-item" do
+      contents = link_to activity.ownable, class: "pull-left", title: activity.ownable.name do
+        image_tag activity.ownable.avatar_url(:thumb), class: "media-object", size: '50x50', alt: activity.ownable.name 
+      end
+      contents += content_tag :div, class: "media-body" do
+        html = content_tag :b, class: "media-heading" do 
+          link_to activity.ownable.name, activity.ownable
+        end 
+        html += render_partial
+      end
+    end 
 	end
 
 	def render_partial
@@ -27,6 +26,7 @@ class ActivityPresenter < SimpleDelegator
 		locals[activity.trackable_type.underscore.to_sym] = activity.trackable
 		render partial_path, locals
 	end
+
 
 	def partial_path
 		partial_paths.detect do |path|

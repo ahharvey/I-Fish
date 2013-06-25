@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   skip_authorize_resource :only => :multipart_import
 
   def index
-    @surveys = Survey.includes(:admin, :desa, :fishery).page(params[:page]).per(15)
+    @activities = Activity.includes(:ownable).page(params[:page]).per(15)
   end
 
   def reports
