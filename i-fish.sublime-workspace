@@ -1,0 +1,445 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Activity",
+				"ActivityFeed"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"command_palette":
+	{
+		"height": 267.0,
+		"selected_items":
+		[
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 251.0
+	},
+	"console":
+	{
+		"height": 118.0
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/Users/andrewharvey/Code/i-fish/assets/css/bootstrap.css",
+		"/Users/andrewharvey/Code/i-fish/assets/css/bootstrap.min.css",
+		"/Users/andrewharvey/Code/i-fish/index.html",
+		"/Users/andrewharvey/Code/i-fish/assets/css/docs.css",
+		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap.min.css",
+		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap.css",
+		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap-responsive.min.css.css",
+		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap-responsive.css",
+		"/Users/andrewharvey/Code/i-fish/javascripts/bootstrap.min.js",
+		"/Users/andrewharvey/Code/i-fish/javascripts/bootstrap.js",
+		"/Users/andrewharvey/Code/i-fish/config/application.rb",
+		"/Users/andrewharvey/Code/i-fish/config/environment.rb",
+		"/Users/andrewharvey/Code/i-fish/config/routes.rb",
+		"/Users/andrewharvey/Code/i-fish/config.ru",
+		"/Users/andrewharvey/Code/i-fish/Rakefile",
+		"/Users/andrewharvey/Code/i-fish/config/initializers/secret_token.rb",
+		"/Users/andrewharvey/Code/i-fish/config/initializers/session_store.rb",
+		"/Users/andrewharvey/Code/i-fish/config/environments/development.rb",
+		"/Users/andrewharvey/Code/i-fish/config/environments/production.rb",
+		"/Users/andrewharvey/Code/i-fish/config/environments/staging.rb",
+		"/Users/andrewharvey/Code/i-fish/config/environments/test.rb",
+		"/Users/andrewharvey/Code/i-fish/app/views/layouts/signin.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/layouts/application.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/layouts/navbar_modules/_nav.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/controllers/districts_controller.rb",
+		"/Users/andrewharvey/Code/i-fish/app/controllers/provinces_controller.rb",
+		"/Users/andrewharvey/Code/i-fish/app/mailers/user_mailer.rb",
+		"/Users/andrewharvey/Code/i-fish/app/views/admins/registrations/welcome.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/layouts/_navbar.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/activities/index.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/presenters/activity_presenter.rb",
+		"/Users/andrewharvey/Code/i-fish/app/assets/stylesheets/bootstrap_and_overrides.css.scss",
+		"/Users/andrewharvey/Code/i-fish/app/views/home/index.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/home/_pagination.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/controllers/home_controller.rb",
+		"/Users/andrewharvey/Code/i-fish/Gemfile",
+		"/Users/andrewharvey/Code/i-fish/app/controllers/surveys_controller.rb",
+		"/Users/andrewharvey/Code/i-fish/app/models/admin.rb",
+		"/Users/andrewharvey/Code/i-fish/app/views/users/registrations/welcome.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_data_waiting_for_approval.text.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_data_waiting_for_approval.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_admin_waiting_for_approval.text.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_admin_waiting_for_approval.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/data_upload_failure.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/fisheries_controller.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/fisheries/show.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/assets/javascripts/chart_helper.js.coffee.erb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/home_controller.rb",
+		"/Users/andrewharvey/Code/export_system/app/models/excel_file.rb",
+		"/Users/andrewharvey/Code/export_system/config/routes.rb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/vessel_types_controller.rb",
+		"/Users/andrewharvey/Code/export_system/Gemfile",
+		"/Users/andrewharvey/Code/export_system/app/models/user.rb",
+		"/Users/andrewharvey/Code/export_system/app/models/admin.rb",
+		"/Users/andrewharvey/Code/export_system/app/models/landing.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/layouts/application.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/assets/javascripts/application.js",
+		"/Users/andrewharvey/Code/export_system/app/views/admins/show.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/admins_controller.rb",
+		"/Users/andrewharvey/Code/export_system/app/models/ability.rb",
+		"/Users/andrewharvey/Code/export_system/lib/email_processor.rb",
+		"/Users/andrewharvey/Code/export_system/app/mailers/user_mailer.rb",
+		"/Users/andrewharvey/Code/export_system/app/models/survey.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/user_mailer/new_data_waiting_for_approval.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/surveys_controller.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/surveys/show.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/assets/stylesheets/bootstrap_and_overrides.css.scss",
+		"/Users/andrewharvey/Code/export_system/app/views/shared/_api_links.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/helpers/application_helper.rb",
+		"/Users/andrewharvey/Code/export_system/app/presenters/activity_presenter.rb",
+		"/Users/andrewharvey/Code/export_system/app/models/activity.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/activities/survey/_create.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/panel/admins/index.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/provinces_controller.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/supervisor/dashboard/_logbooks.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/logbooks/_supervisor_controls.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/assets/javascripts/custom.js.coffee",
+		"/Users/andrewharvey/Code/export_system/app/views/fishes/_form.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/supervisor/dashboard/_admins.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/surveys/_supervisor_controls.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/panel/admins/index.js.erb",
+		"/Users/andrewharvey/Code/export_system/.rvmrc",
+		"/Users/andrewharvey/Code/export_system/app/views/gears/index.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/fishes/index.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/admins/index.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/users/index.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/supervisor/dashboard/_surveys.html.erb",
+		"/Users/andrewharvey/Code/export_system/config/database.yml",
+		"/Users/andrewharvey/Code/export_system/config/credentials.yml",
+		"/Users/andrewharvey/Code/export_system/app/controllers/application_controller.rb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/logbooks_controller.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/panel/admins/show.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/controllers/desas_controller.rb",
+		"/Users/andrewharvey/Code/export_system/db/seeds.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/users/registrations/crop.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/assets/javascripts/users.js.coffee",
+		"/Users/andrewharvey/Code/export_system/app/assets/javascripts/panel/admins.js.coffee",
+		"/Users/andrewharvey/Code/export_system/vendor/assets/javascripts/jquery.Jcrop.js",
+		"/Users/andrewharvey/Code/export_system/vendor/assets/stylesheets/jquery.Jcrop.css",
+		"/Users/andrewharvey/Code/export_system/app/models/logbook.rb",
+		"/Users/andrewharvey/Code/export_system/app/views/layouts/_templates_modal.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/views/panel/admins/_admin_item.html.erb",
+		"/Users/andrewharvey/Code/export_system/app/assets/stylesheets/application.css.scss",
+		"/Users/andrewharvey/Code/export_system/app/controllers/panel/admins_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/controllers/users_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/controllers/operators_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/controllers/divesites_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/controllers/regions_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/controllers/countries_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/controllers/application_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/layouts/leaderboards/_regions.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/layouts/leaderboards/_divesites.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/layouts/leaderboards/_leaders.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/layouts/leaderboards/_countries.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/layouts/leaderboards/_operators.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/layouts/leaderboards/_users.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/divesites/show.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/layouts/navbar/_navbar.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/Gemfile",
+		"/Users/andrewharvey/Code/mantawatch/app/controllers/prereps_controller.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/prereps/_form.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/prereps/new.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/prereps/edit.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/models/prerep.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/models/user.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/helpers/application_helper.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/assets/show.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/countries/index.html.erb"
+	],
+	"find":
+	{
+		"height": 35.0
+	},
+	"find_in_files":
+	{
+		"height": 93.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"glyph",
+			"glyp",
+			"gly",
+			"glyp",
+			"gly",
+			"bs-docs-sid",
+			"fishnet",
+			"Fishnet",
+			"ExportXls",
+			"blank.gif",
+			"flags",
+			"toggle",
+			"data_upload_failure",
+			"tagged_user",
+			"<<",
+			"face",
+			"id_photos",
+			"upload prerep",
+			"upload Prerep",
+			".role?",
+			"tagged_user_uids",
+			")\n"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"photos",
+			".has_role?"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 0.0
+	},
+	"input":
+	{
+		"height": 31.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+			[
+				"admin",
+				"app/models/admin.rb"
+			],
+			[
+				"surveys_con",
+				"app/controllers/surveys_controller.rb"
+			],
+			[
+				"routes",
+				"config/routes.rb"
+			],
+			[
+				"gem",
+				"Gemfile"
+			],
+			[
+				"home_con",
+				"app/controllers/home_controller.rb"
+			],
+			[
+				"presenter",
+				"app/presenters/activity_presenter.rb"
+			],
+			[
+				"_nav",
+				"app/views/layouts/_navbar.html.erb"
+			],
+			[
+				"registrations/w",
+				"app/views/users/registrations/welcome.html.erb"
+			],
+			[
+				"home/in",
+				"app/views/home/index.html.erb"
+			],
+			[
+				"welcome",
+				"app/views/admins/registrations/welcome.html.erb"
+			],
+			[
+				"user_",
+				"app/mailers/user_mailer.rb"
+			],
+			[
+				"provin",
+				"app/controllers/provinces_controller.rb"
+			],
+			[
+				"districts_c",
+				"app/controllers/districts_controller.rb"
+			],
+			[
+				"sess",
+				"config/initializers/session_store.rb"
+			],
+			[
+				"secret",
+				"config/initializers/secret_token.rb"
+			],
+			[
+				"rakefile",
+				"Rakefile"
+			],
+			[
+				"config",
+				"config.ru"
+			],
+			[
+				"enviro",
+				"config/environment.rb"
+			],
+			[
+				"application",
+				"config/application.rb"
+			],
+			[
+				"admin.r",
+				"app/models/admin.rb"
+			],
+			[
+				"user.",
+				"app/models/user.rb"
+			],
+			[
+				"prereps_c",
+				"app/controllers/vessel_types_controller.rb"
+			],
+			[
+				"user",
+				"app/models/user.rb"
+			],
+			[
+				"appl",
+				"app/helpers/application_helper.rb"
+			],
+			[
+				"surveys/s",
+				"app/views/surveys/show.html.erb"
+			],
+			[
+				"survey",
+				"app/models/survey.rb"
+			],
+			[
+				"supervi",
+				"app/views/logbooks/_supervisor_controls.html.erb"
+			],
+			[
+				"fishes/",
+				"app/views/fishes/_form.html.erb"
+			],
+			[
+				"custom",
+				"app/assets/javascripts/custom.js.coffee"
+			],
+			[
+				"appli",
+				"app/assets/stylesheets/application.css.scss"
+			],
+			[
+				"seed",
+				"db/seeds.rb"
+			],
+			[
+				"route",
+				"config/routes.rb"
+			],
+			[
+				"leaderboards/_l",
+				"app/views/layouts/leaderboards/_users.html.erb"
+			],
+			[
+				"leaderboards/_le",
+				"app/views/layouts/leaderboards/_operators.html.erb"
+			],
+			[
+				"leaderboards/",
+				"app/views/layouts/leaderboards/_countries.html.erb"
+			],
+			[
+				"leaderboard/_",
+				"app/views/layouts/leaderboards/_leaders.html.erb"
+			],
+			[
+				"leaderboars/_",
+				"app/views/layouts/leaderboards/_regions.html.erb"
+			],
+			[
+				"leaderboards/_",
+				"app/views/layouts/leaderboards/_divesites.html.erb"
+			]
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"show_minimap": true,
+	"show_open_files": true,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 316.0,
+	"status_bar_visible": true
+}

@@ -79,6 +79,11 @@ hr.soften {
   border: 0;
 }
 
+#lead {background: #B5E0FF;}
+#highlights {background: #f5f5f5;}
+#details {background: #666;} /* #B5E0FF */
+#contributors {background: #f5f5f5;}
+
 
 
 /* Jumbotrons
@@ -301,7 +306,6 @@ only screen and (     -o-min-device-pixel-ratio: 2/1) {
 .footer {
   text-align: center;
   padding: 30px 0;
-  margin-top: 70px;
   border-top: 1px solid #e5e5e5;
   background-color: #f5f5f5;
 }
