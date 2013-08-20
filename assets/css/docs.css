@@ -80,7 +80,7 @@ hr.soften {
 }
 
 #lead {background: #B5E0FF;}
-#highlights {background: #f5f5f5;}
+#highlights {background: #B5E0FF;} /* #f5f5f5 */
 #details {background: #666;} /* #B5E0FF */
 #contributors {background: #f5f5f5;}
 

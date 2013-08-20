@@ -40,50 +40,40 @@
 	},
 	"file_history":
 	[
-		"/Users/andrewharvey/Code/i-fish/assets/css/bootstrap.css",
-		"/Users/andrewharvey/Code/i-fish/assets/css/bootstrap.min.css",
-		"/Users/andrewharvey/Code/i-fish/index.html",
-		"/Users/andrewharvey/Code/i-fish/assets/css/docs.css",
-		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap.min.css",
-		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap.css",
-		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap-responsive.min.css.css",
-		"/Users/andrewharvey/Code/i-fish/stylesheets/bootstrap-responsive.css",
-		"/Users/andrewharvey/Code/i-fish/javascripts/bootstrap.min.js",
-		"/Users/andrewharvey/Code/i-fish/javascripts/bootstrap.js",
-		"/Users/andrewharvey/Code/i-fish/config/application.rb",
-		"/Users/andrewharvey/Code/i-fish/config/environment.rb",
-		"/Users/andrewharvey/Code/i-fish/config/routes.rb",
-		"/Users/andrewharvey/Code/i-fish/config.ru",
-		"/Users/andrewharvey/Code/i-fish/Rakefile",
-		"/Users/andrewharvey/Code/i-fish/config/initializers/secret_token.rb",
-		"/Users/andrewharvey/Code/i-fish/config/initializers/session_store.rb",
-		"/Users/andrewharvey/Code/i-fish/config/environments/development.rb",
-		"/Users/andrewharvey/Code/i-fish/config/environments/production.rb",
-		"/Users/andrewharvey/Code/i-fish/config/environments/staging.rb",
-		"/Users/andrewharvey/Code/i-fish/config/environments/test.rb",
-		"/Users/andrewharvey/Code/i-fish/app/views/layouts/signin.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/layouts/application.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/layouts/navbar_modules/_nav.html.erb",
 		"/Users/andrewharvey/Code/i-fish/app/controllers/districts_controller.rb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/show.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/_total_production.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/_total_value.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/_total_effort.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/_value_by_fishery.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/_effort_by_species.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/_effort_by_vessel.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/_effort_by_gear.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/districts/show.js.erb",
 		"/Users/andrewharvey/Code/i-fish/app/controllers/provinces_controller.rb",
-		"/Users/andrewharvey/Code/i-fish/app/mailers/user_mailer.rb",
-		"/Users/andrewharvey/Code/i-fish/app/views/admins/registrations/welcome.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/layouts/_navbar.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/activities/index.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/presenters/activity_presenter.rb",
+		"/Users/andrewharvey/Code/i-fish/app/views/provinces/show.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/models/district.rb",
+		"/Users/andrewharvey/Code/i-fish/app/assets/javascripts/provinces.js.coffee",
+		"/Users/andrewharvey/Code/i-fish/app/views/provinces/_fishery_cpue_by_gear.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/provinces/_fishery_cpue_by_species.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/provinces/_district_cpue_by_species.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/provinces/_district_cpue_by_gear.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/views/provinces/show.js.erb",
+		"/Users/andrewharvey/Code/i-fish/app/models/province.rb",
+		"/Users/andrewharvey/Code/i-fish/app/models/survey.rb",
+		"/Users/andrewharvey/Code/i-fish/app/models/landing.rb",
+		"/Users/andrewharvey/Code/i-fish/app/models/catch.rb",
 		"/Users/andrewharvey/Code/i-fish/app/assets/stylesheets/bootstrap_and_overrides.css.scss",
-		"/Users/andrewharvey/Code/i-fish/app/views/home/index.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/home/_pagination.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/controllers/home_controller.rb",
 		"/Users/andrewharvey/Code/i-fish/Gemfile",
-		"/Users/andrewharvey/Code/i-fish/app/controllers/surveys_controller.rb",
-		"/Users/andrewharvey/Code/i-fish/app/models/admin.rb",
-		"/Users/andrewharvey/Code/i-fish/app/views/users/registrations/welcome.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_data_waiting_for_approval.text.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_data_waiting_for_approval.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_admin_waiting_for_approval.text.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/new_admin_waiting_for_approval.html.erb",
-		"/Users/andrewharvey/Code/i-fish/app/views/user_mailer/data_upload_failure.html.erb",
+		"/Users/andrewharvey/Code/i-fish/app/models/excel_file.rb",
+		"/Users/andrewharvey/Code/i-fish/app/models/user.rb",
+		"/Users/andrewharvey/Desktop/west-manggarai-komodo-manta-ray-sanctuary.htm",
+		"/Users/andrewharvey/Desktop/west-manggarai-komodo-manta-ray-sanctuary (1).htm",
+		"/Users/andrewharvey/Code/i-fish/app/uploaders/excel_file_uploader.rb",
+		"/Users/andrewharvey/Code/i-fish/config/routes.rb",
+		"/Users/andrewharvey/Code/i-fish/app/helpers/application_helper.rb",
+		"/Users/andrewharvey/Code/i-fish/app/models/ability.rb",
+		"/Users/andrewharvey/Code/i-fish/config/credentials.yml",
 		"/Users/andrewharvey/Code/export_system/app/controllers/fisheries_controller.rb",
 		"/Users/andrewharvey/Code/export_system/app/views/fisheries/show.html.erb",
 		"/Users/andrewharvey/Code/export_system/app/assets/javascripts/chart_helper.js.coffee.erb",
@@ -167,7 +157,17 @@
 		"/Users/andrewharvey/Code/mantawatch/app/models/user.rb",
 		"/Users/andrewharvey/Code/mantawatch/app/helpers/application_helper.rb",
 		"/Users/andrewharvey/Code/mantawatch/app/views/assets/show.html.erb",
-		"/Users/andrewharvey/Code/mantawatch/app/views/countries/index.html.erb"
+		"/Users/andrewharvey/Code/mantawatch/app/views/countries/index.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/divesites/index.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/prereps/modules/_owner.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/regions/index.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/users/_form.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/users/popups/_about.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/users/registrations/edit.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/users/registrations/settings.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/models/ability.rb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/prereps/show.html.erb",
+		"/Users/andrewharvey/Code/mantawatch/app/views/prereps/upload.html.erb"
 	],
 	"find":
 	{
@@ -175,7 +175,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 93.0,
+		"height": 0.0,
 		"where_history":
 		[
 			""
@@ -186,15 +186,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"glyph",
-			"glyp",
-			"gly",
-			"glyp",
-			"gly",
-			"bs-docs-sid",
-			"fishnet",
-			"Fishnet",
-			"ExportXls",
+			"importing",
+			"twitterized_type",
+			"bootstrapSwitch",
 			"blank.gif",
 			"flags",
 			"toggle",
@@ -274,80 +268,68 @@
 		"selected_items":
 		[
 			[
-				"admin",
-				"app/models/admin.rb"
+				"distr",
+				"app/models/district.rb"
 			],
 			[
-				"surveys_con",
-				"app/controllers/surveys_controller.rb"
-			],
-			[
-				"routes",
-				"config/routes.rb"
+				"prov",
+				"app/models/province.rb"
 			],
 			[
 				"gem",
 				"Gemfile"
 			],
 			[
-				"home_con",
-				"app/controllers/home_controller.rb"
+				"catch",
+				"app/models/catch.rb"
 			],
 			[
-				"presenter",
-				"app/presenters/activity_presenter.rb"
+				"land",
+				"app/models/landing.rb"
 			],
 			[
-				"_nav",
-				"app/views/layouts/_navbar.html.erb"
+				"survey",
+				"app/models/survey.rb"
 			],
 			[
-				"registrations/w",
-				"app/views/users/registrations/welcome.html.erb"
-			],
-			[
-				"home/in",
-				"app/views/home/index.html.erb"
-			],
-			[
-				"welcome",
-				"app/views/admins/registrations/welcome.html.erb"
-			],
-			[
-				"user_",
-				"app/mailers/user_mailer.rb"
+				"distri",
+				"app/models/district.rb"
 			],
 			[
 				"provin",
-				"app/controllers/provinces_controller.rb"
+				"app/models/province.rb"
 			],
 			[
-				"districts_c",
-				"app/controllers/districts_controller.rb"
+				"user",
+				"app/models/user.rb"
 			],
 			[
-				"sess",
-				"config/initializers/session_store.rb"
+				"ex",
+				"app/models/excel_file.rb"
 			],
 			[
-				"secret",
-				"config/initializers/secret_token.rb"
+				"applica",
+				"app/helpers/application_helper.rb"
 			],
 			[
-				"rakefile",
-				"Rakefile"
+				"abili",
+				"app/models/ability.rb"
 			],
 			[
-				"config",
-				"config.ru"
+				"route",
+				"config/routes.rb"
 			],
 			[
-				"enviro",
-				"config/environment.rb"
+				"routes",
+				"config/routes.rb"
 			],
 			[
-				"application",
-				"config/application.rb"
+				"appl",
+				"app/helpers/application_helper.rb"
+			],
+			[
+				"rou",
+				"config/routes.rb"
 			],
 			[
 				"admin.r",
@@ -362,20 +344,12 @@
 				"app/controllers/vessel_types_controller.rb"
 			],
 			[
-				"user",
-				"app/models/user.rb"
-			],
-			[
-				"appl",
-				"app/helpers/application_helper.rb"
+				"admin",
+				"app/models/admin.rb"
 			],
 			[
 				"surveys/s",
 				"app/views/surveys/show.html.erb"
-			],
-			[
-				"survey",
-				"app/models/survey.rb"
 			],
 			[
 				"supervi",
@@ -396,10 +370,6 @@
 			[
 				"seed",
 				"db/seeds.rb"
-			],
-			[
-				"route",
-				"config/routes.rb"
 			],
 			[
 				"leaderboards/_l",
