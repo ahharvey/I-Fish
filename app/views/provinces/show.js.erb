@@ -1,0 +1,6 @@
+<% if params.has_key?(:province) %>
+  $('#district_cpue_by_gear').replaceWith('<%= j render partial: "district_cpue_by_gear" %>');
+  $('#district_cpue_by_species').replaceWith('<%= j render partial: "district_cpue_by_species" %>');
+  $('#fishery_cpue_by_gear').replaceWith('<%= j render partial: "district_cpue_by_gear" %>');
+  $('#fishery_cpue_by_species').replaceWith('<%= j render partial: "district_cpue_by_species" %>');
+<% end %>

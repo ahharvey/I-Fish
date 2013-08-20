@@ -31,6 +31,7 @@ class Survey < ActiveRecord::Base
 	belongs_to :desa
 	has_many :landings
 	has_many :catches, through: :landings
+	has_many :fishes, through: :landings
 	has_one :district, through: :desa
 	has_one :province, through: :district
 

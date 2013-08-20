@@ -40,6 +40,14 @@
 	},
 	"file_history":
 	[
+		"/Users/andrewharvey/Desktop/west-manggarai-komodo-manta-ray-sanctuary.htm",
+		"/Users/andrewharvey/Desktop/west-manggarai-komodo-manta-ray-sanctuary (1).htm",
+		"/Users/andrewharvey/Code/i-fish/app/uploaders/excel_file_uploader.rb",
+		"/Users/andrewharvey/Code/i-fish/config/routes.rb",
+		"/Users/andrewharvey/Code/i-fish/Gemfile",
+		"/Users/andrewharvey/Code/i-fish/app/helpers/application_helper.rb",
+		"/Users/andrewharvey/Code/i-fish/app/models/ability.rb",
+		"/Users/andrewharvey/Code/i-fish/config/credentials.yml",
 		"/Users/andrewharvey/Code/export_system/app/controllers/fisheries_controller.rb",
 		"/Users/andrewharvey/Code/export_system/app/views/fisheries/show.html.erb",
 		"/Users/andrewharvey/Code/export_system/app/assets/javascripts/chart_helper.js.coffee.erb",
@@ -159,9 +167,7 @@
 		"/Users/andrewharvey/Code/mantawatch/app/views/users/show.html.erb",
 		"/Users/andrewharvey/Code/mantawatch/app/views/user_tags/_user_tag.html.erb",
 		"/Users/andrewharvey/Library/Application Support/Sublime Text 2/Packages/Default/Preferences.sublime-settings",
-		"/Users/andrewharvey/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings",
-		"/Users/andrewharvey/Code/mantawatch/.rvmrc",
-		"/Users/andrewharvey/Downloads/solarized/iterm2-colors-solarized/README.md"
+		"/Users/andrewharvey/Library/Application Support/Sublime Text 2/Packages/User/Preferences.sublime-settings"
 	],
 	"find":
 	{
@@ -180,6 +186,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"bootstrapSwitch",
 			"blank.gif",
 			"flags",
 			"toggle",
@@ -259,6 +266,34 @@
 		"selected_items":
 		[
 			[
+				"applica",
+				"app/helpers/application_helper.rb"
+			],
+			[
+				"abili",
+				"app/models/ability.rb"
+			],
+			[
+				"route",
+				"config/routes.rb"
+			],
+			[
+				"routes",
+				"config/routes.rb"
+			],
+			[
+				"appl",
+				"app/helpers/application_helper.rb"
+			],
+			[
+				"gem",
+				"Gemfile"
+			],
+			[
+				"rou",
+				"config/routes.rb"
+			],
+			[
 				"admin.r",
 				"app/models/admin.rb"
 			],
@@ -267,16 +302,8 @@
 				"app/models/user.rb"
 			],
 			[
-				"gem",
-				"Gemfile"
-			],
-			[
 				"prereps_c",
 				"app/controllers/vessel_types_controller.rb"
-			],
-			[
-				"routes",
-				"config/routes.rb"
 			],
 			[
 				"user",
@@ -285,10 +312,6 @@
 			[
 				"admin",
 				"app/models/admin.rb"
-			],
-			[
-				"appl",
-				"app/helpers/application_helper.rb"
 			],
 			[
 				"surveys/s",
@@ -317,10 +340,6 @@
 			[
 				"seed",
 				"db/seeds.rb"
-			],
-			[
-				"route",
-				"config/routes.rb"
 			],
 			[
 				"leaderboards/_l",
