@@ -32,4 +32,9 @@ class District < ActiveRecord::Base
 
   validates :name,
   	presence: true
+
+  def approved_surveys
+    self.surveys.where(approved: true)
+  end
+  
 end

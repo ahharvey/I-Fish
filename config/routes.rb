@@ -96,6 +96,22 @@ IFish::Application.routes.draw do
     resources :users, :only => [:index, :show, :edit, :update]
     resources :admins, :only => [:index, :show, :edit, :update]
 
+    namespace :api do
+      namespace :v1 do
+        resources :users
+        resources :admins
+        resources :logbooks
+        resources :surveys
+        resources :fisheries
+        resources :desas
+        resources :districts
+        resources :provinces
+        resources :engines
+        resources :gears
+        resources :fishes
+      end
+    end
+
     get 'home/index'
     get 'home/upload_data'
     get '/reports' => 'home#reports' 

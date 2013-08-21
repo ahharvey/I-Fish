@@ -17,4 +17,8 @@ class Engine < ActiveRecord::Base
 
   has_many :landings
   has_many :districts, through: :landings
+
+  def approved_landings
+    self.landings.where(survey_id: Survey.where(approved: true))
+  end
 end

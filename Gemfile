@@ -30,6 +30,10 @@ gem 'wkhtmltopdf-heroku', '~> 1.0.0'
 gem 'gmaps4rails', '~> 1.5.6'
 gem 'jquery-datatables-rails', '~> 1.11.2'
 
+gem 'rabl', '~> 0.8.6' # JSON templates
+gem 'oj', '~> 2.1.4' #high performance JSON parser for rabl
+
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

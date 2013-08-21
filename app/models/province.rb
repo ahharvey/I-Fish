@@ -28,6 +28,8 @@ class Province < ActiveRecord::Base
   has_many :gears, through: :landings
   has_many :fishes, through: :landings
 
-
+  def approved_surveys
+    self.surveys.where(approved: true)
+  end
 
 end
