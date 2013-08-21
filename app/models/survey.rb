@@ -14,21 +14,24 @@
 #  catch_scribe   :string(255)
 #  catch_measure  :string(255)
 #  admin_id       :integer
+#  approved       :boolean          default(FALSE), not null
+#  approver_id    :integer
 #
 
 class Survey < ActiveRecord::Base
 	
 	has_paper_trail
 
-	attr_accessible :date, :desa_id, :end_time, :fishery_id, :catch_measure,
-	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer
+	attr_accessible :desa_id, :end_time, :fishery_id, :catch_measure,
+	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer, :approved
 
 	belongs_to :admin
-	belongs_to :approver, :class_name => 'Admin'
+	belongs_to :approver, class_name: 'Admin'
 	belongs_to :fishery
 	belongs_to :desa
 	has_many :landings
 	has_many :catches, through: :landings
+	has_many :fishes, through: :landings
 	has_one :district, through: :desa
 	has_one :province, through: :district
 
@@ -50,7 +53,7 @@ class Survey < ActiveRecord::Base
 		presence: true
 	validates :admin_id,
 		presence: true
-	validate :uniqueness_of_survey
+#	validate :uniqueness_of_survey
 
 	def uniqueness_of_survey
 		# TODO: Is there a better way of doing this?
@@ -58,6 +61,11 @@ class Survey < ActiveRecord::Base
 			errors.add(:base, "Survey has been uploaded already.")
 		end
 	end
+	
+	after_create :send_approval_mail
+	def send_approval_mail
+    UserMailer.new_data_waiting_for_approval(self).deliver
+  end
 
 	def self.import_from_email(params,user_id)
 		params.flatten.each do |param|
@@ -81,4 +89,5 @@ class Survey < ActiveRecord::Base
 			end
 		end
 	end
+
 end

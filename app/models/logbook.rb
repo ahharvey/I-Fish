@@ -2,13 +2,15 @@
 #
 # Table name: logbooks
 #
-#  id         :integer          not null, primary key
-#  date       :date
-#  admin_id   :integer
-#  user_id    :integer
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
-#  fishery_id :integer
+#  id          :integer          not null, primary key
+#  date        :date
+#  admin_id    :integer
+#  user_id     :integer
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  fishery_id  :integer
+#  approver_id :integer
+#  approved    :boolean          default(FALSE), not null
 #
 
 class Logbook < ActiveRecord::Base
@@ -20,7 +22,7 @@ class Logbook < ActiveRecord::Base
   belongs_to :approver, :class_name => 'Admin'
   belongs_to :fishery
   has_many :logged_days
-  attr_accessible :date, :user_id, :admin_id, :fishery_id
+  attr_accessible :date, :user_id, :admin_id, :fishery_id, :approved
 
   validates_uniqueness_of :date, :scope => :fishery_id
 end

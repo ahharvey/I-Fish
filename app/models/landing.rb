@@ -43,6 +43,7 @@ class Landing < ActiveRecord::Base
 	belongs_to :graticule
 	belongs_to :engine
 	belongs_to :fish
+	has_many :fishes, through: :catches
 	has_one :province, through: :survey
 	has_one :district, through: :survey
 	has_one :fishery, through: :survey
@@ -77,8 +78,6 @@ class Landing < ActiveRecord::Base
 		inclusion: {
 			in: 1..999
 		}
-	validates :sail,
-		presence: true
 	validates :crew,
 		numericality: {
 			only_integer: true

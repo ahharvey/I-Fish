@@ -1,8 +1,4 @@
-ExportXls::Application.routes.draw do
-  
-  
-
-  
+IFish::Application.routes.draw do
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
@@ -10,7 +6,8 @@ ExportXls::Application.routes.draw do
     devise_for :users,  
       path_prefix: 'session',
       controllers: { 
-        registrations: 'users#registrations'
+        registrations: 'users/registrations',
+        sessions: 'users/sessions'
       },
       path_names: {  
         sign_in: 'signin',
@@ -94,17 +91,38 @@ ExportXls::Application.routes.draw do
     end
     resources :logged_days
     resources :excel_files
+    resources :activities
 
     resources :users, :only => [:index, :show, :edit, :update]
     resources :admins, :only => [:index, :show, :edit, :update]
 
+    namespace :api do
+      namespace :v1 do
+        resources :users
+        resources :admins
+        resources :logbooks
+        resources :surveys
+        resources :fisheries
+        resources :desas
+        resources :districts
+        resources :provinces
+        resources :engines
+        resources :gears
+        resources :fishes
+      end
+    end
+
     get 'home/index'
     get 'home/upload_data'
-    post 'home/process_upload_data'
-    match '/import_mail' => 'home#import_mail'
-    
+    get '/reports' => 'home#reports' 
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'
+    get '/email_processor', :to => proc { [200, {}, ["OK"]] } 
+
+    match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
+    match '/import_mail' => 'home#import_mail'
+
+    post 'home/process_upload_data'
 
     # handles /valid-locale
     root to: 'home#index'
@@ -113,7 +131,7 @@ ExportXls::Application.routes.draw do
 
   end
 
-  match '/multipart_import' => 'home#multipart_import'
+ 
 
   # handles /bad-locale|anything/valid-path
   match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")

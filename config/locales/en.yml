@@ -139,6 +139,7 @@ en:
     fishery_profile: "Fishery profile"
     upload: "Data Entry"
     panel: "Panel"
+    download: "Download templates"
   devise:
     signin: "Sign in"
     signout: "Sign out"

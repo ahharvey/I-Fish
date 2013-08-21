@@ -19,6 +19,9 @@ class AvatarUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+  def default_url
+    "/assets/fallback/" + [version_name, "default_avatar.png"].compact.join('_')
+  end
 
   version :large do
     resize_to_limit(600, 600)

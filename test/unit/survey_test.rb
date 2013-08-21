@@ -14,6 +14,8 @@
 #  catch_scribe   :string(255)
 #  catch_measure  :string(255)
 #  admin_id       :integer
+#  approved       :boolean          default(FALSE), not null
+#  approver_id    :integer
 #
 
 require 'test_helper'

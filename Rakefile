@@ -4,4 +4,4 @@
 
 require File.expand_path('../config/application', __FILE__)
 
-ExportXls::Application.load_tasks
+IFish::Application.load_tasks

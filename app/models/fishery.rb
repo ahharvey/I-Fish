@@ -30,4 +30,8 @@ class Fishery < ActiveRecord::Base
   	presence: true
   validates :code,
   	presence: true
+
+  def approved_surveys
+    self.surveys.where(approved: true)
+  end
 end

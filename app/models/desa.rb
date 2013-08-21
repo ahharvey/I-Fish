@@ -28,4 +28,8 @@ class Desa < ActiveRecord::Base
                     :lng => 'lng',
                     :process_geocoding => false
 
+  def approved_surveys
+    self.surveys.where(approved: true)
+  end
+
 end

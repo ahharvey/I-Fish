@@ -1,0 +1,9 @@
+<% if params.has_key?(:district) %>
+  $('#effort_by_gear').replaceWith('<%= j render partial: "effort_by_gear" %>');
+  $('#effort_by_vessel').replaceWith('<%= j render partial: "effort_by_vessel" %>');
+  $('#effort_by_species').replaceWith('<%= j render partial: "effort_by_species" %>');
+  $('#value_by_fishery').replaceWith('<%= j render partial: "value_by_fishery" %>');
+  $('#total_value').replaceWith('<%= j render partial: "total_value" %>');
+  $('#total_production').replaceWith('<%= j render partial: "total_production" %>');
+  $('#total_effort').replaceWith('<%= j render partial: "total_effort" %>');
+<% end %>

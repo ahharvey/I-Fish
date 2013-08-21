@@ -23,35 +23,36 @@
 </div>
 <div class="row">
   <div id="graph_catch_per_effort_container"></div>
+  <div id="cpue_chart_container" data-series="hello" data-chart="[[5, 2], [6, 3], [8, 2]]"></div>
   <script type="text/javascript">
-  	function update_catch_effort(){
-  		console.log("Updating chart");
-  		params = {
-  			method: 'catch_per_effort',
-  			date_from: $('#cpe_date_from').val(),
-  			date_to: $('#cpe_date_to').val(),
-  		}
+    function update_catch_effort(){
+      console.log("Updating chart");
+      params = {
+        method: 'catch_per_effort',
+        date_from: $('#cpe_date_from').val(),
+        date_to: $('#cpe_date_to').val(),
+      }
 
-  		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
-  			console.log(data);
-  			render_chart('graph_catch_per_effort_container','Catch per unit effort', 'av. kg / person / hour', '', 'line', data.col_headers, data.month_counts);
-  		}, "json");
-  	};
+      $.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
+        console.log(data);
+        render_chart('graph_catch_per_effort_container','Catch per unit effort', 'av. kg / person / hour', '', 'line', data.col_headers, data.month_counts);
+      }, "json");
+    };
 
-  	$(function () {
-  		// Event handlers
-  		$('#cpe_btn_refresh').click(function(){
-  			update_catch_effort();
-  		});
+    $(function () {
+      // Event handlers
+      $('#cpe_btn_refresh').click(function(){
+        update_catch_effort();
+      });
 
       // Initialise date picker
       $("#cpe_date_from").datepicker();
       $("#cpe_date_to").datepicker();
 
 
-  		// Load chart with default values
-  		update_catch_effort();
-  	});
+      // Load chart with default values
+      update_catch_effort();
+    });
   </script>
 
 </div>
@@ -63,21 +64,21 @@
   </form>
 </div>
 <div class="row">
-  <div id="graph_length_frequency_container"></div>
+  <div id="graph_length_frequency_container" ></div>
   <script type="text/javascript">
-  	function update_length_frequency(){
-  		params = {
-  			method: 'length_frequency',
+    function update_length_frequency(){
+      params = {
+        method: 'length_frequency',
         date_from: $('#lf_date_from').val(),
         date_to: $('#lf_date_to').val(),
-  		}
-  		$.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
-  			console.log(data);
-  			render_chart('graph_length_frequency_container', 'Length Frequency', 'Frequency', 'Size Class (cm)', 'column', data.col_headers, data.length_counts);
-  		}, "json");
-  	};
+      }
+      $.get("/fisheries/<%= @fishery.id %>", params, function(data, textStatus, jqXHR){
+        console.log(data);
+        render_chart('graph_length_frequency_container', 'Length Frequency', 'Frequency', 'Size Class (cm)', 'column', data.col_headers, data.length_counts);
+      }, "json");
+    };
 
-  	$(function () {
+    $(function () {
       // Event handlers
       $('#btn_lf_refresh').click(function(){
         update_length_frequency();
@@ -87,9 +88,9 @@
       $("#lf_date_from").datepicker();
       $("#lf_date_to").datepicker();
 
-  		// Load chart with default values
-  		update_length_frequency();
-  	});
+      // Load chart with default values
+      update_length_frequency();
+    });
   </script>
 
 </div>

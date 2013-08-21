@@ -4,7 +4,7 @@
     <%= devise_error_messages! %>
 
     <div class="row">
-			<div class="span6">
+			<div class="">
 				<%= f.input :name %>
 
 				<%= f.input :email %>
@@ -15,13 +15,12 @@
 
     		<%= f.input :password_confirmation %>
 			</div>
-			<div class="span6">
-				<%= f.input :avatar %>
-			</div>
 		</div>
 
     <div class="form-actions">
-      <%= f.submit "Submit for Approval", class: "btn btn-primary"  %>
+    	<div class="">
+      	<%= f.submit "Submit for Approval", class: "btn btn-primary"  %>
+      </div>
     </div>
 <% end %>
 

@@ -9,5 +9,5 @@ jQuery ->
       url: $('.admin-approve-cb').data('href')
       dataType: 'html'
       data: 
-      	approved: $(this).is(':checked')
+        approved: $(this).is(':checked')
       success: -> alert('User updated')

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= yield (:title) || "" %> | I-Fish</title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+    <%= yield :head %>
+  </head>
+  <body data-spy="scroll" data-target=".bs-docs-sidebar" class="signin-container">
+    <%= render partial: "layouts/navbar" %>
+    <div class="container" style="margin-top:50px">
+      <div class="row">
+        <div class="span6 offset3 well signin-panel">
+          <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
+          <%= render partial: "shared/model_error_messages" %>
+          <div class="page-header">
+            <h3><%= yield (:title) || "FishStat" %></h3>
+          </div><!-- page-header -->
+          <%= yield %>
+          <% unless admin_signed_in? || user_signed_in? %>
+            <div class="pull-right">
+              Admins: 
+              <%= link_to "Sign up", new_admin_registration_path, class: 'navbar-link'  %> |
+              <%= link_to "Login", new_admin_session_path, class: 'navbar-link'  %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <footer>
+      <%= yield :scripts %>
+    </footer>
+  </body>
+  <%= render partial: 'layouts/templates_modal' %>
+</html>

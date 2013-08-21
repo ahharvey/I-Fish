@@ -1,31 +1,34 @@
 class FisheriesController < InheritedResources::Base
   load_and_authorize_resource
-
+  skip_before_filter :authenticate!
+  
   respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
 
   def show
-  	respond_to do |format|
+    #@chart = @fishery.surveys.group("DATE_TRUNC('month', survey.date_published)").order("DATE_TRUNC('month', survey.date_published)").average('landings.cpue_kg')
+    #@chart = Hash[@chart.map { |k, v| [Time.parse(k).utc.to_i*1000, v.to_f.round(0)] }].to_a
+    respond_to do |format|
       @date_from = (DateTime.now - 1.years).strftime("%d/%m/%Y")
       @date_to = DateTime.now.strftime("%d/%m/%Y")
-  	  @fishery = Fishery.find(params[:id])
+      @fishery = Fishery.find(params[:id])
 
       format.html { render }
-      #format.xml { render :xml=>@landings }
+      format.xml { render :xml=>@fishery.to_xml(include: { :surveys => {include: { :landings => { include: :catches }}}} ) }
       format.json do
-  	  	graph_catch_per_effort() if params[:method] == "catch_per_effort"
-  	  	graph_length_frequency() if params[:method] == "length_frequency"
+        graph_catch_per_effort() if params[:method] == "catch_per_effort"
+        graph_length_frequency() if params[:method] == "length_frequency"
         graph_values() if params[:method] == "value"
-  	  end
-  	end
+      end
+    end
   end
 
   protected
 
   def graph_catch_per_effort
-  	@fisheries = Fishery.find(params[:id])
-  	col_headers = []
-	  month_counts = []
-	  from = DateTime.parse(params[:date_from])
+    @fisheries = Fishery.find(params[:id])
+    col_headers = []
+    month_counts = []
+    from = DateTime.parse(params[:date_from])
     to = DateTime.parse(params[:date_to])
     (from.year..to.year).each do |y|
       start_month = (from.year == y) ? from.month : 1
@@ -42,14 +45,14 @@ class FisheriesController < InheritedResources::Base
         month_counts.push res
       end
     end
-		render json: {:col_headers => col_headers, :month_counts => month_counts }
+    render json: {:col_headers => col_headers, :month_counts => month_counts }
   end
 
   def graph_length_frequency
-  	catches = []
+    catches = []
     from = DateTime.parse(params[:date_from])
     to = DateTime.parse(params[:date_to])
-  	@fisheries = Fishery.find(params[:id]).surveys.where(:date_published => from..to ).each do |s|
+    @fisheries = Fishery.find(params[:id]).surveys.where(:date_published => from..to ).each do |s|
       s.landings.each do |l|
         catches.concat l.catches
       end

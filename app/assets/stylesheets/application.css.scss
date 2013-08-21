@@ -12,10 +12,11 @@
  *= require jquery.ui.datepicker
  *= require_self
  *= require dataTables/jquery.dataTables.bootstrap
- *= require bootstrap-toggle-buttons
+ *= require bootstrap-switch
  *= require_tree .
 */
 
 @import "bootstrap_and_overrides.css.scss";
 @import "custom.css.scss";
 @import "gmaps4rails.css.scss";
+/*@import "bootstrapSwitch.css"; */

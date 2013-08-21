@@ -1,0 +1,111 @@
+render_chart = (container, title, y_axis_name, x_axis_name, chart_type, col_headers, counts) ->
+  chart = undefined
+  window.user_chart = new Highcharts.Chart(
+    chart:
+      renderTo: line_chart_container
+      type: chart_type
+      marginRight: 130
+      marginBottom: 70
+
+    title:
+      text: title
+      x: -20 #center
+
+    subtitle:
+      text: ""
+      x: -20
+
+    xAxis:
+      title:
+        text: x_axis_name
+
+      categories: col_headers
+
+    yAxis:
+      title:
+        text: y_axis_name
+
+      plotLines: [
+        value: 0
+        width: 1
+        color: "#808080"
+      ]
+
+    tooltip:
+      formatter: ->
+        "<b>" + @series.name + "</b><br/>" + @x + ": " + @y + "°C"
+
+    legend:
+      layout: "vertical"
+      align: "right"
+      verticalAlign: "top"
+      x: -10
+      y: 100
+      borderWidth: 0
+
+    credits:
+      enabled: false
+
+    series: [
+      name: "Survey"
+      data: counts
+    ]
+  )
+
+$(document).ready ->
+  if $('#cpue_chart_container').length
+    $('#cpue_chart_container').highcharts "StockChart", 
+      title:
+        text: null
+      credits:
+        enabled: false
+      chart:
+        type: "areaspline"
+      rangeSelector:
+        selected: 1
+        buttons: [
+          {
+            type: 'month',
+            count: 3,
+            text: '3m'
+          }, {
+            type: 'year',
+            count: 1,
+            text: '1y'
+          }, {
+            type: 'all',
+            text: 'All'
+          }]
+      series: [
+        name: $('#cpue_chart_container').data('series')
+        data: $('#cpue_chart_container').data('chart')
+        threshold: null 
+      ]
+      navigator:
+        height: 25
+      scrollbar:
+        height: 10
+
+$(document).ready ->
+  if $('#container').length
+    $('#container').highcharts
+      chart:
+        type: "bar"
+
+      title:
+        text: "Fruit Consumption"
+
+      xAxis:
+        categories: ["Apples", "Bananas", "Oranges"]
+
+      yAxis:
+        title:
+          text: "Fruit eaten"
+
+      series: [
+        name: "Jane"
+        data: [1, 0, 4]
+      ,
+        name: "John"
+        data: [5, 7, 3]
+      ]

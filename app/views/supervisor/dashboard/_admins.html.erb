@@ -3,33 +3,39 @@
 <table class="table table-striped table-condensed">
  
     <tr>
-    	<th></th>
+      <th></th>
       <th>Name</th>
       <th>Approved</th>
     </tr>
   
-  	<%if @admins.empty? %>
-  		<tr>
-  			<td></td>
-  			<td>All APPROVED</td>
-  		</tr>
-  	<% else %>
-	    <% for admin in @admins %>
-			  <tr>
-			  	<td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
-			    <td><%= link_to admin.name, [:panel, admin] %></td>
-			    <td>
-			      <div class="controls toggle switch" 
-			          data-toggleButton-label-enabled="Yes" 
-			          data-toggleButton-label-disabled="No" 
-			          data-toggleButton-style-enabled="success" 
-			          data-toggleButton-style-disabled="danger" 
-			          data-toggleButton-height="20"
-			          data-toggleButton-width="80"> 
-			            <%= check_box_tag :approved, admin.id, admin.approved?, class: 'approve-toggle', data: { href: set_approved_panel_admin_path(admin) } %>
-			        </div>
-			    </td>
-			  </tr>
+    <%if @admins.empty? %>
+      <tr>
+        <td></td>
+        <td><i>NO UNAPPROVED STAFF</i></td>
+      </tr>
+    <% else %>
+      <% for admin in @admins %>
+        <tr>
+          <td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
+          <td><%= link_to admin.name, [:panel, admin] %></td>
+          <td>
+            <%= content_tag :div, class: "controls toggle switch switch-mini",
+              data: {
+                on: "success",
+                off: "danger",
+                "on-label" => "YES",
+                "off-label" => "NO"
+                } do %>
+
+              <%= check_box_tag :approved, admin.id, 
+                admin.approved?, 
+                class: 'approve-toggle', 
+                data: { 
+                  href: set_approved_panel_admin_path(admin) 
+                } %>
+            <% end %>
+          </td>
+        </tr>
 			<% end %>
- 		<% end %>
+    <% end %>
  </table>

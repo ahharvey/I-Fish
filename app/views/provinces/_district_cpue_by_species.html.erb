@@ -1,0 +1,32 @@
+<div id="district_cpue_by_species" class="row-fluid">
+  <div class="span12">
+
+    <h5>Effort by Species (kg per person per hour)</h5>
+    <table class="table table-striped table-condensed table-header-rotated">
+      <thead>
+        <tr>
+          <th><%= District.human_attribute_name(:name) %></th>
+          <% for fish in @fishes %>
+            <th class="rotate-45">
+              <div><span>
+                <%= link_to fish.code, fish, title: "#{fish.scientific_name} - #{fish.indonesia_name} - #{fish.english_name}" %>
+              </span></div>
+            </th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% for district in @districts %>
+          <tr>
+            <th class="row-header"><%= link_to district.name, district %></th>
+            <% for fish in @fishes %>
+              <td class="">
+                <%= @district_av_cpue_by_species[[district.id, district.name, fish.id]] || "-" %>
+              </td>
+            <% end %>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

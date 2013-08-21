@@ -15,7 +15,7 @@ class Panel::AdminsController < ApplicationController
   end
 
   def get_role
-  	role.try(:name)
+    role.try(:name)
   end
 
 
@@ -25,7 +25,7 @@ class Panel::AdminsController < ApplicationController
       if @admin.roles.include?(role)
         flash[:error]= I18n.t("panel.roles.exists")
       else
-    	 @admin.roles.push role
+       @admin.roles.push role
        flash[:success]= I18n.t("panel.roles.exists")
       end 
     end
@@ -41,6 +41,11 @@ class Panel::AdminsController < ApplicationController
   def set_approved
     @admin = Admin.find(params[:id])
     @admin.update_column :approved, params[:approved]
+    if @admin.approved?
+      flash[:success] = "Approved"
+    else
+      flash[:error] = "Not Approved"
+    end
     render nothing: true
   end
 

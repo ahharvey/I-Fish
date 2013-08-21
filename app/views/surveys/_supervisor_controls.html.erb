@@ -1,0 +1,24 @@
+<div class="span2">
+  <%= link_to supervisor_dashboard_index_path  do %>
+    <i class='icon-arrow-left'></i> Back to Dashboard 
+  <% end %>
+</div>
+<div class="span1 offset2">
+  <b>Approved:</b>
+</div>
+<div class="span1">
+  <%= content_tag :div, class: "controls switch switch-large",
+    data: {
+      on: "success",
+      off: "danger",
+      "on-label" => "YES",
+      "off-label" => "NO"
+    } do %>
+    <%= check_box_tag :approved, @survey.id, 
+      @survey.approved?, 
+      class: 'approve-toggle', 
+      data: { 
+        href: set_approved_survey_path(@survey) 
+      } %>
+  <% end %>
+</div>

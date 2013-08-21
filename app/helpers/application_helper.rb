@@ -32,8 +32,12 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-home icon-white icon-2x')
   end
 
-  def upload_icon
+  def upload_icon_nav
     content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-2x')
+  end
+
+  def upload_icon
+    content_tag(:i, "", class: 'icon-cloud-upload icon-white')
   end
 
   def upload_icon_large
@@ -48,8 +52,8 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-bar-chart icon-white icon-2x')
   end
 
-  def download_icon
-    content_tag(:i, "", class: 'icon-download-alt')
+  def download_icon_nav
+    content_tag(:i, "", class: 'icon-cloud-download icon-white icon-2x')
   end
 
   def email_icon
@@ -113,11 +117,11 @@ module ApplicationHelper
   end
 
   def flag_en
-    content_tag(:img, "", src: "blank.gif", class: "flag flag-gb", alt: "English")
+    content_tag(:img, "", src: "#", class: "flag flag-gb", alt: "English")
   end
 
   def flag_id
-    content_tag(:img, "", src: "blank.gif", class: "flag flag-id", alt: "Indonesian")
+    content_tag(:img, "", src: "#", class: "flag flag-id", alt: "Indonesian")
   end
 
   def excel_image
@@ -126,6 +130,14 @@ module ApplicationHelper
 
   def pdf_image
     image_tag("pdf.png", class: "", alt: "PDF", width: 16)
+  end
+
+  def approve_icon2
+    content_tag(:i, "", class: 'icon-ok icon-white icon-large')
+  end
+
+  def unapprove_icon2
+    content_tag(:i, "", class: 'icon-remove icon-white icon-large')
   end
 
 end

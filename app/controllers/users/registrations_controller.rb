@@ -1,5 +1,5 @@
 class Users::RegistrationsController < Devise::RegistrationsController
-
+  layout "signin"
 
   def avatar
     @user = current_user

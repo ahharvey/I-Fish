@@ -13,28 +13,27 @@
 
   <%if @surveys.empty? %>
 		<tr>
-			<td></td>
-			<td>All APPROVED</td>
+			<td colspan="7" style="text-align:center;"><i>NO UNAPPROVED SURVEYS</i></td>
 		</tr>
 	<% else %>
-	  <% @surveys.each do |survey| %>
-	    <tr class=<%= survey.approved == false ? 'error' : '' %> >
-	      <td><%= survey.date_published.to_s(:rfc822) rescue '' %></td>
-	      <td><%= survey.start_time.to_s(:time) %> - <%= survey.end_time.to_s(:time) %></td>
-	      <td><%= survey.fishery.name rescue ''%></td>
-	      <td><%= survey.desa.name rescue '' %></td>
-	      <td><%= survey.fleet_observer %><%= survey.catch_measure %><%= survey.catch_scribe %></td>
-	      <td><%= link_to image_tag(survey.admin.avatar_url(:thumb), 
-	          width: "30px", 
-	          height: "30px", 
-	          title: survey.admin.name, 
-	          alt: survey.admin.name),
-	          survey.admin %></td>
-	      
-	      <td>
-	        <%= link_to show_icon, survey %>
-	      </td>
-	    </tr>
-	  <% end %>
+    <% @surveys.each do |survey| %>
+      <tr class=<%= survey.approved == false ? 'error' : '' %> >
+        <td><%= survey.date_published.to_s(:rfc822) rescue '' %></td>
+        <td><%= survey.start_time.to_s(:time) %> - <%= survey.end_time.to_s(:time) %></td>
+        <td><%= survey.fishery.name rescue ''%></td>
+        <td><%= survey.desa.name rescue '' %></td>
+        <td><%= survey.fleet_observer %><%= survey.catch_measure %><%= survey.catch_scribe %></td>
+        <td><%= link_to image_tag(survey.admin.avatar_url(:thumb), 
+            width: "30px", 
+            height: "30px", 
+            title: survey.admin.name, 
+            alt: survey.admin.name),
+            survey.admin %></td>
+        
+        <td>
+          <%= link_to show_icon, survey %>
+        </td>
+      </tr>
+    <% end %>
 	<% end %>
 </table>

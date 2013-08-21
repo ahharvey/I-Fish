@@ -13,7 +13,7 @@ default: &default
 development:
   <<: *default
   database: xls_dev
-  username: admin
+  username: 
   password: 
 
 production:

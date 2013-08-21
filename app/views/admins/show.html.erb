@@ -16,36 +16,7 @@
   <button class="btn" id="btn_refresh">Refresh</button>
 </div>
 
-<div id="container"></div>
-
-<script type="text/javascript">
-	function update_chart(){
-		console.log("Updating chart");
-		params = {
-			date_from: $('#date_from').val(),
-      date_to: $('#date_to').val(),
-		}
-
-		$.get("/admins/<%= @admin.id %>", params, function(data, textStatus, jqXHR){
-			console.log(data);
-			render_chart('container', 'Survey Reports', 'No. of Surveys', '', 'line', data.col_headers, data.month_counts);
-		}, "json");
-	};
-
-	$(function () {
-		// Event handlers
-		$('#btn_refresh').click(function(){
-			update_chart();
-		});
-
-    // Initialise date pickers
-    $("#date_from").datepicker();
-    $("#date_to").datepicker();
-
-		// Load chart with default values
-		update_chart();
-	});
-</script>
+<div id="cpue_chart_container" style="width:100%;height:200px;" data-chart="<%= @chart %>" data-series="Surveys"></div>
 
 <%= link_to 'Back', admins_path %>
 <%= link_to 'Edit', edit_admin_path(@admin) %>

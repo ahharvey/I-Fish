@@ -33,7 +33,9 @@ class Admin < ActiveRecord::Base
   devise :database_authenticatable, :registerable, :rememberable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :office_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
+
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :approved, :office_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
+
 
   validates :name, presence: true
 
@@ -45,10 +47,11 @@ class Admin < ActiveRecord::Base
   has_many :approved_surveys, :class_name => 'Survey', :foreign_key => 'approver_id'
   has_many :logbooks
   has_many :approved_logbooks, :class_name => 'Logbook', :foreign_key => 'approver_id'
+  has_many :activities, as: :ownable
 
 
   after_create :set_default_role
-  after_create :send_admin_mail
+  after_create :send_approval_mail
 
   # sets default role to public
   def set_default_role
@@ -57,8 +60,8 @@ class Admin < ActiveRecord::Base
   end
 
   # sends approval email to Supervisor
-  def send_admin_mail
-    UserMailer.new_admin_waiting_for_approval(self).deliver
+  def send_approval_mail
+    UserMailer.new_admin_waiting_for_approval(self, self.supervisors).deliver
   end
 
   # Ability Methods
@@ -138,6 +141,10 @@ class Admin < ActiveRecord::Base
 
   def team_members
     Admin.where( office_id: self.office_id )
+  end
+
+  def supervisors
+    Admin.joins(:roles).where(roles: {name: ["supervisor", "leader", "administrator"]}).where(office_id: self.office_id)
   end
 
   def supervised_surveys

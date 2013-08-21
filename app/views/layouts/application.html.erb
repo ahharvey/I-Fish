@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>FishNet | <%= yield (:title) || "" %></title>
+    <title><%= yield (:title) || "" %> | I-Fish</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "application" %>
     <%= csrf_meta_tags %>
@@ -13,7 +13,7 @@
       <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
       <%= render partial: "shared/model_error_messages" %>
       <div class="page-header">
-  	    <h1><%= yield (:title) || "FishStat" %></h1>
+        <h1><%= yield (:title) || "FishStat" %></h1>
       </div><!-- page-header -->
       <%= yield %>
       <% unless admin_signed_in? || user_signed_in? %>
@@ -26,6 +26,13 @@
     </div>
     <footer>
       <%= yield :scripts %>
+      <%= javascript_include_tag(
+        "http://code.highcharts.com/stock/highstock.js", 
+        "http://code.highcharts.com/highcharts-more.js", 
+        "http://code.highcharts.com/stock/modules/exporting.js"
+        )
+      %>
     </footer>
   </body>
+  <%= render partial: 'layouts/templates_modal' %>
 </html>

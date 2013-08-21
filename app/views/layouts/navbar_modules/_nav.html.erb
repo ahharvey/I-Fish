@@ -2,56 +2,44 @@
   <li><%= link_to home_icon, root_path, title: t("navbar.home")  %></li>
   <li class="divider-vertical"></li>
   <% if admin_signed_in? %>
-  	<li class="navbar-red">
-	    <%= link_to home_upload_data_path, class: "", title: t("navbar.upload") do %>
-	      <%= upload_icon %>
-	    <% end %>
+    <li class="navbar-red">
+      <%= link_to home_upload_data_path, class: "", title: t("navbar.upload") do %>
+        <%= upload_icon_nav %>
+      <% end %>
     </li>
-	  <li class="dropdown navbar-yellow">
-      <%= link_to supervisor_dashboard_index_path, class: "", title: t("navbar.upload") do %>
+    <li class="navbar-yellow">
+      <%= link_to supervisor_dashboard_index_path, class: "", title: t("navbar.data") do %>
         <%= approve_icon %>
       <% end %>
-	  </li>
+    </li>
   <% end %>   
-  <li class="dropdown navbar-green">
-    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title=<%= t("navbar.reports") %> ><%= report_icon %><b class="caret"></b></a>
-    <ul class="dropdown-menu pull-right">
-      <% if admin_signed_in? || user_signed_in? %>
-        <li>
-          <%= link_to t("fisheries.title"), fisheries_path %>
-        </li>
-        <li>
-          <%= link_to t("desas.title"), desas_path %>
-        </li>
-        <li>
-          <%= link_to t("districts.title"), districts_path %>
-        </li>
-        <li>
-          <%= link_to t("provinces.title"), provinces_path %>
-        </li>
-        <li>
-          <%= link_to t("users.title"), users_path %>
-        </li>
-        <li>
-          <%= link_to t("admins.title"), admins_path %>
-        </li>
-      <% end %>
-    </ul>
+  <li class="navbar-green">
+    <%= link_to reports_path, class: "", title: t("navbar.reports") do %>
+      <%= report_icon %>
+    <% end %>
   </li>
   <li class="divider-vertical"></li>
+  <li>
+    <%= link_to "#", class: "", title: t("navbar.download"), data: { toggle: "modal", target: "#templates_modal" } do %>
+      <%= download_icon_nav %>    
+    <% end %>
+  </li>
+
+  
+  <li class="divider-vertical"></li>
   <% if admin_signed_in? || user_signed_in? %>
-	  <li class="dropdown">
-	    <a href="#" class="dropdown-toggle" data-toggle="dropdown" title=<%= t("navbar.settings") %> ><%= settings_icon %><b class="caret"></b></a>
-	    <ul class="dropdown-menu pull-right">
+    <li class="dropdown">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" title=<%= t("navbar.settings") %> ><%= settings_icon %><b class="caret"></b></a>
+      <ul class="dropdown-menu pull-right">
         <li><%= link_to t("fishes.title"), fishes_path %></li>
         <li><%= link_to t("gears.title"), gears_path %></li>
         <% if admin_signed_in? %>
-        	<li><%= link_to "Admins", panel_admins_path %></li>
-	        <li><%= link_to "Users", panel_users_path %></li>
-	        <li><%= link_to "Roles", panel_roles_path %></li>
-	       <% end %>
-	    </ul>
-	  </li>
-	  <li class="divider-vertical"></li>
-	<% end %>
+          <li><%= link_to "Admins", panel_admins_path %></li>
+          <li><%= link_to "Users", panel_users_path %></li>
+          <li><%= link_to "Roles", panel_roles_path %></li>
+         <% end %>
+      </ul>
+    </li>
+    <li class="divider-vertical"></li>
+  <% end %>
 </ul>

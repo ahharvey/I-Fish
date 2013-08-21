@@ -40,10 +40,11 @@ class User < ActiveRecord::Base
 
   validates :name, presence: true
 
-#  has_many :surveys, dependent: :destroy
+  has_many :surveys, dependent: :destroy
   belongs_to :desa
   has_and_belongs_to_many :roles, :before_add => :validates_role
   has_many :logbooks
+  has_many :activities, as: :ownable
 
   
   mount_uploader :avatar, AvatarUploader
@@ -70,29 +71,29 @@ class User < ActiveRecord::Base
   after_create :set_default_role
 
   def set_default_role
-  	self.roles.push Role.find_by_name("public")
-  	self.save!
+    self.roles.push Role.find_by_name("public")
+    self.save!
   end
 
   # Ability Methods
   def admin?
-  	false
+    false
   end
 
   def supervisor?
-  	false
+    false
   end
 
   def staff?
-  	false
+    false
   end
 
   def public?
-  	has_role?("public")
+    has_role?("public")
   end
 
   def has_role?(role)
-  	self.roles.select{ |r| r.name == role }.count > 0
+    self.roles.select{ |r| r.name == role }.count > 0
   end
 
   def validates_role(role)

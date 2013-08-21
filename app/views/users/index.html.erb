@@ -7,16 +7,12 @@
   <tr>
     <th>Email</th>
     <th>Name</th>
-    <th></th>
   </tr>
 
   <% @users.each do |user| %>
     <tr>
       <td><%= user.email %></td>
       <td><%= user.name %></td>
-      <td>
-        <%= link_to show_icon, user %>
-      </td>
     </tr>
   <% end %>
 </table>

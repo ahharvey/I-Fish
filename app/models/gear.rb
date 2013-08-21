@@ -29,4 +29,7 @@ class Gear < ActiveRecord::Base
   has_many :districts, through: :landings
   has_many :fisheries, through: :landings
 
+  def approved_landings
+    self.landings.where(survey_id: Survey.where(approved: true))
+  end
 end
