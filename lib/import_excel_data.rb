@@ -44,6 +44,7 @@ class ImportExcelData
       if xls.sheets.include?('Form A - Fleet')#
         xls.default_sheet = 'Form A - Fleet'
         for d in 2..xls.last_row
+          row = xls.cell(d,"A").to_i
           reg = xls.cell(d,"B").to_s
           name = xls.cell(d,"C")
           type = xls.cell(d,"D")
@@ -75,6 +76,7 @@ class ImportExcelData
             graticule_id = Graticule.where("LOWER(code) = ?", graticule).first.id rescue 0
             fish_id = Fish.where("LOWER(code) = ?", fish).first.id rescue 0
             landing = survey.landings.new(  
+              row: row,
               power: power, 
               graticule_id: graticule_id.to_i, 
               type: type, 
@@ -103,16 +105,18 @@ class ImportExcelData
         if xls.sheets.include?('Form B - Catch')
           xls.default_sheet = 'Form B - Catch'
           for i in 2..xls.last_row
-            species = xls.cell(i,"B").downcase  rescue ''
-            length = xls.cell(i,"C").to_i
-            weight = xls.cell(i,"D").to_i
+            row = xls.cell(i,"B").to_i
+            species = xls.cell(i,"C").downcase  rescue ''
+            length = xls.cell(i,"D").to_i
+            sampling_factor = xls.cell(i,"E").to_s
             unless species.blank?
               fish_id = Fish.where("LOWER(code) = ?", species).first.id rescue 0
+              landing_id = Landing.where(survey_id: survey.id, row: row).first.id
               catch = Catch.new(
                 fish_id: fish_id.to_i,
                 length: length,
-                weight: weight,
-                landing_id: landing.id
+                sfactor: sampling_factor,
+                landing_id: landing_id.to_i
               )
               excel_data.add_model(catch, {:sheet => "Form B - Catch", :model_type => "Catch", :row => i})
             end

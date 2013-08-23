@@ -34,7 +34,7 @@ class Landing < ActiveRecord::Base
 	has_paper_trail
 
 	attr_accessible :boat_size, :crew, :fuel, :gear_id, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
-	:power, :graticule_id, :engine_id, :survey_id, :fish_id, :importing?, :cpue
+	:power, :graticule_id, :engine_id, :survey_id, :fish_id, :importing?, :cpue, :row
 
 	set_inheritance_column nil
 
