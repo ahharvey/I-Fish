@@ -9,9 +9,7 @@
     <th><%= Survey.human_attribute_name(:end_time) %></th>
     <th><%= Survey.human_attribute_name(:fishery_id) %></th>
     <th><%= Survey.human_attribute_name(:desa_id) %></th>
-    <th><%= Survey.human_attribute_name(:fleet_observer) %></th>
-    <th><%= Survey.human_attribute_name(:catch_measure) %></th>
-    <th><%= Survey.human_attribute_name(:catch_scribe) %></th>
+    <th>Eumerators</th>
     <th><%= Survey.human_attribute_name(:admin_id) %></th>
     
     <th></th>
@@ -24,9 +22,26 @@
       <td><%= survey.end_time.to_s(:time) %></td>
       <td><%= survey.fishery.name rescue ''%></td>
       <td><%= survey.desa.name rescue '' %></td>
-      <td><%= survey.fleet_observer %></td>
-      <td><%= survey.catch_measure %></td>
-      <td><%= survey.catch_scribe %></td>
+      <td>
+        <%= link_to image_tag(survey.landing_enumerator.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: survey.landing_enumerator.name, 
+          alt: survey.landing_enumerator.name),
+          survey.landing_enumerator %>
+        <%= link_to image_tag(survey.catch_measurer.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: survey.catch_measurer.name, 
+          alt: survey.catch_measurer.name),
+          survey.catch_measurer %>
+        <%= link_to image_tag(survey.catch_scribe.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: survey.catch_scribe.name, 
+          alt: survey.catch_scribe.name),
+          survey.catch_scribe %>
+      </td>
       <td><%= link_to image_tag(survey.admin.avatar_url(:thumb), 
           width: "30px", 
           height: "30px", 

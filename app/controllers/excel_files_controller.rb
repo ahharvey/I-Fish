@@ -4,6 +4,8 @@ class ExcelFilesController < InheritedResources::Base
   respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
 
   def show
-  	@rspreadsheet = Excelx.new(@excel_file.file.url.to_s)
+    require 'roo'
+    @excel_file = ExcelFile.find(params[:id])
+  	@rspreadsheet = Excelx.new("http://i-fish.dev/uploads/excel_file/file/7/Database.template__3_.xlsx")#Excelx.new(@excel_file.file.url.to_s)
   end
 end

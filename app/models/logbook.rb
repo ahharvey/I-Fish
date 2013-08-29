@@ -24,5 +24,21 @@ class Logbook < ActiveRecord::Base
   has_many :logged_days
   attr_accessible :date, :user_id, :admin_id, :fishery_id, :approved
 
-  validates_uniqueness_of :date, :scope => :fishery_id
+  #validates_uniqueness_of :date, :scope => :user_id
+
+  def surveys_this_month
+    prereps.where( 'prereps.created_at > ?', Date.today.beginning_of_month ).size
+  end
+
+  def logbooks_this_month
+    logbooks.where( 'prereps.created_at > ?', Date.today.beginning_of_month ).size
+  end
+
+  def self.completed_this_month
+    Logbook.where( date: Date.today.beginning_of_month..Date.today.end_of_month ).size
+  end
+
+  def self.completed_last_month
+    Logbook.where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
+  end
 end

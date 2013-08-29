@@ -22,11 +22,24 @@ class Survey < ActiveRecord::Base
 	
 	has_paper_trail
 
-	attr_accessible :desa_id, :end_time, :fishery_id, :catch_measure,
-	:fleet_observer, :catch_scribe, :start_time, :admin_id, :user_id, :date_published, :observer, :approved
+	attr_accessible :desa_id, 
+									:end_time, 
+									:fishery_id, 
+									:start_time, 
+									:admin_id, 
+									:user_id, 
+									:date_published, 
+									:observer, 
+									:approved,
+									:catch_measurer_id,
+									:catch_scribe_id,
+									:landing_enumerator_id
 
 	belongs_to :admin
 	belongs_to :approver, class_name: 'Admin'
+	belongs_to :landing_enumerator, class_name: 'Admin'
+	belongs_to :catch_measurer, class_name: 'Admin'
+	belongs_to :catch_scribe, class_name: 'Admin'
 	belongs_to :fishery
 	belongs_to :desa
 	has_many :landings
@@ -45,11 +58,11 @@ class Survey < ActiveRecord::Base
 		presence: true
 	validates :fishery_id,
 		presence: true
-	validates :fleet_observer,
+	validates :landing_enumerator_id,
 		presence: true
-	validates :catch_scribe,
+	validates :catch_scribe_id,
 		presence: true
-	validates :catch_measure,
+	validates :catch_measurer_id,
 		presence: true
 	validates :admin_id,
 		presence: true
@@ -62,9 +75,13 @@ class Survey < ActiveRecord::Base
 		end
 	end
 	
-	after_create :send_approval_mail
-	def send_approval_mail
-    UserMailer.new_data_waiting_for_approval(self).deliver
+	after_create :format_approval_mail
+
+	def format_approval_mail
+		Survey.send_approval_mail( id )
+	end
+	def self.send_approval_mail(survey_id)
+    #UserMailer.new_data_waiting_for_approval(survey_id).deliver
   end
 
 	def self.import_from_email(params,user_id)
@@ -89,5 +106,13 @@ class Survey < ActiveRecord::Base
 			end
 		end
 	end
+
+	def self.completed_this_month
+    Survey.where( date_published: Date.today.beginning_of_month..Date.today.end_of_month ).size
+  end
+
+  def self.completed_last_month
+    Survey.where( date_published: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
+  end
 
 end

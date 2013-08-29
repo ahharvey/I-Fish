@@ -69,7 +69,7 @@
   <tr>
     <th><%= Catch.human_attribute_name(:fish_id) %></th>
     <th><%= Catch.human_attribute_name(:length) %> (mm)</th>
-    <th><%= Catch.human_attribute_name(:weight) %> (g)</th>
+    <th><%= Catch.human_attribute_name(:sfactor) %></th>
     <th></th>
   </tr>
 
@@ -77,7 +77,7 @@
     <tr>
       <td><%= link_to catch.fish.english_name, catch.fish %></td>
       <td><%= catch.length %></td>
-      <td><%= catch.weight %></td>
+      <td><%= catch.sfactor %></td>
       <td>
         <%= link_to show_icon, catch %>
         <%= link_to edit_icon, edit_catch_path(catch) %>

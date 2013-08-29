@@ -72,14 +72,54 @@ class ExcelFile < ActiveRecord::Base
     end
 
     def save_models!
+      Rails.logger.info @models.to_yaml
+      puts @models.to_yaml
       # We need to save the survey first if it exists and then add each of the landings to it
-      if @models.select{|m| m[:model].is_a? Survey}.count > 0
-        survey = @models.select{|m| m[:model].is_a? Survey}.first[:model]
+      for survey in @models.select{|m| m[:model].is_a? Survey}
+        survey = survey[:model]
+        Rails.logger.info survey.to_yaml
+        puts survey.to_yaml
         survey.save!
-        @models.select{|m| m[:model].is_a? Landing}.each do |l|
-          l[:model].survey = survey
-        end
+        
       end
+
+      for landing in @models.select{|m| m[:model].is_a? Landing}
+        landing = landing[:model]
+        landing.survey_id = Survey.last.id
+        Rails.logger.info landing.to_yaml
+        puts landing.to_yaml
+        landing.save!
+        Rails.logger.info "#############################"
+        puts "#############################"
+      end
+
+      for catch_tab in @models.select{|m| m[:model].is_a? Catch}
+        catch_tab = catch_tab[:model]
+        landing = Landing.where(survey_id: survey.id, row: catch_tab.row).first
+        catch_tab.landing_id = landing.id
+        Rails.logger.info catch_tab.to_yaml
+        puts catch_tab.to_yaml
+        catch_tab.save!
+        
+      end
+
+
+
+
+
+#        @models.select{|m| m[:model].is_a? Landing}.each do |l|
+#          l[:model].survey = survey
+#          Rails.logger.info l[:model].to_yaml
+#          puts l[:model].to_yaml
+#        end
+#        @models.select{|m| m[:model].is_a? Catch}.each do |c|
+#          landing = Landing.where(survey_id: survey.id, row: c[:model].row )
+#          Rails.logger.info c[:model].row
+#          c[:model].landing = landing
+#          Rails.logger.info c[:model].to_yaml
+#          puts c[:model].to_yaml
+#        end
+      
 
       # We need to save the logbook first if it exists and then add each of the landings to it
       if @models.select{|m| m[:model].is_a? Logbook}.count > 0
@@ -87,6 +127,7 @@ class ExcelFile < ActiveRecord::Base
         logbook.save!
         @models.select{|m| m[:model].is_a? LoggedDay}.each do |l|
           l[:model].logbook = logbook
+
         end
       end
 

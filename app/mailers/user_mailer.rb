@@ -22,10 +22,10 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def new_data_waiting_for_approval(data)
-    @data = data
-    @uploader = data.admin
-    @supervisors = data.admin.supervisors
+  def new_data_waiting_for_approval(survey_id)
+    @survey = Survey.find(survey_id)
+    @uploader = @survey.admin
+    @supervisors = @uploader.supervisors
     @url = supervisor_dashboard_index_url
     mail(:to => @supervisors.all.map(&:email), :subject => "APPROVAL REQUEST :: New Survey Data")
   end
