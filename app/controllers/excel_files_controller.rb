@@ -6,6 +6,7 @@ class ExcelFilesController < InheritedResources::Base
   def show
     require 'roo'
     @excel_file = ExcelFile.find(params[:id])
-  	@rspreadsheet = Excelx.new(@excel_file.file.url.to_s) #Excelx.new("http://i-fish.dev/uploads/excel_file/file/7/Database.template__3_.xlsx")#
+    @file = File.join(RAILS.root, @excel_file.file.url.to_s)
+    @rspreadsheet = Excelx.new(@file) #Excelx.new("http://i-fish.dev/uploads/excel_file/file/7/Database.template__3_.xlsx")#
   end
 end
