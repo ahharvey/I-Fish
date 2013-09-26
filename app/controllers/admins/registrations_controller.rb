@@ -44,7 +44,7 @@ class Admins::RegistrationsController < Devise::RegistrationsController
       elsif params[:admin][:avatar].present?
         admin_crop_path
       else
-        admin_path(resource)
+        root_path
       end
     end
 

@@ -34,7 +34,7 @@ gem 'jquery-datatables-rails', '~> 1.11.2'
 gem 'rabl', '~> 0.8.6' # JSON templates
 gem 'oj', '~> 2.1.4' #high performance JSON parser for rabl
 
-gem 'newrelic_rpm', '~> 3.6.6.147' #system monitoring and profiling
+
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
@@ -58,3 +58,5 @@ group :development do
   gem 'meta_request'
   gem 'rack-mini-profiler', '~> 0.1.26'
 end
+
+gem 'newrelic_rpm', '~> 3.6.6.147' #system monitoring and profiling

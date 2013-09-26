@@ -51,6 +51,7 @@ class Ability
     can :manage, Logbook, :admin_id => admin.id #Can manage own data
     can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :read, Fishery # To view summarised fishery data
+    can :upload_data, :home # Can submit data
   end
 
   def staff(admin)
