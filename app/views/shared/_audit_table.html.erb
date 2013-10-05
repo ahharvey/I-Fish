@@ -11,13 +11,18 @@
       <% for version in parent.versions %>
         <tr>
           <td><%= version.created_at.to_s(:rfc822) %></td>
-          <td><% admin = Admin.find(version.whodunnit.to_i) %>
-            <%= image_tag( admin.avatar_url(:thumb), 
-              width: "30px", 
-              height: "30px", 
-              title: admin.name, 
-              alt: admin.name) 
-            %>
+          <td>
+            <% if version.whodunnit == "Guest" %>
+              Guest
+            <% else %>
+              <% admin = Admin.find(version.whodunnit.to_i) %>
+              <%= image_tag( admin.avatar_url(:thumb), 
+                width: "30px", 
+                height: "30px", 
+                title: admin.name, 
+                alt: admin.name) 
+              %>
+            <% end %>
           </td>
           <td><%= version.event %></td>
         </tr>

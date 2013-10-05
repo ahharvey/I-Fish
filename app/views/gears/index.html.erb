@@ -32,9 +32,12 @@
           <%= gear.name? ? gear.name : "" %>
         </td>
         <td>
-            
-            <%= link_to edit_icon, edit_gear_path(gear) %>
-            <%= link_to destroy_icon, gear, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>
+            <% if can? :update, gear %>
+              <%= link_to edit_icon, edit_gear_path(gear) %>
+            <% end %>
+            <% if can? :destroy, gear %>
+              <%= link_to destroy_icon, gear, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>
+            <% end %>
         </td>
       </tr>
     <% end %>
