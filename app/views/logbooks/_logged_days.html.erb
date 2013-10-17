@@ -14,7 +14,6 @@
     <th><%= LoggedDay.human_attribute_name(:weight) %></th>
     <th><%= LoggedDay.human_attribute_name(:value) %></th>
     <th><%= LoggedDay.human_attribute_name(:condition) %></th>
-    <th><%= LoggedDay.human_attribute_name(:moon) %></th>
     <th></th>
   </tr>
 
@@ -25,7 +24,7 @@
       <td><%= logged_day.start_time.to_s(:time) %></td>
       <td><%= logged_day.end_time.to_s(:time) %></td>
       <td><%= logged_day.gear_time %></td>
-      <td><%= logged_day.graticule %></td>
+      <td><%= link_to logged_day.graticule.try(:code), logged_day.graticule %></td>
       <td><%= logged_day.fuel %></td>
       <td><%= logged_day.sail.yn %></td>
       <td><%= logged_day.net.yn %></td>
@@ -35,7 +34,6 @@
       <td><%= logged_day.weight %></td>
       <td><%= logged_day.value %></td>
       <td><%= logged_day.condition_as_text %></td>
-      <td><%= logged_day.moon_as_text %></td>
       <td>
           <%= link_to show_icon, logged_day %>
           <%= link_to edit_icon, edit_logged_day_path(logged_day) %>

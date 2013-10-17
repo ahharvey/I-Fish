@@ -38,6 +38,7 @@ class Ability
     can :read, User
     can :read, Admin
     can :manage, Admin, id: admin.id
+    can :read, ExcelFile #can read excel files
   end
 
   def public(admin)
@@ -51,6 +52,9 @@ class Ability
     can :manage, Logbook, :admin_id => admin.id #Can manage own data
     can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :read, Fishery # To view summarised fishery data
+    can :upload_data, :home # Can submit data
+    can :process_upload_data, :home # Can submit data
+    can :manage, ExcelFile, :admin_id => admin.id #Can manage own excel files
   end
 
   def staff(admin)

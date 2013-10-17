@@ -26,10 +26,10 @@
       <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
       <dd><%= @survey.desa.name rescue ''%></dd>
 
-      <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+      <dt><%= District.human_attribute_name(:name) %></dt>
       <dd><%= @survey.district.name rescue ''%></dd>
 
-      <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+      <dt><%= Province.human_attribute_name(:name) %></dt>
       <dd><%= @survey.province.name rescue ''%></dd>
       
     </dl>
@@ -60,19 +60,47 @@
 
       
       <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
-      <dd><%= @survey.admin.name rescue ''%></dd>
+      <dd>
+        <%= link_to image_tag(@survey.admin.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: @survey.admin.name, 
+          alt: @survey.admin.name),
+          @survey.admin %>
+      </dd>
 
-
+      
       <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
-      <dd><%= @survey.fleet_observer %></dd>
+      <dd>
+        <%= link_to image_tag(@survey.landing_enumerator.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: @survey.landing_enumerator.name, 
+          alt: @survey.landing_enumerator.name),
+          @survey.landing_enumerator %>
+      </dd>
 
 
       <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
-      <dd><%= @survey.catch_measure %></dd>
+      <dd>
+        <%= link_to image_tag(@survey.catch_measurer.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: @survey.catch_measurer.name, 
+          alt: @survey.catch_measurer.name),
+          @survey.catch_measurer %>
+      </dd>
 
 
       <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
-      <dd><%= @survey.catch_scribe %></dd>
+      <dd>
+        <%= link_to image_tag(@survey.catch_scribe.avatar_url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: @survey.catch_scribe.name, 
+          alt: @survey.catch_scribe.name),
+          @survey.catch_scribe %>
+      </dd>
 
     </dl>
 
@@ -86,7 +114,7 @@
         <th><%= Landing.human_attribute_name(:vessel_ref) %></th>
         <th><%= Landing.human_attribute_name(:vessel_name) %></th>
         <th><%= Landing.human_attribute_name(:grid_square) %></th>
-        <th><%= Landing.human_attribute_name(:type) %></th>
+        <th><%= Landing.human_attribute_name(:vessel_type_id) %></th>
         <th><%= Landing.human_attribute_name(:time_out) %></th>
         <th><%= Landing.human_attribute_name(:time_in) %></th>
         <th><%= Landing.human_attribute_name(:engine) %></th>
@@ -105,8 +133,8 @@
         <tr>
             <td><%= landing.vessel_ref %></td>
             <td><%= landing.vessel_name %></td>
-            <td><%= landing.graticule %></td>
-            <td><%= landing.type %></td>
+            <td><%= link_to landing.graticule.try(:code), landing.graticule %></td>
+            <td><%= link_to landing.vessel_type.try(:code).try(:upcase), landing.vessel_type %></td>
             <td><%= landing.time_out.to_s(:triptime) %></td>
             <td><%= landing.time_in.to_s(:triptime) %></td>
             <td><%= link_to landing.engine.code, "#", title: landing.engine.name %></td>
@@ -136,15 +164,15 @@
       <tr>
         <th><%= Catch.human_attribute_name(:fish_id) %></th>
         <th><%= Catch.human_attribute_name(:length) %> (mm)</th>
-        <th><%= Catch.human_attribute_name(:weight) %> (g)</th>
+        <th><%= Landing.human_attribute_name(:vessel_name) %></th>
         <th></th>
       </tr>
 
       <% @survey.catches.each do |catch| %>
         <tr>
-          <td><%= link_to catch.fish.english_name, catch.fish %></td>
+          <td><%= link_to catch.fish.code, catch.fish, title: "#{catch.fish.scientific_name} - #{catch.fish.english_name}" %></td>
           <td><%= catch.length %></td>
-          <td><%= catch.weight %></td>
+          <td><%= catch.landing.vessel_name %></td>
           <td>
             <%= link_to show_icon, catch %>
             <%= link_to edit_icon, edit_catch_path(catch) %>

@@ -140,4 +140,12 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-remove icon-white icon-large')
   end
 
+  def up_arrow
+    content_tag :i, "", class: 'icon-arrow-up success'
+  end
+
+  def down_arrow
+    content_tag :i, "", class: 'icon-arrow-down danger'
+  end
+
 end

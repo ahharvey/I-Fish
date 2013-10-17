@@ -4,6 +4,7 @@ gem 'rails', '~> 3.2.11'
 gem 'inherited_resources', '~> 1.3.1'
 gem 'pg', '~> 0.14.1'
 gem 'unicorn', '~> 4.6.0'
+#gem 'queue_classic', '~>2.1.2' #queued processes
 
 gem 'jquery-rails', '~> 2.2.1'
 gem 'jquery-ui-rails', '~> 4.0.1'
@@ -57,3 +58,5 @@ group :development do
   gem 'meta_request'
   gem 'rack-mini-profiler', '~> 0.1.26'
 end
+
+gem 'newrelic_rpm', '~> 3.6.6.147' #system monitoring and profiling

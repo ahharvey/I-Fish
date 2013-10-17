@@ -33,16 +33,39 @@ class Landing < ActiveRecord::Base
 	
 	has_paper_trail
 
-	attr_accessible :boat_size, :crew, :fuel, :gear_id, :quantity, :sail, :time_in, :time_out, :value, :vessel_name, :vessel_ref, :weight, :type,
-	:power, :graticule_id, :engine_id, :survey_id, :fish_id, :importing?, :cpue
+	attr_accessible :boat_size, 
+									:crew, 
+									:fuel, 
+									:gear_id, 
+									:quantity, 
+									:sail, 
+									:time_in, 
+									:time_out, 
+									:value, 
+									:vessel_name, 
+									:vessel_ref, 
+									:weight, 
+									:vessel_type_id,
+									:power, 
+									:graticule_id, 
+									:engine_id, 
+									:survey_id, 
+									:fish_id, 
+									:importing?, 
+									:cpue, 
+									:row,
+									:ice,
+									:conditions,
+									:aborted
 
-	set_inheritance_column nil
+	self.inheritance_column = nil
 
 	belongs_to :gear
 	belongs_to :survey
 	belongs_to :graticule
 	belongs_to :engine
 	belongs_to :fish
+	belongs_to :vessel_type
 	has_many :fishes, through: :catches
 	has_one :province, through: :survey
 	has_one :district, through: :survey
@@ -51,7 +74,7 @@ class Landing < ActiveRecord::Base
 
 	has_many :catches, dependent: :destroy
 
-	before_save :calculate_cpue
+	#before_save :calculate_cpue
 
 	validates :power,
 		presence: true,
@@ -76,7 +99,7 @@ class Landing < ActiveRecord::Base
 			only_integer: true
 		},
 		inclusion: {
-			in: 1..999
+			in: 0..999
 		}
 	validates :crew,
 		numericality: {
@@ -125,13 +148,31 @@ class Landing < ActiveRecord::Base
 		presence: true
 	validates :time_in,
 		presence: true
+	validates :conditions,
+		presence: true,
+		inclusion: {
+			in: 1..3
+		}
+	validates :ice,
+		numericality: {
+				only_integer: true
+			},
+		inclusion: {
+			in: 0..99
+		}
 #	validates :type,
 #		presence: true
 
+	@@condition_data = { 1 => "Calm" , 2 => "Moderate" , 3 => "High" }
+  
+  def condition_as_text
+    @@condition_data[condition]
+  end
+
 	def calculate_cpue
-		self.cpue_kg = self.weight.to_i / ( ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour ) * self.crew.to_i )
-		self.cpue_idr = ( self.value.to_i * self.weight.to_i ) / ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour )
-		self.cpue_fuel = self.weight.to_i / self.fuel.to_i
+		self.cpue_kg = weight.to_i / ( ( ( time_in.to_i - time_out.to_i ) * crew.to_i ) / 1.hour ) 
+		#self.cpue_idr = ( self.value.to_i * self.weight.to_i ) / ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour )
+		#self.cpue_fuel = weight.to_i / fuel.to_i
 	end
 
 	def importing!

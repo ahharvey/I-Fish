@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220095846) do
+ActiveRecord::Schema.define(:version => 20130828140319) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -62,9 +62,10 @@ ActiveRecord::Schema.define(:version => 20130220095846) do
     t.integer  "fish_id"
     t.integer  "landing_id"
     t.integer  "length"
-    t.integer  "weight"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "sfactor"
+    t.integer  "row"
   end
 
   create_table "desas", :force => true do |t|
@@ -157,8 +158,8 @@ ActiveRecord::Schema.define(:version => 20130220095846) do
     t.integer  "weight"
     t.datetime "time_out"
     t.datetime "time_in"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
+    t.datetime "created_at",     :null => false
+    t.datetime "updated_at",     :null => false
     t.string   "type"
     t.integer  "engine_id"
     t.integer  "graticule_id"
@@ -172,9 +173,15 @@ ActiveRecord::Schema.define(:version => 20130220095846) do
     t.integer  "fuel"
     t.integer  "power"
     t.integer  "crew"
+    t.integer  "row"
+    t.integer  "vessel_type_id"
+    t.integer  "ice"
+    t.integer  "conditions"
+    t.boolean  "aborted"
   end
 
   add_index "landings", ["fish_id"], :name => "index_landings_on_fish_id"
+  add_index "landings", ["vessel_type_id"], :name => "index_landings_on_vessel_type_id"
 
   create_table "logbooks", :force => true do |t|
     t.date     "date"
@@ -212,6 +219,8 @@ ActiveRecord::Schema.define(:version => 20130220095846) do
     t.datetime "created_at",   :null => false
     t.datetime "updated_at",   :null => false
     t.integer  "crew"
+    t.boolean  "aborted"
+    t.integer  "ice"
   end
 
   add_index "logged_days", ["fish_id"], :name => "index_logged_days_on_fish_id"
@@ -253,19 +262,22 @@ ActiveRecord::Schema.define(:version => 20130220095846) do
     t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",                        :null => false
-    t.datetime "updated_at",                        :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.integer  "fishery_id"
-    t.string   "fleet_observer"
-    t.string   "catch_scribe"
-    t.string   "catch_measure"
     t.integer  "admin_id"
-    t.boolean  "approved",       :default => false, :null => false
+    t.boolean  "approved",              :default => false, :null => false
     t.integer  "approver_id"
+    t.integer  "landing_enumerator_id"
+    t.integer  "catch_measurer_id"
+    t.integer  "catch_scribe_id"
   end
 
   add_index "surveys", ["approved"], :name => "index_surveys_on_approved"
   add_index "surveys", ["approver_id"], :name => "index_surveys_on_approver_id"
+  add_index "surveys", ["catch_measurer_id"], :name => "index_surveys_on_catch_measurer_id"
+  add_index "surveys", ["catch_scribe_id"], :name => "index_surveys_on_catch_scribe_id"
+  add_index "surveys", ["landing_enumerator_id"], :name => "index_surveys_on_landing_enumerator_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

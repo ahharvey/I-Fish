@@ -22,10 +22,10 @@ class UserMailer < ActionMailer::Base
     end
   end
 
-  def new_data_waiting_for_approval(data)
-    @data = data
-    @uploader = data.admin
-    @supervisors = data.admin.supervisors
+  def new_data_waiting_for_approval(survey_id)
+    @survey = Survey.find(survey_id)
+    @uploader = @survey.admin
+    @supervisors = @uploader.supervisors
     @url = supervisor_dashboard_index_url
     mail(:to => @supervisors.all.map(&:email), :subject => "APPROVAL REQUEST :: New Survey Data")
   end
@@ -39,5 +39,11 @@ class UserMailer < ActionMailer::Base
   def data_upload_failure_email_not_recognized(sender)
     @email = sender
     mail(:to => @email, :subject => "Excel Spreadsheet upload failure")
+  end
+
+  def new_admin_approved(admin_id)
+    @admin = Admin.find(admin_id)
+    @url = new_admin_session_url
+    mail(:to => @admin.email, :subject => "I-Fish Registration Approved")
   end
 end

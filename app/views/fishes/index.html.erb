@@ -33,8 +33,12 @@
         <td><%= fish.indonesia_name %></td>
         <td><%= fish.code %></td>
         <td>
+          <% if can? :update, fish %>
             <%= link_to edit_icon, edit_fish_path(fish) %> 
+          <% end %>
+          <% if can? :destroy, fish %>
             <%= link_to destroy_icon, fish, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>
+          <% end %>
         </td>
       </tr>
     <% end %>

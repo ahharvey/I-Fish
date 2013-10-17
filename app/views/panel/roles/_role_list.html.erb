@@ -4,7 +4,9 @@
     <% @roles.each do |role| %>
       <li>
         <%= role.name %>
-        <%= link_to remove_icon, [:panel, role], method: :delete, confirm: 'You sure?', remote: true %>
+        <% if can? :destroy, role %>
+          <%= link_to remove_icon, [:panel, role], method: :delete, confirm: 'You sure?', remote: true %>
+        <% end %>
       </li>
     <% end %>
   </ul>

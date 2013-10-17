@@ -103,7 +103,7 @@ IFish::Application.routes.draw do
         resources :logbooks
         resources :surveys
         resources :fisheries
-        resources :desas
+        resources :desas, path: :landing_sites
         resources :districts
         resources :provinces
         resources :engines

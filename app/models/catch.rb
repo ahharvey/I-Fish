@@ -15,7 +15,7 @@ class Catch < ActiveRecord::Base
 	
 	has_paper_trail
 	
-	attr_accessible :fish_id, :length, :weight, :landing_id
+	attr_accessible :fish_id, :length, :weight, :landing_id, :sfactor, :row
 
 	belongs_to :fish
 	belongs_to :landing
@@ -24,7 +24,8 @@ class Catch < ActiveRecord::Base
 	validates :fish_id,
 		presence: true
 	validates :landing_id,
-		presence: true
+		presence: true,
+		if: :not_importing
 	validates :length,
 		presence: true,
 		numericality: {
@@ -33,16 +34,27 @@ class Catch < ActiveRecord::Base
 		inclusion: {
 			in: 1..9999
 		}
-	validates :weight,
+#	validates :weight,
+#		presence: true,
+#		numericality: {
+#			only_integer: true
+#		},
+#		inclusion: {
+#			in: 1..999999
+#		}
+	validates :sfactor,
 		presence: true,
-		numericality: {
-			only_integer: true
-		},
 		inclusion: {
-			in: 1..999999
-		}
+			in: %{c s}
+			}
 
-	
+	def importing!
+		@importing = true
+	end
+
+	def not_importing
+		!@importing
+	end
 
 
 	def self.import_from_email(params, user_id)
