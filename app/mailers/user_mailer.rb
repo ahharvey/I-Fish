@@ -40,4 +40,10 @@ class UserMailer < ActionMailer::Base
     @email = sender
     mail(:to => @email, :subject => "Excel Spreadsheet upload failure")
   end
+
+  def new_admin_approved(admin_id)
+    @admin = Admin.find(admin_id)
+    @url = new_admin_session_url
+    mail(:to => @admin.email, :subject => "I-Fish Registration Approved")
+  end
 end

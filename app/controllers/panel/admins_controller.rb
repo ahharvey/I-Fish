@@ -43,6 +43,7 @@ class Panel::AdminsController < ApplicationController
     @admin.update_column :approved, params[:approved]
     if @admin.approved?
       flash[:success] = "Approved"
+      UserMailer.new_admin_approved(@admin.id)
     else
       flash[:error] = "Not Approved"
     end
