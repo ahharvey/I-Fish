@@ -125,7 +125,6 @@ IFish::Application.routes.draw do
 
     post 'home/process_upload_data'
 
-    post '/email_processor' => 'griddler/emails#create'
 
     # handles /valid-locale
     root to: 'home#index'
