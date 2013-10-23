@@ -22,6 +22,7 @@ gem 'roo', '< 1.10.2'
 gem 'mini_magick', '~> 3.5.0'
 gem 'rmagick', '~> 2.13.2'
 gem 'griddler', '~> 0.5.0'  #Mandril API for incoming email handling
+gem 'rubyzip', '< 1.0.0'
 
 gem 'paper_trail', '~> 2'
 

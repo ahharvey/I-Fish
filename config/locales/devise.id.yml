@@ -33,8 +33,10 @@ id:
         signed_up: 'Proses pendaftaran berhasil. Apabila diaktifkan, konfirmasi telah dikirimkan ke e-mail anda.'
         updated: 'Akun anda telah berhasil diperbaharui.'
         destroyed: 'Selamat Tinggal,  Akun anda telah di hapus'
+        add_avatar: 'Add an avatar to your profile.'  
       admin:
         signed_up_but_not_approved: 'You have signed up successfully but your account has not been approved by your supervisor yet'
+        add_avatar: 'Add an avatar to your profile.'  
     unlocks:
       send_instructions: 'Anda akan menerima e-mail berisi instruksi untuk membuka kembali akun anda dalam beberapa menit lagi.'
       unlocked: 'Akun anda telah berhasil dibuka kembali. Anda telah sign in.'
