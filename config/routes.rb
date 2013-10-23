@@ -111,7 +111,7 @@ IFish::Application.routes.draw do
         resources :fishes
       end
     end
-    
+
 
     get 'home/index'
     get 'home/upload_data'
@@ -137,14 +137,14 @@ IFish::Application.routes.draw do
  
 
   # handles /bad-locale|anything/valid-path
-  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+#  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
   
   # handles /anything|valid-path-but-no-locale
-  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+#  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
 
   # handles /
   #root to: redirect("/#{I18n.default_locale}")
-  match '', to: redirect("/#{I18n.default_locale}")
+#  match '', to: redirect("/#{I18n.default_locale}")
 
 
 end

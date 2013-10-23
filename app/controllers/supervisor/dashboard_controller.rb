@@ -1,5 +1,5 @@
 class Supervisor::DashboardController < ApplicationController
-	load_and_authorize_resource
+	authorize_resource :class => false
   def index
 		@surveys = Survey.where(approved: false)
 		@logbooks = Logbook.where(approved: false)
