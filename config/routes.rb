@@ -119,10 +119,13 @@ IFish::Application.routes.draw do
     get '/fishery_profile' => 'home#fishery_profile'
     get '/email_processor', :to => proc { [200, {}, ["OK"]] } 
 
+
     match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
     match '/import_mail' => 'home#import_mail'
 
     post 'home/process_upload_data'
+
+    mount_griddler
 
     # handles /valid-locale
     root to: 'home#index'

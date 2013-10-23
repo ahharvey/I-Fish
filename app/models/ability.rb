@@ -68,6 +68,10 @@ class Ability
   def supervisor(admin)
     #Supervissors inherit abilities of enuemerators
      
+    #AND#
+    # Supervisors can view the dashboard
+
+    can :manage, Supervisor#dashboard_controller
     
     #AND#
     # Supervisors can view and edit data owned by staff who share the same office.
