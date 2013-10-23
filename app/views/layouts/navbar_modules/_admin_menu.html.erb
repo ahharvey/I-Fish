@@ -9,12 +9,14 @@
 			Settings
 		<% end %>
 	<li>
-	<li>
-		<%= link_to admin_security_path, title: t("devise.edit") do %>
-			<%= security_icon %>
-			Security
-		<% end %>
-	<li>
+	<% if can? :manage, 'supervisor/dashboard' %>
+		<li>
+			<%= link_to admin_security_path, title: t("devise.edit") do %>
+				<%= security_icon %>
+				Security
+			<% end %>
+		<li>
+	<% end %>
 	<li>
 		<%= link_to admin_avatar_path, title: t("devise.edit") do %>
 			<%= avatar_icon %>
