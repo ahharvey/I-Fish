@@ -1,3 +1,5 @@
+require "email_processor"
+
 Griddler.configure do |config|
   config.processor_class = EmailProcessor # MyEmailProcessor
   config.to = :hash # :full, :email, :hash
