@@ -111,6 +111,7 @@ IFish::Application.routes.draw do
         resources :fishes
       end
     end
+    
 
     get 'home/index'
     get 'home/upload_data'
