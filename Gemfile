@@ -30,7 +30,7 @@ gem 'paper_trail', '~> 2'
 gem 'wicked_pdf', '~> 0.9.4'
 gem 'wkhtmltopdf-heroku', '~> 1.0.0'
 
-gem 'gmaps4rails', '~> 2.0.3'
+gem 'gmaps4rails', '~> 1.5.6'
 gem 'jquery-datatables-rails', '~> 1.11.2'
 
 gem 'rabl', '~> 0.9.0' # JSON templates
