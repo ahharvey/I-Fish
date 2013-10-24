@@ -12,6 +12,7 @@ gem 'simple_form', '~> 2.1.0'
 gem 'kaminari', '~> 0.14.1'
 gem 'bootstrap-switch-rails', '~> 1.8.1' #toggle buttons for Twitter Bootsterap
 
+
 gem 'devise', '~> 2.1.0'
 gem 'cancan', '~> 1.6.9'
 gem 'omniauth', '~> 1.1.3'
