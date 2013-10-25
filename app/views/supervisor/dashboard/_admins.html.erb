@@ -19,7 +19,7 @@
           <td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
           <td><%= link_to admin.name, [:panel, admin] %></td>
           <td>
-            <%= content_tag :div, class: "controls toggle switch switch-mini",
+            <%= content_tag :div, class: "controls toggle make-switch switch-mini",
               data: {
                 on: "success",
                 off: "danger",
