@@ -46,4 +46,5 @@ class UserMailer < ActionMailer::Base
     @url = new_admin_session_url
     mail(:to => @admin.email, :subject => "I-Fish Registration Approved")
   end
+  
 end
