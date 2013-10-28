@@ -72,6 +72,7 @@ class Ability
     # Supervisors can view the dashboard
 
     can :manage, 'supervisor/dashboard'
+    can :index, 'supervisor/dashboard'
     
     #AND#
     # Supervisors can view and edit data owned by staff who share the same office.
