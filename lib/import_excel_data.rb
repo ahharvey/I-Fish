@@ -96,13 +96,13 @@ class ImportExcelData
               sail_bool = ""
             end
 
-            if aborted == "Y"
-              abort_bool = true
-            elsif aborted == "N"
-              abort_bool = false
-            else
-              abort_bool = ""
-            end
+#            if aborted == "Y"
+#              abort_bool = true
+#            elsif aborted == "N"
+#              abort_bool = false
+#            else
+#              abort_bool = ""
+#            end
 
             Rails.logger.info aborted
             Rails.logger.info abort_bool
@@ -131,7 +131,7 @@ class ImportExcelData
               time_out: dep_time, 
               gear_id: gear_id.to_i,
               fish_id: fish_id.to_i,
-              aborted: abort_bool,
+              aborted: aborted,
               ice: ice,
               conditions: conditions
             )
