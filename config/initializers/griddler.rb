@@ -1,4 +1,4 @@
-require "email_processor"
+#require "email_processor"
 
 Griddler.configure do |config|
   config.processor_class = EmailProcessor # MyEmailProcessor
