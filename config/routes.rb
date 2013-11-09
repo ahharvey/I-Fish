@@ -1,6 +1,6 @@
 IFish::Application.routes.draw do
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
+#  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
     
     devise_for :users,  
@@ -132,19 +132,19 @@ IFish::Application.routes.draw do
     # handles /valid-locale/fake-path
     #match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
 
-  end
+#  end
 
  
 
   # handles /bad-locale|anything/valid-path
-  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+#  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
   
   # handles /anything|valid-path-but-no-locale
-  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+#  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
 
   # handles /
   #root to: redirect("/#{I18n.default_locale}")
-  match '', to: redirect("/#{I18n.default_locale}")
+#  match '', to: redirect("/#{I18n.default_locale}")
 
 
 end
