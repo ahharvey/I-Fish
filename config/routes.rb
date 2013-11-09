@@ -119,6 +119,7 @@ IFish::Application.routes.draw do
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'
     get "/email_processor", to: proc { [200, {}, ["OK"]] }, as: "mandrill_head_test_request"
+    
 
 
     match '/multipart_import' => 'home#multipart_import', via: [:get, :post]

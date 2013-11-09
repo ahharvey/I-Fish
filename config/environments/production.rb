@@ -16,7 +16,7 @@ IFish::Application.configure do
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
   config.assets.compile = false
-  config.action_mailer.default_url_options = { :host => 'fishstat-production.herokuapp.com', :locale => I18n.locale }
+  config.action_mailer.default_url_options = { :host => 'ifish.imacsindonesia.com', :locale => I18n.locale }
 
   # Generate digests for assets URLs
   config.assets.digest = true
