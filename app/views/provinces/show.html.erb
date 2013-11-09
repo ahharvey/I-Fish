@@ -15,14 +15,22 @@
                 remote: true
                 ) do |f| %>
   Select report year: 
+
+  <% if Survey.exists? %>
   
-  <%= f.input :year, 
-    collection: Survey.first(order: 'date_published ASC').date_published.year..Survey.last(order: 'date_published ASC').date_published.year,
-    selected: Date.today.year,
-    input_html: {
-      class: "report_year"
-      } %>
-  <% end %>
+    <%= f.input :year, 
+      collection: Survey.first(order: 'date_published ASC').date_published.year..Survey.last(order: 'date_published ASC').date_published.year,
+      selected: Date.today.year,
+      input_html: {
+        class: "report_year"
+        } %>
+    <% end %>
+
+<% else %>
+
+  <i>No survey data uploaded</i>
+
+<% end %>
   
 
 <%= render partial: 'fishery_cpue_by_gear' %>
