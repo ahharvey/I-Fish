@@ -3,7 +3,8 @@ require "griddler"
 class EmailProcessor
   def self.process(email)
     #authorize! :multipart_import, :home
-    Rails.logger.info("HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH")
+
+    Rails.logger.info email.body
     
     admin   =   Admin.where(:email => email.from).first rescue nil
     xlsx    =   "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
