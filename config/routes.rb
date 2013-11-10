@@ -1,6 +1,6 @@
 IFish::Application.routes.draw do
 
-#  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
     
     devise_for :users,  
@@ -119,7 +119,6 @@ IFish::Application.routes.draw do
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'
     get "/email_processor", to: proc { [200, {}, ["OK"]] }, as: "mandrill_head_test_request"
-    
 
 
     match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
@@ -133,19 +132,19 @@ IFish::Application.routes.draw do
     # handles /valid-locale/fake-path
     #match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
 
-#  end
+  end
 
  
 
   # handles /bad-locale|anything/valid-path
-#  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
   
   # handles /anything|valid-path-but-no-locale
-#  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
 
   # handles /
   #root to: redirect("/#{I18n.default_locale}")
-#  match '', to: redirect("/#{I18n.default_locale}")
+  match '', to: redirect("/#{I18n.default_locale}")
 
 
 end
