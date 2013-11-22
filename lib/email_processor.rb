@@ -14,7 +14,7 @@ class EmailProcessor
       if email.attachments.size > 0 && email.attachments.all? { |a| a.content_type == xlsx || a.content_type == xls }
         for attachment in email.attachments
           
-          parameters = {file: attachement, admin_id: id}
+          parameters = {file: attachment, admin_id: id}
           excel_file = ExcelFile.new(parameters)
           
           ActiveRecord::Base.transaction do
@@ -55,6 +55,6 @@ class EmailProcessor
 
     Rails.logger.info(text)
 
-    render :text => text, :status => status
+    # render :text => text, :status => status
   end
 end
