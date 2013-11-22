@@ -18,7 +18,7 @@ gem 'omniauth', '~> 1.1.3'
 
 gem 'carrierwave', '~> 0.9.0'
 gem 'fog', '~> 1.16.0'
-gem 'roo', '< 1.10.2'
+gem 'roo', '< 1.12.1'
 gem 'mini_magick', '~> 3.6.0'
 gem 'rmagick', '~> 2.13.2'
 gem 'griddler', '~> 0.6.1'  #Mandril API for incoming email handling
