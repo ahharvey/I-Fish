@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '1.9.3'
+ruby '2.0.0'
 gem 'rails', '~> 3.2.11'
 gem 'inherited_resources', '~> 1.4'
 gem 'pg', '~> 0.17.0'
@@ -18,11 +18,11 @@ gem 'omniauth', '~> 1.1.3'
 
 gem 'carrierwave', '~> 0.9.0'
 gem 'fog', '~> 1.16.0'
-gem 'roo', '< 1.12.1'
+gem 'roo', '~> 1.12.1'
 gem 'mini_magick', '~> 3.6.0'
 gem 'rmagick', '~> 2.13.2'
 gem 'griddler', '~> 0.6.1'  #Mandril API for incoming email handling
-gem 'rubyzip', '< 1.0.0'
+#gem 'rubyzip', '< 1.0.0'
 
 gem 'paper_trail', '~> 2'
 
