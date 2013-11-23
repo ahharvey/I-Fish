@@ -35,7 +35,7 @@ gem 'jquery-datatables-rails', '~> 1.12.1'
 
 gem 'rabl', '~> 0.9.0' # JSON templates
 gem 'oj', '~> 2.2.3' #high performance JSON parser for rabl
-
+gem 'unf', '~> 0.1.3' #Unicode support required by Fog
 
 
 group :assets do
