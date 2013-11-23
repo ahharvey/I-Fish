@@ -1,6 +1,6 @@
 #require 'iconv'
 require 'roo'
-require 'zip'
+#require 'zip'
 
 class ImportExcelData
   def self.working_based_sheet(xl_file, excel_data)
