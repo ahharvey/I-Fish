@@ -8,8 +8,10 @@ class ImportExcelData
 
     if xl_file.file.file.extension.eql?("xls")
       xls = Roo::Excel.new(xl_file.file.path)
-    else
+    elsif xl_file.file.file.extension.eql?("xlsx")
       xls = Roo::Excelx.new(xl_file.file.path)
+    else
+      xls = ''
     end
     mysheets = xls.sheets
 
