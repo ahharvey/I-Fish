@@ -42,7 +42,7 @@ group :assets do
   gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
   gem 'uglifier', '~> 2.3.1'
-  gem 'bootstrap-sass', '~> 3.0.2'
+  gem 'bootstrap-sass', '~> 2.3.2'                 ##********major update available
   gem 'font-awesome-sass-rails', '~> 3.0.2'
 end
 
