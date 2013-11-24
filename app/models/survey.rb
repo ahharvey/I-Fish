@@ -50,28 +50,34 @@ class Survey < ActiveRecord::Base
 
 	validates :date_published,
 		presence: true
-	validates :desa_id,
-		presence: true
+	validates :desa,
+		presence: {
+			message: " is not recognized." 
+		}
 	validates :start_time,
 		presence: true
 	validates :end_time,
 		presence: true
-	validates :fishery_id,
-		presence: true
-	validates :landing_enumerator_id,
-		presence: true
-	validates :catch_scribe_id,
-		presence: true
-	validates :catch_measurer_id,
-		presence: true
-	validates :admin_id,
-		presence: true
+	validates :fishery,
+		presence: {
+			message: " is not recognized." 
+		}
+	validates :admin,
+		presence: {
+			message: " is not recognized." 
+		}
 	validates :landing_enumerator, 
-		presence: true
+		presence: {
+			message: " is not recognized." 
+		}
 	validates :catch_scribe, 
-		presence: true
+		presence: {
+			message: " is not recognized." 
+		}
 	validates :catch_measurer, 
-		presence: true
+		presence: {
+			message: " is not recognized." 
+		}
 
 #	validate :uniqueness_of_survey
 

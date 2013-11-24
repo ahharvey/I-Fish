@@ -92,8 +92,10 @@ class Landing < ActiveRecord::Base
 		presence: true
 	validates :boat_size,
 		presence: true
-	validates :engine_id,
-		presence: true
+	validates :engine,
+		presence: {
+			message: " is not valid" 
+		}
 	validates :fuel,
 		numericality: {
 			only_integer: true
@@ -123,14 +125,14 @@ class Landing < ActiveRecord::Base
 #		inclusion: {
 #			in: 1..999
 #		}
-	validates :gear_id,
-		presence: true
 	validates :gear, 
-		presence: true
-	validates :fish_id,
-		presence: true
+		presence: {
+			message: " is not recognized." 
+		}
 	validates :fish, 
-		presence: true
+		presence: {
+			message: " is not recognized." 
+		}
 	# Do not validate presence of survey_id if this model is being imported from an excel file
 	# as the parent survey will be saved later and currently doesn't have an ID.
 	validates :survey_id,
