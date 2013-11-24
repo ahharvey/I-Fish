@@ -66,7 +66,7 @@ class Survey < ActiveRecord::Base
 		presence: true
 	validates :admin_id,
 		presence: true
-	validates :landing_emumerator, associated: true
+	validates :landing_enumerator, associated: true
 	validates :catch_scribe, associated: true
 	validates :catch_measurer, associated: true
 
