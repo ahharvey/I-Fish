@@ -86,8 +86,8 @@ class Landing < ActiveRecord::Base
 		}
 	validates :graticule_id,
 		presence: true
-	validates :vessel_ref,
-		presence: true
+# validates :vessel_ref,
+#		presence: true
 	validates :vessel_name,
 		presence: true
 	validates :boat_size,
