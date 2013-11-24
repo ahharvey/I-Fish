@@ -109,7 +109,7 @@ class ImportExcelData
 #            end
 
             Rails.logger.info aborted
-            Rails.logger.info abort_bool
+            Rails.logger.info aborted
           
             gear_id = Gear.where("LOWER(alpha_code) = ?", gear).first.id rescue ''
             engine_id = Engine.where("LOWER(code) = ?", engine).first.id rescue ''
