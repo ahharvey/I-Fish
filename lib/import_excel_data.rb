@@ -105,6 +105,7 @@ class ImportExcelData
           admin_id: xl_file.admin.id
         )
         excel_data.add_model(survey, {:sheet => "Survey", :model_type => "Survey"})
+        
       end
 
       # parses and imports survey landing data from Form A tab
