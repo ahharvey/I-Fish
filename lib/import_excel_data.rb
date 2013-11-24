@@ -40,8 +40,8 @@ class ImportExcelData
       catch_measurer = xls.cell(9,"B")
 
       unless fishery.blank?
-        desa_id = Desa.where("LOWER(name) = ?", code_desa.downcase).first.id rescue 0
-        fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue 0
+        desa_id = Desa.where("LOWER(name) = ?", code_desa.downcase).first.id rescue ''
+        fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue ''
 
         if vessel_enumerator.is_a? String
           if admin = Admin.find_by_email(vessel_enumerator)

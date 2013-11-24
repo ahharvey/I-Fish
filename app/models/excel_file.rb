@@ -140,7 +140,7 @@ class ExcelFile < ActiveRecord::Base
       @models.each do |m|
         if !m[:model].valid?
           m[:model].errors.each do |e|
-            error_messages << "\"#{e.to_s.titlecase} #{m[:model].errors[e][0]}\" - #{m[:meta][:sheet]} #{m[:meta].key?(:row) ? m[:meta][:row] : ''}"
+            error_messages << "#{e.to_s.titlecase} #{m[:model].errors[e][0]} - #{m[:meta][:sheet]}, row #{m[:meta][:row] or 'N/A'}"
           end
         end
       end
