@@ -94,7 +94,7 @@ class ImportExcelData
         Rails.logger.info catch_measurer_id
 
         survey = Survey.new(
-          fishery_id: fishery_id, 
+          fishery_id: fishery_id.to_i, 
           desa_id: desa_id, 
           date_published: date.to_s, 
           start_time: start_time, #DateTime.new(date.year,date.month,date.day,start_time.hour,start_time.min)
