@@ -42,9 +42,52 @@ class ImportExcelData
       unless fishery.blank?
         desa_id = Desa.where("LOWER(name) = ?", code_desa.downcase).first.id rescue 0
         fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue 0
-        vessel_enumerator_id = Admin.find_by_email(vessel_enumerator).id rescue vessel_enumerator
-        catch_scribe_id = Admin.find_by_email(catch_scribe).id rescue catch_scribe
-        catch_measurer_id = Admin.find_by_email(catch_measurer).id rescue catch_measurer
+
+        if vessel_enumerator.is_a? String
+          if admin = Admin.find_by_email(vessel_enumerator)
+            vessel_enumerator_id = admin.id
+          elsif admin = Admin.find_by_name(vessel_enumerator)
+            vessel_enumerator_id = admin.id
+          else
+            vessel_enumerator_id = ''
+          end
+        elsif vessel_enumerator.is_a? Integer
+          vessel_enumerator_id = Admin.find( vessel_enumerator )
+        else
+          vessel_enumerator_id = ''
+        end
+
+        if catch_scribe.is_a? String
+          if admin = Admin.find_by_email(catch_scribe)
+            catch_scribe_id = admin.id
+          elsif admin = Admin.find_by_name(catch_scribe)
+            catch_scribe_id = admin.id
+          else
+            catch_scribe_id = ''
+          end
+        elsif catch_scribe.is_a? Integer
+          catch_scribe_id = Admin.find( catch_scribe )
+        else
+          catch_scribe_id = ''
+        end
+
+        if catch_measurer.is_a? String
+          if admin = Admin.find_by_email(catch_measurer)
+            catch_measurer_id = admin.id
+          elsif admin = Admin.find_by_name(catch_measurer)
+            catch_measurer_id = admin.id
+          else
+            catch_measurer_id = ''
+          end
+        elsif catch_measurer.is_a? Integer
+          catch_measurer_id = Admin.find( catch_measurer )
+        else
+          catch_measurer_id = ''
+        end
+
+#        vessel_enumerator_id = Admin.find_by_email(vessel_enumerator).id rescue vessel_enumerator
+#        catch_scribe_id = Admin.find_by_email(catch_scribe).id rescue catch_scribe
+#        catch_measurer_id = Admin.find_by_email(catch_measurer).id rescue catch_measurer
 
         Rails.logger.info vessel_enumerator_id
         Rails.logger.info catch_scribe_id

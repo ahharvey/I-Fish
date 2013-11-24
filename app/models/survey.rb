@@ -66,6 +66,10 @@ class Survey < ActiveRecord::Base
 		presence: true
 	validates :admin_id,
 		presence: true
+	validates :landing_emumerator, associated: true
+	validates :catch_scribe, associated: true
+	validates :catch_measurer, associated: true
+
 #	validate :uniqueness_of_survey
 
 	def uniqueness_of_survey

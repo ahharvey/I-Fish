@@ -125,6 +125,10 @@ class Landing < ActiveRecord::Base
 #		}
 	validates :gear_id,
 		presence: true
+	validates :gear, associated: true
+	validates :fish_id,
+		presence: true
+	validates :fish, associated: true
 	# Do not validate presence of survey_id if this model is being imported from an excel file
 	# as the parent survey will be saved later and currently doesn't have an ID.
 	validates :survey_id,
