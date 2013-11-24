@@ -99,9 +99,9 @@ class ImportExcelData
           date_published: date.to_s, 
           start_time: start_time, #DateTime.new(date.year,date.month,date.day,start_time.hour,start_time.min)
           end_time: end_time, #DateTime.new(date.year,date.month,date.day,end_time.hour,end_time.min)
-          landing_enumerator_id: vessel_enumerator_id.to_i, 
-          catch_scribe_id: catch_scribe_id.to_i, 
-          catch_measurer_id: catch_measurer_id.to_i,
+          landing_enumerator_id: vessel_enumerator_id, 
+          catch_scribe_id: catch_scribe_id, 
+          catch_measurer_id: catch_measurer_id,
           admin_id: xl_file.admin.id
         )
         excel_data.add_model(survey, {:sheet => "Survey", :model_type => "Survey"})
@@ -162,12 +162,12 @@ class ImportExcelData
             landing = Landing.new(  
               row: row,
               power: power, 
-              graticule_id: graticule_id.to_i, 
-              vessel_type_id: vessel_type_id.to_i, 
+              graticule_id: graticule_id, 
+              vessel_type_id: vessel_type_id, 
               vessel_ref: reg, 
               vessel_name: name, 
               boat_size: length,
-              engine_id: engine_id.to_i, 
+              engine_id: engine_id, 
               sail: sail_bool, 
               fuel: fuel, 
               crew: crew, 
@@ -176,8 +176,8 @@ class ImportExcelData
               value: value, 
               time_in: arr_time, 
               time_out: dep_time, 
-              gear_id: gear_id.to_i,
-              fish_id: fish_id.to_i,
+              gear_id: gear_id,
+              fish_id: fish_id,
               aborted: aborted,
               ice: ice,
               conditions: conditions
@@ -199,7 +199,7 @@ class ImportExcelData
               fish_id = Fish.where("LOWER(code) = ?", species).first.id rescue 0
               #landing_id = Landing.where(survey_id: survey.id, row: row).first.id
               catch_tab = Catch.new(
-                fish_id: fish_id.to_i,
+                fish_id: fish_id,
                 length: length,
                 sfactor: sampling_factor,
                 row: row
@@ -286,13 +286,13 @@ class ImportExcelData
             sail: sail.to_bool,
             net: net.to_bool,
             line: line.to_bool,
-            fish_id: fish_id.to_i,
+            fish_id: fish_id,
             quantity: quantity,
             weight: weight,
             value: value,
             condition: condition,
             logbook_id: logbook.id,
-            graticule_id: graticule_id.to_i,
+            graticule_id: graticule_id,
             ice: ice,
             aborted: abort_bool
             )
