@@ -219,11 +219,25 @@ class ImportExcelData
     if xls.sheets.include?('Logbook')
       xls.default_sheet = 'Logbook'
 
-      user = xls.cell(1,"C").to_i
+      user = xls.cell(1,"C")
       fishery = xls.cell(1,"G").downcase
       month = xls.cell(1,"K").to_i
       year = xls.cell(1,"O").to_i
-      user_id = User.find_by_name( user.to_s ).id rescue user
+
+      if user.is_a? String
+        if user_record = User.find_by_email(user)
+          user_id = user_record.id
+        elsif user_record = User.find_by_name(user)
+          user_id = user_record.id
+        else
+          user_id = ''
+        end
+      elsif user.is_a? Integer
+        user_id = User.find( user )
+      else
+        user_id = ''
+      end
+      #user_id = User.find_by_name( user.to_s ).id rescue user
       #fishery_id = Fishery.find_by_code(fishery).id rescue 'fishery'
       fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue 'fishery'
       logbook = Logbook.new(
