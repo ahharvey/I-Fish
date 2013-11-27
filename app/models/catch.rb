@@ -15,7 +15,7 @@ class Catch < ActiveRecord::Base
 	
 	has_paper_trail
 	
-	attr_accessible :fish_id, :length, :weight, :landing_id, :sfactor, :row
+	attr_accessible :fish_id, :length, :weight, :landing_id, :sfactor, :row, :measurement
 
 	belongs_to :fish
 	belongs_to :landing
@@ -42,6 +42,13 @@ class Catch < ActiveRecord::Base
 #		inclusion: {
 #			in: 1..999999
 #		}
+	validates :measurement,
+		presence: {
+			message: " is not recognized."
+		},
+		inclusion: {
+			in: %{fl dw fin}
+		}
 	validates :sfactor,
 		presence: true,
 		inclusion: {

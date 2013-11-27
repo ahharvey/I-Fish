@@ -376,9 +376,10 @@ class ImportExcelData
             engine = xls.cell(d,"E").downcase rescue ''
             power = xls.cell(d,"F").to_i
             graticule = xls.cell(d,"G").to_s rescue ''
-            dep_date = xls.cell(d,"H").blank? ? date : xls.cell(d,"I").to_date
+            dep_date = xls.cell(d,"H").blank? ? date : xls.cell(d,"H").to_date
             dep_time = dep_date.to_datetime + xls.cell(d,"I").to_i.seconds
-            arr_time = date.to_datetime + xls.cell(d,"J").to_i.seconds   
+            arr_time = date.to_datetime + xls.cell(d,"J").to_i.seconds  
+            aborted = xls.cell(j,"K").to_s 
             gear = xls.cell(d,"L").downcase rescue ''
             fuel = xls.cell(d,"M").to_i
             crew = xls.cell(d,"N").to_i
@@ -388,13 +389,13 @@ class ImportExcelData
             qty = xls.cell(d,"R").to_i
             value = xls.cell(d,"S").to_i
 
-            if sail == "Y"
-              sail_bool = true
-            elsif sail == "N"
-              sail_bool = false
-            else
-              sail_bool = ""
-            end
+#            if sail == "Y"
+#              sail_bool = true
+#            elsif sail == "N"
+#              sail_bool = false
+#            else
+#              sail_bool = ""
+#            end
 =begin debug code
 #            if aborted == "Y"
 #              abort_bool = true
@@ -452,10 +453,10 @@ class ImportExcelData
               catch_tab = Catch.new(
                 fish_id: fish_id,
                 length: length,
-                measurement: measurement,
+                measurement: measurement.downcase,
                 sfactor: sampling_factor,
                 row: row
-              )
+                )
               #Rails.logger.info catch.to_yaml
               #puts catch.to_yaml
               catch_tab.importing!

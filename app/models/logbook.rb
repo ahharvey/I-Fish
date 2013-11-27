@@ -29,7 +29,7 @@ class Logbook < ActiveRecord::Base
       message: " is not defined."
     },
     uniqueness: { 
-      scope: :user_id 
+      scope: [ :user_id, :fishery_id ] 
     }
   validates :fishery,
     presence: {

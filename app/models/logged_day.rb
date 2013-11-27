@@ -30,6 +30,7 @@ class LoggedDay < ActiveRecord::Base
   belongs_to :fish
   belongs_to :graticule
   belongs_to :logbook
+  has_one :fishery, through: :logbook
   attr_accessible :condition,
                   :crew,
                   :end_time,
@@ -47,7 +48,8 @@ class LoggedDay < ActiveRecord::Base
                   :logbook_id,
                   :graticule_id,
                   :ice,
-                  :aborted
+                  :aborted,
+                  :notes
 
   validates :condition,
     presence: {
@@ -71,21 +73,26 @@ class LoggedDay < ActiveRecord::Base
       message: " is not defined." 
     }
 
-  validates :line,
-    inclusion: {
-      in: [true, false],
-      message: " is not defined." 
-    }
-  validates :net,
-    inclusion: {
-      in: [true, false],
-      message: " is not defined." 
-    }
-  validates :sail,
-    inclusion: {
-      in: [true, false],
-      message: " is not defined." 
-    }
+#  validates :line,
+#    inclusion: {
+#      in: [true, false],
+#      message: " is not defined." 
+#    },
+#    if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
+#  validates :net,
+#    inclusion: {
+#      in: [true, false],
+#      message: " is not defined." 
+#    }
+#    #,
+#    #if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
+#  validates :sail,
+#    inclusion: {
+#      in: [true, false],
+#      message: " is not defined." 
+#    }
+#    #,
+#    #if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
   validates :aborted,
     inclusion: {
       in: [true, false],
@@ -120,13 +127,13 @@ class LoggedDay < ActiveRecord::Base
     numericality: {
       message: " is not a number."
     }
-  validates :weight,
-    presence: {
-      message: " is not defined." 
-    },
-    numericality: {
-      message: " is not a number."
-    }
+#  validates :weight,
+#    presence: {
+#      message: " is not defined." 
+#    },
+#    numericality: {
+#      message: " is not a number."
+#    }
   validates :ice,
     presence: {
       message: " is not defined." 

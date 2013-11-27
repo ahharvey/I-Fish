@@ -147,11 +147,14 @@ class Landing < ActiveRecord::Base
 		}
 	validates :weight,
 		numericality: {
-			only_integer: true
+			only_integer: true,
+			message: " is not a number."
 		},
 		inclusion: {
-			in: 1..999999
-		}
+			in: 1..999999,
+			message: " is too high."
+		},
+		allow_nil: true
 	validates :time_out,
 		presence: true
 	validates :time_in,
