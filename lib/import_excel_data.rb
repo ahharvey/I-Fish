@@ -68,8 +68,20 @@ class ImportExcelData
       fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue ''
 
       vessel_enumerator_id = ImportExcelData.lookup_admin( vessel_enumerator )
+
       catch_scribe_id = ImportExcelData.lookup_admin( catch_scribe )
       catch_measurer_id = ImportExcelData.lookup_admin( catch_measurer )
+
+      Rails.logger.info vessel_enumerator_id
+      Rails.logger.info catch_scribe_id
+      Rails.logger.info catch_measurer_id
+
+      puts vessel_enumerator_id
+      puts catch_scribe_id
+      puts catch_measurer_id
+
+      puts "hHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      Rails.logger.info "hHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
       
 =begin debug code
       
@@ -566,21 +578,28 @@ class ImportExcelData
   def self.lookup_admin( object )
     if object.is_a? String
       if admin = Admin.find_by_email(object)
-        admin.id
+        admin_id = admin.id
       elsif admin = Admin.find_by_name(object)
-        admin.id
+        admin_id = admin.id
       else
-        nil
+        admin_id = nil
       end
     elsif object.is_a? Integer
       if admin = Admin.find( object ).id
-        admin.id
+        admin_id = admin.id
       else
-        nil
+        admin_id = nil
       end
     else
-      nil
+      admin_id = nil
     end
+    Rails.logger.info admin_id
+
+      puts admin_id
+
+      puts "hHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+      Rails.logger.info "hHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
+    admin_id
   end
 end
 
