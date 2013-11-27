@@ -228,19 +228,21 @@ class ImportExcelData
     month = xls.cell(1,"K").to_i
     year = xls.cell(1,"O").to_i
 
-    if user.is_a? String
-      if user_record = User.find_by_email(user)
-        user_id = user_record.id
-      elsif user_record = User.find_by_name(user)
-        user_id = user_record.id
-      else
-        user_id = ''
-      end
-    elsif user.is_a? Integer
-      user_id = User.find( user ).id
-    else
-      user_id = ''
-    end
+    user_id = ImportExcelData.lookup_user( user )
+
+#    if user.is_a? String
+#      if user_record = User.find_by_email(user)
+#        user_id = user_record.id
+#      elsif user_record = User.find_by_name(user)
+#        user_id = user_record.id
+#      else
+#        user_id = ''
+#      end
+#    elsif user.is_a? Integer
+#      user_id = User.find( user ).id
+#    else
+#      user_id = ''
+#    end
     #user_id = User.find_by_name( user.to_s ).id rescue user
     #fishery_id = Fishery.find_by_code(fishery).id rescue 'fishery'
     fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue 'fishery'
@@ -488,19 +490,21 @@ class ImportExcelData
     month = xls.cell(1,"K").to_i
     year = xls.cell(1,"O").to_i
 
-    if user.is_a? String
-      if user_record = User.find_by_email(user)
-        user_id = user_record.id
-      elsif user_record = User.find_by_name(user)
-        user_id = user_record.id
-      else
-        user_id = ''
-      end
-    elsif user.is_a? Integer
-      user_id = User.find( user ).id
-    else
-      user_id = ''
-    end
+    user_id = ImportExcelData.lookup_user( user )
+
+#    if user.is_a? String
+#      if user_record = User.find_by_email(user)
+#        user_id = user_record.id
+#      elsif user_record = User.find_by_name(user)
+#        user_id = user_record.id
+#      else
+#        user_id = ''
+#      end
+#    elsif user.is_a? Integer
+#      user_id = User.find( user ).id
+#    else
+#      user_id = ''
+#    end
     #user_id = User.find_by_name( user.to_s ).id rescue user
     #fishery_id = Fishery.find_by_code(fishery).id rescue 'fishery'
     fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue 'fishery'
@@ -578,56 +582,55 @@ class ImportExcelData
   def self.lookup_admin( object )
     if object.is_a? String
       if admin = Admin.find_by_email(object) rescue false
-        puts "string email"
-        Rails.logger.info "string email"
         admin_id = admin.id
       elsif admin = Admin.find_by_name(object) rescue false
-        puts "string name"
-        Rails.logger.info "string name"
         admin_id = admin.id
       else
-        puts "string else"
-        Rails.logger.info "string else"
         admin_id = nil
       end
     elsif object.is_a? Integer
       if admin = Admin.find( object ) rescue false
-        puts "integer"
-        Rails.logger.info "integer"
         admin_id = admin.id
       else
-        puts "integer fail "
-        Rails.logger.info "integer fail"
         admin_id = nil
       end
     elsif object.is_a? Float
       if admin = Admin.find( object.to_i ) rescue false
-        puts "decimal"
-        Rails.logger.info "decimal"
         admin_id = admin.id
       else
-        puts "decimal fail"
-        Rails.logger.info "decimal fail"
-        puts object
-        Rails.logger.info object
         admin_id = nil
       end
     else
-      
-        puts "fail"
-        Rails.logger.info "fail"
-        puts object
-        Rails.logger.info object
-        admin_id = nil
-      
+      admin_id = nil
     end
-    Rails.logger.info admin_id
-
-      puts admin_id
-
-      puts "hHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
-      Rails.logger.info "hHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHH"
     admin_id
+  end
+
+  def self.lookup_user( object )
+    if object.is_a? String
+      if user = User.find_by_email(object) rescue false
+        user_id = user.id
+      elsif user = User.find_by_name(object) rescue false
+        user_id = user.id
+      else
+        user_id = nil
+      end
+    elsif object.is_a? Integer
+      if user = User.find( object ) rescue false
+        user_id = user.id
+      else
+        user_id = nil
+      end
+    elsif object.is_a? Float
+      if user = User.find( object.to_i ) rescue false
+        user_id = user.id
+      else
+        user_id = nil
+      end
+    else
+      user_id = nil
+    end
+    user_id
   end
 end
 
