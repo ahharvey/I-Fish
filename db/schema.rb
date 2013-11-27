@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031045202) do
+ActiveRecord::Schema.define(:version => 20131126143516) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -271,6 +271,7 @@ ActiveRecord::Schema.define(:version => 20131031045202) do
     t.integer  "landing_enumerator_id"
     t.integer  "catch_measurer_id"
     t.integer  "catch_scribe_id"
+    t.integer  "vessel_count"
   end
 
   add_index "surveys", ["approved"], :name => "index_surveys_on_approved"

@@ -34,7 +34,7 @@ class ImportExcelData
       date = xls.cell(3,"B").to_date
       start_time = date.to_datetime + xls.cell(4,"B").to_i.seconds
       end_time = date.to_datetime+xls.cell(5,"B").to_i.seconds
-      vessel_count = xls.cell(6,"B").to_i
+      vessel_count = xls.cell(6,"B")
       vessel_enumerator = xls.cell(7,"B")
       catch_scribe = xls.cell(8,"B")
       catch_measurer = xls.cell(9,"B")
@@ -102,7 +102,8 @@ class ImportExcelData
           landing_enumerator_id: vessel_enumerator_id, 
           catch_scribe_id: catch_scribe_id, 
           catch_measurer_id: catch_measurer_id,
-          admin_id: xl_file.admin.id
+          admin_id: xl_file.admin.id,
+          vessel_count: vessel_count
         )
         excel_data.add_model(survey, {:sheet => "Survey", :model_type => "Survey"})
         
