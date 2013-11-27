@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131126143516) do
+ActiveRecord::Schema.define(:version => 20131127051245) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -62,10 +62,11 @@ ActiveRecord::Schema.define(:version => 20131126143516) do
     t.integer  "fish_id"
     t.integer  "landing_id"
     t.integer  "length"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "sfactor"
     t.integer  "row"
+    t.string   "measurement"
   end
 
   create_table "desas", :force => true do |t|
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20131126143516) do
     t.integer  "crew"
     t.boolean  "aborted"
     t.integer  "ice"
+    t.text     "notes"
   end
 
   add_index "logged_days", ["fish_id"], :name => "index_logged_days_on_fish_id"

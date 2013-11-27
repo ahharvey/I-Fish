@@ -56,6 +56,11 @@ class Catch < ActiveRecord::Base
 		!@importing
 	end
 
+	@@measurement_data = { 'fl' => "Fork Length" , 'dw' => "Disc Width" , 'fin' => "Fin Length" }
+  
+  def measurement_as_text
+    @@measurement_data[measurement]
+  end
 
 	def self.import_from_email(params, user_id)
 		params.flatten.each do |param|
