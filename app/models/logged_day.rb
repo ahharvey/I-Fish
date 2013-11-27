@@ -58,7 +58,8 @@ class LoggedDay < ActiveRecord::Base
     inclusion: { 
       in: 1..3,
       message: " is not recognized." 
-    }
+    },
+    unless: [ :aborted?, :inactive? ]
   
   validates :start_time,
     presence: {
@@ -97,7 +98,8 @@ class LoggedDay < ActiveRecord::Base
     inclusion: {
       in: [true, false],
       message: " is not defined." 
-    }
+    },
+    unless: [ :inactive? ]
 
   validates :crew,
     presence: {
@@ -145,11 +147,13 @@ class LoggedDay < ActiveRecord::Base
   validates :fish,
     presence: {
       message: " is not recognized." 
-    }
+    },
+    unless: [ :aborted?, :inactive? ]
   validates :graticule,
     presence: {
       message: " is not recognized." 
-    }
+    },
+    unless: [ :aborted?, :inactive? ]
 
 
   @@condition_data = { 1 => "Calm" , 2 => "Moderate" , 3 => "High" }
@@ -162,4 +166,13 @@ class LoggedDay < ActiveRecord::Base
   def moon_as_text
     @@moon_data[moon]
   end
+
+  #private
+
+  def inactive?
+    start_time == end_time
+    #true
+  end
+
+
 end
