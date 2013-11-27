@@ -175,7 +175,7 @@ class LoggedDay < ActiveRecord::Base
   end
 
   def nofish?
-    quantity == weight == 0
+    quantity == 0 && weight == 0
   end
 
 
