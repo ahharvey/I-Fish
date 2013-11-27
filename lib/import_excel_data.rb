@@ -577,21 +577,49 @@ class ImportExcelData
 
   def self.lookup_admin( object )
     if object.is_a? String
-      if admin = Admin.find_by_email(object)
+      if admin = Admin.find_by_email(object) rescue false
+        puts "string email"
+        Rails.logger.info "string email"
         admin_id = admin.id
-      elsif admin = Admin.find_by_name(object)
+      elsif admin = Admin.find_by_name(object) rescue false
+        puts "string name"
+        Rails.logger.info "string name"
         admin_id = admin.id
       else
+        puts "string else"
+        Rails.logger.info "string else"
         admin_id = nil
       end
     elsif object.is_a? Integer
-      if admin = Admin.find( object ).id
+      if admin = Admin.find( object ) rescue false
+        puts "integer"
+        Rails.logger.info "integer"
         admin_id = admin.id
       else
+        puts "integer fail "
+        Rails.logger.info "integer fail"
+        admin_id = nil
+      end
+    elsif object.is_a? Float
+      if admin = Admin.find( object.to_i ) rescue false
+        puts "decimal"
+        Rails.logger.info "decimal"
+        admin_id = admin.id
+      else
+        puts "decimal fail"
+        Rails.logger.info "decimal fail"
+        puts object
+        Rails.logger.info object
         admin_id = nil
       end
     else
-      admin_id = nil
+      
+        puts "fail"
+        Rails.logger.info "fail"
+        puts object
+        Rails.logger.info object
+        admin_id = nil
+      
     end
     Rails.logger.info admin_id
 
