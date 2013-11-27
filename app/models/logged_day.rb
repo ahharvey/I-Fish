@@ -30,6 +30,7 @@ class LoggedDay < ActiveRecord::Base
   belongs_to :fish
   belongs_to :graticule
   belongs_to :logbook
+  has_one :fishery, through: :logbook
   attr_accessible :condition,
                   :crew,
                   :end_time,
@@ -45,7 +46,111 @@ class LoggedDay < ActiveRecord::Base
                   :weight,
                   :fish_id,
                   :logbook_id,
-                  :graticule_id
+                  :graticule_id,
+                  :ice,
+                  :aborted,
+                  :notes
+
+  validates :condition,
+    presence: {
+      message: " is not defined." 
+    },
+    inclusion: { 
+      in: 1..3,
+      message: " is not recognized." 
+    }
+  
+  validates :start_time,
+    presence: {
+      message: " is not defined." 
+    }
+  validates :end_time,
+    presence: {
+      message: " is not defined." 
+    }
+  validates :gear_time,
+    presence: {
+      message: " is not defined." 
+    }
+
+#  validates :line,
+#    inclusion: {
+#      in: [true, false],
+#      message: " is not defined." 
+#    },
+#    if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
+#  validates :net,
+#    inclusion: {
+#      in: [true, false],
+#      message: " is not defined." 
+#    }
+#    #,
+#    #if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
+#  validates :sail,
+#    inclusion: {
+#      in: [true, false],
+#      message: " is not defined." 
+#    }
+#    #,
+#    #if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
+  validates :aborted,
+    inclusion: {
+      in: [true, false],
+      message: " is not defined." 
+    }
+
+  validates :crew,
+    presence: {
+      message: " is not defined." 
+    },
+    numericality: {
+      message: " is not a number."
+    }
+  validates :fuel,
+    presence: {
+      message: " is not defined." 
+    },
+    numericality: {
+      message: " is not a number."
+    }
+  validates :quantity,
+    presence: {
+      message: " is not defined." 
+    },
+    numericality: {
+      message: " is not a number."
+    }
+  validates :value,
+    presence: {
+      message: " is not defined." 
+    },
+    numericality: {
+      message: " is not a number."
+    }
+#  validates :weight,
+#    presence: {
+#      message: " is not defined." 
+#    },
+#    numericality: {
+#      message: " is not a number."
+#    }
+  validates :ice,
+    presence: {
+      message: " is not defined." 
+    },
+    numericality: {
+      message: " is not a number."
+    }
+
+  validates :fish,
+    presence: {
+      message: " is not recognized." 
+    }
+  validates :graticule,
+    presence: {
+      message: " is not recognized." 
+    }
+
 
   @@condition_data = { 1 => "Calm" , 2 => "Moderate" , 3 => "High" }
   @@moon_data = { 1 => "New" , 2 => "Waxing" , 3 => "Full" , 4 => "Waning"  }

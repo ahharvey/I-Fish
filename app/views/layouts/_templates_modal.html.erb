@@ -4,59 +4,122 @@
     <h3>Download Templates</h3>
   </div>
   <div class="modal-body">
-    
-    <%= link_to "/Database.template.xlsx", title: "Survey template" do %>
+
+    <h4>Small Pelagics</h4>
+        
+    <%= link_to "/templates/SmallPelagicLandingSite.template.xlsx", title: "Small Pelagic Landing Site Survey template" do %>
       <div class="modal-icon">
         <%= excel_icon %>
       </div>
       <div class="modal-text">
-        <b><%= t("modal.download.survey.spreadsheet.title") %></b>
+        <b><%= t("modal.download.small_pelagic_survey.spreadsheet.title") %></b>
         <br />
-        <small><%= t("modal.download.logbook.spreadsheet.text") %></small>
+        <small><%= t("modal.download.small_pelagic_survey.spreadsheet.text") %></small>
       </div>
     <% end %>
     
     <br />
     <br />
     
-    <%= link_to "/Logbook.template.xlsx", title: "Logbook template" do %>
+    <%= link_to "/templates/SmallPelagicLogbook.template.xlsx", title: "Small Pelagic Logbook template" do %>
       <div class="modal-icon">
         <%= excel_icon %>
       </div>
       <div class="modal-text">
-        <b><%= t("modal.download.logbook.spreadsheet.title") %></b>
+        <b><%= t("modal.download.small_pelagic_logbook.spreadsheet.title") %></b>
         <br />
-        <small><%= t("modal.download.logbook.spreadsheet.text") %></small>
+        <small><%= t("modal.download.small_pelagic_logbook.spreadsheet.text") %></small>
       </div>
     <% end %>
 
     <br />
     <br />
     
-    <%= link_to "/Form A.pdf", title: "Survey forms" do %>
+    <%= link_to "/templates/SmallPelagic.FormA.pdf", title: "Small Pelagic Survey Form A" do %>
       <div class="modal-icon">
         <%= doc_icon %>
       </div>
       <div class="modal-text">
-        <b><%= t("modal.download.survey.form.title") %></b>
+        <b><%= t("modal.download.small_pelagic_survey.form.title") %></b>
         <br />
-        <small><%= t("modal.download.survey.form.text") %></small>
+        <small><%= t("modal.download.small_pelagic_survey.form.text") %></small>
       </div>
     <% end %>
 
     <br />
     <br />
     
-    <%= link_to "/Form B.pdf", title: "Logbook forms" do %>
+    <%= link_to "/templates/SmallPelagic.FormB.pdf", title: "Small Pelagic Survey Form B" do %>
       <div class="modal-icon">
         <%= doc_icon %>
       </div>
       <div class="modal-text">
-        <b><%= t("modal.download.logbook.form.title") %></b>
+        <b><%= t("modal.download.small_pelagic_logbook.form.title") %></b>
         <br />
-        <small><%= t("modal.download.logbook.form.text") %></small>
+        <small><%= t("modal.download.small_pelagic_logbook.form.text") %></small>
       </div>
     <% end %>
+
+    <hr>
+
+    <h4>Sharks & Rays</h4>
+
+    <%= link_to "/templates/SharksLandingSite.template.xlsx", title: "Sharks & Rays Landing Site Survey template" do %>
+      <div class="modal-icon">
+        <%= excel_icon %>
+      </div>
+      <div class="modal-text">
+        <b><%= t("modal.download.shark_survey.spreadsheet.title") %></b>
+        <br />
+        <small><%= t("modal.download.shark_survey.spreadsheet.text") %></small>
+      </div>
+    <% end %>
+    
+    <br />
+    <br />
+
+    <%= link_to "/templates/SharksLogbook.template.xlsx", title: "Sharks & Rays Logbook template" do %>
+      <div class="modal-icon">
+        <%= excel_icon %>
+      </div>
+      <div class="modal-text">
+        <b><%= t("modal.download.shark_logbook.spreadsheet.title") %></b>
+        <br />
+        <small><%= t("modal.download.shark_logbook.spreadsheet.text") %></small>
+      </div>
+    <% end %>
+
+    <br />
+    <br />
+
+    <%= link_to "/templates/SharksLandingSite.Form.pdf", title: "Sharks & Rays Survey Form A" do %>
+      <div class="modal-icon">
+        <%= doc_icon %>
+      </div>
+      <div class="modal-text">
+        <b><%= t("modal.download.shark_survey.form.title") %></b>
+        <br />
+        <small><%= t("modal.download.shark_survey.form.text") %></small>
+      </div>
+    <% end %>
+
+    <br />
+    <br />
+
+    <%= link_to "/templates/SharksLogbook.Form.pdf", title: "Sharks & Rays Survey Form B" do %>
+      <div class="modal-icon">
+        <%= doc_icon %>
+      </div>
+      <div class="modal-text">
+        <b><%= t("modal.download.shark_logbook.form.title") %></b>
+        <br />
+        <small><%= t("modal.download.shark_logbook.form.text") %></small>
+      </div>
+    <% end %>
+
+    <br />
+    <br />
+
   </div>
   <div class="modal-footer">
     <%= link_to "Close", "#", class:"btn", data: {dismiss: "modal"}, aria: {hidden: "true"} %>

@@ -86,14 +86,16 @@ class Landing < ActiveRecord::Base
 		}
 	validates :graticule_id,
 		presence: true
-	validates :vessel_ref,
-		presence: true
+# validates :vessel_ref,
+#		presence: true
 	validates :vessel_name,
 		presence: true
 	validates :boat_size,
 		presence: true
-	validates :engine_id,
-		presence: true
+	validates :engine,
+		presence: {
+			message: " is not valid" 
+		}
 	validates :fuel,
 		numericality: {
 			only_integer: true
@@ -123,8 +125,14 @@ class Landing < ActiveRecord::Base
 #		inclusion: {
 #			in: 1..999
 #		}
-	validates :gear_id,
-		presence: true
+	validates :gear, 
+		presence: {
+			message: " is not recognized." 
+		}
+	validates :fish, 
+		presence: {
+			message: " is not recognized." 
+		}
 	# Do not validate presence of survey_id if this model is being imported from an excel file
 	# as the parent survey will be saved later and currently doesn't have an ID.
 	validates :survey_id,
@@ -139,11 +147,14 @@ class Landing < ActiveRecord::Base
 		}
 	validates :weight,
 		numericality: {
-			only_integer: true
+			only_integer: true,
+			message: " is not a number."
 		},
 		inclusion: {
-			in: 1..999999
-		}
+			in: 1..999999,
+			message: " is too high."
+		},
+		allow_nil: true
 	validates :time_out,
 		presence: true
 	validates :time_in,

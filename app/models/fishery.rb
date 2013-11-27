@@ -21,6 +21,7 @@ class Fishery < ActiveRecord::Base
   has_many :fishes, through: :landings
   has_many :engines, through: :landings
   has_many :logbooks
+  has_many :logged_days, through: :logbook
   has_many :provinces, through: :surveys
   has_many :districts, through: :surveys
 

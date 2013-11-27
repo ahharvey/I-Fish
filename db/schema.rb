@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131031045202) do
+ActiveRecord::Schema.define(:version => 20131127084253) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -62,10 +62,11 @@ ActiveRecord::Schema.define(:version => 20131031045202) do
     t.integer  "fish_id"
     t.integer  "landing_id"
     t.integer  "length"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",  :null => false
+    t.datetime "updated_at",  :null => false
     t.string   "sfactor"
     t.integer  "row"
+    t.string   "measurement"
   end
 
   create_table "desas", :force => true do |t|
@@ -221,6 +222,7 @@ ActiveRecord::Schema.define(:version => 20131031045202) do
     t.integer  "crew"
     t.boolean  "aborted"
     t.integer  "ice"
+    t.text     "notes"
   end
 
   add_index "logged_days", ["fish_id"], :name => "index_logged_days_on_fish_id"
@@ -271,6 +273,7 @@ ActiveRecord::Schema.define(:version => 20131031045202) do
     t.integer  "landing_enumerator_id"
     t.integer  "catch_measurer_id"
     t.integer  "catch_scribe_id"
+    t.integer  "vessel_count"
   end
 
   add_index "surveys", ["approved"], :name => "index_surveys_on_approved"
@@ -303,11 +306,16 @@ ActiveRecord::Schema.define(:version => 20131031045202) do
     t.datetime "updated_at",                             :null => false
     t.integer  "desa_id"
     t.string   "avatar"
+    t.integer  "vessel_type_id"
+    t.integer  "engine_id"
+    t.integer  "power"
+    t.integer  "length"
+    t.text     "notes"
   end
 
   add_index "users", ["authentication_token"], :name => "index_users_on_authentication_token", :unique => true
   add_index "users", ["confirmation_token"], :name => "index_users_on_confirmation_token", :unique => true
-  add_index "users", ["email"], :name => "index_users_on_email", :unique => true
+  add_index "users", ["email"], :name => "index_users_on_email"
   add_index "users", ["reset_password_token"], :name => "index_users_on_reset_password_token", :unique => true
   add_index "users", ["unlock_token"], :name => "index_users_on_unlock_token", :unique => true
 

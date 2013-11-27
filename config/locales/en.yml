@@ -147,14 +147,28 @@ en:
     signup: "Sign up"
   modal:
     download:
-      survey:
+      small_pelagic_survey:
         form:
           title: "Download Survey Forms"
           text: "These forms are used to record landing site survey data."
         spreadsheet:
           title: "Download Survey Template"
           text: "This spreadsheet is used to enter and submit landing site survey data."
-      logbook:
+      small_pelagic_logbook:
+        form:
+          title: "Download Logbook Form"
+          text: "This form is used by fishers to record their daily logbook."
+        spreadsheet:
+          title: "Download Logbook Template"
+          text: "This spreadsheet is used to enter and submit fishers' logbook data."
+      shark_survey:
+        form:
+          title: "Download Survey Forms"
+          text: "These forms are used to record landing site survey data."
+        spreadsheet:
+          title: "Download Survey Template"
+          text: "This spreadsheet is used to enter and submit landing site survey data."
+      shark_logbook:
         form:
           title: "Download Logbook Form"
           text: "This form is used by fishers to record their daily logbook."

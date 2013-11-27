@@ -24,7 +24,25 @@ class Logbook < ActiveRecord::Base
   has_many :logged_days
   attr_accessible :date, :user_id, :admin_id, :fishery_id, :approved
 
-  #validates_uniqueness_of :date, :scope => :user_id
+  validates :date, 
+    presence: {
+      message: " is not defined."
+    },
+    uniqueness: { 
+      scope: [ :user_id, :fishery_id ] 
+    }
+  validates :fishery,
+    presence: {
+      message: " is not recognized." 
+    }
+  validates :user,
+    presence: {
+      message: " is not recognized." 
+    }
+  validates :admin,
+    presence: {
+      message: " is not recognized." 
+    }
 
   def surveys_this_month
     prereps.where( 'prereps.created_at > ?', Date.today.beginning_of_month ).size

@@ -33,7 +33,8 @@ class Survey < ActiveRecord::Base
 									:approved,
 									:catch_measurer_id,
 									:catch_scribe_id,
-									:landing_enumerator_id
+									:landing_enumerator_id,
+									:vessel_count
 
 	belongs_to :admin
 	belongs_to :approver, class_name: 'Admin'
@@ -49,23 +50,46 @@ class Survey < ActiveRecord::Base
 	has_one :province, through: :district
 
 	validates :date_published,
-		presence: true
-	validates :desa_id,
-		presence: true
+		presence: {
+			message: " is not defined." 
+		}
+	validates :desa,
+		presence: {
+			message: " is not recognized." 
+		}
 	validates :start_time,
-		presence: true
+		presence: {
+			message: " is not defined." 
+		}
 	validates :end_time,
-		presence: true
-	validates :fishery_id,
-		presence: true
-	validates :landing_enumerator_id,
-		presence: true
-	validates :catch_scribe_id,
-		presence: true
-	validates :catch_measurer_id,
-		presence: true
-	validates :admin_id,
-		presence: true
+		presence: {
+			message: " is not defined." 
+		}
+	validates :fishery,
+		presence: {
+			message: " is not recognized." 
+		}
+	validates :admin,
+		presence: {
+			message: " is not recognized." 
+		}
+	validates :landing_enumerator, 
+		presence: {
+			message: " is not recognized." 
+		}
+	validates :catch_scribe, 
+		presence: {
+			message: " is not recognized." 
+		}
+	validates :catch_measurer, 
+		presence: {
+			message: " is not recognized." 
+		}
+	validates :vessel_count, 
+		numericality: {
+      message: " is not a number."
+    }
+
 #	validate :uniqueness_of_survey
 
 	def uniqueness_of_survey
