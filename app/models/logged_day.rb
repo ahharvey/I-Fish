@@ -148,7 +148,7 @@ class LoggedDay < ActiveRecord::Base
     presence: {
       message: " is not recognized." 
     },
-    unless: [ :aborted?, :inactive? ]
+    unless: [ :aborted?, :inactive?, :nofish? ]
   validates :graticule,
     presence: {
       message: " is not recognized." 
@@ -172,6 +172,10 @@ class LoggedDay < ActiveRecord::Base
   def inactive?
     start_time == end_time
     #true
+  end
+
+  def nofish?
+    quantity == weight == 0
   end
 
 
