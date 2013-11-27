@@ -68,8 +68,13 @@ class ImportExcelData
       fishery_id = Fishery.where("LOWER(code) = ?", fishery.downcase).first.id rescue ''
 
       vessel_enumerator_id = ImportExcelData.lookup_admin( vessel_enumerator )
+
       catch_scribe_id = ImportExcelData.lookup_admin( catch_scribe )
       catch_measurer_id = ImportExcelData.lookup_admin( catch_measurer )
+
+      Rails.logger.info vessel_enumerator_id
+      Rails.logger.info catch_scribe_id
+      Rails.logger.info catch_measurer_id
       
 =begin debug code
       
