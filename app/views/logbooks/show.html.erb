@@ -1,57 +1,65 @@
 <% title t ".title" %>
 
-<div class="row">
-  <div class="span7">
-    <% if can? :update, @logbook %>
-      <%= render partial: "logbooks/supervisor_controls" %>
-    <% end %>
+
+  <div class="row">
+    <div class="span7">
+      <% if can? :update, @logbook %>
+        <%= render partial: "logbooks/supervisor_controls" %>
+      <% end %>
+    </div>
+    <div class="span5">
+      <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+    </div>
+
   </div>
-  <div class="span5">
-    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+
+  <br />
+  <br />
+
+  <div class="pull-right">
+    <dl class="dl-horizontal">
+      <dt>Admin:</dt>
+      <dd>
+        <%= link_to image_tag(@logbook.admin.avatar.url(:thumb), 
+          width: "30px", 
+          height: "30px", 
+          title: @logbook.admin.name, 
+          alt: @logbook.admin.name),
+          @logbook.admin %>
+      </dd>
+    </dl>
   </div>
 
-</div>
-
-<br />
-<br />
-
-<div class="pull-right">
   <dl class="dl-horizontal">
-    <dt>Admin:</dt>
+
+    <dt>User:</dt>
     <dd>
-      <%= link_to image_tag(@logbook.admin.avatar.url(:thumb), 
+      <%= link_to image_tag(@logbook.user.avatar.url(:thumb), 
         width: "30px", 
         height: "30px", 
-        title: @logbook.admin.name, 
-        alt: @logbook.admin.name),
-        @logbook.admin %>
+        title: @logbook.user.name, 
+        alt: @logbook.user.name), 
+        @logbook.user %>
     </dd>
+
+    <dt>Date:</dt>
+    <dd><%= @logbook.date.strftime("%B %Y") %></dd>
+
+    <dt>Fishery:</dt>
+    <dd><%= @logbook.fishery.name %></dd>
+
+    <dt>Desa:</dt>
+    <dd><%= @logbook.user.desa.name %>, <%= @logbook.user.desa.province.name %></dd>
+    
+
   </dl>
-</div>
-
-<dl class="dl-horizontal">
-
-  <dt>User:</dt>
-  <dd>
-    <%= link_to image_tag(@logbook.user.avatar.url(:thumb), 
-      width: "30px", 
-      height: "30px", 
-      title: @logbook.user.name, 
-      alt: @logbook.user.name), 
-      @logbook.user %>
-  </dd>
-
-  <dt>Date:</dt>
-  <dd><%= @logbook.date.strftime("%B %Y") %></dd>
-  
-
-</dl>
 
 
 
-<%= render partial: "logbooks/logged_days" %>
+  <%= render partial: "logbooks/logged_days" %>
 
-<%= render partial: 'shared/audit_table', locals: { parent: @logbook } %>
+  <%= render partial: 'shared/audit_table', locals: { parent: @logbook } %>
 
-<%= link_to 'Edit', edit_logbook_path(@logbook) %> |
-<%= link_to 'Back', logbooks_path %>
+  <%= link_to 'Edit', edit_logbook_path(@logbook) %> |
+  <%= link_to 'Back', logbooks_path %>
+
