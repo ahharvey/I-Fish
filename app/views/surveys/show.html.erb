@@ -130,28 +130,30 @@
       </tr>
 
       <% for landing in @survey.landings %>
-        <tr>
-            <td><%= landing.vessel_ref %></td>
-            <td><%= landing.vessel_name %></td>
-            <td><%= link_to landing.graticule.try(:code), landing.graticule %></td>
-            <td><%= link_to landing.vessel_type.try(:code).try(:upcase), landing.vessel_type %></td>
-            <td><%= landing.time_out.to_s(:triptime) %></td>
-            <td><%= landing.time_in.to_s(:triptime) %></td>
-            <td><%= link_to landing.engine.code, "#", title: landing.engine.name %></td>
-            <td><%= landing.fuel %></td>
-            <td><%= landing.sail %></td>
-            <td><%= landing.crew %></td>
-            <td><%= landing.boat_size %></td>
-            <td><%= link_to landing.gear.alpha_code, landing.gear, title:landing.gear.name %></td>
-            <td><%= landing.quantity %></td>
-            <td><%= landing.weight %></td>
-            <td><%= landing.value %></td>
+        <% present landing do |landing_presenter| %> 
+          <tr>
+            <td><%= landing_presenter.vessel_ref %></td>
+            <td><%= landing_presenter.vessel_name %></td>
+            <td><%= landing_presenter.graticule %></td>
+            <td><%= landing_presenter.vessel_type %></td>
+            <td><%= landing_presenter.time_out %></td>
+            <td><%= landing_presenter.time_in %></td>
+            <td><%= landing_presenter.engine %></td>
+            <td><%= landing_presenter.fuel %></td>
+            <td><%= landing_presenter.sail %></td>
+            <td><%= landing_presenter.crew %></td>
+            <td><%= landing_presenter.boat_size %></td>
+            <td><%= landing_presenter.gear %></td>
+            <td><%= landing_presenter.quantity %></td>
+            <td><%= landing_presenter.weight %></td>
+            <td><%= landing_presenter.value %></td>
             <td>
               <%= link_to show_icon, landing %>
               <%= link_to edit_icon, edit_landing_path(landing) %>
               <%= link_to destroy_icon, landing, method: :delete, data: { confirm: 'Are you sure?' } %>
             </td>
           </tr>
+        <% end %>
       <% end %>
     </table>
 </div>
@@ -165,20 +167,24 @@
         <th><%= Catch.human_attribute_name(:fish_id) %></th>
         <th><%= Catch.human_attribute_name(:length) %> (mm)</th>
         <th><%= Landing.human_attribute_name(:vessel_name) %></th>
+        <th><%= Landing.human_attribute_name(:sfactor) %></th>
         <th></th>
       </tr>
 
       <% @survey.catches.each do |catch| %>
-        <tr>
-          <td><%= link_to catch.fish.code, catch.fish, title: "#{catch.fish.scientific_name} - #{catch.fish.english_name}" %></td>
-          <td><%= catch.length %></td>
-          <td><%= catch.landing.vessel_name %></td>
-          <td>
-            <%= link_to show_icon, catch %>
-            <%= link_to edit_icon, edit_catch_path(catch) %>
-            <%= link_to destroy_icon, catch, method: :delete, data: { confirm: 'Are you sure?' } %>
-          </td>
-        </tr>
+        <% present catch do |catch_presenter| %> 
+          <tr>
+            <td><%= catch_presenter.fish %></td>
+            <td><%= catch_presenter.length %></td>
+            <td><%= catch_presenter.vessel_name %></td>
+            <td><%= catch_presenter.sfactor %></td>
+            <td>
+              <%= link_to show_icon, catch %>
+              <%= link_to edit_icon, edit_catch_path(catch) %>
+              <%= link_to destroy_icon, catch, method: :delete, data: { confirm: 'Are you sure?' } %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
     </table>
 

@@ -79,6 +79,7 @@ class ExcelFile < ActiveRecord::Base
         survey = survey[:model]
         Rails.logger.info survey.to_yaml
         puts survey.to_yaml
+        PaperTrail.whodunnit = survey.user_id
         survey.save!
         
       end
@@ -88,6 +89,7 @@ class ExcelFile < ActiveRecord::Base
         landing.survey_id = Survey.last.id
         Rails.logger.info landing.to_yaml
         puts landing.to_yaml
+        PaperTrail.whodunnit = landing.survey.user_id
         landing.save!
         Rails.logger.info "#############################"
         puts "#############################"
@@ -99,6 +101,7 @@ class ExcelFile < ActiveRecord::Base
         catch_tab.landing_id = landing.id
         Rails.logger.info catch_tab.to_yaml
         puts catch_tab.to_yaml
+        PaperTrail.whodunnit = catch_tab.survey.user_id
         catch_tab.save!
         
       end
@@ -126,12 +129,14 @@ class ExcelFile < ActiveRecord::Base
         logbook = @models.select{|m| m[:model].is_a? Logbook}.first[:model]
         logbook.save!
         @models.select{|m| m[:model].is_a? LoggedDay}.each do |l|
-          l[:model].logbook = logbook
-
+          l = l[:model]
+          l.logbook_id = logbook.id
+          PaperTrail.whodunnit = logbook.user_id
+          l.save!
         end
       end
 
-      @models.each { |m| m[:model].save! }
+      #@models.each { |m| m[:model].save! }
     end
 
     # Aggregate errors into a list with meta data
