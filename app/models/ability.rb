@@ -83,6 +83,9 @@ class Ability
     end
     can :manage, Survey
     can :manage, Logbook
+    can :manage, Landing
+    can :manage, Catch
+    can :manage, LoggedDay
     can :read, Fishery # To view summarised fishery data
   end
 
