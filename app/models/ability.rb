@@ -81,8 +81,8 @@ class Ability
 
     can :read, Admin, Admin.includes(:roles).where(:roles => {:name => "staff"}, :office_id => admin.office_id) do |a|
     end
-    can :manage, Survey, Survey.includes(:desa).where(:desas => {:district_id => admin.office.district_id}) do |survey|
-    end
+    can :manage, Survey
+    can :manage, Logbook
     can :read, Fishery # To view summarised fishery data
   end
 
