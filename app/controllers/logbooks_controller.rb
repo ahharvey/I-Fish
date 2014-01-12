@@ -7,7 +7,7 @@ class LogbooksController < InheritedResources::Base
     @logbook = Logbook.find params[:id]
     @logbook.update_column :approved, params[:approved]
     if @logbook.approved?
-      track_activity @survey
+      track_activity @logbook
       @logbook.update_column :approver_id, current_admin.id
       flash[:success] = "Approved"
     else
