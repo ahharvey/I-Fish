@@ -59,4 +59,12 @@ class Logbook < ActiveRecord::Base
   def self.completed_last_month
     Logbook.where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
   end
+
+  def self.approved_this_month
+    Logbook.where( date: Date.today.beginning_of_month..Date.today.end_of_month, approved: true ).size
+  end
+
+  def self.approved_last_month
+    Logbook.where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, approved: true ).size
+  end
 end
