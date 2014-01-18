@@ -4,20 +4,22 @@
   <tr>
     <th><%= Logbook.human_attribute_name(:date) %></th>
     <th><%= Logbook.human_attribute_name(:fishery) %></th>
+    <th><%= User.human_attribute_name(:desa_id) %></th>
     <th><%= Logbook.human_attribute_name(:user) %></th>
     <th><%= Logbook.human_attribute_name(:admin) %></th>
     <th></th>
   </tr>
 
-  <%if @logbooks.empty? %>
+  <%if @unapproved_logbooks.empty? %>
 		<tr>
 			<td colspan="5" style="text-align:center;"><i>NO UNAPPROVED LOGBOOKS</i></td>
 		</tr>
 	<% else %>  
-    <% @logbooks.each do |logbook| %>
+    <% @unapproved_logbooks.each do |logbook| %>
       <tr class=<%= logbook.approved == false ? 'error' : ''%> >
         <td><%= logbook.date.to_s(:rfc822) %></td>
         <td><%= logbook.fishery.name %></td>
+        <td><%= logbook.user.desa.name %></td>
         <td>
           <%= image_tag(logbook.user.avatar_url(:thumb), 
             width: "30px", 
@@ -25,6 +27,7 @@
             title: logbook.user.name, 
             alt: logbook.user.name) 
           %>
+          <%= logbook.user.name %>
         </td>
         <td>
           <%= image_tag(logbook.admin.avatar_url(:thumb), 

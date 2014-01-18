@@ -11,7 +11,7 @@
     <th><%= Survey.human_attribute_name(:desa_id) %></th>
     <th>Eumerators</th>
     <th><%= Survey.human_attribute_name(:admin_id) %></th>
-    
+    <th></th>
     <th></th>
   </tr>
 
@@ -47,8 +47,15 @@
           height: "30px", 
           title: survey.admin.name, 
           alt: survey.admin.name),
-          survey.admin %></td>
-      
+          survey.admin %>
+      </td>
+      <td>
+        <% if survey.approved? %>
+          <span class="label label-success">Approved</span>
+        <% else %>
+          <span class="label label-important">Not Approved</span>
+        <% end %>
+      </td>      
       <td>
         <%= link_to show_icon, survey %>
         <%= link_to edit_icon, edit_survey_path(survey) %>

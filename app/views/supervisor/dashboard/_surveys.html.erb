@@ -12,12 +12,12 @@
       <th></th>
     </tr>
 
-    <%if @surveys.empty? %>
-  		<tr>
-  			<td colspan="7" style="text-align:center;"><i>NO UNAPPROVED SURVEYS</i></td>
-  		</tr>
-  	<% else %>
-      <% @surveys.each do |survey| %>
+    <%if @unapproved_surveys.empty? %>
+      <tr>
+        <td colspan="7" style="text-align:center;"><i>NO UNAPPROVED SURVEYS</i></td>
+      </tr>
+    <% else %>
+      <% @unapproved_surveys.each do |survey| %>
         <tr class=<%= survey.approved == false ? 'error' : '' %> >
           <td><%= survey.date_published.to_s(:rfc822) rescue '' %></td>
           <td><%= survey.start_time.to_s(:time) %> - <%= survey.end_time.to_s(:time) %></td>
@@ -55,7 +55,7 @@
           </td>
         </tr>
       <% end %>
-  	<% end %>
+    <% end %>
   </table>
 
 </div>

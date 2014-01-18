@@ -9,10 +9,11 @@
     <th><%= Logbook.human_attribute_name(:user) %></th>
     <th><%= Logbook.human_attribute_name(:admin) %></th>
     <th></th>
+    <th></th>
   </tr>
 
   <% @logbooks.each do |logbook| %>
-    <tr>
+    <tr class=<%= logbook.approved == false ? 'error' : '' %>>
       <td><%= logbook.date.to_s(:rfc822) %></td>
       <td><%= logbook.fishery.name %></td>
       <td>
@@ -30,6 +31,13 @@
           title: logbook.admin.name, 
           alt: logbook.admin.name) 
         %>
+      </td>
+      <td>
+        <% if logbook.approved? %>
+          <span class="label label-success">Approved</span>
+        <% else %>
+          <span class="label label-important">Not Approved</span>
+        <% end %>
       </td>
       <td>
           <%= link_to show_icon, logbook %>
