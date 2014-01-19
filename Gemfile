@@ -25,6 +25,7 @@ gem 'griddler', '~> 0.6.1'  #Mandril API for incoming email handling
 gem 'rubyzip', '~> 1.1.0'
 #gem 'zip-zip', '~> 0.2'
 
+
 gem 'paper_trail', '~> 2.7.1'
 
 gem 'wicked_pdf', '~> 0.9.4'

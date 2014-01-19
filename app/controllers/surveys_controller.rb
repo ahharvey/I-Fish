@@ -27,18 +27,63 @@ class SurveysController < InheritedResources::Base
     end
   end
 
-  def set_approved
+  def approve
     @survey = Survey.find( params[:id] )
-    @survey.update_column :approved, params[:approved]
+    @survey.approved!
     if @survey.approved?
       track_activity @survey
-      @survey.update_column :approver_id, current_admin.id
-      flash[:success] = "Approved"
+      @survey.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("approved")
     else
-      @survey.update_column :approver_id, nil
-      flash[:error] = "Not Approved"
+      flash[:error] = review_error_msg
     end
-    render nothing: true
+    refresh_supervisor_controls( @survey )
+  end
+
+  def reject
+    @survey = Survey.find( params[:id] )
+    @survey.rejected!
+    if @survey.rejected?
+      track_activity @survey
+      @survey.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("Rejected")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @survey )
+  end
+
+  def pend
+    @survey = Survey.find( params[:id] )
+    @survey.pending!
+    if @survey.pending?
+      track_activity @survey
+      @survey.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("Pending")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @survey )
+  end
+
+  private
+
+  def refresh_supervisor_controls( survey )
+    respond_to do |format|
+      format.html { redirect_to survey  }
+      format.js {
+        @survey = survey 
+        render :refresh_supervisor_controls
+      }
+    end
+  end
+
+  def review_success_msg( state )
+    "Survey successfully reviewed: #{state.upcase}"
+  end
+
+  def review_error_msg
+    "We encountered an error reviewing this survey. Please try again."
   end
 
 end

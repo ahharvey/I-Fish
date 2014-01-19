@@ -4,16 +4,16 @@ class Supervisor::DashboardController < ApplicationController
     authorize! :index, 'supervisor/dashboard'
 		
     @surveys = Survey.scoped
-    @unapproved_surveys = @surveys.where(approved: false)
+    @unapproved_surveys = @surveys.where( review_state: 'pending' )
     @historical_surveys = @surveys.
-      where(approved: true).
+      where( review_state: 'approved' ).
       where('date_published > ?', Date.today.beginning_of_month-1.year).
       group_by { |t| t.date_published.beginning_of_month }
 		
     @logbooks = Logbook.scoped
-    @unapproved_logbooks = @logbooks.where(approved: false)
+    @unapproved_logbooks = @logbooks.where( review_state: 'pending' )
     @historical_logbooks = @logbooks.
-      where(approved: true).
+      where( review_state: 'approved').
       where('date > ?', Date.today.beginning_of_month-1.year).
       group_by { |t| t.date.beginning_of_month }
 

@@ -34,10 +34,13 @@ class Survey < ActiveRecord::Base
 									:catch_measurer_id,
 									:catch_scribe_id,
 									:landing_enumerator_id,
-									:vessel_count
+									:vessel_count,
+									:review_state,
+									:reviewed_at
+									:reviewer
 
 	belongs_to :admin
-	belongs_to :approver, class_name: 'Admin'
+	belongs_to :reviewer, class_name: 'Admin'
 	belongs_to :landing_enumerator, class_name: 'Admin'
 	belongs_to :catch_measurer, class_name: 'Admin'
 	belongs_to :catch_scribe, class_name: 'Admin'
@@ -91,6 +94,21 @@ class Survey < ActiveRecord::Base
     }
 
 #	validate :uniqueness_of_survey
+	
+	STATES = %w{ pending rejected approved }
+
+  STATES.each do |state|
+    define_method("#{state}?") do
+      self.review_state == state
+    end
+
+    define_method("#{state}!") do
+      self.update_attributes(
+        review_state: state,
+        reviewed_at: DateTime.now
+        )
+    end
+  end
 
 	def uniqueness_of_survey
 		# TODO: Is there a better way of doing this?
@@ -140,11 +158,11 @@ class Survey < ActiveRecord::Base
   end
 
   def self.approved_this_month
-    Survey.where( date_published: Date.today.beginning_of_month..Date.today.end_of_month, approved: true ).size
+    Survey.where( date_published: Date.today.beginning_of_month..Date.today.end_of_month, review_state: 'approved' ).size
   end
 
   def self.approved_last_month
-    Survey.where( date_published: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, approved: true ).size
+    Survey.where( date_published: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 
 end

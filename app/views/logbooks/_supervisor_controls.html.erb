@@ -1,20 +1,37 @@
-<div class="span2">
-  <%= link_to supervisor_dashboard_index_path  do %>
-    <i class='icon-arrow-left'></i> Back to Dashboard 
-  <% end %>
-</div>
-<div class="span1 offset2">
-  <b>Approved:</b>
-</div>
-<div class="span1">
-  <%= content_tag :div, class: "controls make-switch switch-large",
-    data: {
-      on: "success",
-      off: "danger",
-      "on-label" => "YES",
-      "off-label" => "NO"
-    } do %>
-
-    <%= check_box_tag :approved, @logbook.id, @logbook.approved?, class: 'approve-toggle', data: { href: set_approved_logbook_path(@logbook) } %>
-  <% end %>
-</div>
+<% if can? :update, @logbook %>
+  <div class="row-fluid">
+    <div class="span4">
+      <%= link_to :back  do %>
+        <i class='icon-arrow-left'></i> Back
+      <% end %>
+    </div>
+    <div class="span6 offset2">
+      <div class="row-fluid">
+        <%= link_to reject_logbook_path(@logbook), 
+          class: "span4 btn btn-large #{@logbook.rejected? ? 'btn-danger' : '' }", 
+          method: :put, 
+          remote: true do 
+          %>
+            <i class='icon-remove-sign icon-large'></i>
+            Rejected
+        <% end %>  
+        <%= link_to pend_logbook_path(@logbook), 
+          class: "span4 btn btn-large #{@logbook.pending? ? 'btn-warning' : '' }", 
+          method: :put, 
+          remote: true do
+          %>
+          <i class='icon-warning-sign icon-large'></i>
+          Pending
+        <% end %>
+        <%= link_to approve_logbook_path(@logbook), 
+          class: "span4 btn btn-large #{@logbook.approved? ? 'btn-success' : '' }", 
+          method: :put, 
+          remote: true do 
+          %>
+          <i class="icon-ok-sign icon-large"></i>
+          Approved
+        <% end %>
+      </div>
+    </div>
+  </div>
+<% end %>

@@ -2,12 +2,10 @@
 
 
   <div class="row">
-    <div class="span7">
-      <% if can? :update, @logbook %>
-        <%= render partial: "logbooks/supervisor_controls" %>
-      <% end %>
+    <div id="supervisor_controls" class="span8">
+      <%= render partial: "logbooks/supervisor_controls" %>
     </div>
-    <div class="span5">
+    <div class="span4">
       <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
     </div>
 
