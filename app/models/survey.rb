@@ -36,8 +36,10 @@ class Survey < ActiveRecord::Base
 									:landing_enumerator_id,
 									:vessel_count,
 									:review_state,
-									:reviewed_at
-									:reviewer
+									:reviewed_at,
+									:reviewer,
+                  :start_time_input,
+                  :end_time_input
 
 	belongs_to :admin
 	belongs_to :reviewer, class_name: 'Admin'
@@ -51,6 +53,12 @@ class Survey < ActiveRecord::Base
 	has_many :fishes, through: :landings
 	has_one :district, through: :desa
 	has_one :province, through: :district
+
+  attr_writer :start_time_input, :end_time_input
+
+  before_save :save_start_at, :save_end_at  
+  validate :check_start_at if @start_time_input.present?
+  validate :check_end_at if @end_time_input.present?
 
 	validates :date_published,
 		presence: {
@@ -165,4 +173,84 @@ class Survey < ActiveRecord::Base
     Survey.where( date_published: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 
+  def formatted_fishery
+    fishery.name
+  end
+
+  def formatted_desa
+    desa.name
+  end
+
+  def formatted_date
+    date_published.to_s(:rfc822)
+  end
+
+  def formatted_start_time
+    start_time.to_s(:time)
+  end
+
+  def formatted_end_time
+    end_time.to_s(:time)
+  end
+
+  def start_time_input
+    @start_time_input || start_time.try(:strftime, "%H:%M")
+  end
+
+  # handles setting of end time
+  def end_time_input
+    @end_time_input || end_time.try(:strftime, "%H:%M")
+  end
+  
+  # combines time and date to set value of start_time 
+  def save_start_at
+    self.start_time = Time.zone.parse("#{date_published} #{@start_time_input}" ) if ( @start_time_input.present? && date_published.present? )
+  end
+
+  # combines time and date to set value of end_time 
+  def save_end_at
+    self.end_time = Time.zone.parse("#{date_published} #{@end_time_input}" ) if ( @end_time_input.present? && date_published.present? )
+  end
+  
+  # validates start time
+  def check_start_at
+    if  ( @start_time_input.present? && date_published.present? ) && Time.zone.parse( "#{date_published} #{@start_time_input}" ).nil?
+      errors.add :start_time, "cannot be parsed"
+    elsif @start_time_input.present? && !date_published.present?
+      errors.add :date_published, "cannot be blank"
+    elsif !@start_time_input.present? && date_published.present?
+      errors.add :start_time, "cannot be blank"
+    end
+  rescue ArgumentError
+    errors.add :start_time, "is not defined"   
+  end
+
+  # validates end time
+  def check_end_at
+    if  ( @end_time_input.present? && date_published.present? ) && Time.zone.parse( "#{date_published} #{@end_time_input}" ).nil?
+      errors.add :end_time, "cannot be parsed"
+    elsif @end_time_input.present? && !date_published.present?
+      errors.add :date_published, "cannot be blank"
+    elsif !@end_time_input.present? && date_published.present?
+      errors.add :end_time, "cannot be blank"
+    end
+  rescue ArgumentError
+    errors.add :end_time, "is not defined"   
+  end
+
+  def formatted_admin
+    admin.name
+  end
+
+  def formatted_landing_enumerator
+    landing_enumerator.name
+  end
+
+  def formatted_catch_measurer
+    catch_measurer.name
+  end
+
+  def formatted_catch_scribe
+    catch_scribe.name
+  end
 end

@@ -24,7 +24,7 @@ gem 'rmagick', '~> 2.13.2'
 gem 'griddler', '~> 0.6.1'  #Mandril API for incoming email handling
 gem 'rubyzip', '~> 1.1.0'
 #gem 'zip-zip', '~> 0.2'
-
+gem 'best_in_place', '~> 2.1.0' #in-line editing for logbooks and surveys
 
 gem 'paper_trail', '~> 2.7.1'
 

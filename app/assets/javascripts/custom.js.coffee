@@ -21,3 +21,15 @@ $(document).ajaxComplete (event, request) ->
   msg = request.getResponseHeader("X-Message")
   type = request.getResponseHeader("X-Message-Type")
   show_ajax_message msg, type #use whatever popup, notification or whatever plugin you want
+
+$(document).ready ->
+  
+  # Activating Best In Place 
+  jQuery(".best_in_place").best_in_place()
+
+
+
+jQuery -> #initialize Twitter Bootstrap tooltips
+  $("a[rel*=popover]").tooltip
+    trigger: "hover"
+    placement: "right"

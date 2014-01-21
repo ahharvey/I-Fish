@@ -59,6 +59,18 @@ class Logbook < ActiveRecord::Base
     end
   end
 
+  def logbook_date
+    date.strftime("%B %Y")
+  end
+
+  def owner
+    user.name
+  end
+
+  def uploader
+    admin.name
+  end
+
   def surveys_this_month
     prereps.where( 'prereps.created_at > ?', Date.today.beginning_of_month ).size
   end

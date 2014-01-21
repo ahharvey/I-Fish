@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require jquery.ui.all
 //= require jquery.ui.datepicker
+//= require best_in_place
 //= require bootstrap
 //= require bootstrap-switch
 //= require jquery.Jcrop
@@ -25,4 +26,5 @@
 // NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
 // IT'S ALL JUST JUNK FOR OUR DOCS!
 // ++++++++++++++++++++++++++++++++++++++++++
+
 

@@ -13,97 +13,72 @@
 <br />
 <br />
 
-<div class="row">
-  <div class="span4">
+<% present @survey do |survey_presenter| %> 
 
-    <dl class="dl-horizontal">
-      
-      <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
-      <dd><%= @survey.fishery.name rescue '' %></dd>
+  <div class="row-fluid">
+    <div class="span4 well">
 
-      <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
-      <dd><%= @survey.desa.name rescue ''%></dd>
+      <dl class="dl-horizontal">
+        
+        <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
+        <dd><%= survey_presenter.fishery %></dd>
 
-      <dt><%= District.human_attribute_name(:name) %></dt>
-      <dd><%= @survey.district.name rescue ''%></dd>
+        <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+        <dd><%= survey_presenter.desa %></dd>
 
-      <dt><%= Province.human_attribute_name(:name) %></dt>
-      <dd><%= @survey.province.name rescue ''%></dd>
-      
-    </dl>
+        <dt><%= Desa.human_attribute_name(:district_id) %></dt>
+        <dd><%= @survey.district.name rescue '--' %></dd>
 
+        <dt><%= Province.human_attribute_name(:name) %></dt>
+        <dd><%= @survey.province.name rescue '--' %></dd>
+        
+      </dl>
+
+    </div>
+
+    <div class="span4 well">
+
+      <dl class="dl-horizontal">
+
+        <dt><%= Survey.human_attribute_name(:date_published) %></dt>
+        <dd><%= survey_presenter.date %></dd>
+
+        <dt><%= Survey.human_attribute_name(:start_time) %></dt>
+        <dd><%= survey_presenter.start_time %></dd>
+
+
+        <dt><%= Survey.human_attribute_name(:end_time) %></dt>
+        <dd><%= survey_presenter.end_time %></dd>
+
+      </dl>
+
+    </div>
+
+    <div class="span4 well">
+
+      <dl class="dl-horizontal">
+
+        
+        <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
+        <dd><%= survey_presenter.admin %></dd>
+
+        
+        <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
+        <dd><%= survey_presenter.landing_enumerator %></dd>
+
+
+        <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
+        <dd><%= survey_presenter.catch_measurer %></dd>
+
+
+        <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
+        <dd><%= survey_presenter.catch_scribe %></dd>
+
+      </dl>
+
+    </div>
   </div>
-
-  <div class="span4">
-
-    <dl class="dl-horizontal">
-
-      <dt><%= Survey.human_attribute_name(:date_published) %></dt>
-      <dd><%= @survey.date_published.to_s(:rfc822) %></dd>
-
-      <dt><%= Survey.human_attribute_name(:start_time) %></dt>
-      <dd><%= @survey.start_time.to_s(:time) %></dd>
-
-
-      <dt><%= Survey.human_attribute_name(:end_time) %></dt>
-      <dd><%= @survey.end_time.to_s(:time) %></dd>
-
-    </dl>
-
-  </div>
-
-  <div class="span4">
-
-    <dl class="dl-horizontal">
-
-      
-      <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
-      <dd>
-        <%= link_to image_tag(@survey.admin.avatar_url(:thumb), 
-          width: "30px", 
-          height: "30px", 
-          title: @survey.admin.name, 
-          alt: @survey.admin.name),
-          @survey.admin %>
-      </dd>
-
-      
-      <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
-      <dd>
-        <%= link_to image_tag(@survey.landing_enumerator.avatar_url(:thumb), 
-          width: "30px", 
-          height: "30px", 
-          title: @survey.landing_enumerator.name, 
-          alt: @survey.landing_enumerator.name),
-          @survey.landing_enumerator %>
-      </dd>
-
-
-      <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
-      <dd>
-        <%= link_to image_tag(@survey.catch_measurer.avatar_url(:thumb), 
-          width: "30px", 
-          height: "30px", 
-          title: @survey.catch_measurer.name, 
-          alt: @survey.catch_measurer.name),
-          @survey.catch_measurer %>
-      </dd>
-
-
-      <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
-      <dd>
-        <%= link_to image_tag(@survey.catch_scribe.avatar_url(:thumb), 
-          width: "30px", 
-          height: "30px", 
-          title: @survey.catch_scribe.name, 
-          alt: @survey.catch_scribe.name),
-          @survey.catch_scribe %>
-      </dd>
-
-    </dl>
-
-  </div>
-</div>
+<% end %>
 
 <div class="row">
 
@@ -147,8 +122,7 @@
             <td><%= landing_presenter.value %></td>
             <td>
               <%= link_to show_icon, landing %>
-              <%= link_to edit_icon, edit_landing_path(landing) %>
-              <%= link_to destroy_icon, landing, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to edit_icon, landing %>
             </td>
           </tr>
         <% end %>
@@ -177,9 +151,7 @@
             <td><%= catch_presenter.vessel_name %></td>
             <td><%= catch_presenter.sfactor %></td>
             <td>
-              <%= link_to show_icon, catch %>
-              <%= link_to edit_icon, edit_catch_path(catch) %>
-              <%= link_to destroy_icon, catch, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <%= link_to edit_icon, catch.landing %>
             </td>
           </tr>
         <% end %>

@@ -3,6 +3,22 @@ class LogbooksController < InheritedResources::Base
 
   respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
 
+  def update
+    @logbook = Logbook.find params[:id]
+
+    respond_to do |format|
+      if @logbook.update_attributes(params[:logbook])
+        flash[:success] = "Logbook updated successfully!"
+        format.html { redirect_to(@logbook, :notice => 'Logbook was successfully updated.') }
+        format.json { respond_with_bip(@logbook) }
+      else
+        flash[:error] = @logbook.errors.full_messages.join(", ")
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@logbook) }
+      end
+    end
+  end
+
   def approve
     @logbook = Logbook.find params[:id]
     #@logbook.update_column :approved, params[:approved]
@@ -47,6 +63,10 @@ class LogbooksController < InheritedResources::Base
     end
     #render nothing: true
     refresh_supervisor_controls( @logbook )
+  end
+
+  def user_avatar
+    render partial: 'logbooks/user_avatar'
   end
 
   private

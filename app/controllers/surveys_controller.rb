@@ -18,12 +18,18 @@ class SurveysController < InheritedResources::Base
   end
 
   def update
-    @survey = @currently_signed_in.surveys.find(params[:id])
-    if @survey.update_attributes(params[:survey])
-      track_activity @survey
-      redirect_to @survey, notice: "Survey was updated."
-    else
-      render :edit
+    @survey = Survey.find params[:id]
+
+    respond_to do |format|
+      if @survey.update_attributes(params[:survey])
+        flash[:success] = "Survey updated successfully!"
+        format.html { redirect_to(@survey, :notice => 'Survey was successfully updated.') }
+        format.json { respond_with_bip(@survey) }
+      else
+        flash[:error] = @survey.errors.full_messages.join(", ")
+        format.html { render :action => "edit" }
+        format.json { respond_with_bip(@survey) }
+      end
     end
   end
 
