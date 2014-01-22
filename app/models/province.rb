@@ -29,7 +29,7 @@ class Province < ActiveRecord::Base
   has_many :fishes, through: :landings
 
   def approved_surveys
-    self.surveys.where(approved: true)
+    self.surveys.where( review_state: 'approved' )
   end
 
 end
