@@ -1,20 +1,52 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links" %>
+<div class="row">
+  <div class="span8">
+    <%= link_to :back do %>
+      <i class='icon-arrow-left'></i> Back
+    <% end %>
+  </div>
+  <div class="span4">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
+
+</div>
+
+<br />
+<br />
+
 
 <table class="table table-striped table-condensed">
   <tr>
+    <th></th>
     <th><%= Logbook.human_attribute_name(:date) %></th>
     <th><%= Logbook.human_attribute_name(:fishery) %></th>
+    <th><%= User.human_attribute_name(:desa_id) %></th>
     <th><%= Logbook.human_attribute_name(:user) %></th>
     <th><%= Logbook.human_attribute_name(:admin) %></th>
     <th></th>
   </tr>
 
   <% @logbooks.each do |logbook| %>
-    <tr>
+    <% if logbook.approved? %>
+      <tr  >
+    <% elsif logbook.rejected? %>
+      <tr class='error' >
+    <% elsif logbook.pending? %>
+      <tr class='warning' >
+    <% end %>
+      <td>
+        <% if logbook.approved? %>
+          <span class="label label-success"><i class='icon-ok-sign'></i></span>
+        <% elsif logbook.rejected? %>
+          <span class="label label-important"><i class='icon-remove-sign'></i></span>
+        <% elsif logbook.pending? %>
+          <span class="label label-warning"><i class='icon-warning-sign'></i></span>
+        <% end %>
+      </td>
       <td><%= logbook.date.to_s(:rfc822) %></td>
       <td><%= logbook.fishery.name %></td>
+      <td><%= logbook.user.desa.name %></td>
       <td>
         <%= image_tag(logbook.user.avatar_url(:thumb), 
           width: "30px", 
@@ -41,5 +73,3 @@
 </table>
 
 <br />
-
-<%= link_to 'New Logbook', new_logbook_path %>

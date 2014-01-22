@@ -49,7 +49,15 @@ class LoggedDay < ActiveRecord::Base
                   :graticule_id,
                   :ice,
                   :aborted,
-                  :notes
+                  :notes,
+                  :start_time_input,
+                  :start_date_input
+  
+  attr_writer :start_time_input, :end_time_input, :date_input
+
+  before_save :save_start_at, :save_end_at  
+  validate :check_start_at, :check_end_at
+
 
   validates :condition,
     presence: {
@@ -61,10 +69,6 @@ class LoggedDay < ActiveRecord::Base
     },
     unless: [ :aborted?, :inactive? ]
   
-  validates :start_time,
-    presence: {
-      message: " is not defined." 
-    }
   validates :end_time,
     presence: {
       message: " is not defined." 
@@ -167,6 +171,57 @@ class LoggedDay < ActiveRecord::Base
     @@moon_data[moon]
   end
 
+  # handles setting of start time
+  def start_time_input
+    @start_time_input || start_time.try(:strftime, "%H:%M")
+  end
+
+  # handles setting of end time
+  def end_time_input
+    @end_time_input || end_time.try(:strftime, "%H:%M")
+  end
+
+  # handles entry of date
+  def date_input
+    @date_input || start_time.try(:strftime, "%Y-%m-%d")
+  end
+  
+  # combines time and date to set value of start_time 
+  def save_start_at
+    self.start_time = Time.zone.parse("#{@date_input} #{@start_time_input}" ) if ( @start_time_input.present? && @date_input.present? )
+  end
+
+  # combines time and date to set value of end_time 
+  def save_end_at
+    self.end_time = Time.zone.parse("#{@date_input} #{@end_time_input}" ) if ( @end_time_input.present? && @date_input.present? )
+  end
+  
+  # validates start time
+  def check_start_at
+    if  ( @start_time_input.present? && @date_input.present? ) && Time.zone.parse( "#{@date_input} #{@start_time_input}" ).nil?
+      errors.add :start_time, "cannot be parsed"
+    elsif @start_time_input.present? && !@date_input.present?
+      errors.add :start_date_input, "cannot be blank"
+    elsif !@start_time_input.present? && @date_input.present?
+      errors.add :start_time_input, "cannot be blank"
+    end
+  rescue ArgumentError
+    errors.add :start_date_input, "is not defined"   
+  end
+
+  # validates end time
+  def check_end_at
+    if  ( @end_time_input.present? && @date_input.present? ) && Time.zone.parse( "#{@date_input} #{@end_time_input}" ).nil?
+      errors.add :end_time, "cannot be parsed"
+    elsif @end_time_input.present? && !@date_input.present?
+      errors.add :end_date_input, "cannot be blank"
+    elsif !@end_time_input.present? && @date_input.present?
+      errors.add :end_time_input, "cannot be blank"
+    end
+  rescue ArgumentError
+    errors.add :end_date_input, "is not defined"   
+  end
+
   #private
 
   def inactive?
@@ -178,5 +233,24 @@ class LoggedDay < ActiveRecord::Base
     quantity == 0 && weight == 0
   end
 
+  def logged_date
+    start_time.to_date.strftime("%d")
+  end
+
+  def formatted_graticule
+    graticule.code
+  end
+
+  def formatted_sail
+    sail.yn
+  end
+
+  def formatted_fish
+    fish.code
+  end
+
+  def formatted_date
+    start_time.try(:strftime, "%d")
+  end
 
 end

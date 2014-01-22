@@ -2,68 +2,92 @@
 
 <%= render partial: "shared/api_links" %>
 
-<dl class="dl-horizontal">
+<div class="row-fluid">
 
-  <dt>Vessel ref:</dt>
-  <dd><%= @landing.vessel_ref %></dd>
+  <div class="span4 well">
 
+    <dl class="dl-horizontal">
 
-  <dt>Vessel name:</dt>
-  <dd><%= @landing.vessel_name %></dd>
-
-
-  <dt>Type:</dt>
-  <dd><%= @landing.type %></dd>
+      <dt>Registration no.</dt>
+      <dd><%= @landing.vessel_ref %></dd>
 
 
-  <dt>Grid square:</dt>
-  <dd><%= @landing.graticule.try(:code) %></dd>
+      <dt>Vessel name:</dt>
+      <dd><%= @landing.vessel_name %></dd>
 
 
-  <dt>Time out:</dt>
-  <dd><%= @landing.time_out %></dd>
+      <dt>Type:</dt>
+      <dd><%= @landing.type %></dd>
+
+      <dt>Length:</dt>
+      <dd><%= @landing.boat_size %></dd>
+
+      <dt>Engine:</dt>
+      <dd><%= @landing.engine.name %></dd>
+
+      <dt>Power:</dt>
+      <dd><%= @landing.power %></dd>
+
+    </dl>
+
+  </div>
+
+  <div class="span4 well">
+
+    <dl class="dl-horizontal">
+
+      <dt>Time out:</dt>
+      <dd><%= @landing.time_out.to_s(:time) %></dd>
 
 
-  <dt>Time in:</dt>
-  <dd><%= @landing.time_in %></dd>
+      <dt>Time in:</dt>
+      <dd><%= @landing.time_in.to_s(:time) %></dd>
+
+      <dt>Fishing ground:</dt>
+      <dd><%= @landing.graticule.try(:code) %></dd>
+
+      <dt>Crew size:</dt>
+      <dd><%= @landing.crew %></dd>
+
+      <dt>Fuel:</dt>
+      <dd><%= @landing.fuel %></dd>
+
+      <dt>Ice:</dt>
+      <dd><%= @landing.ice.yn rescue '--' %></dd>
+
+      <dt>Sail:</dt>
+      <dd><%= @landing.sail.yn rescue '--' %></dd>
+
+      <dt>Gear:</dt>
+      <dd><%= @landing.gear.alpha_code %></dd>
+
+    </dl>
+
+  </div>
+
+  <div class="span4 well">
+
+    <dl class="dl-horizontal">
+
+      <dt>Species:</dt>
+      <dd><%= @landing.fish.code %></dd>
+
+      <dt>Quantity:</dt>
+      <dd><%= @landing.quantity %></dd>
 
 
-  <dt>Engine:</dt>
-  <dd><%= @landing.engine %></dd>
+      <dt>Weight:</dt>
+      <dd><%= @landing.weight %></dd>
 
 
-  <dt>Fuel:</dt>
-  <dd><%= @landing.fuel %></dd>
+      <dt>Value:</dt>
+      <dd><%= @landing.value %></dd>
 
+    </dl>
 
-  <dt>Sail:</dt>
-  <dd><%= @landing.sail %></dd>
+  </div>
 
-
-  <dt>Crew:</dt>
-  <dd><%= @landing.crew %></dd>
-
-
-  <dt>Boat size:</dt>
-  <dd><%= @landing.boat_size %></dd>
-
-
-  <dt>Gear:</dt>
-  <dd><%= @landing.gear_id %></dd>
-
-
-  <dt>Quantity:</dt>
-  <dd><%= @landing.quantity %></dd>
-
-
-  <dt>Weight:</dt>
-  <dd><%= @landing.weight %></dd>
-
-
-  <dt>Value:</dt>
-  <dd><%= @landing.value %></dd>
-
-</dl>
+</div>
 
 <table class="table table-striped table-condensed">
   <tr>

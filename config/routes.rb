@@ -79,7 +79,9 @@ IFish::Application.routes.draw do
     resources :landings
     resources :offices
     resources :surveys do
-      put :set_approved, on: :member
+      put :approve, on: :member
+      put :pend, on: :member
+      put :reject, on: :member
     end
     resources :engines
     resources :graticules
@@ -87,7 +89,9 @@ IFish::Application.routes.draw do
     resources :districts
     resources :provinces
     resources :logbooks do
-      put :set_approved, on: :member
+      put :approve, on: :member
+      put :pend, on: :member
+      put :reject, on: :member
     end
     resources :logged_days
     resources :excel_files

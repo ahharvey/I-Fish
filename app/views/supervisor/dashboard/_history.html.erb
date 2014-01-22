@@ -1,0 +1,19 @@
+<h3>Overview</h3>
+<table class="table table-striped table-condensed">
+  <tr>
+    <th></th>
+    <th>Logbooks</th>
+    <th>Surveys</th>
+  </tr>
+  <% for record in @historical_records %>
+    <tr>
+      <th><%= record[:month].strftime('%B') %></th>
+      <td class="text-right"><%= record[:logbook] %></td>
+      <td class="text-right"><%= record[:survey] %></td>
+    </tr>
+  <% end %>
+</table>
+
+
+
+

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140112132214) do
+ActiveRecord::Schema.define(:version => 20140118183737) do
 
   create_table "activities", :force => true do |t|
     t.string   "action"
@@ -188,17 +188,17 @@ ActiveRecord::Schema.define(:version => 20140112132214) do
     t.date     "date"
     t.integer  "admin_id"
     t.integer  "user_id"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
     t.integer  "fishery_id"
-    t.integer  "approver_id"
-    t.boolean  "approved",    :default => false, :null => false
+    t.integer  "reviewer_id"
+    t.string   "review_state", :default => "pending"
+    t.datetime "reviewed_at"
   end
 
   add_index "logbooks", ["admin_id"], :name => "index_logbooks_on_admin_id"
-  add_index "logbooks", ["approved"], :name => "index_logbooks_on_approved"
-  add_index "logbooks", ["approver_id"], :name => "index_logbooks_on_approver_id"
   add_index "logbooks", ["fishery_id"], :name => "index_logbooks_on_fishery_id"
+  add_index "logbooks", ["reviewer_id"], :name => "index_logbooks_on_approver_id"
   add_index "logbooks", ["user_id"], :name => "index_logbooks_on_user_id"
 
   create_table "logged_days", :force => true do |t|
@@ -264,23 +264,23 @@ ActiveRecord::Schema.define(:version => 20140112132214) do
     t.integer  "desa_id"
     t.datetime "start_time"
     t.datetime "end_time"
-    t.datetime "created_at",                               :null => false
-    t.datetime "updated_at",                               :null => false
+    t.datetime "created_at",                                   :null => false
+    t.datetime "updated_at",                                   :null => false
     t.integer  "fishery_id"
     t.integer  "admin_id"
-    t.boolean  "approved",              :default => false, :null => false
-    t.integer  "approver_id"
+    t.integer  "reviewer_id"
     t.integer  "landing_enumerator_id"
     t.integer  "catch_measurer_id"
     t.integer  "catch_scribe_id"
     t.integer  "vessel_count"
+    t.string   "review_state",          :default => "pending"
+    t.datetime "reviewed_at"
   end
 
-  add_index "surveys", ["approved"], :name => "index_surveys_on_approved"
-  add_index "surveys", ["approver_id"], :name => "index_surveys_on_approver_id"
   add_index "surveys", ["catch_measurer_id"], :name => "index_surveys_on_catch_measurer_id"
   add_index "surveys", ["catch_scribe_id"], :name => "index_surveys_on_catch_scribe_id"
   add_index "surveys", ["landing_enumerator_id"], :name => "index_surveys_on_landing_enumerator_id"
+  add_index "surveys", ["reviewer_id"], :name => "index_surveys_on_approver_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

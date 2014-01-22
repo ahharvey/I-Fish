@@ -1,21 +1,36 @@
 <h3>Overview</h3>
 <table class="table table-striped table-condensed">
   <tr>
-    <th><%= Desa.human_attribute_name(:name) %></th>
+    <th></th>
+    <th></th>
     <th></th>
     <th>This month</th>
     <th>Last month</th>
   </tr>
   <tr>
-    <th>Surveys</th>
+    <th rowspan="2" >Surveys</th>
+    <td>Submitted</td>
     <td><%= Survey.completed_this_month >= Survey.completed_last_month ? up_arrow : down_arrow %></td>
     <td><%= Survey.completed_this_month %></td>
     <td><%= Survey.completed_last_month %></td>
   </tr>
   <tr>
-    <th>Logbooks</th>
+    <td>Approved</td>
+    <td><%= Survey.approved_this_month >= Survey.approved_last_month ? up_arrow : down_arrow %></td>
+    <td><%= Survey.approved_this_month %></td>
+    <td><%= Survey.approved_last_month %></td>
+  </tr>
+  <tr>
+    <th rowspan="2">Logbooks</th>
+    <td>Submitted</td>
     <td><%= Logbook.completed_this_month >= Logbook.completed_last_month ? up_arrow : down_arrow %></td>
     <td><%= Logbook.completed_this_month %></td>
     <td><%= Logbook.completed_last_month %></td>
+  </tr>
+  <tr>
+    <td>Approved</td>
+    <td><%= Logbook.approved_this_month >= Logbook.approved_last_month ? up_arrow : down_arrow %></td>
+    <td><%= Logbook.approved_this_month %></td>
+    <td><%= Logbook.approved_last_month %></td>
   </tr>
 </table>

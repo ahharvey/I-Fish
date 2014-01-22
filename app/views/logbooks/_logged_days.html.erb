@@ -18,10 +18,10 @@
       <th></th>
     </tr>
 
-  	<% for logged_day in @logbook.logged_days.order("start_time ASC") %>
+    <% for logged_day in @logbook.logged_days.order("start_time ASC") %>
 
       <% present logged_day do |logged_day_presenter| %> 
-    		<tr>
+        <tr>
           <td><%= logged_day_presenter.start_date %></td>
           <td><%= logged_day_presenter.start_time %></td>
           <td><%= logged_day_presenter.end_time %></td>
@@ -37,12 +37,12 @@
           <td><%= logged_day_presenter.value %></td>
           <td><%= logged_day_presenter.condition %></td>
           <td>
-              <%= link_to show_icon, logged_day %>
-              <%= link_to edit_icon, edit_logged_day_path(logged_day) %>
-              <%= link_to destroy_icon, logged_day, method: :delete, data: { confirm: 'Are you sure?' } %>
+              <small><em>
+                <%= link_to 'edit', '#', rel: 'popover', title: 'To edit, simply click the value you wish to change in the table', data: { toggle: 'toggle', placement: 'right', 'original-title' => 'Click the entry to edit directly' } %>
+              </em></small>
           </td>
         </tr>
       <% end %>
-  	<% end %>
+    <% end %>
 
   </table>
