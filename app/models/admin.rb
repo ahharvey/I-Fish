@@ -44,7 +44,7 @@ class Admin < ActiveRecord::Base
   has_one :district, through: :office
   has_one :province, through: :office
   has_many :surveys, dependent: :destroy
-  has_many :approved_surveys, :class_name => 'Survey', :foreign_key => 'approver_id'
+  has_many :reviewed_surveys, :class_name => 'Survey', :foreign_key => 'reviewer_id'
   has_many :surveys_as_landing_enumerator, :class_name => 'Survey', :foreign_key => 'landing_enumerator_id'
   has_many :surveys_as_catch_measurer, :class_name => 'Survey', :foreign_key => 'catch_measurer_id'
   has_many :surveys_as_catch_scribe, :class_name => 'Survey', :foreign_key => 'catch_scribe_id'
