@@ -17,7 +17,10 @@ class AddDesaRecords < ActiveRecord::Migration
     ]
 
     desas.each do |d|
-      Desa.where(d).first_or_create()
+      desa = Desa.where(d).first_or_create()
+      v=Version.where( item_type: "Desa", item_id: desa.id ).first
+      v.whodunnit = 7
+      v.save
     end
 
   end
