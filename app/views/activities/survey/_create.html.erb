@@ -1,1 +1,6 @@
-created <%= link_to survey.date_published, survey %>
+<% if survey %>
+  uploaded a survey : <%= link_to "#{survey.desa.name} - #{survey.formatted_date}", survey %>
+  <p><span class="label label-info"><i class='icon-cloud-upload icon-2x'></i></span></p>
+<% else %>
+  uploaded a survey that has since been deleted
+<% end %>

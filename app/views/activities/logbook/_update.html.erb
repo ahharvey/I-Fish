@@ -1,5 +1,6 @@
 <% if logbook %>
-  updated <%= link_to logbook.date, logbook %>
+  updated <%= link_to "#{logbook.user.desa.name} - #{logbook.logbook_date}", logbook %>
+  <p><span class="label label-info"><i class='icon-edit icon-2x'></i></span></p>
 <% else %>
   updated a logbook that has since been deleted
 <% end %>
