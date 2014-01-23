@@ -115,7 +115,7 @@ class Landing < ActiveRecord::Base
 			only_integer: true
 		},
 		inclusion: {
-			in: 1..999999999
+			in: 0..999999999
 		}
 #	validates :boat_size,
 #		presence: true,
@@ -143,7 +143,7 @@ class Landing < ActiveRecord::Base
 			only_integer: true
 		},
 		inclusion: {
-			in: 1..9999
+			in: 0..9999
 		}
 	validates :weight,
 		numericality: {
@@ -151,7 +151,7 @@ class Landing < ActiveRecord::Base
 			message: " is not a number."
 		},
 		inclusion: {
-			in: 1..999999,
+			in: 0..999999,
 			message: " is too high."
 		},
 		allow_nil: true
