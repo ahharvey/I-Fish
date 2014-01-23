@@ -1,0 +1,6 @@
+<% if survey %>
+  rejected a survey : <%= link_to "#{survey.desa.name} - #{survey.formatted_date}", survey %>
+  <p><span class="label label-important"><i class='icon-remove-sign icon-2x'></i></span></p>
+<% else %>
+  rejected a survey that has since been deleted
+<% end %>

@@ -1,5 +1,6 @@
 <% if survey %>
-	updated <%= link_to survey.date_published, survey %>
+	updated a survey : <%= link_to "#{survey.desa.name} - #{survey.date_published}", survey %>
+  <p><span class="label label-info"><i class='icon-edit icon-2x'></i></span></p>
 <% else %>
 	updated a survey that has since been deleted
 <% end %>

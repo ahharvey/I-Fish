@@ -1,0 +1,6 @@
+<% if logbook %>
+  approved a logbook : <%= link_to "#{logbook.user.desa.name} - #{logbook.logbook_date}", logbook %>
+  <p><span class="label label-success"><i class='icon-ok-sign icon-2x'></i></span></p>
+<% else %>
+  approved a logbook that has since been deleted
+<% end %>
