@@ -39,6 +39,7 @@ class User < ActiveRecord::Base
   attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :notes, :vessel_type_id, :length, :engine_id, :power, :desa_id, :confirmed_at
 
   validates :name, presence: true
+  validate :avatar_size
 
   belongs_to :desa
   has_and_belongs_to_many :roles, :before_add => :validates_role
@@ -101,5 +102,11 @@ class User < ActiveRecord::Base
 
   def validates_role(role)
     raise ActiveRecord::Rollback if self.roles.include? role
+  end
+
+  private
+ 
+  def avatar_size
+    errors[:avatar] << "should be less than 1MB" if avatar.size > 1.megabytes
   end
 end
