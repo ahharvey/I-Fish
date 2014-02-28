@@ -93,6 +93,10 @@ class Admin < ActiveRecord::Base
   end
 
   mount_uploader :avatar, AvatarUploader
+#  validates :avatar, 
+#    file_size: { 
+#      maximum: 1.megabytes.to_i 
+#    } 
   
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_avatar
