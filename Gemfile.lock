@@ -181,6 +181,7 @@ GEM
       json (~> 1.4)
     responders (1.0.0)
       railties (>= 3.2, < 5)
+    rinruby (2.0.3)
     rmagick (2.13.2)
     roo (1.13.2)
       nokogiri
@@ -262,6 +263,7 @@ DEPENDENCIES
   rabl (~> 0.9.0)
   rack-mini-profiler (~> 0.1.31)
   rails (~> 3.2.11)
+  rinruby (~> 2.0.3)
   rmagick (~> 2.13.2)
   roo (~> 1.13.2)
   rubyzip (~> 1.1.0)
