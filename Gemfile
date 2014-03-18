@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 ruby '2.0.0'
 gem 'rails', '~> 3.2.11'
-gem 'inherited_resources', '~> 1.4'
+gem 'inherited_resources', '~> 1.4.1'
 gem 'pg', '~> 0.17.0'
 gem 'unicorn', '~> 4.7.0'
 #gem 'queue_classic', '~>2.1.2' #queued processes
@@ -62,4 +62,4 @@ group :development do
   gem 'rack-mini-profiler', '~> 0.1.31'
 end
 
-gem 'newrelic_rpm', '~> 3.6.8' #system monitoring and profiling
+gem 'newrelic_rpm', '~> 3.7.0' #system monitoring and profiling
