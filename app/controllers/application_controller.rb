@@ -19,18 +19,18 @@ class ApplicationController < ActionController::Base
   def authenticate!
     if admin_signed_in?
       authenticate_admin!
-      @currently_signed_in = current_admin
+      @currently_signed_in ||= current_admin
     else
       authenticate_user!
-      @currently_signed_in = current_user
+      @currently_signed_in ||= current_user
     end
   end
 
   def set_currently_signed_in
     if admin_signed_in?
-      @currently_signed_in = current_admin
+      @currently_signed_in ||= current_admin
     else
-      @currently_signed_in = current_user
+      @currently_signed_in ||= current_user
     end
   end
 
