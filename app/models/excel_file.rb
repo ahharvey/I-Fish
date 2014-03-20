@@ -79,7 +79,7 @@ class ExcelFile < ActiveRecord::Base
         survey = survey[:model]
         Rails.logger.info survey.to_yaml
         puts survey.to_yaml
-        PaperTrail.whodunnit = survey.user_id
+        PaperTrail.whodunnit = survey.admin_id
         survey.save!
         
       end
@@ -89,7 +89,7 @@ class ExcelFile < ActiveRecord::Base
         landing.survey_id = Survey.last.id
         Rails.logger.info landing.to_yaml
         puts landing.to_yaml
-        PaperTrail.whodunnit = landing.survey.user_id
+        PaperTrail.whodunnit = landing.survey.admin_id
         landing.save!
         Rails.logger.info "#############################"
         puts "#############################"
@@ -101,7 +101,7 @@ class ExcelFile < ActiveRecord::Base
         catch_tab.landing_id = landing.id
         Rails.logger.info catch_tab.to_yaml
         puts catch_tab.to_yaml
-        PaperTrail.whodunnit = catch_tab.survey.user_id
+        PaperTrail.whodunnit = catch_tab.survey.admin_id
         catch_tab.save!
         
       end
