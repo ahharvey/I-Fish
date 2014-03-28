@@ -74,7 +74,11 @@ IFish::Application.routes.draw do
       resources :surveys
     end
     resources :fisheries
-    resources :fishes
+    resources :fishes do
+      collection do
+        post :import
+      end
+    end
     resources :gears
     resources :landings
     resources :offices
