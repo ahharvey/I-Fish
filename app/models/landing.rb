@@ -140,10 +140,12 @@ class Landing < ActiveRecord::Base
 		:if => :not_importing
 	validates :quantity,
 		numericality: {
-			only_integer: true
+			only_integer: true,
+			message: " is not a number."
 		},
 		inclusion: {
-			in: 0..9999
+			in: 0..9999,
+			message: " is too high."
 		}
 	validates :weight,
 		numericality: {
@@ -181,7 +183,10 @@ class Landing < ActiveRecord::Base
   end
 
 	def calculate_cpue
-		self.cpue_kg = weight.to_i / ( ( ( time_in.to_i - time_out.to_i ) * crew.to_i ) / 1.hour ) 
+		unless quantity.nil?
+			self.cpue = quantity / ( ( ( time_in - time_out ) * crew ) / 1.hour ) 
+		end
+#		self.cpue_kg = weight.to_i / ( ( ( time_in.to_i - time_out.to_i ) * crew.to_i ) / 1.hour ) 
 		#self.cpue_idr = ( self.value.to_i * self.weight.to_i ) / ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour )
 		#self.cpue_fuel = weight.to_i / fuel.to_i
 	end

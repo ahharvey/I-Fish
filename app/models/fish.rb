@@ -47,7 +47,22 @@ class Fish < ActiveRecord::Base
   validates :english_name,
   	presence: true
 
-  
 
-
+  def self.import(file)
+    CSV.foreach(file.path, headers: true) do |row|
+      data = row.to_hash
+      unless data['code'].nil?
+        unless Fish.where(code: data['code']).any?
+          Fish.create(
+            code: data['code'],
+            order: data['order'],
+            family: data['family'],
+            scientific_name: data['scientific_name'],
+            english_name: data['english_name'],
+            indonesia_name: data['indonesian_name']
+            )
+        end
+      end
+    end
+  end
 end

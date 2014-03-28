@@ -38,6 +38,7 @@ class Admin < ActiveRecord::Base
 
 
   validates :name, presence: true
+  validate :avatar_size
 
   has_and_belongs_to_many :roles, :before_add => :validates_role
   belongs_to :office
@@ -156,6 +157,12 @@ class Admin < ActiveRecord::Base
 
   def supervised_surveys
     Survey.where( admin_id: self.team_members.each{|t| t.id } )
+  end
+
+  private
+ 
+  def avatar_size
+    errors[:avatar] << "should be less than 1MB" if avatar.size > 1.megabytes
   end
 
 end
