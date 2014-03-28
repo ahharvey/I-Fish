@@ -3,8 +3,9 @@ ruby '2.0.0'
 gem 'rails', '~> 3.2.11'
 gem 'inherited_resources', '~> 1.4.1'
 gem 'pg', '~> 0.17.0'
-gem 'unicorn', '~> 4.7.0'
+gem 'unicorn', '~> 4.8.0'
 gem 'rack-timeout', '~> 0.0.4'
+
 #gem 'queue_classic', '~>2.1.2' #queued processes
 
 gem 'jquery-rails', '~> 3.0.4'
@@ -45,7 +46,7 @@ gem 'rinruby', '~> 2.0.3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.6'
   gem 'coffee-rails', '~> 3.2.2'
-  gem 'uglifier', '~> 2.3.1'
+  gem 'uglifier', '~> 2.5.0'
   gem 'bootstrap-sass', '~> 2.3.2'                 ##********major update available
   gem 'font-awesome-sass-rails', '~> 3.0.2'
 end
@@ -65,4 +66,5 @@ group :development do
   # gem 'rack-mini-profiler', '~> 0.1.31'
 end
 
-gem 'newrelic_rpm', '~> 3.7.0' #system monitoring and profiling
+gem 'newrelic_rpm', '~> 3.7.1' #system monitoring and profiling
+
