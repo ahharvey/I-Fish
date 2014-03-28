@@ -40,7 +40,7 @@ gem 'rabl', '~> 0.9.0' # JSON templates
 gem 'oj', '~> 2.2.3' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
 
-gem 'rinruby', '~> 2.0.3'
+#gem 'rinruby', '~> 2.0.3'
 
 
 group :assets do
