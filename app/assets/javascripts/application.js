@@ -18,8 +18,8 @@
 //= require bootstrap
 //= require bootstrap-switch
 //= require jquery.Jcrop
-//= require gmaps4rails.base
-//= require gmaps4rails.googlemaps
+//= require gmaps4rails/gmaps4rails.base
+//= require gmaps4rails/gmaps4rails.googlemaps
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap
 //= require_tree .

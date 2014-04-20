@@ -179,7 +179,7 @@ class Landing < ActiveRecord::Base
 	@@condition_data = { 1 => "Calm" , 2 => "Moderate" , 3 => "High" }
   
   def condition_as_text
-    @@condition_data[condition]
+    @@condition_data[conditions]
   end
 
 	def calculate_cpue

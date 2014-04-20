@@ -19,6 +19,7 @@ class FisheriesController < InheritedResources::Base
         graph_length_frequency() if params[:method] == "length_frequency"
         graph_values() if params[:method] == "value"
       end
+      format.xls
     end
   end
 

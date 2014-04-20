@@ -2,6 +2,8 @@
 
 <%= render partial: "shared/api_links", locals: { json: true, xml: true } %>
 
+<%= link_to "Excel", fishery_path(@fishery, format: "xls") %>
+
 <div class="container">
 <div class="row">
   <p>

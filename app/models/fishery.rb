@@ -35,4 +35,11 @@ class Fishery < ActiveRecord::Base
   def approved_surveys
     self.surveys.where( review_state: 'approved' )
   end
+
+  def approved_landings
+    Landing.where(survey_id: self.approved_surveys.map(&:id) )
+  end
+  def approved_catches
+    Catch.where(landing_id: self.approved_landings.map(&:id) ) 
+  end
 end
