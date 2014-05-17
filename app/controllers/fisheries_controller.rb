@@ -58,7 +58,7 @@ class FisheriesController < InheritedResources::Base
         joins(:survey, :fishery).
         where("fisheries.id = ? AND surveys.date_published >= ? AND surveys.date_published <= ?", @fishery.id, from, to)
     counts = catches.group('catches.fish_id').count
-    formatted = Hash[counts.map { |k, v| [Fish.find(k).scientific_name, v] }]
+    formatted = Hash[counts.map { |k, v| [Fish.find(k).scientific_name rescue "Unidentified", v] }]
     render json: formatted.to_a
   end
 

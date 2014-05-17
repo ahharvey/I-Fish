@@ -126,8 +126,6 @@ jQuery ->
     fetchCpue $('#graph_catch_per_effort_container').data('id')
 
 fetchCpue = (id) ->
-  alert('triggers')
-  alert( "/fisheries/" + id + ".json" )
   params =
     method: "catch_per_effort"
     date_from: $("#cpe_date_from").val()
@@ -142,8 +140,6 @@ fetchCpue = (id) ->
       cpueData data
 
 fetchComposition = (id) ->
-  alert('triggers')
-  alert( "/fisheries/" + id + ".json" )
   params =
     method: "catch_composition"
     date_from: $("#cpe_date_from").val()
