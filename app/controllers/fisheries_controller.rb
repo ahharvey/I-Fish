@@ -49,8 +49,10 @@ class FisheriesController < InheritedResources::Base
             cpue = 0.to_i 
           elsif !l.weight.zero?
             cpue = l.weight / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)
+            cpue = cpue / 1000
           elsif !l.quantity.zero?
             cpue = (l.quantity*350) / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)
+            cpue = cpue / 1000
           end
           res.push cpue
         end
@@ -103,6 +105,8 @@ class FisheriesController < InheritedResources::Base
 
       (start_month..end_month).each do |m|
         col_headers.push "#{Date::MONTHNAMES[m].slice(0,3)} #{y.to_s.slice(2,2)}"
+        surveys_from = Date.new(y,m,15).beginning_of_month
+        surveys_to = Date.new(y,m,15).end_of_month
         landings = Landing.joins(:survey).where('surveys.date_published >= ? AND surveys.date_published <= ? AND surveys.fishery_id = ?', surveys_from, surveys_to, @fishery.id) 
         res = []
         ls=landings.where('landings.time_out != landings.time_in')
