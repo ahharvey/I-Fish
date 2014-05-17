@@ -85,7 +85,7 @@ class FisheriesController < InheritedResources::Base
         catches.concat l.catches
       end
     end
-    step = 5
+    step = 50
     catches = catches.sort_by &:length
     lengths = catches.map{ |c| c.length - (c.length % step) }.uniq
     length_counts = lengths.map{ |l| catches.select{ |c| c.length - (c.length % step) == l }.count}
