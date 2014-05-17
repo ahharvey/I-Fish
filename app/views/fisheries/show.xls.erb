@@ -24,7 +24,7 @@ headers["Content-Disposition"] = "attachment; filename=\"testname\""
         <Cell><Data ss:Type="String">Catch Scribe</Data></Cell>
         <Cell><Data ss:Type="String">Catch Measurer</Data></Cell>
       </Row>
-    <% @fishery.approved_surveys.each do |survey| %>
+    <% @fishery.approved_surveys.find_each do |survey| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= survey.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= survey.desa.name %></Data></Cell>
@@ -70,7 +70,7 @@ headers["Content-Disposition"] = "attachment; filename=\"testname\""
         <Cell><Data ss:Type="String">Catch Quantity</Data></Cell>
         <Cell><Data ss:Type="String">Catch Value</Data></Cell>
       </Row>
-    <% @fishery.approved_landings.each do |landing| %>
+    <% @fishery.approved_landings.find_each do |landing| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= landing.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= landing.survey_id %></Data></Cell>
@@ -116,7 +116,7 @@ headers["Content-Disposition"] = "attachment; filename=\"testname\""
         <Cell><Data ss:Type="String">Sampling Factor</Data></Cell>
         <Cell><Data ss:Type="String">Measurement</Data></Cell>
       </Row>
-    <% @fishery.approved_catches.each do |catch| %>
+    <% @fishery.approved_catches.find_each do |catch| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= catch.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing_id %></Data></Cell>
