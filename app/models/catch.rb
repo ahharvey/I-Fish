@@ -20,6 +20,7 @@ class Catch < ActiveRecord::Base
 	belongs_to :fish
 	belongs_to :landing
 	has_one :survey, through: :landing
+	has_one :fishery, through: :survey
 
 	validates :fish_id,
 		presence: true

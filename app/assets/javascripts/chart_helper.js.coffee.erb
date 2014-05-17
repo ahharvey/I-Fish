@@ -109,3 +109,218 @@ $(document).ready ->
         name: "John"
         data: [5, 7, 3]
       ]
+
+
+$(document).ready ->
+  if $("#graph_catch_per_effort_container").length
+    fetchCpue $('#graph_catch_per_effort_container').data('id')
+  if $("#graph_catch_composition").length
+    fetchComposition $('#graph_catch_composition').data('id')
+  if $("#graph_values_container").length
+    fetchValue $('#graph_values_container').data('id')
+  if $("#graph_length_container").length
+    fetchLength $('#graph_length_container').data('id')
+
+jQuery ->
+  $("#cpe_btn_refresh").click ->
+    fetchCpue $('#graph_catch_per_effort_container').data('id')
+
+fetchCpue = (id) ->
+  alert('triggers')
+  alert( "/fisheries/" + id + ".json" )
+  params =
+    method: "catch_per_effort"
+    date_from: $("#cpe_date_from").val()
+    date_to: $("#cpe_date_to").val()
+  $.ajax
+    url: "/fisheries/" + $('#graph_catch_per_effort_container').data('id')
+    type: "GET"
+    async: true
+    data: params
+    dataType: "json"
+    success: (data) ->
+      cpueData data
+
+fetchComposition = (id) ->
+  alert('triggers')
+  alert( "/fisheries/" + id + ".json" )
+  params =
+    method: "catch_composition"
+    date_from: $("#cpe_date_from").val()
+    date_to: $("#cpe_date_to").val()
+  $.ajax
+    url: "/fisheries/" + $('#graph_catch_composition').data('id')
+    type: "GET"
+    async: true
+    data: params
+    dataType: "json"
+    success: (data) ->
+      compositionData data
+
+fetchValue = (id) ->
+  params =
+    method: "value"
+    date_from: $("#cpe_date_from").val()
+    date_to: $("#cpe_date_to").val()
+  $.ajax
+    url: "/fisheries/" + $('#graph_values_container').data('id')
+    type: "GET"
+    async: true
+    data: params
+    dataType: "json"
+    success: (data) ->
+      valueData data
+
+fetchLength = (id) ->
+  params =
+    method: "length_frequency"
+    date_from: $("#cpe_date_from").val()
+    date_to: $("#cpe_date_to").val()
+  $.ajax
+    url: "/fisheries/" + $('#graph_length_container').data('id')
+    type: "GET"
+    async: true
+    data: params
+    dataType: "json"
+    success: (data) ->
+      lengthData data
+
+cpueData = (data) -> 
+  if $("#graph_catch_per_effort_container").length  
+    options = 
+      title:
+        text: "Catch per Unit Effort"
+        x: -20 #center
+      subtitle:
+        text: "average kg per hour"
+        x: -20
+      legend:
+        enabled: false
+      exporting:
+        enabled: false
+      credits:
+        enabled: false
+      xAxis:
+        labels:
+          rotation: -45
+          y: 30
+        categories: data['col_headers']
+      yAxis:
+        title:
+          text: "kg per hour"
+        min: 0
+        plotLines: [
+          value: 0
+          width: 1
+          color: "#808080"
+        ]
+      tooltip:
+        valueSuffix: " kg/hour"
+      series: [{
+        name: 'CPUE',
+        data: data['month_counts']
+      }]
+    $("#graph_catch_per_effort_container").highcharts options
+
+valueData = (data) -> 
+  if $("#graph_values_container").length  
+    options = 
+      title:
+        text: "Catch per Unit Effort"
+        x: -20 #center
+      subtitle:
+        text: "average Rupiah per hour"
+        x: -20
+      legend:
+        enabled: false
+      exporting:
+        enabled: false
+      credits:
+        enabled: false
+      xAxis:
+        labels:
+          rotation: -45
+          y: 30
+        categories: data['col_headers']
+      yAxis:
+        title:
+          text: "IDR per hour"
+        min: 0
+        plotLines: [
+          value: 0
+          width: 1
+          color: "#808080"
+        ]
+      tooltip:
+        valueSuffix: " IDR/hour"
+      series: [{
+        name: 'Data',
+        data: data['month_counts']
+      }]
+    $("#graph_values_container").highcharts options
+
+compositionData = (data) ->
+  if $("#graph_catch_composition").length  
+    $("#graph_catch_composition").highcharts
+      chart:
+        plotBackgroundColor: null
+        plotBorderWidth: null
+        plotShadow: false
+      credits:
+        enabled: false
+      exporting: 
+        enabled: false
+      title:
+        text: "Catch Composition"
+      tooltip:
+        pointFormat: "{series.name}: <b>{point.percentage:.1f}%</b>"
+      plotOptions:
+        pie:
+          allowPointSelect: true
+          cursor: "pointer"
+          dataLabels:
+            enabled: true
+            format: "<b>{point.name}</b>: {point.percentage:.1f} %"
+            style:
+              color: (Highcharts.theme and Highcharts.theme.contrastTextColor) or "black"
+      series: [
+        type: "pie"
+        name: "Proportion of catch"
+        data: data
+      ]
+
+lengthData = (data) ->
+  if $("#graph_length_container").length  
+    $("#graph_length_container").highcharts
+      chart:
+        type: "column"
+      title:
+        text: "Length Frequency"
+      credits:
+        enabled: false
+      exporting:
+        enabled: false
+      xAxis:
+        categories: data['col_headers']
+        title:
+          text: "Size classes"
+      yAxis:
+        min: 0
+        title:
+          text: "Frequency"
+      tooltip:
+        headerFormat: "<span style=\"font-size:10px\">{point.key} mm</span><table>"
+        pointFormat: "<tr><td style=\"color:{series.color};padding:0\">{series.name}: </td>" + "<td style=\"padding:0\"><b>{point.y:.0f}</b></td></tr>"
+        footerFormat: "</table>"
+        shared: true
+        useHTML: true
+      plotOptions:
+        column:
+          pointPadding: 0.2
+          borderWidth: 0
+      series: [{
+        name: "Species"
+        data: data['length_counts']
+      }]
+
+    return

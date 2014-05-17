@@ -18,6 +18,7 @@ class FisheriesController < InheritedResources::Base
         graph_catch_per_effort() if params[:method] == "catch_per_effort"
         graph_length_frequency() if params[:method] == "length_frequency"
         graph_values() if params[:method] == "value"
+        graph_catch_composition() if params[:method] == "catch_composition"
       end
       format.xls
     end
@@ -47,6 +48,18 @@ class FisheriesController < InheritedResources::Base
       end
     end
     render json: {:col_headers => col_headers, :month_counts => month_counts }
+  end
+
+  def graph_catch_composition
+    @fishery = Fishery.find(params[:id])
+    from = DateTime.parse(params[:date_from])
+    to = DateTime.parse(params[:date_to])
+    catches = Catch.
+        joins(:survey, :fishery).
+        where("fisheries.id = ? AND surveys.date_published >= ? AND surveys.date_published <= ?", @fishery.id, from, to)
+    counts = catches.group('catches.fish_id').count
+    formatted = Hash[counts.map { |k, v| [Fish.find(k).scientific_name, v] }]
+    render json: formatted.to_a
   end
 
   def graph_length_frequency
