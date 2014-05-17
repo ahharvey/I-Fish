@@ -105,7 +105,8 @@ class FisheriesController < InheritedResources::Base
         col_headers.push "#{Date::MONTHNAMES[m].slice(0,3)} #{y.to_s.slice(2,2)}"
         landings = Landing.joins(:survey).where('surveys.date_published >= ? AND surveys.date_published <= ? AND surveys.fishery_id = ?', surveys_from, surveys_to, @fishery.id) 
         res = []
-        landings.each do |l| 
+        ls=landings.where('landings.time_out != landings.time_in')
+        ls.each do |l| 
           if l.value.zero?
             value = 0.to_i 
           else 
