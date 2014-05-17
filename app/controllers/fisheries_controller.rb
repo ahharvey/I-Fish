@@ -19,6 +19,7 @@ class FisheriesController < InheritedResources::Base
         graph_length_frequency() if params[:method] == "length_frequency"
         graph_values() if params[:method] == "value"
         graph_catch_composition() if params[:method] == "catch_composition"
+        graph_fishing_activity() if params[:method] == "activity"
       end
       format.xls
     end
@@ -62,6 +63,25 @@ class FisheriesController < InheritedResources::Base
       end
     end
     render json: {:col_headers => col_headers, :month_counts => month_counts }
+  end
+
+  def graph_fishing_activity
+    @fishery = Fishery.find(params[:id])
+    col_headers = []
+    month_counts = []
+    from = DateTime.parse(params[:date_from])
+    to = DateTime.parse(params[:date_to])
+    logged_days = LoggedDay.joins(:logbook).where('logbooks.fishery_id = ? AND logbooks.date >= ? AND logbooks.date <= ?', @fishery.id, from, to )
+    active_days = logged_days.where(:end_time > :start_time)
+    active_counts = active_days.group("DATE_TRUNC('day', start_time)").order("DATE_TRUNC('day', start_time)").count
+    logged_counts = logged_days.group("DATE_TRUNC('day', start_time)").order("DATE_TRUNC('day', start_time)").count
+    active_counts.each do |ac|
+      key = ac[0]
+      value = ac[1]
+      logged_counts[key] = value.to_f / logged_counts[key]
+    end
+    logged_counts = Hash[ logged_counts.map { |k, v| [Time.parse(k.to_s).utc.to_i*1000, v] }].to_a
+    render json: logged_counts
   end
 
   def graph_catch_composition
