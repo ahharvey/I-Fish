@@ -27,7 +27,7 @@ class FisheriesController < InheritedResources::Base
   protected
 
   def graph_catch_per_effort
-    @fisheries = Fishery.find(params[:id])
+    @fishery = Fishery.find(params[:id])
     col_headers = []
     month_counts = []
     from = DateTime.parse(params[:date_from])
@@ -38,11 +38,22 @@ class FisheriesController < InheritedResources::Base
 
       (start_month..end_month).each do |m|
         col_headers.push "#{Date::MONTHNAMES[m].slice(0,3)} #{y.to_s.slice(2,2)}"
-        landings = []
-        surveys = @fisheries.surveys.select{ |s| s.date_published.year == y && s.date_published.month == m}.each do |s|
-          landings.concat(s.landings)
+        surveys_from = Date.new(y,m,15).beginning_of_month
+        surveys_to = Date.new(y,m,15).end_of_month
+        landings = Landing.joins(:survey).where('surveys.date_published >= ? AND surveys.date_published <= ? AND surveys.fishery_id = ?', surveys_from, surveys_to, @fishery.id) 
+
+        res = []
+        landings.each do |l| 
+          if l.weight.zero? && l.quantity.zero?
+            cpue = 0.to_i 
+          elsif !l.weight.zero?
+            cpue = l.weight / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)
+          elsif !l.quantity.zero?
+            cpue = (l.quantity*350) / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)
+          end
+          res.push cpue
         end
-        res = landings.map{ |l| l.weight / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)}.inject(0, :+)
+        res = res.inject(0, :+)
         res = res / landings.count if landings.count > 0
         month_counts.push res
       end
