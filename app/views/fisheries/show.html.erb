@@ -18,48 +18,46 @@
 </div>
 <div class="row">
   <div class="span12">
-    <form class="form-inline" id="graph_options">
+
       <%= text_field_tag "cpe_date_from", @date_from, class: "span2" %>
       <%= text_field_tag "cpe_date_to", @date_to, class: "span2" %>
-      <button class="btn" id="cpe_btn_refresh">Refresh</button>
-    </form>
+      <%= link_to "Refresh", "javascript:void(0)",class: "btn", id: "cpe_btn_refresh" %>
+
   </div>
 </div>
 <div class="row">
-  <div class="span12">
+  <div class="span16">
     Surveys : <%= @fishery.surveys.count %>
   </div>
 </div>
 <br />
 <br />
 <div class="row">
-  <div class="span12">
+  <div class="span6">
     <div id="graph_catch_per_effort_container" data-id= <%= @fishery.id %> ></div>
   </div>
-</div>
-<br />
-<br />
-<div class="row">
-  <div class="span12">
+  <div class="span6">
     <div id="graph_values_container" data-id = <%= @fishery.id %> ></div>
   </div>
 </div>
 <br />
 <br />
 <div class="row">
-  <div class="span12">
+  <div class="span6">
     <div id="graph_activity_container" data-id = <%= @fishery.id %> ></div>
+  </div>
+  <div class="span6">
+    <div id="graph_catch_composition" data-id= <%= @fishery.id %>></div>
   </div>
 </div>
 <br />
 <br />
-<div class="row">
-  <div class="span6">
-    <div id="graph_catch_composition" data-id= <%= @fishery.id %>></div>
-  </div>
-  <div class="span6">
-    <div id="graph_length_container" data-id= <%= @fishery.id %>></div>
-  </div>
+<div class="row" id="graph_length_container" data-id="<%= @fishery.id %>" data-species="<%= raw @fishery.catches.map(&:fish_id).uniq.to_json %>">
+  <% @fishery.catches.map(&:fish_id).uniq.each do |species| %>
+    <div class="span6">
+      <div id="graph_length_container_<%= species %>" data-id="<%= @fishery.id %>" data-name="<%= Fish.find(species).scientific_name %>" ></div>
+    </div>
+  <% end %>
 </div>
 
   <div class="row">

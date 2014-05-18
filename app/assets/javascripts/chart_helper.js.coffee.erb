@@ -119,13 +119,28 @@ $(document).ready ->
   if $("#graph_values_container").length
     fetchValue $('#graph_values_container').data('id')
   if $("#graph_length_container").length
-    fetchLength $('#graph_length_container').data('id')
+    for species in $("#graph_length_container").data('species')
+      fetchLength( species, $('#graph_length_container').data('id') )
   if $("#graph_activity_container").length
     fetchActivity $('#graph_activity_container').data('id')
 
+
 jQuery ->
   $("#cpe_btn_refresh").click ->
-    fetchCpue $('#graph_catch_per_effort_container').data('id')
+    params =
+      method: "value"
+      date_from: $("#cpe_date_from").val()
+      date_to: $("#cpe_date_to").val()
+    $.ajax
+      url: "/fisheries/" + $('#graph_values_container').data('id')
+      type: "GET"
+      async: true
+      data: params
+      dataType: "json"
+      success: (data) ->
+        chart.setData(data)
+
+        
 
 fetchCpue = (id) ->
   params =
@@ -169,19 +184,20 @@ fetchValue = (id) ->
     success: (data) ->
       valueData data
 
-fetchLength = (id) ->
+fetchLength = (species, id) ->
   params =
     method: "length_frequency"
     date_from: $("#cpe_date_from").val()
     date_to: $("#cpe_date_to").val()
+    species: species
   $.ajax
-    url: "/fisheries/" + $('#graph_length_container').data('id')
+    url: "/fisheries/" + id
     type: "GET"
     async: true
     data: params
     dataType: "json"
     success: (data) ->
-      lengthData data
+      lengthData(species, data)
 
 fetchActivity = (id) ->
   params =
@@ -237,6 +253,8 @@ cpueData = (data) ->
 valueData = (data) -> 
   if $("#graph_values_container").length  
     options = 
+      chart:
+        renderTo: "graph_values_container"
       title:
         text: "Catch per Unit Effort"
         x: -20 #center
@@ -266,10 +284,10 @@ valueData = (data) ->
       tooltip:
         valueSuffix: " IDR/hour"
       series: [{
-        name: 'Data',
+        name: 'Value',
         data: data['month_counts']
       }]
-    $("#graph_values_container").highcharts options
+    window.chart = new Highcharts.Chart( options )
 
 compositionData = (data) ->
   if $("#graph_catch_composition").length  
@@ -301,9 +319,9 @@ compositionData = (data) ->
         data: data
       ]
 
-lengthData = (data) ->
-  if $("#graph_length_container").length  
-    $("#graph_length_container").highcharts
+lengthData = (species, data) ->
+  if $("#graph_length_container_"+species).length  
+    $("#graph_length_container_"+species).highcharts
       chart:
         type: "column"
       title:
@@ -331,7 +349,7 @@ lengthData = (data) ->
           pointPadding: 0.2
           borderWidth: 0
       series: [{
-        name: "Species"
+        name: $("#graph_length_container_"+species).data('name')
         data: data['length_counts']
       }]
 
@@ -341,11 +359,23 @@ activityData = (data) ->
   if $("#graph_activity_container").length  
     # Create the chart
     $("#graph_activity_container").highcharts "StockChart",
-      rangeSelector:
-        selected: 1
-        inputEnabled: $("#graph_activity_container").width() > 480
       title:
-        text: "AAPL Stock Price"
+        text: "Fishing Activity"
+      exporting:
+        enabled: false
+      navigator:
+        enabled: false
+      rangeSelector:
+        enabled: false
+      scrollbar:
+        enabled: false
+      credits: 
+        enabled: false
+      yAxis:
+        min: 0
+        opposite: false
+        title:
+          text: "Vessels operational (%)"
       series: [
         name: "AAPL"
         data: data

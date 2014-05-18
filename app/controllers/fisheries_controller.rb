@@ -80,7 +80,7 @@ class FisheriesController < InheritedResources::Base
       value = ac[1]
       logged_counts[key] = value.to_f / logged_counts[key]
     end
-    logged_counts = Hash[ logged_counts.map { |k, v| [Time.parse(k.to_s).utc.to_i*1000, v] }].to_a
+    logged_counts = Hash[ logged_counts.map { |k, v| [Time.parse(k.to_s).utc.to_i*1000, v*100] }].to_a
     render json: logged_counts
   end
 
@@ -98,13 +98,13 @@ class FisheriesController < InheritedResources::Base
 
   def graph_length_frequency
     catches = []
+    fishery = Fishery.find(params[:id])
+    species = Fish.find(params[:species])
     from = DateTime.parse(params[:date_from])
     to = DateTime.parse(params[:date_to])
-    @fisheries = Fishery.find(params[:id]).surveys.where(:date_published => from..to ).each do |s|
-      s.landings.each do |l|
-        catches.concat l.catches
-      end
-    end
+    catches = Catch.
+      joins(:landing, :survey, :fishery).
+      where('fisheries.id = ? AND catches.fish_id = ? AND surveys.date_published >= ? AND surveys.date_published <= ?', fishery.id, species, from, to)
     step = 50
     catches = catches.sort_by &:length
     lengths = catches.map{ |c| c.length - (c.length % step) }.uniq
