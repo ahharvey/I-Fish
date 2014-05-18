@@ -326,10 +326,14 @@ lengthData = (species, data) ->
       chart:
         type: "column"
       title:
+        text: $("#graph_length_container_"+species).data('name')
+      subtitle:
         text: "Length Frequency"
       credits:
         enabled: false
       exporting:
+        enabled: false
+      legend: 
         enabled: false
       xAxis:
         categories: data['col_headers']
@@ -350,7 +354,7 @@ lengthData = (species, data) ->
           pointPadding: 0.2
           borderWidth: 0
       series: [{
-        name: $("#graph_length_container_"+species).data('name')
+        name: "Frequency"
         data: data['length_counts']
       }]
 
