@@ -55,7 +55,7 @@
 <div class="row" id="graph_length_container" data-id="<%= @fishery.id %>" data-species="<%= raw @fishery.catches.map(&:fish_id).uniq.to_json %>">
   <% @fishery.catches.map(&:fish_id).uniq.each do |species| %>
     <% unless species == 0 %>
-      <div class="span6">
+      <div class="span4">
         <div id="graph_length_container_<%= species %>" data-id="<%= @fishery.id %>" data-name="<%= Fish.find(species).scientific_name %>" ></div>
       </div>
     <% end %>
