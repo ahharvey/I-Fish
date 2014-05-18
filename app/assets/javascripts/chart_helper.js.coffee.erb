@@ -120,7 +120,8 @@ $(document).ready ->
     fetchValue $('#graph_values_container').data('id')
   if $("#graph_length_container").length
     for species in $("#graph_length_container").data('species')
-      fetchLength( species, $('#graph_length_container').data('id') )
+      if species > 0 
+        fetchLength( species, $('#graph_length_container').data('id') )
   if $("#graph_activity_container").length
     fetchActivity $('#graph_activity_container').data('id')
 
