@@ -105,7 +105,7 @@ class FisheriesController < InheritedResources::Base
     catches = Catch.
       joins(:landing, :survey, :fishery).
       where('fisheries.id = ? AND catches.fish_id = ? AND surveys.date_published >= ? AND surveys.date_published <= ?', fishery.id, species, from, to)
-    step = 50
+    step = 5
     catches = catches.sort_by &:length
     lengths = catches.map{ |c| c.length - (c.length % step) }.uniq
     length_counts = lengths.map{ |l| catches.select{ |c| c.length - (c.length % step) == l }.count}
