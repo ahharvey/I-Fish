@@ -21,7 +21,7 @@ class Ability
   end
 
   def abilities_for_all # Abilities for guests and all users
-    can :read, [Fishery, Fish, Gear, Desa, District, Province, Engine] # Guests can read public models, including viewing reports
+    can :read, [Fishery, Fish, Gear, Desa, District, Province, Engine, Logbook] # Guests can read public models, including viewing reports
     can :index, :home # home page
     can :reports, :home # report select page
     #can :multipart_import, :home # email import route
