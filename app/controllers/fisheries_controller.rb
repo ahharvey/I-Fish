@@ -20,6 +20,8 @@ class FisheriesController < InheritedResources::Base
         graph_values() if params[:method] == "value"
         graph_catch_composition() if params[:method] == "catch_composition"
         graph_fishing_activity() if params[:method] == "activity"
+        render :json=>@fishery.to_json(include: { :surveys => {include: { :landings => { include: :catches }}}} ) unless params.has_key?(:method)
+        
       end
       format.xls
     end
