@@ -6,7 +6,7 @@
   xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
   xmlns:html="http://www.w3.org/TR/REC-html40">
   
-  <Worksheet ss:Name="Sampled Catch">
+  <Worksheet ss:Name="Catch">
     <Table>
       <Row>
         <Cell><Data ss:Type="String">Fishery:</Data></Cell>
@@ -18,15 +18,50 @@
       </Row>
       <Row>
         <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Desa</Data></Cell>
+        <Cell><Data ss:Type="String">Survey Start</Data></Cell>
+        <Cell><Data ss:Type="String">Survey End</Data></Cell>
+        <Cell><Data ss:Type="String">Fleet Observer</Data></Cell>
+        <Cell><Data ss:Type="String">Catch Scribe</Data></Cell>
+        <Cell><Data ss:Type="String">Catch Measurer</Data></Cell>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">Landing ID</Data></Cell>
         <Cell><Data ss:Type="String">Survey ID</Data></Cell>
         <Cell><Data ss:Type="String">Species</Data></Cell>
         <Cell><Data ss:Type="String">Length</Data></Cell>
         <Cell><Data ss:Type="String">Sampling Factor</Data></Cell>
         <Cell><Data ss:Type="String">Measurement</Data></Cell>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Survey ID</Data></Cell>
+        <Cell><Data ss:Type="String">Vessel No.</Data></Cell>
+        <Cell><Data ss:Type="String">Vessel Name</Data></Cell>
+        <Cell><Data ss:Type="String">Type</Data></Cell>
+        <Cell><Data ss:Type="String">Power</Data></Cell>
+        <Cell><Data ss:Type="String">Length</Data></Cell>
+        <Cell><Data ss:Type="String">Fishing Grounds</Data></Cell>
+        <Cell><Data ss:Type="String">Trip Start</Data></Cell>
+        <Cell><Data ss:Type="String">Trip End</Data></Cell>
+        <Cell><Data ss:Type="String">Aborted</Data></Cell>
+        <Cell><Data ss:Type="String">Sail</Data></Cell>
+        <Cell><Data ss:Type="String">Fuel</Data></Cell>
+        <Cell><Data ss:Type="String">Crew</Data></Cell>
+        <Cell><Data ss:Type="String">Gear</Data></Cell>
+        <Cell><Data ss:Type="String">Ice</Data></Cell>
+        <Cell><Data ss:Type="String">Conditions</Data></Cell>
+        <Cell><Data ss:Type="String">Main Species</Data></Cell>
+        <Cell><Data ss:Type="String">Catch Weight</Data></Cell>
+        <Cell><Data ss:Type="String">Catch Quantity</Data></Cell>
+        <Cell><Data ss:Type="String">Catch Value</Data></Cell>
       </Row>
     <% @fishery.approved_catches.find_each do |catch| %>
       <Row>
+        <Cell><Data ss:Type="Number"><%= catch.survey.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.desa.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.start_time %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.end_time %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.landing_enumerator.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.catch_scribe.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.catch_measurer.name %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing_id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing.try(:survey_id) %></Data></Cell>
@@ -34,6 +69,27 @@
         <Cell><Data ss:Type="String"><%= catch.length %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.sfactor.upcase %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.measurement.upcase %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= catch.landing.id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= catch.landing.survey_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.vessel_ref %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.vessel_name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.type %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.power %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.boat_size %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.graticule.try(:code) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.time_out %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.time_in %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.aborted? ? 'Yes' : '' %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.sail? ? 'Yes' : 'No' %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.fuel %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.crew %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.gear.try(:alpha_code) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.ice %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.condition_as_text %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.fish.try(:scientific_name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.weight %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.quantity %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.landing.value %></Data></Cell>
       </Row>
     <% end %>
     </Table>
