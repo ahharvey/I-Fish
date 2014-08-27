@@ -116,7 +116,7 @@
         <Cell><Data ss:Type="String">Sampling Factor</Data></Cell>
         <Cell><Data ss:Type="String">Measurement</Data></Cell>
       </Row>
-    <% @fishery.approved_catches.find_each do |catch| %>
+    <% @fishery.approved_catches.first(5).find_each do |catch| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= catch.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing_id %></Data></Cell>
