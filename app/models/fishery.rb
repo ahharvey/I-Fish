@@ -54,6 +54,6 @@ class Fishery < ActiveRecord::Base
   end
 
   def approved_catches
-    Catch.where(landing_id: self.approved_landing_ids ) 
+    Catch.includes(:landing, :survey).where(landing_id: self.approved_landing_ids ) 
   end
 end
