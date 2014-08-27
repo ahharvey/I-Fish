@@ -69,27 +69,7 @@
         <Cell><Data ss:Type="String"><%= catch.length %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.sfactor.upcase %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.measurement.upcase %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= catch.landing.id %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= catch.landing.survey_id %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.vessel_ref %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.vessel_name %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.type %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.power %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.boat_size %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.graticule.try(:code) %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.time_out %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.time_in %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.aborted? ? 'Yes' : '' %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.sail? ? 'Yes' : 'No' %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.fuel %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.crew %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.gear.try(:alpha_code) %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.ice %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.condition_as_text %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.fish.try(:scientific_name) %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.weight %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.quantity %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.landing.value %></Data></Cell>
+        
       </Row>
     <% end %>
     </Table>
