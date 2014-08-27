@@ -23,7 +23,9 @@ class FisheriesController < InheritedResources::Base
         render :json=>@fishery.to_json(include: { :surveys => {include: { :landings => { include: :catches }}}} ) unless params.has_key?(:method)
         
       end
-      format.xls
+      format.xls {
+        headers["Content-Disposition"] = "attachment; filename=\"#{@fishery.name}_#{Date.today}\"" 
+      }
     end
   end
 
