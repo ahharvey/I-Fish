@@ -32,7 +32,7 @@ gem 'paper_trail', '~> 2.7.1'
 
 gem 'wicked_pdf', '~> 0.9.4'
 gem 'wkhtmltopdf-heroku', '~> 1.0.0'
-gem 'axlsx_rails', '~> 0.2.0'
+# gem 'axlsx_rails', '~> 0.2.0'
 
 gem 'gmaps4rails', '~> 1.5.6'                 ##********major update available
 gem 'jquery-datatables-rails', '~> 1.12.1'
