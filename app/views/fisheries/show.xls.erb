@@ -97,5 +97,36 @@
     <% end %>
     </Table>
   </Worksheet>
-  
+  <Worksheet ss:Name="Sampled Catch">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="String">Fishery:</Data></Cell>
+        <Cell><Data ss:Type="String"><%= @fishery.name %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">Exported:</Data></Cell>
+        <Cell><Data ss:Type="String"><%= Date.today %></Data></Cell>
+      </Row>
+      <Row>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
+        <Cell><Data ss:Type="String">Landing ID</Data></Cell>
+        <Cell><Data ss:Type="String">Survey ID</Data></Cell>
+        <Cell><Data ss:Type="String">Species</Data></Cell>
+        <Cell><Data ss:Type="String">Length</Data></Cell>
+        <Cell><Data ss:Type="String">Sampling Factor</Data></Cell>
+        <Cell><Data ss:Type="String">Measurement</Data></Cell>
+      </Row>
+    <% @fishery.approved_catches.find_each do |catch| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= catch.id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= catch.landing_id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= catch.landing.survey_id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.fish.try(:scientific_name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.length %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.sfactor %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.measurement %></Data></Cell>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
 </Workbook>
