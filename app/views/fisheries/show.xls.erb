@@ -56,12 +56,12 @@
     <% @fishery.approved_catches.find_each do |catch| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= catch.survey.id %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.survey.desa.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.desa.try(:name) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.survey.start_time %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.survey.end_time %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.survey.landing_enumerator.name %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.survey.catch_scribe.name %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.survey.catch_measurer.name %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.landing_enumerator.try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.catch_scribe.try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.survey.catch_measurer.try(:name) %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing_id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing.try(:survey_id) %></Data></Cell>
