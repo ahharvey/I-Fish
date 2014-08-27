@@ -1,0 +1,33 @@
+wb = xlsx_package.workbook
+
+wb.add_worksheet(name: "Surveys") do |sheet|
+  sheet.add_row ["Fishery:", @fishery.name]
+  sheet.add_row ["Exported:", Date.today ]
+  sheet.add_row ["ID", "Desa", "Survey Start", "Survey End", "Fleet Observer", "Catch Scribe", "Catch Measurer"]
+  @fishery.approved_surveys.find_each do |survey|
+    sheet.add_row [survey.id, survey.desa.name, survey.start_time, survey.end_time, survey.landing_enumerator.name, survey.catch_scribe.name, survey.catch_measurer.name]
+  end
+end
+
+wb.add_worksheet(name: "Landings") do |sheet|
+  sheet.add_row ["Fishery:", @fishery.name]
+  sheet.add_row ["Exported:", Date.today ]
+  sheet.add_row ["ID","Survey ID","Vessel No.","Vessel Name","Type","Power","Length","Fishing Grounds","Trip Start","Trip End","Aborted","Sail","Fuel","Crew","Gear","Ice","Conditions","Main Species","Catch Weight","Catch Quantity","Catch Value"]
+  @fishery.approved_landings.find_each do |landing|
+    sheet.add_row [landing.id, landing.survey_id, landing.vessel_ref, landing.vessel_name, landing.type, landing.power, landing.boat_size, landing.graticule.try(:code), landing.time_out, landing.time_in, landing.aborted? ? 'Yes' : '', landing.sail? ? 'Yes' : 'No', landing.fuel, landing.crew, landing.gear.try(:alpha_code), landing.ice, landing.condition_as_text, landing.fish.try(:scientific_name), landing.weight, landing.quantity, landing.value] 
+  end
+end
+
+wb.add_worksheet(name: "Sampled Catch") do |sheet|
+  sheet.add_row ["Fishery:", @fishery.name]
+  sheet.add_row ["Exported:", Date.today ]
+  sheet.add_row ["ID", "Landing ID", "Survey ID", "Species", "Length", "Sampling Factor", "Measurement"]
+  @fishery.approved_catches.find_each do |catch|
+    sheet.add_row [catch.id, catch.landing_id, catch.landing.try(:survey_id), catch.fish.try(:scientific_name), catch.length, catch.sfactor.upcase, catch.measurement.upcase] 
+  end
+end
+
+
+
+
+

@@ -37,10 +37,23 @@ class Fishery < ActiveRecord::Base
     self.surveys.where( review_state: 'approved' )
   end
 
-  def approved_landings
-    Landing.where(survey_id: self.approved_surveys.map(&:id) )
+  def approved_survey_ids
+    Rails.cache.fetch(["approved_survey_ids", self], expires_in: 5.minutes) do
+      self.surveys.where( review_state: 'approved' ).map(&:id)
+    end
   end
+
+  def approved_landings
+    Landing.where(survey_id: self.approved_survey_ids )
+  end
+
+  def approved_landing_ids
+    Rails.cache.fetch(["approved_landing_ids", self], expires_in: 5.minutes) do
+      Landing.where(survey_id: self.approved_survey_ids ).map(&:id) 
+    end
+  end
+
   def approved_catches
-    Catch.where(landing_id: self.approved_landings.map(&:id) ) 
+    Catch.where(landing_id: self.approved_landing_ids ) 
   end
 end
