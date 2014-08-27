@@ -120,7 +120,7 @@
       <Row>
         <Cell><Data ss:Type="Number"><%= catch.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing_id %></Data></Cell>
-        <Cell><Data ss:Type="Number"><%= catch.landing.survey_id %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= catch.landing.try(:survey_id) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.fish.try(:scientific_name) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.length %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.sfactor %></Data></Cell>
