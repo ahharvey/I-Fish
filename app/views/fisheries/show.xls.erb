@@ -116,15 +116,15 @@
         <Cell><Data ss:Type="String">Sampling Factor</Data></Cell>
         <Cell><Data ss:Type="String">Measurement</Data></Cell>
       </Row>
-    <% @fishery.approved_catches.first(5).each do |catch| %>
+    <% @fishery.approved_catches.find_each do |catch| %>
       <Row>
         <Cell><Data ss:Type="Number"><%= catch.id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing_id %></Data></Cell>
         <Cell><Data ss:Type="Number"><%= catch.landing.try(:survey_id) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.fish.try(:scientific_name) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= catch.length %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.sfactor %></Data></Cell>
-        <Cell><Data ss:Type="String"><%= catch.measurement %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.sfactor.upcase %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= catch.measurement.upcase %></Data></Cell>
       </Row>
     <% end %>
     </Table>
