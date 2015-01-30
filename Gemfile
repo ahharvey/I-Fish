@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-ruby '2.0.0'
+ruby "2.1.5"
 gem 'rails', '~> 3.2.11'
 gem 'inherited_resources', '~> 1.4.1'
 gem 'pg', '~> 0.17.0'
