@@ -12,14 +12,14 @@ IFish::Application.configure do
 
   # Disable Rails's static asset server (Apache or nginx will already do this)
   # config.serve_static_assets = false
-  config.serve_static_files = false
+  config.serve_static_files = true
 
   # Compress JavaScripts and CSS
   #config.assets.compress = true
   config.assets.js_compressor = :uglifier
 
   # Don't fallback to assets pipeline if a precompiled asset is missed
-  config.assets.compile = false
+  config.assets.compile = true
   config.action_mailer.default_url_options = { :host => 'fishstat-staging.herokuapp.com', :locale => I18n.locale }
 
   # Generate digests for assets URLs
