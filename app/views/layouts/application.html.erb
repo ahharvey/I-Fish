@@ -33,7 +33,10 @@
         )
       %>
       <%= render partial: "layouts/ganalytics" %> 
-      <%= render partial: "layouts/tour" %> 
+
+      <% if admin_signed_in? %>
+        <%= render partial: "layouts/tour" %> 
+      <% end %>
       
     </footer>
   </body>
