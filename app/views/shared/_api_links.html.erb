@@ -1,18 +1,18 @@
 <div class="btn-group pull-right">
   <% if defined?(pdf) && pdf == true %>
-    <%= link_to pdf_image, current_url(format: :pdf), class: "btn btn-mini", title: "Export to PDF" %>
+    <%= link_to pdf_image, current_url(format: :pdf), class: "btn btn-xs btn-default", title: "Export to PDF" %>
   <% end %>
   <% if defined?(xls) && xls == true %>
-    <%= link_to excel_image, current_url(format: :xls), class: "btn btn-mini", title: "Export to Excel" %>
+    <%= link_to excel_image, current_url(format: :xls), class: "btn btn-xs btn-default", title: "Export to Excel" %>
   <% end %>
   <% if defined?(csv) && csv == true %>
-    <%= link_to "CSV", current_url(format: :csv), class: "btn btn-mini", title: "Export to CSV" %>
+    <%= link_to "CSV", current_url(format: :csv), class: "btn btn-xs btn-default", title: "Export to CSV" %>
   <% end %>
   <% if defined?(json) && json == true %>
-    <%= link_to "JSON", current_url(:format=>:json), class:"btn btn-mini", title: "Export to JSON" %>
+    <%= link_to "JSON", current_url(:format=>:json), class: "btn btn-xs  btn-default", title: "Export to JSON" %>
   <% end %>
   <% if defined?(xml) && xml == true %>
-    <%= link_to "XML", current_url(:format=>:xml), class:"btn btn-mini", title: "Export to XML" %>
+    <%= link_to "XML", current_url(:format=>:xml), class: "btn btn-xs  btn-default", title: "Export to XML" %>
   <% end %>
 </div>
 <br />

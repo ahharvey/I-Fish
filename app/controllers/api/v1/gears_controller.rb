@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with Gear.create(params[:gear])
+        respond_with Gear.create(gear_params)
       end
       
       def update
@@ -21,6 +21,12 @@ module Api
       
       def destroy
         respond_with Gear.destroy(params[:id])
+      end
+
+      private
+  
+      def gear_params
+        params.require(:gear).permit( :alpha_code, :cat_eng, :cat_ind, :fao_code, :name, :num_code, :sub_cat_eng, :sub_cat_ind, :type_eng, :type_ind )
       end
     end
   end

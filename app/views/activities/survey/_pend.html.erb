@@ -1,6 +1,10 @@
 <% if survey %>
   marked a survey as pending : <%= link_to "#{survey.desa.name} - #{survey.formatted_date}", survey %>
-  <p><span class="label label-warning"><i class='icon-warning-sign icon-2x'></i></span></p>
+  <br />
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-square fa-stack-2x text-warning"></i>
+    <i class="fa fa-warning fa-stack-1x fa-inverse"></i>
+  </span>
 <% else %>
   marked as pending a survey that has since been deleted
 <% end %>

@@ -1,0 +1,17 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Operations</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:captain) %></dt>
+      <dd><%= @vessel.gear.try(:captain) %></dd>
+      <dt><%= Vessel.human_attribute_name(:gear) %></dt>
+      <dd><%= @vessel.gear.try(:name) %></dd>
+      <dt><%= Vessel.human_attribute_name(:hooks) %></dt>
+      <dd><%= @vessel.gear.try(:hooks) %></dd>
+      <dt><%= Vessel.human_attribute_name(:crew) %></dt>
+      <dd><%= @vessel.gear.try(:crew) %></dd>
+    </dl>
+  </div>
+</div>

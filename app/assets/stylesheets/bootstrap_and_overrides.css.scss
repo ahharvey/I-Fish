@@ -10,6 +10,12 @@ $fontAwesomeTtfPath: image-path('fontawesome-webfont.ttf');
 $fontAwesomeSvgzPath: image-path('fontawesome-webfont.svgz');
 $fontAwesomeSvgPath: image-path('fontawesome-webfont.svg');
 
+$black: #000;
+$red: #9d261d;
+$orange: #f0ad4e;
+$green: #3a883a;
+$white: #fff;
+
 $USAIDblue: #002A6C;
 $USAIDred: #C2113A;
 $USAIDblack: #000;
@@ -18,20 +24,40 @@ $USAIDlgrey: #DDDDDD;
 $USAIDlblue: #A5BAE0;
 
 $navbarBackground: $USAIDblue;
+$navbar-default-bg: $USAIDblue;
 $navbarBackgroundHighlight: lighten($USAIDblue, 20%);
-
-$navbarLinkColor: $USAIDlgrey;
-$navbarLinkColorHover: $USAIDlgrey;
 
 $dropdownLinkBackgroundHover: $USAIDlblue;
 $dropdownLinkBackgroundActive: $USAIDlblue;
 
+$navbar-default-link-color: $USAIDlgrey;
+$navbar-default-link-hover-color: $USAIDlgrey; 
+$navbar-default-link-active-bg: $USAIDlblue;
+$navbar-default-link-active-color:$USAIDblue;
+
+$navbarLinkColorHover: $USAIDlblue;
+$navbarLinkColorActive: $USAIDblue;
+
+$linkColorActive: $USAIDblue;
+$navbarLinkBackgroundActive: $USAIDblue;
+$linkColor: $USAIDlblue;
+
+
+
+@mixin border-radius($radius) {
+  -webkit-border-radius: $radius;
+     -moz-border-radius: $radius;
+      -ms-border-radius: $radius;
+          border-radius: $radius;
+}
+
+@import "bootstrap-sprockets";
 @import "bootstrap";
 
-@import "bootstrap-responsive";
-
+@import "font-awesome-sprockets";
 @import "font-awesome";
 
+.navbar-brand { padding: 20px 15px;}
 #map img { 
   max-width: none;
 }
@@ -65,7 +91,7 @@ $dropdownLinkBackgroundActive: $USAIDlblue;
 .flag.flag-gb {background-position: -16px 0}
 .flag.flag-id {background-position: 0 -11px}
 
-.panel {border: 1px #ccc solid; padding:10px; @include border-radius(5px);}
+.panel-xx {border: 1px #ccc solid; padding:10px; @include border-radius(5px);}
 .new {background-color: $USAIDred; transition: background-color 1s linear; }
 
 .typeahead .active > a, .typeahead .active > a:hover { background-color: $USAIDred; }
@@ -156,9 +182,9 @@ label.boolean.optional.control-label.toggle-label {
   padding-left: 0;
 }
 
-.navbar-green { @include gradientBar($green, darken($green,20%) );}
-.navbar-yellow { @include gradientBar($orange,darken($orange,20%));}
-.navbar-red { @include gradientBar($red, darken($red,20%));}
+.navbar-green { background: $green;}
+.navbar-yellow { background: $orange; }
+.navbar-red { background: $red; }
 
 .box {
   margin-top: 20px;
@@ -184,3 +210,58 @@ label.boolean.optional.control-label.toggle-label {
 
 .danger {color:#9d261d;}
 .success {color:#46a546;}
+
+
+
+
+.ui-autocomplete {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  float: left;
+  display: none;
+  min-width: 160px;
+  _width: 160px;
+  padding: 4px 0;
+  margin: 2px 0 0 0;
+  list-style: none;
+  background-color: #ffffff;
+  border-color: #ccc;
+  border-color: rgba(0, 0, 0, 0.2);
+  border-style: solid;
+  border-width: 1px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  *border-right-width: 2px;
+  *border-bottom-width: 2px;
+ 
+  .ui-menu-item > a.ui-corner-all {
+    display: block;
+    padding: 3px 15px;
+    clear: both;
+    font-weight: normal;
+    line-height: 18px;
+    color: #555555;
+    white-space: nowrap;
+ 
+    &.ui-state-hover, &.ui-state-active {
+      color: #ffffff;
+      text-decoration: none;
+      background-color: #0088cc;
+      border-radius: 0px;
+      -webkit-border-radius: 0px;
+      -moz-border-radius: 0px;
+      background-image: none;
+    }
+  }
+}
+
+

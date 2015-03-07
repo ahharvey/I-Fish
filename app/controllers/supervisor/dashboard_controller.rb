@@ -3,21 +3,21 @@ class Supervisor::DashboardController < ApplicationController
   def index
     authorize! :index, 'supervisor/dashboard'
 		
-    @surveys = Survey.scoped
+    @surveys = Survey.where(fishery_id: current_admin.member_fisheries.map(&:id) )
     @unapproved_surveys = @surveys.where( review_state: 'pending' )
     @historical_surveys = @surveys.
       where( review_state: 'approved' ).
       where('date_published > ?', Date.today.beginning_of_month-1.year).
       group_by { |t| t.date_published.beginning_of_month }
 		
-    @logbooks = Logbook.scoped
+    @logbooks = Logbook.where(fishery_id: current_admin.member_fisheries.map(&:id) )
     @unapproved_logbooks = @logbooks.where( review_state: 'pending' )
     @historical_logbooks = @logbooks.
       where( review_state: 'approved').
       where('date > ?', Date.today.beginning_of_month-1.year).
       group_by { |t| t.date.beginning_of_month }
 
-		@admins = Admin.where(approved: false)
+		@admins = Admin.where(approved: false, office_id: current_admin.office_id)
 
     @historical_records = []
 

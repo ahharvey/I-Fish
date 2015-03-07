@@ -1,0 +1,48 @@
+<% title t ".title" %>
+
+<div class="alert alert-info" role="alert">
+  <p>We've sent you an email!</p>
+  <p>Please check your inbox and confirm your account within 7 days to continue using I-Fish.</p>
+</div>
+
+<br />
+<br />
+
+<p><b>Let's get started!</b></p>
+<p>Please enter your name and add a profile picture.</p>
+
+<br />
+
+
+<%= simple_form_for @user, 
+  html: {
+    multipart: true, 
+    class: 'form form-horizontal'
+    }, 
+  wrapper: :horizontal_form, 
+  wrapper_mappings: {
+  check_boxes: :horizontal_radio_and_checkboxes,
+    radio_buttons: :horizontal_radio_and_checkboxes,
+    file: :horizontal_file_input,
+    boolean: :horizontal_boolean
+  } do |f| %>
+
+
+    
+  <%= f.input :name, input_html: {class: 'input-lg'} %>
+  <%= f.input :avatar, 
+    as: :file, 
+    input_html: { 
+      class: 'input-lg', 
+      onchange: "validateFiles(this);", 
+      data: { 
+        max_file_size: 1.megabytes 
+      } 
+    }  %>
+
+    <div class="form-actions">
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+        Next
+     	<% end %>
+    </div>
+<% end %>

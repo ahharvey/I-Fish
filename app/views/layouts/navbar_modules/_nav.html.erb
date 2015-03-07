@@ -1,44 +1,51 @@
-<ul class="nav">
-  <li><%= link_to home_icon, root_path, title: t("navbar.home")  %></li>
+<ul class="nav navbar-nav">
+  <li>
+    <%= link_to root_path, title: t("navbar.home") do %>
+      <%= icon fa_home, "", class: 'fa-2x' %>
+    <% end %>
+  </li>
   <li class="divider-vertical"></li>
   <% if admin_signed_in? %>
-    <li class="navbar-red">
+    <li id="nav_upload" class="navbar-red">
       <%= link_to home_upload_data_path, class: "", title: t("navbar.upload") do %>
-        <%= upload_icon_nav %>
+        <%= icon fa_submit, "", class: 'fa-2x' %>
       <% end %>
     </li>
     <% if can? :view, 'supervisor/dashboard' %>
-      <li class="navbar-yellow">
+      <li id="nav_review" class="navbar-yellow">
         <%= link_to supervisor_dashboard_index_path, class: "", title: t("navbar.data") do %>
-          <%= approve_icon %>
+          <%= icon fa_approve, '', class: 'fa-2x' %>
         <% end %>
       </li>
     <% end %>
   <% end %>   
-  <li class="navbar-green">
+  <li id="nav_reports" class="navbar-green">
     <%= link_to reports_path, class: "", title: t("navbar.reports") do %>
-      <%= report_icon %>
+      <%= icon fa_reports, '', class: 'fa-2x' %>
     <% end %>
   </li>
   <li class="divider-vertical"></li>
-  <li>
-    <%= link_to "#", class: "", title: t("navbar.download"), data: { toggle: "modal", target: "#templates_modal" } do %>
-      <%= download_icon_nav %>    
+  <li id="nav_protocols">
+    <%= link_to protocols_path, class: "", title: t("navbar.download") do %>
+      <%= icon fa_protocols, '', class: 'fa-2x' %>    
     <% end %>
   </li>
 
-  
   <li class="divider-vertical"></li>
+
   <% if admin_signed_in? || user_signed_in? %>
     <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown" title=<%= t("navbar.settings") %> ><%= settings_icon %><b class="caret"></b></a>
-      <ul class="dropdown-menu pull-right">
+      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title=<%= t("navbar.settings") %> ><%= icon fa_settings, "", class: 'fa-2x' %><b class="caret"></b></a>
+      <ul class="dropdown-menu">
         <li><%= link_to t("fishes.title"), fishes_path %></li>
         <li><%= link_to t("gears.title"), gears_path %></li>
+        <li><%= link_to t("companies.title"), companies_path %></li>
+        <li><%= link_to t("vessels.title"), vessels_path %></li>
         <% if admin_signed_in? %>
           <li><%= link_to "Admins", panel_admins_path %></li>
           <li><%= link_to "Users", panel_users_path %></li>
           <li><%= link_to "Roles", panel_roles_path %></li>
+          <li><%= link_to "Offices", offices_path %></li>
          <% end %>
       </ul>
     </li>

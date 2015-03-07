@@ -22,25 +22,6 @@ class Survey < ActiveRecord::Base
 	
 	has_paper_trail
 
-	attr_accessible :desa_id, 
-									:end_time, 
-									:fishery_id, 
-									:start_time, 
-									:admin_id, 
-									:user_id, 
-									:date_published, 
-									:observer, 
-									:approved,
-									:catch_measurer_id,
-									:catch_scribe_id,
-									:landing_enumerator_id,
-									:vessel_count,
-									:review_state,
-									:reviewed_at,
-									:reviewer,
-                  :start_time_input,
-                  :end_time_input
-
 	belongs_to :admin
 	belongs_to :reviewer, class_name: 'Admin'
 	belongs_to :landing_enumerator, class_name: 'Admin'

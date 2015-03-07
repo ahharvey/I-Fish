@@ -1,0 +1,74 @@
+<script> 
+  var tour;
+
+  tour = new Tour({
+    name: '20150215',
+    steps: [
+      {
+        orphan: true,
+        title: 'Welcome to I-Fish',
+        content: 'We\'re always making things better! Click next for a quick tour of the latest features.'
+      }, {
+        element: '#recent_activity',
+        placement: 'top',
+        title: 'Recent Activity',
+        content: 'See who is taking action within I-Fish fisheries.'
+      }, {
+        element: '#quick_links',
+        placement: 'left',
+        title: 'Quick Links',
+        content: 'Easy navigation to the pages you use most often. Click here to go straight to the fisheries your organization is active within...'
+      }, {
+        orphan: true,
+        title: 'Fishery',
+        content: '...and view all the details about the fishery in one easy location.',
+        path: '/fisheries/1'
+      }, {
+        element: '#documents',
+        placement: 'right',
+        title: 'Upload Files',
+        content: 'Add important documents about this fishery, including relevant maps, agreements and regulations.'
+      }, {
+        element: '#member_panel',
+        placement: 'left',
+        title: 'About the Fishery',
+        content: 'View characteristics of the fishery, including target species, gears and member companies. To add a new target species, gear or member company, simply type in the relevant box.'
+      }, {
+        element: '#audit_table',
+        placement: 'top',
+        title: 'Change log',
+        content: 'See what changes have been made, and by whom. I-Fish keeps a record of all changes.'
+      }, {
+        element: '#nav_protocols',
+        placement: 'bottom',
+        title: 'Protocols',
+        content: 'Click to view and download protocols, templates and forms.'
+      }, {
+        element: '#nav_upload',
+        placement: 'bottom',
+        title: 'Add data',
+        content: 'Click here to upload new data to I-Fish.'
+      }, {
+        element: '#nav_review',
+        placement: 'bottom',
+        title: 'Review data',
+        content: 'Click here to review and approve data uploaded by enumerators.'
+      }, {
+        element: '#nav_reports',
+        placement: 'bottom',
+        title: 'Reports',
+        content: 'Click here to view data reports.'
+      }
+    ],
+    container: 'body',
+    keyboard: true,
+    storage: window.localStorage,
+    debug: false,
+    backdrop: true,
+    autoscroll: true
+  });
+
+  tour.init();
+
+  tour.start();
+</script>

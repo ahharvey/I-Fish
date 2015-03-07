@@ -24,10 +24,12 @@ class Fish < ActiveRecord::Base
   
   has_paper_trail
 
-  default_scope order('fishes.order ASC, family ASC, scientific_name ASC')
+  # default_scope order('fishes.order ASC, family ASC, scientific_name ASC')
+  default_scope -> { order('fishes.order ASC, family ASC, scientific_name ASC') }
+  
   self.table_name = "fishes"
 
-  attr_accessible :code, :english_name, :family, :fishbase_name, :indonesia_name, :order, :scientific_name, :a, :b, :max, :mat, :opt, :threatened
+  attr_accessor :fishery_id
 
   has_many :catches, dependent: :destroy
   has_many :logged_days
@@ -35,6 +37,9 @@ class Fish < ActiveRecord::Base
   has_many :provinces, through: :landings
   has_many :districts, through: :landings
   has_many :fisheries, through: :landings
+
+  has_and_belongs_to_many :target_fisheries, class_name: "Fishery"
+
 
   validates :code,
   	presence: true

@@ -1,0 +1,5 @@
+<script>
+  <% if flash[:ganalytics] %>
+    pageTracker._trackPageview("<%= flash[:ganalytics] %>");
+  <% end %>
+</script>

@@ -1,0 +1,100 @@
+<%= simple_form_for @vessel, html: {class: 'form form-horizontal'} do |f| %>
+  <%= f.input :return_to, as: :hidden %>
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+  
+    <%= f.input :ap2hi_ref %>
+
+    <%= f.input :issf_ref %>
+
+    <%= f.input :imo_number %>
+
+    <%= f.input :sipi_number %>
+
+    <%= f.input :sipi_expiry %>
+
+    <%= f.input :siup_number %>
+
+    <%= f.input :name %>
+
+    <%= f.association :company %>
+
+    <%= f.input :owner %>
+
+    <%= f.association :vessel_type %>
+
+    <%= f.input :length %>
+
+    <%= f.input :tonnage %>
+
+    <%= f.input :flag_state %>
+    
+    <%= f.input :year_built %>
+
+    <%= f.input :captain %>
+    
+    <%= f.association :gear %>
+
+    <%= f.input :hooks %>
+
+    <%= f.input :crew %>
+
+    <%= f.input :shark_policy, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+
+    <%= f.input :iuu_list, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+    
+    <%= f.input :code_of_conduct, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+    
+  
+    </div>
+
+  </div>
+    
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+        Save
+      <% end %>
+
+
+      <% if !f.object.new_record? %>
+        <%= link_to "Cancel", @vessel, :class=>"btn pull-right" %>
+
+      <% else %>
+        <%= link_to "Cancel", vessels_path, :class=>"btn pull-right" %>
+      <% end %> 
+    </div>
+  </div>
+<% end %>
+
+<br />

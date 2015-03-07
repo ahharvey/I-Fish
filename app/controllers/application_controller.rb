@@ -1,4 +1,10 @@
+require "application_responder"
+
 class ApplicationController < ActionController::Base
+  before_action :configure_permitted_parameters, if: :devise_controller?
+  self.responder = ApplicationResponder
+  respond_to :html
+
   protect_from_forgery
   before_filter :set_locale
   #before_filter :authenticate!
@@ -35,7 +41,7 @@ class ApplicationController < ActionController::Base
   end
 
   def user_for_paper_trail
-    admin_signed_in? ? current_admin : 'Guest'  # or whatever
+    admin_signed_in? ? current_admin.id : 'Guest'  # or whatever
   end
 
   rescue_from CanCan::AccessDenied do |exception|
@@ -45,9 +51,21 @@ class ApplicationController < ActionController::Base
   def track_activity(trackable, action = params[:action])
     @currently_signed_in.activities.create! action: action, trackable: trackable 
   end
-  
+
+
+  protected
+
+  def configure_permitted_parameters
+    if resource_class == Admin
+      devise_parameter_sanitizer.for(:sign_up) << [:name, :office_id]
+      devise_parameter_sanitizer.for(:invite) << [:office_id, :approved]
+      devise_parameter_sanitizer.for(:accept_invitation) << [:name]
+    end
+
+  end
 
   private
+
   def set_locale
     I18n.locale = params[:locale] if params[:locale].present?
   end

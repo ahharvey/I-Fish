@@ -12,19 +12,19 @@
 
 //= require jquery
 //= require jquery_ujs
-//= require jquery.ui.all
-//= require jquery.ui.datepicker
+//= require jquery-ui
+//= require select2-ng/select2.js
+//= require bootstrap-tour/build/js/bootstrap-tour
 //= require best_in_place
-//= require bootstrap
+//= require bootstrap-sprockets
 //= require bootstrap-switch
 //= require jquery.Jcrop
-//= require gmaps4rails/gmaps4rails.base
-//= require gmaps4rails/gmaps4rails.googlemaps
-//= require dataTables/jquery.dataTables
-//= require dataTables/jquery.dataTables.bootstrap
+//= require underscore
+//= require gmaps/google
+//= require dataTables
+//= require datatables-bootstrap3
+//= require autocomplete-rails
+//= require local_time
 //= require_tree .
-// NOTICE!! DO NOT USE ANY OF THIS JAVASCRIPT
-// IT'S ALL JUST JUNK FOR OUR DOCS!
-// ++++++++++++++++++++++++++++++++++++++++++
 
 

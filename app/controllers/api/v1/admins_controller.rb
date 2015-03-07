@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with Admin.create(params[:admin])
+        respond_with Admin.create(admin_params)
       end
       
       def update
@@ -22,6 +22,13 @@ module Api
       def destroy
         respond_with Admin.destroy(params[:id])
       end
+
+      private
+  
+        def admin_params
+          params.require(:admin).permit( :email, :password, :password_confirmation, :remember_me, :name, :approved, :office_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
+      )
+        end
     end
   end
 end

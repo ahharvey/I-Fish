@@ -15,7 +15,7 @@ class Catch < ActiveRecord::Base
 	
 	has_paper_trail
 	
-	attr_accessible :fish_id, :length, :weight, :landing_id, :sfactor, :row, :measurement
+	
 
 	belongs_to :fish
 	belongs_to :landing

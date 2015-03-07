@@ -1,25 +1,11 @@
-<%= gmaps(	map_options: { 	
-				id: defined?(id) ? id : "map",
-				container_class: "map_container_wide",
-				class: "gmaps4rails_map_wide",
-				type: "TERRAIN", 
-				center_latitude: defined?(latitude) ? latitude : 0 ,
-				center_longitude: defined?(longitude) ? longitude : 0 ,
-				auto_adjust: defined?(auto_adjust) ? auto_adjust : true, 
-				auto_zoom: defined?(auto_zoom) ? auto_zoom : true, 
-				zoom: 10,
-				minZoom: 1,
-				mapTypeControl: defined?(controls) ? controls : true
-			},
-      markers: { 
-				data: @placemarks,
-				options: {
-					do_clustering: true,
-					clusterer_gridSize: 50,
-					clusterer_maxZoom: 10,
-					clusterer_minZoom: false
-				}
-			},
-			last_map: defined?(last_map) ? last_map : true
-			) 
-%>
+
+
+<% content_for :scripts do %>
+  <%= javascript_include_tag "//maps.google.com/maps/api/js?v=3.13&amp;sensor=false&amp;libraries=geometry".html_safe, "//google-maps-utility-library-v3.googlecode.com/svn/tags/markerclustererplus/2.0.14/src/markerclusterer_packed.js".html_safe, "//google-maps-utility-library-v3.googlecode.com/svn/tags/infobox/1.1.9/src/infobox_packed.js".html_safe %>
+<% end %>
+
+<div class="map_wide_container">
+  <div class="map_wide_inner">
+    <div id="map" style="width:100%;height:100%;" data-data='<%=raw @hash.to_json %>'></div>
+  </div>
+</div>

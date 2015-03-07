@@ -33,31 +33,6 @@ class Landing < ActiveRecord::Base
 	
 	has_paper_trail
 
-	attr_accessible :boat_size, 
-									:crew, 
-									:fuel, 
-									:gear_id, 
-									:quantity, 
-									:sail, 
-									:time_in, 
-									:time_out, 
-									:value, 
-									:vessel_name, 
-									:vessel_ref, 
-									:weight, 
-									:vessel_type_id,
-									:power, 
-									:graticule_id, 
-									:engine_id, 
-									:survey_id, 
-									:fish_id, 
-									:importing?, 
-									:cpue, 
-									:row,
-									:ice,
-									:conditions,
-									:aborted
-
 	self.inheritance_column = nil
 
 	belongs_to :gear
@@ -115,7 +90,7 @@ class Landing < ActiveRecord::Base
 			only_integer: true
 		},
 		inclusion: {
-			in: 0..999999999
+			in: 0..1000000000
 		}
 #	validates :boat_size,
 #		presence: true,

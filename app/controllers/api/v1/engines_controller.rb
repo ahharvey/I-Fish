@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with Engine.create(params[:engine])
+        respond_with Engine.create(engine_params)
       end
       
       def update
@@ -21,6 +21,12 @@ module Api
       
       def destroy
         respond_with Engine.destroy(params[:id])
+      end
+
+      private
+
+      def engine_params
+        params.require(:engine).permit( :name, :code )
       end
     end
   end

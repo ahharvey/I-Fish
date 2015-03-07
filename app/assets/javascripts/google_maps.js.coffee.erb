@@ -1,0 +1,26 @@
+jQuery -> #infinite scroll
+  if $('#map').length
+    
+    handler = Gmaps.build('Google')
+    
+    handler.buildMap
+      internal: 
+        id: 'map'
+      provider: 
+        mapTypeId: google.maps.MapTypeId.TERRAIN
+        mapTypeControl: true
+        scrollwheel: false
+        panControl: false
+        zoomControl: true
+        zoomControlOptions:
+          style: google.maps.ZoomControlStyle.LARGE,
+          position: google.maps.ControlPosition.RIGHT_CENTER
+        scaleControl: true
+        scaleControlOptions:
+          position: google.maps.ControlPosition.BOTTOM_RIGHT
+        streetViewControl: false
+        styles: mapStyle
+      , ->
+        markers = handler.addMarkers( $('#map').data('data') )
+        handler.bounds.extendWith(markers)
+        handler.fitMapToBounds()

@@ -1,0 +1,12 @@
+<div id="OfficeList">
+  <ul class="list-unstyled">
+    <% @fishery.member_offices.each do |office| %>
+      <li>
+        <%= link_to office.name, office %>
+        <% if can? :update, @fishery %>
+          <%= link_to remove_icon, delete_member_office_fishery_path(@fishery, member_office: office.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

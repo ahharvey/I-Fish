@@ -13,13 +13,11 @@ class UserMailer < ActionMailer::Base
     mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
   end
 
-  def new_admin_waiting_for_approval(new_admin, supervisors)
-    if supervisors.length > 0
-      @admin = new_admin
-      @supervisors = supervisors
-      @url  = new_admin_session_url
-      mail(:to => @supervisors.all.map(&:email), :subject => "APPROVAL REQUEST :: New Team Member")
-    end
+  def new_admin_waiting_for_approval(new_admin_id, supervisor_id)
+    @admin      = Admin.find(new_admin_id)
+    @supervisor = Admin.find(supervisor_id)
+    @url        = new_admin_session_url
+    mail( to: @supervisor.email, subject: "APPROVAL REQUEST :: New Team Member")
   end
 
   def new_data_waiting_for_approval(survey_id)
@@ -45,6 +43,16 @@ class UserMailer < ActionMailer::Base
     @admin = Admin.find(admin_id)
     @url = new_admin_session_url
     mail(:to => @admin.email, :subject => "I-Fish Registration Approved")
+  end
+
+  def new_pvr_application(vessel_id, admin_id)
+    @vessel = Vessel.find(vessel_id)
+    @admin = Admin.find(admin_id)
+    @url = vessel_url(@vessel)
+    mail(
+      to: @admin.email,
+      subject: "AP2HI request for UVI"
+      )
   end
   
 end

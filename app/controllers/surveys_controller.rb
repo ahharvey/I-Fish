@@ -1,27 +1,39 @@
-class SurveysController < InheritedResources::Base
+class SurveysController < ApplicationController
   load_and_authorize_resource
 
-  respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
+  before_action :set_survey, only: [:show, :edit, :update, :destroy]
+  respond_to :html
+  respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
 
   def index
+    @surveys = Survey.all
+    respond_with(@surveys)
   end
-  
+
+  def show
+    respond_with(@survey)
+  end
+
+  def new
+    @survey = Survey.new
+    respond_with(@survey)
+  end
+
+  def edit
+  end
+
   def create
-    @survey = Survey.new(params[:survey])
+    @survey = Survey.new(survey_params)
     @survey.admin_id = @currently_signed_in.id
-    if @survey.save 
-      track_activity @survey
-      redirect_to @survey
-    else
-      render :new
-    end
+    track_activity @survey if @survey.save
+    respond_with @survey, location: -> { after_save_path_for(@survey) }
   end
 
   def update
-    @survey = Survey.find params[:id]
-
+    @survey.update(survey_params)
+    # respond_with @survey, location: -> { after_save_path_for(@survey) }
     respond_to do |format|
-      if @survey.update_attributes(params[:survey])
+      if @survey.update_attributes(survey_params)
         flash[:success] = "Survey updated successfully!"
         format.html { redirect_to(@survey, :notice => 'Survey was successfully updated.') }
         format.json { respond_with_bip(@survey) }
@@ -31,6 +43,11 @@ class SurveysController < InheritedResources::Base
         format.json { respond_with_bip(@survey) }
       end
     end
+  end
+
+  def destroy
+    @survey.destroy
+    respond_with(@survey)
   end
 
   def approve
@@ -73,6 +90,37 @@ class SurveysController < InheritedResources::Base
   end
 
   private
+  
+  def set_survey
+    @survey = Survey.find(params[:id])
+  end
+
+  def survey_params
+    params.require(:survey).permit(
+      :desa_id, 
+      :end_time, 
+      :fishery_id, 
+      :start_time, 
+      :admin_id, 
+      :user_id, 
+      :date_published, 
+      :observer, 
+      :approved,
+      :catch_measurer_id,
+      :catch_scribe_id,
+      :landing_enumerator_id,
+      :vessel_count,
+      :review_state,
+      :reviewed_at,
+      :reviewer,
+      :start_time_input,
+      :end_time_input
+      )
+  end
+
+  def after_save_path_for(resource)
+    survey_path(resource)
+  end
 
   def refresh_supervisor_controls( survey )
     respond_to do |format|
@@ -93,3 +141,5 @@ class SurveysController < InheritedResources::Base
   end
 
 end
+
+

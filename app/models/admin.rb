@@ -30,14 +30,14 @@ class Admin < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable, :rememberable
+  devise :invitable, :database_authenticatable, :registerable, :rememberable
 
   # Setup accessible (or protected) attributes for your model
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :approved, :office_id, :avatar, :crop_x, :crop_y, :crop_w, :crop_h
-
-
+  
   validates :name, presence: true
+  validates :office, presence: true
+  validates :email, presence: true, uniqueness: true
   validate :avatar_size
 
   has_and_belongs_to_many :roles, :before_add => :validates_role
@@ -55,7 +55,7 @@ class Admin < ActiveRecord::Base
 
 
   after_create :set_default_role
-  after_create :send_approval_mail
+  after_create :send_approval_mail, unless: :created_by_invitation?
 
   # sets default role to public
   def set_default_role
@@ -65,7 +65,9 @@ class Admin < ActiveRecord::Base
 
   # sends approval email to Supervisor
   def send_approval_mail
-    UserMailer.new_admin_waiting_for_approval(self, self.supervisors).deliver
+    for supervisor in self.office_supervisors
+      UserMailer.new_admin_waiting_for_approval(self.id, supervisor.id).deliver_later
+    end
   end
 
   # Ability Methods
@@ -151,12 +153,30 @@ class Admin < ActiveRecord::Base
     Admin.where( office_id: self.office_id )
   end
 
-  def supervisors
-    Admin.joins(:roles).where(roles: {name: ["supervisor", "leader", "administrator"]}).where(office_id: self.office_id)
+  def office_supervisors
+    office.supervisors
+  end
+
+  def member_fisheries
+    office.member_fisheries
   end
 
   def supervised_surveys
     Survey.where( admin_id: self.team_members.each{|t| t.id } )
+  end
+
+  def self.pvr_managers
+    Rails.cache.fetch([self, "pvr_managers"], expires_in: 5.minutes) do
+      Admin.joins(:roles).where(roles: {name: ["pvr_coordinator"]})
+    end
+  end
+
+  def created_by_invitation?
+    invitation_created_at? && encrypted_password.blank? 
+  end
+
+  def pending_invitation?
+    invitation_created_at? && invitation_accepted_at.blank?
   end
 
   private
@@ -164,5 +184,7 @@ class Admin < ActiveRecord::Base
   def avatar_size
     errors[:avatar] << "should be less than 1MB" if avatar.size > 1.megabytes
   end
+
+  
 
 end

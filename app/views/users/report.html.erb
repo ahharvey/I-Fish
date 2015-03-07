@@ -1,0 +1,68 @@
+<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+
+<p>
+  <b>Name:</b>
+  <%= @user.name %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%= @user.email %>
+</p>
+
+<div id="graph_options">
+  <select id="month_from">
+    <% @month_names.each_with_index do |v,i| %>
+      <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
+    <% end %>
+  </select>
+  <select id="year_from">
+    <% (2010..2013).each do |y| %>
+      <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
+    <% end %>
+  </select>
+  <select id="month_to">
+    <% @month_names.each_with_index do |v,i| %>
+      <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
+    <% end %>
+  </select>
+  <select id="year_to">
+    <% (2010..2013).each do |y| %>
+      <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
+      <% end %>
+  </select>
+  <button class="btn" id="btn_refresh">Refresh</button>
+</div>
+
+<div id="container"></div>
+
+<script type="text/javascript">
+	function update_chart(){
+		console.log("Updating chart");
+		params = {
+			month_from: $('#month_from').val(),
+			year_from: $('#year_from').val(),
+			month_to: $('#month_to').val(),
+			year_to: $('#year_to').val(),
+		}
+
+		$.get("/users/<%= @user.id %>", params, function(data, textStatus, jqXHR){
+			console.log(data);
+			render_chart('container', 'Survey Reports', 'No. of Survey', '', 'line', data.col_headers, data.month_counts);
+		}, "json");
+	};
+
+	$(function () {
+		// Event handlers
+		$('#btn_refresh').click(function(){
+			update_chart();
+		});
+
+		// Load chart with default values
+		update_chart();
+	});
+</script>
+
+<%= render partial: 'shared/audit_table', locals: { parent: @user } %>
+
+<%= link_to 'Back', users_path %>

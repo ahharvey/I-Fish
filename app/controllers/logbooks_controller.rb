@@ -1,14 +1,40 @@
-class LogbooksController < InheritedResources::Base
+class LogbooksController < ApplicationController
   load_and_authorize_resource
+
   skip_before_filter :authenticate!
 
-  respond_to :html, :xml, :json, :except => [ :edit, :new, :update, :create ]
+  before_action :set_logbook, only: [:show, :edit, :update, :destroy]
+  respond_to :html
+  respond_to :xml, :json, :except => [ :edit, :new, :update, :create ]
+
+  def index
+    @logbooks = Logbook.all
+    respond_with(@logbooks)
+  end
+
+  def show
+    respond_with(@logbook)
+  end
+
+  def new
+    @logbook = Logbook.new
+    respond_with(@logbook)
+  end
+
+  def edit
+  end
+
+  def create
+    @logbook = Logbook.new(logbook_params)
+    @logbook.save
+    respond_with @logbook, location: -> { after_save_path_for(@logbook) }
+  end
 
   def update
-    @logbook = Logbook.find params[:id]
-
+    @logbook.update(logbook_params)
+    # respond_with @logbook, location: -> { after_save_path_for(@logbook) }
     respond_to do |format|
-      if @logbook.update_attributes(params[:logbook])
+      if @logbook.update_attributes(logbook_params)
         flash[:success] = "Logbook updated successfully!"
         format.html { redirect_to(@logbook, :notice => 'Logbook was successfully updated.') }
         format.json { respond_with_bip(@logbook) }
@@ -20,6 +46,11 @@ class LogbooksController < InheritedResources::Base
     end
   end
 
+  def destroy
+    @logbook.destroy
+    respond_with(@logbook)
+  end
+
   def approve
     @logbook = Logbook.find params[:id]
     #@logbook.update_column :approved, params[:approved]
@@ -28,7 +59,6 @@ class LogbooksController < InheritedResources::Base
       track_activity @logbook
       @logbook.update_column :reviewer_id, current_admin.id
       flash[:success] = review_success_msg("approved")
-      
     else
       flash[:error] = review_error_msg
     end
@@ -43,7 +73,6 @@ class LogbooksController < InheritedResources::Base
       track_activity @logbook
       @logbook.update_column :reviewer_id, current_admin.id
       flash[:success] = review_success_msg("rejected")
-      
     else
       flash[:error] = review_error_msg
     end
@@ -58,7 +87,6 @@ class LogbooksController < InheritedResources::Base
       track_activity @logbook
       @logbook.update_column :reviewer_id, current_admin.id
       flash[:success] = review_success_msg("pending")
-      
     else
       flash[:error] = review_error_msg
     end
@@ -71,6 +99,26 @@ class LogbooksController < InheritedResources::Base
   end
 
   private
+  
+  def set_logbook
+    @logbook = Logbook.find(params[:id])
+  end
+
+  def logbook_params
+    params.require(:vessel).permit(
+      :date, 
+      :user_id, 
+      :admin_id, 
+      :fishery_id, 
+      :review_state, 
+      :reviewed_at, 
+      :reviewer_id
+      )
+  end
+
+  def after_save_path_for(resource)
+    logbook_path(resource)
+  end
 
   def refresh_supervisor_controls( logbook )
     respond_to do |format|
@@ -89,4 +137,7 @@ class LogbooksController < InheritedResources::Base
   def review_error_msg
     "We encountered an error reviewing this logbook. Please try again."
   end
+
 end
+
+

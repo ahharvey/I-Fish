@@ -1,9 +1,20 @@
-class ProvincesController < InheritedResources::Base
+
+
+
+class ProvincesController < ApplicationController
   load_and_authorize_resource
 
-  respond_to :html, :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
+  before_action :set_province, only: [:show, :edit, :update, :destroy]
+  respond_to :html
+  respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
+
+  def index
+    @provinces = Province.all
+    respond_with(@provinces)
+  end
 
   def show
+    # respond_with(@province)
     @province = Province.includes(:surveys, :gears, :fishes, :districts, :fisheries, :landings => [ :catches ] ).find(params[:id])
     @districts = @province.districts.uniq
     @fisheries = @province.fisheries.uniq
@@ -77,8 +88,51 @@ class ProvincesController < InheritedResources::Base
           :right => '[page] of [toPage]' 
         }
       }
-
     end
   end
+
+  def new
+    @province = Province.new
+    respond_with(@province)
+  end
+
+  def edit
+  end
+
+  def create
+    @province = Province.new(province_params)
+    @province.save
+    respond_with @province, location: -> { after_save_path_for(@province) }
+  end
+
+  def update
+    @province.update(province_params)
+    respond_with @province, location: -> { after_save_path_for(@province) }
+  end
+
+  def destroy
+    @province.destroy
+    respond_with(@province)
+  end
+
+  private
   
+  def set_province
+    @province = Province.find(params[:id])
+  end
+
+  def vessel_params
+    params.require(:vessel).permit(
+      :name, 
+      :code, 
+      :year
+      )
+  end
+
+  def after_save_path_for(resource)
+    province_path(resource)
+  end
+
 end
+
+

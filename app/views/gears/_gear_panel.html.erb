@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Details</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+
+      <dt><%= Gear.human_attribute_name(:cat_ind) %></dt>
+      <dd><%= @gear.cat_ind %> <small><%= @gear.cat_eng %></small></dd>
+
+      <dt><%= Gear.human_attribute_name(:sub_cat_ind) %></dt>
+      <dd><%= @gear.sub_cat_ind %> <small><%= @gear.sub_cat_eng %></small></dd>
+
+      <dt><%= Gear.human_attribute_name(:type_ind) %></dt>
+      <dd><%= @gear.type_ind %> <small><%= @gear.type_eng %></small></dd>
+
+      <dt><%= Gear.human_attribute_name(:name) %></dt>
+      <dd><%= @gear.name %></dd>
+
+      <dt><%= Gear.human_attribute_name(:alpha_code) %></dt>
+      <dd><%= @gear.alpha_code %></dd>
+
+      <dt><%= Gear.human_attribute_name(:num_code) %></dt>
+      <dd><%= @gear.num_code %></dd>
+
+      <dt><%= Gear.human_attribute_name(:fao_code) %></dt>
+      <dd><%= @gear.fao_code %></dd>
+
+    </dl>
+  </div>
+</div>

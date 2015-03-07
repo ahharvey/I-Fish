@@ -13,8 +13,6 @@ class Engine < ActiveRecord::Base
   
   has_paper_trail
 
-  attr_accessible :name, :code
-
   has_many :landings
   has_many :districts, through: :landings
 

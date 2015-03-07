@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with User.create(params[:user])
+        respond_with User.create(user_params)
       end
       
       def update
@@ -21,6 +21,12 @@ module Api
       
       def destroy
         respond_with User.destroy(params[:id])
+      end
+
+      private
+
+      def user_params
+        params.require(:user).permit( :email, :password, :password_confirmation, :remember_me, :name, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :notes, :vessel_type_id, :length, :engine_id, :power, :desa_id, :confirmed_at)
       end
     end
   end

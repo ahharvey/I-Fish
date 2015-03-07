@@ -1,0 +1,47 @@
+<% title t ".title" %>
+
+<%= link_to new_company_path, class: "btn btn-mini btn-default", title: "Create new company", alt: "New company" do %>
+  <%= add_icon %>
+  NEW
+<% end %>
+
+<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+
+
+<table  class="table table-striped table-condensed datatable">
+  <thead>
+    <tr>
+      <th></th>
+      <th></th>
+      <th><%= Company.human_attribute_name(:name) %></th>
+      <th><%= Company.human_attribute_name(:shark_policy) %></th>
+      <th><%= Company.human_attribute_name(:iuu_list) %></th>
+      <th><%= Company.human_attribute_name(:code_of_conduct) %></th>
+      <th><%= Company.human_attribute_name(:member) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @companies.each do |company| %>
+      <tr>
+        <td><%= link_to show_icon, company %> </td>
+        <td><%= image_tag company.avatar_url(:thumb), title: company.name, width: "30px", height: "30px" if company.avatar? %></td>
+        <td><%= company.name %></td>
+        <td><%= company.shark_policy %></td>
+        <td><%= company.iuu_list %></td>
+        <td><%= company.code_of_conduct %></td>
+        <td><%= company.member %></td>
+        <td>
+          <% if can? :update, company %>
+            <%= link_to edit_icon, edit_company_path(company) %> 
+          <% end %>
+          <% if can? :destroy, company %>
+            <%= link_to destroy_icon, company, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />

@@ -1,0 +1,9 @@
+<p><%= t("devise.mailer.invitation_instructions.hello", email: @resource.email) %></p>
+
+<p><%= t("devise.mailer.invitation_instructions.someone_invited_you", invited_by: Admin.find( @resource.invited_by_id ).name.titlecase, office_name: Office.find( @resource.office_id ).name ) %></p>
+
+<p><%= t("devise.mailer.invitation_instructions.instructions") %></p>
+
+<p><%= link_to t("devise.mailer.invitation_instructions.accept"), accept_invitation_url(@resource, :invitation_token => @token) %></p>
+
+<p><%= t("devise.mailer.invitation_instructions.ignore").html_safe %></p>

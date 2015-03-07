@@ -3,75 +3,37 @@
 <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
 
 <div class="row">
-
-  <% if @fish.threatened == true %>
-    <div class="alert alert-error">
-      <strong>Threatened Species</strong>
+  <div class="col-xs-12 col-md-8">
+    <div class="row">
+      <% if @fish.threatened? %>
+        <div class="col-xs-12">
+          <ul class="list-group">
+            <li class="list-group-item list-group-item-danger">
+              <strong>
+                <%= icon fa_warning, 'Endangered, Threatened, or Protected Species', class: 'fa-2x' %>
+              </strong>
+            </li>
+          </ul>
+        </div>
+      <% end %>
+      <div class="col-xs-12 col-md-6">
+        <%= render partial: "fish_panel" %>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <%= render partial: "biology_panel" %>
+      </div>
     </div>
-  <% end %>
-  
-
-  <div class="span6">
-
-    Name:
-
-    <dl class="dl-horizontal">
-      
-      <dt><%= Fish.human_attribute_name(:code) %></dt>
-      <dd><%= @fish.code %></dd>
-      
-      <dt><%= Fish.human_attribute_name(:order) %></dt>
-      <dd><%= @fish.order %></dd>
-
-      <dt><%= Fish.human_attribute_name(:family) %></dt>
-      <dd><%= @fish.family %></dd>
-
-      <dt><%= Fish.human_attribute_name(:scientific_name) %></dt>
-      <dd><%= @fish.scientific_name %></dd>
-
-      <dt><%= Fish.human_attribute_name(:fishbase_name) %></dt>
-      <dd><%= @fish.fishbase_name %></dd>
-
-      <dt><%= Fish.human_attribute_name(:english_name) %></dt>
-      <dd><%= @fish.english_name %></dd>
-
-      <dt><%= Fish.human_attribute_name(:indonesia_name) %></dt>
-      <dd><%= @fish.indonesia_name %></dd>
-
-    </dl>
-
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'shared/audit_table', locals: { parent: @fish } %>
+      </div>
+    </div>
   </div>
-
-  <div class="span6">
-
-    Biology:
-
-    <dl class="dl-horizontal">
-
-      <dt><%= Fish.human_attribute_name(:a) %></dt>
-      <dd><%= @fish.a? ? @fish.a : "-" %></dd>
-
-      <dt><%= Fish.human_attribute_name(:b) %></dt>
-      <dd><%= @fish.b? ? @fish.b : "-" %></dd>
-
-      <dt><%= Fish.human_attribute_name(:max) %></dt>
-      <dd><%= @fish.max? ? "#{@fish.max} mm" : "-" %></dd>
-
-      <dt><%= Fish.human_attribute_name(:mat) %></dt>
-      <dd><%= @fish.mat? ? "#{@fish.mat} mm" : "-" %></dd>
-
-      <dt><%= Fish.human_attribute_name(:opt) %></dt>
-      <dd><%= @fish.opt? ? "#{@fish.opt} mm" : "-" %></dd>
-
-    </dl>
-
+  <div class="col-xs-12 col-md-4">
   </div>
-
 </div>
 
-<%= render partial: 'shared/audit_table', locals: { parent: @fish } %>
-
-
+  
 
 <%= link_to 'Edit', edit_fish_path(@fish) %> |
 <%= link_to 'Back', fishes_path %>

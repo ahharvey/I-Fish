@@ -22,7 +22,6 @@ class Logbook < ActiveRecord::Base
   belongs_to :reviewer, :class_name => 'Admin'
   belongs_to :fishery
   has_many :logged_days
-  attr_accessible :date, :user_id, :admin_id, :fishery_id, :review_state, :reviewed_at, :reviewer_id
 
   validates :date, 
     presence: {

@@ -6,12 +6,16 @@ class AvatarUploader < CarrierWave::Uploader::Base
   include CarrierWave::RMagick
 
   # Include the Sprockets helpers for Rails 3.1+ asset pipeline compatibility:
-  include Sprockets::Helpers::RailsHelper
-  include Sprockets::Helpers::IsolatedHelper
+  # include Sprockets::Rails::Helper
+  #include Sprockets::Helpers::IsolatedHelper
 
   # Choose what kind of storage to use for this uploader:
   #storage :file
-  storage :fog
+  if Rails.env.development? || Rails.env.test?
+    storage = :file
+  else
+    storage = :fog
+  end
 
   # Override the directory where uploaded files will be stored.
   # This is a sensible default for uploaders that are meant to be mounted:
@@ -20,8 +24,11 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def default_url
-    "/assets/fallback/" + [version_name, "default_avatar.png"].compact.join('_')
+#    "/assets/fallback/" + [version_name, "default_avatar.png"].compact.join('_')
+    #ActionController::Base.helpers.asset_path("fallback/" + [version_name, "large_default_avatar.png"].compact.join('_'))
+    ActionController::Base.helpers.asset_path("fallback/" + [version_name, "default_avatar.png"].compact.join('_'))
   end
+
 
   version :large do
     resize_to_limit(600, 600)
@@ -46,7 +53,7 @@ class AvatarUploader < CarrierWave::Uploader::Base
   end
 
   def extension_white_list
-    %w(jpg jpeg gif png)
+    %w(jpg jpeg gif png JPG JPEG PNG GIF)
   end
 
 end

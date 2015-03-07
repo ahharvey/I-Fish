@@ -1,0 +1,49 @@
+<% title t ".title" %>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <div class="row">
+      <div class="col-xs-6">
+        <%= render partial: "issf_uvi_request" %>
+      </div>
+      <div class="col-xs-6">
+      </div>
+    </div>
+    <br />
+    <div class="row">
+      <div class="col-xs-12 col-md-6">
+        <%= render partial: "registration_panel" %>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <%= render partial: "vessel_panel" %>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <%= render partial: "operation_panel" %>
+      </div>
+      <div class="col-xs-12 col-md-6">
+        <%= render partial: "policy_panel" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'shared/file_upload', locals: { resource: @vessel } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'shared/audit_table', locals: { parent: @vessel } %>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-4">
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_vessel_path(@vessel) %> |
+<%= link_to 'Back', vessels_path %>
+
+
+
+
+
+

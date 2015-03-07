@@ -1,0 +1,31 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Taxonomy</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+
+      <dt><%= Fish.human_attribute_name(:code) %></dt>
+      <dd><%= @fish.code %></dd>
+      
+      <dt><%= Fish.human_attribute_name(:order) %></dt>
+      <dd><%= @fish.order %></dd>
+
+      <dt><%= Fish.human_attribute_name(:family) %></dt>
+      <dd><%= @fish.family %></dd>
+
+      <dt><%= Fish.human_attribute_name(:scientific_name) %></dt>
+      <dd><%= @fish.scientific_name %></dd>
+
+      <dt><%= Fish.human_attribute_name(:fishbase_name) %></dt>
+      <dd><%= @fish.fishbase_name %></dd>
+
+      <dt><%= Fish.human_attribute_name(:english_name) %></dt>
+      <dd><%= @fish.english_name %></dd>
+
+      <dt><%= Fish.human_attribute_name(:indonesia_name) %></dt>
+      <dd><%= @fish.indonesia_name %></dd>
+
+    </dl>
+  </div>
+</div>

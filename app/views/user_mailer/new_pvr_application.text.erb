@@ -1,0 +1,87 @@
+=====================
+UVI REQUEST
+=====================
+
+AP2HI have submitted a new UVI application.
+
+<%= vessel_path(@vessel) %>
+
+
+
+## Registration:
+#####################
+
+<%= Vessel.human_attribute_name(:ap2hi_ref) %>
+<%= @vessel.ap2hi_ref %>
+
+<%= Vessel.human_attribute_name(:issf_ref) %>
+<%= @vessel.issf_ref %>
+
+<%= Vessel.human_attribute_name(:imo_number) %>
+<%= @vessel.imo_number %>
+
+<%= Vessel.human_attribute_name(:sipi_number) %>
+<%= @vessel.sipi_number %>
+
+<%= Vessel.human_attribute_name(:sipi_expiry) %>
+<%= @vessel.sipi_expiry %>
+
+<%= Vessel.human_attribute_name(:siup_number) %>
+<%= @vessel.siup_number %>
+
+
+## Vessel:
+#####################
+
+<%= Vessel.human_attribute_name(:name) %>
+<%= @vessel.name %>
+
+<%= Vessel.human_attribute_name(:company) %>
+<%= link_to @vessel.company.try(:name), @vessel.company %>
+
+<%= Vessel.human_attribute_name(:owner) %>
+<%= @vessel.owner %>
+
+<%= Vessel.human_attribute_name(:vessel_type) %>
+<%= @vessel.vessel_type.try(:name) %>
+
+<%= Vessel.human_attribute_name(:length) %>
+<%= @vessel.length %>
+
+<%= Vessel.human_attribute_name(:tonnage) %>
+<%= @vessel.tonnage %>
+
+<%= Vessel.human_attribute_name(:flag_state) %>
+<%= @vessel.flag_state %>
+
+<%= Vessel.human_attribute_name(:year_built) %>
+<%= @vessel.year_built %>
+
+
+## Operations:
+#####################
+
+<%= Vessel.human_attribute_name(:captain) %>
+<%= @vessel.gear.try(:captain) %>
+
+<%= Vessel.human_attribute_name(:gear) %>
+<%= @vessel.gear.try(:name) %>
+
+<%= Vessel.human_attribute_name(:hooks) %>
+<%= @vessel.gear.try(:hooks) %>
+
+<%= Vessel.human_attribute_name(:crew) %>
+<%= @vessel.gear.try(:crew) %>
+
+
+## Policies:
+#####################
+
+<%= Vessel.human_attribute_name(:shark_policy) %>
+<%= human_bool @vessel.shark_policy %>
+
+<%= Vessel.human_attribute_name(:iuu_list) %>
+<%= human_bool @vessel.iuu_list %>
+
+<%= Vessel.human_attribute_name(:code_of_conduct) %>
+<%= human_bool @vessel.code_of_conduct %>

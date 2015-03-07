@@ -1,11 +1,19 @@
 jQuery ->
   $('.datatable').dataTable
-    sPaginationType: "bootstrap"
-    sDom: "<'row'<'span6'l><'span6'f>r>t<'row'<'span6'i><'span6'p>>"
-    iDisplayLength: 15
-  
+    "pageLength": 15
+  $('div.dataTables_filter input').addClass('form-control input-sm');
+  $('div.dataTables_length select').addClass('form-control input-sm')
+    # sDom: "<'row'<'col-xs-6'l><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>"
+
+
 jQuery ->
-  $(".approve-toggle:checkbox").change ->
+  $(".toggle-switch").bootstrapSwitch()
+
+
+
+
+jQuery ->
+  $(".approve-toggle:checkbox").on 'switchChange.bootstrapSwitch', (event, state) ->
     $.ajax
       type: "PUT"
       url: $(this).data("href")
@@ -45,6 +53,10 @@ jQuery -> #initialize Twitter Bootstrap tooltips
     "jpeg"
     "gif"
     "png"
+    "JPG"
+    "JPEG"
+    "PNG"
+    "GIF"
   ]
   extName = undefined
   maxFileSize = $(inputFile).data("max-file-size")
@@ -63,3 +75,4 @@ jQuery -> #initialize Twitter Bootstrap tooltips
     window.alert extErrorMessage
     $(inputFile).val ""
   return
+

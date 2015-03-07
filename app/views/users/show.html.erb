@@ -1,68 +1,81 @@
-<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+<% title @user.name %>
 
-<p>
-  <b>Name:</b>
-  <%= @user.name %>
-</p>
+<div class="row">
+  <div class="col-xs-4">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
 
-<p>
-  <b>Email:</b>
-  <%= @user.email %>
-</p>
-
-<div id="graph_options">
-  <select id="month_from">
-    <% @month_names.each_with_index do |v,i| %>
-      <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
-    <% end %>
-  </select>
-  <select id="year_from">
-    <% (2010..2013).each do |y| %>
-      <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
-    <% end %>
-  </select>
-  <select id="month_to">
-    <% @month_names.each_with_index do |v,i| %>
-      <option value="<%= i + 1 %>"><%= v.slice(0,3) %></option>
-    <% end %>
-  </select>
-  <select id="year_to">
-    <% (2010..2013).each do |y| %>
-      <option value="<%= y %>" <%= "selected=\"selected\"".html_safe if y == Date.today.year %>><%= y %></option>
-      <% end %>
-  </select>
-  <button class="btn" id="btn_refresh">Refresh</button>
 </div>
 
-<div id="container"></div>
+<br />
+<br />
 
-<script type="text/javascript">
-	function update_chart(){
-		console.log("Updating chart");
-		params = {
-			month_from: $('#month_from').val(),
-			year_from: $('#year_from').val(),
-			month_to: $('#month_to').val(),
-			year_to: $('#year_to').val(),
-		}
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Details</h3>
+      </div>
+      <div class="panel-body">
+        <%= image_tag @user.avatar_url(:thumb), title: @user.name, class: 'img-circle', width: "40px", height: "40px" if @user.avatar? %>
+        <dl class="dl-horizontal">
+          
+          <dt><%= User.human_attribute_name(:name) %></dt>
+          <dd><%= @user.name %></dd>
+          
+          <dt><%= User.human_attribute_name(:email) %></dt>
+          <dd><%= @user.email %></dd>
 
-		$.get("/users/<%= @user.id %>", params, function(data, textStatus, jqXHR){
-			console.log(data);
-			render_chart('container', 'Survey Reports', 'No. of Survey', '', 'line', data.col_headers, data.month_counts);
-		}, "json");
-	};
+        </dl>
+      </div>
+    </div>
+  </div>
+  <div class="col-xs-12 col-md-6">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">Files</h3>
+      </div>
+      <div class="panel-body">
+        <% @user.documents.each do |document| %>
+          <%= link_to document.file.url do %>
+            <div class= 'col-xs-3 well text-center'>
+              <% if document.content_type == 'application/doc' %>
+                <%= icon fa_word, "", class: 'fa-2x' %>
+              <% elsif document.content_type == 'application/xls' %>
+                <%= icon fa_excel, "", class: 'fa-2x' %>
+              <% elsif document.content_type == 'application/pdf' %>
+                <%= icon fa_pdf, "", class: 'fa-4x' %>
+              <% elsif document.content_type == 'jpg' %>
+                <%= icon fa_image, "", class: 'fa-2x' %>
+              <% end %>
+              <br />
+              <br />
+              <%= document.title %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="panel-footer">
+        <div class="row">
+          <%= form_for Document.new, html: { class: 'inline-form'} do |f| %>
+            <div class="col-xs-12 col-md-6">
+              <%= f.hidden_field :documentable_id, value: @user.id %>
+              <%= f.hidden_field :documentable_type, value: @user.class.name %>
+              
+              <div class="input-group">
+                <%= f.label :file, "Upload files", class: 'sr-only' %>
+                <%= f.file_field :file, class: 'form-control' %>
+                <span class="input-group-btn">
+                  <%= f.submit 'Upload', class: 'btn btn-default btn-primary' %>
+                  </span>
+              </div>
+            </div>
 
-	$(function () {
-		// Event handlers
-		$('#btn_refresh').click(function(){
-			update_chart();
-		});
+            
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
 
-		// Load chart with default values
-		update_chart();
-	});
-</script>
-
-<%= render partial: 'shared/audit_table', locals: { parent: @user } %>
-
-<%= link_to 'Back', users_path %>
+</div>

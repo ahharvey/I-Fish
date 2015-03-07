@@ -1,0 +1,12 @@
+<div id="GearList">
+  <ul class="list-unstyled">
+    <% @fishery.used_gears.each do |gear| %>
+      <li>
+        <%= link_to gear.name, gear %>
+        <% if can? :update, @fishery %>
+          <%= link_to remove_icon, delete_used_gear_fishery_path(@fishery, used_gear: gear.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

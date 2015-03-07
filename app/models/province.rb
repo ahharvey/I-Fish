@@ -14,7 +14,6 @@ class Province < ActiveRecord::Base
   
   has_paper_trail
 
-  attr_accessible :name, :code, :year
   attr_accessor :year
 
   has_many :districts

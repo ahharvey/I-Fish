@@ -9,9 +9,9 @@
   </head>
   <body data-spy="scroll" data-target=".bs-docs-sidebar" class="signin-container">
     <%= render partial: "layouts/navbar" %>
-    <div class="container" style="margin-top:50px">
+    <div class="container-fluid" style="margin-top:50px">
       <div class="row">
-        <div class="span6 offset3 well signin-panel">
+        <div class="col-xs-12 col-md-6 col-md-offset-3 well signin-panel">
           <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
           <%= render partial: "shared/model_error_messages" %>
           <div class="page-header">

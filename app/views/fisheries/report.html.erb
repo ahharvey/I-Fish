@@ -1,0 +1,69 @@
+<% title t ".title" %>
+
+<%= render partial: "shared/api_links", locals: { json: true, xml: true, xls: true } %>
+
+
+
+<div class="container">
+<div class="row">
+  <p>
+    <b>Name:</b>
+    <%= @fishery.name %>
+  </p>
+
+  <p>
+    <b>Code:</b>
+    <%= @fishery.code %>
+  </p>
+</div>
+<div class="row">
+  <div class="span12">
+
+      <%= text_field_tag "cpe_date_from", @date_from, class: "span2" %>
+      <%= text_field_tag "cpe_date_to", @date_to, class: "span2" %>
+      <%= link_to "Refresh", "javascript:void(0)",class: "btn", id: "cpe_btn_refresh" %>
+
+  </div>
+</div>
+<div class="row">
+  <div class="span16">
+    Surveys : <%= @fishery.surveys.count %>
+  </div>
+</div>
+<br />
+<br />
+<div class="row">
+  <div class="span6">
+    <div id="graph_catch_per_effort_container" data-id= <%= @fishery.id %> ></div>
+  </div>
+  <div class="span6">
+    <div id="graph_values_container" data-id = <%= @fishery.id %> ></div>
+  </div>
+</div>
+<br />
+<br />
+<div class="row">
+  <div class="span6">
+    <div id="graph_activity_container" data-id = <%= @fishery.id %> ></div>
+  </div>
+  <div class="span6">
+    <div id="graph_catch_composition" data-id= <%= @fishery.id %>></div>
+  </div>
+</div>
+<br />
+<br />
+<div class="row" id="graph_length_container" data-id="<%= @fishery.id %>" data-species="<%= raw @fishery.catches.map(&:fish_id).uniq.to_json %>">
+  <% @fishery.catches.map(&:fish_id).uniq.each do |species| %>
+    <% unless species == 0 %>
+      <div class="span4">
+        <div id="graph_length_container_<%= species %>" data-id="<%= @fishery.id %>" data-name="<%= Fish.find(species).scientific_name %>" ></div>
+      </div>
+    <% end %>
+  <% end %>
+</div>
+
+  <div class="row">
+    <%= link_to 'Edit', edit_fishery_path(@fishery) %> |
+    <%= link_to 'Back', fisheries_path %>
+  </div>
+</div>

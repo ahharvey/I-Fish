@@ -16,17 +16,13 @@ class Desa < ActiveRecord::Base
   
   has_paper_trail
   
-  attr_accessible :name, :kabupaten, :code, :lat, :lng, :district_id
+  
 
   has_many :surveys, dependent: :destroy
   has_many :landings, through: :surveys
   has_many :users
   belongs_to :district
   has_one :province, through: :district
-
-  acts_as_gmappable :lat => 'lat', 
-                    :lng => 'lng',
-                    :process_geocoding => false
 
   def approved_surveys
     self.surveys.where( review_state: 'approved')

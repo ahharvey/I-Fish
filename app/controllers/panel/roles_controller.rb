@@ -6,7 +6,7 @@ class Panel::RolesController < ApplicationController
   end
 
   def create
-    Role.create params[:role]
+    Role.create role_params
     redisplay_roles
   end
 
@@ -26,4 +26,10 @@ class Panel::RolesController < ApplicationController
       }
     end
   end
+
+  private
+  def role_params
+    params.require(:user).permit( :name)
+  end
+  
 end

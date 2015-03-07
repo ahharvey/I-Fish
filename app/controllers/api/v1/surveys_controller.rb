@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with Survey.create(params[:survey])
+        respond_with Survey.create(survey_params)
       end
       
       def update
@@ -21,6 +21,12 @@ module Api
       
       def destroy
         respond_with Survey.destroy(params[:id])
+      end
+
+      private
+
+      def survey_params
+        params.require(:survey).permit( :desa_id, :end_time, :fishery_id, :start_time, :admin_id, :user_id, :date_published, :observer, :approved,:catch_measurer_id,:catch_scribe_id,:landing_enumerator_id,:vessel_count,:review_state,:reviewed_at,:reviewer,:start_time_input,:end_time_input)
       end
     end
   end

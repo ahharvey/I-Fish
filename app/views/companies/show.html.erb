@@ -1,0 +1,27 @@
+<% title t ".title" %>
+
+<div class="row">
+  <div class="col-xs-12 col-md-8">
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: "company_panel" %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'shared/file_upload', locals: { resource: @company } %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'shared/audit_table', locals: { parent: @company } %>
+      </div>
+    </div>
+  </div>
+  <div id="member_panel" class="col-xs-12 col-md-4">
+    <%= render partial: "vessel_panel" %>
+  </div>
+</div>
+
+<%= link_to 'Edit', edit_company_path(@company) %> |
+<%= link_to 'Back', companies_path %>

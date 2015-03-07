@@ -1,57 +1,51 @@
-<%= form_for(@gear) do |f| %>
-  <% if @gear.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@gear.errors.count, "error") %> prohibited this gear from being saved:</h2>
+<%= simple_form_for @gear, html: {class: 'form form-horizontal'} do |f| %>
 
-      <ul>
-      <% @gear.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
+  <div class="row">
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+      <%= f.input :fishery_id, as: :hidden %>
+
+      <%= f.input :cat_ind %>
+
+      <%= f.input :cat_eng %>
+
+      <%= f.input :sub_cat_ind %>
+
+      <%= f.input :sub_cat_eng %>
+
+      <%= f.input :type_ind %>
+
+      <%= f.input :type_eng %>
+
+      <%= f.input :name %>
+
+      <%= f.input :alpha_code %>
+
+      <%= f.input :num_code %>
+
+      <%= f.input :fao_code %>
+
     </div>
-  <% end %>
 
-  <div class="field">
-    <%= f.label :cat_ind %><br />
-    <%= f.text_field :cat_ind %>
   </div>
-  <div class="field">
-    <%= f.label :cat_eng %><br />
-    <%= f.text_field :cat_eng %>
-  </div>
-  <div class="field">
-    <%= f.label :sub_cat_ind %><br />
-    <%= f.text_field :sub_cat_ind %>
-  </div>
-  <div class="field">
-    <%= f.label :sub_cat_eng %><br />
-    <%= f.text_field :sub_cat_eng %>
-  </div>
-  <div class="field">
-    <%= f.label :type_ind %><br />
-    <%= f.text_field :type_ind %>
-  </div>
-  <div class="field">
-    <%= f.label :type_eng %><br />
-    <%= f.text_field :type_eng %>
-  </div>
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :alpha_code %><br />
-    <%= f.text_field :alpha_code %>
-  </div>
-  <div class="field">
-    <%= f.label :num_code %><br />
-    <%= f.text_field :num_code %>
-  </div>
-  <div class="field">
-    <%= f.label :fao_code %><br />
-    <%= f.text_field :fao_code %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+        Save
+      <% end %>
+
+
+      <% if !f.object.new_record? %>
+        <%= link_to "Cancel", @gear, :class=>"btn pull-right" %>
+
+      <% else %>
+        <%= link_to "Cancel", gears_path, :class=>"btn pull-right" %>
+      <% end %> 
+
+    </div>
   </div>
 <% end %>
+

@@ -9,7 +9,7 @@
   </head>
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <%= render partial: "layouts/navbar" %>
-    <div class="container" style="margin-top:50px">
+    <div class="container-fluid" style="margin-top:50px">
       <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
       <%= render partial: "shared/model_error_messages" %>
       <div class="page-header">
@@ -32,6 +32,9 @@
         "http://code.highcharts.com/stock/modules/exporting.js"
         )
       %>
+      <%= render partial: "layouts/ganalytics" %> 
+      <%= render partial: "layouts/tour" %> 
+      
     </footer>
   </body>
   <%= render partial: 'layouts/templates_modal' %>

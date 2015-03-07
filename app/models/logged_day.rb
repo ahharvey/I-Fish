@@ -31,27 +31,6 @@ class LoggedDay < ActiveRecord::Base
   belongs_to :graticule
   belongs_to :logbook
   has_one :fishery, through: :logbook
-  attr_accessible :condition,
-                  :crew,
-                  :end_time,
-                  :fuel,
-                  :gear_time,
-                  :line,
-                  :moon,
-                  :net,
-                  :quantity,
-                  :sail,
-                  :start_time,
-                  :value,
-                  :weight,
-                  :fish_id,
-                  :logbook_id,
-                  :graticule_id,
-                  :ice,
-                  :aborted,
-                  :notes,
-                  :start_time_input,
-                  :start_date_input
   
   attr_writer :start_time_input, :end_time_input, :date_input
 

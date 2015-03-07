@@ -1,0 +1,16 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Details</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+
+
+      <dt><%= Fishery.human_attribute_name(:name) %></dt>
+      <dd><%= @fishery.name %></dd>
+      <dt><%= Fishery.human_attribute_name(:code) %></dt>
+      <dd><%= @fishery.code %></dd>
+
+    </dl>
+  </div>
+</div>

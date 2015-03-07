@@ -14,7 +14,7 @@
 require 'import_excel_data'
 
 class ExcelFile < ActiveRecord::Base
-  attr_accessible :file, :filename, :filesize, :admin_id
+  
   before_validation :import_excel_data
   before_save :update_asset_attributes
   mount_uploader :file, ExcelFileUploader

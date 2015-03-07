@@ -11,11 +11,18 @@ end
 
 
 CarrierWave.configure do |config|
+  if Rails.env.development? || Rails.env.test?
+    config.storage = :file
+  else
+    config.storage = :fog
+  end
   config.fog_directory  = AWS_DIRECTORY
-  config.storage = :fog
+  
   config.fog_credentials = {
       :provider => 'AWS',
       :aws_access_key_id => AWS_KEY,
       :aws_secret_access_key => AWS_SECRET
   }
 end
+
+

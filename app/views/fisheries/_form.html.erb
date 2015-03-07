@@ -1,4 +1,4 @@
-<%= form_for(@fishery) do |f| %>
+<%= simple_form_for @fishery do |f| %>
   <% if @fishery.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@fishery.errors.count, "error") %> prohibited this fishery from being saved:</h2>
@@ -11,14 +11,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label :code %><br />
-    <%= f.text_field :code %>
-  </div>
+
+    <%= f.input :name %>
+
+    <%= f.input :code %>
+
+    <%= f.association :protocol %>
+
+    <%= f.association :protocol_id do %>
+      <%= f.select :protocol_id, {include_blank:true} %>
+    <% end %>
+
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

@@ -1,2 +1,35 @@
-<%= link_to edit_profile_icon, edit_user_registration_path, class: 'navbar-link', title: t("devise.edit") %> |
-<%= link_to logout_icon, destroy_user_session_path, method: :delete, class: 'navbar-link', title: t("devise.signout") %>
+<%= link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
+
+    <%= image_tag @currently_signed_in.avatar_url(:thumb), title: @currently_signed_in.name, class: 'img-circle', width: "30px", height: "30px" if @currently_signed_in.avatar? %>
+
+  <b class="caret navbar-link"></b>
+<% end %>
+<ul class="dropdown-menu">  
+  <li>
+    <%= link_to @currently_signed_in do %>
+      <%= icon fa_profile, "", class: 'fa-fw' %>
+      <%= @currently_signed_in.name || @currently_signed_in.email %>
+    <% end %>
+  </li>
+  <li>
+    <%= link_to edit_user_path(@currently_signed_in), title: t("devise.edit") do %>
+      <%= icon fa_edit_profile, "", class: 'fa-fw' %>
+      Edit profile
+    <% end %>
+  <li>
+
+  <li>
+    <%= link_to edit_user_registration_path, title: t("devise.edit") do %>
+      <%= icon fa_password, "", class: 'fa-fw'  %>
+      Security
+    <% end %>
+  <li>
+
+  <li class="divider"></li>
+  <li>
+    <%= link_to destroy_user_session_path, method: :delete, title: t("devise.signout") do %>
+      <%= icon fa_logout, "", class: 'fa-fw' %>
+      Sign Out
+    <% end %>
+  <li>
+</ul>

@@ -1,6 +1,10 @@
 <% if survey %>
   approved a survey : <%= link_to "#{survey.desa.name} - #{survey.formatted_date}", survey %>
-  <p><span class="label label-success"><i class='icon-ok-sign icon-2x'></i></span></p>
+  <br />
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-square fa-stack-2x text-success"></i>
+    <i class="fa fa-check fa-stack-1x fa-inverse"></i>
+  </span>
 <% else %>
   approved a survey that has since been deleted
 <% end %>

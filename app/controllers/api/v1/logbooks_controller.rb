@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with Logbook.create(params[:logbook])
+        respond_with Logbook.create(logbook_params)
       end
       
       def update
@@ -21,6 +21,12 @@ module Api
       
       def destroy
         respond_with Logbook.destroy(params[:id])
+      end
+
+      private
+
+      def logbook_params
+        params.require(:logbook).permit( :date, :user_id, :admin_id, :fishery_id, :review_state, :reviewed_at, :reviewer_id)
       end
     end
   end

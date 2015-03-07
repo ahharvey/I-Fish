@@ -1,0 +1,44 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Files</h3>
+  </div>
+  <div class="panel-body">
+    <% resource.documents.each do |document| %>
+      <%= link_to document.file.url, title: document.title do %>
+        <div class= 'col-xs-3'>
+          <div class="well text-center">
+            <% if document.is_word? %>
+              <%= icon fa_word, "", class: 'fa-4x' %>
+            <% elsif document.is_excel? %>
+              <%= icon fa_excel, "", class: 'fa-4x' %>
+            <% elsif document.is_pdf? %>
+              <%= icon fa_pdf, "", class: 'fa-4x' %>
+            <% elsif document.is_image? %>
+              <%= icon fa_image, "", class: 'fa-4x' %>
+            <% end %>
+            <br />
+            <br />
+            <small><%= truncate document.title, length: 15 %></small>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <%= form_for Document.new, html: { class: 'inline-form'} do |f| %>
+        <div class="col-xs-12 col-md-6">
+          <%= f.hidden_field :documentable_id, value: resource.id %>
+          <%= f.hidden_field :documentable_type, value: resource.class.name %>
+          <div class="input-group">
+            <%= f.label :file, "Upload files", class: 'sr-only' %>
+            <%= f.file_field :file, class: 'form-control' %>
+            <span class="input-group-btn">
+              <%= f.submit 'Upload', class: 'btn btn-default btn-primary' %>
+            </span>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

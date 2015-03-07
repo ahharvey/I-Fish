@@ -1,4 +1,4 @@
-class SupervisorController < InheritedResources::Base
+class SupervisorController < ApplicationController
 
 	def dashboard
 		@surveys = Survey.where(approved: false)

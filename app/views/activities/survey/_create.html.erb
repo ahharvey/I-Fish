@@ -1,6 +1,10 @@
 <% if survey %>
   uploaded a survey : <%= link_to "#{survey.desa.name} - #{survey.formatted_date}", survey %>
-  <p><span class="label label-info"><i class='icon-cloud-upload icon-2x'></i></span></p>
+  <br />
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-square fa-stack-2x text-info"></i>
+    <i class="fa fa-cloud-upload fa-stack-1x fa-inverse"></i>
+  </span>
 <% else %>
   uploaded a survey that has since been deleted
 <% end %>

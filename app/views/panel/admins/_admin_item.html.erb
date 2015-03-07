@@ -7,16 +7,20 @@
     <td><%= admin.province.try(:name) %></td>
     <td>
       <% if can? :update, admin %> 
-        <%= content_tag :div, 
-          class: "controls make-switch switch-mini", 
-          data: { 
-            on: "success", 
-            off: "danger", 
-            "on-label" => "YES", 
-            "off-label" => "NO"
-          } do %>
-          <%= check_box_tag :approved, admin.id, admin.approved?, class: 'approve-toggle', data: { href: set_approved_panel_admin_path(admin) } %>
-        <% end %>
+        
+          <%= check_box_tag :approved, 
+            admin.id, 
+            admin.approved?, 
+            class: 'toggle-switch approve-toggle', 
+            data: { 
+              href: set_approved_panel_admin_path(admin),
+              size: 'mini',
+              'on-color' => 'success',
+              'off-color' => 'danger',
+              'on-text' => "#{ icon 'check' }",
+              'off-text' => "#{ icon 'remove' }"
+            } %>
+
       <% end %>
     </td>
     <td>

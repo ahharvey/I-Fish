@@ -1,0 +1,32 @@
+
+<%= simple_form_for @protocol, html: {class: 'form form-horizontal'} do |f| %>
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+  
+      <%= f.input :title %>
+    
+      <%= f.input :description %>
+  
+    </div>
+
+  </div>
+    
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+        Save
+      <% end %>
+
+
+      <% if !f.object.new_record? %>
+        <%= link_to "Cancel", @protocol, :class=>"btn pull-right" %>
+
+      <% else %>
+        <%= link_to "Cancel", protocols_path, :class=>"btn pull-right" %>
+      <% end %> 
+    </div>
+  </div>
+<% end %>

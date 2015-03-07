@@ -1,0 +1,15 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Policies</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:shark_policy) %></dt>
+      <dd><%= human_bool @vessel.shark_policy %></dd>
+      <dt><%= Vessel.human_attribute_name(:iuu_list) %></dt>
+      <dd><%= human_bool @vessel.iuu_list %></dd>
+      <dt><%= Vessel.human_attribute_name(:code_of_conduct) %></dt>
+      <dd><%= human_bool @vessel.code_of_conduct %></dd>
+    </dl>
+  </div>
+</div>

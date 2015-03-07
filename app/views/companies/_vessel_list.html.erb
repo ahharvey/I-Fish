@@ -1,0 +1,14 @@
+<div id="VesselList">
+  <br />
+  <ul class="list-unstyled">
+    <% @company.vessels.each do |vessel| %>
+      <li>
+        <b><%= link_to vessel.ap2hi_ref, vessel %></b>  -  
+        <i><%= vessel.name %></i>
+        <% if can? :update, @company %>
+          <%= link_to remove_icon, delete_vessel_company_path(@company, vessel: vessel.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

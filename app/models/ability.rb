@@ -31,6 +31,7 @@ class Ability
     # Users can view all users, and can manage their own profile.
     can :read, User
     can :manage, User, id: user.id
+    #can :welcome, User, id: user.id
   end
 
   def abilities_for_all_admins(admin)

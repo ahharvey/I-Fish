@@ -13,12 +13,22 @@ class Office < ActiveRecord::Base
   
   has_paper_trail
 
-  attr_accessible :name, :district_id
+  # attr_accessible :name, :district_id
 
   has_many :admins
   belongs_to :district
   has_one :province, through: :district
 
+  has_and_belongs_to_many :member_fisheries, class_name: "Fishery"
+
+  attr_accessor :fishery_id
+
   validates :name,
   	presence: true
+
+  def supervisors
+    Rails.cache.fetch([self, "supvervisors"], expires_in: 5.minutes) do
+      Admin.joins(:roles).where(roles: {name: ["supervisor", "leader", "administrator"]}).where(office_id: self.id)
+    end
+  end
 end

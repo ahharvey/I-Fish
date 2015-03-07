@@ -1,11 +1,11 @@
 <% title t ".title" %>
 
 
-  <div class="row-fluid">
-    <div id="supervisor_controls" class="span8">
+  <div class="row">
+    <div id="supervisor_controls" class="col-xs-8">
       <%= render partial: "logbooks/supervisor_controls" %>
     </div>
-    <div class="span4">
+    <div class="col-xs-4">
       <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
     </div>
 
@@ -14,77 +14,82 @@
   <br />
   <br />
 
-  <div class="row-fluid">
-    <div class="span6 well">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 panel panel-default">
+      <div class="panel-heading">Location</div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
 
-      <dl class="dl-horizontal">
+          <dt>Fisher:</dt>
+          <dd>
+            <%= best_in_place @logbook, 
+              :user_id, 
+              type: :select, 
+              collection: User.all.map { |u| [u.id, u.name] }, 
+              activator: '#edit-logbook-user',
+              display_as: :owner, 
+              classes: 'user_in_place' 
+              %>
+            <small><em><%= link_to 'edit', '#', id: 'edit-logbook-user' %></em></small>
+          </dd>
 
-        <dt>Fisher:</dt>
-        <dd>
-          <%= best_in_place @logbook, 
-            :user_id, 
-            type: :select, 
-            collection: User.all.map { |u| [u.id, u.name] }, 
-            activator: '#edit-logbook-user',
-            display_as: :owner, 
-            classes: 'user_in_place' 
-            %>
-          <small><em><%= link_to 'edit', '#', id: 'edit-logbook-user' %></em></small>
-        </dd>
+          <dt>Date:</dt>
+          <dd>
+            <%= best_in_place @logbook, 
+              :date, 
+              type: :date, 
+              activator: '#edit-logbook-date',
+              display_as: :logbook_date 
+              %>
+            <small><em><%= link_to 'edit', '#', id: 'edit-logbook-date' %></em></small>
+          </dd>
 
-        <dt>Date:</dt>
-        <dd>
-          <%= best_in_place @logbook, 
-            :date, 
-            type: :date, 
-            activator: '#edit-logbook-date',
-            display_as: :logbook_date 
-            %>
-          <small><em><%= link_to 'edit', '#', id: 'edit-logbook-date' %></em></small>
-        </dd>
+          <dt>Fishery:</dt>
+          <dd><%= @logbook.fishery.name %></dd>
 
-        <dt>Fishery:</dt>
-        <dd><%= @logbook.fishery.name %></dd>
+          <dt>Desa:</dt>
+          <dd><%= @logbook.user.desa.name %>, <%= @logbook.user.desa.province.name %></dd>
+          
 
-        <dt>Desa:</dt>
-        <dd><%= @logbook.user.desa.name %>, <%= @logbook.user.desa.province.name %></dd>
-        
-
-      </dl>
+        </dl>
+      </div>
     </div>
-    <div class="span6 well">
-      <dl class="dl-horizontal">
-        <dt>Uploaded by:</dt>
-        <dd>
-          <% if @logbook.admin_id %>
-            <%= link_to image_tag(@logbook.admin.avatar_url(:thumb), 
-              width: "30px", 
-              height: "30px", 
-              title: @logbook.admin.name, 
-              alt: @logbook.admin.name),
-              @logbook.admin 
-              %>
-            <%= @logbook.admin.name %>
-          <% else %>
-            -
-          <% end %>
-        </dd>
-        <dt>Reviewed by:</dt>
-        <dd>
-          <% if @logbook.reviewer_id %>
-            <%= link_to image_tag(@logbook.reviewer.avatar_url(:thumb), 
-              width: "30px", 
-              height: "30px", 
-              title: @logbook.reviewer.name, 
-              alt: @logbook.reviewer.name),
-              @logbook.reviewer 
-              %>
-            <%= @logbook.reviewer.name %>
-          <% else %>
-            -
-          <% end %>
-        </dd>
-      </dl>
+    <div class="col-xs-12 col-md-6 panel panel-default">
+      <div class="panel-heading">Location</div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt>Uploaded by:</dt>
+          <dd>
+            <% if @logbook.admin_id %>
+              <%= link_to image_tag(@logbook.admin.avatar_url(:thumb), 
+                width: "30px", 
+                height: "30px", 
+                title: @logbook.admin.name, 
+                alt: @logbook.admin.name),
+                @logbook.admin 
+                %>
+              <%= @logbook.admin.name %>
+            <% else %>
+              -
+            <% end %>
+          </dd>
+          <dt>Reviewed by:</dt>
+          <dd>
+            <% if @logbook.reviewer_id %>
+              <%= link_to image_tag(@logbook.reviewer.avatar_url(:thumb), 
+                width: "30px", 
+                height: "30px", 
+                title: @logbook.reviewer.name, 
+                alt: @logbook.reviewer.name),
+                @logbook.reviewer 
+                %>
+              <%= @logbook.reviewer.name %>
+            <% else %>
+              -
+            <% end %>
+          </dd>
+        </dl>
+      </div>
     </div>
   </div>
 

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>UVI REQUEST</h1>
+
+    <p>AP2HI have submitted a new UVI application.</p>
+
+    <p><%= link_to "View this vessel online", vessel_path(@vessel) %>
+
+    <br />
+    <br />
+
+    <h4>Registration:</h4>
+
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:ap2hi_ref) %></dt>
+      <dd><%= @vessel.ap2hi_ref %></dd>
+      <dt><%= Vessel.human_attribute_name(:issf_ref) %></dt>
+      <dd><%= @vessel.issf_ref %></dd>
+      <dt><%= Vessel.human_attribute_name(:imo_number) %></dt>
+      <dd><%= @vessel.imo_number %></dd>
+      <dt><%= Vessel.human_attribute_name(:sipi_number) %></dt>
+      <dd><%= @vessel.sipi_number %></dd>
+      <dt><%= Vessel.human_attribute_name(:sipi_expiry) %></dt>
+      <dd><%= @vessel.sipi_expiry %></dd>
+      <dt><%= Vessel.human_attribute_name(:siup_number) %></dt>
+      <dd><%= @vessel.siup_number %></dd>
+    </dl>
+
+    <h4>Vessel:</h4>
+
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:name) %></dt>
+      <dd><%= @vessel.name %></dd>
+      <dt><%= Vessel.human_attribute_name(:company) %></dt>
+      <dd><%= link_to @vessel.company.try(:name), @vessel.company %></dd>
+      <dt><%= Vessel.human_attribute_name(:owner) %></dt>
+      <dd><%= @vessel.owner %></dd>
+      <dt><%= Vessel.human_attribute_name(:vessel_type) %></dt>
+      <dd><%= @vessel.vessel_type.try(:name) %></dd>
+      <dt><%= Vessel.human_attribute_name(:length) %></dt>
+      <dd><%= @vessel.length %></dd>
+      <dt><%= Vessel.human_attribute_name(:tonnage) %></dt>
+      <dd><%= @vessel.tonnage %></dd>
+      <dt><%= Vessel.human_attribute_name(:flag_state) %></dt>
+      <dd><%= @vessel.flag_state %></dd>
+      <dt><%= Vessel.human_attribute_name(:year_built) %></dt>
+      <dd><%= @vessel.year_built %></dd>
+    </dl>
+
+    <h4>Operations:</h4>
+
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:captain) %></dt>
+      <dd><%= @vessel.gear.try(:captain) %></dd>
+      <dt><%= Vessel.human_attribute_name(:gear) %></dt>
+      <dd><%= @vessel.gear.try(:name) %></dd>
+      <dt><%= Vessel.human_attribute_name(:hooks) %></dt>
+      <dd><%= @vessel.gear.try(:hooks) %></dd>
+      <dt><%= Vessel.human_attribute_name(:crew) %></dt>
+      <dd><%= @vessel.gear.try(:crew) %></dd>
+    </dl>
+
+    <h4>Policies:</h4>
+
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:shark_policy) %></dt>
+      <dd><%= human_bool @vessel.shark_policy %></dd>
+      <dt><%= Vessel.human_attribute_name(:iuu_list) %></dt>
+      <dd><%= human_bool @vessel.iuu_list %></dd>
+      <dt><%= Vessel.human_attribute_name(:code_of_conduct) %></dt>
+      <dd><%= human_bool @vessel.code_of_conduct %></dd>
+    </dl>
+
+  </body>
+</html>

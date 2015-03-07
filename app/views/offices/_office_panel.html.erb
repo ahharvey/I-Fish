@@ -1,0 +1,13 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Details</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt><%= Office.human_attribute_name(:name) %></dt>
+      <dd><%= @office.name %></dd>
+      <dt><%= Office.human_attribute_name(:district_id) %></dt>
+      <dd><%= @office.district.try(:name) %></dd>
+    </dl>
+  </div>
+</div>

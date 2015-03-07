@@ -28,23 +28,26 @@
 #  avatar                 :string(255)
 #
 
+
+
 class User < ActiveRecord::Base
   
   has_paper_trail
 
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, #:validatable,
-         :token_authenticatable, :lockable, :timeoutable, :omniauthable #, :confirmable
+         :lockable, :timeoutable, :omniauthable #, :confirmable
 
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :name, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :notes, :vessel_type_id, :length, :engine_id, :power, :desa_id, :confirmed_at
-
-  validates :name, presence: true
+  
+  validates :email, presence: true, uniqueness: true
   validate :avatar_size
 
   belongs_to :desa
   has_and_belongs_to_many :roles, :before_add => :validates_role
   has_many :logbooks
   has_many :activities, as: :ownable
+
+  has_many :documents, as: :documentable
 
   
   mount_uploader :avatar, AvatarUploader

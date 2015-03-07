@@ -1,34 +1,34 @@
 <% if can? :update, @survey %>
-  <div class="row-fluid">
-    <div class="span4">
+  <div class="row">
+    <div class="col-xs-4">
       <%= link_to :back  do %>
-        <i class='icon-arrow-left'></i> Back 
+        <%= icon 'arrow-left', "Back" %> 
       <% end %>
     </div>
-    <div class="span6 offset2">
-      <div class="row-fluid">
+    <div class="col-xs-6 col-xs-offset-2">
+      <div class="row">
         <%= link_to reject_survey_path(@survey), 
-          class: "span4 btn btn-large #{@survey.rejected? ? 'btn-danger' : '' }", 
+          class: "col-xs-4 btn btn-lg #{@survey.rejected? ? 'btn-danger' : 'btn-default' }", 
           method: :put, 
           remote: true do 
           %>
-            <i class='icon-remove-sign icon-large'></i>
+            <%= icon 'remove', "", class: 'fa-lg' %>
             Rejected
         <% end %>  
         <%= link_to pend_survey_path(@survey), 
-          class: "span4 btn btn-large #{@survey.pending? ? 'btn-warning' : '' }", 
+          class: "col-xs-4 btn btn-lg #{@survey.pending? ? 'btn-warning' : 'btn-default' }", 
           method: :put, 
           remote: true do
           %>
-          <i class='icon-warning-sign icon-large'></i>
+          <%= icon 'warning', "", class: 'fa-lg' %>
           Pending
         <% end %>
         <%= link_to approve_survey_path(@survey), 
-          class: "span4 btn btn-large #{@survey.approved? ? 'btn-success' : '' }", 
+          class: "col-xs-4 btn btn-lg #{@survey.approved? ? 'btn-success' : 'btn-default' }", 
           method: :put, 
           remote: true do 
           %>
-          <i class="icon-ok-sign icon-large"></i>
+          <%= icon 'check', "", class: 'fa-lg' %>
           Approved
         <% end %>
       </div>

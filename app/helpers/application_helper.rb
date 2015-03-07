@@ -10,18 +10,22 @@ module ApplicationHelper
   end
 
   def twitterized_type(type)
-    case type
-    when :alert
+    case type.to_s
+    when 'alert'
       "warning"
-    when :error
-      "error"
-    when :notice
+    when 'error'
+      'danger'
+    when 'notice'
       "info"
-    when :success
+    when 'success'
       "success"
     else
       type.to_s
     end
+  end
+
+  def human_bool(boolean)
+    boolean ? 'Yes' : 'No'
   end
 
   def present(object, klass = nil)
@@ -35,93 +39,105 @@ module ApplicationHelper
     url_for params.merge(new_params)
   end
   
-  def home_icon
-    content_tag(:i, "", class: 'icon-home icon-white icon-2x')
+  def fa_home
+    "home"
   end
 
-  def upload_icon_nav
-    content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-2x')
+  def fa_submit
+    "cloud-upload"
   end
 
-  def upload_icon
-    content_tag(:i, "", class: 'icon-cloud-upload icon-white')
+  def fa_approve
+    "check"
   end
 
-  def upload_icon_large
-    content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-large')
+  def fa_reports
+    "line-chart"
   end
 
-  def approve_icon
-    content_tag(:i, "", class: 'icon-ok icon-white icon-2x')
+  def fa_protocols
+    "download"
   end
 
-  def report_icon
-    content_tag(:i, "", class: 'icon-bar-chart icon-white icon-2x')
+  def fa_settings
+    "cog"
   end
 
-  def download_icon_nav
-    content_tag(:i, "", class: 'icon-cloud-download icon-white icon-2x')
+  def fa_profile
+    "user"
   end
 
-  def email_icon
-    content_tag(:i, "", class: 'icon-envelope-alt')
+  def fa_edit_profile
+    "cogs"
   end
 
-  def addressbook_icon
-    content_tag(:i, "", class: 'icon-book')
+  def fa_password
+    "key"
   end
 
-  def edit_profile_icon
-    content_tag(:i, "", class: 'icon-cogs')
+  def fa_avatar
+    "user"
   end
 
-  def settings_icon
-    content_tag(:i, "", class: 'icon-cog icon-white icon-2x')
+  def fa_logout
+    "sign-out"
   end
 
-  def profile_icon
-    content_tag(:i, "", class: 'icon-user icon-white icon-2x')
+  def fa_new
+    "plus"
   end
 
-  def security_icon
-    content_tag(:i, "", class: 'icon-key')
+  def fa_word
+    "file-word-o"
   end
 
-  def avatar_icon
-    content_tag(:i, "", class: 'icon-user')
+  def fa_excel
+    "file-excel-o"
   end
 
-  def logout_icon
-    content_tag(:i, "", class: 'icon-signout')
+  def fa_pdf
+    "file-pdf-o"
+  end
+
+  def fa_image
+    "file-image-o"
+  end
+
+  def fa_warning
+    'exclamation-triangle'
   end
 
   def show_icon
-    content_tag(:i, "", class: 'icon-eye-open')
+    icon 'eye'
   end
 
   def edit_icon
-    content_tag(:i, "", class: 'icon-edit')
+    icon 'edit'
   end
 
   def destroy_icon
-    content_tag(:i, "", class: 'icon-trash')
+    icon 'trash'
   end
 
   def add_icon
-    content_tag(:i, "", class: 'icon-plus')
+    icon 'plus'
   end
 
-  def excel_icon
-    content_tag(:i, "", class: 'icon-table')
+  def email_icon
+    icon 'envelope-o'
   end
 
-  def doc_icon
-    content_tag(:i, "", class: 'icon-file')
+  def addressbook_icon
+    icon 'book'
   end
 
   def remove_icon
-    content_tag(:i, "", class: 'icon-remove')
+    icon 'remove'
   end
+
+  
+
+
 
   def flag_en
     content_tag(:img, "", src: "#", class: "flag flag-gb", alt: "English")
@@ -130,6 +146,82 @@ module ApplicationHelper
   def flag_id
     content_tag(:img, "", src: "#", class: "flag flag-id", alt: "Indonesian")
   end
+
+
+  def up_arrow
+    icon 'arrow-up', "", class: 'success'
+  end
+
+  def down_arrow
+    icon 'arrow-down', "", class: 'danger'
+  end
+
+
+
+
+          def upload_icon_nav
+            content_tag(:i, "", class: 'icon- icon-white icon-2x')
+          end
+
+          def upload_icon
+            content_tag(:i, "", class: 'icon-cloud-upload icon-white')
+          end
+
+          def upload_icon_large
+            content_tag(:i, "", class: 'icon-cloud-upload icon-white icon-large')
+          end
+
+          def approve_icon
+            content_tag(:i, "", class: 'icon-ok icon-white icon-2x')
+          end
+
+          def report_icon
+            content_tag(:i, "", class: 'icon-bar-chart icon-white icon-2x')
+          end
+
+          def download_icon_nav
+            content_tag(:i, "", class: 'icon-cloud-download icon-white icon-2x')
+          end
+
+  
+
+          def edit_profile_icon
+            content_tag(:i, "", class: 'icon-cogs')
+          end
+
+          def settings_icon
+            content_tag(:i, "", class: 'icon-cog icon-white icon-2x')
+          end
+
+          def profile_icon
+            content_tag(:i, "", class: 'icon-user icon-white icon-2x')
+          end
+
+          def security_icon
+            content_tag(:i, "", class: 'icon-key')
+          end
+
+          def avatar_icon
+            content_tag(:i, "", class: 'icon-user')
+          end
+
+          def logout_icon
+            content_tag(:i, "", class: 'icon-signout')
+          end
+
+  
+
+  def excel_icon
+    icon 'table'
+  end
+
+  def doc_icon
+    icon 'file'
+  end
+
+  
+
+  
 
   def excel_image
     image_tag("excel.png", class: "", alt: "Excel", width: 16)
@@ -147,12 +239,6 @@ module ApplicationHelper
     content_tag(:i, "", class: 'icon-remove icon-white icon-large')
   end
 
-  def up_arrow
-    content_tag :i, "", class: 'icon-arrow-up success'
-  end
-
-  def down_arrow
-    content_tag :i, "", class: 'icon-arrow-down danger'
-  end
+  
 
 end

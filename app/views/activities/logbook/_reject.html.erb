@@ -1,6 +1,10 @@
 <% if logbook %>
   rejected a logbook : <%= link_to "#{logbook.user.desa.name} - #{logbook.logbook_date}", logbook %>
-  <p><span class="label label-important"><i class='icon-remove-sign icon-2x'></i></span></p>
+  <br />
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-square fa-stack-2x text-danger"></i>
+    <i class="fa fa-remove fa-stack-1x fa-inverse"></i>
+  </span>
 <% else %>
   rejected a logbook that has since been deleted
 <% end %>

@@ -1,0 +1,30 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Biology</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      
+      <dt><%= Fish.human_attribute_name(:a) %></dt>
+      <dd><%= @fish.a? ? @fish.a : "-" %></dd>
+
+      <dt><%= Fish.human_attribute_name(:b) %></dt>
+      <dd><%= @fish.b? ? @fish.b : "-" %></dd>
+
+      <dt><%= Fish.human_attribute_name(:max) %></dt>
+      <dd><%= @fish.max? ? "#{@fish.max} mm" : "-" %></dd>
+
+      <dt><%= Fish.human_attribute_name(:mat) %></dt>
+      <dd><%= @fish.mat? ? "#{@fish.mat} mm" : "-" %></dd>
+
+      <dt><%= Fish.human_attribute_name(:opt) %></dt>
+      <dd><%= @fish.opt? ? "#{@fish.opt} mm" : "-" %></dd>
+
+    </dl>
+  </div>
+</div>
+
+
+
+
+

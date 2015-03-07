@@ -1,25 +1,45 @@
-<% title "I-Fish" %>
-<div class="container">
-	<div class="row-fluid">
-		<div class="span6 offset3">
-			<h5>Recent Activity</h5>
 
-			
-			<div id="surveys">
-				<% @activities.each do |activity| %>
-					<%= ActivityPresenter.new(activity, self).render_activity %>
-				<% end %>
-			</div>
-			
-			
-			<div class="row">
-				<div class="pull-right pagination">
-					<%= render partial: 'home/pagination' %>
-					
-				</div>
-				
-			</div>
-		</div>
-		
-	</div>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-push-6">
+      <% if admin_signed_in? %>
+        <div id="quick_links" class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Quick Links</h3>
+          </div>
+          <div class="panel-body">
+            <dl>
+              <dt>My fisheries</dt>
+              <% for fishery in current_admin.member_fisheries %> 
+                <dd><%= link_to fishery.name, fishery %></dd>
+              <% end %>
+            </dl>
+          </div>
+        </div>
+      <% end %>
+    </div>
+    <div id="recent_activity" class="col-xs-12 col-md-6 col-md-pull-6">
+      <h5>Recent Activity</h5>
+
+      
+      <div>
+        <% @activities.each do |activity| %>
+          <%= ActivityPresenter.new(activity, self).render_activity %>
+        <% end %>
+      </div>
+      
+      
+      <div class="row">
+        <div class="pull-right">
+          <%= render partial: 'home/pagination' %>
+          
+        </ul>
+        
+      </div>
+    </div>
+    
+    
+  </div>
 </div>
+
+

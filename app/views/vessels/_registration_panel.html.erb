@@ -1,0 +1,21 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Registration</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:ap2hi_ref) %></dt>
+      <dd><%= @vessel.ap2hi_ref %></dd>
+      <dt><%= Vessel.human_attribute_name(:issf_ref) %></dt>
+      <dd><%= @vessel.issf_ref %></dd>
+      <dt><%= Vessel.human_attribute_name(:imo_number) %></dt>
+      <dd><%= @vessel.imo_number %></dd>
+      <dt><%= Vessel.human_attribute_name(:sipi_number) %></dt>
+      <dd><%= @vessel.sipi_number %></dd>
+      <dt><%= Vessel.human_attribute_name(:sipi_expiry) %></dt>
+      <dd><%= @vessel.sipi_expiry %></dd>
+      <dt><%= Vessel.human_attribute_name(:siup_number) %></dt>
+      <dd><%= @vessel.siup_number %></dd>
+    </dl>
+  </div>
+</div>

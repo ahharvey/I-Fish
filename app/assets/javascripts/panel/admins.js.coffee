@@ -3,7 +3,7 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 # sets Admin.approved status from index view via Ajax
 jQuery ->
-  $('.admin-approve-cb:checkbox').change ->
+  $('.admin-approve-cb:checkbox').on 'switchChange.bootstrapSwitch', (event, state) ->
     $.ajax
       type: 'PUT'
       url: $('.admin-approve-cb').data('href')

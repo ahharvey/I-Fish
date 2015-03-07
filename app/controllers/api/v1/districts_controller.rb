@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with District.create(params[:district])
+        respond_with District.create(district_params)
       end
       
       def update
@@ -21,6 +21,12 @@ module Api
       
       def destroy
         respond_with District.destroy(params[:id])
+      end
+
+      private
+  
+      def district_params
+        params.require(:district).permit( :name, :province_id, :code, :year )
       end
     end
   end

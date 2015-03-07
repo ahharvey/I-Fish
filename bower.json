@@ -1,0 +1,28 @@
+{
+  "name": "y",
+  "version": "y",
+  "homepage": "https://github.com/ahharvey/I-Fish",
+  "authors": [
+    "AHH <ah.harvey@gmail.com>"
+  ],
+  "description": "bower for i-fish",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "vendor/assets/bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "underscore": "~1.7.0",
+    "bootstrap-switch": "~3.3.0",
+    "select2-ng": "~3.5.0",
+    "jcrop": "~0.9.12",
+    "datatables": "~1.10.4",
+    "datatables-bootstrap3": "*",
+    "bootstrap-tour": "0.10.0"
+  }
+}

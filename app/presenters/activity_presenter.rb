@@ -9,8 +9,10 @@ class ActivityPresenter < SimpleDelegator
 
 	def render_activity
 		div_for activity, class: "media feed-item" do
-      contents = link_to activity.ownable, class: "pull-left", title: activity.ownable.name do
-        image_tag activity.ownable.avatar_url(:thumb), class: "media-object", size: '50x50', alt: activity.ownable.name 
+      contents = content_tag :div, class: "media-left" do 
+        link_to activity.ownable, title: activity.ownable.name do
+          image_tag activity.ownable.avatar_url(:thumb), class: "media-object", size: '50x50', alt: activity.ownable.name 
+        end
       end
       contents += content_tag :div, class: "media-body" do
         html = content_tag :b, class: "media-heading" do 

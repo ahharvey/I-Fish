@@ -1,0 +1,17 @@
+<div id="AdminList">
+  <br />
+  <ul class="list-unstyled">
+    <% @office.admins.each do |admin| %>
+      <li>
+        <% if admin.pending_invitation? %>
+          <i><%= admin.email %> <small>(invitation pending)</small> 
+        <% else %>
+          <b><%= link_to admin.name, admin %></b>
+        <% end %>
+        <% if can? :update, @office %>
+          <%= link_to remove_icon, delete_admin_office_path(@office, admin: admin.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

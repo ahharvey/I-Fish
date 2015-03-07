@@ -13,7 +13,7 @@ class Fishery < ActiveRecord::Base
   
   has_paper_trail
 
-  attr_accessible :code, :name
+  has_many :documents, as: :documentable
   
   has_many :surveys, dependent: :destroy
   has_many :landings, through: :surveys
@@ -26,12 +26,30 @@ class Fishery < ActiveRecord::Base
   has_many :provinces, through: :surveys
   has_many :districts, through: :surveys
 
+  belongs_to :protocol
+
+  has_and_belongs_to_many :target_fishes,
+    join_table: "fisheries_fishes",
+    foreign_key: :fishery_id,
+    association_foreign_key:  :fish_id,
+    class_name: "Fish",
+    before_add: :validates_target_fishes
+  has_and_belongs_to_many :used_gears, class_name: "Gear", before_add: :validates_used_gears
+  has_and_belongs_to_many :member_companies, 
+    join_table: "fisheries_companies",
+    foreign_key: :fishery_id,
+    association_foreign_key:  :company_id,
+    class_name: "Company", 
+    before_add: :validates_member_companies
+  has_and_belongs_to_many :member_offices, class_name: "Office", before_add: :validates_member_offices
 
 
   validates :name,
   	presence: true
   validates :code,
   	presence: true
+
+
 
   def approved_surveys
     self.surveys.where( review_state: 'approved' )
@@ -55,5 +73,27 @@ class Fishery < ActiveRecord::Base
 
   def approved_catches
     Catch.includes(:landing, :survey).where(landing_id: self.approved_landing_ids ) 
+  end
+
+  def category_name
+    target_fishes.try(:scientific_name)
+  end
+
+  private
+
+  def validates_target_fishes(fish)
+    raise ActiveRecord::Rollback if self.target_fishes.include? fish
+  end
+
+  def validates_used_gears(gear)
+    raise ActiveRecord::Rollback if self.used_gears.include? gear
+  end
+
+  def validates_member_companies(company)
+    raise ActiveRecord::Rollback if self.member_companies.include? company
+  end
+
+  def validates_member_offices(office)
+    raise ActiveRecord::Rollback if self.member_offices.include? office
   end
 end

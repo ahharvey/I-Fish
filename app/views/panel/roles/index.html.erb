@@ -1,19 +1,27 @@
 <% title "Roles" %>
 
 <div class="row">
-  <div class="panel span4">
+  <div class="panel col-xs-4">
     <% if can? :create, Role %>
       <%= simple_form_for [:panel, @new_role], remote: true do |f| %>
         <%= f.error_notification  %>
     
-        <%= f.input :name, :wrapper => :append, label: false do %>
-          <%= f.input_field :name, placeholder: "Add a new role..." %><%= button_tag add_icon, type: 'submit', class: 'btn btn-success' %>
+
+
+        <%= f.input :name, wrapper: :horizontal_input_group, label: false do %>
+
+          <%= f.input_field :name, class: "form-control", placeholder: "Add a new role..." %>
+
+          <span class="input-group-btn">
+            <%= button_tag icon('plus'), type: 'submit', class: 'btn btn-success' %>
+          </span><!-- /btn-group -->
         <% end %>
 
       <% end %>
+      <br />
+      <br />
     <% end %>
 
     <%= render partial: 'role_list' %>
   </div>
 </div>
-

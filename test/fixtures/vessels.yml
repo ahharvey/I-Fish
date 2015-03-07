@@ -1,0 +1,29 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  vessel_type_id: 
+  gear_id: 
+  flag_state: MyString
+  year_built: MyString
+  length: 1
+  tonnage: 1
+  imo_number: MyString
+  shark_policy: false
+  iuu_list: false
+  code_of_conduct: false
+  company_id: 
+
+two:
+  name: MyString
+  vessel_type_id: 
+  gear_id: 
+  flag_state: MyString
+  year_built: MyString
+  length: 1
+  tonnage: 1
+  imo_number: MyString
+  shark_policy: false
+  iuu_list: false
+  code_of_conduct: false
+  company_id: 

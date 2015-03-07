@@ -1,10 +1,10 @@
 <% title t ".title" %>
 
 <div class="row">
-  <div id="supervisor_controls" class="span8">
+  <div id="supervisor_controls" class= "col-xs-8">
     <%= render partial: "surveys/supervisor_controls" %>
   </div>
-  <div class="span4">
+  <div class="col-xs-4">
     <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
   </div>
 
@@ -15,66 +15,73 @@
 
 <% present @survey do |survey_presenter| %> 
 
-  <div class="row-fluid">
-    <div class="span4 well">
+  <div class="row">
+    <div class="col-xs-12 col-md-4 panel panel-default">
+      <div class="panel-heading">Location</div>
+      <div class="panel-body">
 
-      <dl class="dl-horizontal">
-        
-        <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
-        <dd><%= survey_presenter.fishery %></dd>
+        <dl class="dl-horizontal">
+          
+          <dt><%= Survey.human_attribute_name(:fishery_id) %></dt>
+          <dd><%= survey_presenter.fishery %></dd>
 
-        <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
-        <dd><%= survey_presenter.desa %></dd>
+          <dt><%= Survey.human_attribute_name(:desa_id) %></dt>
+          <dd><%= survey_presenter.desa %></dd>
 
-        <dt><%= Desa.human_attribute_name(:district_id) %></dt>
-        <dd><%= @survey.district.name rescue '--' %></dd>
+          <dt><%= Desa.human_attribute_name(:district_id) %></dt>
+          <dd><%= @survey.district.name rescue '--' %></dd>
 
-        <dt><%= Province.human_attribute_name(:name) %></dt>
-        <dd><%= @survey.province.name rescue '--' %></dd>
-        
-      </dl>
-
-    </div>
-
-    <div class="span4 well">
-
-      <dl class="dl-horizontal">
-
-        <dt><%= Survey.human_attribute_name(:date_published) %></dt>
-        <dd><%= survey_presenter.date %></dd>
-
-        <dt><%= Survey.human_attribute_name(:start_time) %></dt>
-        <dd><%= survey_presenter.start_time %></dd>
-
-
-        <dt><%= Survey.human_attribute_name(:end_time) %></dt>
-        <dd><%= survey_presenter.end_time %></dd>
-
-      </dl>
+          <dt><%= Province.human_attribute_name(:name) %></dt>
+          <dd><%= @survey.province.name rescue '--' %></dd>
+          
+        </dl>
+      </div>
 
     </div>
 
-    <div class="span4 well">
+    <div class="col-xs-12 col-md-4 panel panel-default">
+      <div class="panel-heading">Time</div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
 
-      <dl class="dl-horizontal">
+          <dt><%= Survey.human_attribute_name(:date_published) %></dt>
+          <dd><%= survey_presenter.date %></dd>
 
-        
-        <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
-        <dd><%= survey_presenter.admin %></dd>
-
-        
-        <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
-        <dd><%= survey_presenter.landing_enumerator %></dd>
-
-
-        <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
-        <dd><%= survey_presenter.catch_measurer %></dd>
+          <dt><%= Survey.human_attribute_name(:start_time) %></dt>
+          <dd><%= survey_presenter.start_time %></dd>
 
 
-        <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
-        <dd><%= survey_presenter.catch_scribe %></dd>
+          <dt><%= Survey.human_attribute_name(:end_time) %></dt>
+          <dd><%= survey_presenter.end_time %></dd>
 
-      </dl>
+        </dl>
+      </div>
+
+    </div>
+
+    <div class="col-xs-12 col-md-4 panel panel-default">
+      <div class="panel-heading">Survey team</div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+
+          
+          <dt><%= Survey.human_attribute_name(:admin_id) %></dt>
+          <dd><%= survey_presenter.admin %></dd>
+
+          
+          <dt><%= Survey.human_attribute_name(:fleet_observer) %></dt>
+          <dd><%= survey_presenter.landing_enumerator %></dd>
+
+
+          <dt><%= Survey.human_attribute_name(:catch_measure) %></dt>
+          <dd><%= survey_presenter.catch_measurer %></dd>
+
+
+          <dt><%= Survey.human_attribute_name(:catch_scribe) %></dt>
+          <dd><%= survey_presenter.catch_scribe %></dd>
+
+        </dl>
+      </div>
 
     </div>
   </div>
@@ -132,7 +139,7 @@
 
 <div class="row">
 
-  <div class="span6 offset3">
+  <div class="col-xs-12 col-md-6 col-md-offset-3">
 
     <table class="table table-striped table-condensed">
       <tr>

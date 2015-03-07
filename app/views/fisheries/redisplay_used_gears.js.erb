@@ -1,0 +1,3 @@
+$('#GearList').replaceWith("<%= escape_javascript(render :partial=>'gear_list') %>");
+$(".flash-container").html("<%= escape_javascript(render partial: 'shared/flash_messages') %>");
+$(".alert").delay(3000).fadeOut('slow');

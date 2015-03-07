@@ -1,32 +1,32 @@
 <%= link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
-	<%= profile_icon %>
+
+    <%= image_tag @currently_signed_in.avatar_url(:thumb), title: @currently_signed_in.name, class: 'img-circle', width: "30px", height: "30px" if @currently_signed_in.avatar? %>
+
 	<b class="caret navbar-link"></b>
 <% end %>
 <ul class="dropdown-menu">	
 	<li>
-		<%= link_to admin_settings_path, title: t("devise.edit") do %>
-			<%= edit_profile_icon %>
-			Settings
+		<%= link_to @currently_signed_in do %>
+      <%= icon fa_profile, "", class: 'fa-fw' %>
+      <%= @currently_signed_in.name %>
+    <% end %>
+	</li>
+	<li>
+		<%= link_to edit_admin_path(@currently_signed_in), title: t("devise.edit") do %>
+			<%= icon fa_edit_profile, "", class: 'fa-fw' %>
+			Edit profile
 		<% end %>
 	<li>
-	<% if can? :manage, 'supervisor/dashboard' %>
-		<li>
-			<%= link_to admin_security_path, title: t("devise.edit") do %>
-				<%= security_icon %>
-				Security
-			<% end %>
-		<li>
-	<% end %>
 	<li>
-		<%= link_to admin_avatar_path, title: t("devise.edit") do %>
-			<%= avatar_icon %>
-			Avatar
+		<%= link_to edit_user_registration_path, title: t("devise.edit") do %>
+			<%= icon fa_password, "", class: 'fa-fw'  %>
+			Security
 		<% end %>
 	<li>
 	<li class="divider"></li>
 	<li>
 		<%= link_to destroy_admin_session_path, method: :delete, title: t("devise.signout") do %>
-			<%= logout_icon %>
+			<%= icon fa_logout, "", class: 'fa-fw' %>
 			Sign Out
 		<% end %>
 	<li>

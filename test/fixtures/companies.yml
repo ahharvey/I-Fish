@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  shark_policy: false
+  iuu_list: false
+  code_of_conduct: false
+  member: false
+
+two:
+  name: MyString
+  shark_policy: false
+  iuu_list: false
+  code_of_conduct: false
+  member: false

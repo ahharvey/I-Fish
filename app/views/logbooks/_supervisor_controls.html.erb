@@ -1,36 +1,35 @@
 <% if can? :update, @logbook %>
-  <div class="row-fluid">
-    <div class="span4">
+  <div class="row">
+    <div class="col-xs-2">
       <%= link_to :back  do %>
-        <i class='icon-arrow-left'></i> Back
+        <%= icon 'arrow-left', "Back" %>
       <% end %>
     </div>
-    <div class="span6 offset2">
-      <div class="row-fluid">
-        <%= link_to reject_logbook_path(@logbook), 
-          class: "span4 btn btn-large #{@logbook.rejected? ? 'btn-danger' : '' }", 
-          method: :put, 
-          remote: true do 
-          %>
-            <i class='icon-remove-sign icon-large'></i>
-            Rejected
-        <% end %>  
-        <%= link_to pend_logbook_path(@logbook), 
-          class: "span4 btn btn-large #{@logbook.pending? ? 'btn-warning' : '' }", 
-          method: :put, 
-          remote: true do
-          %>
-          <i class='icon-warning-sign icon-large'></i>
-          Pending
-        <% end %>
-        <%= link_to approve_logbook_path(@logbook), 
-          class: "span4 btn btn-large #{@logbook.approved? ? 'btn-success' : '' }", 
-          method: :put, 
-          remote: true do 
-          %>
-          <i class="icon-ok-sign icon-large"></i>
-          Approved
-        <% end %>
+    <div class="col-xs-8 col-xs-offset-2">
+      <div class="row">
+        <div class="col-xs-12 text-center">
+          <%= link_to reject_logbook_path(@logbook), 
+            class: "col-xs-4 btn btn-lg #{@logbook.rejected? ? 'btn-danger' : 'btn-default' }", 
+            method: :put, 
+            remote: true do 
+            %>
+              <%= icon 'remove', "Rejected", class: "fa_lg" %>
+          <% end %>  
+          <%= link_to pend_logbook_path(@logbook), 
+            class: "col-xs-4 btn btn-lg #{@logbook.pending? ? 'btn-warning' : 'btn-default' }", 
+            method: :put, 
+            remote: true do
+            %>
+            <%= icon 'warning', "Pending", class: 'fa_lg' %>
+          <% end %>
+          <%= link_to approve_logbook_path(@logbook), 
+            class: "col-xs-4 btn btn-lg #{@logbook.approved? ? 'btn-success' : 'btn-default' }", 
+            method: :put, 
+            remote: true do 
+            %>
+            <%= icon 'check', "Approved", class: 'fa_lg' %> 
+          <% end %>
+        </div>
       </div>
     </div>
   </div>

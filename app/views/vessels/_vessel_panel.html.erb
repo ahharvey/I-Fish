@@ -1,0 +1,25 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Vessel</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:name) %></dt>
+      <dd><%= @vessel.name %></dd>
+      <dt><%= Vessel.human_attribute_name(:company) %></dt>
+      <dd><%= link_to @vessel.company.try(:name), @vessel.company %></dd>
+      <dt><%= Vessel.human_attribute_name(:owner) %></dt>
+      <dd><%= @vessel.owner %></dd>
+      <dt><%= Vessel.human_attribute_name(:vessel_type) %></dt>
+      <dd><%= @vessel.vessel_type.try(:name) %></dd>
+      <dt><%= Vessel.human_attribute_name(:length) %></dt>
+      <dd><%= @vessel.length %></dd>
+      <dt><%= Vessel.human_attribute_name(:tonnage) %></dt>
+      <dd><%= @vessel.tonnage %></dd>
+      <dt><%= Vessel.human_attribute_name(:flag_state) %></dt>
+      <dd><%= @vessel.flag_state %></dd>
+      <dt><%= Vessel.human_attribute_name(:year_built) %></dt>
+      <dd><%= @vessel.year_built %></dd>
+    </dl>
+  </div>
+</div>

@@ -1,0 +1,12 @@
+<div id="CompanyList">
+  <ul class="list-unstyled">
+    <% @fishery.member_companies.each do |company| %>
+      <li>
+        <%= link_to company.name, company %>
+        <% if can? :update, @fishery %>
+          <%= link_to remove_icon, delete_member_company_fishery_path(@fishery, member_company: company.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

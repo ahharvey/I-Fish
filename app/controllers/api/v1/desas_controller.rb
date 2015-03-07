@@ -12,7 +12,7 @@ module Api
       end
       
       def create
-        respond_with Desa.create(params[:desa])
+        respond_with Desa.create(desa_params)
       end
       
       def update
@@ -21,6 +21,12 @@ module Api
       
       def destroy
         respond_with Desa.destroy(params[:id])
+      end
+
+      private
+  
+      def desa_params
+        params.require(:desa).permit( :name, :kabupaten, :code, :lat, :lng, :district_id )
       end
     end
   end

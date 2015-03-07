@@ -14,27 +14,33 @@ id:
       team: "New team members have signed up and are awaiting your approval"
   admins:
     title: "Staf Staf"
+    welcome:
+      title: "Salamat datang ke I-Fish"
     edit:
       title: "Edit Profil"
+    crop:
+      title: "Crop avatar"
     registrations:
       edit:
         title: "Security"
-      security:
-        title: "Security"
-      settings:
-        title: "Settings"
-      avatar:
-        title: "Avatar"
-      crop:
-        title: "Crop Avatar"
-      welcome:
-        title: "Welcome"
+      new:
+        title: "Sign up"
   catches:
     title: "Komposisi Penangkapan"
     index:
       title: "Komposisi Penangkapan"
     show:
       title: "Laporan Penangkapan"
+  companies:
+    title: "Perusahan perusahan"
+    index:
+      title: "Perusahan perusahan"
+    show:
+      title: "Perusahan"
+    new:
+      title: "Perusahan baru"
+    edit:
+      title: "Mengedit perusahan"
   desas:
     title: "Desas"
     index:
@@ -70,6 +76,8 @@ id:
     index:
       title: "Perikanan Perikanan"
     show:
+      title: "Perikanan"
+    report:
       title: "Laporan Perikanan"
   fishes:
     title: "Ikan"
@@ -111,6 +119,22 @@ id:
       title: "Logged Days"
     show:
       title: "Logged Day"
+  offices:
+    title: "Kantor Kantor"
+    index:
+      title: "Kantor Kantor"
+    show:
+      title: "Kantor"
+  protocols:
+    title: "Protokol Protokol"
+    index:
+      title: "Protokol Protokol"
+    show:
+      title: "Protokol Protokol"
+    new:
+      title: "Protokol baru"
+    edit:
+      title: "Mengedit protokol"
   provinces:
     title: "Provinces"
     index:
@@ -129,6 +153,27 @@ id:
       title: "Laporan Survey"
   users:
     title: "Nelayan Nelayan"
+    welcome:
+      title: "Salamat datang ke I-Fish"
+    edit:
+      title: "Edit Profil"
+    crop:
+      title: "Crop avatar"
+    registrations:
+      edit:
+        title: "Security"
+      new:
+        title: "Sign up"
+  vessels:
+    title: "Kapal kapal"
+    index:
+      title: "Kapal kapal"
+    show:
+      title: "Kapal"
+    new:
+      title: "Kapal baru"
+    edit:
+      title: "Mengedit kapal"
   navbar:
     home: "Pulang"
     data: "Review"
@@ -275,6 +320,28 @@ id:
         catch_scribe: "Catch scribe"
         catch_measure: "Catch measurer"
         admin_id: "Admin"
+      vessel:
+        name: "Name"
+        vessel_type_id: "Vessel Type"
+        gear_id: "Gear"
+        flag_state: "Flag state"
+        year_built: "Year of Construction"
+        length: "Length"
+        tonnage: "GT"
+        imo_number: "IMO reg. no."
+        shark_policy: "Shark policy"
+        iuu_list: "IUU list"
+        code_of_conduct: "Code of Conduct"
+        company_id: "Company"
+        ap2hi_ref: "AP2HI UVI"
+        issf_ref: "ISSF UVI"
+        crew: "No. crew"
+        hooks: "No. hooks"
+        captain: "Captain"
+        owner: "Owner"
+        sipi_number: "SIPI"
+        sipi_expiry: "SIPI expiry date"
+        siup_number: "SIUP"
   views:
     pagination:
       first: "&laquo; First"

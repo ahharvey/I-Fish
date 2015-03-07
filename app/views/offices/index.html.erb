@@ -1,0 +1,38 @@
+<% title t ".title" %>
+
+<%= link_to new_office_path, class: "btn btn-mini btn-default", title: "Create new office", alt: "New office" do %>
+  <%= icon fa_new, "NEW" %>
+<% end %>
+
+<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+
+
+<table  class="table table-striped table-condensed datatable">
+  <thead>
+    <tr>
+      <th></th>
+      <th><%= Company.human_attribute_name(:name) %></th>
+      <th><%= Company.human_attribute_name(:district) %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @offices.each do |office| %>
+      <tr>
+        <td><%= link_to show_icon, office %> </td>
+        <td><%= office.name %></td>
+        <td><%= office.district.try(:name) %></td>
+        <td>
+          <% if can? :update, office %>
+            <%= link_to edit_icon, edit_office_path(office) %> 
+          <% end %>
+          <% if can? :destroy, office %>
+            <%= link_to destroy_icon, office, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br />

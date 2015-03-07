@@ -1,0 +1,18 @@
+<%= simple_form_for @vessel, html: {class: ''} do |f| %>
+  <% if !@vessel.issf_ref_requested? && @vessel.issf_ref.blank? %>
+    <%= f.input :issf_ref_requested, as: :hidden, input_html: {value: true } %>
+    <%= content_tag :button, type: :submit, class: 'btn btn-success btn-lg btn-block' do %>
+      Request ISSF UVI
+    <% end %>
+
+  <% elsif @vessel.issf_ref_requested? && @vessel.issf_ref.blank? %>
+    <%= f.input :issf_ref_requested, as: :hidden, input_html: {value: true } %>
+    <%= content_tag :button, type: :submit, class: 'btn btn-warning btn-lg btn-block', disabled: '' do %>
+      ISSF UVI Requested
+    <% end %>
+  <% end %>
+  
+
+      
+
+<% end %>

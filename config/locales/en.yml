@@ -15,27 +15,33 @@ en:
       team: "New team members have signed up and are awaiting your approval"
   admins:
     title: "Officers"
+    welcome:
+      title: "Welcome to I-Fish"
     edit:
       title: "Edit Profile"
+    crop:
+      title: "Crop avatar"
     registrations:
       edit:
         title: "Security"
-      security:
-        title: "Security"
-      settings:
-        title: "Settings"
-      avatar:
-        title: "Avatar"
-      crop:
-        title: "Crop Avatar"
-      welcome:
-        title: "Welcome"
+      new:
+        title: "Sign up"
   catches:
     title: "Catch Composition"
     index:
       title: "Catch Composition"
     show:
       title: "Catch Report"
+  companies:
+    title: "Companies"
+    index:
+      title: "Companies"
+    show:
+      title: "Company"
+    new:
+      title: "New company"
+    edit:
+      title: "Edit company"
   desas:
     title: "Villages"
     index:
@@ -71,7 +77,13 @@ en:
     index:
       title: "Fisheries"
     show:
+      title: "Fishery"
+    report:
       title: "Fishery Report"
+    target_fishes:
+      exists: "Target fish already set"
+      created: "Target fish added"
+      removed: "Target fish removed"
   fishes:
     title: "Fish"
     index:
@@ -112,6 +124,22 @@ en:
       title: "Logged Days"
     show:
       title: "Logged Day"
+  offices:
+    title: "Offices"
+    index:
+      title: "Offices"
+    show:
+      title: "Office"
+  protocols:
+    title: "Protocols"
+    index:
+      title: "Protocols"
+    show:
+      title: "Protocol"
+    new:
+      title: "New protocol"
+    edit:
+      title: "Edit protocol"
   provinces:
     title: "Provinces"
     index:
@@ -130,6 +158,27 @@ en:
       title: "Landing Site Survey Report"
   users:
     title: "Fishers"
+    welcome:
+      title: "Welcome to I-Fish"
+    edit:
+      title: "Edit Profile"
+    crop:
+      title: "Crop avatar"
+    registrations:
+      edit:
+        title: "Security"
+      new:
+        title: "Sign up"
+  vessels:
+    title: "Vessels"
+    index:
+      title: "Vessels"
+    show:
+      title: "Vessel"
+    new:
+      title: "New vessel"
+    edit:
+      title: "Edit vessel"
   navbar:
     home: "Home"
     data: "Review"
@@ -279,6 +328,28 @@ en:
         admin_id: "Admin"
         supervisor:
           unapproved: "Some are unapproved!!"
+      vessel:
+        name: "Name"
+        vessel_type_id: "Vessel Type"
+        gear_id: "Gear"
+        flag_state: "Flag state"
+        year_built: "Year of Construction"
+        length: "Length"
+        tonnage: "GT"
+        imo_number: "IMO reg. no."
+        shark_policy: "Shark policy"
+        iuu_list: "IUU list"
+        code_of_conduct: "Code of Conduct"
+        company_id: "Company"
+        ap2hi_ref: "AP2HI UVI"
+        issf_ref: "ISSF UVI"
+        crew: "No. crew"
+        hooks: "No. hooks"
+        captain: "Captain"
+        owner: "Owner"
+        sipi_number: "SIPI"
+        sipi_expiry: "SIPI expiry date"
+        siup_number: "SIUP"
   views:
     pagination:
       first: "&laquo; First"

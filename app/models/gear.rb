@@ -21,13 +21,16 @@ class Gear < ActiveRecord::Base
   
   has_paper_trail
 
-  default_scope order('num_code ASC')
-  attr_accessible :alpha_code, :cat_eng, :cat_ind, :fao_code, :name, :num_code, :sub_cat_eng, :sub_cat_ind, :type_eng, :type_ind
-
+  # default_scope order('num_code ASC')
+  default_scope -> { order('num_code ASC') }
   has_many :landings, dependent: :destroy
   has_many :provinces, through: :landings
   has_many :districts, through: :landings
   has_many :fisheries, through: :landings
+
+  has_and_belongs_to_many :using_fisheries, class_name: "Fishery"
+
+  attr_accessor :fishery_id
 
   def approved_landings
     self.landings.where(survey_id: Survey.where(approved: true))

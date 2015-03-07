@@ -1,4 +1,8 @@
+
 IFish::Application.routes.draw do
+
+require 'sidekiq/web'
+
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
@@ -29,22 +33,6 @@ IFish::Application.routes.draw do
         sign_up: 'signup'
       }
 
-    devise_scope :user do
-      match 'user/crop_avatar' => 'users/registrations#crop', :as => :user_crop
-      match 'user/upload_avatar' => 'users/registrations#avatar', :as => :user_avatar
-      match 'user/settings' => 'users/registrations#settings', :as => :user_settings
-      match 'user/security' => 'users/registrations#security', :as => :user_security
-      match 'user/welcome' => 'users/registrations#welcome', :as => :user_welcome
-    end
-
-    devise_scope :admin do
-      match 'admin/crop_avatar' => 'admins/registrations#crop', :as => :admin_crop
-      match 'admin/upload_avatar' => 'admins/registrations#avatar', :as => :admin_avatar
-      match 'admin/settings' => 'admins/registrations#settings', :as => :admin_settings
-      match 'admin/security' => 'admins/registrations#security', :as => :admin_security
-      match 'admin/welcome' => 'admins/registrations#welcome', :as => :admin_welcome
-    end
-
     namespace :panel do
       resources :users do
         member do
@@ -73,19 +61,45 @@ IFish::Application.routes.draw do
     resources :desas do
       resources :surveys
     end
-    resources :fisheries
+    resources :fisheries do
+      resources :companies, only: [:create, :new]
+      resources :gears, only: [:create, :new]
+      resources :fishes, only: [:create, :new]
+      resources :offices, only: [:create, :new]
+      member do
+        get :report
+        post :add_target_fish
+        delete :delete_target_fish
+        post :add_used_gear
+        delete :delete_used_gear
+        post :add_member_company
+        post :create_member_company
+        get :new_member_company
+        delete :delete_member_company
+        post :add_member_office
+        delete :delete_member_office
+      end
+    end
     resources :fishes do
       collection do
         post :import
+        get :autocomplete
       end
     end
     resources :gears
     resources :landings
-    resources :offices
+    resources :offices do
+      member do
+        post :add_admin
+        delete :delete_admin
+      end
+    end
     resources :surveys do
-      put :approve, on: :member
-      put :pend, on: :member
-      put :reject, on: :member
+      member do
+        put :approve
+        put :pend
+        put :reject
+      end
     end
     resources :engines
     resources :graticules
@@ -101,11 +115,42 @@ IFish::Application.routes.draw do
     resources :excel_files
     resources :activities
 
-    resources :users, :only => [:index, :show, :edit, :update]
-    resources :admins, :only => [:index, :show, :edit, :update]
+    resources :responders
 
-    namespace :api do
-      namespace :v1 do
+    resources :tests
+
+    resources :vessels
+
+    resources :companies do
+      member do
+        get 'crop' => 'companies#crop', :as => :crop
+        get :report
+        post :add_vessel
+        delete :delete_vessel
+      end
+    end
+
+    resources :documents
+
+    resources :protocols
+
+    resources :users, :only => [:index, :show, :edit, :update] do
+      member do
+        get 'welcome' => 'users#welcome', :as => :welcome
+        get :report
+        get :crop
+      end
+    end
+    resources :admins, :only => [:index, :show, :edit, :update] do
+      member do
+        get :welcome
+        get :crop
+      end
+    end
+
+
+    namespace :api, defaults: {format: 'json'} do
+      scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
         resources :users
         resources :admins
         resources :logbooks
@@ -120,6 +165,10 @@ IFish::Application.routes.draw do
       end
     end
 
+    authenticate :admin, lambda { |a| a.admin? } do
+      mount Sidekiq::Web => '/sidekiq'
+    end
+
 
     get 'home/index'
     get 'home/upload_data'
@@ -130,7 +179,7 @@ IFish::Application.routes.draw do
 
 
     match '/multipart_import' => 'home#multipart_import', via: [:get, :post]
-    match '/import_mail' => 'home#import_mail'
+    post '/import_mail' => 'home#import_mail'
 
     post 'home/process_upload_data'
 
@@ -145,14 +194,15 @@ IFish::Application.routes.draw do
  
 
   # handles /bad-locale|anything/valid-path
-  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}")
+  match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}"), via: :get
   
   # handles /anything|valid-path-but-no-locale
-  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }
+  match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }, via: :get
 
   # handles /
   #root to: redirect("/#{I18n.default_locale}")
-  match '', to: redirect("/#{I18n.default_locale}")
+  match '', to: redirect("/#{I18n.default_locale}"), via: :get
 
+  
 
 end
