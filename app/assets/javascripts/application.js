@@ -17,12 +17,12 @@
 //= require bootstrap-tour/build/js/bootstrap-tour
 //= require best_in_place
 //= require bootstrap-sprockets
-//= require bootstrap-switch
-//= require jquery.Jcrop
-//= require underscore
+//= require bootstrap-switch/dist/js/bootstrap-switch
+//= require jcrop/js/jquery.Jcrop
+//= require underscore/underscore
 //= require gmaps/google
-//= require dataTables
-//= require datatables-bootstrap3
+//= require datatables/media/js/jquery.dataTables
+//= require datatables-bootstrap3/BS3/assets/js/datatables
 //= require autocomplete-rails
 //= require local_time
 //= require_tree .
