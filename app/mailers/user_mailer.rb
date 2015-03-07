@@ -1,5 +1,5 @@
 class UserMailer < ActionMailer::Base
-  default from: "i-fish@imacsindonesia.com"
+  default from: "no-reply@i-fish.net"
 
   def data_upload_success(admin_id, excel_file_id)
     @admin = Admin.find(admin_id)
