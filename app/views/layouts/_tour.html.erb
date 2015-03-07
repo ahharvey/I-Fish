@@ -2,7 +2,7 @@
   var tour;
 
   tour = new Tour({
-    name: '20150215',
+    name: '20150304',
     steps: [
       {
         orphan: true,
@@ -22,7 +22,7 @@
         orphan: true,
         title: 'Fishery',
         content: '...and view all the details about the fishery in one easy location.',
-        path: '/fisheries/1'
+        path: <%= fishery_path(current_admin.member_fisheries.first) %>
       }, {
         element: '#documents',
         placement: 'right',
