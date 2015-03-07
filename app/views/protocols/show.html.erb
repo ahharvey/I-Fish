@@ -20,51 +20,7 @@
     </div>
   </div>
   <div class="col-xs-12 col-md-6">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <h3 class="panel-title">Files</h3>
-      </div>
-      <div class="panel-body">
-        <% @protocol.documents.each do |document| %>
-          <%= link_to document.file.url do %>
-            <div class= 'col-xs-3 well text-center'>
-              <% if document.content_type == 'application/doc' %>
-                <%= icon fa_word, "", class: 'fa-2x' %>
-              <% elsif document.content_type == 'application/xls' %>
-                <%= icon fa_excel, "", class: 'fa-2x' %>
-              <% elsif document.content_type == 'application/pdf' %>
-                <%= icon fa_pdf, "", class: 'fa-4x' %>
-              <% elsif document.content_type == 'jpg' %>
-                <%= icon fa_image, "", class: 'fa-2x' %>
-              <% end %>
-              <br />
-              <br />
-              <%= document.title %>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <div class="panel-footer">
-        <div class="row">
-          <%= form_for Document.new, html: { class: 'inline-form'} do |f| %>
-            <div class="col-xs-12 col-md-6">
-              <%= f.hidden_field :documentable_id, value: @protocol.id %>
-              <%= f.hidden_field :documentable_type, value: @protocol.class.name %>
-              
-              <div class="input-group">
-                <%= f.label :file, "Upload files", class: 'sr-only' %>
-                <%= f.file_field :file, class: 'form-control' %>
-                <span class="input-group-btn">
-                  <%= f.submit 'Upload', class: 'btn btn-default btn-primary' %>
-                  </span>
-              </div>
-            </div>
-
-            
-          <% end %>
-        </div>
-      </div>
-    </div>
+    <%= render partial: 'shared/file_upload', locals: { resource: @protocol } %>
   </div>
 
 </div>

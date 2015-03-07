@@ -24,7 +24,7 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
-    @Document.save
+    @document.save
     respond_with @document, location: -> { after_save_path_for(@document) }
   end
 
@@ -57,7 +57,7 @@ class DocumentsController < ApplicationController
   end
 
   def after_save_path_for(resource)
-    document_path(resource)
+    polymorphic_path(resource.documentable)
   end
 
 end
