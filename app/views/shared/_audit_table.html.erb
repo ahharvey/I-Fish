@@ -31,12 +31,15 @@
             </td>
             <td><small><%= version.event.titlecase %></small></td>
             <td><small>
-              <% version.changeset.except(:updated_at, :created_at).each do |c| %>
-                <b><%= parent.class.human_attribute_name(c[0].to_sym) %></b>
-                changed from 
-                <i><%= c[1][0] %></i>
-                to
-                <i><%= c[1][1] %></i>.
+              <% if version.event == 'create' %>
+                <i><%= parent.class.human_attribute_name(c[0].to_sym) %></i>:
+                <b><%= c[1][1] %></b>
+              <% else %>
+                <% version.changeset.except(:updated_at, :created_at, :id).each do |c| %>
+                  <i><%= parent.class.human_attribute_name(c[0].to_sym) %></i>
+                  changed to
+                  <b><%= c[1][1] %></b>.
+                <% end %>
               <% end %>
             </small></td>
           </tr>
