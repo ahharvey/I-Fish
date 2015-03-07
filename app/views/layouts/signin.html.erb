@@ -18,13 +18,6 @@
             <h3><%= yield (:title) || "FishStat" %></h3>
           </div><!-- page-header -->
           <%= yield %>
-          <% unless admin_signed_in? || user_signed_in? %>
-            <div class="pull-right">
-              Admins: 
-              <%= link_to "Sign up", new_admin_registration_path, class: 'navbar-link'  %> |
-              <%= link_to "Login", new_admin_session_path, class: 'navbar-link'  %>
-            </div>
-          <% end %>
         </div>
       </div>
     </div>
@@ -32,5 +25,9 @@
       <%= yield :scripts %>
     </footer>
   </body>
-  <%= render partial: 'layouts/templates_modal' %>
+
+  <% unless admin_signed_in? || user_signed_in? %>
+    <%= render partial: 'layouts/modal_signup' %>
+    <%= render partial: 'layouts/modal_signin' %>
+  <% end %>
 </html>

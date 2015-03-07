@@ -1,4 +1,5 @@
 <p class="navbar-text">
-	<%= link_to t("devise.signup"), new_user_registration_path, class: 'navbar-link'  %> |
-	<%= link_to t("devise.signin"), new_user_session_path, class: 'navbar-link'  %>
+  <%= link_to t("devise.signup"), "#modal_signup", data: { toggle: "modal", target: "#modal_signup" } %> | 
+  <%= link_to t("devise.signin"), "#modal_signin", data: { toggle: "modal", target: "#modal_signin" } %>
 </p>
+

@@ -1,0 +1,16 @@
+<div class="modal fade" id="modal_signup" tabindex="-1" role="dialog" aria-labelledby="templates_modal_Label" aria-hidden="true">
+  <div class="modal-dialog">
+
+        <div class="list-group">
+          <%= link_to new_user_registration_path, class: 'list-group-item list-group-item-success' do %>
+            <h4 class="list-group-item-heading">New User Registration</h4>
+            <p class="list-group-item-text">Click here to register as an industry member.</p>
+          <% end %>
+          <%= link_to new_admin_registration_path, class: 'list-group-item list-group-item-danger' do %>
+            <h4 class="list-group-item-heading">New Admin Registration</h4>
+            <p class="list-group-item-text">Click here to register as a government or association staff.</p>
+          <% end %>
+        </div>
+
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->

@@ -1,0 +1,16 @@
+<div class="modal fade" id="modal_signin" tabindex="-1" role="dialog" aria-labelledby="templates_modal_Label" aria-hidden="true">
+  <div class="modal-dialog">
+
+        <div class="list-group">
+          <%= link_to new_user_session_path, class: 'list-group-item list-group-item-success' do %>
+            <h4 class="list-group-item-heading">User sign in</h4>
+            <p class="list-group-item-text">Registered industry members can click here to sign in.</p>
+          <% end %>
+          <%= link_to new_admin_session_path, class: 'list-group-item list-group-item-danger' do %>
+            <h4 class="list-group-item-heading">Admin sign in</h4>
+            <p class="list-group-item-text">Registered government or association staff can click here to sign in.</p>
+          <% end %>
+        </div>
+
+  </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
