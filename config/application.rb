@@ -18,6 +18,7 @@ module IFish
     # Custom directories with classes and modules you want to be autoloadable.
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
+
     config.app_generators.scaffold_controller :responders_controller
 
     config.active_record.raise_in_transactional_callbacks = true
@@ -59,6 +60,9 @@ module IFish
 
     # Enable the asset pipeline
     config.assets.enabled = true
+
+    # Add bower assets
+    config.assets.paths << Rails.root.join('vendor', 'assets', 'bower_components')
 
     config.assets.initialize_on_precompile = false
 
