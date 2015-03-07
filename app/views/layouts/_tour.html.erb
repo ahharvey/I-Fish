@@ -19,11 +19,11 @@
         title: 'Quick Links',
         content: 'Easy navigation to the pages you use most often. Click here to go straight to the fisheries your organization is active within...'
       }, {
-        orphan: true,
-        title: 'Fishery',
-        content: '...and view all the details about the fishery in one easy location.',
-        path: '<%= fishery_path(current_admin.member_fisheries.first) %>'
-      }, {
+          orphan: true,
+          title: 'Fishery',
+          content: '...and view all the details about the fishery in one easy location.',
+          path: '<%= fishery_path( current_admin.member_fisheries.any? ? current_admin.member_fisheries.first : Fishery.first) %>'
+        }, {
         element: '#documents',
         placement: 'right',
         title: 'Upload Files',
