@@ -101,7 +101,7 @@ class Admin < ActiveRecord::Base
 #      maximum: 1.megabytes.to_i 
 #    } 
   
-  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
+  attr_accessor :crop_x, :crop_y, :crop_w, :crop_h, :password, :password_confirmation, :current_password
   after_update :crop_avatar
   
   def crop_avatar
