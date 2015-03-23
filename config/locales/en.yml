@@ -169,6 +169,10 @@ en:
         title: "Security"
       new:
         title: "Sign up"
+  unloadings:
+    title: "Unloadings"
+    index:
+      title: "Unloadings"
   vessels:
     title: "Vessels"
     index:
@@ -226,6 +230,12 @@ en:
           text: "This spreadsheet is used to enter and submit fishers' logbook data."
   activerecord:
     attributes:
+      bait_loading: 
+        date: "Date"
+        quantity: "Quantity (kg)"
+        location: "Location"
+        fish_id: "Species"
+        vessel_id: "Vessel"
       catch:
         fish_id: "Fish"
         landing_id: "Landing"
@@ -328,6 +338,22 @@ en:
         admin_id: "Admin"
         supervisor:
           unapproved: "Some are unapproved!!"
+      unloading:
+        port: "Port"
+        time_out: "Dep."
+        time_in: "Arr."
+        etp: "ETP"
+        location: "Location"
+        fuel: "Fuel (L)"
+        ice: "Ice (Block)"
+        byproduct: "Byproduct"
+        discard: "Discard"
+        yft: "YFT"
+        bet: "BET"
+        skj: "SKJ"
+        kaw: "KAW"
+        landed: "Landed"
+        discarded: "Discarded"
       vessel:
         name: "Name"
         vessel_type_id: "Vessel Type"

@@ -1,0 +1,196 @@
+
+
+<%# Conditionally set remote: true. Also, passing model name as data attribute %>
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= simple_form_for @unloading, 
+  wrapper: :horizontal_form,
+  html: { 
+    role: :form, 
+    class: 'form form-horizontal', 
+    data: { 
+      model: 'unloading' 
+    } 
+  }, 
+  remote: remote do |f| %>
+
+
+  <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
+  <%= render partial: "shared/model_error_messages" %>
+
+  <%= f.input :vessel_id, as: :hidden %>
+
+
+  <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b>Location</b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_port" class="control-label sr-only"><%= Unloading.human_attribute_name(:port) %></label>
+          <div class="col-md-6">
+            <%= f.input_field :port, class: 'form-control', placeholder: Unloading.human_attribute_name(:port) %>
+          </div>
+
+          <label for="unloading_location" class="control-label sr-only"><%= Unloading.human_attribute_name(:location) %></label>
+          <div class="col-md-6">
+              <%= f.input_field :location, class: 'form-control', placeholder: Unloading.human_attribute_name(:location) %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+
+
+  <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b><%= Unloading.human_attribute_name(:time_out) %></b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_time_out" class="control-label sr-only"><%= Unloading.human_attribute_name(:time_out) %></label>
+          <div class="col-md-12 datetime-select-wrapper">
+            <%= f.input_field :time_out,
+              default: Time.now,
+              start_year: Time.now.year-100,
+              end_year: Time.now.year,
+              class: 'datetime-select-input form-control', 
+              data: {
+                date: @unloading.time_out? ? @unloading.time_out.to_s(:long) : '',
+                id: 'unloading_time_out',
+                name: 'unloading[time_out]',
+                min: Date.today-100.years,
+                max: Date.today,
+                label: Unloading.human_attribute_name(:time_out)
+              } %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b><%= Unloading.human_attribute_name(:time_in) %></b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_time_in" class="control-label sr-only"><%= Unloading.human_attribute_name(:time_in) %></label>
+          <div class="col-md-12 datetime-select-wrapper">
+            <%= f.input_field :time_in,
+              default: Time.now,
+              start_year: Time.now.year-100,
+              end_year: Time.now.year,
+              class: 'datetime-select-input form-control',
+              data: {
+                date: @unloading.time_in? ? @unloading.time_in.to_s(:long) : '',
+                id: 'unloading_time_in',
+                name: 'unloading[time_in]',
+                min: Date.today-100.years,
+                max: Date.today,
+                label: Unloading.human_attribute_name(:time_in)
+              } %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+
+
+  <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b>Production (kg)</b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_yft" class="control-label sr-only"><%= Unloading.human_attribute_name(:yft) %></label>
+          <div class="col-md-3">
+            <%= f.input_field :yft, class: 'form-control', placeholder: Unloading.human_attribute_name(:yft) %>
+          </div>
+
+          <label for="unloading_bet" class="control-label sr-only"><%= Unloading.human_attribute_name(:bet) %></label>
+          <div class="col-md-3">
+              <%= f.input_field :bet, class: 'form-control', placeholder: Unloading.human_attribute_name(:bet) %>
+          </div>
+
+          <label for="unloading_skj" class="control-label sr-only"><%= Unloading.human_attribute_name(:skj) %></label>
+          <div class="col-md-3">
+              <%= f.input_field :skj, class: 'form-control', placeholder: Unloading.human_attribute_name(:skj) %>
+          </div>
+
+          <label for="unloading_kaw" class="control-label sr-only"><%= Unloading.human_attribute_name(:kaw) %></label>
+          <div class="col-md-3">
+              <%= f.input_field :kaw, class: 'form-control', placeholder: Unloading.human_attribute_name(:kaw) %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b>Bycatch (kg)</b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_byproduct" class="control-label sr-only"><%= Unloading.human_attribute_name(:byproduct) %></label>
+          <div class="col-md-6">
+            <%= f.input_field :byproduct, class: 'form-control', placeholder: Unloading.human_attribute_name(:landed) %>
+          </div>
+
+          <label for="unloading_discard" class="control-label sr-only"><%= Unloading.human_attribute_name(:discard) %></label>
+          <div class="col-md-6">
+              <%= f.input_field :discard, class: 'form-control', placeholder: Unloading.human_attribute_name(:discarded) %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b>Inputs</b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_fuel" class="control-label sr-only"><%= Unloading.human_attribute_name(:fuel) %></label>
+          <div class="col-md-6">
+            <%= f.input_field :fuel, class: 'form-control', placeholder: Unloading.human_attribute_name(:fuel) %>
+          </div>
+
+          <label for="unloading_ice" class="control-label sr-only"><%= Unloading.human_attribute_name(:ice) %></label>
+          <div class="col-md-6">
+              <%= f.input_field :ice, class: 'form-control', placeholder: Unloading.human_attribute_name(:ice) %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b>ETP</b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_etp" class="control-label sr-only"><%= Unloading.human_attribute_name(:etp) %></label>
+          <div class="col-md-12">
+            <%= f.input_field :etp,
+              class: 'toggle-switch', 
+              data: { 
+                size: 'normal',
+                'on-color' => 'success',
+                'off-color' => 'danger',
+                'on-text' => "Yes",
+                'off-text' => "No"
+              } %>
+
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+
+  <div class="actions">
+    <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+      Save
+    <% end %>
+  </div>
+
+<% end %>

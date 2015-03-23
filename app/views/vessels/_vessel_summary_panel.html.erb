@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Vessel Details</h3>
+  </div>
+  <div class="panel-body">
+    <dl class="dl-horizontal">
+      <dt><%= Vessel.human_attribute_name(:name) %></dt>
+      <dd><%= @vessel.name %></dd>
+      <dt><%= Vessel.human_attribute_name(:company) %></dt>
+      <dd><%= link_to @vessel.company.try(:name), @vessel.company %></dd>
+      <dt><%= Vessel.human_attribute_name(:ap2hi_ref) %></dt>
+      <dd><%= @vessel.ap2hi_ref %></dd>
+      <dt><%= Vessel.human_attribute_name(:sipi_number) %></dt>
+      <dd><%= @vessel.sipi_number %></dd>
+      <dt><%= Vessel.human_attribute_name(:sipi_expiry) %></dt>
+      <dd><%= @vessel.sipi_expiry %></dd>
+    </dl>
+  </div>
+</div>

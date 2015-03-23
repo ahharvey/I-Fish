@@ -11,6 +11,12 @@
     </div>
     <br />
     <div class="row">
+      <div class="col-xs-12">
+        <%= link_to "Add unloading report", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+      </div>
+    </div>
+    <br />
+    <div class="row">
       <div class="col-xs-12 col-md-6">
         <%= render partial: "registration_panel" %>
       </div>
@@ -41,9 +47,3 @@
 
 <%= link_to 'Edit', edit_vessel_path(@vessel) %> |
 <%= link_to 'Back', vessels_path %>
-
-
-
-
-
-

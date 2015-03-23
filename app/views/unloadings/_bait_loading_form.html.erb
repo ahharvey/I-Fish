@@ -1,0 +1,45 @@
+<%# Conditionally set remote: true. Also, passing model name as data attribute %>
+<% modal ||= false %>
+<% remote = modal ? true : false %>
+<%= simple_form_for unloading, 
+  wrapper: :inline_form,
+  html: { 
+    role: :form, 
+    class: 'form form-inline', 
+    data: { 
+      model: 'bait_loading' 
+    } 
+  }, 
+  remote: remote do |f| %>
+
+
+  <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
+  <%= render partial: "shared/model_error_messages" %>
+
+
+  <%= f.input :vessel_id, as: :hidden %>
+  <%= f.input :time_out, as: :hidden %>
+  <%= f.input :time_in, as: :hidden %>
+  <%= f.input :yft, as: :hidden %>
+  <%= f.input :bet, as: :hidden %>
+  <%= f.input :skj, as: :hidden %>
+  <%= f.input :kaw, as: :hidden %>
+  <%= f.input :byproduct, as: :hidden %>
+  <%= f.input :discard, as: :hidden %>
+  <%= f.input :fuel, as: :hidden %>
+  <%= f.input :ice, as: :hidden %>
+
+
+  <%= f.simple_fields_for :bait_loadings do |builder| %>
+    <%= render 'bait_loading_fields', f: builder %>
+  <% end %>
+
+  <%= link_to_add_fields icon('plus', 'Add bait loading'), f, :bait_loadings %>
+
+  <div class="actions">
+    <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+      Save
+    <% end %>
+  </div>
+
+<% end %>

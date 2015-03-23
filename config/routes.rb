@@ -119,8 +119,11 @@ require 'sidekiq/web'
 
     resources :tests
 
-    resources :vessels
-
+    resources :vessels do
+      resources :unloadings
+    end
+    resources :unloadings
+    
     resources :companies do
       member do
         get 'crop' => 'companies#crop', :as => :crop

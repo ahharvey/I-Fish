@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150228052818) do
+ActiveRecord::Schema.define(version: 20150323010112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,6 +71,21 @@ ActiveRecord::Schema.define(version: 20150228052818) do
   end
 
   add_index "admins_roles", ["admin_id", "role_id"], name: "by_admin_and_role", unique: true, using: :btree
+
+  create_table "bait_loadings", force: :cascade do |t|
+    t.date     "date"
+    t.integer  "vessel_id"
+    t.string   "location"
+    t.integer  "fish_id"
+    t.integer  "quantity"
+    t.integer  "unloading_id"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+  end
+
+  add_index "bait_loadings", ["fish_id"], name: "index_bait_loadings_on_fish_id", using: :btree
+  add_index "bait_loadings", ["unloading_id"], name: "index_bait_loadings_on_unloading_id", using: :btree
+  add_index "bait_loadings", ["vessel_id"], name: "index_bait_loadings_on_vessel_id", using: :btree
 
   create_table "catches", force: :cascade do |t|
     t.integer  "fish_id"
@@ -347,6 +362,39 @@ ActiveRecord::Schema.define(version: 20150228052818) do
   add_index "surveys", ["landing_enumerator_id"], name: "index_surveys_on_landing_enumerator_id", using: :btree
   add_index "surveys", ["reviewer_id"], name: "index_surveys_on_approver_id", using: :btree
 
+  create_table "unloading_catches", force: :cascade do |t|
+    t.integer  "fish_id"
+    t.integer  "quantity"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "unloading_id"
+  end
+
+  add_index "unloading_catches", ["fish_id"], name: "index_unloading_catches_on_fish_id", using: :btree
+  add_index "unloading_catches", ["unloading_id"], name: "index_unloading_catches_on_unloading_id", using: :btree
+
+  create_table "unloadings", force: :cascade do |t|
+    t.string   "port"
+    t.datetime "time_out"
+    t.datetime "time_in"
+    t.boolean  "etp"
+    t.string   "location"
+    t.integer  "fuel"
+    t.integer  "ice"
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "vessel_id"
+    t.string   "review_state", default: "pending"
+    t.integer  "byproduct"
+    t.integer  "discard"
+    t.integer  "yft"
+    t.integer  "bet"
+    t.integer  "skj"
+    t.integer  "kaw"
+  end
+
+  add_index "unloadings", ["vessel_id"], name: "index_unloadings_on_vessel_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
     t.string   "encrypted_password",     limit: 255, default: "", null: false
@@ -434,6 +482,10 @@ ActiveRecord::Schema.define(version: 20150228052818) do
   add_index "vessels", ["gear_id"], name: "index_vessels_on_gear_id", using: :btree
   add_index "vessels", ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
 
+  add_foreign_key "bait_loadings", "fishes"
+  add_foreign_key "bait_loadings", "unloadings"
+  add_foreign_key "bait_loadings", "vessels"
+  add_foreign_key "unloading_catches", "fishes"
   add_foreign_key "vessels", "companies"
   add_foreign_key "vessels", "gears"
   add_foreign_key "vessels", "vessel_types"

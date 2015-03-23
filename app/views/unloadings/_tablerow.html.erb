@@ -1,0 +1,53 @@
+<% present unloading do |unloading_presenter| %> 
+  <%= content_tag_for :tr, unloading do %>
+    <td>
+      <% if unloading.approved? %>
+        <span class="label label-success"><i class='fa fa-check'></i></span>
+      <% elsif unloading.rejected? %>
+        <span class="label label-important"><i class='fa fa-ban'></i></span>
+      <% elsif unloading.pending? %>
+        <span class="label label-warning"><i class='fa fa-warning'></i></span>
+      <% end %>
+    </td>
+    <td><%= unloading_presenter.port %></td>
+    <td><%= unloading_presenter.time_out %></td>
+    <td><%= unloading_presenter.time_in %></td>
+    <td><%= unloading_presenter.yft %></td>
+    <td><%= unloading_presenter.bet %></td>
+    <td><%= unloading_presenter.skj %></td>
+    <td><%= unloading_presenter.kaw %></td>
+    <td><%= unloading_presenter.byproduct %></td>
+    <td><%= unloading_presenter.discard %></td>
+    <td><%= unloading_presenter.etp %></td>
+    <td><%= unloading_presenter.location %></td>
+    <td><%= unloading_presenter.fuel %></td>
+    <td><%= unloading_presenter.ice %></td> 
+    <td>
+      <%= link_to "#{unloading.number_of_bait_loadings} bait loadings", "#new_bait_loading_modal_#{unloading.id}", class: "btn btn-xs btn-block #{unloading.number_of_bait_loadings > 0 ? 'btn-success' : 'btn-danger' }", data: { toggle: 'modal', 'unloading-id' => unloading.id } %>
+      <% if @vessel.present? %>
+        <%# Bootstrap modal markup. @see: http://getbootstrap.com/javascript/#modals %>
+        <div class="modal fade" id='<%= "new_bait_loading_modal_#{unloading.id}" %>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">Bait Loading - <%= @vessel.name %> <small><i>(<%= @vessel.ap2hi_ref %>)</i></small></h4>
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col-xs-12">
+                      <%# Render the new person form (passing modal => true to enable remote => true) %>
+                      <%= render 'bait_loading_form', modal: true, unloading: unloading %>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      <% end %>
+
+    </td>
+  <% end %>
+<% end %>

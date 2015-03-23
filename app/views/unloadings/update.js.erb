@@ -1,0 +1,1 @@
+$('#unloading_<%= @unloading.id %>').replaceWith("<%= escape_javascript( render partial: 'tablerow', locals: {unloading: @unloading } ) %>");
