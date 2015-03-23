@@ -104,5 +104,10 @@ group :development do
   # gem 'rack-mini-profiler', '~> 0.1.31'
 end
 
+group :production, :staging do
+  gem 'rails_12factor'
+end
+
+
 gem 'newrelic_rpm', '~> 3.9.0' #system monitoring and profiling
 
