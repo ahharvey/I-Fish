@@ -164,6 +164,10 @@ id:
         title: "Security"
       new:
         title: "Sign up"
+  unloadings:
+    title: "Unloadings"
+    index:
+      title: "Unloadings"
   vessels:
     title: "Kapal kapal"
     index:
@@ -221,6 +225,12 @@ id:
           text: "This spreadsheet is used to enter and submit fishers' logbook data."
   activerecord:
     attributes:
+      bait_loading: 
+        date: "Date"
+        quantity: "Quantity (kg)"
+        location: "Location"
+        fish_id: "Species"
+        vessel_id: "Vessel"
       catch:
         fish_id: "Ikan"
         landing_id: "Tangkap"
@@ -320,6 +330,22 @@ id:
         catch_scribe: "Catch scribe"
         catch_measure: "Catch measurer"
         admin_id: "Admin"
+      unloading:
+        port: "Pelabuhan"
+        time_out: "Brangkat"
+        time_in: "Kembali"
+        etp: "ETP"
+        location: "Lokasi"
+        fuel: "Solar (L)"
+        ice: "Es (Balok)"
+        byproduct: "Byproduct"
+        discard: "Discard"
+        yft: "YFT"
+        bet: "BET"
+        skj: "SKJ"
+        kaw: "KAW"
+        landed: "Landed"
+        discarded: "Discarded"
       vessel:
         name: "Name"
         vessel_type_id: "Vessel Type"

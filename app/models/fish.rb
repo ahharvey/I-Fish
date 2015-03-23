@@ -52,6 +52,7 @@ class Fish < ActiveRecord::Base
   validates :english_name,
   	presence: true
 
+    scope :default, -> { order('fishes.code ASC') }
 
   def self.import(file)
     CSV.foreach(file.path, headers: true) do |row|

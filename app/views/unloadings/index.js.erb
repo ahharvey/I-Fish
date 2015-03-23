@@ -1,0 +1,8 @@
+
+$('#unloadings_tbody').prepend("<%= escape_javascript( render partial: 'tablerow', locals: {unloading: @unloading } ) %>");
+$('#new_unloading_modal').modal_success();
+$('.switch')['bootstrapSwitch']();
+
+
+
+

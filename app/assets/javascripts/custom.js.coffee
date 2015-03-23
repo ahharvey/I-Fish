@@ -10,6 +10,54 @@ jQuery ->
   $(".toggle-switch").bootstrapSwitch()
 
 
+jQuery ->  #initialize Bootstrap datepicker on date select field
+  if $('.datetime-select-input').length
+
+    $('.datetime-select-input').each ->
+
+      date  = $(this).data('date')
+      id    = $(this).prop('id')
+      name  = $(this).prop('name')
+      max   = $(this).data('max')
+      min   = $(this).data('min')
+      label = $(this).data('label')
+
+      $(this).closest(".datetime-select-wrapper").replaceWith ->
+        open_wrapper = "<div class='col-md-12'>"
+        input = "<input class='form-control datetime-select-bootstrapped' type='text' placeholder='" + label + "' name='" + name + "' id='" + id + "' value='" + date + "'>"
+        close_wrapper = "</div>"
+        $ open_wrapper + input + close_wrapper
+
+      $(".datetime-select-bootstrapped").datetimepicker
+        minDate: min
+        maxDate: max
+        sideBySide: true
+        format: 'DD/MM/YYYY HH:mm'
+
+jQuery ->  #initialize Bootstrap datepicker on date select field
+  if $('.date-select-input').length
+
+    $('.date-select-input').each ->
+
+      date  = $(this).data('date')
+      id    = $(this).prop('id')
+      name  = $(this).prop('name')
+      max   = $(this).data('max')
+      min   = $(this).data('min')
+      label = $(this).data('label')
+
+      $(this).closest(".date-select-wrapper").replaceWith ->
+        open_wrapper = "<span class='col-md-12'>"
+        input = "<input class='form-control date-select-bootstrapped' type='text' placeholder='" + label + "' name='" + name + "' id='" + id + "' value='" + date + "'>"
+        close_wrapper = "</span>"
+        $ open_wrapper + input + close_wrapper
+
+      $(".date-select-bootstrapped").datetimepicker
+        minDate: min
+        maxDate: max
+        sideBySide: true
+        format: 'DD/MM/YYYY'
+
 
 
 jQuery ->
@@ -23,7 +71,7 @@ jQuery ->
 
 show_ajax_message = (msg, type) ->
   $(".flash-container").html "<div class='alert alert-#{type} fade in' data-alert='alert' style='margin-top:17px'><a class='close' href='#' onclick='$('.alert').remove();''>×</a><p>#{msg}</p></div>"
-  $(".alert-#{type}").delay(3000).slideUp 'slow'
+  $(".alert-#{type}").delay(7000).slideUp 'slow'
  
 $(document).ajaxComplete (event, request) ->
   msg = request.getResponseHeader("X-Message")

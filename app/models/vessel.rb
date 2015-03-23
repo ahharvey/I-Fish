@@ -3,12 +3,15 @@ class Vessel < ActiveRecord::Base
   belongs_to :gear
   belongs_to :company
   has_many :documents, as: :documentable
+  has_many :unloadings
 
   has_paper_trail
 
   attr_accessor :return_to
 
   before_save :send_pvr_request
+
+  scope :default, -> { order('vessels.ap2hi_ref ASC') }
 
   private
 

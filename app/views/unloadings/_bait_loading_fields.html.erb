@@ -1,0 +1,40 @@
+<fieldset>
+  <div class="col-xs-2">
+    <%= f.input_field :date,
+      default: Time.now,
+      start_year: Time.now.year-100,
+      end_year: Time.now.year,
+      class: 'date-select-input form-control',
+      data: {
+        date: '',
+        id: 'bait_loading_date',
+        name: 'bait_loading[date]',
+        min: Date.today-100.years,
+        max: Date.today,
+        label: BaitLoading.human_attribute_name(:date)
+      } %>
+  </div>
+
+  <div class="col-xs-2">
+
+    <%= f.association :vessel, collection: Vessel.default, prompt: BaitLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id, label: false, wrapper: false %>
+  </div>
+
+  <div class="col-xs-2">
+  <%= f.input_field :location, placeholder: BaitLoading.human_attribute_name(:location), class: 'form-control' %>
+  </div>
+
+  <div class="col-xs-2">
+    <%= f.association :fish, collection: Fish.default, prompt: BaitLoading.human_attribute_name(:fish), label_method: :code, value_method: :id, label: false, wrapper: false %>
+    
+  </div>
+
+  <div class="col-xs-2">
+    <%= f.input_field :quantity, placeholder: BaitLoading.human_attribute_name(:quantity), class: 'form-control' %>
+  </div>
+
+  <div class="col-xs-2">
+    <%= f.hidden_field :_destroy %>
+    <%= link_to destroy_icon, '#', class: "remove_fields" %>
+  </div>
+</fieldset>

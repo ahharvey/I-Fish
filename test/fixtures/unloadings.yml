@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  port: MyString
+  time_out: 2015-03-20 20:38:11
+  time_in: 2015-03-20 20:38:11
+  etp: 
+  location: MyString
+  fuel: 1
+  ice: 1
+
+two:
+  port: MyString
+  time_out: 2015-03-20 20:38:11
+  time_in: 2015-03-20 20:38:11
+  etp: 
+  location: MyString
+  fuel: 1
+  ice: 1

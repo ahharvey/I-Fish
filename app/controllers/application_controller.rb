@@ -5,6 +5,8 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html
 
+  #add_flash_types :error, :success, :info
+
   protect_from_forgery
   before_filter :set_locale
   #before_filter :authenticate!
@@ -77,7 +79,7 @@ class ApplicationController < ActionController::Base
   def flash_to_headers
     return unless request.xhr?
     response.headers['X-Message'] = flash_message
-    response.headers["X-Message-Type"] = flash_type.to_s
+    response.headers["X-Message-Type"] = twitterized_type( flash_type )
 
     flash.discard # don't want the flash to appear when you reload page
   end
@@ -91,6 +93,21 @@ class ApplicationController < ActionController::Base
   def flash_type
     [:alert, :error, :notice, :success].each do |type|
       return type unless flash[type].blank?
+    end
+  end
+
+  def twitterized_type(type)
+    case type.to_s
+    when 'alert'
+      "warning"
+    when 'error'
+      'danger'
+    when 'notice'
+      "info"
+    when 'success'
+      "success"
+    else
+      type.to_s
     end
   end
 
