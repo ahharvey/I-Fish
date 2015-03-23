@@ -161,6 +161,22 @@ class Admin < ActiveRecord::Base
     office.member_fisheries
   end
 
+  def managed_companies
+    Company.all
+  end
+
+  def managed_vessels
+    Vessel.where(company_id: managed_companies)
+  end
+
+  def managed_unloadings
+    Unloadings.where(vessel_id: managed_vessels)
+  end
+
+  def managed_bait_loadings
+    BaitLoading.where(unloading_id: managed_unloadings)
+  end
+
   def supervised_surveys
     Survey.where( admin_id: self.team_members.each{|t| t.id } )
   end
