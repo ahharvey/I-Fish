@@ -241,6 +241,13 @@ en:
         landing_id: "Landing"
         length: "Length"
         width: "Width"
+      company:
+        name: "Name"
+        code: "Abbreviation"
+        shark_policy: "Shark policy?"
+        iuu_list: "IUU list?"
+        code_of_conduct: "Code of conduct?"
+        member: "AP2HI member?"
       desa:
         name: "Name"
         code: "Code"
@@ -383,3 +390,10 @@ en:
       previous: "&lsaquo; Prev"
       next: "Next &rsaquo;"
       truncate: "..."
+  machine_types:
+    none: "Unpowered"
+    inboard: "Inboard"
+    outboard: "Outboard"
+  material_types:
+    wood: "Wood"
+    fiber: "Fiberglass"

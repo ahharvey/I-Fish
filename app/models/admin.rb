@@ -170,7 +170,7 @@ class Admin < ActiveRecord::Base
   end
 
   def managed_unloadings
-    Unloadings.where(vessel_id: managed_vessels)
+    Unloading.where(vessel_id: managed_vessels)
   end
 
   def managed_bait_loadings

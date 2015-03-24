@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323010112) do
+ActiveRecord::Schema.define(version: 20150323111414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -107,6 +107,7 @@ ActiveRecord::Schema.define(version: 20150323010112) do
     t.string   "avatar"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.string   "code"
   end
 
   create_table "desas", force: :cascade do |t|
@@ -476,6 +477,12 @@ ActiveRecord::Schema.define(version: 20150323010112) do
     t.date     "sipi_expiry"
     t.string   "siup_number"
     t.boolean  "issf_ref_requested"
+    t.string   "material_type"
+    t.string   "machine_type"
+    t.integer  "capacity"
+    t.boolean  "vms"
+    t.boolean  "tracker"
+    t.string   "port"
   end
 
   add_index "vessels", ["company_id"], name: "index_vessels_on_company_id", using: :btree

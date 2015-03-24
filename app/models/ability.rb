@@ -2,6 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user_or_admin)
+    alias_action :create, :update, :read, to: :not_destroy
     user_or_admin ||= User.new
 
     abilities_for_all
@@ -53,6 +54,10 @@ class Ability
     can :manage, Logbook, :admin_id => admin.id #Can manage own data
     can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :read, Fishery # To view summarised fishery data
+    can :read, Company, id: admin.managed_companies.map(&:id)
+    can :read, Vessel, id: admin.managed_vessels.map(&:id)
+    can :create, Unloading, id: admin.managed_unloadings.map(&:id)
+    can :create, BaitLoading, id: admin.managed_bait_loadings.map(&:id)
     can :upload_data, :home # Can submit data
     can :process_upload_data, :home # Can submit data
     can :manage, ExcelFile, :admin_id => admin.id #Can manage own excel files
@@ -61,11 +66,11 @@ class Ability
   def staff(admin)
     # Staff can view and edit data they own, and profiles of users who share the same district
     can :manage, Survey, :admin_id => admin.id #Can manage own data
-    can :manage, Fishery
-    can :manage, Company
-    can :manage, Vessel
-    can :manage, Unloading
-    can :manage, BaitLoading
+    can :not_destroy, Fishery, id: admin.member_fisheries.map(&:id)
+    can :not_destroy, Company, id: admin.managed_companies.map(&:id)
+    can :not_destroy, Vessel, id: admin.managed_vessels.map(&:id)
+    can :not_destroy, Unloading, id: admin.managed_unloadings.map(&:id)
+    can :not_destroy, BaitLoading, id: admin.managed_bait_loadings.map(&:id)
     #can :read, Fishery # To view summarised fishery data
     can :read, User
     can :read, Admin, :id => admin.id

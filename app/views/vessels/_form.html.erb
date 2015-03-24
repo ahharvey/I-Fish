@@ -25,9 +25,25 @@
 
     <%= f.association :vessel_type %>
 
+    <%= f.input :material_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
+      <%= f.select :material_type, Vessel::MATERIAL_TYPES.map { |s| [I18n.t("material_types.#{s}"), s] } %>
+    <% end %>
+
+    <%= f.input :machine_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
+      <%= f.select :machine_type, Vessel::MACHINE_TYPES.map { |s| [I18n.t("machine_types.#{s}"), s] } %>
+    <% end %>
+
     <%= f.input :length %>
 
     <%= f.input :tonnage %>
+
+    <%= f.input :capacity %>
+
+    <%= f.input :vms %>
+
+    <%= f.input :tracker %>
+
+    <%= f.input :port %>
 
     <%= f.input :flag_state %>
     
@@ -35,7 +51,7 @@
 
     <%= f.input :captain %>
     
-    <%= f.association :gear %>
+    <%= f.association :gear, label_method: :alpha_code, value_method: :id %>
 
     <%= f.input :hooks %>
 

@@ -59,7 +59,7 @@ gem 'wkhtmltopdf-heroku', '~> 1.0.0'
 gem 'rabl', '~> 0.11.0' # JSON templates
 gem 'oj', '~> 2.11.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
-
+gem 'rqrcode-with-patches', '~>0.5.4'
 
 ##
 ## UPLOADS AND INCOMING
