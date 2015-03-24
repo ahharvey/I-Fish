@@ -6,6 +6,8 @@
     <dl class="dl-horizontal">
       <dt><%= Company.human_attribute_name(:name) %></dt>
       <dd><%= @company.name %></dd>
+      <dt><%= Company.human_attribute_name(:code) %></dt>
+      <dd><%= @company.code %></dd>
       <dt><%= Company.human_attribute_name(:shark_policy) %></dt>
       <dd><%= human_bool(@company.shark_policy) %></dd>
       <dt><%= Company.human_attribute_name(:iuu_list) %></dt>

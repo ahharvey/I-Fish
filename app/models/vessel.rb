@@ -13,6 +13,10 @@ class Vessel < ActiveRecord::Base
 
   scope :default, -> { order('vessels.ap2hi_ref ASC') }
 
+  MATERIAL_TYPES = ["wood", "fiber"]
+  MACHINE_TYPES = ["none", "outboard", "inboard"]
+
+
   private
 
   def send_pvr_request
