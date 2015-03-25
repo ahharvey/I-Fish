@@ -1,8 +1,9 @@
 class Unloading < ActiveRecord::Base
   belongs_to :vessel
   has_many :unloading_catches
+  accepts_nested_attributes_for :unloading_catches, allow_destroy: true, reject_if: :all_blank
   has_many :bait_loadings
-  accepts_nested_attributes_for :bait_loadings, allow_destroy: true #, reject_if: :all_blank
+  accepts_nested_attributes_for :bait_loadings, allow_destroy: true, reject_if: :all_blank
 
 #  validates :yft, :bet, :skj, :kaw, :byproduct, :discard, :fuel, :ice,
 #    presence: {

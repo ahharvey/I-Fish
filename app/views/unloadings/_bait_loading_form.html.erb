@@ -30,11 +30,7 @@
   <%= f.input :ice, as: :hidden %>
 
 
-  <%= f.simple_fields_for :bait_loadings do |builder| %>
-    <%= render 'bait_loading_fields', f: builder %>
-  <% end %>
 
-  <%= link_to_add_fields icon('plus', 'Add bait loading'), f, :bait_loadings %>
 
   <div class="actions">
     <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>

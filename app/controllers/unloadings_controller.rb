@@ -25,6 +25,7 @@ class UnloadingsController < ApplicationController
   def new
     @unloading = Unloading.new
     @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
+    build_nested_forms( @unloading, @vessel ) if params[:vessel_id]
     respond_with(@unloading)
   end
 
@@ -115,6 +116,18 @@ class UnloadingsController < ApplicationController
       vessel_unloadings_path( params[:unloading][:vessel_id] )
     else
       unloading_path(resource)
+    end
+  end
+
+  def build_nested_forms( unloading, vessel )
+    if vessel.vessel_type.code == 'pol'
+      ['YFT','BET','SKJ','KAW'].each do |t|
+        tuna = Fish.find_by(code: t)
+        unloading.unloading_catches.build(fish_id: tuna.id)
+      end
+      3.times { unloading.bait_loadings.build }
+    elsif vessel.vessel_type.code == 'hl'
+      unloading.bait_loadings.build
     end
   end
 
