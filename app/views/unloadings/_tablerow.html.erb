@@ -23,7 +23,7 @@
     <td><%= unloading_presenter.fuel %></td>
     <td><%= unloading_presenter.ice %></td> 
     <td>
-      <%= link_to "#{unloading.number_of_bait_loadings} bait loadings", "#new_bait_loading_modal_#{unloading.id}", class: "btn btn-xs btn-block #{unloading.number_of_bait_loadings > 0 ? 'btn-success' : 'btn-danger' }", data: { toggle: 'modal', 'unloading-id' => unloading.id } %>
+      <%= link_to "#{unloading.number_of_bait_loadings} bait loadings", edit_unloading_path(unloading), class: "btn btn-xs btn-block #{unloading.number_of_bait_loadings > 0 ? 'btn-success' : 'btn-danger' }" %>
       <% if @vessel.present? %>
         <%# Bootstrap modal markup. @see: http://getbootstrap.com/javascript/#modals %>
         <div class="modal fade" id='<%= "new_bait_loading_modal_#{unloading.id}" %>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">

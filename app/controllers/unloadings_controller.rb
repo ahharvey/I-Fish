@@ -23,7 +23,7 @@ class UnloadingsController < ApplicationController
   end
 
   def new
-    @unloading = Unloading.new
+    @unloading = Unloading.new( vessel_id: params[:vessel_id])
     @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
     build_nested_forms( @unloading, @vessel ) if params[:vessel_id]
     respond_with(@unloading)
@@ -37,7 +37,7 @@ class UnloadingsController < ApplicationController
     #temp_params[:time_out] = Date.strptime(temp_params[:time_out], '%m/%d/%Y %I:%M %p') rescue ''
     #temp_params[:time_in] = Date.strptime(temp_params[:time_in], '%m/%d/%Y %I:%M %p') rescue ''
     @unloading = Unloading.new(unloading_params)
-    #@unloading.save
+    track_activity @unloading if @unloading.save
     respond_with @unloading, location: -> { after_save_path_for(@unloading) }
 #    respond_to do |format|
 #      if @unloading.save
@@ -58,6 +58,7 @@ class UnloadingsController < ApplicationController
   def update
     @vessel = Vessel.find(params[:vessel_id]) if params[:vessel_id]
     if @unloading.update(unloading_params)
+      track_activity @unloading
       if params[:unloading][:bait_loading_attributes].present?
         flash[:success] = "Bait Loading updated successfully!"
       else 
@@ -74,7 +75,7 @@ class UnloadingsController < ApplicationController
   end
 
   def destroy
-    @unloading.destroy
+    track_activity @unloading if @unloading.destroy
     respond_with(@unloading)
   end
 
@@ -100,8 +101,16 @@ class UnloadingsController < ApplicationController
       :location,
       :fuel,
       :ice,
+      unloading_catches_attributes: [
+        :id,
+        :fish_id,
+        :cut_type,
+        :quantity,
+        :_destroy
+        ],
       bait_loadings_attributes: [
         :id, 
+        :date,
         :quantity, 
         :location,
         :fish_id,
@@ -112,7 +121,7 @@ class UnloadingsController < ApplicationController
   end
 
   def after_save_path_for(resource)
-    if params[:unloading][:vessel_id].present? || params[:unloading][:bait_loading_attributes].present?
+    if params[:unloading][:vessel_id] #|| params[:unloading][:bait_loading_attributes].present?
       vessel_unloadings_path( params[:unloading][:vessel_id] )
     else
       unloading_path(resource)
@@ -127,6 +136,12 @@ class UnloadingsController < ApplicationController
       end
       3.times { unloading.bait_loadings.build }
     elsif vessel.vessel_type.code == 'hl'
+      ['YFT'].each do |t|
+        tuna = Fish.find_by(code: t)
+        ['dirtyloin','cleanloin'].each do |c|
+          unloading.unloading_catches.build(fish_id: tuna.id, cut_type: c)
+        end
+      end
       unloading.bait_loadings.build
     end
   end

@@ -1,8 +1,13 @@
 <div class="form-group row">
-  <div class="col-xs-6">
+  <div class="col-xs-4">
     <%= f.association :fish, label_method: :code, value_method: :id, class: 'form-control', wrapper: false, label: false %>
   </div>
-  <div class="col-xs-6">
+  <div class="col-xs-4">
+    <%= f.input :cut_type, label: false, wrapper: false do %>
+      <%= f.select :cut_type, UnloadingCatch::CUT_TYPES.map { |s| [I18n.t("cut_types.#{s}"), s] }, {}, { class: 'form-control' } %>
+    <% end %>
+  </div>
+  <div class="col-xs-4">
     <%= f.input_field :quantity, class: 'form-control', placeholder: UnloadingCatch.human_attribute_name(:quantity) %>
   </div>
 </div>

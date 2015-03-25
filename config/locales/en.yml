@@ -175,6 +175,8 @@ en:
       title: "Unloading Reports"
     new:
       title: "New Unloading Report"
+    edit:
+      title: "Edit Unloading Report"
   vessels:
     title: "Vessels"
     index:
@@ -399,3 +401,10 @@ en:
   material_types:
     wood: "Wood"
     fiber: "Fiberglass"
+  cut_types:
+    wholeround: "Wholeround"
+    dirtyloin: "Dirty loin"
+    cleanloin: "Clean loin"
+  relationship_types:
+    independent: "Independent"
+    contracted: "Contracted"

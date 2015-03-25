@@ -170,6 +170,8 @@ id:
       title: "Laporan Laporan Unloading"
     new: 
       title: "Laporan Unloading Baru"
+    edit:
+      title: "Edit Laporan Unloading"
   vessels:
     title: "Kapal kapal"
     index:
@@ -391,3 +393,10 @@ id:
   material_types:
     wood: "Kayu"
     fiber: "Fiber"
+  cut_types:
+    wholeround: "Wholeround"
+    dirtyloin: "Loin kotor"
+    cleanloin: "Loin bersih"
+  relationship_types:
+    independent: "Independent"
+    contracted: "Contracted"

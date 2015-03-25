@@ -15,8 +15,6 @@
   remote: remote do |f| %>
 
 
-  <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
-  <%= render partial: "shared/model_error_messages" %>
 
   <div class="form-group required integer">
     <span class="col-md-3 control-label integer required"><b>Vessel</b></span>
@@ -29,7 +27,7 @@
             <h5><%= @vessel.name %> <i><small>(<%= @vessel.ap2hi_ref %>)</small></i><h5>
             <%= f.input :vessel_id, as: :hidden %>
           <% else %>
-            <%= f.association :vessel %>
+            <%= f.association :vessel, label: false %>
           <% end %>
         </div>
       </div>

@@ -15,6 +15,7 @@ class Vessel < ActiveRecord::Base
 
   MATERIAL_TYPES = ["wood", "fiber"]
   MACHINE_TYPES = ["none", "outboard", "inboard"]
+  RELATIONSHIP_TYPES = ["contracted", "independent"]
 
 
   private

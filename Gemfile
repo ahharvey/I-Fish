@@ -50,6 +50,8 @@ gem 'rails4-autocomplete', '~> 1.1.1'
 gem 'best_in_place', '~> 3.0.0' #in-line editing for logbooks and surveys
 gem 'gmaps4rails', '~> 2.1.0'       
 gem 'local_time', '~> 1.0.0'
+gem 'country_select', '~> 2.2.0'
+gem 'countries', '~> 0.11.0'
 #gem 'jquery-datatables-rails', '~> 1.12.1'
 
 ##

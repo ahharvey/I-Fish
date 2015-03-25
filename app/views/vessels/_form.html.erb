@@ -19,18 +19,33 @@
 
     <%= f.input :name %>
 
+    <%= f.input :name_changed, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+
     <%= f.association :company %>
+
+    <%= f.input :relationship_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
+      <%= f.select :relationship_type, Vessel::RELATIONSHIP_TYPES.map { |s| [I18n.t("relationship_types.#{s}"), s] }, {}, { class: 'form-control' } %>
+    <% end %>
 
     <%= f.input :owner %>
 
     <%= f.association :vessel_type %>
 
     <%= f.input :material_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
-      <%= f.select :material_type, Vessel::MATERIAL_TYPES.map { |s| [I18n.t("material_types.#{s}"), s] } %>
+      <%= f.select :material_type, Vessel::MATERIAL_TYPES.map { |s| [I18n.t("material_types.#{s}"), s] }, {}, { class: 'form-control' } %>
     <% end %>
 
     <%= f.input :machine_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
-      <%= f.select :machine_type, Vessel::MACHINE_TYPES.map { |s| [I18n.t("machine_types.#{s}"), s] } %>
+      <%= f.select :machine_type, Vessel::MACHINE_TYPES.map { |s| [I18n.t("machine_types.#{s}"), s] }, {}, { class: 'form-control' } %>
     <% end %>
 
     <%= f.input :length %>
@@ -39,13 +54,57 @@
 
     <%= f.input :capacity %>
 
-    <%= f.input :vms %>
+    <%= f.input :vms, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
 
-    <%= f.input :tracker %>
+    
+    <%= f.input :tracker, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
 
     <%= f.input :port %>
 
-    <%= f.input :flag_state %>
+    <%= f.input :flag_state do %>
+      
+      <%= f.country_select :flag_state, {selected: @vessel.flag_state, priority_countries: ["ID"]}, {class: "form-control"} %>
+    <% end %>
+
+    <%= f.input :flag_state_changed, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+
+    <%= f.input :radio, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
     
     <%= f.input :year_built %>
 

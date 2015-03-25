@@ -16,8 +16,8 @@ jQuery ->  #initialize Bootstrap datepicker on date select field
     $('.datetime-select-input').each ->
 
       date  = $(this).data('date')
-      id    = $(this).prop('id').replace(/\(.*?\)\s/g, '')
-      name  = $(this).prop('name').replace(/\(.*?\)\s/g, '')
+      id    = $(this).prop('id').replace('_1i', "") #replace(/\(.*?\)\s/g, '')
+      name  = $(this).prop('name').replace('(1i)', "") #.replace(/\(.*?\)\s/g, '')
       max   = $(this).data('max')
       min   = $(this).data('min')
       label = $(this).data('label')
@@ -40,8 +40,8 @@ jQuery ->  #initialize Bootstrap datepicker on date select field
     $('.date-select-input').each ->
 
       date  = $(this).data('date')
-      id    = $(this).prop('id').replace(/\(.*?\)\s/g, '')
-      name  = $(this).prop('name').replace(/\(.*?\)\s/g, '')
+      id    = $(this).prop('id').replace('_1i', "") #.replace(/\(.*?\)\s/g, '')
+      name  = $(this).prop('name').replace('(1i)', "") #.replace(/\(.*?\)\s/g, '')
       max   = $(this).data('max')
       min   = $(this).data('min')
       label = $(this).data('label')

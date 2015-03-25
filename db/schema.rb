@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150323111414) do
+ActiveRecord::Schema.define(version: 20150325161957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -369,6 +369,7 @@ ActiveRecord::Schema.define(version: 20150323111414) do
     t.datetime "created_at",   null: false
     t.datetime "updated_at",   null: false
     t.integer  "unloading_id"
+    t.string   "cut_type"
   end
 
   add_index "unloading_catches", ["fish_id"], name: "index_unloading_catches_on_fish_id", using: :btree
@@ -483,6 +484,10 @@ ActiveRecord::Schema.define(version: 20150323111414) do
     t.boolean  "vms"
     t.boolean  "tracker"
     t.string   "port"
+    t.boolean  "name_changed"
+    t.boolean  "flag_state_changed"
+    t.boolean  "radio"
+    t.string   "relationship_type"
   end
 
   add_index "vessels", ["company_id"], name: "index_vessels_on_company_id", using: :btree

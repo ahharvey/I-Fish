@@ -1,0 +1,10 @@
+<% if unloading %>
+  added an unloading report: <%= link_to "#{unloading.vessel.name} (#{unloading.vessel.ap2hi_ref})", unloading %>
+  <br />
+  <span class="fa-stack fa-lg">
+    <i class="fa fa-square fa-stack-2x text-info"></i>
+    <i class="fa fa-cloud-upload fa-stack-1x fa-inverse"></i>
+  </span>
+<% else %>
+  added an unloading report that has since been deleted
+<% end %>

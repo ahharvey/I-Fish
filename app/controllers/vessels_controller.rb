@@ -24,17 +24,17 @@ class VesselsController < ApplicationController
 
   def create
     @vessel = Vessel.new(vessel_params)
-    @vessel.save
+    track_activity @vessel if @vessel.save
     respond_with @vessel, location: -> { after_save_path_for(@vessel) }
   end
 
   def update
-    @vessel.update(vessel_params)
+    track_activity @vessel if @vessel.update(vessel_params)
     respond_with @vessel, location: -> { after_save_path_for(@vessel) }
   end
 
   def destroy
-    @vessel.destroy
+    track_activity @vessel if @vessel.destroy
     respond_with(@vessel)
   end
 
@@ -67,7 +67,11 @@ class VesselsController < ApplicationController
       :sipi_number,
       :sipi_expiry,
       :siup_number,
-      :issf_ref_requested
+      :issf_ref_requested,
+      :name_changed,
+      :flag_state_changed,
+      :radio,
+      :relationship_type
       )
   end
 
