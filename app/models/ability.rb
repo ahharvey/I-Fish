@@ -71,6 +71,12 @@ class Ability
     can :not_destroy, Vessel, id: admin.managed_vessels.map(&:id)
     can :not_destroy, Unloading, id: admin.managed_unloadings.map(&:id)
     can :not_destroy, BaitLoading, id: admin.managed_bait_loadings.map(&:id)
+
+    can :create, Unloading 
+    can :create, BaitLoading
+    can :create, Vessel
+    can :create, Company
+ 
     #can :read, Fishery # To view summarised fishery data
     can :read, User
     can :read, Admin, :id => admin.id

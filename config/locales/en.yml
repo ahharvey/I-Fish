@@ -170,9 +170,11 @@ en:
       new:
         title: "Sign up"
   unloadings:
-    title: "Unloadings"
+    title: "Unloading Reports"
     index:
-      title: "Unloadings"
+      title: "Unloading Reports"
+    new:
+      title: "New Unloading Report"
   vessels:
     title: "Vessels"
     index:

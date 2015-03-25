@@ -9,6 +9,12 @@ module ApplicationHelper
     @show_title = show_title
   end
 
+  def subtitle(page_subtitle, show_subtitle = true)
+    page_subtitle = page_subtitle.join(' ') if page_subtitle.respond_to? :join
+    content_for(:subtitle) { h(page_subtitle.to_s) }
+    @show_subtitle = show_subtitle
+  end
+
   def twitterized_type(type)
     case type.to_s
     when 'alert'

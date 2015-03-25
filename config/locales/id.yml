@@ -167,7 +167,9 @@ id:
   unloadings:
     title: "Unloadings"
     index:
-      title: "Unloadings"
+      title: "Laporan Laporan Unloading"
+    new: 
+      title: "Laporan Unloading Baru"
   vessels:
     title: "Kapal kapal"
     index:

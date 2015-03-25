@@ -24,6 +24,7 @@ class UnloadingsController < ApplicationController
 
   def new
     @unloading = Unloading.new
+    @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
     respond_with(@unloading)
   end
 
@@ -31,26 +32,26 @@ class UnloadingsController < ApplicationController
   end
 
   def create
-    temp_params = unloading_params
+    #temp_params = unloading_params
     #temp_params[:time_out] = Date.strptime(temp_params[:time_out], '%m/%d/%Y %I:%M %p') rescue ''
     #temp_params[:time_in] = Date.strptime(temp_params[:time_in], '%m/%d/%Y %I:%M %p') rescue ''
-    @unloading = Unloading.new(temp_params)
+    @unloading = Unloading.new(unloading_params)
     #@unloading.save
-    #respond_with @unloading, location: -> { after_save_path_for(@unloading) }
-    respond_to do |format|
-      if @unloading.save
-        format.html { redirect_to after_save_path_for(@unloading), notice: 'Person was successfully created.' }
-        format.json { render action: 'index', status: :created, location: @unloading }
-        # added:
-        format.js   { render action: 'index', status: :created, location: @unloading }
-      else
-        flash[:error] = @unloading.errors.full_messages.join(", ")
-        format.html { render action: 'new' }
-        format.json { render json: @unloading.errors, status: :unprocessable_entity }
-        # added:
-        format.js   { render json: @unloading.errors, status: :unprocessable_entity }
-      end
-    end
+    respond_with @unloading, location: -> { after_save_path_for(@unloading) }
+#    respond_to do |format|
+#      if @unloading.save
+#        format.html { redirect_to after_save_path_for(@unloading), notice: 'Person was successfully created.' }
+#        format.json { render action: 'index', status: :created, location: @unloading }
+#        # added:
+#        format.js   { render action: 'index', status: :created, location: @unloading }
+#      else
+#        flash[:error] = @unloading.errors.full_messages.join(", ")
+#        format.html { render action: 'new' }
+#        format.json { render json: @unloading.errors, status: :unprocessable_entity }
+#        # added:
+#        format.js   { render json: @unloading.errors, status: :unprocessable_entity }
+#      end
+#    end
   end
 
   def update

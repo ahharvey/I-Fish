@@ -13,7 +13,7 @@
       <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
       <%= render partial: "shared/model_error_messages" %>
       <div class="page-header">
-        <h1><%= yield (:title) || "FishStat" %></h1>
+        <h1><%= yield (:title) || "FishStat" %> <small><%= yield (:subtitle) || "" %></small></h1>
       </div><!-- page-header -->
       <%= yield %>
     </div>

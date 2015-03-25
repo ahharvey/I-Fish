@@ -1,5 +1,9 @@
 <% title t ".title" %>
 
+<% if @vessel.present? %>
+  <% subtitle "#{@vessel.name} (#{@vessel.ap2hi_ref})" %>
+<% end %>
+
 <div class="row">
   <div class="col-xs-8">
     <%= link_to :back do %>
@@ -18,10 +22,8 @@
 <% if @vessel.present? %>
   <div class="row">
     <div class="col-xs-12 col-md-6">
-      <%= render partial: "vessels/vessel_summary_panel" %>
-    </div>
-    <div class="col-xs-12 col-md-6">
-      <%= link_to 'New Unloading', '#new_unloading_modal', class: 'btn btn-lg btn-primary btn-block', data: { toggle: 'modal' } %>
+      <%= link_to 'New Unloading', new_vessel_unloading_path(@vessel), class: 'btn btn-lg btn-primary btn-block' %>
+      <br />
     </div>
   </div>
 <% end %>
