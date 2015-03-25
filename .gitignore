@@ -26,3 +26,4 @@
 .iml
 
 /config/credentials.yml
+public/assets/**
