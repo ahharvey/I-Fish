@@ -89,6 +89,7 @@ class CompaniesController < ApplicationController
       redisplay_vessels
     else
       render js: "window.location = #{new_vessel_path(company_id: params[:id], ap2hi_ref: params[:get_vessel]).to_json}"
+      #flash[:success]= I18n.t("fisheries.vessels.created")
     end
     
   end

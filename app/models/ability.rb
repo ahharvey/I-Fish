@@ -2,7 +2,7 @@ class Ability
   include CanCan::Ability
 
   def initialize(user_or_admin)
-    alias_action :create, :update, :read, to: :not_destroy
+    
     user_or_admin ||= User.new
 
     abilities_for_all
@@ -67,15 +67,23 @@ class Ability
     # Staff can view and edit data they own, and profiles of users who share the same district
     can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :not_destroy, Fishery, id: admin.member_fisheries.map(&:id)
-    can :not_destroy, Company, id: admin.managed_companies.map(&:id)
-    can :not_destroy, Vessel, id: admin.managed_vessels.map(&:id)
-    can :not_destroy, Unloading, id: admin.managed_unloadings.map(&:id)
-    can :not_destroy, BaitLoading, id: admin.managed_bait_loadings.map(&:id)
 
-    can :create, Unloading 
+
+    can :create, Unloading
+    can :manage, Unloading, id: admin.managed_unloadings.map(&:id)
+    cannot :destroy, Unloading
+
     can :create, BaitLoading
+    can :manage, BaitLoading, id: admin.managed_bait_loadings.map(&:id)
+    cannot :destroy, BaitLoading
+
     can :create, Vessel
+    can :manage, Vessel, id: admin.managed_vessels.map(&:id)
+    cannot :destroy, Vessel
+
     can :create, Company
+    can :manage, Company, id: admin.managed_companies.map(&:id)
+    cannot :destroy, Company
  
     #can :read, Fishery # To view summarised fishery data
     can :read, User
