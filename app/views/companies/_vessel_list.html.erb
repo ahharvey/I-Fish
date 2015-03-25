@@ -1,7 +1,7 @@
 <div id="VesselList">
   <br />
   <ul class="list-unstyled">
-    <% @company.vessels.each do |vessel| %>
+    <% @company.vessels.default.each do |vessel| %>
       <li>
         <b><%= link_to vessel.ap2hi_ref, vessel %></b>  -  
         <i><%= vessel.name %></i>
