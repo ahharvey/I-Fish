@@ -123,7 +123,7 @@ class ApplicationController < ActionController::Base
     if current_user.nil?
       session[:next] = request.fullpath
       puts session[:next]
-      redirect_to login_url, alert: "You must log in to continue."
+      redirect_to new_user_session_url, alert: "You must log in to continue."
     else
       #render :file => "#{Rails.root}/public/403.html", :status => 403
       if request.env["HTTP_REFERER"].present?
