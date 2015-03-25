@@ -66,7 +66,8 @@ class Ability
   def staff(admin)
     # Staff can view and edit data they own, and profiles of users who share the same district
     can :manage, Survey, :admin_id => admin.id #Can manage own data
-    can :not_destroy, Fishery, id: admin.member_fisheries.map(&:id)
+    can :manage, Fishery, id: admin.member_fisheries.map(&:id)
+    cannot :destroy, Fishery
 
 
     can :create, Unloading
