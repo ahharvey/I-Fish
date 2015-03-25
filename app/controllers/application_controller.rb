@@ -5,6 +5,15 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html
 
+  # redirects when user's role is not authorised
+  rescue_from CanCan::AccessDenied, with: :access_denied
+
+  # in production redirects to 404 if url does not exist
+  # in other environments displays real exceptions
+  unless Rails.application.config.consider_all_requests_local 
+    rescue_from ActionController::RoutingError, with: -> { render_404  }
+  end
+
   #add_flash_types :error, :success, :info
 
   protect_from_forgery
@@ -46,9 +55,6 @@ class ApplicationController < ActionController::Base
     admin_signed_in? ? current_admin.id : 'Guest'  # or whatever
   end
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
 
   def track_activity(trackable, action = params[:action])
     @currently_signed_in.activities.create! action: action, trackable: trackable 
@@ -108,6 +114,23 @@ class ApplicationController < ActionController::Base
       "success"
     else
       type.to_s
+    end
+  end
+
+  # called by rescue_from CanCan::AccessDenied
+  # defines where to redirect 
+  def access_denied( excepton )
+    if current_user.nil?
+      session[:next] = request.fullpath
+      puts session[:next]
+      redirect_to login_url, alert: "You must log in to continue."
+    else
+      #render :file => "#{Rails.root}/public/403.html", :status => 403
+      if request.env["HTTP_REFERER"].present?
+        redirect_to :back, alert: exception.message
+      else
+        redirect_to root_url, alert: exception.message
+      end
     end
   end
 
