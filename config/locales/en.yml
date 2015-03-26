@@ -387,6 +387,7 @@ en:
         sipi_number: "SIPI"
         sipi_expiry: "SIPI expiry date"
         siup_number: "SIUP"
+        formatted_sipi_expiry: "SIPI expiry date"
   views:
     pagination:
       first: "&laquo; First"

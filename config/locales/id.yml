@@ -379,6 +379,7 @@ id:
         sipi_number: "SIPI"
         sipi_expiry: "SIPI berlaku s/d"
         siup_number: "SIUP"
+        formatted_sipi_expiry: "SIPI berlaku s/d"
   views:
     pagination:
       first: "&laquo; First"
