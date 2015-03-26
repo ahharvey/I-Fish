@@ -21,6 +21,9 @@
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
 #  crew         :integer
+#  aborted      :boolean
+#  ice          :integer
+#  notes        :text
 #
 
 require 'test_helper'

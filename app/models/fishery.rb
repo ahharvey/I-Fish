@@ -2,11 +2,12 @@
 #
 # Table name: fisheries
 #
-#  id         :integer          not null, primary key
-#  name       :string(255)
-#  code       :string(255)
-#  created_at :datetime         not null
-#  updated_at :datetime         not null
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  code        :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  protocol_id :integer
 #
 
 class Fishery < ActiveRecord::Base

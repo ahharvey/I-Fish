@@ -26,6 +26,11 @@
 #  updated_at             :datetime         not null
 #  desa_id                :integer
 #  avatar                 :string(255)
+#  vessel_type_id         :integer
+#  engine_id              :integer
+#  power                  :integer
+#  length                 :integer
+#  notes                  :text
 #
 
 require 'test_helper'

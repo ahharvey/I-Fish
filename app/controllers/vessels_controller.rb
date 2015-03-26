@@ -71,7 +71,8 @@ class VesselsController < ApplicationController
       :name_changed,
       :flag_state_changed,
       :radio,
-      :relationship_type
+      :relationship_type,
+      :formatted_sipi_expiry
       )
   end
 

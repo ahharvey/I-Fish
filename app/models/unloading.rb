@@ -1,9 +1,44 @@
+# == Schema Information
+#
+# Table name: unloadings
+#
+#  id           :integer          not null, primary key
+#  port         :string
+#  time_out     :datetime
+#  time_in      :datetime
+#  etp          :boolean
+#  location     :string
+#  fuel         :integer
+#  ice          :integer
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  vessel_id    :integer
+#  review_state :string           default("pending")
+#  byproduct    :integer
+#  discard      :integer
+#  yft          :integer
+#  bet          :integer
+#  skj          :integer
+#  kaw          :integer
+#
+
 class Unloading < ActiveRecord::Base
   belongs_to :vessel
   has_many :unloading_catches
   accepts_nested_attributes_for :unloading_catches, allow_destroy: true, reject_if: :all_blank
   has_many :bait_loadings
   accepts_nested_attributes_for :bait_loadings, allow_destroy: true, reject_if: :all_blank
+
+  validates :time_out, 
+    timeliness: {
+      type: :datetime
+    }
+  validates :time_in, 
+    timeliness: {
+      after: :time_out,
+      type: :datetime
+    }
+
 
 #  validates :yft, :bet, :skj, :kaw, :byproduct, :discard, :fuel, :ice,
 #    presence: {

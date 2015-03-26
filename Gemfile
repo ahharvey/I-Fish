@@ -13,7 +13,9 @@ gem 'rack-timeout', '~> 0.2.0'
 ## MODELS
 gem 'paper_trail', '~> 3.0.0'
 #gem 'queue_classic', '~>2.1.2' #queued processes
-gem 'sidekiq', '~> 3.3.2' 
+gem 'sidekiq', '~> 3.3.2'
+gem 'validates_timeliness', '~> 3.0.0'
+gem 'chronic', '~> 0.10.2'
 
 ##
 ## CONTROLLERS
@@ -52,6 +54,7 @@ gem 'gmaps4rails', '~> 2.1.0'
 gem 'local_time', '~> 1.0.0'
 gem 'country_select', '~> 2.2.0'
 gem 'countries', '~> 0.11.0'
+gem 'modernizr-rails', '~> 2.7.0'
 #gem 'jquery-datatables-rails', '~> 1.12.1'
 
 ##
