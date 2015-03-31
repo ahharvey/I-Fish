@@ -58,6 +58,30 @@ $linkColor: $USAIDlblue;
 @import "font-awesome";
 
 .navbar-brand { padding: 20px 15px;}
+.brand-beta {color:$USAIDlblue;font-size:10px;font-weight:200!important;vertical-align:text-top;}
+
+
+.img-circle.avatar {
+  height: 40px;
+  width: 40px;
+  min-width: 40px;
+  min-height: 40px;
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
+  background: $USAIDblue;
+  color: #fff;
+  font-size: 1.2em;
+}
+nav .img-circle.avatar { 
+  background: #fff; 
+  color: $USAIDblue; 
+  width: 30px!important;
+  height: 30px!important;
+  min-width: 30px;
+  min-height: 30px;
+}
+
 #map img { 
   max-width: none;
 }

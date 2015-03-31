@@ -146,6 +146,14 @@ class Admin < ActiveRecord::Base
     end 
   end
 
+  def firstname
+    self.name.blank? ? "" : self.name.split(" ").first
+  end
+  
+  def lastname
+    self.name.blank? ? "" : self.name.split(" ").last
+  end
+
   # modifies Devise send_reset_password_instructions to only send if Admin is approved
   def self.send_reset_password_instructions(attributes={})
     recoverable = find_or_initialize_with_errors(reset_password_keys, attributes, :not_found)

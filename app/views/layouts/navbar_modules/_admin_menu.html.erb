@@ -1,14 +1,15 @@
-<%= link_to "#", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
-
-    <%= image_tag @currently_signed_in.avatar_url(:thumb), title: @currently_signed_in.name, class: 'img-circle', width: "30px", height: "30px" if @currently_signed_in.avatar? %>
-
-	<b class="caret navbar-link"></b>
+<%= link_to "javascript:void(0)", class: "dropdown-toggle", data: { toggle: "dropdown" } do %>
+	
+	<% present @currently_signed_in do |admin_presenter| %>
+		<%= admin_presenter.avatar %>
+	<% end %>
+	
 <% end %>
 <ul class="dropdown-menu">	
 	<li>
 		<%= link_to @currently_signed_in do %>
       <%= icon fa_profile, "", class: 'fa-fw' %>
-      <%= @currently_signed_in.name %>
+      <%= @currently_signed_in.name.titlecase %>
     <% end %>
 	</li>
 	<li>

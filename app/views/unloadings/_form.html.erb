@@ -62,20 +62,8 @@
         <div class="form-group row">
 
           <label for="unloading_time_out" class="control-label sr-only"><%= Unloading.human_attribute_name(:time_out) %></label>
-          <div class="col-md-12 datetime-select-wrapper">
-            <%= f.input_field :time_out,
-              default: Time.now,
-              start_year: Time.now.year-100,
-              end_year: Time.now.year,
-              class: 'datetime-select-input form-control', 
-              data: {
-                date: @unloading.time_out? ? @unloading.time_out.to_s(:long) : '',
-                id: 'unloading_time_out',
-                name: 'unloading[time_out]',
-                min: Date.today-100.years,
-                max: Date.today,
-                label: Unloading.human_attribute_name(:time_out)
-              } %>
+          <div class="col-md-12">
+            <%= f.input_field :formatted_time_out, class: 'datetimepicker form-control' %>
           </div>
 
         </div>
@@ -89,19 +77,7 @@
 
           <label for="unloading_time_in" class="control-label sr-only"><%= Unloading.human_attribute_name(:time_in) %></label>
           <div class="col-md-12 datetime-select-wrapper">
-            <%= f.input_field :time_in,
-              default: Time.now,
-              start_year: Time.now.year-100,
-              end_year: Time.now.year,
-              class: 'datetime-select-input form-control',
-              data: {
-                date: @unloading.time_in? ? @unloading.time_in.to_s(:long) : '',
-                id: 'unloading_time_in',
-                name: 'unloading[time_in]',
-                min: Date.today-100.years,
-                max: Date.today,
-                label: Unloading.human_attribute_name(:time_in)
-              } %>
+            <%= f.input_field :formatted_time_in, class: 'datetimepicker form-control' %>
           </div>
 
         </div>
@@ -195,10 +171,21 @@
     </div>
   </div>
 
-  <div class="actions">
-    <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
-      Save
-    <% end %>
-  </div>
+  <div class="form-group">
+    <div class="col-md-9 col-md-offset-3">
 
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
+        Save
+      <% end %>
+
+      <% if @vessel %>
+        <%= link_to "Cancel", vessel_unloadings_path( @vessel ) %>
+      <% elsif @unloading.vessel_id? %>
+        <%= link_to "Cancel", vessel_unloadings_path( @unloading.vessel_id ) %>
+      <% else %>
+        <%= link_to "Cancel", vessels_path %>
+      <% end %> 
+
+    </div>
+  </div>
 <% end %>

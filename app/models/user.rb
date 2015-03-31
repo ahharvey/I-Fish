@@ -110,6 +110,14 @@ class User < ActiveRecord::Base
     raise ActiveRecord::Rollback if self.roles.include? role
   end
 
+  def firstname
+    self.name.blank? ? "" : self.name.split(" ").first
+  end
+  
+  def lastname
+    self.name.blank? ? "" : self.name.split(" ").last
+  end
+
   private
  
   def avatar_size

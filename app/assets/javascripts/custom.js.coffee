@@ -20,6 +20,7 @@ jQuery ->
       format: 'MMMM DD, YYYY'
     $("input.datetimepicker[type=text]").datetimepicker
       format: 'MMMM DD, YYYY HH:mm'
+      sideBySide: true
 
 
 

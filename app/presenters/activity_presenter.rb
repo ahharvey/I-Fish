@@ -11,7 +11,13 @@ class ActivityPresenter < SimpleDelegator
 		div_for activity, class: "media feed-item" do
       contents = content_tag :div, class: "media-left" do 
         link_to activity.ownable, title: activity.ownable.name do
-          image_tag activity.ownable.avatar_url(:thumb), class: "media-object", size: '50x50', alt: activity.ownable.name 
+          if activity.ownable.avatar?
+            image_tag activity.ownable.avatar_url(:thumb), class: "media-object", size: '50x50', alt: activity.ownable.name
+          else
+            content_tag :div, class: "media-object img-circle avatar" do
+              "#{activity.ownable.firstname[0].capitalize}#{activity.ownable.lastname[0].capitalize}"
+            end
+          end
         end
       end
       contents += content_tag :div, class: "media-body" do

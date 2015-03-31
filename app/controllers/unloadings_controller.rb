@@ -30,6 +30,7 @@ class UnloadingsController < ApplicationController
   end
 
   def edit
+    @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
   end
 
   def create
@@ -91,6 +92,8 @@ class UnloadingsController < ApplicationController
       :port, 
       :time_out,
       :time_in,
+      :formatted_time_out,
+      :formatted_time_in,
       :yft,
       :bet,
       :skj,
@@ -115,6 +118,7 @@ class UnloadingsController < ApplicationController
         :location,
         :fish_id,
         :vessel_id,
+        :formatted_date,
         :_destroy
         ]
       )

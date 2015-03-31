@@ -21,4 +21,13 @@ class BaitLoading < ActiveRecord::Base
     timeliness: {
       type: :date
     }
+  attr_writer :formatted_date
+  before_validation :save_formatted_date 
+  def formatted_date
+    @formatted_date || date.try(:to_s, :long)
+  end
+  
+  def save_formatted_date
+    self.date = Chronic.parse(@formatted_date) if @formatted_date.present?
+  end
 end

@@ -6,11 +6,11 @@ class UnloadingPresenter < BasePresenter
   end
 
   def time_out
-    best_in_place unloading, :time_out, as: :input, place_holder: '--', inner_class: 'col-xs-1', display_as: :formatted_time_out
+    best_in_place unloading, :time_out, as: :input, place_holder: '--', inner_class: 'col-xs-1', display_as: :short_time_out
   end
 
   def time_in
-    best_in_place unloading, :time_in, as: :input, place_holder: '--', inner_class: 'col-xs-1', display_as: :formatted_time_in
+    best_in_place unloading, :time_in, as: :input, place_holder: '--', inner_class: 'col-xs-1', display_as: :short_time_in
   end
 
   def yft

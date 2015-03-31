@@ -65,12 +65,40 @@ class Unloading < ActiveRecord::Base
     end
   end
 
+#  def formatted_time_out
+#    time_out.try(:strftime, "%d-%b-%Y %H:%M")
+#  end#
+
+#  def formatted_time_in
+#    time_in.try(:strftime, "%d-%b-%Y %H:%M")
+#  end
+
+  attr_writer :formatted_time_out
+  before_validation :save_formatted_time_out 
   def formatted_time_out
-    time_out.try(:strftime, "%d-%b-%Y %H:%M")
+    @formatted_time_out || time_out.try(:to_s, :long)
+  end
+  
+  def save_formatted_time_out
+    self.time_out = Chronic.parse(@formatted_time_out) if @formatted_time_out.present?
   end
 
+  def short_time_out
+    time_out.try(:to_s, :short)
+  end
+
+  attr_writer :formatted_time_in
+  before_validation :save_formatted_time_in 
   def formatted_time_in
-    time_in.try(:strftime, "%d-%b-%Y %H:%M")
+    @formatted_time_in || time_in.try(:to_s, :long)
+  end
+  
+  def save_formatted_time_in
+    self.time_in = Chronic.parse(@formatted_time_in) if @formatted_time_in.present?
+  end
+
+  def short_time_in
+    time_in.try(:to_s, :short)
   end
 
   def number_of_bait_loadings
