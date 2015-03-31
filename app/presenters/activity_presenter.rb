@@ -12,7 +12,7 @@ class ActivityPresenter < SimpleDelegator
       contents = content_tag :div, class: "media-left" do 
         link_to activity.ownable, title: activity.ownable.name do
           if activity.ownable.avatar?
-            image_tag activity.ownable.avatar_url(:thumb), class: "media-object", size: '50x50', alt: activity.ownable.name
+            image_tag activity.ownable.avatar_url(:thumb), class: "media-object img-circle", size: '40x40', alt: activity.ownable.name
           else
             content_tag :div, class: "media-object img-circle avatar" do
               "#{activity.ownable.firstname[0].capitalize}#{activity.ownable.lastname[0].capitalize}"
