@@ -121,7 +121,7 @@ class UnloadingsController < ApplicationController
   end
 
   def after_save_path_for(resource)
-    if params[:unloading][:vessel_id] #|| params[:unloading][:bait_loading_attributes].present?
+    if params[:unloading][:vessel_id].present? #|| params[:unloading][:bait_loading_attributes].present?
       vessel_unloadings_path( params[:unloading][:vessel_id] )
     else
       unloading_path(resource)

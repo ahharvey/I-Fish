@@ -72,7 +72,14 @@ class VesselsController < ApplicationController
       :flag_state_changed,
       :radio,
       :relationship_type,
-      :formatted_sipi_expiry
+      :formatted_sipi_expiry,
+      :return_to, 
+      :material_type, 
+      :machine_type, 
+      :capacity, 
+      :vms, 
+      :tracker, 
+      :port
       )
   end
 

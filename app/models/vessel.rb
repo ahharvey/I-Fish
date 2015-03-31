@@ -65,9 +65,9 @@ class Vessel < ActiveRecord::Base
 
   
   attr_writer :formatted_sipi_expiry
-  before_save :save_formatted_sipi_expiry 
+  before_validation :save_formatted_sipi_expiry 
   def formatted_sipi_expiry
-    @formatted_sipi_expiry || sipi_expiry.to_s(:long)
+    @formatted_sipi_expiry || sipi_expiry.try(:to_s, :long)
   end
   
   def save_formatted_sipi_expiry

@@ -16,7 +16,7 @@
 //= require select2-ng/select2.js
 //= require bootstrap-tour/build/js/bootstrap-tour
 //= require moment/moment
-//= require eonasdan-bootstrap-datetimepicker/src/js/bootstrap-datetimepicker
+//= require eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min
 //= require best_in_place
 //= require bootstrap-sprockets
 //= require bootstrap-switch/dist/js/bootstrap-switch
