@@ -10,18 +10,18 @@
       <% end %>
     </td>
     <td><%= unloading_presenter.port %></td>
-    <td><%= unloading_presenter.time_out %></td>
+    <td class='hidden-xs'><%= unloading_presenter.time_out %></td>
     <td><%= unloading_presenter.time_in %></td>
-    <td><%= unloading_presenter.yft %></td>
-    <td><%= unloading_presenter.bet %></td>
-    <td><%= unloading_presenter.skj %></td>
-    <td><%= unloading_presenter.kaw %></td>
-    <td><%= unloading_presenter.byproduct %></td>
-    <td><%= unloading_presenter.discard %></td>
-    <td><%= unloading_presenter.etp %></td>
-    <td><%= unloading_presenter.location %></td>
-    <td><%= unloading_presenter.fuel %></td>
-    <td><%= unloading_presenter.ice %></td> 
+    <td class='hidden-xs'><%= unloading_presenter.yft %></td>
+    <td class='hidden-xs'><%= unloading_presenter.bet %></td>
+    <td class='hidden-xs'><%= unloading_presenter.skj %></td>
+    <td class='hidden-xs'><%= unloading_presenter.kaw %></td>
+    <td class='hidden-xs'><%= unloading_presenter.byproduct %></td>
+    <td class='hidden-xs'><%= unloading_presenter.discard %></td>
+    <td class='hidden-xs'><%= unloading_presenter.etp %></td>
+    <td class='hidden-xs'><%= unloading_presenter.location %></td>
+    <td class='hidden-xs'><%= unloading_presenter.fuel %></td>
+    <td class='hidden-xs'><%= unloading_presenter.ice %></td> 
     <td>
       <%= link_to "#{unloading.number_of_bait_loadings} bait loadings", edit_unloading_path(unloading), class: "btn btn-xs btn-block #{unloading.number_of_bait_loadings > 0 ? 'btn-success' : 'btn-danger' }" %>
       <% if @vessel.present? %>
