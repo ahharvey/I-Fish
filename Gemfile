@@ -1,11 +1,11 @@
 source 'https://rubygems.org'
-ruby "2.1.5"
+ruby "2.2.0"
 
 ##
 ## STACK
 gem 'rails', '~> 4.2.0' #3.2.11'
 gem 'pg', '~> 0.18.0'
-gem 'unicorn', '~> 4.8.0'
+#gem 'unicorn', '~> 4.8.0'
 gem 'puma', '~> 2.11.0' 
 gem 'rack-timeout', '~> 0.2.0'
 
@@ -62,17 +62,17 @@ gem 'modernizr-rails', '~> 2.7.0'
 gem 'wicked_pdf', '~> 0.11.0'
 gem 'wkhtmltopdf-heroku', '~> 1.0.0'
 gem 'rabl', '~> 0.11.0' # JSON templates
-gem 'oj', '~> 2.11.0' #high performance JSON parser for rabl
+gem 'oj', '~> 2.12.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
 gem 'rqrcode-with-patches', '~>0.5.4'
 
 ##
 ## UPLOADS AND INCOMING
 gem 'carrierwave', '~> 0.10.0'
-gem 'fog', '~> 1.27.0'
+gem 'fog', '~> 1.29.0'
 gem 'roo', '~> 1.13.2'
-gem 'mini_magick', '~> 4.0.3'
-gem 'rmagick', '~> 2.13.2'
+gem 'mini_magick', '~> 4.2.0'
+gem 'rmagick', '~> 2.14.0'
 gem 'griddler', '~> 1.1.0'  #Mandril API for incoming email handling
 gem 'griddler-mandrill', '~> 1.0.0'
 gem 'rubyzip', '~> 1.1.0'
@@ -114,5 +114,5 @@ group :production, :staging do
 end
 
 
-gem 'newrelic_rpm', '~> 3.9.0' #system monitoring and profiling
+gem 'newrelic_rpm', '~> 3.11.0' #system monitoring and profiling
 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150325161957) do
+ActiveRecord::Schema.define(version: 20150408235611) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -79,13 +79,31 @@ ActiveRecord::Schema.define(version: 20150325161957) do
     t.integer  "fish_id"
     t.integer  "quantity"
     t.integer  "unloading_id"
-    t.datetime "created_at",   null: false
-    t.datetime "updated_at",   null: false
+    t.datetime "created_at",                       null: false
+    t.datetime "updated_at",                       null: false
+    t.integer  "price"
+    t.string   "method_type"
+    t.string   "review_state", default: "pending"
   end
 
   add_index "bait_loadings", ["fish_id"], name: "index_bait_loadings_on_fish_id", using: :btree
   add_index "bait_loadings", ["unloading_id"], name: "index_bait_loadings_on_unloading_id", using: :btree
   add_index "bait_loadings", ["vessel_id"], name: "index_bait_loadings_on_vessel_id", using: :btree
+
+  create_table "carrier_loadings", force: :cascade do |t|
+    t.date    "date"
+    t.integer "vessel_id"
+    t.integer "fish_id"
+    t.string  "location"
+    t.string  "size"
+    t.string  "grade"
+    t.integer "quantity"
+    t.string  "review_state", default: "pending"
+    t.string  "string",       default: "pending"
+  end
+
+  add_index "carrier_loadings", ["fish_id"], name: "index_carrier_loadings_on_fish_id", using: :btree
+  add_index "carrier_loadings", ["vessel_id"], name: "index_carrier_loadings_on_vessel_id", using: :btree
 
   create_table "catches", force: :cascade do |t|
     t.integer  "fish_id"
@@ -383,16 +401,18 @@ ActiveRecord::Schema.define(version: 20150325161957) do
     t.string   "location"
     t.integer  "fuel"
     t.integer  "ice"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "vessel_id"
-    t.string   "review_state", default: "pending"
+    t.string   "review_state",      default: "pending"
     t.integer  "byproduct"
     t.integer  "discard"
     t.integer  "yft"
     t.integer  "bet"
     t.integer  "skj"
     t.integer  "kaw"
+    t.string   "catch_certificate"
+    t.integer  "budget"
   end
 
   add_index "unloadings", ["vessel_id"], name: "index_unloadings_on_vessel_id", using: :btree
@@ -488,6 +508,12 @@ ActiveRecord::Schema.define(version: 20150325161957) do
     t.boolean  "flag_state_changed"
     t.boolean  "radio"
     t.string   "relationship_type"
+    t.integer  "fish_capacity"
+    t.integer  "bait_capacity"
+    t.string   "location_built"
+    t.string   "seafdec_ref"
+    t.string   "mmaf_ref"
+    t.string   "dkp_ref"
   end
 
   add_index "vessels", ["company_id"], name: "index_vessels_on_company_id", using: :btree
@@ -497,6 +523,7 @@ ActiveRecord::Schema.define(version: 20150325161957) do
   add_foreign_key "bait_loadings", "fishes"
   add_foreign_key "bait_loadings", "unloadings"
   add_foreign_key "bait_loadings", "vessels"
+  add_foreign_key "carrier_loadings", "vessels"
   add_foreign_key "unloading_catches", "fishes"
   add_foreign_key "vessels", "companies"
   add_foreign_key "vessels", "gears"

@@ -33,6 +33,14 @@ class Company < ActiveRecord::Base
     avatar.recreate_versions! if crop_x.present?
   end
 
+  def has_fishing_vessels?
+    vessels.where(vessel_type_id: VesselType.find_by(code: 'pol')).any? || vessels.where(vessel_type_id: VesselType.find_by(code: 'hl')).any? 
+  end
+
+  def has_carrier_vessels?
+    vessels.where(vessel_type_id: VesselType.find_by(code: 'ca')).any? 
+  end
+
   private
  
   def avatar_size

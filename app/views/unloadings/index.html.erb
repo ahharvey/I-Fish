@@ -6,9 +6,7 @@
 
 <div class="row">
   <div class="col-xs-8">
-    <%= link_to :back do %>
-      <i class='icon-arrow-left'></i> Back
-    <% end %>
+    
   </div>
   <div class="col-xs-4">
     <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
@@ -58,26 +56,14 @@
 
 <br />
 
-
-<% if @vessel.present? %>
-  <%# Bootstrap modal markup. @see: http://getbootstrap.com/javascript/#modals %>
-  <div class="modal fade" id="new_unloading_modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-          <h4 class="modal-title" id="myModalLabel">Unloading Record - <%= @vessel.name %> <small><i>(<%= @vessel.ap2hi_ref %>)</i></small></h4>
-        </div>
-        <div class="modal-body">
-          <div class="row">
-            <div class="col-xs-12">
-              <%# Render the new person form (passing modal => true to enable remote => true) %>
-              <%= render 'form', modal: true %>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+<div class="row">
+  <div class="col-xs-6">
+    <%= link_to :back, class: 'btn btn-primary btn-block' do %>
+      <%= icon('arrow-left', 'Back') %>
+    <% end %>
   </div>
-<% end %>
+  
+</div>
+
+
 

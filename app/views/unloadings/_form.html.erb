@@ -11,8 +11,7 @@
     data: { 
       model: 'unloading' 
     } 
-  }, 
-  remote: remote do |f| %>
+  } do |f| %>
 
 
 
@@ -137,6 +136,25 @@
   </div>
 
   <div class="form-group required integer">
+      <span class="col-md-3 control-label integer required"><b>Other</b></span>
+      <div class="col-md-9">
+        <div class="form-group row">
+
+          <label for="unloading_price" class="control-label sr-only"><%= Unloading.human_attribute_name(:budget) %></label>
+          <div class="col-md-6">
+            <%= f.input_field :budget, class: 'form-control', placeholder: Unloading.human_attribute_name(:budget) %>
+          </div>
+
+          <label for="unloading_catch_certificate" class="control-label sr-only"><%= Unloading.human_attribute_name(:catch_certificate) %></label>
+          <div class="col-md-6">
+              <%= f.input_field :catch_certificate, class: 'form-control', placeholder: Unloading.human_attribute_name(:catch_certificate) %>
+          </div>
+
+        </div>
+      </div>
+  </div>
+
+  <div class="form-group required integer">
       <span class="col-md-3 control-label integer required"><b>ETP</b></span>
       <div class="col-md-9">
         <div class="form-group row">
@@ -157,18 +175,6 @@
 
         </div>
       </div>
-  </div>
-
-  <div class="form-group required integer">
-    <span class="col-md-3 control-label integer required"><b>Bait Loading</b></span>
-    <div class="col-md-9">
-
-      <%= f.simple_fields_for :bait_loadings do |builder| %>
-        <%= render 'bait_loading_fields', f: builder %>
-      <% end %>
-
-      <p class="text-center"><%= link_to_add_fields icon('plus', 'Add bait loading'), f, :bait_loadings %></p>
-    </div>
   </div>
 
   <div class="form-group">

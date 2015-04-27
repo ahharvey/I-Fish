@@ -9,7 +9,13 @@
 
     <%= f.input :ap2hi_ref %>
 
+    <%= f.input :mmaf_ref %>
+
+    <%= f.input :dkp_ref %>
+
     <%= f.input :issf_ref %>
+
+    <%= f.input :seafdec_ref %>
 
     <%= f.input :imo_number %>
 
@@ -110,11 +116,17 @@
     
     <%= f.input :year_built %>
 
+    <%= f.input :location_built %>
+
     <%= f.input :captain %>
     
     <%= f.association :gear, label_method: :alpha_code, value_method: :id %>
 
     <%= f.input :hooks %>
+
+    <%= f.input :fish_capacity %>
+
+    <%= f.input :bait_capacity %>
 
     <%= f.input :crew %>
 

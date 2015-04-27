@@ -1,0 +1,53 @@
+<%= simple_form_for @carrier_loading, 
+  wrapper: :horizontal_form,
+  html: { 
+    role: :form, 
+    class: 'form form-horizontal'
+  } do |f| %>
+
+  <% if @vessel.present? %>
+  	<div class="form-group string optional bait_loading_vessel_id">
+      <label for="carrier_loading_vessel" class="string optional control-label col-sm-3"><%= CarrierLoading.human_attribute_name(:vessel) %></label>
+      <div class="col-sm-9">
+          <h5><%= @vessel.name %> <i><small>(<%= @vessel.ap2hi_ref %>)</small></i><h5>
+          <%= f.input :vessel_id, as: :hidden %>
+      </div>
+    </div>
+
+  <% else %>
+  	<%= f.association :vessel, collection: @vessels, prompt: CarrierLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id %>
+  <% end %>
+
+  <%= f.input :formatted_date, class: 'datepicker form-control' %>
+
+  <%= f.association :fish, collection: Fish.default, prompt: CarrierLoading.human_attribute_name(:fish), label_method: :code, value_method: :id %>
+
+  <%= f.input :size, placeholder: CarrierLoading.human_attribute_name(:size) %>
+
+  <%= f.input :grade, placeholder: CarrierLoading.human_attribute_name(:grade) %>
+
+  <%= f.input :location, placeholder: CarrierLoading.human_attribute_name(:location) %>
+
+  <div class="form-group">
+    <div class="col-md-9 col-md-offset-3">
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
+        Save
+      <% end %>
+
+      <% if params[:company_id] %>
+	      <%= link_to "Cancel", company_carrier_loadings_path( params[:company_id] ) %>
+      <% elsif params[:vessel_id] %>
+	      <%= link_to "Cancel", vessel_carrier_loadings_path( params[:vessel_id] ) %>
+      <% elsif @vessel %>
+        <%= link_to "Cancel", vessel_carrier_loadings_path( @vessel ) %>
+      <% elsif @carrier_loading.vessel_id? %>
+        <%= link_to "Cancel", vessel_carrier_loadings_path( @carrier_loading.vessel_id ) %>
+      <% else %>
+        <%= link_to "Cancel", carrier_loadings_path %>
+      <% end %> 
+
+    </div>
+  </div>
+
+<% end %>

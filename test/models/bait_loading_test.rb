@@ -11,6 +11,9 @@
 #  unloading_id :integer
 #  created_at   :datetime         not null
 #  updated_at   :datetime         not null
+#  price        :integer
+#  method_type  :string
+#  review_state :string           default("pending")
 #
 
 require 'test_helper'

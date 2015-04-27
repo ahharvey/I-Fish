@@ -1,6 +1,12 @@
 <% title t ".title" %>
 
 <div class="row">
+  <div class="col-xs-6">
+    
+  </div>
+</div>
+
+<div class="row">
   <div class="col-xs-12 col-md-8">
     <div class="row">
       <div class="col-xs-12">
@@ -19,6 +25,16 @@
     </div>
   </div>
   <div id="member_panel" class="col-xs-12 col-md-4">
+    <% if @company.has_fishing_vessels? %>
+      <%= link_to "View unloading reports", company_unloadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+      <%= link_to "View bait loading reports", company_bait_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+    <% end %>
+    <% if @company.has_carrier_vessels? %>
+      <%= link_to "View carrier loading reports", company_carrier_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+    <% end %>
+    <% if @company.has_fishing_vessels? || @company.has_carrier_vessels? %>
+      <br />
+    <% end %>
     <%= render partial: "vessel_panel" %>
   </div>
 </div>

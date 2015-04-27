@@ -1,0 +1,23 @@
+<% present bait_loading do |bait_loading_presenter| %> 
+  <%= content_tag_for :tr, bait_loading do %>
+    <td>
+      <% if bait_loading.approved? %>
+        <span class="label label-success"><i class='fa fa-check'></i></span>
+      <% elsif bait_loading.rejected? %>
+        <span class="label label-important"><i class='fa fa-ban'></i></span>
+      <% elsif bait_loading.pending? %>
+        <span class="label label-warning"><i class='fa fa-warning'></i></span>
+      <% end %>
+    </td>
+    <td><%= bait_loading_presenter.date %></td>
+    <td><%= bait_loading_presenter.ap2hi_ref %></td>
+    <td><%= bait_loading_presenter.fish %></td>
+    <td class='hidden-xs'><%= bait_loading_presenter.quantity %></td>
+    <td class='hidden-xs'><%= bait_loading_presenter.method_type %></td>
+    <td class='hidden-xs'><%= bait_loading_presenter.location %></td>
+    <td class='hidden-xs'><%= bait_loading_presenter.quantity %></td> 
+    <td>
+      <%= link_to "Edit", edit_bait_loading_path(bait_loading), class: "btn btn-xs btn-block btn-primary" %>
+    </td>
+  <% end %>
+<% end %>

@@ -69,6 +69,9 @@ class Ability
     can :manage, Fishery, id: admin.member_fisheries.map(&:id)
     cannot :destroy, Fishery
 
+    can :create, CarrierLoading
+    can :manage, CarrierLoading, id: admin.managed_carrier_loadings.map(&:id)
+    cannot :destroy, CarrierLoading
 
     can :create, Unloading
     can :manage, Unloading, id: admin.managed_unloadings.map(&:id)

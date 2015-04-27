@@ -6,7 +6,7 @@ module QrcodeHelper
     qr = RQRCode::QRCode.new(text)
     sizeStyle = "width: #{size}px; height: #{size}px;"
 
-    content_tag :table, class: "qrcode pull-right" do
+    content_tag :table, class: "qrcode" do
       qr.modules.each_index do |x|
         concat(content_tag(:tr) do
           qr.modules.each_index do |y|

@@ -1,0 +1,70 @@
+<% title t ".title" %>
+
+<% if @vessel.present? %>
+  <% subtitle "#{@vessel.name} (#{@vessel.ap2hi_ref})" %>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-8">
+
+  </div>
+  <div class="col-xs-4">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
+
+</div>
+
+<br />
+<br />
+
+
+<% if @vessel.present? %>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <%= link_to 'New Bait Loading', new_vessel_bait_loading_path(@vessel), class: 'btn btn-lg btn-primary btn-block' %>
+      <br />
+    </div>
+  </div>
+<% end %>
+
+<% if @company.present? %>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <%= link_to 'New Bait Loading', new_company_bait_loading_path(@company), class: 'btn btn-lg btn-primary btn-block' %>
+      <br />
+    </div>
+  </div>
+<% end %>
+
+
+<table class="table table-striped table-condensed datatable">
+   <thead>
+    <tr>
+      <th data-sortable="false"></th>
+      <th><%= BaitLoading.human_attribute_name(:formatted_date) %></th>
+      <th><%= BaitLoading.human_attribute_name(:ap2hi_ref) %></th>
+      <th><%= BaitLoading.human_attribute_name(:fish) %></th>
+      <th><%= BaitLoading.human_attribute_name(:quantity) %></th>
+      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:method_type) %></th>
+      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:location) %></th>
+      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:price) %></th>
+      <th data-sortable="false"></th>
+    </tr>
+  <thead>
+  <tbody id="bait_loadings_tbody">
+    <% @bait_loadings.each do |bait_loading| %>
+      <%= render partial: 'tablerow', locals: {bait_loading: bait_loading} %>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+
+<div class="row">
+  <div class="col-xs-6">
+    <%= link_to :back, class: 'btn btn-primary btn-block' do %>
+      <%= icon('arrow-left', 'Back') %>
+    <% end %>
+  </div>
+  
+</div>

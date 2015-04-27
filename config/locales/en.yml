@@ -26,6 +26,10 @@ en:
         title: "Security"
       new:
         title: "Sign up"
+  bait_loadings:
+    title: "Bait Loadings"
+    index: 
+      title: "Bait Loadings"
   catches:
     title: "Catch Composition"
     index:
@@ -236,10 +240,21 @@ en:
     attributes:
       bait_loading: 
         date: "Date"
-        quantity: "Quantity (kg)"
+        ap2hi_ref: "AP2HI UVI"
+        formatted_date: "Date"
+        quantity: "Quantity (buckets)"
         location: "Location"
         fish_id: "Species"
         vessel_id: "Vessel"
+        method_types: "Method"
+      carrier_loading:
+        vessel: "Vessel"
+        formatted_date: "Date"
+        date: "Date"
+        fish: "Species"
+        size: "Size"
+        grade: "Grade"
+        location: "Location"
       catch:
         fish_id: "Fish"
         landing_id: "Landing"
@@ -388,6 +403,12 @@ en:
         sipi_expiry: "SIPI expiry date"
         siup_number: "SIUP"
         formatted_sipi_expiry: "SIPI expiry date"
+        mmaf_ref: "MMAF UVI"
+        dkp_ref: "DKP UVI"
+        seafdec_ref: "SEAFDEC UVI"
+        fish_capacity: "Hold capacity (m3)"
+        bait_capacity: "Bait capacity (m3)"
+        location_built: "Place of construction"
   views:
     pagination:
       first: "&laquo; First"
@@ -409,3 +430,5 @@ en:
   relationship_types:
     independent: "Independent"
     contracted: "Contracted"
+  method_types:
+    bagan: "Bagan"

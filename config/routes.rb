@@ -121,10 +121,16 @@ require 'sidekiq/web'
 
     resources :vessels do
       resources :unloadings
+      resources :bait_loadings
+      resources :carrier_loadings
     end
     resources :unloadings
+    resources :carrier_loadings
     
     resources :companies do
+      resources :unloadings
+      resources :bait_loadings
+      resources :carrier_loadings
       member do
         get 'crop' => 'companies#crop', :as => :crop
         get :report
@@ -132,6 +138,8 @@ require 'sidekiq/web'
         delete :delete_vessel
       end
     end
+
+    resources :bait_loadings
 
     resources :documents
 

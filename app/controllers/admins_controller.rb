@@ -102,9 +102,6 @@ class AdminsController < ApplicationController
   def admin_params
     params.require(:admin).permit(
       :email, 
-      :password, 
-      :password_confirmation, 
-      :remember_me, 
       :name, 
       :approved, 
       :office_id, 
@@ -112,12 +109,7 @@ class AdminsController < ApplicationController
       :crop_x, 
       :crop_y, 
       :crop_w, 
-      :crop_h,
-      :invited_by_id,
-      :invited_by_type,
-      :invitation_token,
-      :invitation_created_at,
-      :invitation_sent_at
+      :crop_h
       )
   end
 

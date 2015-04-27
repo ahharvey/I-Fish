@@ -1,0 +1,64 @@
+<% title t ".title" %>
+
+<% if @vessel.present? %>
+  <% subtitle "#{@vessel.name} (#{@vessel.ap2hi_ref})" %>
+<% end %>
+
+<div class="row">
+  <div class="col-xs-8">
+    <%= link_to :back do %>
+      <i class='icon-arrow-left'></i> Back
+    <% end %>
+  </div>
+  <div class="col-xs-4">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
+
+</div>
+
+<br />
+<br />
+
+
+<% if @vessel.present? %>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <%= link_to 'New Carrier Loading', new_vessel_carrier_loading_path(@vessel), class: 'btn btn-lg btn-primary btn-block' %>
+      <br />
+    </div>
+  </div>
+<% end %>
+
+<% if @company.present? %>
+  <div class="row">
+    <div class="col-xs-12 col-md-6">
+      <%= link_to 'New Carrier Loading', new_company_carrier_loading_path(@company), class: 'btn btn-lg btn-primary btn-block' %>
+      <br />
+    </div>
+  </div>
+<% end %>
+
+
+<table class="table table-striped table-condensed datatable">
+   <thead>
+    <tr>
+      <th data-sortable="false"></th>
+      <th><%= CarrierLoading.human_attribute_name(:formatted_date) %></th>
+      <th><%= CarrierLoading.human_attribute_name(:vessel_id) %></th>
+      <th><%= CarrierLoading.human_attribute_name(:fish_id) %></th>
+      <th class='hidden-xs'><%= CarrierLoading.human_attribute_name(:location) %></th>
+      <th class='hidden-xs'><%= CarrierLoading.human_attribute_name(:size) %></th>
+      <th class='hidden-xs'><%= CarrierLoading.human_attribute_name(:grade) %></th>
+      <th><%= CarrierLoading.human_attribute_name(:quantity) %></th>
+      <th data-sortable="false"></th>
+    </tr>
+  <thead>
+  <tbody id="carrier_loadings_tbody">
+    <% @carrier_loadings.each do |carrier_loading| %>
+      <%= render partial: 'tablerow', locals: {carrier_loading: carrier_loading} %>
+    <% end %>
+  </tbody>
+</table>
+
+<br />
+

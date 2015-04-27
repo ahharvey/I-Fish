@@ -17,4 +17,5 @@ class UnloadingCatch < ActiveRecord::Base
 
   CUT_TYPES = ["wholeround", "dirtyloin", "cleanloin"]
 
+
 end

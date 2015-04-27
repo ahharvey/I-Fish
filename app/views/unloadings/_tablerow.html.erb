@@ -23,31 +23,7 @@
     <td class='hidden-xs'><%= unloading_presenter.fuel %></td>
     <td class='hidden-xs'><%= unloading_presenter.ice %></td> 
     <td>
-      <%= link_to "#{unloading.number_of_bait_loadings} bait loadings", edit_unloading_path(unloading), class: "btn btn-xs btn-block #{unloading.number_of_bait_loadings > 0 ? 'btn-success' : 'btn-danger' }" %>
-      <% if @vessel.present? %>
-        <%# Bootstrap modal markup. @see: http://getbootstrap.com/javascript/#modals %>
-        <div class="modal fade" id='<%= "new_bait_loading_modal_#{unloading.id}" %>' tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                <h4 class="modal-title" id="myModalLabel">Bait Loading - <%= @vessel.name %> <small><i>(<%= @vessel.ap2hi_ref %>)</i></small></h4>
-              </div>
-              <div class="modal-body">
-                <div class="container-fluid">
-                  <div class="row">
-                    <div class="col-xs-12">
-                      <%# Render the new person form (passing modal => true to enable remote => true) %>
-                      <%= render 'bait_loading_form', modal: true, unloading: unloading %>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      <% end %>
-
+      <%= link_to "Edit", edit_unloading_path(unloading), class: "btn btn-xs btn-block btn-primary" %>
     </td>
   <% end %>
 <% end %>

@@ -37,6 +37,12 @@
 #  flag_state_changed :boolean
 #  radio              :boolean
 #  relationship_type  :string
+#  fish_capacity      :integer
+#  bait_capacity      :integer
+#  location_built     :string
+#  seafdec_ref        :string
+#  mmaf_ref           :string
+#  dkp_ref            :string
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

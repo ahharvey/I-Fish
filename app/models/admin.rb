@@ -189,6 +189,10 @@ class Admin < ActiveRecord::Base
     Unloading.where(vessel_id: managed_vessels)
   end
 
+  def managed_carrier_loadings
+    CarrierLoading.where(vessel_id: managed_vessels)
+  end
+
   def managed_bait_loadings
     BaitLoading.where(unloading_id: managed_unloadings)
   end

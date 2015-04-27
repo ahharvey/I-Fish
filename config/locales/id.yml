@@ -25,6 +25,10 @@ id:
         title: "Security"
       new:
         title: "Sign up"
+  bait_loadings:
+    title: "Loading Umpan"
+    index: 
+      title: "Loading Umpan"
   catches:
     title: "Komposisi Penangkapan"
     index:
@@ -231,10 +235,21 @@ id:
     attributes:
       bait_loading: 
         date: "Date"
-        quantity: "Quantity (kg)"
+        ap2hi_ref: "AP2HI UVI"
+        formatted_date: "Date"
+        quantity: "Quantity (ember)"
         location: "Location"
         fish_id: "Species"
         vessel_id: "Vessel"
+        method_types: "Method"
+      carrier_loading:
+        vessel: "Vessel"
+        formatted_date: "Date"
+        date: "Date"
+        fish: "Species"
+        size: "Size"
+        grade: "Grade"
+        location: "Location"
       company:
         name: "Nama pendek"
         code: "Abbreviation"
@@ -380,6 +395,12 @@ id:
         sipi_expiry: "SIPI berlaku s/d"
         siup_number: "SIUP"
         formatted_sipi_expiry: "SIPI berlaku s/d"
+        mmaf_ref: "MMAF UVI"
+        dkp_ref: "DKP UVI"
+        seafdec_ref: "SEAFDEC UVI"
+        fish_capacity: "Kapasitas hasil (m3)"
+        bait_capacity: "Kapasitas umpan (m3)"
+        location_built: "Lokasi pembuatan"
   views:
     pagination:
       first: "&laquo; First"
@@ -401,3 +422,5 @@ id:
   relationship_types:
     independent: "Independent"
     contracted: "Contracted"
+  method_types:
+    bagan: "Bagan"

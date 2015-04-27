@@ -3,20 +3,6 @@
 <div class="row">
   <div class="col-xs-12 col-md-8">
     <div class="row">
-      <div class="col-xs-6">
-        <%= render partial: "issf_uvi_request" %>
-      </div>
-      <div class="col-xs-6">
-      </div>
-    </div>
-    <br />
-    <div class="row">
-      <div class="col-xs-12">
-        <%= link_to "View unloading reports", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
-      </div>
-    </div>
-    <br />
-    <div class="row">
       <div class="col-xs-12 col-md-6">
         <%= render partial: "registration_panel" %>
       </div>
@@ -44,11 +30,27 @@
   <div class="col-xs-12 col-md-4">
     <div class="row">
       <div class="col-xs-12">
+        <%= link_to "View unloading reports", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+        <% unless @vessel.vessel_type.try(:code) == 'ca' %>
+          <%= link_to "View bait loading reports", vessel_bait_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+        <% end %>
+        <% if @vessel.vessel_type.try(:code) == 'ca' %>
+          <%= link_to "View carrier loading reports", vessel_carrier_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+        <% end %>
+        <br />
+        <%= render partial: "issf_uvi_request" %>
+        <br />
         <%= render partial: 'qrcode_panel' %>
       </div>
     </div>
   </div>
 </div>
 
-<%= link_to 'Edit', edit_vessel_path(@vessel) %> |
-<%= link_to 'Back', vessels_path %>
+<div class="row">
+  <div class="col-xs-6">
+    <%= link_to 'Back', vessels_path, class: 'btn btn-block btn-primary' %>
+  </div>
+  <div class="col-xs-6">
+    <%= link_to 'Edit', edit_vessel_path(@vessel), class: 'btn btn-block btn-primary' %>
+  </div>
+</div>
