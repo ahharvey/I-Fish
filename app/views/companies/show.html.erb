@@ -7,7 +7,20 @@
 </div>
 
 <div class="row">
-  <div class="col-xs-12 col-md-8">
+  <div id="member_panel" class="col-xs-12 col-md-4 col-md-push-8">
+    <% if @company.has_fishing_vessels? %>
+      <%= link_to "View unloading reports", company_unloadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+      <%= link_to "View bait loading reports", company_bait_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+    <% end %>
+    <% if @company.has_carrier_vessels? %>
+      <%= link_to "View carrier loading reports", company_carrier_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+    <% end %>
+    <% if @company.has_fishing_vessels? || @company.has_carrier_vessels? %>
+      <br />
+    <% end %>
+    <%= render partial: "vessel_panel" %>
+  </div>
+  <div class="col-xs-12 col-md-8 col-md-pull-4">
     <div class="row">
       <div class="col-xs-12">
         <%= render partial: "company_panel" %>
@@ -24,19 +37,7 @@
       </div>
     </div>
   </div>
-  <div id="member_panel" class="col-xs-12 col-md-4">
-    <% if @company.has_fishing_vessels? %>
-      <%= link_to "View unloading reports", company_unloadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
-      <%= link_to "View bait loading reports", company_bait_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
-    <% end %>
-    <% if @company.has_carrier_vessels? %>
-      <%= link_to "View carrier loading reports", company_carrier_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
-    <% end %>
-    <% if @company.has_fishing_vessels? || @company.has_carrier_vessels? %>
-      <br />
-    <% end %>
-    <%= render partial: "vessel_panel" %>
-  </div>
+  
 </div>
 
 <div class="row">
