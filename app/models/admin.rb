@@ -64,6 +64,7 @@ class Admin < ActiveRecord::Base
 
   after_create :set_default_role
   after_create :send_approval_mail, unless: :created_by_invitation?
+  before_create :generate_access_token
 
   # sets default role to public
   def set_default_role
@@ -215,12 +216,19 @@ class Admin < ActiveRecord::Base
     invitation_created_at? && invitation_accepted_at.blank?
   end
 
+  def generate_access_token
+    begin
+      self.access_token = SecureRandom.hex
+    end while self.class.exists?(access_token: access_token)
+  end
+
   private
  
   def avatar_size
     errors[:avatar] << "should be less than 1MB" if avatar.size > 1.megabytes
   end
 
+  
   
 
 end

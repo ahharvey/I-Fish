@@ -1,8 +1,36 @@
 <div class="panel panel-default hidden-xs hidden-sm hidden-md">
   <div class="panel-heading">
-    <h3 class="panel-title">QR code</h3>
+    <h3 class="panel-title">Sticker</h3>
   </div>
   <div class="panel-body">
-    <%= render_qr_code vessel_url(@vessel) %>
+  	<div class="row">
+  		<div class="col-xs-4">
+  			<%= image_tag "ap2hi.jpg", alt: "AP2HI", class: 'img-responsive'  %>
+  		</div>
+  		<div class="col-xs-8">
+  			<p style='color:#188BA0;font-size:22px;text-align:center'>AP2HI</p>
+  			<p style='color:#188BA0;font-size:14px;text-align:center'>Asosiasi Perikanan Pole & Line dan Handline Indoneisa</p>
+  			<p style='color:#188BA0;font-size:8px;text-align:center'>Indonesian Pole & Line and Handline Fisheries Association
+
+  		</div>
+  	</div>
+  	<div class="row">
+  		<div class="col-xs-8">
+  			<br />
+  			<dl class="dl-horizontal">
+      		<dt><%= Vessel.human_attribute_name(:name) %></dt>
+      		<dd><%= @vessel.name %></dd>
+      		<br />
+      		<dt><%= Vessel.human_attribute_name(:ap2hi_ref) %></dt>
+		      <dd><%= @vessel.ap2hi_ref %></dd>
+	      </dl>
+  		</div>
+  		<div class="col-xs-4">
+  			<%= render_qr_code vessel_url(@vessel) %>
+  		</div>
+  	</div>
+    
+    <%= link_to  t( :generate_stickers ), vessel_path(@vessel, format: :pdf), class: 'btn btn-block btn-default' %>
   </div>
+
 </div>

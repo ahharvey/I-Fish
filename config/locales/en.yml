@@ -1,6 +1,7 @@
 # English localization file.
 
 en:
+  generate_stickers: 'Generate stickers'
   panel:
     roles:
       exists: "This person already has the role"

@@ -131,6 +131,7 @@ require 'sidekiq/web'
       resources :unloadings
       resources :bait_loadings
       resources :carrier_loadings
+      resources :vessels
       member do
         get 'crop' => 'companies#crop', :as => :crop
         get :report
@@ -162,17 +163,18 @@ require 'sidekiq/web'
 
     namespace :api, defaults: {format: 'json'} do
       scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do
-        resources :users
-        resources :admins
-        resources :logbooks
-        resources :surveys
+        # resources :users
+        # resources :admins
+        # resources :logbooks
+        # resources :surveys
         resources :fisheries
-        resources :desas, path: :landing_sites
-        resources :districts
-        resources :provinces
-        resources :engines
-        resources :gears
+        # resources :desas, path: :landing_sites
+        # resources :districts
+        # resources :provinces
+        # resources :engines
+        # resources :gears
         resources :fishes
+        resources :vessels, only: [:index]
       end
     end
 

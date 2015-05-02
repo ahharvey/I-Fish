@@ -65,6 +65,9 @@ gem 'rabl', '~> 0.11.0' # JSON templates
 gem 'oj', '~> 2.12.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
 gem 'rqrcode-with-patches', '~>0.5.4'
+gem 'prawn', '~> 2.0.1'
+#gem 'prawn-labels', '~> 1.2.3'
+gem 'prawn-qrcode', '~> 0.2.2.1'
 
 ##
 ## UPLOADS AND INCOMING

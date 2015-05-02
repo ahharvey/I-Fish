@@ -15,5 +15,6 @@
 
     <% end %>
     <%= render partial: 'vessel_list' %>
+    <%= link_to  t( :generate_stickers ), company_vessels_path(@company, format: :pdf), class: 'btn btn-block btn-default' %>
   </div>
 </div>

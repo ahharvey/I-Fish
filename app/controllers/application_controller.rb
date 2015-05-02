@@ -60,6 +60,12 @@ class ApplicationController < ActionController::Base
     @currently_signed_in.activities.create! action: action, trackable: trackable 
   end
 
+  def restrict_access
+    authenticate_or_request_with_http_token do |token, options|
+      Admin.exists?(access_token: token)
+    end
+  end
+
 
   protected
 

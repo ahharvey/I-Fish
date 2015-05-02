@@ -3,15 +3,38 @@ class VesselsController < ApplicationController
 
   before_action :set_vessel, only: [:show, :edit, :update, :destroy]
   respond_to :html
-  respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
+  respond_to :xml, :json, :csv, :xls, :js, :pdf, :except => [ :edit, :new, :update, :create ]
 
   def index
-    @vessels = Vessel.all
-    respond_with(@vessels)
+    if params[:company_id]
+      @vessels = Vessel.where(company_id: params[:company_id] )
+      @company = Company.find( params[:company_id])
+      sticker_filename = "VesselStickers_#{@company.code}_#{Date.today.strftime("%Y%m%d")}.pdf"
+    else
+      @vessels = Vessel.all
+      sticker_filename = "VesselStickers_#{Date.today.strftime("%Y%m%d")}.pdf"
+    end
+    respond_with(@vessels) do |format|
+      format.pdf do
+        pdf = StickerPdf.new(@vessels, view_context)
+        send_data pdf.render, filename: 
+        sticker_filename,
+        type: "application/pdf"
+      end
+    end
   end
 
   def show
-    respond_with(@vessel)
+    @vessels = []
+    @vessels << @vessel
+    respond_with(@vessel) do |format|
+      format.pdf do
+        pdf = StickerPdf.new(@vessels, view_context)
+        send_data pdf.render, filename: 
+        "VesselStickers_#{@vessel.ap2hi_ref}_#{Date.today.strftime("%Y%m%d")}.pdf",
+        type: "application/pdf"
+      end
+    end
   end
 
   def new
