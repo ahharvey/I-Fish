@@ -46,40 +46,15 @@
 #
 
 class Vessel < ActiveRecord::Base
-  belongs_to :vessel_type
-  belongs_to :gear
-  belongs_to :company
+  acts_as_vessel
+
+  has_one :pending_vessel # Or has_many, see the last paragraph
+
   has_many :documents, as: :documentable
   has_many :unloadings
-
-  validates :sipi_expiry, 
-    timeliness: {
-      type: :date
-    }
-
-  has_paper_trail
-
-  attr_accessor :return_to
+  has_many :audits, as: :auditable
 
   before_save :send_pvr_request
-
-  scope :default, -> { order('vessels.ap2hi_ref ASC') }
-
-  MATERIAL_TYPES = ["wood", "fiber"]
-  MACHINE_TYPES = ["none", "outboard", "inboard"]
-  RELATIONSHIP_TYPES = ["contracted", "independent"]
-
-  
-  attr_writer :formatted_sipi_expiry
-  before_validation :save_formatted_sipi_expiry 
-  def formatted_sipi_expiry
-    @formatted_sipi_expiry || sipi_expiry.try(:to_s, :long)
-  end
-  
-  def save_formatted_sipi_expiry
-    self.sipi_expiry = Chronic.parse(@formatted_sipi_expiry) if @formatted_sipi_expiry.present?
-  end
-
 
   private
 

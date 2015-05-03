@@ -1,0 +1,141 @@
+<%= simple_form_for @pending_vessel, html: {class: 'form form-horizontal'} do |f| %>
+  
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+
+    <p>Enter the changed data below.</p>
+    <p>Leave a field blank if the existing data is correct.</p>
+    
+
+    <%= f.input :vessel_id, as: :hidden %>
+
+    <%= f.input :sipi_number %>
+
+    <%= f.input :formatted_sipi_expiry, as: :string, input_html: { class: 'datepicker' } %>
+
+    <%= f.input :siup_number %>
+
+    <%= f.input :name %>
+
+    <%= f.input :name_changed, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+
+    <%= f.association :company %>
+
+    <%= f.input :relationship_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
+      <%= f.select :relationship_type, Vessel::RELATIONSHIP_TYPES.map { |s| [I18n.t("relationship_types.#{s}"), s] }, {}, { class: 'form-control' } %>
+    <% end %>
+
+    <%= f.input :owner %>
+
+    <%= f.association :vessel_type %>
+
+    <%= f.input :material_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
+      <%= f.select :material_type, Vessel::MATERIAL_TYPES.map { |s| [I18n.t("material_types.#{s}"), s] }, {}, { class: 'form-control' } %>
+    <% end %>
+
+    <%= f.input :machine_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
+      <%= f.select :machine_type, Vessel::MACHINE_TYPES.map { |s| [I18n.t("machine_types.#{s}"), s] }, {}, { class: 'form-control' } %>
+    <% end %>
+
+    <%= f.input :length %>
+
+    <%= f.input :tonnage %>
+
+    <%= f.input :capacity %>
+
+    <%= f.input :vms, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+
+    
+    <%= f.input :tracker, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+
+    <%= f.input :port %>
+
+    <%= f.input :flag_state do %>
+      
+      <%= f.country_select :flag_state, {selected: @pending_vessel.flag_state, priority_countries: ["ID"]}, {class: "form-control"} %>
+    <% end %>
+
+    <%= f.input :flag_state_changed, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+
+    <%= f.input :radio, input_html: {
+      class: 'toggle-switch', 
+      data: { 
+        size: 'mini',
+        'on-color' => 'success',
+        'off-color' => 'danger',
+        'on-text' => "Yes",
+        'off-text' => "No"
+        } 
+      } %>
+    
+    <%= f.input :year_built %>
+
+    <%= f.input :location_built %>
+
+    <%= f.input :captain %>
+    
+    <%= f.association :gear, label_method: :alpha_code, value_method: :id %>
+
+    <%= f.input :hooks %>
+
+    <%= f.input :fish_capacity %>
+
+    <%= f.input :bait_capacity %>
+
+    <%= f.input :crew %>
+   
+  
+    </div>
+
+  </div>
+    
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+        Save
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
+
+<br />

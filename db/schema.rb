@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150430111831) do
+ActiveRecord::Schema.define(version: 20150503135440) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,19 @@ ActiveRecord::Schema.define(version: 20150430111831) do
   end
 
   add_index "admins_roles", ["admin_id", "role_id"], name: "by_admin_and_role", unique: true, using: :btree
+
+  create_table "audits", force: :cascade do |t|
+    t.integer  "admin_id"
+    t.integer  "auditable_id"
+    t.string   "auditable_type"
+    t.text     "comment"
+    t.string   "status"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+  end
+
+  add_index "audits", ["admin_id"], name: "index_audits_on_admin_id", using: :btree
+  add_index "audits", ["auditable_type", "auditable_id"], name: "index_audits_on_auditable_type_and_auditable_id", using: :btree
 
   create_table "bait_loadings", force: :cascade do |t|
     t.date     "date"
@@ -329,6 +342,48 @@ ActiveRecord::Schema.define(version: 20150430111831) do
     t.integer  "district_id"
   end
 
+  create_table "pending_vessels", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "vessel_type_id"
+    t.integer  "gear_id"
+    t.string   "flag_state"
+    t.string   "year_built"
+    t.integer  "length"
+    t.integer  "tonnage"
+    t.integer  "company_id"
+    t.integer  "crew"
+    t.integer  "hooks"
+    t.string   "captain"
+    t.string   "owner"
+    t.string   "sipi_number"
+    t.date     "sipi_expiry"
+    t.string   "siup_number"
+    t.string   "material_type"
+    t.string   "machine_type"
+    t.integer  "capacity"
+    t.boolean  "vms"
+    t.boolean  "tracker"
+    t.string   "port"
+    t.boolean  "name_changed"
+    t.boolean  "flag_state_changed"
+    t.string   "radio"
+    t.string   "relationship_type"
+    t.integer  "fish_capacity"
+    t.integer  "bait_capacity"
+    t.string   "location_built"
+    t.string   "status"
+    t.integer  "admin_id"
+    t.integer  "vessel_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+  end
+
+  add_index "pending_vessels", ["admin_id"], name: "index_pending_vessels_on_admin_id", using: :btree
+  add_index "pending_vessels", ["company_id"], name: "index_pending_vessels_on_company_id", using: :btree
+  add_index "pending_vessels", ["gear_id"], name: "index_pending_vessels_on_gear_id", using: :btree
+  add_index "pending_vessels", ["vessel_id"], name: "index_pending_vessels_on_vessel_id", using: :btree
+  add_index "pending_vessels", ["vessel_type_id"], name: "index_pending_vessels_on_vessel_type_id", using: :btree
+
   create_table "protocols", force: :cascade do |t|
     t.string   "title"
     t.text     "description"
@@ -521,10 +576,16 @@ ActiveRecord::Schema.define(version: 20150430111831) do
   add_index "vessels", ["gear_id"], name: "index_vessels_on_gear_id", using: :btree
   add_index "vessels", ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
 
+  add_foreign_key "audits", "admins"
   add_foreign_key "bait_loadings", "fishes"
   add_foreign_key "bait_loadings", "unloadings"
   add_foreign_key "bait_loadings", "vessels"
   add_foreign_key "carrier_loadings", "vessels"
+  add_foreign_key "pending_vessels", "admins"
+  add_foreign_key "pending_vessels", "companies"
+  add_foreign_key "pending_vessels", "gears"
+  add_foreign_key "pending_vessels", "vessel_types"
+  add_foreign_key "pending_vessels", "vessels"
   add_foreign_key "unloading_catches", "fishes"
   add_foreign_key "vessels", "companies"
   add_foreign_key "vessels", "gears"

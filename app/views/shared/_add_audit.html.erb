@@ -1,0 +1,56 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Audit Report</h3>
+  </div>
+  <div class="panel-body">
+    <%= simple_form_for @audit = Audit.new, html: {class: 'form form-horizontal'} do |f| %>
+  
+
+      <div class="row">
+      
+        <div class="col-xs-12 ">
+          <dl class='dl-horizontal'>
+            <dt>By:</dt>
+            <dd><%= current_admin.name %></dd>
+            <dt>Date:</dt>
+            <dd><%= Date.today.to_s(:long) %></dd>
+            <dt>Type:</dt>
+            <dd><%= parent.class.name %></dd>
+            <dt>For:</dt>
+            <% if parent.class.name == 'Vessel' %>
+              <dd><%= parent.name %> <small>(<%= parent.ap2hi_ref %>)</small></dd>
+            <% elsif parent.class.name == 'Company' %>
+              <dd><%= parent.name %></dd>
+            <% end %>
+        </div>
+      </div>
+
+      <div class="row">
+
+        <div class="col-xs-10 col-xs-offset-1">
+        
+          <%= f.input :comment %>
+
+        </div>
+
+      </div>
+
+      <div class="row">
+
+          <div class="col-xs-6">
+            <%= f.radio_button :status, "rejected", onclick: "this.form.submit();", class: 'sr-only' %>
+            <%= f.label :status, "Reject", value: "rejected", class: "btn btn-block btn-danger btn-lg #{@audit.rejected? ? 'active' : ''}" %>
+          </div>
+
+          <div class="col-xs-6">
+            <%= f.radio_button :status, "approved", onclick: "this.form.submit();", class: 'sr-only' %>
+            <%= f.label :status, "Approve", value: "approved", class: "btn btn-block btn-success btn-lg #{@audit.approved? ? 'active' : ''}" %>
+          </div>
+      
+        </div>
+
+      </div>
+        
+    <% end %>
+  </div>
+</div>

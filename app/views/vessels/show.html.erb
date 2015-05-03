@@ -48,10 +48,20 @@
 </div>
 
 <div class="row">
+  <div class="col-xs-12">
+    <%= link_to "Audit", new_vessel_audit_path(@vessel), class: 'btn btn-block btn-primary' %>
+  </div>
+</div>
+
+<br />
+
+<div class="row">
   <div class="col-xs-6">
     <%= link_to 'Back', vessels_path, class: 'btn btn-block btn-primary' %>
   </div>
   <div class="col-xs-6">
-    <%= link_to 'Edit', edit_vessel_path(@vessel), class: 'btn btn-block btn-primary' %>
+    <% if admin_signed_in? && current_admin.admin? %>
+      <%= link_to 'Edit', edit_vessel_path(@vessel), class: 'btn btn-block btn-primary' %>
+    <% end %>
   </div>
 </div>

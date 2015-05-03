@@ -14,6 +14,12 @@ en:
     unapproved:
       survey: "Surveys have been added and are awaiting your approval"
       team: "New team members have signed up and are awaiting your approval"
+  audits:
+    title: "Audit Report"
+    new:
+      title: "Audit Report"
+    edit: 
+      title: "Audit Report"
   admins:
     title: "Officers"
     welcome:
@@ -135,6 +141,12 @@ en:
       title: "Offices"
     show:
       title: "Office"
+  pending_vessels:
+    title: "Update Vessel"
+    new: 
+      title: "Update Vessel"
+    edit: 
+      title: "Update Vessel"
   protocols:
     title: "Protocols"
     index:

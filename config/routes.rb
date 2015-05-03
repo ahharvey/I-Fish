@@ -101,6 +101,7 @@ require 'sidekiq/web'
         put :reject
       end
     end
+    resources :audits, except: [:edit]
     resources :engines
     resources :graticules
     resources :vessel_types
@@ -123,7 +124,10 @@ require 'sidekiq/web'
       resources :unloadings
       resources :bait_loadings
       resources :carrier_loadings
+      resources :audits, except: [:edit]
+      resources :pending_vessels
     end
+    resources :pending_vessels
     resources :unloadings
     resources :carrier_loadings
     
@@ -132,6 +136,7 @@ require 'sidekiq/web'
       resources :bait_loadings
       resources :carrier_loadings
       resources :vessels
+      resources :audits, except: [:edit]
       member do
         get 'crop' => 'companies#crop', :as => :crop
         get :report
