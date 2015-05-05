@@ -56,6 +56,8 @@ class Vessel < ActiveRecord::Base
 
   before_save :send_pvr_request
 
+  scope :default, -> { order('vessels.ap2hi_ref ASC') }
+
   private
 
   def send_pvr_request
