@@ -61,6 +61,9 @@ jQuery ->
   $('#get_office').autocomplete
     source: $('#get_office').data('autocomplete-source')
 jQuery ->
+  $('#get_role').autocomplete
+    source: $('#get_role').data('autocomplete-source')
+jQuery ->
   $('#fishery_protocol_id').select2
     placeholder: 'Select a protocol'
     allowClear: true
