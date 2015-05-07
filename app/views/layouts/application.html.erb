@@ -22,12 +22,14 @@
     </div>
     <footer>
       <%= yield :scripts %>
-      <%= javascript_include_tag(
-        "http://code.highcharts.com/stock/highstock.js", 
-        "http://code.highcharts.com/highcharts-more.js", 
-        "http://code.highcharts.com/stock/modules/exporting.js"
-        )
-      %>
+      <% if false %>
+        <%= javascript_include_tag(
+          "http://code.highcharts.com/stock/highstock.js", 
+          "http://code.highcharts.com/highcharts-more.js", 
+          "http://code.highcharts.com/stock/modules/exporting.js"
+          )
+        %>
+      <% end %>
       <%= render partial: "layouts/ganalytics" %> 
 
       <% if admin_signed_in? %>
