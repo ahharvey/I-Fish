@@ -93,7 +93,7 @@ class StickerPdf < Prawn::Document
     move_down 10
     text "AP2HI", size: 22, align: :center, color: "188BA0"
     move_down 3
-    text "Asosiasi Perikanan Pole & Line dan Handline Indoneisa", size: 14, color: "188BA0", align: :center
+    text "Asosiasi Perikanan Pole & Line dan Handline Indonesia", size: 14, color: "188BA0", align: :center
     move_down 3
     text "Indonesian Pole & Line and Handline Fisheries Association", size: 8, color: "188BA0", align: :center
   end
