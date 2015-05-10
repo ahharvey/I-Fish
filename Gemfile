@@ -8,6 +8,7 @@ gem 'pg', '~> 0.18.0'
 #gem 'unicorn', '~> 4.8.0'
 gem 'puma', '~> 2.11.0' 
 gem 'rack-timeout', '~> 0.2.0'
+gem 'hirefire-resource', '~> 0.3.5'
 
 ## 
 ## MODELS
