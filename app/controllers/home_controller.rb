@@ -5,7 +5,7 @@ class HomeController < ApplicationController
   skip_authorize_resource :only => :multipart_import
 
   def index
-    @activities = Activity.includes(:ownable).page(params[:page]).per(15)
+    @activities = Activity.includes(:ownable, :trackable).page(params[:page]).per(15)
   end
 
   def reports
