@@ -96,7 +96,7 @@ class CompaniesController < ApplicationController
 
   def delete_vessel
     vessel = Vessel.find params[:vessel]
-    vessel.update_attribute(company_id: "")
+    vessel.update_attributes(company_id: "")
     flash[:success]= I18n.t("companies.vessels.removed")
     redisplay_vessels
   end
