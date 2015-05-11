@@ -54,12 +54,19 @@ class Ability
     can :manage, Logbook, :admin_id => admin.id #Can manage own data
     can :manage, Survey, :admin_id => admin.id #Can manage own data
     can :read, Fishery # To view summarised fishery data
+    
     can :read, Company, id: admin.managed_companies.map(&:id)
     can :read, Vessel, id: admin.managed_vessels.map(&:id)
-    can :create, Unloading, id: admin.managed_unloadings.map(&:id)
-    can :create, BaitLoading, id: admin.managed_bait_loadings.map(&:id)
+    
+    can :create, Unloading, vessel_id: admin.managed_vessels.map(&:id)
+    can :create, BaitLoading, vessel_id: admin.managed_vessels.map(&:id)
+    
+    can :create, Audit
+    can :create, PendingVessel
+    
     can :upload_data, :home # Can submit data
     can :process_upload_data, :home # Can submit data
+    
     can :manage, ExcelFile, :admin_id => admin.id #Can manage own excel files
   end
 
@@ -88,6 +95,9 @@ class Ability
     can :create, Company
     can :manage, Company, id: admin.managed_companies.map(&:id)
     cannot :destroy, Company
+
+    can :create, Audit
+    can :create, PendingVessel
  
     #can :read, Fishery # To view summarised fishery data
     can :read, User
