@@ -1,12 +1,12 @@
 <% title t ".title" %>
 
 <div class="row">
-  <div class="span8">
+  <div class="col-xs-8">
     <%= link_to :back do %>
       <i class='icon-arrow-left'></i> Back
     <% end %>
   </div>
-  <div class="span4">
+  <div class="col-xs-4">
     <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
   </div>
 
