@@ -101,7 +101,7 @@ class LogbooksController < ApplicationController
   private
   
   def set_logbook
-    @logbook = Logbook.find(params[:id])
+    @logbook = Logbook.includes(user: [:desa], :admin, :fishery, :logged_days, :versions).find(params[:id])
   end
 
   def logbook_params
