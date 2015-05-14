@@ -146,11 +146,11 @@ module ApplicationHelper
 
 
   def flag_en
-    content_tag(:img, "", src: "#", class: "flag flag-gb", alt: "English")
+    image_tag("blank.gif", class: "flag flag-gb", alt: "English")
   end
 
   def flag_id
-    content_tag(:img, "", src: "#", class: "flag flag-id", alt: "Indonesian")
+    image_tag("blank.gif", class: "flag flag-id", alt: "Indonesian")
   end
 
 
