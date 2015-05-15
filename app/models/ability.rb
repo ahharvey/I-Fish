@@ -97,6 +97,9 @@ class Ability
     cannot :destroy, Company
 
     can :create, Audit
+    can :manage, Audit, admin_id: admin
+    cannot :destroy Audit 
+
     can :create, PendingVessel
  
     #can :read, Fishery # To view summarised fishery data
