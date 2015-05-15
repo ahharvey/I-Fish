@@ -98,7 +98,7 @@ class Ability
 
     can :create, Audit
     can :manage, Audit, admin_id: admin
-    cannot :destroy Audit 
+    cannot :destroy, Audit 
 
     can :create, PendingVessel
  

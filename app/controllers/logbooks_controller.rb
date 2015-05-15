@@ -8,7 +8,7 @@ class LogbooksController < ApplicationController
   respond_to :xml, :json, :except => [ :edit, :new, :update, :create ]
 
   def index
-    @logbooks = Logbook.includes( user: [:desa], :admin, :fishery).all
+    @logbooks = Logbook.includes( :admin, :fishery, user: [:desa] ).all
     respond_with(@logbooks)
   end
 
@@ -101,7 +101,7 @@ class LogbooksController < ApplicationController
   private
   
   def set_logbook
-    @logbook = Logbook.includes(user: [:desa], :admin, :fishery, :logged_days, :versions).find(params[:id])
+    @logbook = Logbook.includes(:admin, :fishery, :logged_days, :versions, user: [:desa] ).find(params[:id])
   end
 
   def logbook_params
