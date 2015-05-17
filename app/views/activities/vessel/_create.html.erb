@@ -1,10 +1,7 @@
 <% if vessel %>
-  added a vessel to the registry: <%= link_to "#{vessel.name} (#{vessel.ap2hi_ref})", vessel %>
+  added a vessel to the registry: 
   <br />
-  <span class="fa-stack fa-lg">
-    <i class="fa fa-square fa-stack-2x text-info"></i>
-    <i class="fa fa-cloud-upload fa-stack-1x fa-inverse"></i>
-  </span>
+  <%= link_to "#{vessel.name} (#{vessel.ap2hi_ref})", vessel %>
 <% else %>
   added a vessel that has since been deleted
 <% end %>

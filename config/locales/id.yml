@@ -1,5 +1,6 @@
 # Indonesian loalization file
 id:
+  open: 'Buka'
   generate_stickers: 'Generate stickers'
   panel:
     roles:

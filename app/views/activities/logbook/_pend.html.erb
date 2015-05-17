@@ -1,10 +1,7 @@
 <% if logbook %>
-  marked a logbook as pending : <%= link_to "#{logbook.user.desa.name} - #{logbook.logbook_date}", logbook %>
+  marked a logbook as pending:
   <br />
-  <span class="fa-stack fa-lg">
-    <i class="fa fa-square fa-stack-2x text-warning"></i>
-    <i class="fa fa-warning fa-stack-1x fa-inverse"></i>
-  </span>
+  <%= link_to "#{logbook.user.desa.name} - #{logbook.logbook_date}", logbook %>
 <% else %>
   marked as pending a logbook that has since been deleted
 <% end %>

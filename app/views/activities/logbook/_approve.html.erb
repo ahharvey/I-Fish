@@ -1,10 +1,7 @@
 <% if logbook %>
-  approved a logbook : <%= link_to "#{logbook.user.desa.name} - #{logbook.logbook_date}", logbook %>
+  approved a logbook:
   <br />
-  <span class="fa-stack fa-lg">
-    <i class="fa fa-square fa-stack-2x text-success"></i>
-    <i class="fa fa-check fa-stack-1x fa-inverse"></i>
-  </span>
+  <%= link_to "#{logbook.user.desa.name} - #{logbook.logbook_date}", logbook %>
 <% else %>
   approved a logbook that has since been deleted
 <% end %>

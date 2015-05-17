@@ -1,10 +1,7 @@
 <% if survey %>
-	updated a survey : <%= link_to "#{survey.desa.name} - #{survey.date_published}", survey %>
-  <br />
-  <span class="fa-stack fa-lg">
-    <i class="fa fa-square fa-stack-2x text-info"></i>
-    <i class="fa fa-edit fa-stack-1x fa-inverse"></i>
-  </span>
+	updated a survey:
+	<br />
+	<%= link_to "#{survey.desa.name} - #{survey.date_published}", survey %>
 <% else %>
 	updated a survey that has since been deleted
 <% end %>

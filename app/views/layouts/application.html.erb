@@ -12,12 +12,14 @@
   </head>
   <body data-spy="scroll" data-target=".bs-docs-sidebar">
     <%= render partial: "layouts/navbar" %>
-    <div class="container-fluid" style="margin-top:50px">
+    <div class="container-fluid" style="margin-top:61px">
       <div class="flash-container"><%= render partial: "shared/flash_messages" %></div>
       <%= render partial: "shared/model_error_messages" %>
-      <div class="page-header">
-        <h1><%= yield (:title) || "FishStat" %> <small><%= yield (:subtitle) || "" %></small></h1>
-      </div><!-- page-header -->
+      <% if content_for? :title %>
+        <div class="page-header">
+          <h1><%= yield (:title) || "FishStat" %> <small><%= yield (:subtitle) || "" %></small></h1>
+        </div><!-- page-header -->
+      <% end %>
       <%= yield %>
     </div>
     <footer>

@@ -1,6 +1,7 @@
 # English localization file.
 
 en:
+  open: 'Open'
   generate_stickers: 'Generate stickers'
   panel:
     roles:
