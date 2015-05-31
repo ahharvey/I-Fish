@@ -16,22 +16,22 @@
                 ) do |f| %>
   Select report year: 
 
-  <% if Survey.exists? %>
+  <% if @surveys.any? %>
   
     <%= f.input :year, 
-      collection: Survey.first(order: 'date_published ASC').date_published.year..Survey.last(order: 'date_published ASC').date_published.year,
+      collection: @surveys.first.date_published.year..@surveys.last.date_published.year,
       selected: Date.today.year,
       input_html: {
         class: "report_year"
         } %>
-    <% end %>
 
-<% else %>
+  <% else %>
 
-  <i>No survey data uploaded</i>
+    <i>No survey data uploaded</i>
 
-<% end %>
+  <% end %>
   
+<% end %>
 
 <%= render partial: 'fishery_cpue_by_gear' %>
 

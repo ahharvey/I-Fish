@@ -220,7 +220,7 @@ class LoggedDay < ActiveRecord::Base
   end
 
   def formatted_graticule
-    graticule.code
+    graticule.try(:code)
   end
 
   def formatted_sail
@@ -228,7 +228,7 @@ class LoggedDay < ActiveRecord::Base
   end
 
   def formatted_fish
-    fish.code
+    fish.try(:code)
   end
 
   def formatted_date

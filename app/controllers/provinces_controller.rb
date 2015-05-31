@@ -16,6 +16,8 @@ class ProvincesController < ApplicationController
   def show
     # respond_with(@province)
     @province = Province.includes(:surveys, :gears, :fishes, :districts, :fisheries, :landings => [ :catches ] ).find(params[:id])
+    @surveys  = @province.surveys.default
+    
     @districts = @province.districts.uniq
     @fisheries = @province.fisheries.uniq
 

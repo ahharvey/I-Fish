@@ -43,6 +43,8 @@ class Survey < ActiveRecord::Base
   validate :check_start_at if @start_time_input.present?
   validate :check_end_at if @end_time_input.present?
 
+  scope :default, -> { order('surveys.date_published ASC') }
+
 	validates :date_published,
 		presence: {
 			message: " is not defined." 
