@@ -17,15 +17,15 @@
     <tr>
       <th></th>
       <th><%= Vessel.human_attribute_name(:ap2hi_ref) %></th>
-      <th><%= Vessel.human_attribute_name(:issf_ref) %></th>
+      <th class='hidden-xs'><%= Vessel.human_attribute_name(:issf_ref) %></th>
       <th><%= Vessel.human_attribute_name(:name) %></th>
       <th><%= Vessel.human_attribute_name(:company) %></th>
-      <th><%= Vessel.human_attribute_name(:vessel_type) %></th>
-      <th><%= Vessel.human_attribute_name(:gear) %></th>
-      <th><%= Vessel.human_attribute_name(:shark_policy) %></th>
-      <th><%= Vessel.human_attribute_name(:iuu_list) %></th>
-      <th><%= Vessel.human_attribute_name(:code_of_conduct) %></th>
-      <th></th>
+      <th class='hidden-xs'><%= Vessel.human_attribute_name(:vessel_type) %></th>
+      <th class='hidden-xs'><%= Vessel.human_attribute_name(:gear) %></th>
+      <th class='hidden-xs'><%= Vessel.human_attribute_name(:shark_policy) %></th>
+      <th class='hidden-xs'><%= Vessel.human_attribute_name(:iuu_list) %></th>
+      <th class='hidden-xs'><%= Vessel.human_attribute_name(:code_of_conduct) %></th>
+      <th class='hidden-xs'></th>
     </tr>
   </thead>
   <tbody>
@@ -33,15 +33,15 @@
       <tr>
         <td><%= link_to show_icon, vessel %> </td>
         <td><%= vessel.ap2hi_ref %></td>
-        <td><%= vessel.issf_ref %></td>
+        <td class='hidden-xs'><%= vessel.issf_ref %></td>
         <td><%= vessel.name %></td>
         <td><%= vessel.company.try(:name) %></td>
-        <td><%= vessel.vessel_type.try(:name) %></td>
-        <td><%= vessel.gear.try(:alpha_code) %></td>
-        <td><%= human_bool vessel.shark_policy %></td>
-        <td><%= human_bool vessel.iuu_list %></td>
-        <td><%= human_bool vessel.code_of_conduct %></td>
-        <td>
+        <td class='hidden-xs'><%= vessel.vessel_type.try(:name) %></td>
+        <td class='hidden-xs'><%= vessel.gear.try(:alpha_code) %></td>
+        <td class='hidden-xs'><%= human_bool vessel.shark_policy %></td>
+        <td class='hidden-xs'><%= human_bool vessel.iuu_list %></td>
+        <td class='hidden-xs'><%= human_bool vessel.code_of_conduct %></td>
+        <td class='hidden-xs'>
           <% if can? :update, vessel %>
             <%= link_to edit_icon, edit_vessel_path(vessel) %> 
           <% end %>
