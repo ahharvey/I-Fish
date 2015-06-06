@@ -1,8 +1,14 @@
 <% title t ".title" %>
 
-<%= link_to new_vessel_path, class: "btn btn-mini btn-default", title: "Add new vessel", alt: "New vessel" do %>
-  <%= icon fa_new, "NEW" %>
-<% end %>
+<div class="btn-group">
+  <%= link_to new_vessel_path, class: "btn btn-mini btn-default", title: "Add new vessel", alt: "New vessel" do %>
+    <%= icon fa_new, "NEW" %>
+  <% end %>
+
+  <%= link_to new_vessel_import_path, class: "btn btn-mini btn-default", title: "Import vessels", alt: "Import vessels" do %>
+    <%= icon fa_import, "IMPORT" %>
+  <% end %>
+</div>
 
 <%= render partial: "shared/api_links", locals: {json: true, xml: true, csv: true} %>
 

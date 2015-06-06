@@ -92,6 +92,8 @@ class Ability
     can :manage, Vessel, id: admin.managed_vessels.map(&:id)
     cannot :destroy, Vessel
 
+    can :create, VesselImport
+
     can :create, Company
     can :manage, Company, id: admin.managed_companies.map(&:id)
     cannot :destroy, Company

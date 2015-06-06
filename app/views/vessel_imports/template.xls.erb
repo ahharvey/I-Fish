@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="ImportVessels">
+    <Table>
+      <Row>
+        <% Vessel.columns.each do |column| %>
+          <% if column.name.in? ["id", *Vessel.accessible_attributes] %>
+            <Cell><Data ss:Type="String"><%= column.name %></Data></Cell>
+          <% end %>
+        <% end %>
+      </Row>
+    </Table>
+  </Worksheet>
+</Workbook>

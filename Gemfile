@@ -74,7 +74,8 @@ gem 'prawn-qrcode', '~> 0.2.2.1'
 ## UPLOADS AND INCOMING
 gem 'carrierwave', '~> 0.10.0'
 gem 'fog', '~> 1.29.0'
-gem 'roo', '~> 1.13.2'
+gem 'roo', '~> 2.0.0'
+gem 'roo-xls', '~> 1.0.0'
 gem 'mini_magick', '~> 4.2.0'
 gem 'rmagick', '~> 2.14.0'
 gem 'griddler', '~> 1.1.0'  #Mandril API for incoming email handling

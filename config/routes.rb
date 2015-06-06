@@ -70,6 +70,8 @@ require 'sidekiq/web'
         get :report
         post :add_target_fish
         delete :delete_target_fish
+        post :add_bait_fish
+        delete :delete_bait_fish
         post :add_used_gear
         delete :delete_used_gear
         post :add_member_company
@@ -128,6 +130,12 @@ require 'sidekiq/web'
       resources :pending_vessels
     end
     resources :pending_vessels
+    resources :vessel_imports do
+      collection do
+        get :template
+      end
+    end
+    
     resources :unloadings
     resources :carrier_loadings
     

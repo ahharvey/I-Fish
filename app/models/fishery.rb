@@ -30,7 +30,7 @@ class Fishery < ActiveRecord::Base
   belongs_to :protocol
 
   has_and_belongs_to_many :target_fishes,
-    join_table: "fisheries_fishes",
+    join_table: "target_fishes",
     foreign_key: :fishery_id,
     association_foreign_key:  :fish_id,
     class_name: "Fish",
@@ -43,6 +43,13 @@ class Fishery < ActiveRecord::Base
     class_name: "Company", 
     before_add: :validates_member_companies
   has_and_belongs_to_many :member_offices, class_name: "Office", before_add: :validates_member_offices
+
+  has_and_belongs_to_many :bait_fishes, 
+    join_table: "bait_fishes",
+    foreign_key: :fishery_id,
+    association_foreign_key:  :fish_id,
+    class_name: "Fish",
+    before_add: :validates_bait_fishes
 
 
   validates :name,
@@ -84,6 +91,10 @@ class Fishery < ActiveRecord::Base
 
   def validates_target_fishes(fish)
     raise ActiveRecord::Rollback if self.target_fishes.include? fish
+  end
+
+  def validates_bait_fishes(fish)
+    raise ActiveRecord::Rollback if self.bait_fishes.include? fish
   end
 
   def validates_used_gears(gear)

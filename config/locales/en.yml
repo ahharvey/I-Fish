@@ -96,6 +96,10 @@ en:
       exists: "Target fish already set"
       created: "Target fish added"
       removed: "Target fish removed"
+    bait_fishes:
+      exists: "Bait fish already set"
+      created: "Bait fish added"
+      removed: "Bait fish removed"
   fishes:
     title: "Fish"
     index:
@@ -205,6 +209,10 @@ en:
       title: "New vessel"
     edit:
       title: "Edit vessel"
+  vessel_imports:
+    title: "Import Vessels"
+    new:
+      title: "Import Vessels"
   navbar:
     home: "Home"
     data: "Review"
@@ -258,9 +266,15 @@ en:
         formatted_date: "Date"
         quantity: "Quantity (buckets)"
         location: "Location"
-        fish_id: "Species"
+        fish: "Dominant species"
+        secondary_fish: "Secondary species"
         vessel_id: "Vessel"
-        method_types: "Method"
+        method_types: "Catching method"
+        select_fish: "Select primary species"
+        select_secondary_fish: "Select secondary species (if present)"
+        select_method: "Select catching method"
+        select_grid: "Select source location"
+        price: "Total price"
       carrier_loading:
         vessel: "Vessel"
         formatted_date: "Date"
@@ -402,6 +416,7 @@ en:
         year_built: "Year of Construction"
         length: "Length"
         tonnage: "GT"
+        capacity: "Horsepower"
         imo_number: "IMO reg. no."
         shark_policy: "Shark policy"
         iuu_list: "IUU list"
@@ -413,16 +428,32 @@ en:
         hooks: "No. hooks"
         captain: "Captain"
         owner: "Owner"
-        sipi_number: "SIPI"
-        sipi_expiry: "SIPI expiry date"
+        sipi_number: "SIPI/ SIKPI"
+        sipi_expiry: "SIPI/ SIKPI expiry date"
         siup_number: "SIUP"
-        formatted_sipi_expiry: "SIPI expiry date"
+        formatted_sipi_expiry: "SIPI/ SIKPI expiry date"
         mmaf_ref: "MMAF UVI"
         dkp_ref: "DKP UVI"
         seafdec_ref: "SEAFDEC UVI"
-        fish_capacity: "Hold capacity (m3)"
-        bait_capacity: "Bait capacity (m3)"
+        fish_capacity: "Hold capacity (kg)"
+        bait_capacity: "Bait capacity (kg)"
         location_built: "Place of construction"
+    errors:
+      models:
+        bait_loading:
+          invalid_date: "is invalid"
+          attributes: 
+            vessel:
+              blank: "Please select a vessel"
+            fish: 
+              blank: "Please select a dominant bait species"
+            quantity: 
+              blank: "Please enter the number of bait buckets"
+            method_type:
+              blank: "Please enter a catching method"
+            location:
+              blank: "Please select a catching location"
+
   views:
     pagination:
       first: "&laquo; First"
@@ -437,12 +468,16 @@ en:
   material_types:
     wood: "Wood"
     fiber: "Fiberglass"
+    steel: "Steel"
   cut_types:
     wholeround: "Wholeround"
     dirtyloin: "Dirty loin"
     cleanloin: "Clean loin"
+    gg: "GG"
   relationship_types:
     independent: "Independent"
     contracted: "Contracted"
   method_types:
-    bagan: "Bagan"
+    bagan: "Lift net"
+    purse: "Purse seine"
+    beach: "Beach seine"

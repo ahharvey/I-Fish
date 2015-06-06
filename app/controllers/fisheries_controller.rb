@@ -69,6 +69,28 @@ class FisheriesController < ApplicationController
     redisplay_target_fishes
   end
 
+  def add_bait_fish
+    fish = Fish.find_by_code params[:get_bait]
+    if fish
+      if @fishery.bait_fishes.include?(fish)
+        flash[:alert]= I18n.t("fisheries.bait_fishes.exists")
+      else
+       @fishery.bait_fishes.push fish
+       flash[:success]= I18n.t("fisheries.bait_fishes.created")
+      end 
+      redisplay_bait_fishes
+    else
+      render js: "window.location = #{new_fish_path(fishery_id: params[:id], code: params[:get_bait]).to_json}"
+    end
+    
+  end
+
+  def delete_bait_fish
+    @fishery.bait_fishes.delete(Fish.find params[:target_fish])
+    flash[:success]= I18n.t("fisheries.bait_fishes.removed")
+    redisplay_bait_fishes
+  end
+
   def add_used_gear
     gear = Gear.find_by_alpha_code params[:get_gear]
     if gear
@@ -303,6 +325,13 @@ class FisheriesController < ApplicationController
     respond_to do |format|
       format.html { redirect_to @fishery }
       format.js { render :redisplay_target_fishes }
+    end
+  end
+
+  def redisplay_bait_fishes
+    respond_to do |format|
+      format.html { redirect_to @fishery }
+      format.js { render :redisplay_bait_fishes }
     end
   end
 

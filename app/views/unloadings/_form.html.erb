@@ -46,7 +46,8 @@
 
           <label for="unloading_location" class="control-label sr-only"><%= Unloading.human_attribute_name(:location) %></label>
           <div class="col-md-6">
-              <%= f.input_field :location, class: 'form-control', placeholder: Unloading.human_attribute_name(:location) %>
+
+              <%= f.association :grid, collection: Grid.default, prompt: Unloading.human_attribute_name(:select_grid), label_method: :coordinates, value_method: :id, wrapper: false %>
           </div>
 
         </div>
@@ -93,7 +94,7 @@
           <%= render 'unloading_catch_fields', f: builder %>
         <% end %>
 
-        <p class="text-center"><%= link_to_add_fields icon('plus', 'Add production record'), f, :unloading_catches %></p>
+        <%= link_to_add_fields icon('plus', 'Add production record'), f, :unloading_catches %>
       </div>
   </div>
 

@@ -32,13 +32,22 @@ class Fish < ActiveRecord::Base
   attr_accessor :fishery_id
 
   has_many :catches, dependent: :destroy
+  has_many :bait_landings
+  has_many :secondary_bait_landings, class_name: 'BaitLanding', foreign_key: 'secondary_fish_id'
   has_many :logged_days
   has_many :landings
   has_many :provinces, through: :landings
   has_many :districts, through: :landings
   has_many :fisheries, through: :landings
 
-  has_and_belongs_to_many :target_fisheries, class_name: "Fishery"
+  has_and_belongs_to_many :target_fisheries, 
+    class_name: "Fishery",
+    join_table: 'target_fishes', 
+    uniq: true
+  has_and_belongs_to_many :bait_fisheries, 
+    class_name: "Fishery",
+    join_table: 'bait_fishes', 
+    uniq: true
 
 
   validates :code,

@@ -14,21 +14,26 @@
       </div>
     </div>
 
+  <% elsif @company.present? %>
+    <%= f.association :vessel, collection: @company.vessels, prompt: BaitLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id %>
   <% else %>
   	<%= f.association :vessel, collection: @vessels, prompt: BaitLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id %>
   <% end %>
 
   <%= f.input :formatted_date, input_html: { class: 'datepicker form-control' } %>
 
-  <%= f.association :fish, collection: Fish.default, prompt: BaitLoading.human_attribute_name(:fish), label_method: :code, value_method: :id %>
+
+  <%= f.association :fish, collection: @bait_fishes, prompt: BaitLoading.human_attribute_name(:select_fish), label_method: :code, value_method: :id %>
+
+  <%= f.association :secondary_fish, collection: @bait_fishes, prompt: BaitLoading.human_attribute_name(:select_secondary_fish), label_method: :code, value_method: :id %>
 
   <%= f.input :quantity, placeholder: BaitLoading.human_attribute_name(:quantity) %>
 
   <%= f.input :method_types, wrapper_html: { class: 'select' } do %>
-      <%= f.select :method_type, BaitLoading::METHOD_TYPES.map { |s| [I18n.t("method_types.#{s}"), s] }, {}, { class: 'form-control' } %>
-    <% end %>
+    <%= f.select :method_type, BaitLoading::METHOD_TYPES.map { |s| [I18n.t("method_types.#{s}"), s] }, {prompt: BaitLoading.human_attribute_name(:select_method)}, { class: 'form-control' } %>
+  <% end %>
 
-  <%= f.input :location, placeholder: BaitLoading.human_attribute_name(:location) %>
+  <%= f.association :grid, collection: Grid.default, prompt: BaitLoading.human_attribute_name(:select_grid), label_method: :coordinates, value_method: :id %>
 
   <%= f.input :price, placeholder: BaitLoading.human_attribute_name(:price) %>
 

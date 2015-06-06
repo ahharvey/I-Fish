@@ -52,6 +52,9 @@ jQuery ->
   $('#get_fish').autocomplete
     source: $('#get_fish').data('autocomplete-source')
 jQuery ->
+  $('#get_bait').autocomplete
+    source: $('#get_bait').data('autocomplete-source')
+jQuery ->
   $('#get_gear').autocomplete
     source: $('#get_gear').data('autocomplete-source')
 jQuery ->

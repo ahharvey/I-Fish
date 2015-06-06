@@ -1,0 +1,15 @@
+<div id="BaitList">
+  <br />
+  <ul class="list-unstyled">
+    <% @fishery.bait_fishes.each do |fish| %>
+      <li>
+        <b><%= link_to fish.code, fish %></b>  -  
+        <i><%= fish.scientific_name %></i>  -  
+        <%= fish.english_name %> 
+        <% if can? :update, @fishery %>
+          <%= link_to remove_icon, delete_bait_fish_fishery_path(@fishery, bait_fish: fish.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -19,12 +19,32 @@
 class BaitLoading < ActiveRecord::Base
   belongs_to :vessel, touch: true
   belongs_to :fish, touch: true
+  belongs_to :secondary_fish, class_name: 'Fish', foreign_key: 'secondary_fish_id'
+  belongs_to :grid, touch: true
   belongs_to :unloading, touch: true
-  validates :date, 
-    timeliness: {
-      type: :date
+  
+
+
+  validates :vessel,
+    presence: true
+  validates :fish,
+    presence: true
+  validates :quantity,
+    presence: true,
+    numericality: {
+      only_integer: true
+    },
+    inclusion: {
+      in: 1..999
     }
-  METHOD_TYPES = ["bagan"]
+  validates :method_type,
+    presence: true
+  validates :grid,
+    presence: true
+
+
+
+  METHOD_TYPES = ["bagan", "purse", "beach"]
 
   STATES = %w{ pending rejected approved }
 
@@ -43,11 +63,20 @@ class BaitLoading < ActiveRecord::Base
   
   attr_writer :formatted_date
   before_validation :save_formatted_date 
+  validate :validates_date
   def formatted_date
     @formatted_date || date.try(:to_s, :long)
   end
   
   def save_formatted_date
     self.date = Chronic.parse(@formatted_date) if @formatted_date.present?
+  end
+
+  private
+
+  def validates_date
+    if @formatted_date.present? && Chronic.parse(@formatted_date).nil?
+      self.errors.add(:formatted_date, :invalid_date)
+    end
   end
 end

@@ -26,9 +26,7 @@ class BaitLoadingsController < ApplicationController
 
   def new
     @bait_loading = BaitLoading.new( vessel_id: params[:vessel_id])
-    @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
-    @vessels = Vessel.where(company_id: params[:company_id] ) if params[:company_id]
-    @vessels = Vessel.default unless params[:company_id]
+    initialize_form 
     respond_with(@bait_loading)
   end
 
@@ -39,12 +37,16 @@ class BaitLoadingsController < ApplicationController
 
   def create
     @bait_loading = BaitLoading.new(bait_loading_params)
-    @bait_loading.save
+    if @bait_loading.save
+    else
+      initialize_form 
+      Rails.logger.info @bait_loading.errors.to_yaml
+    end
     respond_with @bait_loading, location: -> { after_save_path_for(@bait_loading) }
   end
 
   def update
-    @bait_loading.update(bait_loading_params)
+    initialize_form unless @bait_loading.update(bait_loading_params)
     respond_with @bait_loading, location: -> { after_save_path_for(@bait_loading) }
   end
 
@@ -59,15 +61,31 @@ class BaitLoadingsController < ApplicationController
     @bait_loading = BaitLoading.find(params[:id])
   end
 
+  def initialize_form
+    @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
+    @company = Company.find( params[:company_id] ) if params[:company_id]  
+    
+    if @vessel
+      @vessels = Vessel.default
+      @bait_fishes = @vessel.bait_fishes 
+    elsif @company
+      @vessels = Vessel.where(company_id: params[:company_id] )
+      @bait_fishes = @company.bait_fishes 
+    else
+      @vessels = Vessel.default
+      @bait_fishes = Fish.default
+    end
+  end
+
   def bait_loading_params
     params.require(:bait_loading).permit(
-      :vessel,
+      :vessel_id,
       :formatted_date,
-      :fish,
+      :fish_id,
       :quantity,
       :price,
       :location,
-      :method,
+      :method_type,
 
       )
   end

@@ -26,6 +26,7 @@
 
 class Unloading < ActiveRecord::Base
   belongs_to :vessel
+  belongs_to :grid
   has_many :unloading_catches
   accepts_nested_attributes_for :unloading_catches, allow_destroy: true, reject_if: :all_blank
   has_many :bait_loadings

@@ -20,7 +20,10 @@ class Company < ActiveRecord::Base
   has_many :documents, as: :documentable
   has_many :vessels
 
-  has_and_belongs_to_many :member_fisheries, class_name: "Company"
+  has_and_belongs_to_many :member_fisheries, 
+    class_name: "Fishery",
+    join_table: "fisheries_companies",
+    uniq: true
 
   validate :avatar_size
 
@@ -39,6 +42,14 @@ class Company < ActiveRecord::Base
 
   def has_carrier_vessels?
     vessels.where(vessel_type_id: VesselType.find_by(code: 'ca')).any? 
+  end
+
+  def bait_fishes
+    bait = []
+    member_fisheries.each do |fishery|
+      bait << fishery.bait_fishes
+    end
+    bait.first.uniq.sort_by(&:code)
   end
 
   private

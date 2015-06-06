@@ -85,6 +85,14 @@ id:
       title: "Perikanan"
     report:
       title: "Laporan Perikanan"
+    target_fishes:
+      exists: "Ikan target sudah ada"
+      created: "Ikan target termasuk"
+      removed: "Ikan target hapus"
+    bait_fishes:
+      exists: "Ikan umpan sudah ada"
+      created: "Ikan umpan termasuk"
+      removed: "Ikan umpan hapus"
   fishes:
     title: "Ikan"
     index:
@@ -188,6 +196,9 @@ id:
       title: "Kapal baru"
     edit:
       title: "Mengedit kapal"
+  vessel_imports:
+    new:
+      title: "Impor Kapal Kapal"
   navbar:
     home: "Pulang"
     data: "Review"
@@ -238,12 +249,20 @@ id:
       bait_loading: 
         date: "Date"
         ap2hi_ref: "AP2HI UVI"
-        formatted_date: "Date"
-        quantity: "Quantity (ember)"
-        location: "Location"
-        fish_id: "Species"
-        vessel_id: "Vessel"
-        method_types: "Method"
+        formatted_date: "Tanggal"
+        quantity: "Kuantitas (ember)"
+        location: "Lokasi"
+        fish: "Jenis dominan"
+        fish_id: "Jenis dominan"
+        secondary_fish_id: "Jenis sekunder (kalau ada)"
+        secondary_fish: "Jenis sekunder (kalau ada)"
+        vessel_id: "Kapal"
+        vessel: "Kapal"
+        method_types: "Metode penangkapan"
+        select_fish: "Pilihan jenis dominan"
+        select_method: "Pilihan metode penangkapan"
+        select_grid: "Pilihan lokasi diambil"
+        price: "Harga total"
       carrier_loading:
         vessel: "Vessel"
         formatted_date: "Date"
@@ -382,6 +401,7 @@ id:
         year_built: "Tahun pembuatan"
         length: "VOA (m)"
         tonnage: "Ukuran (GT)"
+        capacity: "PK"
         imo_number: "IMO reg. no."
         shark_policy: "Shark policy"
         iuu_list: "IUU list"
@@ -403,6 +423,21 @@ id:
         fish_capacity: "Kapasitas hasil (m3)"
         bait_capacity: "Kapasitas umpan (m3)"
         location_built: "Lokasi pembuatan"
+    errors:
+      models:
+        bait_loading:
+          invalid_date: "is invalid"
+          attributes: 
+            vessel:
+              blank: "Please select a vessel"
+            fish: 
+              blank: "Please select a dominant bait species"
+            quantity: 
+              blank: "Please enter the number of bait buckets"
+            method:
+              blank: "Please enter a catching method"
+            location:
+              blank: "Please select a catching location"
   views:
     pagination:
       first: "&laquo; First"
@@ -417,12 +452,16 @@ id:
   material_types:
     wood: "Kayu"
     fiber: "Fiber"
+    steel: "Baja"
   cut_types:
     wholeround: "Wholeround"
     dirtyloin: "Loin kotor"
     cleanloin: "Loin bersih"
+    gg: "GG"
   relationship_types:
     independent: "Independent"
     contracted: "Contracted"
   method_types:
     bagan: "Bagan"
+    purse: "Purse seine"
+    beach: "Beach seine"

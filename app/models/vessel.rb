@@ -58,6 +58,11 @@ class Vessel < ActiveRecord::Base
 
   scope :default, -> { order('vessels.ap2hi_ref ASC') }
 
+  def bait_fishes
+    company.try(:bait_fishes)
+  end
+
+  
   private
 
   def send_pvr_request
@@ -68,4 +73,35 @@ class Vessel < ActiveRecord::Base
       end
     end
   end
+
+  def self.accessible_attributes
+   [
+      'ap2hi_ref',
+      'name',
+      'name_changed',
+      'captain',
+      'owner',
+      'company_id',
+      'port',
+      'relationship_type',
+      'length',
+      'tonnage',
+      'material_type',
+      'machine_type',
+      'capacity',
+      'flag_state',
+      'flag_state_changed',
+      'year_built',
+      'crew',
+      'hooks',
+      'sipi_number',
+      'sipi_expiry',
+      'siup_number',
+      'radio',
+      'vms',
+      'tracker',
+    ]
+  end
+
+  
 end

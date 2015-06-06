@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150503135440) do
+ActiveRecord::Schema.define(version: 20150531094222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,14 @@ ActiveRecord::Schema.define(version: 20150503135440) do
   add_index "audits", ["admin_id"], name: "index_audits_on_admin_id", using: :btree
   add_index "audits", ["auditable_type", "auditable_id"], name: "index_audits_on_auditable_type_and_auditable_id", using: :btree
 
+  create_table "bait_fishes", id: false, force: :cascade do |t|
+    t.integer "fishery_id", null: false
+    t.integer "fish_id",    null: false
+  end
+
+  add_index "bait_fishes", ["fish_id", "fishery_id"], name: "index_bait_fishes_on_fish_id_and_fishery_id", using: :btree
+  add_index "bait_fishes", ["fishery_id", "fish_id"], name: "index_bait_fishes_on_fishery_id_and_fish_id", using: :btree
+
   create_table "bait_loadings", force: :cascade do |t|
     t.date     "date"
     t.integer  "vessel_id"
@@ -93,14 +101,18 @@ ActiveRecord::Schema.define(version: 20150503135440) do
     t.integer  "fish_id"
     t.integer  "quantity"
     t.integer  "unloading_id"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
     t.integer  "price"
     t.string   "method_type"
-    t.string   "review_state", default: "pending"
+    t.string   "review_state",      default: "pending"
+    t.integer  "grid_id"
+    t.integer  "secondary_fish_id"
   end
 
   add_index "bait_loadings", ["fish_id"], name: "index_bait_loadings_on_fish_id", using: :btree
+  add_index "bait_loadings", ["grid_id"], name: "index_bait_loadings_on_grid_id", using: :btree
+  add_index "bait_loadings", ["secondary_fish_id"], name: "index_bait_loadings_on_secondary_fish_id", using: :btree
   add_index "bait_loadings", ["unloading_id"], name: "index_bait_loadings_on_unloading_id", using: :btree
   add_index "bait_loadings", ["vessel_id"], name: "index_bait_loadings_on_vessel_id", using: :btree
 
@@ -201,11 +213,6 @@ ActiveRecord::Schema.define(version: 20150503135440) do
     t.integer "company_id"
   end
 
-  create_table "fisheries_fishes", id: false, force: :cascade do |t|
-    t.integer "fishery_id"
-    t.integer "fish_id"
-  end
-
   create_table "fisheries_gears", id: false, force: :cascade do |t|
     t.integer "fishery_id"
     t.integer "gear_id"
@@ -253,6 +260,13 @@ ActiveRecord::Schema.define(version: 20150503135440) do
     t.string   "code",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+  end
+
+  create_table "grids", force: :cascade do |t|
+    t.integer  "xaxis"
+    t.string   "yaxis",      limit: 1
+    t.datetime "created_at",           null: false
+    t.datetime "updated_at",           null: false
   end
 
   create_table "landings", force: :cascade do |t|
@@ -437,6 +451,11 @@ ActiveRecord::Schema.define(version: 20150503135440) do
   add_index "surveys", ["landing_enumerator_id"], name: "index_surveys_on_landing_enumerator_id", using: :btree
   add_index "surveys", ["reviewer_id"], name: "index_surveys_on_approver_id", using: :btree
 
+  create_table "target_fishes", id: false, force: :cascade do |t|
+    t.integer "fishery_id"
+    t.integer "fish_id"
+  end
+
   create_table "unloading_catches", force: :cascade do |t|
     t.integer  "fish_id"
     t.integer  "quantity"
@@ -469,8 +488,10 @@ ActiveRecord::Schema.define(version: 20150503135440) do
     t.integer  "kaw"
     t.string   "catch_certificate"
     t.integer  "budget"
+    t.integer  "grid_id"
   end
 
+  add_index "unloadings", ["grid_id"], name: "index_unloadings_on_grid_id", using: :btree
   add_index "unloadings", ["vessel_id"], name: "index_unloadings_on_vessel_id", using: :btree
 
   create_table "users", force: :cascade do |t|
@@ -578,6 +599,8 @@ ActiveRecord::Schema.define(version: 20150503135440) do
 
   add_foreign_key "audits", "admins"
   add_foreign_key "bait_loadings", "fishes"
+  add_foreign_key "bait_loadings", "fishes", column: "secondary_fish_id"
+  add_foreign_key "bait_loadings", "grids"
   add_foreign_key "bait_loadings", "unloadings"
   add_foreign_key "bait_loadings", "vessels"
   add_foreign_key "carrier_loadings", "vessels"
@@ -587,6 +610,7 @@ ActiveRecord::Schema.define(version: 20150503135440) do
   add_foreign_key "pending_vessels", "vessel_types"
   add_foreign_key "pending_vessels", "vessels"
   add_foreign_key "unloading_catches", "fishes"
+  add_foreign_key "unloadings", "grids"
   add_foreign_key "vessels", "companies"
   add_foreign_key "vessels", "gears"
   add_foreign_key "vessels", "vessel_types"

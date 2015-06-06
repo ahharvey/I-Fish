@@ -23,4 +23,16 @@ namespace :add_data do
       end
     end
   end
+
+  task :create_grids => :environment do 
+    xs = 14..49
+    ys = "a".."z"
+
+    ys.each do |y|
+      xs.each do |x|
+        Grid.create(xaxis: x, yaxis: y)
+      end
+    end
+
+  end
 end
