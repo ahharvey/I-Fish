@@ -3,7 +3,8 @@ module Api
     class VesselsController < ApplicationController
       respond_to :json
 
-      before_filter :restrict_access
+      #before_filter :restrict_access
+      
       
       def index
         @vessels = Vessel.includes(:gear, :vessel_type).where(ap2hi_ref: params[:uvi]) if params[:uvi]

@@ -29,6 +29,8 @@ gem 'devise', '~> 3.4.0'
 gem 'devise_invitable', '~> 1.4.1'                  
 gem 'cancancan', '~> 1.10.0'
 gem 'omniauth', '~> 1.2.0'
+gem 'doorkeeper', '~> 2.2.0'
+gem 'oauth2'
 
 ##
 ## INCLUDES

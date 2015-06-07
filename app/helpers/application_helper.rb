@@ -93,6 +93,10 @@ module ApplicationHelper
     "sign-out"
   end
 
+  def fa_integrate
+    "exchange"
+  end
+
   def fa_new
     "plus"
   end

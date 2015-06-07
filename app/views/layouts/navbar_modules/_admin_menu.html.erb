@@ -24,6 +24,15 @@
 			Security
 		<% end %>
 	<li>
+
+	<% if current_admin.developer? %>
+		<li>
+			<%= link_to oauth_applications_path do %>
+				<%= icon fa_integrate, "Developers", class: 'fa-fw'  %>
+			<% end %>
+		</li>
+	<% end %>
+
 	<li class="divider"></li>
 	<li>
 		<%= link_to destroy_admin_session_path, method: :delete, title: t("devise.signout") do %>

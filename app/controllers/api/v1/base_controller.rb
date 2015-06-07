@@ -4,6 +4,7 @@ module Api
       protect_from_forgery with: :null_session
       before_action :set_resource, only: [:destroy, :show, :update]
       respond_to :json, :xml
+      before_action :doorkeeper_authorize!
 
       def create
         set_resource(resource_class.new(resource_params))

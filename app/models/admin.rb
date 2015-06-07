@@ -97,7 +97,11 @@ class Admin < ActiveRecord::Base
   end
 
   def public?
-  	has_role?("public")
+  	
+  end
+
+  def developer?
+    has_role?("developer")
   end
 
   def has_role?(role)

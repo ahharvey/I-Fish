@@ -140,4 +140,7 @@ class Ability
   def administrator(admin)
     can :manage, :all
   end
+
+  def developer(admin)
+  end
 end
