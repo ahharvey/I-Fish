@@ -14,7 +14,7 @@ gem 'hirefire-resource', '~> 0.3.5'
 ## MODELS
 gem 'paper_trail', '~> 3.0.0'
 #gem 'queue_classic', '~>2.1.2' #queued processes
-gem 'sidekiq', '~> 3.3.2'
+gem 'sidekiq', '~> 3.4.0'
 gem 'validates_timeliness', '~> 3.0.0'
 gem 'chronic', '~> 0.10.2'
 
@@ -63,11 +63,11 @@ gem 'modernizr-rails', '~> 2.7.0'
 ##
 ## DOWNLOADS AND OUTGOING
 gem 'wicked_pdf', '~> 0.11.0'
-gem 'wkhtmltopdf-heroku', '~> 1.0.0'
+gem 'wkhtmltopdf-heroku', '~> 2.12.0'
 gem 'rabl', '~> 0.11.0' # JSON templates
 gem 'oj', '~> 2.12.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
-gem 'rqrcode-with-patches', '~>0.5.4'
+gem 'rqrcode-with-patches', '~>0.6.0'
 gem 'prawn', '~> 2.0.1'
 #gem 'prawn-labels', '~> 1.2.3'
 gem 'prawn-qrcode', '~> 0.2.2.1'
@@ -79,7 +79,7 @@ gem 'fog', '~> 1.29.0'
 gem 'roo', '~> 2.0.0'
 gem 'roo-xls', '~> 1.0.0'
 gem 'mini_magick', '~> 4.2.0'
-gem 'rmagick', '~> 2.14.0'
+gem 'rmagick', '~> 2.15.0'
 gem 'griddler', '~> 1.1.0'  #Mandril API for incoming email handling
 gem 'griddler-mandrill', '~> 1.0.0'
 gem 'rubyzip', '~> 1.1.0'
@@ -121,5 +121,5 @@ group :production, :staging do
 end
 
 
-gem 'newrelic_rpm', '~> 3.11.0' #system monitoring and profiling
+gem 'newrelic_rpm', '~> 3.12.0' #system monitoring and profiling
 
