@@ -2,7 +2,8 @@
 IFish::Application.routes.draw do
 
   use_doorkeeper
-require 'sidekiq/web'
+  mount_griddler
+  require 'sidekiq/web'
 
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do

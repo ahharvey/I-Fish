@@ -25,9 +25,9 @@ gem 'responders', '2.1.0'
 
 ##
 ## AUTHENTICATION
-gem 'devise', '~> 3.4.0'
-gem 'devise_invitable', '~> 1.4.1'                  
-gem 'cancancan', '~> 1.10.0'
+gem 'devise', '~> 3.5.0'
+gem 'devise_invitable', '~> 1.5.0'                  
+gem 'cancancan', '~> 1.11.0'
 gem 'omniauth', '~> 1.2.0'
 gem 'doorkeeper', '~> 2.2.0'
 #gem 'oauth2'
@@ -75,13 +75,13 @@ gem 'prawn-qrcode', '~> 0.2.2.1'
 ##
 ## UPLOADS AND INCOMING
 gem 'carrierwave', '~> 0.10.0'
-gem 'fog', '~> 1.29.0'
+gem 'fog', '~> 1.31.0'
 gem 'roo', '~> 2.0.0'
 gem 'roo-xls', '~> 1.0.0'
 gem 'mini_magick', '~> 4.2.0'
 gem 'rmagick', '~> 2.15.0'
-gem 'griddler', '~> 1.1.0'  #Mandril API for incoming email handling
-gem 'griddler-mandrill', '~> 1.0.0'
+gem 'griddler', '~> 1.2.0'  #Mandril API for incoming email handling
+gem 'griddler-mandrill', '~> 1.1.0'
 gem 'rubyzip', '~> 1.1.0'
 # gem 'zip-zip', '~> 0.2'
 
@@ -112,7 +112,7 @@ group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
-  gem 'letter_opener', '~> 1.3.0'
+  gem 'letter_opener'
   # gem 'rack-mini-profiler', '~> 0.1.31'
 end
 
