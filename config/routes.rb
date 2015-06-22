@@ -1,9 +1,10 @@
+require 'sidekiq/web'
 
 IFish::Application.routes.draw do
 
   use_doorkeeper
   mount_griddler
-  require 'sidekiq/web'
+  
 
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
@@ -212,7 +213,9 @@ IFish::Application.routes.draw do
 
     post 'home/process_upload_data'
 
-
+    #authenticate :admin, lambda { |a| a.admin? } do
+      mount Sidekiq::Web => '/sidekiq'
+    #end
     # handles /valid-locale
     root to: 'home#index'
     # handles /valid-locale/fake-path
@@ -220,9 +223,7 @@ IFish::Application.routes.draw do
 
   end
 
-  #authenticate :admin, lambda { |a| a.admin? } do
-    mount Sidekiq::Web => '/sidekiq'
-  #end
+  
 
  
 
