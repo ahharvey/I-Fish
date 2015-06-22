@@ -130,6 +130,9 @@ IFish::Application.routes.draw do
       resources :carrier_loadings
       resources :audits, except: [:edit]
       resources :pending_vessels
+      collection do
+        get :generate_stickers
+      end
     end
     resources :pending_vessels
     resources :vessel_imports do
@@ -193,9 +196,7 @@ IFish::Application.routes.draw do
       end
     end
 
-    authenticate :admin, lambda { |a| a.admin? } do
-      mount Sidekiq::Web => '/sidekiq'
-    end
+    
 
 
     get 'home/index'
@@ -218,6 +219,10 @@ IFish::Application.routes.draw do
     #match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
 
   end
+
+  #authenticate :admin, lambda { |a| a.admin? } do
+    mount Sidekiq::Web => '/sidekiq'
+  #end
 
  
 

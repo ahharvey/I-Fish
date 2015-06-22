@@ -22,6 +22,7 @@
 #  kaw               :integer
 #  catch_certificate :string
 #  budget            :integer
+#  grid_id           :integer
 #
 
 require 'test_helper'

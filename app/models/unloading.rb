@@ -22,6 +22,7 @@
 #  kaw               :integer
 #  catch_certificate :string
 #  budget            :integer
+#  grid_id           :integer
 #
 
 class Unloading < ActiveRecord::Base

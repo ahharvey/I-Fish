@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>PDF AVAILABLE FOR DOWNLOAD</h1>
+
+    <p><%= @admin.name %>,</p>
+    
+    <p>The PDF you requested is ready for download.</p>
+
+    <p><%= link_to "Download!", @report.file.url %>.</p>
+
+  </body>
+</html>

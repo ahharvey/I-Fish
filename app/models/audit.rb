@@ -1,3 +1,17 @@
+# == Schema Information
+#
+# Table name: audits
+#
+#  id             :integer          not null, primary key
+#  admin_id       :integer
+#  auditable_id   :integer
+#  auditable_type :string
+#  comment        :text
+#  status         :string
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#
+
 class Audit < ActiveRecord::Base
   belongs_to :user
   belongs_to :auditable, polymorphic: true

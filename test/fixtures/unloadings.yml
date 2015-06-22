@@ -22,6 +22,7 @@
 #  kaw               :integer
 #  catch_certificate :string
 #  budget            :integer
+#  grid_id           :integer
 #
 
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html

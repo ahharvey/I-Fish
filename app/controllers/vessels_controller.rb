@@ -29,7 +29,7 @@ class VesselsController < ApplicationController
     @vessels << @vessel
     respond_with(@vessel) do |format|
       format.pdf do
-        pdf = StickerPdf.new(@vessels, view_context)
+        pdf = StickerPdf.new(@vessels)
         send_data pdf.render, filename: 
         "VesselStickers_#{@vessel.ap2hi_ref}_#{Date.today.strftime("%Y%m%d")}.pdf",
         type: "application/pdf"
@@ -59,6 +59,23 @@ class VesselsController < ApplicationController
   def destroy
     track_activity @vessel if @vessel.destroy
     respond_with(@vessel)
+  end
+
+  def generate_stickers
+    if params[:company_id]
+      @vessels = Vessel.where(company_id: params[:company_id] )
+      @company = Company.find( params[:company_id])
+      sticker_filename = "VesselStickers_#{@company.code}_#{Date.today.strftime("%Y%m%d")}.pdf"
+    elsif params[:vessel_id]
+      @vessels = Vessel.where(id: params[:vessel_id] )
+      sticker_filename = "VesselStickers_#{@vessels.first.ap2hi_ref}_#{Date.today.strftime("%Y%m%d")}.pdf"
+    else
+      @vessels = Vessel.all
+      sticker_filename = "VesselStickers_#{Date.today.strftime("%Y%m%d")}.pdf"
+    end
+    flash[:success] = "A PDF contaning these stickers is being generated. An email will be sent to #{current_admin.email} when it's ready."
+    PdfGeneratedJob.perform_later(current_admin.id, sticker_filename, @vessels.pluck(:id) )
+    redirect_to :back
   end
 
   private

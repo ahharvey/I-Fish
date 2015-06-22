@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150607042224) do
+ActiveRecord::Schema.define(version: 20150622131536) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -254,6 +254,12 @@ ActiveRecord::Schema.define(version: 20150607042224) do
     t.string   "fao_code",    limit: 255
     t.datetime "created_at",              null: false
     t.datetime "updated_at",              null: false
+  end
+
+  create_table "generated_reports", force: :cascade do |t|
+    t.string   "file"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "graticules", force: :cascade do |t|

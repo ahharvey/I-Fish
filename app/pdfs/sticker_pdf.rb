@@ -1,7 +1,7 @@
 class StickerPdf < Prawn::Document
 	require 'prawn/qrcode'
 
-  def initialize(vessels, view)
+  def initialize(vessels)
     super(page_layout: :landscape)
 
     @vessels = vessels
@@ -15,7 +15,7 @@ class StickerPdf < Prawn::Document
     build_sticker
 
     build_crop_marks(10,35,5,0.5)
-    
+
   end
 
   private

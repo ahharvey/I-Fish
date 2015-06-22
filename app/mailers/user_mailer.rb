@@ -54,5 +54,12 @@ class UserMailer < ActionMailer::Base
       subject: "AP2HI request for UVI"
       )
   end
+
+  def generated_report_ready(admin_id, generated_report_id)
+
+    @admin = Admin.find(admin_id)
+    @report = GeneratedReport.find(generated_report_id)
+    mail(:to => @admin.email, :subject => "I-FISH :: Generated PDF ready for download")
+  end
   
 end

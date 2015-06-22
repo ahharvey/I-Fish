@@ -2,14 +2,16 @@
 #
 # Table name: carrier_loadings
 #
-#  id        :integer          not null, primary key
-#  date      :date
-#  vessel_id :integer
-#  fish_id   :integer
-#  location  :string
-#  size      :string
-#  grade     :string
-#  quantity  :integer
+#  id           :integer          not null, primary key
+#  date         :date
+#  vessel_id    :integer
+#  fish_id      :integer
+#  location     :string
+#  size         :string
+#  grade        :string
+#  quantity     :integer
+#  review_state :string           default("pending")
+#  string       :string           default("pending")
 #
 
 class CarrierLoading < ActiveRecord::Base

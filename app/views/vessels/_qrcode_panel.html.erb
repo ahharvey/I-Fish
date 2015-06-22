@@ -32,7 +32,7 @@
   		</div>
   	</div>
     
-    <%= link_to  t( :generate_stickers ), vessel_path(@vessel, format: :pdf), class: 'btn btn-block btn-default' %>
+    <%= link_to  t( :generate_stickers ), generate_stickers_vessels_path( vessel_id: @vessel.id), class: 'btn btn-block btn-default' %>
   </div>
 
 </div>
