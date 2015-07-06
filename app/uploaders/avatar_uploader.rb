@@ -40,17 +40,41 @@ class AvatarUploader < CarrierWave::Uploader::Base
     resize_to_fill(100, 100)
   end
 
+#  def crop
+#    if model.crop_x.present?
+#      resize_to_limit(600, 600)
+#      manipulate! do |img|
+#        x = model.crop_x.to_i
+#        y = model.crop_y.to_i
+#        w = model.crop_w.to_i
+#        h = model.crop_h.to_i
+#        img.crop!(x, y, w, h)
+#      end
+#    end
+#  end
+
+
+  # modifies crop for minimagick
   def crop
     if model.crop_x.present?
       resize_to_limit(600, 600)
       manipulate! do |img|
-        x = model.crop_x.to_i
-        y = model.crop_y.to_i
-        w = model.crop_w.to_i
-        h = model.crop_h.to_i
-        img.crop!(x, y, w, h)
+        x = model.crop_x
+        y = model.crop_y
+        w = model.crop_w
+        h = model.crop_h
+
+        #size = w << 'x' << h
+        #offset = '+' << x << '+' << y
+
+        #img.crop("#{size}#{offset}") # Doesn't return an image...
+        img.crop "#{w}x#{h}+#{x}+#{y}"
+        img = yield(img) if block_given?
+        img # ...so needs to be called
+
       end
     end
+
   end
 
   def extension_white_list

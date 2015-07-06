@@ -29,15 +29,15 @@
 
       
       <ul class='timeline'>
-        <% @activities.each do |activity| %>
-          <%= ActivityPresenter.new(activity, self).render_activity %>
-        <% end %>
+
+        <%= render partial: 'activities/activity', collection: @activities, locals: { view: self } %>
+
         <li class="clearfix" style="float: none;"></li>
       </ul>
       
       
       <div class="row">
-        <div class="pull-right">
+        <div class="col-xs-12">
           <%= render partial: 'home/pagination' %>
           
         </ul>
