@@ -4,7 +4,7 @@
     <% @office.admins.each do |admin| %>
       <li>
         <% if admin.pending_invitation? %>
-          <i><%= admin.email %> <small>(invitation pending)</small> 
+          <i><%= admin.email %> <small>(invitation pending)</small> </i>
         <% else %>
           <b><%= link_to admin.name, admin %></b>
         <% end %>
