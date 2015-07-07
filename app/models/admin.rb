@@ -62,6 +62,9 @@ class Admin < ActiveRecord::Base
   has_many :approved_logbooks, :class_name => 'Logbook', :foreign_key => 'approver_id'
   has_many :activities, as: :ownable
 
+  has_many :pending_vessels
+  has_many :audits
+
 
   after_create :set_default_role
   after_create :send_approval_mail, unless: :created_by_invitation?

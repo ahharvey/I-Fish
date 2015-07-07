@@ -1,0 +1,19 @@
+<% if @vessel.active? %>
+	<div class="panel panel-success">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Active</h3>
+	  </div>
+	</div>
+<% elsif @vessel.inactive? %>
+	<div class="panel panel-warning">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Inactive</h3>
+	  </div>
+	</div>
+<% else @vessel.decommissioned? %>
+	<div class="panel panel-danger">
+	  <div class="panel-heading">
+	    <h3 class="panel-title">Decommissioned</h3>
+	  </div>
+	</div>
+<% end %>

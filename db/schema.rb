@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150622131536) do
+ActiveRecord::Schema.define(version: 20150707124642) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -434,11 +434,16 @@ ActiveRecord::Schema.define(version: 20150622131536) do
     t.string   "status"
     t.integer  "admin_id"
     t.integer  "vessel_id"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                             null: false
+    t.datetime "updated_at",                             null: false
+    t.string   "review_state",       default: "pending"
+    t.datetime "reviewed_at"
+    t.integer  "audit_id"
+    t.string   "operational_type"
   end
 
   add_index "pending_vessels", ["admin_id"], name: "index_pending_vessels_on_admin_id", using: :btree
+  add_index "pending_vessels", ["audit_id"], name: "index_pending_vessels_on_audit_id", using: :btree
   add_index "pending_vessels", ["company_id"], name: "index_pending_vessels_on_company_id", using: :btree
   add_index "pending_vessels", ["gear_id"], name: "index_pending_vessels_on_gear_id", using: :btree
   add_index "pending_vessels", ["vessel_id"], name: "index_pending_vessels_on_vessel_id", using: :btree
@@ -605,14 +610,14 @@ ActiveRecord::Schema.define(version: 20150622131536) do
     t.integer  "length"
     t.integer  "tonnage"
     t.string   "imo_number"
-    t.boolean  "shark_policy"
-    t.boolean  "iuu_list"
-    t.boolean  "code_of_conduct"
+    t.boolean  "shark_policy",       default: false
+    t.boolean  "iuu_list",           default: false
+    t.boolean  "code_of_conduct",    default: false
     t.integer  "company_id"
     t.string   "ap2hi_ref"
     t.string   "issf_ref"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.integer  "crew"
     t.integer  "hooks"
     t.string   "captain"
@@ -620,16 +625,16 @@ ActiveRecord::Schema.define(version: 20150622131536) do
     t.string   "sipi_number"
     t.date     "sipi_expiry"
     t.string   "siup_number"
-    t.boolean  "issf_ref_requested"
+    t.boolean  "issf_ref_requested", default: false
     t.string   "material_type"
     t.string   "machine_type"
     t.integer  "capacity"
-    t.boolean  "vms"
-    t.boolean  "tracker"
+    t.boolean  "vms",                default: false
+    t.boolean  "tracker",            default: false
     t.string   "port"
-    t.boolean  "name_changed"
-    t.boolean  "flag_state_changed"
-    t.boolean  "radio"
+    t.boolean  "name_changed",       default: false
+    t.boolean  "flag_state_changed", default: false
+    t.boolean  "radio",              default: false
     t.string   "relationship_type"
     t.integer  "fish_capacity"
     t.integer  "bait_capacity"
@@ -637,6 +642,8 @@ ActiveRecord::Schema.define(version: 20150622131536) do
     t.string   "seafdec_ref"
     t.string   "mmaf_ref"
     t.string   "dkp_ref"
+    t.string   "status"
+    t.string   "operational_type"
   end
 
   add_index "vessels", ["company_id"], name: "index_vessels_on_company_id", using: :btree
@@ -651,6 +658,7 @@ ActiveRecord::Schema.define(version: 20150622131536) do
   add_foreign_key "bait_loadings", "vessels"
   add_foreign_key "carrier_loadings", "vessels"
   add_foreign_key "pending_vessels", "admins"
+  add_foreign_key "pending_vessels", "audits"
   add_foreign_key "pending_vessels", "companies"
   add_foreign_key "pending_vessels", "gears"
   add_foreign_key "pending_vessels", "vessel_types"

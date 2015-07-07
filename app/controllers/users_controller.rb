@@ -43,6 +43,10 @@ class UsersController < ApplicationController
     render layout: "signin"
   end
 
+  def home
+    redirect_to current_user
+  end
+
   def crop
 
   end

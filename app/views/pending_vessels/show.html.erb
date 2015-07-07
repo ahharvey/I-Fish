@@ -1,0 +1,107 @@
+<% associations = PendingVessel.reflect_on_all_associations %>
+<% associations = associations.select { |a| a.macro == :belongs_to } %>
+<% association_foreign_keys = associations.map(&:foreign_key) %>
+
+<%= simple_form_for @pending_vessel, url: approve_pending_vessel_path(@pending_vessel), html: {class: 'form form-horizontal'} do |f| %>
+  <div class='row'>
+    <div class='col-xs-12 col-sm-6 col-sm-offset-3'>
+      <br />
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Review Changes</h3>
+        </div>
+        <table class="table table-condensed">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Current Record</th>
+              <th>Pending Changes</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @pending_vessel.accessible_attributes.each do |k, v| %>
+            
+              <tr class='<%= v.to_s == @pending_vessel.vessel[k].to_s ? 'bg-success' : 'bg-danger' %>'>
+                <td class='text-right'><b><%= Vessel.human_attribute_name(k) %></b></td>
+                
+                <td>
+                  <% if association_foreign_keys.include?(k.to_s) %>
+                    <%= @pending_vessel.vessel.send(k.to_s.chomp('_id').to_sym).try(:name) %>
+                  <% else %>
+                    <% if @pending_vessel.column_for_attribute(k).type.to_s == 'boolean' %>
+                      <%= @pending_vessel.vessel[k].present? ? 'Yes' : 'No' %>
+                    <% else %>
+                      <%= @pending_vessel.vessel[k].present? ? @pending_vessel.vessel[k] : '-'%>
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= v.to_s == @pending_vessel.vessel[k].to_s ? '' : icon('arrow-circle-left') %>
+                  <% if association_foreign_keys.include?(k.to_s) %>
+                    <%= @pending_vessel.send(k.to_s.chomp('_id').to_sym).try(:name) %>
+                  <% else %>
+                    <% if @pending_vessel.column_for_attribute(k).type.to_s == 'boolean' %>
+                      <%= v.present? ? 'Yes' : 'No'%>
+                    <% else %>
+                      <%= v.present? ? v : '-'%>
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+        <div class="panel-body">
+          <% if @pending_vessel.pending? %>
+            <p>Click 'Accept' to copy all pending changes to the current recrod.</p>
+            <p>Click 'Edit' to adjust the pending changes before they are accepted.</p>
+            <p>Click 'Reject' to mark the pending changes as reviewed and rejected. The change log will remain.</p>
+          <% else %>
+            <p class='text-center'><i>There are no pending edits to this vessel.</i></p>
+          <% end %>
+        </div>
+        <div class="panel-footer text-center">
+          <div class="btn-group btn-group-lg btn-group-justified" role="group">
+            
+            <% if @pending_vessel.pending? %>
+              <div class="btn-group" role="group">
+                <%= link_to reject_pending_vessel_path(@pending_vessel), class: 'btn btn-danger', method: :patch do %>
+                  Reject
+                <% end %>
+              </div>
+            <% end %>
+            
+            <% if @pending_vessel.pending? %>
+              <div class="btn-group" role="group">
+                <%= link_to edit_pending_vessel_path(@pending_vessel), class: 'btn btn-warning' do %>
+                  Edit
+                <% end %>
+              </div>
+            <% end %>
+            
+            <div class="btn-group" role="group">
+              <%= link_to "Cancel", @pending_vessel.vessel, class: 'btn btn-default'  %>
+            </div>
+
+            <% if @pending_vessel.pending? %>
+              <div class="btn-group" role="group">
+                <%= content_tag :button, type: :submit, class: 'btn btn-success' do %>
+                  Accept
+                <% end %>
+              </div>
+            <% end %>
+            
+            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<% end %>
+
+<div class="row">
+  <div class="col-xs-12 col-sm-6 col-sm-offset-3">
+    <%= render partial: 'shared/audit_table', locals: { parent: @pending_vessel } %>
+  </div>
+</div>

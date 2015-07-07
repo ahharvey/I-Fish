@@ -102,11 +102,15 @@ class Ability
     can :manage, Audit, admin_id: admin
     cannot :destroy, Audit 
 
-    can :create, PendingVessel
+    can :manage, PendingVessel
+    cannot :destroy, PendingVessel
  
     #can :read, Fishery # To view summarised fishery data
     can :read, User
     can :read, Admin, :id => admin.id
+
+    can :manage, 'staff/dashboard'
+    can :index, 'staff/dashboard'
   end
 
   def supervisor(admin)

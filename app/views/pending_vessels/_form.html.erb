@@ -8,7 +8,8 @@
     <p>Enter the changed data below.</p>
     <p>Leave a field blank if the existing data is correct.</p>
     
-
+    <%= f.input :audit_id, as: :hidden %>
+    <%= f.input :admin_id, as: :hidden %>
     <%= f.input :vessel_id, as: :hidden %>
 
     <%= f.input :sipi_number %>
@@ -30,23 +31,19 @@
         } 
       } %>
 
+    <%= f.input :operational_type, collection: Vessel::OPERATIONAL_TYPES, input_type: lambda { |s| I18n.t("operational_types.#{s}") } %>
+    
     <%= f.association :company %>
 
-    <%= f.input :relationship_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
-      <%= f.select :relationship_type, Vessel::RELATIONSHIP_TYPES.map { |s| [I18n.t("relationship_types.#{s}"), s] }, {}, { class: 'form-control' } %>
-    <% end %>
+    <%= f.input :relationship_type, collection: Vessel::RELATIONSHIP_TYPES, input_type: lambda { |s| I18n.t("relationship_types.#{s}") } %>
 
     <%= f.input :owner %>
 
     <%= f.association :vessel_type %>
 
-    <%= f.input :material_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
-      <%= f.select :material_type, Vessel::MATERIAL_TYPES.map { |s| [I18n.t("material_types.#{s}"), s] }, {}, { class: 'form-control' } %>
-    <% end %>
+    <%= f.input :material_type, collection: Vessel::MATERIAL_TYPES, input_type: lambda {|s| I18n.t("material_types.#{s}") } %>
 
-    <%= f.input :machine_type, input_html: { class: 'form-control' }, wrapper_html: { class: 'select' } do %>
-      <%= f.select :machine_type, Vessel::MACHINE_TYPES.map { |s| [I18n.t("machine_types.#{s}"), s] }, {}, { class: 'form-control' } %>
-    <% end %>
+    <%= f.input :machine_type, collection: Vessel::MACHINE_TYPES, label_type: lambda {|s| I18n.t("machine_types.#{s}") }  %>
 
     <%= f.input :length %>
 
@@ -79,10 +76,7 @@
 
     <%= f.input :port %>
 
-    <%= f.input :flag_state do %>
-      
-      <%= f.country_select :flag_state, {selected: @pending_vessel.flag_state, priority_countries: ["ID"]}, {class: "form-control"} %>
-    <% end %>
+    <%= f.input :flag_state, priority: [ "ID" ], as: :country, include_blank: true   %>
 
     <%= f.input :flag_state_changed, input_html: {
       class: 'toggle-switch', 

@@ -77,7 +77,7 @@ class AuditsController < ApplicationController
           edit_pending_vessel_path(@pending_vessel.id)
         else
           Rails.logger.info "EEEEEEEEEEEEEE"
-          new_vessel_pending_vessel_path(@vessel)
+          new_audit_pending_vessel_path(resource)
         end
       else
         vessel_path(@vessel)

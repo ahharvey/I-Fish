@@ -20,6 +20,14 @@ module BaseVessel
 	MATERIAL_TYPES = ["wood", "fiber", "steel"]
 	MACHINE_TYPES = ["none", "outboard", "inboard"]
 	RELATIONSHIP_TYPES = ["contracted", "independent"]
+  OPERATIONAL_TYPES = ["active", "inactive", "decommissioned"]
+
+
+  OPERATIONAL_TYPES.each do |status|
+    define_method("#{status}?") do
+      self.operational_type == status
+    end
+  end
 
   def formatted_sipi_expiry
     @formatted_sipi_expiry || sipi_expiry.try(:to_s, :long)

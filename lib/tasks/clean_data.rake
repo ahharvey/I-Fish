@@ -29,4 +29,31 @@ namespace :clean_data do
       users.map(&:destroy)
     end
   end
+
+  task :clean_booleans => :environment do 
+    vessel_booleans = [
+      'vms', 
+      'tracker',
+      'shark_policy', 
+      'iuu_list', 
+      'code_of_conduct', 
+      'issf_ref_requested', 
+      'name_changed', 
+      'flag_state_changed', 
+      'radio'
+    ]
+
+    Vessel.all.each do |v|
+      
+      vessel_booleans.each do |bool|
+        if v.send(bool).nil?
+          v.bool = false
+        end
+      end
+
+      v.save
+    
+    end
+
+  end
 end

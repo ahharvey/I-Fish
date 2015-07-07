@@ -119,7 +119,8 @@ class VesselsController < ApplicationController
       :capacity, 
       :vms, 
       :tracker, 
-      :port
+      :port,
+      :operational_type
       )
   end
 

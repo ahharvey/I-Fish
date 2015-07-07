@@ -18,7 +18,18 @@
         <% end %>
       </li>
     <% end %>
-  <% end %>   
+    <% if can? :view, 'staff/dashboard' %>
+      <li id="nav_staff" class="navbar-yellow">
+        <%= link_to staff_dashboard_index_path, class: "", title: t("navbar.staff") do %>
+          <%= icon fa_approve, '', class: 'fa-2x' %>
+          <span class="badge">
+            <%= PendingVessel.pending.size %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>
+  <% end %> 
+
   <li id="nav_reports" class="navbar-green">
     <%= link_to reports_path, class: "", title: t("navbar.reports") do %>
       <%= icon fa_reports, '', class: 'fa-2x' %>

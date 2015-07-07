@@ -1,8 +1,16 @@
 <% title t ".title" %>
 
+<div class='row'>
+  <div class='col-xs-12'>
+    <%= render 'operational_status' %>
+  </div>
+</div>
 <div class="row">
   <div class="col-xs-12 col-md-4 col-md-push-8">
     <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: "audit_panel" %>
+      </div>
       <div class="col-xs-12">
         <%= link_to "View unloading reports", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
         <% unless @vessel.vessel_type.try(:code) == 'ca' %>

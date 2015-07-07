@@ -1,29 +1,36 @@
 <div class="panel panel-default">
+  
   <div class="panel-heading">
     <h3 class="panel-title">Files</h3>
   </div>
-  <div class="panel-body">
-    <% resource.documents.each do |document| %>
-      <%= link_to document.file.url, title: document.title do %>
-        <div class= 'col-xs-3'>
-          <div class="well text-center">
-            <% if document.is_word? %>
-              <%= icon fa_word, "", class: 'fa-4x' %>
-            <% elsif document.is_excel? %>
-              <%= icon fa_excel, "", class: 'fa-4x' %>
-            <% elsif document.is_pdf? %>
-              <%= icon fa_pdf, "", class: 'fa-4x' %>
-            <% elsif document.is_image? %>
-              <%= icon fa_image, "", class: 'fa-4x' %>
-            <% end %>
-            <br />
-            <br />
-            <small><%= truncate document.title, length: 15 %></small>
+  
+  <% if resource.documents.any? %>
+  
+    <div class="panel-body">
+      <% resource.documents.each do |document| %>
+        <%= link_to document.file.url, title: document.title do %>
+          <div class= 'col-xs-3'>
+            <div class="well text-center">
+              <% if document.is_word? %>
+                <%= icon fa_word, "", class: 'fa-4x' %>
+              <% elsif document.is_excel? %>
+                <%= icon fa_excel, "", class: 'fa-4x' %>
+              <% elsif document.is_pdf? %>
+                <%= icon fa_pdf, "", class: 'fa-4x' %>
+              <% elsif document.is_image? %>
+                <%= icon fa_image, "", class: 'fa-4x' %>
+              <% end %>
+              <br />
+              <br />
+              <small><%= truncate document.title, length: 15 %></small>
+            </div>
           </div>
-        </div>
+        <% end %>
       <% end %>
-    <% end %>
-  </div>
+    </div>
+  
+  <% end %>
+  
   <div class="panel-footer">
     <div class="row">
       <%= form_for Document.new, html: { class: 'inline-form'} do |f| %>
@@ -41,4 +48,5 @@
       <% end %>
     </div>
   </div>
+  
 </div>

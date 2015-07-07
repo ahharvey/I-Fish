@@ -14,6 +14,10 @@ id:
     unapproved:
       survey: "Surveys have been added and are awaiting your approval"
       team: "New team members have signed up and are awaiting your approval"
+  staff:
+    dashboard:
+      index:
+        title: "Dasbor"
   admins:
     title: "Staf Staf"
     welcome:
@@ -139,6 +143,14 @@ id:
       title: "Kantor Kantor"
     show:
       title: "Kantor"
+  pending_vessels:
+    title: "Update Vessel"
+    new: 
+      title: "Update Vessel"
+    edit: 
+      title: "Update Vessel"
+    index: 
+      title: "Pending Updates"
   protocols:
     title: "Protokol Protokol"
     index:
@@ -202,6 +214,7 @@ id:
   navbar:
     home: "Pulang"
     data: "Review"
+    staff: "Dasbor"
     reports: "Laporan"
     settings: "Settings"
     user_profile: "User profile"
@@ -363,6 +376,8 @@ id:
       office:
         name: "Nama"
         district_id: "Kabupaten"
+      pending_vessel: 
+        operational_type: "Status Operasional"
       province:
         name: "Propinsi"
         alpha_code: "Abbr."
@@ -423,6 +438,7 @@ id:
         fish_capacity: "Kapasitas hasil (m3)"
         bait_capacity: "Kapasitas umpan (m3)"
         location_built: "Lokasi pembuatan"
+        operational_type: "Status Operasional"
     errors:
       models:
         bait_loading:
@@ -465,3 +481,7 @@ id:
     bagan: "Bagan"
     purse: "Purse seine"
     beach: "Beach seine"
+  operational_types:
+    active: 'Aktif'
+    inactive: 'Non-aktif'
+    decommissioned: 'Dimatikan'

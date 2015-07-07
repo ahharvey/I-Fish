@@ -5,8 +5,20 @@ class ApplicationController < ActionController::Base
   self.responder = ApplicationResponder
   respond_to :html
 
-  # redirects when user's role is not authorised
-  rescue_from CanCan::AccessDenied, with: :access_denied
+  rescue_from CanCan::AccessDenied do |exception| #, with: :access_denied
+    if @currently_signed_in.nil?
+      session[:next] = request.fullpath
+      puts session[:next]
+      redirect_to new_user_session_url, alert: "You must log in to continue."
+    else
+      #render :file => "#{Rails.root}/public/403.html", :status => 403
+      if request.env["HTTP_REFERER"].present?
+        redirect_to :back, alert: exception.message
+      else
+        redirect_to root_url, alert: exception.message
+      end
+    end
+  end
 
   # in production redirects to 404 if url does not exist
   # in other environments displays real exceptions
@@ -123,22 +135,6 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  # called by rescue_from CanCan::AccessDenied
-  # defines where to redirect 
-  def access_denied( excepton )
-    if current_user.nil?
-      session[:next] = request.fullpath
-      puts session[:next]
-      redirect_to new_admin_session_url, alert: "You must log in to continue."
-    else
-      #render :file => "#{Rails.root}/public/403.html", :status => 403
-      if request.env["HTTP_REFERER"].present?
-        redirect_to :back, alert: exception.message
-      else
-        redirect_to root_url, alert: exception.message
-      end
-    end
-  end
 
     
 end

@@ -13,10 +13,13 @@
 #
 
 class Audit < ActiveRecord::Base
-  belongs_to :user
+  belongs_to :admin
   belongs_to :auditable, polymorphic: true
+  has_one :pending_vessel
 
-  STATES = %w{ approved rejected }
+  scope :default, -> { order('audits.created_at DESC') }
+
+  STATES = %w{ approved rejected reviewed}
 
   STATES.each do |state|
     define_method("#{state}?") do

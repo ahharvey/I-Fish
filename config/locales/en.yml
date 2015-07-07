@@ -15,6 +15,10 @@ en:
     unapproved:
       survey: "Surveys have been added and are awaiting your approval"
       team: "New team members have signed up and are awaiting your approval"
+  staff:
+    dashboard:
+      index:
+        title: "Dashboard"
   audits:
     title: "Audit Report"
     new:
@@ -152,6 +156,8 @@ en:
       title: "Update Vessel"
     edit: 
       title: "Update Vessel"
+    index: 
+      title: "Pending Updates"
   protocols:
     title: "Protocols"
     index:
@@ -216,6 +222,7 @@ en:
   navbar:
     home: "Home"
     data: "Review"
+    staff: "Dashboard"
     reports: "Report"
     settings: "Settings"
     user_profile: "User profile"
@@ -376,6 +383,8 @@ en:
       office:
         name: "Name"
         district_id: "District"
+      pending_vessel: 
+        operational_type: "Operational Status"
       province:
         name: "Province"
         alpha_code: "Abbr."
@@ -438,6 +447,7 @@ en:
         fish_capacity: "Hold capacity (kg)"
         bait_capacity: "Bait capacity (kg)"
         location_built: "Place of construction"
+        operational_type: "Operational Status"
     errors:
       models:
         bait_loading:
@@ -481,3 +491,7 @@ en:
     bagan: "Lift net"
     purse: "Purse seine"
     beach: "Beach seine"
+  operational_types:
+    active: 'Active'
+    inactive: 'Inactive'
+    decommissioned: 'Decommissioned'

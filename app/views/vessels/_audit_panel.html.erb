@@ -1,0 +1,46 @@
+<% if @vessel.audits.any? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Audits</h3>
+    </div>
+
+    <div class="list-group">
+      <% if @vessel.pending_vessel.present? %>
+        <% if @vessel.pending_vessel.pending? %>
+          <%= link_to @vessel.pending_vessel, class: 'list-group-item list-group-item-danger' do %>
+            <h4 class="list-group-item-heading">
+              <%= @vessel.pending_vessel.admin.try(:name) %>
+              submitted pending changes to this vessel record.
+            </h4>
+            <p class="list-group-item-text">
+              Click here to review these changes.
+            </p>
+          <% end %>
+        <% end %>
+      <% end %>
+      <% @vessel.audits.default.first(5).each do |audit| %>
+        <li class="list-group-item">
+          <p><small>
+            <% if audit.approved? %>
+              <%= icon fa_approve, '', class: 'fa-fw fa-2x text-success' %>
+            <% elsif audit.reviewed? %>
+              <%= icon fa_warning, '', class: 'fa-fw fa-2x text-warning' %>
+            <% else %>
+              <%= icon fa_danger, '', class: 'fa-fw fa-2x text-danger' %>
+            <% end %>
+            <%= image_tag audit.admin.avatar_url(:thumb), 
+              width: "30px", 
+              height: "30px", 
+              style: 'vertical-align:text-bottom;',
+              title: audit.admin.name, 
+              alt: audit.admin.name
+              %>
+            <%= audit.status.capitalize %> by
+            <%= link_to audit.admin.try(:name), audit.admin %> on 
+            <%= audit.created_at.to_s(:long) %>
+          </small></p>
+        </li>
+      <% end %>
+    </div>
+  </div>
+<% end %>

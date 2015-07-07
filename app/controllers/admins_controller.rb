@@ -48,9 +48,11 @@
 class AdminsController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_admin, only: [:show, :edit, :update, :destroy]
+  before_action :set_admin, only: [:show, :edit, :update, :destroy, :welcome]
   respond_to :html
   respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
+
+  layout :select_layout
 
   def index
     @admins = Admin.all
@@ -86,7 +88,7 @@ class AdminsController < ApplicationController
   end
 
   def welcome
-    render layout: "signin"
+    #respond_with(@admin)
   end
 
   def crop
@@ -118,6 +120,14 @@ class AdminsController < ApplicationController
       crop_admin_path(resource)
     else
       admin_path(resource)
+    end
+  end
+
+  def select_layout
+    if action_name == 'welcome'
+      'signin'  
+    else
+      'application'
     end
   end
 

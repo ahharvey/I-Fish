@@ -62,6 +62,42 @@ class Vessel < ActiveRecord::Base
     company.try(:bait_fishes)
   end
 
+  def accessible_attributes
+    attributes.except(
+      'id',
+      'created_at',
+      'updated_at',
+      'audit_id',
+      'admin_id',
+      'vessel_id', 
+      'review_state', 
+      'reviewed_at'
+      )
+  end
+
+  def auditable_attributes
+    attributes.except(
+      'id',
+      'created_at',
+      'updated_at',
+      'audit_id',
+      'admin_id',
+      'vessel_id', 
+      'review_state', 
+      'reviewed_at',
+      'imo_number',
+      'shark_policy',
+      'iuu_list',
+      'code_of_conduct',
+      'ap2hi_ref',
+      'issf_ref',
+      'issf_ref_requested',
+      'seafdec_ref',
+      'mmaf_ref',
+      'dkp_ref'
+      )
+  end
+
   
   private
 
@@ -102,6 +138,8 @@ class Vessel < ActiveRecord::Base
       'tracker',
     ]
   end
+
+
 
   
 end

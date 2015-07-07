@@ -61,6 +61,10 @@ IFish::Application.routes.draw do
       resources :dashboard
     end
 
+    namespace :staff do
+      resources :dashboard
+    end
+
     resources :catches
     resources :desas do
       resources :surveys
@@ -107,7 +111,9 @@ IFish::Application.routes.draw do
         put :reject
       end
     end
-    resources :audits, except: [:edit]
+    resources :audits, except: [:edit] do
+      resources :pending_vessels, only: [:new, :create]
+    end
     resources :engines
     resources :graticules
     resources :vessel_types
@@ -131,12 +137,16 @@ IFish::Application.routes.draw do
       resources :bait_loadings
       resources :carrier_loadings
       resources :audits, except: [:edit]
-      resources :pending_vessels
       collection do
         get :generate_stickers
       end
     end
-    resources :pending_vessels
+    resources :pending_vessels do
+      member do
+        patch :approve
+        patch :reject
+      end
+    end
     resources :vessel_imports do
       collection do
         get :template
@@ -215,8 +225,16 @@ IFish::Application.routes.draw do
     post 'home/process_upload_data'
 
     #authenticate :admin, lambda { |a| a.admin? } do
-      mount Sidekiq::Web => '/sidekiq'
+      
     #end
+    authenticated :admin do
+      root :to => "home#index", as: :admin_root
+      mount Sidekiq::Web => '/sidekiq'
+    end
+
+    authenticated :user do
+      root to: 'users#home', as: :user_root
+    end
     # handles /valid-locale
     root to: 'home#index'
     # handles /valid-locale/fake-path

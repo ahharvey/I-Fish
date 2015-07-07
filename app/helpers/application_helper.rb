@@ -117,6 +117,10 @@ module ApplicationHelper
     "file-image-o"
   end
 
+  def fa_danger
+    'minus-circle'
+  end
+
   def fa_warning
     'exclamation-triangle'
   end
