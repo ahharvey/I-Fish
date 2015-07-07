@@ -17,8 +17,7 @@
   <tbody>
     <%if @pending_vessels.empty? %>
       <tr>
-        <td></td>
-        <td><i>NO PENDING VESSEL AUDITS</i></td>
+        <td colspan="7"><i>NO PENDING VESSEL AUDITS</i></td>
       </tr>
     <% else %>
       <% @pending_vessels.each do |vessel| %>
