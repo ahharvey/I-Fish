@@ -124,7 +124,7 @@
           <th><%= UnloadingCatch.human_attribute_name(:cut_type) %></th>
           <th><%= UnloadingCatch.human_attribute_name(:type) %></th>
           <th><%= UnloadingCatch.human_attribute_name(:size_class_id) %></th>
-          <th></th>
+
         </tr>
 
         <% for unloading_catch in @unloading.unloading_catches %>
@@ -136,10 +136,7 @@
               <td><%= unloading_catch_presenter.type %></td>
               <td><%= unloading_catch_presenter.size_class %></td>
 
-              <td>
-                <%= link_to show_icon, unloading_catch %>
-                <%= link_to edit_icon, unloading_catch %>
-              </td>
+
             </tr>
           <% end %>
         <% end %>
