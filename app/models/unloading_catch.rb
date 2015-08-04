@@ -14,6 +14,7 @@
 class UnloadingCatch < ActiveRecord::Base
   belongs_to :fish
   belongs_to :unloading
+  belongs_to :size_class
 
   CUT_TYPES = ["wholeround", "dirtyloin", "cleanloin", "gg"]
 
