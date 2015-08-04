@@ -78,6 +78,13 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def staff_dashboard
+    pendingVessels      = PendingVessel.pending.size
+    pendingUnloadings   = Unloading.where(vessel_id: current_admin.managed_vessels.map(&:id), review_state: 'pending' ).size
+    pendingBaitLoadings = BaitLoading.where(vessel_id: current_admin.managed_vessels.map(&:id), review_state: 'pending' ).size
+    @staff_dashboard_pending = pendingVessels + pendingUnloadings + pendingBaitLoadings
+  end
+
 
   protected
 
