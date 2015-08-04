@@ -21,5 +21,14 @@ class UnloadingCatchPresenter < BasePresenter
   	best_in_place_if (can? :edit, unloading_catch), unloading_catch, :size_class, as: :select, collection: SizeClass.default.map{ |sc| [sc.id, sc.name] }, inner_class: 'col-xs-1'
   end
 
+  private 
+
+  def handle_none(value)
+    if value.present?
+      yield
+    else
+      content_tag :span, "--", class: "no-data"
+    end
+  end
 end
 

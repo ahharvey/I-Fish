@@ -160,6 +160,7 @@ IFish::Application.routes.draw do
         put :reject
       end
     end
+    resources :unloading_catches
     resources :carrier_loadings
     resources :size_classes
     
