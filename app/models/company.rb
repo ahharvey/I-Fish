@@ -19,6 +19,11 @@ class Company < ActiveRecord::Base
 
   has_many :documents, as: :documentable
   has_many :vessels
+  has_many :unloadings, through: :vessels
+  has_many :bait_loadings, through: :vessels
+  has_many :carier_loadings, through: :vessels
+  has_many :users, through: :company_positions
+  has_many :company_positions
 
   has_and_belongs_to_many :member_fisheries, 
     class_name: "Fishery",

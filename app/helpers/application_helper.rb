@@ -153,6 +153,14 @@ module ApplicationHelper
     icon 'remove'
   end
 
+  def fa_true
+    'check-square-o'
+  end
+
+  def fa_false
+    'square-o'
+  end
+
   
 
 

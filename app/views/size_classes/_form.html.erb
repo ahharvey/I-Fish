@@ -1,0 +1,40 @@
+<%= simple_form_for @size_class, 
+    html: {
+      multipart: true, 
+      class: 'form form-horizontal'
+      }, 
+    wrapper: :horizontal_form do |f| %>
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+    
+	    <%= f.input :name %>
+
+	    <%= f.input :upper, as: :integer %>
+
+	    <%= f.input :lower, as: :integer %> 
+  
+    </div>
+
+  </div>
+    
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions text-right">
+
+      <% if !f.object.new_record? %>
+        <%= link_to "Cancel", @size_class, :class=>"btn" %>
+
+      <% else %>
+        <%= link_to "Cancel", size_classes_path, :class=>"btn" %>
+      <% end %> 
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
+        Save
+      <% end %>
+
+    </div>
+  </div>
+<% end %>
+
+<br />

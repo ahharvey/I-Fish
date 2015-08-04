@@ -1,11 +1,17 @@
 jQuery ->
   $('.datatable').dataTable
     "pageLength": 15
+    "aoColumnDefs": [{
+      'bSortable': false
+      'aTargets': ['nosort']
+    }]
+
   $('div.dataTables_filter input').addClass('form-control input-sm');
   $('div.dataTables_length select').addClass('form-control input-sm')
     # sDom: "<'row'<'col-xs-6'l><'col-xs-6'f>r>t<'row'<'col-xs-6'i><'col-xs-6'p>>"
 
-
+jQuery ->
+  $.fn.select2.defaults.set('theme', 'bootstrap');
 
 jQuery ->
   if Modernizr.touch # or !Modernizr.inputtypes.date
@@ -79,7 +85,12 @@ jQuery ->  #initialize Bootstrap datepicker on date select field
         sideBySide: true
         format: 'DD/MM/YYYY'
 
+jQuery ->
+  if $('.select2-select').length
 
+    $('.select2-select').select2
+      placeholder: $(this).attr('prompt') || "Select..."
+      allowClear: true 
 
 jQuery ->
   $(".approve-toggle:checkbox").on 'switchChange.bootstrapSwitch', (event, state) ->

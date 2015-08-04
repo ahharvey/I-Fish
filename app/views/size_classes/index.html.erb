@@ -1,0 +1,48 @@
+<% title t ".title" %>
+
+<% if can? :create, SizeClass %>
+  <div class="btn-group">
+    <%= link_to new_size_class_path, class: "btn btn-mini btn-default", title: "Add new size class", alt: "New size class" do %>
+      <%= icon fa_new, "NEW" %>
+    <% end %>
+  </div>
+<% end %>
+
+<br />
+<br />
+
+<table  class="table table-striped table-condensed datatable">
+  <thead>
+    <tr>
+      <th class="nosort"></th>
+      <th><%= SizeClass.human_attribute_name(:name) %></th>
+      <th class='hidden-xs'><%= SizeClass.human_attribute_name(:upper) %></th>
+      <th class='hidden-xs'><%= SizeClass.human_attribute_name(:lower) %></th>
+      <th class='hidden-xs'><%= SizeClass.human_attribute_name(:median) %></th>      
+      <th class='hidden-xs nosort'></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @size_classes.each do |size_class| %>
+
+      <tr>
+        <td><%= link_to show_icon, size_class %> </td>
+        <td><%= size_class.name %></td>
+        <td class='hidden-xs'><%= size_class.upper %></td>
+        <td class='hidden-xs'><%= size_class.lower %></td>
+        <td class='hidden-xs'><%= size_class.median %></td>          
+        <td class='hidden-xs'>
+          <% if can? :update, size_class %>
+            <%= link_to edit_icon, edit_size_class_path(size_class) %> 
+          <% end %>
+          <% if can? :destroy, size_class %>
+            <%= link_to destroy_icon, size_class, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>
+          <% end %>
+        </td>
+      </tr>
+
+    <% end %>
+  </tbody>
+</table>
+
+<br />

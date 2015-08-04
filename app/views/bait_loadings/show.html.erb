@@ -1,11 +1,24 @@
 <% title t ".title" %>
 
-<%= render partial: "shared/api_links" %>
+
+
+<div class="row">
+  <div id="supervisor_controls" class= "col-xs-8">
+    <%= render partial: "supervisor_controls" %>
+  </div>
+  <div class="col-xs-4">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
+
+</div>
+
+<br />
+<br />
 
 <dl class="dl-horizontal">
   
   <dt><%= BaitLoading.human_attribute_name(:formatted_date) %></dt>
-  <dd><i><%= @bait_loading.formatted_datentific_name %></i></dd>
+  <dd><i><%= @bait_loading.formatted_date %></i></dd>
 
   <dt><%= BaitLoading.human_attribute_name(:vessel_id) %></dt>
   <dd><%= @bait_loading.vessel.ap2hi_ref %> </dd>
@@ -26,7 +39,7 @@
   <dd><%= @bait_loading.price %> </dd>
 </dl>
 
-<%= link_to 'Edit', edit_bait_unloadings_path(@bait_unloading) %> |
-<%= link_to 'Back', bait_unloadings_path %>
+<%= link_to 'Edit', edit_bait_loading_path(@bait_loading) %> |
+<%= link_to 'Back', bait_loadings_path %>
 
 

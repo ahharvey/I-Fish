@@ -23,7 +23,9 @@
     <td class='hidden-xs'><%= unloading_presenter.fuel %></td>
     <td class='hidden-xs'><%= unloading_presenter.ice %></td> 
     <td>
-      <%= link_to "Edit", edit_unloading_path(unloading), class: "btn btn-xs btn-block btn-primary" %>
+      <% if can? :edit, unloading %>
+        <%= link_to "Edit", edit_unloading_path(unloading), class: "btn btn-xs btn-block btn-primary" %>
+      <% end %>
     </td>
   <% end %>
 <% end %>

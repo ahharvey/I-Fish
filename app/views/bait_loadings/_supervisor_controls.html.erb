@@ -1,0 +1,38 @@
+<% if can? :update, @bait_loading %>
+  <div class="row">
+    <div class="col-xs-4">
+      <%= link_to :back  do %>
+        <%= icon 'arrow-left', "Back" %> 
+      <% end %>
+    </div>
+    <div class="col-xs-6 col-xs-offset-2">
+      <div class="row">
+        <%= link_to reject_bait_loading_path(@bait_loading), 
+          class: "col-xs-4 btn btn-lg #{@bait_loading.rejected? ? 'btn-danger' : 'btn-default' }", 
+          method: :put, 
+          remote: true do 
+          %>
+            <%= icon 'remove', "", class: 'fa-lg' %>
+            Rejected
+        <% end %>  
+        <%= link_to pend_bait_loading_path(@bait_loading), 
+          class: "col-xs-4 btn btn-lg #{@bait_loading.pending? ? 'btn-warning' : 'btn-default' }", 
+          method: :put, 
+          remote: true do
+          %>
+          <%= icon 'warning', "", class: 'fa-lg' %>
+          Pending
+        <% end %>
+        <%= link_to approve_bait_loading_path(@bait_loading), 
+          class: "col-xs-4 btn btn-lg #{@bait_loading.approved? ? 'btn-success' : 'btn-default' }", 
+          method: :put, 
+          remote: true do 
+          %>
+          <%= icon 'check', "", class: 'fa-lg' %>
+          Approved
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+<% end %>

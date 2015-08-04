@@ -1,13 +1,47 @@
 <div class="form-group row">
-  <div class="col-xs-4">
-    <%= f.association :fish, label_method: :code, value_method: :id, class: 'form-control', wrapper: false, label: false %>
+  <div class="col-xs-2">
+    <%= f.select :fish, 
+      Fish.default.map{ |f| [ f.code, f.id ] },
+      { prompt: UnloadingCatch.human_attribute_name(:fish)},
+      { 
+        class: 'form-control select2-select', 
+        data: {
+          placeholder: UnloadingCatch.human_attribute_name(:fish)
+        }
+      } %>
   </div>
-  <div class="col-xs-4">
-    <%= f.input :cut_type, label: false, wrapper: false do %>
-      <%= f.select :cut_type, UnloadingCatch::CUT_TYPES.map { |s| [I18n.t("cut_types.#{s}"), s] }, {}, { class: 'form-control' } %>
-    <% end %>
+  <div class="col-xs-2">
+
+    <%= f.select :cut_type, 
+      UnloadingCatch::CUT_TYPES.map { |s| [I18n.t("cut_types.#{s}"), s] }, 
+      { prompt: UnloadingCatch.human_attribute_name(:cut_type)}, 
+      { 
+        class: 'form-control select2-select',
+        data: {
+          placeholder: UnloadingCatch.human_attribute_name(:cut_type)
+        } 
+      } %>
+
   </div>
-  <div class="col-xs-4">
+  <div class="col-xs-2">
+    <%= f.select :size_class_id, 
+      SizeClass.default.map { |s| [s.name, s.id] }, 
+      {prompt: UnloadingCatch.human_attribute_name(:size_class)}, 
+      { 
+        class: 'form-control select2-select',
+        data: {
+          placeholder: UnloadingCatch.human_attribute_name(:size_class)
+        } 
+      } %>
+  </div>
+
+  <div class="col-xs-2">
     <%= f.input_field :quantity, class: 'form-control', placeholder: UnloadingCatch.human_attribute_name(:quantity) %>
   </div>
+
+  <div class="col-xs-2">
+    <%= f.select :type, UnloadingCatch::CATCH_TYPES.map{ |t| [I18n.t("catch_types.#{t}"), t] }, {}, { class: 'form-control', placeholder: UnloadingCatch.human_attribute_name(:type) } %>
+  </div>
+
+
 </div>

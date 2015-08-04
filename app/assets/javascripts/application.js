@@ -13,14 +13,14 @@
 //= require jquery
 //= require jquery_ujs
 //= require jquery-ui
-//= require select2-ng/select2.js
+//= require select2-ng/dist/js/select2.js
 //= require bootstrap-tour/build/js/bootstrap-tour
 //= require moment/moment
 //= require eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min
 //= require best_in_place
 //= require bootstrap-sprockets
 //= require bootstrap-switch/dist/js/bootstrap-switch
-//= require jcrop/js/jquery.Jcrop
+//= require jcrop/js/Jcrop
 //= require underscore/underscore
 //= require gmaps/google
 //= require datatables/media/js/jquery.dataTables

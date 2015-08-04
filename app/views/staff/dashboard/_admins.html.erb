@@ -1,0 +1,48 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">New Team Members</h3>
+  </div>
+  <table class="table table-condensed">
+ 
+    <tr>
+      <th></th>
+      <th>Name</th>
+      <th>Approved</th>
+    </tr>
+  
+    <%if @admins.empty? %>
+      <tr>
+        <td></td>
+        <td><i>NO UNAPPROVED STAFF</i></td>
+      </tr>
+    <% else %>
+      <% for admin in @admins %>
+        <tr>
+          <td><%= image_tag(admin.avatar_url(:thumb), width: "30px", height: "30px") %></td>
+          <td><%= link_to admin.name, [:panel, admin] %></td>
+          <td>
+
+
+              <%= check_box_tag :approved, 
+                admin.id, 
+                admin.approved?, 
+                class: 'toggle-switch approve-toggle', 
+                data: { 
+                  href: set_approved_panel_admin_path(admin),
+                  size: 'mini',
+                  'on-color' => 'success',
+                  'off-color' => 'danger',
+                  'on-text' => "#{ icon 'check' }",
+                  'off-text' => "#{ icon 'remove' }"
+                } %>
+
+              
+          </td>
+        </tr>
+      <% end %>
+    <% end %>
+   </table>
+  <div class="panel-footer text-right">
+    <%= link_to "See All", admins_path %>
+  </div>
+</div>

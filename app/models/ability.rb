@@ -22,9 +22,16 @@ class Ability
   end
 
   def abilities_for_all # Abilities for guests and all users
-    can :read, [Fishery, Fish, Gear, Desa, District, Province, Engine, Logbook] # Guests can read public models, including viewing reports
+    can [:index, :show], [Fishery, Fish, Gear, Company, Engine, Vessel] # Guests can read public models, including viewing reports
     can :index, :home # home page
-    can :reports, :home # report select page
+    can [
+      :current_catch_composition, 
+      :average_catch_composition, 
+      :current_monthly_production, 
+      :average_monthly_production, 
+      :current_fuel_utilization
+      ], Company
+    #can :reports, :home # report select page
     #can :multipart_import, :home # email import route
   end
 
@@ -32,15 +39,38 @@ class Ability
     # Users can view all users, and can manage their own profile.
     can :read, User
     can :manage, User, id: user.id
+    
+    cannot :manage, Unloading
+    can :create, Unloading
+    can :manage, Unloading, vessel_id: user.managed_vessels.map(&:id)
+    can :index, Unloading, vessel_id: user.managed_vessels.map(&:id)
+    cannot :destroy, Unloading
+    
+    cannot :manage, BaitLoading
+    can :create, BaitLoading
+    can :manage, BaitLoading, vessel_id: user.managed_vessels.map(&:id)
+    cannot :index, BaitLoading
+    can :index, BaitLoading, vessel_id: user.managed_vessels.map(&:id)
+    cannot :destroy, BaitLoading
+    
+    can :report, Company, id: user.companies.map(&:id)
+    can :manage, SizeClass
+    cannot :destroy, SizeClass
     #can :welcome, User, id: user.id
   end
 
   def abilities_for_all_admins(admin)
     # Admins can view all users and admins, and can manage their own profile.
+    can :read, [Fishery, Fish, Gear, Company, Engine, Vessel]
+
     can :read, User
     can :read, Admin
     can :manage, Admin, id: admin.id
     can :read, ExcelFile #can read excel files
+    can :manage, Bait
+    cannot :destroy, Bait
+    can :manage, SizeClass
+    cannot :destroy, SizeClass
   end
 
   def public(admin)

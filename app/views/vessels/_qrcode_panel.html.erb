@@ -31,8 +31,9 @@
   			<%= render_qr_code vessel_url(@vessel) %>
   		</div>
   	</div>
-    
-    <%= link_to  t( :generate_stickers ), generate_stickers_vessels_path( vessel_id: @vessel.id), class: 'btn btn-block btn-default' %>
+    <% if can? :update, @vessel %>
+      <%= link_to  t( :generate_stickers ), generate_stickers_vessels_path( vessel_id: @vessel.id), class: 'btn btn-block btn-default' %>
+    <% end %>
   </div>
 
 </div>

@@ -1,0 +1,100 @@
+<% subtitle t ".title" %>
+<% title @company.name %>
+
+<div class="row">
+  
+  <div class="col-xs-12 col-sm-6 col-md-4">
+  	<div class="panel panel-default">
+		  <div class="panel-heading"><b>Current Catch Composition (<%= Date.today.year %>)</b></div>
+		  <div class="panel-body">
+			  <%= pie_chart current_catch_composition_company_path(@company) %>
+		  </div>
+		</div>  
+  </div>
+
+  <div class="col-xs-12 col-sm-6 col-md-4">
+  	<div class="panel panel-default">
+		  <div class="panel-heading"><b>Historical Average Catch Composition</b></div>
+		  <div class="panel-body">
+		    <%= pie_chart average_catch_composition_company_path(@company) %>
+		  </div>
+		</div>
+  </div>
+
+  <div class="col-xs-12 col-md-4">
+	  <div class="panel panel-default">
+		  <div class="panel-heading"><b>Fuel Efficiency</b></div>
+		  <div class="panel-body">
+		    <div id="fuel_utilization" data-url="<%= current_fuel_utilization_company_path(@company, format: :js) %>"></div>
+		  </div>
+		</div>
+    
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+  	<div class="panel panel-default">
+		  <div class="panel-heading"><b>Current Monthly Production (<%= Date.today.year %>)</b></div>
+		  <div class="panel-body">
+		    <%= column_chart current_monthly_production_company_path(@company) %>
+		  </div>
+		</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+  	<div class="panel panel-default">
+		  <div class="panel-heading"><b>Historical Average Monthly Production</b></div>
+		  <div class="panel-body">
+		    <%= column_chart average_monthly_production_company_path(@company) %>
+		  </div>
+		</div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() { 
+        var url = $('#fuel_utilization').data('url');
+      	var data
+      	$.get( url, function( response ) {
+
+        	data = response  ;
+        	data = google.visualization.arrayToDataTable( data )
+        	var options = {
+	          title: null,
+	          hAxis: {title: 'Fuel', minValue: 0, maxValue: 15},
+	          vAxis: {title: 'Catch', minValue: 0, maxValue: 15},
+	          legend: 'none'
+	        };
+	        var chart = new google.visualization.ScatterChart(document.getElementById('fuel_utilization'));
+
+	        chart.draw(data, options);
+        });
+
+
+  			
+
+        
+
+        
+      }
+    </script>
+  </head>
+  <body>
+    

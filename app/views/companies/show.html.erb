@@ -1,23 +1,42 @@
 <% title t ".title" %>
 
 <div class="row">
-  <div class="col-xs-6">
-    
+  <div id="supervisor_controls" class= "col-xs-8">
+    <%= render partial: "surveys/supervisor_controls" %>
   </div>
+  <div class="col-xs-4">
+    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+  </div>
+
 </div>
+
+<br />
+<br />
 
 <div class="row">
   <div id="member_panel" class="col-xs-12 col-md-4 col-md-push-8">
     <% if @company.has_fishing_vessels? %>
-      <%= link_to "View unloading reports", company_unloadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
-      <%= link_to "View bait loading reports", company_bait_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+      <% if can? :read, @company.unloadings %>
+        <%= link_to "View unloading reports", company_unloadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+      <% end %>
+      <% if can? :read, @company.bait_loadings %>
+        <%= link_to "View bait loading reports", company_bait_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+      <% end %>
     <% end %>
     <% if @company.has_carrier_vessels? %>
-      <%= link_to "View carrier loading reports", company_carrier_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
+      <% if can? :read, @company.carrier_loadings %>
+        <%= link_to "View carrier loading reports", company_carrier_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' 
+        %>
+      <% end %>
+    <% end %>
+    <% if can? :report, @company %>
+      <%= link_to "Reports", report_company_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
     <% end %>
     <% if @company.has_fishing_vessels? || @company.has_carrier_vessels? %>
+
       <br />
     <% end %>
+    <%= render partial: 'admin_panel' %>
     <%= render partial: "vessel_panel" %>
   </div>
   <div class="col-xs-12 col-md-8 col-md-pull-4">
@@ -45,7 +64,9 @@
     <%= link_to 'Back', companies_path, class: 'btn btn-block btn-primary' %>
   </div>
   <div class="col-xs-6">
-    <%= link_to 'Edit', edit_company_path(@company), class: 'btn btn-block btn-primary' %>
+    <% if can? :edit, @company %>
+      <%= link_to 'Edit', edit_company_path(@company), class: 'btn btn-block btn-primary' %>
+    <% end %>
   </div>
 </div>
 

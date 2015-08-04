@@ -1,0 +1,13 @@
+
+  <%= content_tag_for :tr, bait do %>
+    <td>
+      <%= link_to show_icon, bait %>
+    </td>
+    <td><%= bait.code %></td>
+    <td><%= bait.name %></td>
+    <td>
+      <% if can? :edit, bait %>
+        <%= link_to "Edit", edit_bait_loading_path(bait), class: "btn btn-xs btn-block btn-primary" %>
+      <% end %>
+    </td>
+  <% end %>

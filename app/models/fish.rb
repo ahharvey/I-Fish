@@ -39,6 +39,8 @@ class Fish < ActiveRecord::Base
   has_many :provinces, through: :landings
   has_many :districts, through: :landings
   has_many :fisheries, through: :landings
+  has_many :unloading_catches
+  has_many :unloadings, through: :unloading_catches
 
   has_and_belongs_to_many :target_fisheries, 
     class_name: "Fishery",

@@ -1,11 +1,15 @@
 <% title t ".title" %>
 
-<div class="row">
-  <div class="col-xs-12 col-md-8">
-    <div class="row">
-      <div class='col-xs-12'>
-        <%= render partial: 'staff/dashboard/pending_vessels' %>
-      </div>
-    </div>
-  </div>
+
+<div class='row'>
+	<div class='col-xs-12 col-sm-8'>
+		<%= render 'pending_vessels' %>
+		<%= render 'unloadings' %>
+		<%= render 'bait_loadings' %>
+	</div>
+	<div class='col-xs-12 col-sm-4'>
+		<%= render 'summary' %>
+		<%= render 'admins' %>
+		<%= render 'history' %>
+	</div>
 </div>

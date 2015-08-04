@@ -57,3 +57,8 @@ jQuery ->
     regexp = new RegExp($(this).data('id'), 'g')
     $(this).before($(this).data('fields').replace(regexp, time))
     event.preventDefault()
+
+    if $('.select2-select').length
+      $('.select2-select').select2
+        placeholder: "Select..."
+        allowClear: true 

@@ -12,16 +12,26 @@
         <%= render partial: "audit_panel" %>
       </div>
       <div class="col-xs-12">
-        <%= link_to "View unloading reports", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+        <% if can? :read, @vessel.unloadings %>
+          <%= link_to "View unloading reports", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+        <% end %>
         <% unless @vessel.vessel_type.try(:code) == 'ca' %>
-          <%= link_to "View bait loading reports", vessel_bait_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+          <% if can? :read, @vessel.bait_loadings %>
+            <%= link_to "View bait loading reports", vessel_bait_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+          <% end %>
         <% end %>
         <% if @vessel.vessel_type.try(:code) == 'ca' %>
-          <%= link_to "View carrier loading reports", vessel_carrier_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+          <% if can? :read, @vessel.carrier_landings %>
+            <%= link_to "View carrier loading reports", vessel_carrier_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+            <br />
+          <% end %>
         <% end %>
-        <br />
-        <%= render partial: "issf_uvi_request" %>
-        <br />
+        <% if can? :update, @vessel %>
+          
+          <%= render partial: "issf_uvi_request" %>
+          <br />
+        <% end %>
+        
         <%= render partial: 'qrcode_panel' %>
       </div>
     </div>
@@ -55,11 +65,13 @@
   
 </div>
 
-<div class="row">
-  <div class="col-xs-12">
-    <%= link_to "Audit", new_vessel_audit_path(@vessel), class: 'btn btn-block btn-primary' %>
+<% if can? :create, Audit %>
+  <div class="row">
+    <div class="col-xs-12">
+      <%= link_to "Audit", new_vessel_audit_path(@vessel), class: 'btn btn-block btn-primary' %>
+    </div>
   </div>
-</div>
+<% end %>
 
 <br />
 

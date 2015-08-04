@@ -37,7 +37,7 @@ class UnloadingsController < ApplicationController
     #temp_params = unloading_params
     #temp_params[:time_out] = Date.strptime(temp_params[:time_out], '%m/%d/%Y %I:%M %p') rescue ''
     #temp_params[:time_in] = Date.strptime(temp_params[:time_in], '%m/%d/%Y %I:%M %p') rescue ''
-    @unloading = Unloading.new(unloading_params)
+    @unloading = Unloading.new(unloading_params.merge( user_id: current_user.try(:id), admin_id: current_admin.try(:id) ) )
     track_activity @unloading if @unloading.save
     respond_with @unloading, location: -> { after_save_path_for(@unloading) }
 #    respond_to do |format|
@@ -78,6 +78,45 @@ class UnloadingsController < ApplicationController
   def destroy
     track_activity @unloading if @unloading.destroy
     respond_with(@unloading)
+  end
+
+  def approve
+    @unloading = Unloading.find( params[:id] )
+    @unloading.approved!
+    if @unloading.approved?
+      track_activity @unloading
+      @unloading.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("approved")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @unloading )
+  end
+
+  def reject
+    @unloading = Unloading.find( params[:id] )
+    @unloading.rejected!
+    if @unloading.rejected?
+      track_activity @unloading
+      @survey.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("Rejected")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @unloading )
+  end
+
+  def pend
+    @unloading = Unloading.find( params[:id] )
+    @unloading.pending!
+    if @unloading.pending?
+      track_activity @unloading
+      @unloading.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("Pending")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @unloading )
   end
 
   private
@@ -148,6 +187,24 @@ class UnloadingsController < ApplicationController
       end
       unloading.bait_loadings.build
     end
+  end
+
+  def refresh_supervisor_controls( unloading )
+    respond_to do |format|
+      format.html { redirect_to unloading  }
+      format.js {
+        @unloading = unloading 
+        render :refresh_supervisor_controls
+      }
+    end
+  end
+
+  def review_success_msg( state )
+    "Unloading successfully reviewed: #{state.upcase}"
+  end
+
+  def review_error_msg
+    "We encountered an error reviewing this unloading. Please try again."
   end
 
 end

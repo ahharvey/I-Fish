@@ -38,10 +38,20 @@ en:
         title: "Security"
       new:
         title: "Sign up"
+  baits:
+    title: "Bait"
+    index: 
+      title: "Bait"
+    new: 
+      title: "New bait"
+    edit: 
+      title: "Edit bait"
   bait_loadings:
     title: "Bait Loadings"
     index: 
       title: "Bait Loadings"
+    show: 
+      title: "Bait Loading Report"
   catches:
     title: "Catch Composition"
     index:
@@ -58,6 +68,8 @@ en:
       title: "New company"
     edit:
       title: "Edit company"
+    report:
+      title: "Company Report"
   desas:
     title: "Villages"
     index:
@@ -178,6 +190,12 @@ en:
       title: "Edit province"
     new:
       title: "New province"
+  size_classes:
+    title: "Size Classes"
+    index:
+      title: "Size Classes"
+    show:
+      title: "Size Class"
   surveys:
     title: "Landing Site Surveys"
     index:
@@ -201,6 +219,8 @@ en:
     title: "Unloading Reports"
     index:
       title: "Unloading Reports"
+    show:
+      title: "Unloading Report"
     new:
       title: "New Unloading Report"
     edit:
@@ -385,6 +405,7 @@ en:
         district_id: "District"
       pending_vessel: 
         operational_type: "Operational Status"
+        admin: "Auditor"
       province:
         name: "Province"
         alpha_code: "Abbr."
@@ -417,6 +438,13 @@ en:
         kaw: "KAW"
         landed: "Landed"
         discarded: "Discarded"
+        wpp: "WPP"
+      unloading_catch: 
+        fish: 'Species'
+        cut_type: 'Cut'
+        size_class: 'Size'
+        quantity: 'Quantity (kg)'
+        type: 'Type'
       vessel:
         name: "Name"
         vessel_type_id: "Vessel Type"
@@ -491,7 +519,11 @@ en:
     bagan: "Lift net"
     purse: "Purse seine"
     beach: "Beach seine"
+    bouke: "Bouke Ami"
   operational_types:
     active: 'Active'
     inactive: 'Inactive'
     decommissioned: 'Decommissioned'
+  catch_types:
+    landed: 'Landed'
+    discarded: 'Discarded'

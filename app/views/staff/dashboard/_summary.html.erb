@@ -1,0 +1,40 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Overview</h3>
+  </div>
+  <table class="table table-condensed">
+    <tr>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th>This month</th>
+      <th>Last month</th>
+    </tr>
+    <tr>
+      <th rowspan="2" >Unloadings</th>
+      <td>Submitted</td>
+      <td><%= Unloading.completed_this_month >= Unloading.completed_last_month ? up_arrow : down_arrow %></td>
+      <td><%= Unloading.completed_this_month %></td>
+      <td><%= Unloading.completed_last_month %></td>
+    </tr>
+    <tr>
+      <td>Approved</td>
+      <td><%= Unloading.approved_this_month >= Unloading.approved_last_month ? up_arrow : down_arrow %></td>
+      <td><%= Unloading.approved_this_month %></td>
+      <td><%= Unloading.approved_last_month %></td>
+    </tr>
+    <tr>
+      <th rowspan="2">Bait Loadings</th>
+      <td>Submitted</td>
+      <td><%= BaitLoading.completed_this_month >= BaitLoading.completed_last_month ? up_arrow : down_arrow %></td>
+      <td><%= BaitLoading.completed_this_month %></td>
+      <td><%= BaitLoading.completed_last_month %></td>
+    </tr>
+    <tr>
+      <td>Approved</td>
+      <td><%= BaitLoading.approved_this_month >= BaitLoading.approved_last_month ? up_arrow : down_arrow %></td>
+      <td><%= BaitLoading.approved_this_month %></td>
+      <td><%= BaitLoading.approved_last_month %></td>
+    </tr>
+  </table>
+</div>

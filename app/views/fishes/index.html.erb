@@ -1,11 +1,15 @@
 <% title t ".title" %>
 
-<%= link_to new_fish_path, class: "btn btn-mini btn-default", title: "Create new fish", alt: "New fish" do %>
-  <%= add_icon %>
-  NEW
+<% if can? :create, Fish %>
+  <%= link_to new_fish_path, class: "btn btn-mini btn-default", title: "Create new fish", alt: "New fish" do %>
+    <%= add_icon %>
+    NEW
+  <% end %>
 <% end %>
 
-<%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+<% if admin_signed_in? %>
+  <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+<% end %>
 
 <% if admin_signed_in? %>
   <% if @currently_signed_in.admin? %>
@@ -29,26 +33,28 @@
 <table  class="table table-striped table-condensed datatable">
   <thead>
     <tr>
-      <th></th>
+      <th class='nosort'></th>
+      <th><%= Fish.human_attribute_name(:code) %></th>
       <th><%= Fish.human_attribute_name(:order) %></th>
       <th><%= Fish.human_attribute_name(:family) %></th>
       <th><%= Fish.human_attribute_name(:scientific_name) %></th>
       <th><%= Fish.human_attribute_name(:english_name) %></th>
       <th><%= Fish.human_attribute_name(:indonesian_name) %></th>
-      <th><%= Fish.human_attribute_name(:code) %></th>
-      <th></th>
+      
+      <th class='nosort'></th>
     </tr>
   </thead>
   <tbody>
     <% @fishes.each do |fish| %>
       <tr>
         <td><%= link_to show_icon, fish %> </td>
+        <td><%= fish.code %></td>
         <td><%= fish.order %></td>
         <td><%= fish.family %></td>
         <td><%= fish.scientific_name %></td>
         <td><%= link_to truncate(fish.english_name, length: 28), fish, title: fish.english_name %></td>
         <td><%= fish.indonesia_name %></td>
-        <td><%= fish.code %></td>
+        
         <td>
           <% if can? :update, fish %>
             <%= link_to edit_icon, edit_fish_path(fish) %> 

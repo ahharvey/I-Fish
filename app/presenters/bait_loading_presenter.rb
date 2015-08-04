@@ -12,6 +12,10 @@ class BaitLoadingPresenter < BasePresenter
   def fish
     best_in_place bait_loading, :fish_id, as: :select, collection: Fish.all.map{ |g| [g.id, g.code] }, inner_class: 'col-xs-1'
   end
+
+  def bait
+    best_in_place bait_loading, :bait_id, as: :select, collection: Bait.all.map{ |g| [g.id, g.code] }, inner_class: 'col-xs-1'
+  end
   
   def quantity
     best_in_place bait_loading, :quantity, as: :input, place_holder: '--', inner_class: 'col-xs-1'

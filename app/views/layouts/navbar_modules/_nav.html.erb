@@ -23,24 +23,32 @@
         <%= link_to staff_dashboard_index_path, class: "", title: t("navbar.staff") do %>
           <%= icon fa_approve, '', class: 'fa-2x' %>
           <span class="badge">
-            <%= PendingVessel.pending.size %>
+            <%= PendingVessel.pending.size +
+              Unloading.where(vessel_id: current_admin.managed_vessels.map(&:id), review_state: 'pending' ).size +
+              BaitLoading.where(vessel_id: current_admin.managed_vessels.map(&:id), review_state: 'pending' ).size
+              %>
           </span>
         <% end %>
       </li>
     <% end %>
   <% end %> 
 
-  <li id="nav_reports" class="navbar-green">
-    <%= link_to reports_path, class: "", title: t("navbar.reports") do %>
-      <%= icon fa_reports, '', class: 'fa-2x' %>
-    <% end %>
-  </li>
+  <% if can? :reports, :home %>
+    <li id="nav_reports" class="navbar-green">
+      <%= link_to reports_path, class: "", title: t("navbar.reports") do %>
+        <%= icon fa_reports, '', class: 'fa-2x' %>
+      <% end %>
+    </li>
   <li class="divider-vertical"></li>
-  <li id="nav_protocols">
-    <%= link_to protocols_path, class: "", title: t("navbar.download") do %>
-      <%= icon fa_protocols, '', class: 'fa-2x' %>    
-    <% end %>
-  </li>
+  <% end %>
+
+  <% if can? :read, Protocol %>
+    <li id="nav_protocols">
+      <%= link_to protocols_path, class: "", title: t("navbar.download") do %>
+        <%= icon fa_protocols, '', class: 'fa-2x' %>    
+      <% end %>
+    </li>
+  <% end %>
 
   <li class="divider-vertical"></li>
 
@@ -48,10 +56,24 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title=<%= t("navbar.settings") %> ><%= icon fa_settings, "", class: 'fa-2x' %><b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <li><%= link_to t("fishes.title"), fishes_path %></li>
-        <li><%= link_to t("gears.title"), gears_path %></li>
-        <li><%= link_to t("companies.title"), companies_path %></li>
-        <li><%= link_to t("vessels.title"), vessels_path %></li>
+        <% if can? :read, Fish %>
+          <li><%= link_to t("fishes.title"), fishes_path %></li>
+        <% end %>
+        <% if can? :read, Bait %>
+          <li><%= link_to t("baits.title"), baits_path %></li>
+        <% end %>
+        <% if can? :read, Gear %>
+          <li><%= link_to t("gears.title"), gears_path %></li>
+        <% end %>
+        <% if can? :read, SizeClass %>
+          <li><%= link_to t("size_classes.title"), size_classes_path %></li>
+        <% end %>
+        <% if can? :read, Company %>
+          <li><%= link_to t("companies.title"), companies_path %></li>
+        <% end %>
+        <% if can? :read, Vessel %>
+          <li><%= link_to t("vessels.title"), vessels_path %></li>
+        <% end %>
         <% if admin_signed_in? %>
           <li><%= link_to "Admins", panel_admins_path %></li>
           <li><%= link_to "Users", panel_users_path %></li>

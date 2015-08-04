@@ -1,0 +1,19 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">History</h3>
+  </div>
+  <table class="table table-condensed">
+    <tr>
+      <th></th>
+      <th>Unloadings</th>
+      <th>Bait Loadings</th>
+    </tr>
+    <% for record in @historical_records %>
+      <tr>
+        <th><%= record[:month].strftime('%B') %></th>
+        <td class="text-right"><%= record[:unloading] %></td>
+        <td class="text-right"><%= record[:bait_loading] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>

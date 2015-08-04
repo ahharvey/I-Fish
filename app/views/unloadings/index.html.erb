@@ -4,15 +4,17 @@
   <% subtitle "#{@vessel.name} (#{@vessel.ap2hi_ref})" %>
 <% end %>
 
-<div class="row">
-  <div class="col-xs-8">
-    
-  </div>
-  <div class="col-xs-4">
-    <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
-  </div>
+<% if admin_signed_in? %>
+  <div class="row">
+    <div class="col-xs-8">
+      
+    </div>
+    <div class="col-xs-4">
+      <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
+    </div>
 
-</div>
+  </div>
+<% end %>
 
 <br />
 <br />

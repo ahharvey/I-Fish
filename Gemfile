@@ -58,6 +58,8 @@ gem 'local_time', '~> 1.0.0'
 gem 'country_select', '~> 2.2.0'
 gem 'countries', '~> 0.11.0'
 gem 'modernizr-rails', '~> 2.7.0'
+gem 'groupdate', '~> 2.4.0' # formats data for charts
+gem 'chartkick', '~> 1.3.2' # adds ChartKick
 #gem 'jquery-datatables-rails', '~> 1.12.1'
 
 ##

@@ -1,0 +1,26 @@
+<div class='row'>
+	<div class='col-xs-12'>
+		<%= simple_form_for @bait, html: {class: 'form form-horizontal'} do |f| %>
+			<%= f.input :name %>
+			<%= f.input :code %>
+
+			<div class="form-group">
+		    <div class="col-xs-12 text-center">
+
+		      <% if !f.object.new_record? %>
+		        <%= link_to "Cancel", @bait%>
+
+		      <% else %>
+		        <%= link_to "Cancel", baits_path %>
+		      <% end %>
+
+		      <%= content_tag :button, type: :submit, class: 'btn btn-primary btn-lg' do %>
+		        Save
+		      <% end %>
+
+		    </div>
+		  </div>
+
+		<% end %>
+	</div>
+</div>

@@ -26,8 +26,15 @@
 #
 
 class Unloading < ActiveRecord::Base
+
+  has_paper_trail
+  
   belongs_to :vessel
-  belongs_to :grid
+  has_one :company, through: :vessel
+  belongs_to :wpp
+  belongs_to :port
+  belongs_to :user
+  belongs_to :reviewer, :class_name => 'User'
   has_many :unloading_catches
   accepts_nested_attributes_for :unloading_catches, allow_destroy: true, reject_if: :all_blank
   has_many :bait_loadings
@@ -109,5 +116,23 @@ class Unloading < ActiveRecord::Base
     Rails.cache.fetch(["bait-loadings", self], expires_in: 5.minutes) do
       bait_loadings.length
     end
+  end
+
+
+
+  def self.completed_this_month
+    Unloading.where( time_in: Date.today.beginning_of_month..Date.today.end_of_month ).size
+  end
+
+  def self.completed_last_month
+    Unloading.where( time_in: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
+  end
+
+  def self.approved_this_month
+    Unloading.where( time_in: Date.today.beginning_of_month..Date.today.end_of_month, review_state: 'approved' ).size
+  end
+
+  def self.approved_last_month
+    Unloading.where( time_in: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 end

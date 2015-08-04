@@ -1,5 +1,9 @@
 class BaitLoadingsController < ApplicationController
+
+  # load_and_authorize_resource :vessel
+  # load_and_authorize_resource :bait_loading, through: :vessel
   load_and_authorize_resource
+
 
   before_action :set_bait_loading, only: [:show, :edit, :update, :destroy]
 
@@ -55,6 +59,45 @@ class BaitLoadingsController < ApplicationController
     respond_with(@bait_loading)
   end
 
+  def approve
+    @bait_loading = BaitLoading.find( params[:id] )
+    @bait_loading.approved!
+    if @bait_loading.approved?
+      track_activity @bait_loading
+      @bait_loading.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("approved")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @bait_loading )
+  end
+
+  def reject
+    @bait_loading = BaitLoading.find( params[:id] )
+    @bait_loading.rejected!
+    if @bait_loading.rejected?
+      track_activity @bait_loading
+      @bait_loading.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("Rejected")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @bait_loading )
+  end
+
+  def pend
+    @bait_loading = BaitLoading.find( params[:id] )
+    @bait_loading.pending!
+    if @bait_loading.pending?
+      track_activity @bait_loading
+      @bait_loading.update_column :reviewer_id, current_admin.id
+      flash[:success] = review_success_msg("Pending")
+    else
+      flash[:error] = review_error_msg
+    end
+    refresh_supervisor_controls( @bait_loading )
+  end
+
   private
   
   def set_bait_loading
@@ -82,6 +125,8 @@ class BaitLoadingsController < ApplicationController
       :vessel_id,
       :formatted_date,
       :fish_id,
+      :bait_id,
+      :secondary_bait_id,
       :quantity,
       :price,
       :location,
@@ -92,6 +137,24 @@ class BaitLoadingsController < ApplicationController
 
   def after_save_path_for(resource)
     bait_loading_path(resource)
+  end
+
+  def refresh_supervisor_controls( bait_loading )
+    respond_to do |format|
+      format.html { redirect_to bait_loading  }
+      format.js {
+        @bait_loading = bait_loading 
+        render :refresh_supervisor_controls
+      }
+    end
+  end
+
+  def review_success_msg( state )
+    "Bait loading successfully reviewed: #{state.upcase}"
+  end
+
+  def review_error_msg
+    "We encountered an error reviewing this bait loading. Please try again."
   end
 
 end

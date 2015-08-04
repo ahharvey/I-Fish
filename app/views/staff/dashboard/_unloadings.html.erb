@@ -1,0 +1,54 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Unloadings</h3>
+  </div>
+  <table  class="table table-condensed">
+    <thead>
+      <tr>
+        <th></th>
+	      <th><%= Unloading.human_attribute_name(:port) %></th>
+	      <th><%= Unloading.human_attribute_name(:time_in) %></th>
+	      <th><%= Unloading.human_attribute_name(:port) %></th>
+	      <th><%= Unloading.human_attribute_name(:wpp) %></th>
+	      <th class='hidden-xs'><%= Unloading.human_attribute_name(:etp) %></th>
+	      <th class='hidden-xs'><%= Unloading.human_attribute_name(:fuel) %></th>
+	      <th class='hidden-xs'><%= Unloading.human_attribute_name(:ice) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%if @unloadings.empty? %>
+        <tr>
+          <td colspan="7"><i>NO UNAPPROVED UNLOADINGS</i></td>
+        </tr>
+      <% else %>
+        <% @unloadings.each do |unloading| %>
+        	<% present unloading do |unloading_presenter| %> 
+					  <%= content_tag_for :tr, unloading do %>
+					  	<tr>
+						  	<td><%= link_to show_icon, unloading %> </td>
+						    <td><%= unloading_presenter.port %></td>
+						    <td><%= unloading_presenter.time_in %></td>
+						    <td><%= unloading_presenter.port %></td>
+						    <td><%= unloading_presenter.wpp %></td>
+						    <td class='hidden-xs'><%= unloading_presenter.etp %></td>
+						    <td class='hidden-xs'><%= unloading_presenter.fuel %></td>
+						    <td class='hidden-xs'><%= unloading_presenter.ice %></td> 
+						  </tr>
+					  <% end %>
+					<% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="panel-footer text-right">
+    <%= link_to "See All", unloadings_path %>
+  </div>
+</div>
+
+
+
+
+
+
+
+      

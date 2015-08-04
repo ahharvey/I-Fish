@@ -1,0 +1,17 @@
+<div id="UserList">
+  <br />
+  <ul class="list-unstyled">
+    <% @company.users.each do |user| %>
+      <li>
+        <% if user.pending_invitation? %>
+          <i><%= user.email %> <small>(invitation pending)</small> </i>
+        <% else %>
+          <b><%= link_to user.name, user %></b>
+        <% end %>
+        <% if can? :update, @company %>
+          <%= link_to remove_icon, delete_user_company_path(@company, user: user.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

@@ -4,6 +4,8 @@
   <% subtitle "#{@vessel.name} (#{@vessel.ap2hi_ref})" %>
 <% end %>
 
+
+<% if admin_signed_in? %>
 <div class="row">
   <div class="col-xs-8">
 
@@ -13,6 +15,8 @@
   </div>
 
 </div>
+
+<% end %>
 
 <br />
 <br />
@@ -43,7 +47,7 @@
       <th data-sortable="false"></th>
       <th><%= BaitLoading.human_attribute_name(:formatted_date) %></th>
       <th><%= BaitLoading.human_attribute_name(:ap2hi_ref) %></th>
-      <th><%= BaitLoading.human_attribute_name(:fish) %></th>
+      <th><%= BaitLoading.human_attribute_name(:bait) %></th>
       <th><%= BaitLoading.human_attribute_name(:quantity) %></th>
       <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:method_type) %></th>
       <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:location) %></th>

@@ -44,7 +44,11 @@ class UsersController < ApplicationController
   end
 
   def home
-    redirect_to current_user
+    if current_user.company_positions.where(status: 'active').any?
+      redirect_to current_user.company_positions.last.company
+    else
+      redirect_to current_user
+    end
   end
 
   def crop

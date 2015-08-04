@@ -153,8 +153,15 @@ IFish::Application.routes.draw do
       end
     end
     
-    resources :unloadings
+    resources :unloadings do 
+      member do
+        put :approve
+        put :pend
+        put :reject
+      end
+    end
     resources :carrier_loadings
+    resources :size_classes
     
     resources :companies do
       resources :unloadings
@@ -167,10 +174,25 @@ IFish::Application.routes.draw do
         get :report
         post :add_vessel
         delete :delete_vessel
+        get 'report'
+        get :average_catch_composition
+        get :current_catch_composition
+        get :current_monthly_production
+        get :average_monthly_production
+        get :current_fuel_utilization
+        post :add_user
+        delete :delete_user
       end
     end
 
-    resources :bait_loadings
+    resources :bait_loadings do
+      member do
+        put :approve
+        put :pend
+        put :reject
+      end
+    end
+    resources :baits
 
     resources :documents
 

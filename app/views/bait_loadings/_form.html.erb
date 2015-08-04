@@ -15,34 +15,32 @@
     </div>
 
   <% elsif @company.present? %>
-    <%= f.association :vessel, collection: @company.vessels, prompt: BaitLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id %>
+    <%= f.association :vessel, collection: @company.vessels, prompt: BaitLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id, input_html: {class: 'select2-select'} %>
   <% else %>
-  	<%= f.association :vessel, collection: @vessels, prompt: BaitLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id %>
+  	<%= f.association :vessel, collection: @vessels, prompt: BaitLoading.human_attribute_name(:vessel), label_method: :ap2hi_ref, value_method: :id, input_html: {class: 'select2-select'} %>
   <% end %>
 
   <%= f.input :formatted_date, input_html: { class: 'datepicker form-control' } %>
 
 
-  <%= f.association :fish, collection: @bait_fishes, prompt: BaitLoading.human_attribute_name(:select_fish), label_method: :code, value_method: :id %>
+  <%= f.association :bait, collection: Bait.all, prompt: BaitLoading.human_attribute_name(:select_fish), label_method: :code, value_method: :id, input_html: { class: 'select2-select' } %>
 
-  <%= f.association :secondary_fish, collection: @bait_fishes, prompt: BaitLoading.human_attribute_name(:select_secondary_fish), label_method: :code, value_method: :id %>
+  <%= f.association :secondary_bait, collection: Bait.all, prompt: BaitLoading.human_attribute_name(:select_secondary_fish), label_method: :code, value_method: :id, input_html: { class: 'select2-select' } %>
 
   <%= f.input :quantity, placeholder: BaitLoading.human_attribute_name(:quantity) %>
 
   <%= f.input :method_types, wrapper_html: { class: 'select' } do %>
-    <%= f.select :method_type, BaitLoading::METHOD_TYPES.map { |s| [I18n.t("method_types.#{s}"), s] }, {prompt: BaitLoading.human_attribute_name(:select_method)}, { class: 'form-control' } %>
+    <%= f.select :method_type, BaitLoading::METHOD_TYPES.map { |s| [I18n.t("method_types.#{s}"), s] }, {prompt: BaitLoading.human_attribute_name(:select_method)}, { class: 'form-control select2-select' } %>
   <% end %>
 
-  <%= f.association :grid, collection: Grid.default, prompt: BaitLoading.human_attribute_name(:select_grid), label_method: :coordinates, value_method: :id %>
+  <%= f.association :grid, collection: Grid.default, prompt: BaitLoading.human_attribute_name(:select_grid), label_method: :coordinates, value_method: :id, input_html: {class: 'select2-select'} %>
 
   <%= f.input :price, placeholder: BaitLoading.human_attribute_name(:price) %>
 
   <div class="form-group">
-    <div class="col-md-9 col-md-offset-3">
+    <div class="col-xs-12 text-center">
 
-      <%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
-        Save
-      <% end %>
+      
 
       <% if params[:company_id] %>
 	      <%= link_to "Cancel", company_bait_loadings_path( params[:company_id] ) %>
@@ -55,6 +53,10 @@
       <% else %>
         <%= link_to "Cancel", bait_loadings_path %>
       <% end %> 
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary btn-lg' do %>
+        Save
+      <% end %>
 
     </div>
   </div>

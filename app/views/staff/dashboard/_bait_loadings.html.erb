@@ -1,0 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Bait Loadings</h3>
+  </div>
+  <table  class="table table-condensed">
+    <thead>
+      <tr>
+        <th></th>
+	      <th><%= BaitLoading.human_attribute_name(:formatted_date) %></th>
+	      <th><%= BaitLoading.human_attribute_name(:ap2hi_ref) %></th>
+	      <th><%= BaitLoading.human_attribute_name(:bait) %></th>
+	      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:quantity) %></th>
+	      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:method_type) %></th>
+	      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:location) %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <%if @bait_loadings.empty? %>
+        <tr>
+          <td colspan="7"><i>NO UNAPPROVED BAIT LOADINGS</i></td>
+        </tr>
+      <% else %>
+        <% @bait_loadings.each do |bait_loading| %>
+        	<% present bait_loading do |bait_loading_presenter| %>
+	          <tr>
+	            <td><%= link_to show_icon, bait_loading %> </td>
+	            <td><%= bait_loading_presenter.date %></td>
+					    <td><%= bait_loading_presenter.ap2hi_ref %></td>
+					    <td><%= bait_loading_presenter.bait %></td>
+					    <td class='hidden-xs'><%= bait_loading_presenter.quantity %></td>
+					    <td class='hidden-xs'><%= bait_loading_presenter.method_type %></td>
+					    <td class='hidden-xs'><%= bait_loading_presenter.location %></td>
+	          </tr>
+	        <% end %>
+        <% end %>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="panel-footer text-right">
+    <%= link_to "See All", bait_loadings_path %>
+  </div>
+</div>

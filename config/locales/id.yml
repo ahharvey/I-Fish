@@ -31,10 +31,16 @@ id:
         title: "Security"
       new:
         title: "Sign up"
+  baits:
+    title: "Umpan"
+    index: 
+      title: "Umpan"
   bait_loadings:
     title: "Loading Umpan"
     index: 
       title: "Loading Umpan"
+    show: 
+      title: "Laporan Loading Umpan"
   catches:
     title: "Komposisi Penangkapan"
     index:
@@ -51,6 +57,8 @@ id:
       title: "Perusahan baru"
     edit:
       title: "Mengedit perusahan"
+    report:
+      title: "Laporan Perusahan"
   desas:
     title: "Desas"
     index:
@@ -171,6 +179,12 @@ id:
       title: "Edit province"
     new:
       title: "New province"
+  size_classes:
+    title: "Kelas kelas ukuran"
+    index:
+      title: "Kelas kelas ukuran"
+    show:
+      title: "Kelas ukuran"
   surveys:
     title: "Surveys"
     index:
@@ -194,6 +208,8 @@ id:
     title: "Unloadings"
     index:
       title: "Laporan Laporan Unloading"
+    show:
+      title: "Laporan Unloading"
     new: 
       title: "Laporan Unloading Baru"
     edit:
@@ -378,6 +394,7 @@ id:
         district_id: "Kabupaten"
       pending_vessel: 
         operational_type: "Status Operasional"
+        admin: "Enumerator"
       province:
         name: "Propinsi"
         alpha_code: "Abbr."
@@ -408,6 +425,13 @@ id:
         kaw: "KAW"
         landed: "Landed"
         discarded: "Discarded"
+        wpp: "WPP"
+      unloading_catch: 
+        fish: 'Jenis'
+        cut_type: 'Potongan'
+        size_class: 'Ukuran'
+        quantity: 'Kuantitas (kg)'
+        type: 'Type'
       vessel:
         name: "Nama kapal"
         vessel_type_id: "Jenis kapal"
@@ -481,7 +505,11 @@ id:
     bagan: "Bagan"
     purse: "Purse seine"
     beach: "Beach seine"
+    bouke: "Bouke Ami"
   operational_types:
     active: 'Aktif'
     inactive: 'Non-aktif'
     decommissioned: 'Dimatikan'
+  catch_types:
+    landed: 'Hasil'
+    discarded: 'Membuang'

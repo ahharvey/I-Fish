@@ -51,6 +51,8 @@ class User < ActiveRecord::Base
   has_many :activities, as: :ownable
 
   has_many :documents, as: :documentable
+  has_many :companies, through: :company_positions
+  has_many :company_positions
 
   
   mount_uploader :avatar, AvatarUploader
@@ -117,6 +119,14 @@ class User < ActiveRecord::Base
   
   def lastname
     self.name.blank? ? "" : self.name.split(" ").last
+  end
+
+  def managed_vessels
+    Vessel.where(company_id: companies.map(&:id))
+  end
+
+  def pending_invitation?
+    false
   end
 
   private

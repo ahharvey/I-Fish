@@ -33,28 +33,14 @@
     </div>
   </div>
 
-
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b>Location</b></span>
-      <div class="col-md-9">
-        <div class="form-group row">
-
-          <label for="unloading_port" class="control-label sr-only"><%= Unloading.human_attribute_name(:port) %></label>
-          <div class="col-md-6">
-            <%= f.input_field :port, class: 'form-control', placeholder: Unloading.human_attribute_name(:port) %>
-          </div>
-
-          <label for="unloading_location" class="control-label sr-only"><%= Unloading.human_attribute_name(:location) %></label>
-          <div class="col-md-6">
-
-              <%= f.association :grid, collection: Grid.default, prompt: Unloading.human_attribute_name(:select_grid), label_method: :coordinates, value_method: :id, wrapper: false %>
-          </div>
-
-        </div>
-      </div>
-  </div>
+  <%= f.input :port, collection: Port.all, input_html: { class: 'form-control select2-select' }, placeholder: Unloading.human_attribute_name(:port) %>
 
 
+  
+  <%= f.input :wpp, collection: Wpp.all, input_html: { class: 'form-control select2-select' }, placeholder: Unloading.human_attribute_name(:wpp) %>
+
+  <br />
+  <br />
 
   <div class="form-group required integer">
       <span class="col-md-3 control-label integer required"><b><%= Unloading.human_attribute_name(:time_out) %></b></span>
@@ -84,10 +70,11 @@
       </div>
   </div>
 
-
+  <br />
+  <br />
 
   <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b>Production (kg)</b></span>
+      <span class="col-md-3 control-label integer required"><b>Catch (kg)</b></span>
       <div class="col-md-9">
 
         <%= f.simple_fields_for :unloading_catches do |builder| %>
@@ -98,24 +85,8 @@
       </div>
   </div>
 
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b>Bycatch (kg)</b></span>
-      <div class="col-md-9">
-        <div class="form-group row">
-
-          <label for="unloading_byproduct" class="control-label sr-only"><%= Unloading.human_attribute_name(:byproduct) %></label>
-          <div class="col-md-6">
-            <%= f.input_field :byproduct, class: 'form-control', placeholder: Unloading.human_attribute_name(:landed) %>
-          </div>
-
-          <label for="unloading_discard" class="control-label sr-only"><%= Unloading.human_attribute_name(:discard) %></label>
-          <div class="col-md-6">
-              <%= f.input_field :discard, class: 'form-control', placeholder: Unloading.human_attribute_name(:discarded) %>
-          </div>
-
-        </div>
-      </div>
-  </div>
+  <br />
+  <br />
 
   <div class="form-group required integer">
       <span class="col-md-3 control-label integer required"><b>Inputs</b></span>
@@ -136,24 +107,6 @@
       </div>
   </div>
 
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b>Other</b></span>
-      <div class="col-md-9">
-        <div class="form-group row">
-
-          <label for="unloading_price" class="control-label sr-only"><%= Unloading.human_attribute_name(:budget) %></label>
-          <div class="col-md-6">
-            <%= f.input_field :budget, class: 'form-control', placeholder: Unloading.human_attribute_name(:budget) %>
-          </div>
-
-          <label for="unloading_catch_certificate" class="control-label sr-only"><%= Unloading.human_attribute_name(:catch_certificate) %></label>
-          <div class="col-md-6">
-              <%= f.input_field :catch_certificate, class: 'form-control', placeholder: Unloading.human_attribute_name(:catch_certificate) %>
-          </div>
-
-        </div>
-      </div>
-  </div>
 
   <div class="form-group required integer">
       <span class="col-md-3 control-label integer required"><b>ETP</b></span>
@@ -179,11 +132,9 @@
   </div>
 
   <div class="form-group">
-    <div class="col-md-9 col-md-offset-3">
+    <div class="col-md-9 col-md-offset-3 text-center">
 
-      <%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
-        Save
-      <% end %>
+      
 
       <% if @vessel %>
         <%= link_to "Cancel", vessel_unloadings_path( @vessel ) %>
@@ -192,6 +143,10 @@
       <% else %>
         <%= link_to "Cancel", vessels_path %>
       <% end %> 
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary btn-lg' do %>
+        Save
+      <% end %>
 
     </div>
   </div>

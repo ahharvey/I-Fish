@@ -17,5 +17,7 @@ class UnloadingCatch < ActiveRecord::Base
 
   CUT_TYPES = ["wholeround", "dirtyloin", "cleanloin", "gg"]
 
+  CATCH_TYPES = ['landed', 'discarded']
+
 
 end

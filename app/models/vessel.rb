@@ -52,6 +52,7 @@ class Vessel < ActiveRecord::Base
 
   has_many :documents, as: :documentable
   has_many :unloadings
+  has_many :bait_loadings
   has_many :audits, as: :auditable
 
   before_save :send_pvr_request
