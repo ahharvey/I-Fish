@@ -172,20 +172,22 @@ class UnloadingsController < ApplicationController
   end
 
   def build_nested_forms( unloading, vessel )
-    if vessel.vessel_type.present? && vessel.vessel_type.code == 'pol'
-      ['YFT','BET','SKJ','KAW'].each do |t|
-        tuna = Fish.find_by(code: t)
-        unloading.unloading_catches.build(fish_id: tuna.id)
-      end
-      3.times { unloading.bait_loadings.build }
-    elsif vessel.vessel_type.code == 'hl'
-      ['YFT'].each do |t|
-        tuna = Fish.find_by(code: t)
-        ['dirtyloin','cleanloin'].each do |c|
-          unloading.unloading_catches.build(fish_id: tuna.id, cut_type: c)
+    if vessel.vessel_type.present?
+      if vessel.vessel_type.code == 'pol'
+        ['YFT','BET','SKJ','KAW'].each do |t|
+          tuna = Fish.find_by(code: t)
+          unloading.unloading_catches.build(fish_id: tuna.id)
         end
+        3.times { unloading.bait_loadings.build }
+      elsif vessel.vessel_type.code == 'hl'
+        ['YFT'].each do |t|
+          tuna = Fish.find_by(code: t)
+          ['dirtyloin','cleanloin'].each do |c|
+            unloading.unloading_catches.build(fish_id: tuna.id, cut_type: c)
+          end
+        end
+        unloading.bait_loadings.build
       end
-      unloading.bait_loadings.build
     end
   end
 
