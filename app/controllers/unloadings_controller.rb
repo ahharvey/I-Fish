@@ -172,7 +172,7 @@ class UnloadingsController < ApplicationController
   end
 
   def build_nested_forms( unloading, vessel )
-    if vessel.vessel_type.code == 'pol'
+    if vessel.vessel_type.present? && vessel.vessel_type.code == 'pol'
       ['YFT','BET','SKJ','KAW'].each do |t|
         tuna = Fish.find_by(code: t)
         unloading.unloading_catches.build(fish_id: tuna.id)

@@ -2,6 +2,8 @@ require "application_responder"
 
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
+
+
   self.responder = ApplicationResponder
   respond_to :html
 
@@ -78,6 +80,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  before_filter :staff_dashboard
   def staff_dashboard
     pendingVessels      = PendingVessel.pending.size
     pendingUnloadings   = Unloading.where(vessel_id: current_admin.managed_vessels.map(&:id), review_state: 'pending' ).size

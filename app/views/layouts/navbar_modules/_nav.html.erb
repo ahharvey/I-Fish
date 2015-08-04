@@ -22,9 +22,11 @@
       <li id="nav_staff" class="navbar-yellow">
         <%= link_to staff_dashboard_index_path, class: "", title: t("navbar.staff") do %>
           <%= icon fa_approve, '', class: 'fa-2x' %>
-          <span class="badge">
-            <%= @staff_dashboard_pending %>
-          </span>
+          <% if @staff_dashboard_pending > 0 %>
+            <span class="badge">
+              <%= @staff_dashboard_pending %>
+            </span>
+          <% end %>
         <% end %>
       </li>
     <% end %>
