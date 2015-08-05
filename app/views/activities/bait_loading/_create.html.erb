@@ -1,0 +1,7 @@
+<% if bait_loading %>
+  uploaded a bait loading:
+  <br />
+  <%= link_to "#{bait_loading.date} - #{bait_loading.vessel.ap2hi_ref}", bait_loading %>
+<% else %>
+  uploaded a bait loading that has since been deleted
+<% end %>

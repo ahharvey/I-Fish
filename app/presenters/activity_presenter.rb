@@ -159,7 +159,7 @@ class ActivityPresenter < SimpleDelegator
 
 	def render_content
 		html = content_tag :b, class: "media-heading" do 
-      link_to activity.ownable.name.capitalize, activity.ownable
+      link_to @activity.ownable.try(:name).try(:capitalize), @activity.ownable
     end 
     html += render_partial
 	end

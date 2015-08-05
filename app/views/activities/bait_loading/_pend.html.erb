@@ -1,0 +1,7 @@
+<% if bait_loading %>
+  marked a bait loading as pending:
+  <br />
+  <%= link_to "#{bait_loading.date} - #{bait_loading.vessel.ap2hi_ref}", bait_loading %>
+<% else %>
+  marked as pending a bait loading that has since been deleted
+<% end %>
