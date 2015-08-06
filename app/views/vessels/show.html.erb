@@ -51,16 +51,20 @@
         <%= render partial: "policy_panel" %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <%= render partial: 'shared/file_upload', locals: { resource: @vessel } %>
+    <% if can? :edit, @vessel %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render partial: 'shared/file_upload', locals: { resource: @vessel } %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <%= render partial: 'shared/audit_table', locals: { parent: @vessel } %>
+    <% end %>
+    <% if can? :edit, @vessel %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render partial: 'shared/audit_table', locals: { parent: @vessel } %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
   
 </div>

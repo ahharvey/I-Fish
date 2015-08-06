@@ -38,16 +38,20 @@
         <%= render partial: "company_panel" %>
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <%= render partial: 'shared/file_upload', locals: { resource: @company } %>
+    <% if can? :edit, @company %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render partial: 'shared/file_upload', locals: { resource: @company } %>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
-        <%= render partial: 'shared/audit_table', locals: { parent: @company } %>
+    <% end %>
+    <% if can? :edit, @company %>
+      <div class="row">
+        <div class="col-xs-12">
+          <%= render partial: 'shared/audit_table', locals: { parent: @company } %>
+        </div>
       </div>
-    </div>
+    <% end %>
   </div>
   
 </div>

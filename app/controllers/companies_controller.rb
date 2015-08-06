@@ -171,7 +171,7 @@ class CompaniesController < ApplicationController
       if @company.users.include?(user)
         flash[:alert]= I18n.t("companies.users.exists")
       else
-       @company.company_positions.create(user_id: user.id)
+       @company.company_positions.create(user_id: user.id, status: 'active')
        flash[:success]= I18n.t("companies.users.created")
       end 
       redisplay_users
