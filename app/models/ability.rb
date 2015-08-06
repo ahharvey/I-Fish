@@ -54,7 +54,8 @@ class Ability
     cannot :destroy, BaitLoading
     
     can :report, Company, id: user.companies.map(&:id)
-    can :manage, SizeClass
+    can :read, SizeClass
+    can :create, SizeClass
     cannot :destroy, SizeClass
     #can :welcome, User, id: user.id
   end

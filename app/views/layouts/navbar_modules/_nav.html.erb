@@ -41,7 +41,7 @@
   <li class="divider-vertical"></li>
   <% end %>
 
-  <% if can? :read, Protocol %>
+  <% if can? :index, Protocol %>
     <li id="nav_protocols">
       <%= link_to protocols_path, class: "", title: t("navbar.download") do %>
         <%= icon fa_protocols, '', class: 'fa-2x' %>    
@@ -55,22 +55,22 @@
     <li class="dropdown">
       <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" title=<%= t("navbar.settings") %> ><%= icon fa_settings, "", class: 'fa-2x' %><b class="caret"></b></a>
       <ul class="dropdown-menu">
-        <% if can? :read, Fish %>
+        <% if can? :index, Fish %>
           <li><%= link_to t("fishes.title"), fishes_path %></li>
         <% end %>
-        <% if can? :read, Bait %>
+        <% if can? :index, Bait %>
           <li><%= link_to t("baits.title"), baits_path %></li>
         <% end %>
-        <% if can? :read, Gear %>
+        <% if can? :index, Gear %>
           <li><%= link_to t("gears.title"), gears_path %></li>
         <% end %>
-        <% if can? :read, SizeClass %>
+        <% if can? :index, SizeClass %>
           <li><%= link_to t("size_classes.title"), size_classes_path %></li>
         <% end %>
-        <% if can? :read, Company %>
+        <% if can? :index, Company %>
           <li><%= link_to t("companies.title"), companies_path %></li>
         <% end %>
-        <% if can? :read, Vessel %>
+        <% if can? :index, Vessel %>
           <li><%= link_to t("vessels.title"), vessels_path %></li>
         <% end %>
         <% if admin_signed_in? %>
