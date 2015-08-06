@@ -1,0 +1,7 @@
+<% if unloading %>
+  approved an unloading:
+  <br />
+  <%= link_to "#{unloading.time_in} - #{unloading.vessel.ap2hi_ref}", unloading %>
+<% else %>
+  approved an unloading that has since been deleted
+<% end %>
