@@ -74,10 +74,18 @@
           <li><%= link_to t("vessels.title"), vessels_path %></li>
         <% end %>
         <% if admin_signed_in? %>
-          <li><%= link_to "Admins", panel_admins_path %></li>
-          <li><%= link_to "Users", panel_users_path %></li>
-          <li><%= link_to "Roles", panel_roles_path %></li>
-          <li><%= link_to "Offices", offices_path %></li>
+          <% if can? :read, 'panel/admins' %>
+            <li><%= link_to "Admins", panel_admins_path %></li>
+          <% end %>
+          <% if can? :read, 'panel/users' %>
+            <li><%= link_to "Users", panel_users_path %></li>
+          <% end %>
+          <% if can? :read, Role %>
+            <li><%= link_to "Roles", panel_roles_path %></li>
+          <% end %>
+          <% if can? :read, Office %>
+            <li><%= link_to "Offices", offices_path %></li>
+          <% end %>
          <% end %>
       </ul>
     </li>
