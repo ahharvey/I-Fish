@@ -41,7 +41,7 @@ GEM
     annotate (2.6.10)
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
-    arel (6.0.2)
+    arel (6.0.3)
     autoprefixer-rails (5.2.1.1)
       execjs
       json
@@ -101,7 +101,7 @@ GEM
     devise_invitable (1.5.2)
       actionmailer (>= 3.2.6, < 5)
       devise (>= 3.2.0)
-    doorkeeper (2.2.1)
+    doorkeeper (2.2.2)
       railties (>= 3.2)
     erubis (2.7.0)
     excon (0.45.4)
@@ -134,7 +134,7 @@ GEM
     fog-atmos (0.1.0)
       fog-core
       fog-xml
-    fog-aws (0.7.3)
+    fog-aws (0.7.4)
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
@@ -166,7 +166,7 @@ GEM
       fog-core (~> 1.27)
       fog-json (~> 1.0)
       fog-xml (~> 0.1)
-    fog-profitbricks (0.0.3)
+    fog-profitbricks (0.0.5)
       fog-core
       fog-xml
       nokogiri
@@ -206,13 +206,13 @@ GEM
       sass (~> 3.2)
     formatador (0.2.5)
     git-version-bump (0.15.1)
-    globalid (0.3.5)
+    globalid (0.3.6)
       activesupport (>= 4.1.0)
     gmaps4rails (2.1.2)
     griddler (1.2.1)
       htmlentities
       rails (>= 3.2.0)
-    griddler-mandrill (1.1.1)
+    griddler-mandrill (1.1.2)
       griddler (>= 1.2.1)
     groupdate (2.4.0)
       activesupport (>= 3)
@@ -250,7 +250,7 @@ GEM
       rack-contrib (~> 1.1)
       railties (>= 3.0.0, < 5.0.0)
     mime-types (2.6.1)
-    mini_magick (4.2.7)
+    mini_magick (4.2.9)
     mini_portile (0.6.2)
     minitest (5.7.0)
     modernizr-rails (2.7.1)
@@ -261,7 +261,7 @@ GEM
     newrelic_rpm (3.12.1.298)
     nokogiri (1.6.6.2)
       mini_portile (~> 0.6.0)
-    oj (2.12.10)
+    oj (2.12.11)
     omniauth (1.2.2)
       hashie (>= 1.2, < 4)
       rack (~> 1.0)
@@ -282,7 +282,7 @@ GEM
     rabl (0.11.6)
       activesupport (>= 2.3.14)
     rack (1.6.4)
-    rack-contrib (1.3.0)
+    rack-contrib (1.4.0)
       git-version-bump (~> 0.15)
       rack (~> 1.4)
     rack-protection (1.5.3)
