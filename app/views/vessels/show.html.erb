@@ -12,16 +12,16 @@
         <%= render partial: "audit_panel" %>
       </div>
       <div class="col-xs-12">
-        <% if can? :read, @vessel.unloadings %>
+        <% if can? :read, Unloading %>
           <%= link_to "View unloading reports", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
         <% end %>
         <% unless @vessel.vessel_type.try(:code) == 'ca' %>
-          <% if can? :read, @vessel.bait_loadings %>
+          <% if can? :read, BaitLoading %>
             <%= link_to "View bait loading reports", vessel_bait_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
           <% end %>
         <% end %>
         <% if @vessel.vessel_type.try(:code) == 'ca' %>
-          <% if can? :read, @vessel.carrier_landings %>
+          <% if can? :read, CarrierLanding %>
             <%= link_to "View carrier loading reports", vessel_carrier_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
             <br />
           <% end %>

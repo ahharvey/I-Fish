@@ -1,31 +1,33 @@
-<% present unloading do |unloading_presenter| %> 
-  <%= content_tag_for :tr, unloading do %>
-    <td>
-      <% if unloading.approved? %>
-        <span class="label label-success"><i class='fa fa-check'></i></span>
-      <% elsif unloading.rejected? %>
-        <span class="label label-important"><i class='fa fa-ban'></i></span>
-      <% elsif unloading.pending? %>
-        <span class="label label-warning"><i class='fa fa-warning'></i></span>
-      <% end %>
-    </td>
-    <td><%= unloading_presenter.port %></td>
-    <td class='hidden-xs'><%= unloading_presenter.time_out %></td>
-    <td><%= unloading_presenter.time_in %></td>
-    <td class='hidden-xs'><%= unloading_presenter.yft %></td>
-    <td class='hidden-xs'><%= unloading_presenter.bet %></td>
-    <td class='hidden-xs'><%= unloading_presenter.skj %></td>
-    <td class='hidden-xs'><%= unloading_presenter.kaw %></td>
-    <td class='hidden-xs'><%= unloading_presenter.byproduct %></td>
-    <td class='hidden-xs'><%= unloading_presenter.discard %></td>
-    <td class='hidden-xs'><%= unloading_presenter.etp %></td>
-    <td class='hidden-xs'><%= unloading_presenter.location %></td>
-    <td class='hidden-xs'><%= unloading_presenter.fuel %></td>
-    <td class='hidden-xs'><%= unloading_presenter.ice %></td> 
-    <td>
-      <% if can? :edit, unloading %>
-        <%= link_to "Edit", edit_unloading_path(unloading), class: "btn btn-xs btn-block btn-primary" %>
-      <% end %>
-    </td>
+<% if can? :read, unloading %>
+  <% present unloading do |unloading_presenter| %> 
+    <%= content_tag_for :tr, unloading do %>
+      <td>
+        <% if unloading.approved? %>
+          <span class="label label-success"><i class='fa fa-check'></i></span>
+        <% elsif unloading.rejected? %>
+          <span class="label label-important"><i class='fa fa-ban'></i></span>
+        <% elsif unloading.pending? %>
+          <span class="label label-warning"><i class='fa fa-warning'></i></span>
+        <% end %>
+      </td>
+      <td><%= unloading_presenter.port %></td>
+      <td class='hidden-xs'><%= unloading_presenter.time_out %></td>
+      <td><%= unloading_presenter.time_in %></td>
+      <td class='hidden-xs'><%= unloading_presenter.yft %></td>
+      <td class='hidden-xs'><%= unloading_presenter.bet %></td>
+      <td class='hidden-xs'><%= unloading_presenter.skj %></td>
+      <td class='hidden-xs'><%= unloading_presenter.kaw %></td>
+      <td class='hidden-xs'><%= unloading_presenter.byproduct %></td>
+      <td class='hidden-xs'><%= unloading_presenter.discard %></td>
+      <td class='hidden-xs'><%= unloading_presenter.etp %></td>
+      <td class='hidden-xs'><%= unloading_presenter.location %></td>
+      <td class='hidden-xs'><%= unloading_presenter.fuel %></td>
+      <td class='hidden-xs'><%= unloading_presenter.ice %></td> 
+      <td>
+        <% if can? :edit, unloading %>
+          <%= link_to "Edit", edit_unloading_path(unloading), class: "btn btn-xs btn-block btn-primary" %>
+        <% end %>
+      </td>
+    <% end %>
   <% end %>
 <% end %>

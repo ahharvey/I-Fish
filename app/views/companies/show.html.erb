@@ -9,15 +9,15 @@
 <div class="row">
   <div id="member_panel" class="col-xs-12 col-md-4 col-md-push-8">
     <% if @company.has_fishing_vessels? %>
-      <% if can? :read, @company.unloadings %>
+      <% if can? :read, Unloading %>
         <%= link_to "View unloading reports", company_unloadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
       <% end %>
-      <% if can? :read, @company.bait_loadings %>
+      <% if can? :read, BaitLoading %>
         <%= link_to "View bait loading reports", company_bait_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
       <% end %>
     <% end %>
     <% if @company.has_carrier_vessels? %>
-      <% if can? :read, @company.carrier_loadings %>
+      <% if can? :read, CarrierLoading %>
         <%= link_to "View carrier loading reports", company_carrier_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block' 
         %>
       <% end %>
