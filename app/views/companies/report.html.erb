@@ -54,6 +54,28 @@
   </div>
 </div>
 
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+  	<div class="panel panel-default">
+		  <div class="panel-heading"><b>Current Monthly CPUE (<%= Date.today.year %>)</b></div>
+		  <div class="panel-body">
+		    <%= column_chart current_monthly_cpue_company_path(@company) %>
+		  </div>
+		</div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-xs-12 col-md-6">
+  	<div class="panel panel-default">
+		  <div class="panel-heading"><b>Historical Average Monthly CPUE</b></div>
+		  <div class="panel-body">
+		    <%= column_chart average_monthly_cpue_company_path(@company) %>
+		  </div>
+		</div>
+  </div>
+</div>
+
 
 
 

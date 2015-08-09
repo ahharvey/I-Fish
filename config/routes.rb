@@ -180,6 +180,8 @@ IFish::Application.routes.draw do
         get :current_catch_composition
         get :current_monthly_production
         get :average_monthly_production
+        get :current_monthly_cpue
+        get :average_monthly_cpue
         get :current_fuel_utilization
         post :add_user
         delete :delete_user

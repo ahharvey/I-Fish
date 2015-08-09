@@ -154,6 +154,37 @@ class CompaniesController < ApplicationController
     render json: production.chart_json
       
   end
+  def current_monthly_cpue
+    @company = Company.find(params[:id])
+    fishes   = Fish.default
+    cpue = fishes.map{ |fish| 
+      { 
+        name: fish.code, 
+        data: Unloading.
+          where( vessel_id: @company.vessels.map(&:id), time_in: Date.today.beginning_of_year..Date.today  ).
+          group_by_month_of_year(:time_in, format: '%b' ).
+          average(:cpue) 
+        }
+      }
+    cpue = cpue.delete_if { |k, v| v.blank? }
+    render json: cpue.chart_json
+  end
+  def average_monthly_cpue
+    @company = Company.find(params[:id])
+    fishes   = Fish.default
+    cpue = fishes.map{ |fish| 
+      { 
+        name: fish.code, 
+        data: Unloading.
+          where( vessel_id: @company.vessels.map(&:id)  ).
+          group_by_month_of_year(:time_in, format: '%b' ).
+          average(:cpue) 
+        }
+      }
+    cpue = cpue.delete_if { |k, v| v.blank? }
+
+    render json: cpue.chart_json
+  end
 
   def current_fuel_utilization
     @company = Company.find(params[:id])

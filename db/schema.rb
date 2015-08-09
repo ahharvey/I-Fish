@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150804024202) do
+ActiveRecord::Schema.define(version: 20150809152157) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -581,6 +581,7 @@ ActiveRecord::Schema.define(version: 20150804024202) do
     t.datetime "reviewed_at"
     t.integer  "user_id"
     t.integer  "admin_id"
+    t.decimal  "cpue"
   end
 
   add_index "unloadings", ["admin_id"], name: "index_unloadings_on_admin_id", using: :btree

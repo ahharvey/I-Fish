@@ -51,6 +51,7 @@ class Unloading < ActiveRecord::Base
     }
 
 
+  before_save :set_cpue
 #  validates :yft, :bet, :skj, :kaw, :byproduct, :discard, :fuel, :ice,
 #    presence: {
 #      message: " cannot be blank." 
@@ -134,5 +135,16 @@ class Unloading < ActiveRecord::Base
 
   def self.approved_last_month
     Unloading.where( time_in: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
+  end
+
+  #private
+
+  def set_cpue
+    f     = Fish.find_by(code: 'SKJ')
+    c     = unloading_catches.where(fish_id: f.id )
+    t     = c.sum(:quantity)
+    d     = (time_in - time_out )/60/60/24
+    gt    = vessel.try(:tonnage).to_i || 0
+    cpue  = t / d / gt
   end
 end
