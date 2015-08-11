@@ -37,9 +37,9 @@ class User < ActiveRecord::Base
   
   has_paper_trail
 
-  devise :database_authenticatable, :registerable,
+  devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, #:validatable,
-         :lockable, :timeoutable, :omniauthable #, :confirmable
+         :lockable, :timeoutable, :omniauthable, :invitable # :confirmable
 
   
   validates :email, presence: true, uniqueness: true

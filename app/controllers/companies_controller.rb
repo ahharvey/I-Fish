@@ -209,11 +209,11 @@ class CompaniesController < ApplicationController
     else
       email = params[:get_user]
       name  = email[0,email.index('@')]
-      User.invite!({ email: email, name: name, company_id: @company.id, approved: true }, current_user)
+      user = User.invite!({ email: email, name: name }, @currently_signed_in)
+      @company.company_positions.create( user_id: user.id, status: 'approved' )
       flash[:success]= I18n.t("companies.users.invited")
       redisplay_users
     end
-
   end
 
   def delete_user
