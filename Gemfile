@@ -64,8 +64,8 @@ gem 'chartkick', '~> 1.3.2' # adds ChartKick
 
 ##
 ## DOWNLOADS AND OUTGOING
-gem 'wicked_pdf', '~> 0.11.0'
-gem 'wkhtmltopdf-heroku', '~> 2.12.0'
+# gem 'wicked_pdf', '~> 0.11.0'
+# gem 'wkhtmltopdf-heroku', '~> 2.12.0'
 gem 'rabl', '~> 0.11.0' # JSON templates
 gem 'oj', '~> 2.12.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
