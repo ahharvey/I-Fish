@@ -152,6 +152,11 @@ IFish::Application.routes.draw do
         get :template
       end
     end
+    resources :unloading_imports do
+      collection do
+        get :template
+      end
+    end
     
     resources :unloadings do 
       member do

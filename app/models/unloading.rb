@@ -46,12 +46,14 @@ class Unloading < ActiveRecord::Base
     }
   validates :time_in, 
     timeliness: {
-      after: :time_out,
+      on_or_after: :time_out,
       type: :datetime
     }
 
 
   before_save :set_cpue
+
+
 #  validates :yft, :bet, :skj, :kaw, :byproduct, :discard, :fuel, :ice,
 #    presence: {
 #      message: " cannot be blank." 
@@ -137,6 +139,44 @@ class Unloading < ActiveRecord::Base
     Unloading.where( time_in: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 
+  def komo_kg
+  end
+  def komu_kg=(value)
+    fish = Fish.find_by(code: 'KAW')
+    build_unloading_record(fish, value)
+  end
+
+  def kaw_kg=(value)
+    fish = Fish.find_by(code: 'KAW')
+    build_unloading_record(fish, value)
+  end
+
+  def bet_kg=(value)
+    fish = Fish.find_by(code: 'BET')
+    build_unloading_record(fish, value)
+  end
+
+  def yft_kg=(value)
+    fish = Fish.find_by(code: 'YFT')
+    build_unloading_record(fish, value)
+  end
+
+  def skj_kg=(value)
+    fish = Fish.find_by(code: 'SKJ')
+    build_unloading_record(fish, value)
+  end
+
+  def build_unloading_record(fish, value)
+    unloading_catches.build(
+      fish_id: fish.id,
+      quantity: value,
+      cut_type: 'wholeround',
+      catch_type: 'landed'
+      )
+  end
+
+
+
   #private
 
   def set_cpue
@@ -146,5 +186,23 @@ class Unloading < ActiveRecord::Base
     d     = (time_in - time_out )/60/60/24
     gt    = vessel.try(:tonnage).to_i || 0
     cpue  = t / d / gt
+  end
+
+  def self.accessible_attributes
+    [
+      'vessel_id',
+      'time_out',
+      'time_in',
+      'port_id',
+      'wpp_id',
+      'etp',
+      'fuel',
+      'ice',
+      'bet_kg',
+      'komu_kg',
+      'kaw_kg',
+      'yft_kg',
+      'skj_kg'      
+    ]
   end
 end

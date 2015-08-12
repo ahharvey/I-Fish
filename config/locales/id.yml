@@ -214,6 +214,10 @@ id:
       title: "Laporan Unloading Baru"
     edit:
       title: "Edit Laporan Unloading"
+  unloading_imports:
+    title: "Impor Unloadings"
+    new:
+      title: "Impor Unloadings"
   vessels:
     title: "Kapal kapal"
     index:

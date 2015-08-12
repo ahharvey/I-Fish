@@ -33,7 +33,7 @@
 class CompaniesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :report]
+  before_action :set_company, only: [:show, :edit, :update, :destroy, :report ]
   respond_to :html
   respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
   respond_to :js, only: [:catch_composition, :current_monthly_production, :average_monthly_production, :current_fuel_utilization]
@@ -209,8 +209,15 @@ class CompaniesController < ApplicationController
     else
       email = params[:get_user]
       name  = email[0,email.index('@')]
-      user = User.invite!({ email: email, name: name }, @currently_signed_in)
-      @company.company_positions.create( user_id: user.id, status: 'approved' )
+      
+      
+      # user = User.invite!({ email: email, name: name }, @currently_signed_in).company_positions.create( user_id: user.id, status: 'active' )
+      #@company
+      user = User.new( email: email, name: name )
+
+      company = user.company_positions.build( company_id: @company.id, status: 'active' )
+      user.invite!( @currently_signed_in )
+
       flash[:success]= I18n.t("companies.users.invited")
       redisplay_users
     end
@@ -218,7 +225,7 @@ class CompaniesController < ApplicationController
 
   def delete_user
     user = User.find params[:user]
-    user.update_attribute( :office_id, "")
+    user.company_positions.where(company_id: @company.id).destroy
     flash[:success]= I18n.t("companies.users.removed")
     redisplay_users
   end

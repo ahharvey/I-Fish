@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150811085120) do
+ActiveRecord::Schema.define(version: 20150812031348) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -546,7 +546,7 @@ ActiveRecord::Schema.define(version: 20150811085120) do
     t.datetime "updated_at",    null: false
     t.integer  "unloading_id"
     t.string   "cut_type"
-    t.string   "type"
+    t.string   "catch_type"
     t.integer  "size_class_id"
   end
 

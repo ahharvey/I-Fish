@@ -225,6 +225,10 @@ en:
       title: "New Unloading Report"
     edit:
       title: "Edit Unloading Report"
+  unloading_imports:
+    title: "Import Unloadings"
+    new:
+      title: "Import Unloadings"
   vessels:
     title: "Vessels"
     index:
