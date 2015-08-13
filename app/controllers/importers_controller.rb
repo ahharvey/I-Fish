@@ -28,7 +28,8 @@ class ImportersController < ApplicationController
   def create
     @importer = Importer.new(importer_params)
     if @importer.save
-	    UnloadingImporterJob.perform_later( @currently_signed_in.id, @currently_signed_in.class.name, @importer.id )
+	    #UnloadingImporterJob.perform_later( @currently_signed_in.id, @currently_signed_in.class.name, @importer.id )
+	    UnloadingImporterJob.perform_later( 64, 'Admin', @importer.id )
 	  end
     respond_with @importer, location: -> { after_save_path_for(@importer) }
   end
