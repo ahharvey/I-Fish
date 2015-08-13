@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812154810) do
+ActiveRecord::Schema.define(version: 20150813174054) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -735,12 +735,6 @@ ActiveRecord::Schema.define(version: 20150812154810) do
   add_foreign_key "pending_vessels", "vessel_types"
   add_foreign_key "pending_vessels", "vessels"
   add_foreign_key "unloading_catches", "fishes"
-  add_foreign_key "unloading_catches", "size_classes"
-  add_foreign_key "unloadings", "admins"
-  add_foreign_key "unloadings", "grids"
-  add_foreign_key "unloadings", "ports"
-  add_foreign_key "unloadings", "users"
-  add_foreign_key "unloadings", "wpps"
   add_foreign_key "vessels", "companies"
   add_foreign_key "vessels", "gears"
   add_foreign_key "vessels", "vessel_types"
