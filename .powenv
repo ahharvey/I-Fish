@@ -19,3 +19,8 @@ then
 else
   echo "RVM project not found at: $PWD"
 fi
+
+
+export S3_KEY=AKIAJMGLZKZNA2C5OCJQ
+export S3_SECRET=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
+export S3_directory=imports-dev

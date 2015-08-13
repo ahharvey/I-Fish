@@ -12,7 +12,7 @@ gem 'hirefire-resource', '~> 0.3.5'
 
 ## 
 ## MODELS
-gem 'paper_trail', '~> 3.0.0'
+gem 'paper_trail', '~> 4.0.0'
 #gem 'queue_classic', '~>2.1.2' #queued processes
 gem 'sidekiq', '~> 3.4.0'
 gem 'validates_timeliness', '~> 3.0.0'
@@ -27,9 +27,9 @@ gem 'responders', '2.1.0'
 ## AUTHENTICATION
 gem 'devise', '~> 3.5.0'
 gem 'devise_invitable', '~> 1.5.0'                  
-gem 'cancancan', '~> 1.11.0'
+gem 'cancancan', '~> 1.12.0'
 gem 'omniauth', '~> 1.2.0'
-gem 'doorkeeper', '~> 2.2.0'
+gem 'doorkeeper', '~> 3.0.0'
 #gem 'oauth2'
 
 ##
@@ -77,6 +77,7 @@ gem 'prawn-qrcode', '~> 0.2.2.1'
 ##
 ## UPLOADS AND INCOMING
 gem 'carrierwave', '~> 0.10.0'
+gem 'carrierwave_direct', '~> 0.0.15'
 gem 'fog', '~> 1.31.0'
 gem 'roo', '~> 2.0.0'
 gem 'roo-xls', '~> 1.0.0'
@@ -123,5 +124,5 @@ group :production, :staging do
 end
 
 
-gem 'newrelic_rpm', '~> 3.12.0' #system monitoring and profiling
+gem 'newrelic_rpm', '~> 3.13.0' #system monitoring and profiling
 

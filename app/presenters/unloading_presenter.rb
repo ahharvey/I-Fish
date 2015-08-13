@@ -4,7 +4,7 @@ class UnloadingPresenter < BasePresenter
 
 
   def port
-    best_in_place_if (can? :edit, unloading), unloading, :wpp, as: :select, collection: Port.all.map{ |g| [g.id, g.name] }, inner_class: 'col-xs-1'
+    best_in_place_if (can? :edit, unloading), unloading, :port_id, as: :select, collection: Port.all.map{ |g| [g.id, g.name] }, inner_class: 'col-xs-1'
   end
 
   def time_out
@@ -56,7 +56,7 @@ class UnloadingPresenter < BasePresenter
   end
 
   def wpp
-    best_in_place_if (can? :edit, unloading), unloading, :wpp, as: :select, collection: Wpp.all.map{ |g| [g.id, g.name] }, inner_class: 'col-xs-1'
+    best_in_place_if (can? :edit, unloading), unloading, :wpp_id, as: :select, collection: Wpp.all.map{ |g| [g.id, g.name] }, inner_class: 'col-xs-1'
   end
 
   def company
@@ -72,7 +72,7 @@ class UnloadingPresenter < BasePresenter
   end
 
   def vessel
-    best_in_place_if (can? :edit, unloading), unloading, :wpp, as: :select, collection: Vessel.all.map{ |g| [g.id, g.ap2hi_ref] }, inner_class: 'col-xs-1'
+    best_in_place_if (can? :edit, unloading), unloading, :vessel_id, as: :select, collection: Vessel.all.map{ |g| [g.id, g.ap2hi_ref] }, inner_class: 'col-xs-1'
   end
 
 

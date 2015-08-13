@@ -1,0 +1,16 @@
+en:
+  flash:
+    actions:
+      create:
+        notice_html: "<strong>SUCCESS!</strong> %{resource_name} was successfully created."
+        success_html: "<strong>SUCCESS!</strong> %{resource_name} was successfully created."
+      update:
+        notice_html: "<strong>UPDATED!</strong> %{resource_name} was successfully updated."
+        success_html: "<strong>UPDATED!</strong> %{resource_name} was successfully updated."
+      destroy:
+        notice_html: "<strong>DESTROYED!</strong> %{resource_name} was successfully destroyed."
+        success_html: "<strong>DESTROYED!</strong> %{resource_name} was successfully destroyed."
+        alert_html: "<strong>ALERT!</strong> %{resource_name} could not be destroyed."
+    importers:
+      create:
+        success_html: "<strong>SUCCESS!</strong> Your file was successfully uploaded and is being processed. We'll send an email to %{notification_email} when it's finished."

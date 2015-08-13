@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Spreadsheet import success</h1>
+    <p>
+      The following <b><%= @rows.size %></b> records were imported successfully:<br/>
+    </p>
+    <% @rows.each do |row| %>
+    	<% row.attributes_for_import_email.each do |k, v| %>
+	      <p>
+	        <b><%= k %>:</b> 
+	        <i><%= v %></i> 
+	      </p>
+	    <% end %>
+	    <br />
+	    <br />
+    <% end %>
+  </body>
+</html>

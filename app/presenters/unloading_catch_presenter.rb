@@ -2,7 +2,7 @@ class UnloadingCatchPresenter < BasePresenter
   presents :unloading_catch
 
   def fish
-  	best_in_place_if (can? :edit, unloading_catch), unloading_catch, :fish, as: :select, collection: Fish.default.map{ |f| [f.id, f.code] }, inner_class: 'col-xs-1'
+  	best_in_place_if (can? :edit, unloading_catch), unloading_catch, :fish_id, as: :select, collection: Fish.default.map{ |f| [f.id, f.code] }, inner_class: 'col-xs-1'
   end
 
   def quantity
@@ -14,7 +14,7 @@ class UnloadingCatchPresenter < BasePresenter
   end
 
   def type
-  	best_in_place_if (can? :edit, unloading_catch), unloading_catch, :type, as: :select, collection: UnloadingCatch::CATCH_TYPES.map{ |t| [t, I18n.t("catch_types.#{t}")] }, inner_class: 'col-xs-1'
+  	best_in_place_if (can? :edit, unloading_catch), unloading_catch, :catch_type, as: :select, collection: UnloadingCatch::CATCH_TYPES.map{ |t| [t, I18n.t("catch_types.#{t}")] }, inner_class: 'col-xs-1'
   end
 
   def size_class

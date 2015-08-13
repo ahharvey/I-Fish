@@ -11,6 +11,8 @@ module IFish
   class Application < Rails::Application
     # Use the responders controller from the responders gem
     config.app_generators.scaffold_controller :responders_controller
+    # Configure flash responders 
+    config.responders.flash_keys = [ :success, :alert ]
 
 
 
@@ -22,7 +24,6 @@ module IFish
     config.autoload_paths += Dir["#{config.root}/lib/**/"]
 
 
-    config.app_generators.scaffold_controller :responders_controller
 
     config.active_record.raise_in_transactional_callbacks = true
 
@@ -74,5 +75,7 @@ module IFish
     config.assets.version = '1.0'
 
     config.active_job.queue_adapter = :sidekiq
+
+    
   end
 end

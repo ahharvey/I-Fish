@@ -1,4 +1,4 @@
-class UnloadingImport
+class UnloadingImporter
   # switch to ActiveModel::Model in Rails 4
   include ActiveModel::Model
   #extend ActiveModel::Naming
@@ -16,23 +16,26 @@ class UnloadingImport
   end
 
   def save( owner_id, owner_type)
-    # UnloadingImporterJob.perform_later(imported_unloadings, owner_id, owner_type )
-    Rails.logger.info imported_unloadings
-#    if imported_unloadings.map(&:valid?).all?
-#      imported_unloadings.each do |unloading|
-#        UnloadingSaverJob.perform_later(unloading, owner_id, owner_type)
-#        # unloading.save!
-#        # Activity.create! action: 'create', trackable: unloading, ownable_id: owner_id, ownable_type: owner_type
-#      end
-#      true
-#    else
-#      imported_unloadings.each_with_index do |unloading, index|
-#        unloading.errors.full_messages.each do |message|
-#          errors.add :base, "Row #{index+2}: #{message}"
-#        end
-#      end
-#      false
-#    end
+    owner = owner_type.constantize.find owner_id
+    if imported_unloadings.map(&:valid?).all?
+      imported_unloadings.each do |unloading|
+        # UnloadingSaverJob.perform_later(unloading, owner_id, owner_type)
+        whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
+        unloading.whodunnit(whodunnit) do 
+          unloading.send("#{owner_type.underscore}_id=",owner_id)
+          unloading.save!
+        end
+        Activity.create! action: 'create', trackable: unloading, ownable_id: owner_id, ownable_type: owner_type
+      end
+      true
+    else
+      imported_unloadings.each_with_index do |unloading, index|
+        unloading.errors.full_messages.each do |message|
+          errors.add :base, "Row #{index+2}: #{message}"
+        end
+      end
+      false
+    end
   end
 
   def imported_unloadings
@@ -64,11 +67,11 @@ class UnloadingImport
 #  end
 
   def open_spreadsheet
-    case File.extname(file.original_filename)
-    when ".csv" then Roo::Csv.new(file.path, csv_options: {col_sep: ";"})
-    when ".xls" then Roo::Excel.new(file.path)
-    when ".xlsx" then Roo::Excelx.new(file.path)
-    else raise "Unknown file type: #{file.original_filename}"
+    case File.extname(file.file.filename)
+    when ".csv" then Roo::Csv.new(file.url, csv_options: {col_sep: ";"})
+    when ".xls" then Roo::Excel.new(file.url)
+    when ".xlsx" then Roo::Excelx.new(file.url)
+    else raise "Unknown file type: #{file.file.filename}"
     end
   end
 end

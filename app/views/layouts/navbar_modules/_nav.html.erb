@@ -6,11 +6,13 @@
   </li>
   <li class="divider-vertical"></li>
   <% if admin_signed_in? %>
-    <li id="nav_upload" class="navbar-red">
-      <%= link_to home_upload_data_path, class: "", title: t("navbar.upload") do %>
-        <%= icon fa_submit, "", class: 'fa-2x' %>
-      <% end %>
-    </li>
+    <% if current_admin.admin? %> 
+      <li id="nav_upload" class="navbar-red">
+        <%= link_to home_upload_data_path, class: "", title: t("navbar.upload") do %>
+          <%= icon fa_submit, "", class: 'fa-2x' %>
+        <% end %>
+      </li>
+    <% end %>
     <% if can? :view, 'supervisor/dashboard' %>
       <li id="nav_review" class="navbar-yellow">
         <%= link_to supervisor_dashboard_index_path, class: "", title: t("navbar.data") do %>

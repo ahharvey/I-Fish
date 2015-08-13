@@ -19,7 +19,7 @@
   <div class="row">
     <div class="col-xs-12 col-md-4 ">
       <div class='panel panel-default'>
-        <div class="panel-heading">Location</div>
+        <div class="panel-heading">Company</div>
         <div class="panel-body">
 
           <dl class="dl-horizontal">
@@ -29,12 +29,6 @@
 
             <dt><%= Unloading.human_attribute_name(:vessel_id) %></dt>
             <dd><%= unloading_presenter.vessel %></dd>
-
-            <dt><%= Unloading.human_attribute_name(:port_id) %></dt>
-            <dd><%= unloading_presenter.port %></dd>
-
-            <dt><%= Unloading.human_attribute_name(:wpp_id) %></dt>
-            <dd><%= unloading_presenter.wpp %></dd>
             
           </dl>
         </div>
@@ -44,7 +38,7 @@
 
     <div class="col-xs-12 col-md-4">
       <div class="panel panel-default">
-        <div class="panel-heading">Time</div>
+        <div class="panel-heading">Operations</div>
         <div class="panel-body">
           <dl class="dl-horizontal">
 
@@ -53,6 +47,12 @@
 
             <dt><%= Unloading.human_attribute_name(:time_in) %></dt>
             <dd><%= unloading_presenter.time_in %></dd>
+
+            <dt><%= Unloading.human_attribute_name(:port_id) %></dt>
+            <dd><%= unloading_presenter.port %></dd>
+
+            <dt><%= Unloading.human_attribute_name(:wpp_id) %></dt>
+            <dd><%= unloading_presenter.wpp %></dd>
 
           </dl>
         </div>
@@ -79,7 +79,7 @@
     </div>
 
     <div class="col-xs-12 col-md-4">
-      <div class="panel panel-default">
+      <div class="panel <%= @unloading.etp.present? ? 'panel-danger' : 'panel-success' %>">
         <div class="panel-heading">ETP</div>
         <div class="panel-body">
           <dl class="dl-horizontal">
@@ -93,22 +93,6 @@
 
     </div>
 
-
-    <div class="col-xs-12 col-md-4">
-      <div class="panel panel-default">
-        <div class="panel-heading">Recorded</div>
-        <div class="panel-body">
-          <dl class="dl-horizontal">
-
-            
-            <dt><%= Unloading.human_attribute_name(:user_id) %></dt>
-            <dd><%= unloading_presenter.user %></dd>
-
-          </dl>
-        </div>
-
-      </div>
-    </div>
   </div>
 <% end %>
 
@@ -147,5 +131,9 @@
 
 <%= render partial: 'shared/audit_table', locals: { parent: @unloading } %>
 
-<%= link_to 'Edit', edit_unloading_path(@unloading) %> |
-<%= link_to 'Back', unloadings_path %>
+<% if can? :edit, @unloading %>
+  <%= link_to 'Edit', edit_unloading_path(@unloading) %>
+<% end %>
+<% if can? :destroy, @unloading %>
+  <%= link_to 'Back', unloadings_path %>
+<% end %>

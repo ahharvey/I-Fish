@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type" />
+  </head>
+  <body>
+    <h1>Spreadsheet import failed</h1>
+    <p>
+      Import failed with the following <b><%= @errors.size %></b> errors:<br/>
+    </p>
+    <% @errors.each do |message| %>
+      <p>
+        <%= message %>
+      </p>
+    <% end %>
+  </body>
+</html>

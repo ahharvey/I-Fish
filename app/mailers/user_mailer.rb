@@ -13,6 +13,18 @@ class UserMailer < ActionMailer::Base
     mail(:to => @admin.email, :subject => "Excel Spreadsheet upload failure")
   end
 
+  def import_success(owner_id, owner_type, rows = {})
+    @owner = owner_type.constantize.find(owner_id)
+    @rows = rows
+    mail(:to => @owner.email, :subject => "Spreadsheet imported succesful")
+  end
+
+  def import_failure(owner_id, owner_type, errors ) 
+    @owner = owner_type.constantize.find(owner_id)
+    @errors = errors
+    mail(:to => @owner.email, :subject => "Spreadsheet import failed")
+  end
+
   def new_admin_waiting_for_approval(new_admin_id, supervisor_id)
     @admin      = Admin.find(new_admin_id)
     @supervisor = Admin.find(supervisor_id)

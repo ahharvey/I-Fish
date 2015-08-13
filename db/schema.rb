@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150812031348) do
+ActiveRecord::Schema.define(version: 20150812154810) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -294,6 +294,11 @@ ActiveRecord::Schema.define(version: 20150812031348) do
     t.string   "yaxis",      limit: 1
     t.datetime "created_at",           null: false
     t.datetime "updated_at",           null: false
+  end
+
+  create_table "importers", force: :cascade do |t|
+    t.text   "file"
+    t.string "label"
   end
 
   create_table "landings", force: :cascade do |t|

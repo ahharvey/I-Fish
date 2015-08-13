@@ -175,7 +175,26 @@ class Unloading < ActiveRecord::Base
       )
   end
 
+  def attributes_for_import_email
 
+    vessel    = Vessel.find( vessel_id ).ap2hi_ref  rescue 'none'
+    port      = Port.find( port_id ).name           rescue 'none'
+    wpp       = Wpp.find( wpp_id ).name             rescue 'none'
+    timeout  = time_out.try(:to_s, :long)
+    timein   = time_in.try(:to_s, :long)
+    etpBool  = etp.present? ? 'Yes' : 'No'
+    
+    {
+      vessel: vessel, 
+      port: port,
+      wpp: wpp, 
+      time_out: timeout,
+      time_in: timein, 
+      etp: etpBool,
+      fuel: fuel,
+      ice: ice
+    }
+  end
 
   #private
 

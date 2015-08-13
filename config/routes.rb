@@ -220,6 +220,7 @@ IFish::Application.routes.draw do
       end
     end
 
+    resources :importers
 
     namespace :api, defaults: {format: 'json'} do
       scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do

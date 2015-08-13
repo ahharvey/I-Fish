@@ -19,13 +19,23 @@
           <td>
             <% if version.whodunnit == "Guest" %>
               Guest
-            <% else %>
+            <% elsif version.whodunnit.nil? %>
+              Unknown
+            <% elsif version.whodunnit.is_a? Integer %>
               <% admin = Admin.find(version.whodunnit.to_i) %>
               <%= image_tag( admin.avatar_url(:thumb), 
                 width: "30px", 
                 height: "30px", 
                 title: admin.name, 
                 alt: admin.name) 
+              %>
+            <% else %>
+              <% owner = version.whodunnit %>
+              <%= image_tag( owner.avatar_url(:thumb), 
+                width: "30px", 
+                height: "30px", 
+                title: owner.name, 
+                alt: owner.name) 
               %>
             <% end %>
           </td>
