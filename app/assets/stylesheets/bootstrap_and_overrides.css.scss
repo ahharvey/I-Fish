@@ -60,6 +60,9 @@ $linkColor: $USAIDlblue;
 .navbar-brand { padding: 20px 15px;}
 .brand-beta {color:$USAIDlblue;font-size:10px;font-weight:200!important;vertical-align:text-top;}
 
+.pagination .loading-spinner {
+  color: #337ab7;
+}
 
 .img-circle.avatar {
   height: 40px;
