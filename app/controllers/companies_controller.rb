@@ -168,9 +168,9 @@ class CompaniesController < ApplicationController
   def current_fuel_utilization
     @company = Company.find(params[:id])
     @unloadings = @company.unloadings
-    array = [['Fuel', 'Catch', 'Vessel']]
+    array = [['Fuel', 'Catch']]
     @unloadings.each do |unloading|
-      array << [unloading.fuel, unloading.unloading_catches.sum(:quantity), unloading.vessel.ap2hi_ref]
+      array << [unloading.fuel, unloading.unloading_catches.sum(:quantity)]
     end
     render json: array
   end

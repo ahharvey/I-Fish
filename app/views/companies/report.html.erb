@@ -37,7 +37,7 @@
   	<div class="panel panel-default">
 		  <div class="panel-heading"><b>Current Monthly Production (<%= Date.today.year %>)</b></div>
 		  <div class="panel-body">
-		    <%= column_chart current_monthly_production_company_path(@company), stacked: true, library: { vAxis: { title: 'mt' } } %>
+		    <%= column_chart current_monthly_production_company_path(@company), stacked: true, library: { vAxis: { title: 'kg' } } %>
 		  </div>
 		</div>
   </div>
@@ -48,7 +48,7 @@
   	<div class="panel panel-default">
 		  <div class="panel-heading"><b>Historical Average Monthly Production</b></div>
 		  <div class="panel-body">
-		    <%= column_chart average_monthly_production_company_path(@company), stacked: true, library: { vAxis: { title: 'mt' } } %>
+		    <%= column_chart average_monthly_production_company_path(@company), stacked: true, library: { vAxis: { title: 'kg' } } %>
 		  </div>
 		</div>
   </div>
