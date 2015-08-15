@@ -49,7 +49,12 @@ class Unloading < ActiveRecord::Base
       on_or_after: :time_out,
       type: :datetime
     }
-
+  validates :vessel_id,
+    presence: true 
+  validates :port_id,
+    presence: true
+  validates :wpp_id,
+    presence: true  
 
   before_save :set_cpue
 

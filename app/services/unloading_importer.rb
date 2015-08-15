@@ -50,8 +50,10 @@ class UnloadingImporter
       unloading = Unloading.find_by_id(row["id"]) || Unloading.new
       unloading.attributes = row.to_hash.slice(*( Unloading.accessible_attributes - ['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ) )
       row.to_hash.slice(*['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ).each do |catch|
-        Rails.logger.info catch
-        unloading.send(catch[0]+'=', catch[1])
+        unless catch == nil || catch = 0 
+          Rails.logger.info catch
+          unloading.send(catch[0]+'=', catch[1])
+        end
       end
       unloading
     end

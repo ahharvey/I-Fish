@@ -122,34 +122,15 @@ class CompaniesController < ApplicationController
   end
   def current_monthly_production
     @company = Company.find(params[:id])
-    fishes   = Fish.default
-    production = fishes.map{ |fish| 
-      { 
-        name: fish.code, 
-        data: fish.
-          unloadings.
-          where( vessel_id: @company.vessels.map(&:id), time_in: Date.today.beginning_of_year..Date.today  ).
-          group_by_month_of_year(:time_in, format: '%b' ).
-          sum(:quantity) 
-        }
-      }
-    production = production.delete_if { |k, v| v.blank? }
+    
+    production = @company.current_monthly_production_chart
     render json: production.chart_json
   end
   def average_monthly_production
+    
     @company = Company.find(params[:id])
-    fishes   = Fish.default
-    production = fishes.map{ |fish| 
-      { 
-        name: fish.code, 
-        data: fish.
-          unloadings.
-          where( vessel_id: @company.vessels.map(&:id)  ).
-          group_by_month_of_year(:time_in, format: '%b' ).
-          sum(:quantity) 
-        }
-      }
-    production = production.delete_if { |k, v| v.blank? }
+    
+    production = @company.average_monthly_production_chart
 
     render json: production.chart_json
       

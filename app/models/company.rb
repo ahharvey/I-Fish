@@ -57,6 +57,51 @@ class Company < ActiveRecord::Base
     bait.first.uniq.sort_by(&:code)
   end
 
+  def current_monthly_production_chart
+    Rails.cache.fetch(["current_monthly_production", self], expires_in: 60.minutes) do
+      fishes   = Fish.default
+      production = fishes.map{ |fish| 
+        { 
+          name: fish.code, 
+          data: Unloading.
+            includes(:unloading_catches).
+            where(
+              'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
+              self.vessels.map(&:id), 
+              fish.id
+            ).
+            where( time_in: Date.today.beginning_of_year..Date.today ).
+            group_by_month_of_year(:time_in, format: '%b' ).
+            sum('unloading_catches.quantity')
+          }
+        }
+      production.delete_if { |k, v| v.blank? }
+    end
+  end
+
+  def average_monthly_production_chart
+    Rails.cache.fetch(["average_monthly_production", self], expires_in: 60.minutes) do
+      fishes   = Fish.default
+      production = fishes.map{ |fish| 
+        { 
+          name: fish.code, 
+          data: Unloading.
+            includes(:unloading_catches).
+            where(
+              'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
+              self.vessels.map(&:id), 
+              fish.id
+            ).
+            group_by_month_of_year(:time_in, format: '%b' ).
+            sum('unloading_catches.quantity')
+          }
+        }
+      
+      production.delete_if { |k, v| v.blank? }
+    end
+  end
+
+
   private
  
   def avatar_size
