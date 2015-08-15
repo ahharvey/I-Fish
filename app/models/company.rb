@@ -20,6 +20,8 @@ class Company < ActiveRecord::Base
   has_many :documents, as: :documentable
   has_many :vessels
   has_many :unloadings, through: :vessels
+  has_many :unloading_catches, through: :unloadings
+  has_many :fishes, through: :unloading_catches
   has_many :bait_loadings, through: :vessels
   has_many :carier_loadings, through: :vessels
   has_many :users, through: :company_positions
@@ -59,7 +61,7 @@ class Company < ActiveRecord::Base
 
   def current_monthly_production_chart
     Rails.cache.fetch(["current_monthly_production", self], expires_in: 60.minutes) do
-      fishes   = Fish.default
+      fishes   = self.fishes.default
       production = fishes.map{ |fish| 
         { 
           name: fish.code, 
@@ -75,13 +77,13 @@ class Company < ActiveRecord::Base
             sum('unloading_catches.quantity')
           }
         }
-      production.delete_if { |k, v| v.blank? }
+      #production.delete_if { |k, v| v.blank? }
     end
   end
 
   def average_monthly_production_chart
     Rails.cache.fetch(["average_monthly_production", self], expires_in: 60.minutes) do
-      fishes   = Fish.default
+      fishes   = self.fishes.default
       production = fishes.map{ |fish| 
         { 
           name: fish.code, 
@@ -89,7 +91,7 @@ class Company < ActiveRecord::Base
             includes(:unloading_catches).
             where(
               'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
-              self.vessels.map(&:id), 
+              c.vessels.map(&:id), 
               fish.id
             ).
             group_by_month_of_year(:time_in, format: '%b' ).
@@ -97,7 +99,7 @@ class Company < ActiveRecord::Base
           }
         }
       
-      production.delete_if { |k, v| v.blank? }
+      #production.delete_if { |k, v| v.blank? }
     end
   end
 

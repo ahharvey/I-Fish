@@ -33,7 +33,16 @@
 class CompaniesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_company, only: [:show, :edit, :update, :destroy, :report ]
+  before_action :set_company, 
+    only: [
+      :show, 
+      :edit, 
+      :update, 
+      :destroy, 
+      :report, 
+      :current_monthly_production, 
+      :average_monthly_production 
+    ]
   respond_to :html
   respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
   respond_to :js, only: [:catch_composition, :current_monthly_production, :average_monthly_production, :current_fuel_utilization]
@@ -120,21 +129,15 @@ class CompaniesController < ApplicationController
     @catch = Hash[@catch.map{|k,v| [Fish.find(k).code,v]}]
     render json: @catch
   end
+  
   def current_monthly_production
-    @company = Company.find(params[:id])
-    
-    production = @company.current_monthly_production_chart
-    render json: production.chart_json
+    render json: @company.current_monthly_production_chart.chart_json
   end
-  def average_monthly_production
-    
-    @company = Company.find(params[:id])
-    
-    production = @company.average_monthly_production_chart
 
-    render json: production.chart_json
-      
+  def average_monthly_production
+    render json: @company.average_monthly_production_chart.chart_json
   end
+  
   def current_monthly_cpue
     @company = Company.find(params[:id])
     fishes   = Fish.default
