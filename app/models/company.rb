@@ -111,7 +111,7 @@ class Company < ActiveRecord::Base
               fish.id
             ).
             group_by_month_of_year(:time_in, format: '%b' ).
-            sum('unloading_catches.quantity')
+            sum('unloading_catches.quantity') * 3000
           }
         }
       
