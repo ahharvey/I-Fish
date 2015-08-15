@@ -41,7 +41,9 @@ class CompaniesController < ApplicationController
       :destroy, 
       :report, 
       :current_monthly_production, 
-      :average_monthly_production 
+      :average_monthly_production,
+      :current_catch_composition,
+      :average_catch_composition 
     ]
   respond_to :html
   respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
@@ -114,20 +116,13 @@ class CompaniesController < ApplicationController
   def report
     respond_with(@company)
   end
+  
   def current_catch_composition
-    @company = Company.find(params[:id])
-    @unloadings = @company.unloadings.where( 'unloadings.time_in > ?', Date.today.beginning_of_year)
-    @catch = UnloadingCatch.where(unloading_id: @unloadings.map(&:id) ).group(:fish_id).count
-    @catch = Hash[@catch.map{|k,v| [Fish.find(k).code,v]}]
-    render json: @catch
-
+    render json: @company.current_catch_composition_chart
   end
+
   def average_catch_composition
-    @company = Company.find(params[:id])
-    @unloadings = @company.unloadings
-    @catch = UnloadingCatch.where(unloading_id: @unloadings.map(&:id) ).group(:fish_id).count
-    @catch = Hash[@catch.map{|k,v| [Fish.find(k).code,v]}]
-    render json: @catch
+    render json: @company.average_catch_composition_chart
   end
   
   def current_monthly_production

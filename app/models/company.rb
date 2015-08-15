@@ -59,6 +59,22 @@ class Company < ActiveRecord::Base
     bait.first.uniq.sort_by(&:code)
   end
 
+  def current_catch_composition_chart
+    Rails.cache.fetch(["current_catch_composition_chart", self], expires_in: 60.minutes) do    
+      unloadings  = self.unloadings.where( 'unloadings.time_in > ?', Date.today.beginning_of_year)
+      catches     = UnloadingCatch.where(unloading_id: unloadings.map(&:id) ).group(:fish_id).sum(:quantity)
+      catches     = Hash[catches.map{|k,v| [Fish.find(k).code,v]}]
+    end
+  end
+
+  def average_catch_composition_chart
+    Rails.cache.fetch(["average_catch_composition_chart", self], expires_in: 60.minutes) do
+      unloadings  = self.unloadings
+      catches     = UnloadingCatch.where(unloading_id: unloadings.map(&:id) ).group(:fish_id).sum(:quantity)
+      catches     = Hash[catches.map{|k,v| [Fish.find(k).code,v]}]
+    end
+  end
+
   def current_monthly_production_chart
     Rails.cache.fetch(["current_monthly_production", self], expires_in: 60.minutes) do
       fishes   = self.fishes.default.uniq
