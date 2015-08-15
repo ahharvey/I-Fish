@@ -103,15 +103,17 @@ class Company < ActiveRecord::Base
       production = fishes.map{ |fish| 
         { 
           name: fish.code, 
-          data: 3000 * Unloading.
-            includes(:unloading_catches).
-            where(
-              'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
-              self.vessels.map(&:id), 
-              fish.id
-            ).
-            group_by_month_of_year(:time_in, format: '%b' ).
-            sum('unloading_catches.quantity') 
+          data: 3000 * ( 
+            Unloading.
+              includes(:unloading_catches).
+              where(
+                'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
+                self.vessels.map(&:id), 
+                fish.id
+              ).
+              group_by_month_of_year(:time_in, format: '%b' ).
+              sum('unloading_catches.quantity') 
+            )
           }
         }
       
