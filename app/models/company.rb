@@ -61,7 +61,7 @@ class Company < ActiveRecord::Base
 
   def current_monthly_production_chart
     Rails.cache.fetch(["current_monthly_production", self], expires_in: 60.minutes) do
-      fishes   = self.fishes.default
+      fishes   = self.fishes.uniq.default
       production = fishes.map{ |fish| 
         { 
           name: fish.code, 
@@ -83,7 +83,7 @@ class Company < ActiveRecord::Base
 
   def average_monthly_production_chart
     Rails.cache.fetch(["average_monthly_production", self], expires_in: 60.minutes) do
-      fishes   = self.fishes.default
+      fishes   = self.fishes.uniq.default
       production = fishes.map{ |fish| 
         { 
           name: fish.code, 
