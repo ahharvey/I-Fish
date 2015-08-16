@@ -1,4 +1,4 @@
-class UnloadingImporter
+class BaitLoadingImporter
   # switch to ActiveModel::Model in Rails 4
   include ActiveModel::Model
   #extend ActiveModel::Naming
@@ -17,20 +17,19 @@ class UnloadingImporter
 
   def save( owner_id, owner_type)
     owner = owner_type.constantize.find owner_id
-    if imported_unloadings.map(&:valid?).all?
-      imported_unloadings.each do |unloading|
+    if imported_bait_loadings.map(&:valid?).all?
+      imported_bait_loadings.each do |bait_loading|
         # UnloadingSaverJob.perform_later(unloading, owner_id, owner_type)
         whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
-        unloading.whodunnit(whodunnit) do 
-          unloading.send("#{owner_type.underscore}_id=",owner_id)
-          unloading.save!
+        bait_loading.whodunnit(whodunnit) do 
+          bait_loading.save!
         end
-        Activity.create! action: 'create', trackable: unloading, ownable_id: owner_id, ownable_type: owner_type
+        Activity.create! action: 'create', trackable: bait_loading, ownable_id: owner_id, ownable_type: owner_type
       end
       true
     else
-      imported_unloadings.each_with_index do |unloading, index|
-        unloading.errors.full_messages.each do |message|
+      imported_bait_loadings.each_with_index do |bait_loading, index|
+        bait_loading.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+2}: #{message}"
         end
       end
@@ -38,24 +37,19 @@ class UnloadingImporter
     end
   end
 
-  def imported_unloadings
-    @imported_unloadings ||= load_imported_unloadings
+  def imported_bait_loadings
+    @imported_bait_loadings ||= load_imported_bait_loadings
   end
 
-  def load_imported_unloadings
+  def load_imported_bait_loadings
     spreadsheet = open_spreadsheet
     header = spreadsheet.row(1)
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
-      unloading = Unloading.find_by_id(row["id"]) || Unloading.new
-      unloading.attributes = row.to_hash.slice(*( Unloading.accessible_attributes - ['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ) )
-      row.to_hash.slice(*['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ).each do |catch|
-        unless catch.nil? || catch == 0 
-          Rails.logger.info catch
-          unloading.send(catch[0]+'=', catch[1])
-        end
-      end
-      unloading
+      bait_loading = BaitLoading.find_by_id(row["id"]) || BaitLoading.new
+      bait_loading.attributes = row.to_hash.slice(*( BaitLoading.accessible_attributes ) )
+      bait_loading.quantity = bait_loading.quantity.to_i
+      bait_loading
     end
   end
 

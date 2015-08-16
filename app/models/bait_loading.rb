@@ -34,7 +34,7 @@ class BaitLoading < ActiveRecord::Base
 
   validates :vessel,
     presence: true
-  validates :fish,
+  validates :bait,
     presence: true
   validates :quantity,
     presence: true,
@@ -44,10 +44,10 @@ class BaitLoading < ActiveRecord::Base
     inclusion: {
       in: 1..999
     }
-  validates :method_type,
-    presence: true
-  validates :grid,
-    presence: true
+#  validates :method_type,
+#    presence: true
+#  validates :grid,
+#    presence: true
 
 
 
@@ -96,6 +96,27 @@ class BaitLoading < ActiveRecord::Base
     BaitLoading.where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 
+  def attributes_for_import_email
+
+    vessel    = Vessel.find( vessel_id ).ap2hi_ref    rescue 'none'
+    grid      = Grid.find( grid_id ).name             rescue 'none'
+    loadDate  = date.try(:to_s, :long)
+    bait1     = Bait.find( bait_id ).code             rescue 'none'
+    bait2     = Bait.find( secondary_bait_id ).code   rescue 'none'
+
+    
+    {
+      date: loadDate, 
+      vessel: vessel,
+      method: method_type,
+      grid: grid,
+      quantity: quantity,
+      price: price, 
+      primary: bait1,
+      secondary: bait2
+    }
+  end
+
   private
 
   def validates_date
@@ -103,4 +124,19 @@ class BaitLoading < ActiveRecord::Base
       self.errors.add(:formatted_date, :invalid_date)
     end
   end
+
+  def self.accessible_attributes
+    [ 
+      "date", 
+      "vessel_id", 
+      "method_type", 
+      "grid_id",  
+      "quantity", 
+      "price",
+      "bait_id", 
+      "secondary_bait_id", 
+    ]
+  end
+
+  
 end

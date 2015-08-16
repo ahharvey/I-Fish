@@ -16,23 +16,17 @@ class UnloadingImporterJob < ActiveJob::Base
 
   def perform(owner_id, owner_type, importer_id )
 
-    @importer = Importer.find( importer_id )
-    @user     = owner_type.constantize.find(owner_id)
-    @unloading_import = UnloadingImporter.new( { file: @importer.file }  )
+    @importer         = Importer.find( importer_id )
+    @owner            = owner_type.constantize.find(owner_id)
+    
+    
 
-    if @unloading_import.save( owner_id, owner_type )
-      # redirect_to root_url, notice: "Imported unloadings successfully."
-      Rails.logger.info '------------IMPORT SAVED SUCCESSFULLY------------'
-      rows = @unloading_import.imported_unloadings
-      
-      UserMailer.import_success( owner_id, owner_type, rows ).deliver_later
-    else
-      Rails.logger.info '------------IMPORT FAILED------------'
-      error_messages = @unloading_import.errors.messages[:base]
-
-      UserMailer.import_failure( owner_id, owner_type, error_messages ).deliver_later
-      #render :new
+    if @importer.label == 'unloadings'
+      import_unloadings
+    elsif @importer.label == 'bait_loadings'
+      import_bait_loadings
     end
+    
 
 #    if imported_unloadings.map(&:valid?).all?
 #      imported_unloadings.each do |unloading|
@@ -49,5 +43,55 @@ class UnloadingImporterJob < ActiveJob::Base
 #      end
 #      false
 #    end
+  end
+
+  private
+
+  def import_unloadings
+    @unloading_import = UnloadingImporter.new( { file: @importer.file }  )
+
+    if @unloading_import.save( @owner.id, @owner.class.name )     
+      
+      rows = @unloading_import.imported_unloadings
+      UserMailer.import_success( @owner.id, @owner.class.name, rows ).deliver_later
+      
+      @importer.approved!
+
+      Rails.logger.info '------------IMPORT SAVED SUCCESSFULLY------------'
+
+    else
+      
+      error_messages = @unloading_import.errors.messages[:base]
+      UserMailer.import_failure( @owner.id, @owner.class.name, error_messages ).deliver_later
+
+      @importer.rejected!
+      
+      Rails.logger.info '------------IMPORT FAILED------------'
+
+    end
+  end
+
+  def import_bait_loadings
+    @bait_loading_import = BaitLoadingImporter.new( { file: @importer.file }  )
+
+    if @bait_loading_import.save( @owner.id, @owner.class.name )     
+      
+      rows = @bait_loading_import.imported_bait_loadings
+      UserMailer.import_success( @owner.id, @owner.class.name, rows ).deliver_later
+      
+      @importer.approved!
+
+      Rails.logger.info '------------IMPORT SAVED SUCCESSFULLY------------'
+      
+    else
+      
+      error_messages = @bait_loading_import.errors.messages[:base]
+      UserMailer.import_failure( @owner.id, @owner.class.name, error_messages ).deliver_later
+
+      @importer.rejected!
+      
+      Rails.logger.info '------------IMPORT FAILED------------'
+
+    end
   end
 end

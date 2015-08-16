@@ -61,7 +61,9 @@ class ImportersController < ApplicationController
   	if resource.label == 'unloadings'
   		#flash[:success] = "Your file was uploaded successfully and is being processed. We'll send you an email when it's finished."
   		new_unloading_import_path
-
+		elsif resource.label == 'bait_loadings'
+  		#flash[:success] = "Your file was uploaded successfully and is being processed. We'll send you an email when it's finished."
+  		new_bait_loading_import_path
   	else
 	    importer_path(resource)
 	  end

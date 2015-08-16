@@ -8,7 +8,7 @@
   <% if admin_signed_in? %>
     <% if current_admin.admin? %> 
       <li id="nav_upload" class="navbar-red">
-        <%= link_to home_upload_data_path, class: "", title: t("navbar.upload") do %>
+        <%= link_to home_import_path, class: "", title: t("navbar.upload") do %>
           <%= icon fa_submit, "", class: 'fa-2x' %>
         <% end %>
       </li>

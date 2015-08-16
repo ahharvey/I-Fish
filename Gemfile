@@ -89,6 +89,7 @@ gem 'rubyzip', '~> 1.1.0'
 # gem 'zip-zip', '~> 0.2'
 
 
+gem 'whenever', '~> 0.9.4'
 
 
 gem 'sinatra', require: nil

@@ -41,6 +41,10 @@ id:
       title: "Loading Umpan"
     show: 
       title: "Laporan Loading Umpan"
+  unloading_imports:
+    title: "Impor Loading Umpan"
+    new:
+      title: "Impor Loading Umpan"
   catches:
     title: "Komposisi Penangkapan"
     index:

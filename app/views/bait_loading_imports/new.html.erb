@@ -1,0 +1,48 @@
+<% title t ".title" %>
+
+
+
+
+<div class='row'>
+  <div class='col-xs-12 col-sm-6'>
+    <p>You can import records contained in a CSV or Excel file. The first row must contain the column name. Only the following columns will be imported:</p>
+    <small>
+      <ul>
+        
+        <% BaitLoading.accessible_attributes.each do |column| %>
+          <li>
+            <strong><%= column %></strong> 
+            <% if false %>
+              <%= column.type.to_s.titleize %> type
+            <% end %>
+          </li>
+        <% end %>
+
+      </ul>
+    </small>
+
+    <p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+
+
+    <%= link_to template_bait_loading_imports_path(format: :xls), class: "btn btn-lg btn-default btn-block", title: "Export to Excel" do %>
+      <%= icon fa_excel, "Download Excel template", class: 'fa-lg' %>
+    <% end %>
+    
+  </div>
+  <div class='col-xs-12 col-sm-6'>
+
+    <%= form_for @bait_loading_import, class: "form-inline"  do |f| %>
+      <%= import_errors_for(@bait_loading_import) %>
+      <%= f.hidden_field :label, value: 'bait_loadings' %>
+      <div class="input-group">
+        <%= f.file_field :file, class: 'form-control input-lg' %>
+
+        <span class="input-group-btn">
+          <%= f.submit "Import", class: 'btn btn-primary btn-lg' %>
+        </span>
+      </div><!-- /input-group -->
+
+    <% end %>
+
+  </div>
+</div>

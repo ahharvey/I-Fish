@@ -7,7 +7,7 @@
     <td><%= bait.name %></td>
     <td>
       <% if can? :edit, bait %>
-        <%= link_to "Edit", edit_bait_loading_path(bait), class: "btn btn-xs btn-block btn-primary" %>
+        <%= link_to "Edit", edit_bait_path(bait), class: "btn btn-xs btn-block btn-primary" %>
       <% end %>
     </td>
   <% end %>

@@ -40,6 +40,8 @@ class Unloading < ActiveRecord::Base
   has_many :bait_loadings
   accepts_nested_attributes_for :bait_loadings, allow_destroy: true, reject_if: :all_blank
 
+  scope :default, -> { order('unloadings.time_in DESC') }
+
   validates :time_out, 
     timeliness: {
       type: :datetime

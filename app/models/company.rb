@@ -91,32 +91,39 @@ class Company < ActiveRecord::Base
             where( time_in: Date.today.beginning_of_year..Date.today ).
             group_by_month_of_year(:time_in, format: '%b' ).
             sum('unloading_catches.quantity')
-          }
         }
+      }
       #production.delete_if { |k, v| v.blank? }
     end
   end
 
   def average_monthly_production_chart
     Rails.cache.fetch(["average_monthly_production", self], expires_in: 60.minutes) do
-      fishes   = self.fishes.default.uniq
-      production = fishes.map{ |fish| 
+      fishes      = self.fishes.default.uniq
+      production  = fishes.map{ |fish| 
         { 
           name: fish.code, 
-          data: 3000 * ( 
-            Unloading.
-              includes(:unloading_catches).
-              where(
-                'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
-                self.vessels.map(&:id), 
-                fish.id
-              ).
-              group_by_month_of_year(:time_in, format: '%b' ).
-              sum('unloading_catches.quantity') 
-            )
-          }
+          data: Unloading.
+            includes(:unloading_catches).
+            where(
+              'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
+              self.vessels.map(&:id), 
+              fish.id
+            ).
+            group_by_month_of_year(:time_in, format: '%b' ).
+            sum('unloading_catches.quantity') 
         }
+      }
       
+      newest    = self.unloadings.default.first.time_in.end_of_year
+      oldest    = self.unloadings.default.first.time_in.end_of_year - 1.year
+      timespan  = newest.year / oldest.year
+
+
+      production.each do |p|
+        p[:data].update( p[:data] ) { |k,v| v / timespan }
+      end
+      production
       #production.delete_if { |k, v| v.blank? }
     end
   end

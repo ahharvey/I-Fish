@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813174054) do
+ActiveRecord::Schema.define(version: 20150815174500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -297,8 +297,10 @@ ActiveRecord::Schema.define(version: 20150813174054) do
   end
 
   create_table "importers", force: :cascade do |t|
-    t.text   "file"
-    t.string "label"
+    t.text     "file"
+    t.string   "label"
+    t.string   "review_state"
+    t.datetime "reviewed_at"
   end
 
   create_table "landings", force: :cascade do |t|

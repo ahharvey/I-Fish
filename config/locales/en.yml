@@ -52,6 +52,10 @@ en:
       title: "Bait Loadings"
     show: 
       title: "Bait Loading Report"
+  bait_loading_imports:
+    title: "Import Bait Loadings"
+    new:
+      title: "Import Bait Loadings"
   catches:
     title: "Catch Composition"
     index:

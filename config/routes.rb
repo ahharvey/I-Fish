@@ -157,6 +157,11 @@ IFish::Application.routes.draw do
         get :template
       end
     end
+    resources :bait_loading_imports do
+      collection do
+        get :template
+      end
+    end
     
     resources :unloadings do 
       member do
@@ -244,6 +249,7 @@ IFish::Application.routes.draw do
 
     get 'home/index'
     get 'home/upload_data'
+    get 'home/import'
     get '/reports' => 'home#reports' 
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'

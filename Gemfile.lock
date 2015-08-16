@@ -42,7 +42,7 @@ GEM
       activerecord (>= 3.2, <= 4.3)
       rake (~> 10.4)
     arel (6.0.3)
-    autoprefixer-rails (5.2.1.1)
+    autoprefixer-rails (5.2.1.2)
       execjs
       json
     bcrypt (3.1.10)
@@ -109,7 +109,7 @@ GEM
       railties (>= 3.2)
     erubis (2.7.0)
     excon (0.45.4)
-    execjs (2.5.2)
+    execjs (2.6.0)
     fission (0.5.0)
       CFPropertyList (~> 2.2)
     fog (1.31.0)
@@ -308,7 +308,7 @@ GEM
       sprockets-rails
     rails-deprecated_sanitizer (1.0.3)
       activesupport (>= 4.2.0.alpha)
-    rails-dom-testing (1.0.6)
+    rails-dom-testing (1.0.7)
       activesupport (>= 4.2.0.beta, < 5.0)
       nokogiri (~> 1.6.0)
       rails-deprecated_sanitizer (>= 1.0.1)
@@ -333,7 +333,7 @@ GEM
     request_store (1.2.0)
     responders (2.1.0)
       railties (>= 4.2.0, < 5)
-    rmagick (2.15.3)
+    rmagick (2.15.4)
     roo (2.0.1)
       nokogiri (~> 1)
       rubyzip (~> 1.1, < 2.0.0)
@@ -341,7 +341,7 @@ GEM
       nokogiri
       roo (>= 2.0.0beta1, < 3)
       spreadsheet (> 0.9.0)
-    rqrcode (0.6.0)
+    rqrcode (0.7.0)
       chunky_png
     rqrcode-with-patches (0.6.0)
       chunky_png
@@ -367,11 +367,11 @@ GEM
       rack (~> 1.4)
       rack-protection (~> 1.4)
       tilt (>= 1.3, < 3)
-    sort_alphabetical (1.0.1)
+    sort_alphabetical (1.0.2)
       unicode_utils (>= 1.2.2)
     spreadsheet (1.0.4)
       ruby-ole (>= 1.0)
-    sprockets (3.3.0)
+    sprockets (3.3.1)
       rack (~> 1.0)
     sprockets-rails (2.3.2)
       actionpack (>= 3.0)
@@ -398,6 +398,8 @@ GEM
       timeliness (~> 0.3.6)
     warden (1.2.3)
       rack (>= 1.0)
+    whenever (0.9.4)
+      chronic (>= 0.6.3)
 
 PLATFORMS
   ruby
@@ -462,3 +464,4 @@ DEPENDENCIES
   uglifier (~> 2.7.0)
   unf (~> 0.1.3)
   validates_timeliness (~> 3.0.0)
+  whenever (~> 0.9.4)
