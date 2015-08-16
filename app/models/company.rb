@@ -99,7 +99,7 @@ class Company < ActiveRecord::Base
 
   def average_monthly_production_chart
     Rails.cache.fetch(["average_monthly_production", self], expires_in: 60.minutes) do
-      fishes      = self.fishes.default.uniq
+      fishes      = c.fishes.default.uniq
       production  = fishes.map{ |fish| 
         { 
           name: fish.code, 
@@ -107,7 +107,7 @@ class Company < ActiveRecord::Base
             includes(:unloading_catches).
             where(
               'unloadings.vessel_id IN (?) AND unloading_catches.fish_id = ?', 
-              self.vessels.map(&:id), 
+              c.vessels.map(&:id), 
               fish.id
             ).
             group_by_month_of_year(:time_in, format: '%b' ).
@@ -115,9 +115,9 @@ class Company < ActiveRecord::Base
         }
       }
       
-      newest    = self.unloadings.default.first.time_in.end_of_year
-      oldest    = self.unloadings.default.first.time_in.end_of_year - 1.year
-      timespan  = newest.year / oldest.year
+      newest    = c.unloadings.default.first.time_in.end_of_year
+      oldest    = c.unloadings.default.last.time_in.end_of_year - 1.year
+      timespan  = newest.year - oldest.year
 
 
       production.each do |p|
