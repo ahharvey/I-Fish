@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= yield (:title) || "" %> | I-Fish</title>
+    <title><%= yield (:title) || "" %> | FishPanel</title>
     <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag :modernizr %>
     <%= javascript_include_tag "application" %>
@@ -18,7 +18,7 @@
       <%= render partial: "shared/model_error_messages" %>
       <% if content_for? :title %>
         <div class="page-header">
-          <h1><%= yield (:title) || "FishStat" %> <small><%= yield (:subtitle) || "" %></small></h1>
+          <h1><%= yield (:title) || "FishPanel" %> <small><%= yield (:subtitle) || "" %></small></h1>
         </div><!-- page-header -->
       <% end %>
       <%= yield %>

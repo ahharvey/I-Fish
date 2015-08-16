@@ -54,7 +54,7 @@ class UserMailer < ActionMailer::Base
   def new_admin_approved(admin_id)
     @admin = Admin.find(admin_id)
     @url = new_admin_session_url
-    mail(:to => @admin.email, :subject => "I-Fish Registration Approved")
+    mail(:to => @admin.email, :subject => "FishPanel Registration Approved")
   end
 
   def new_pvr_application(vessel_id, admin_id)
@@ -71,7 +71,7 @@ class UserMailer < ActionMailer::Base
 
     @admin = Admin.find(admin_id)
     @report = GeneratedReport.find(generated_report_id)
-    mail(:to => @admin.email, :subject => "I-FISH :: Generated PDF ready for download")
+    mail(:to => @admin.email, :subject => "FishPanel :: Generated PDF ready for download")
   end
   
 end

@@ -21,7 +21,7 @@ id:
   admins:
     title: "Staf Staf"
     welcome:
-      title: "Salamat datang ke I-Fish"
+      title: "Salamat datang ke FishPanel"
     edit:
       title: "Edit Profil"
     crop:
@@ -198,7 +198,7 @@ id:
   users:
     title: "Nelayan Nelayan"
     welcome:
-      title: "Salamat datang ke I-Fish"
+      title: "Salamat datang ke FishPanel"
     edit:
       title: "Edit Profil"
     crop:

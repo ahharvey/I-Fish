@@ -145,7 +145,7 @@ en:
     layouts:
       admin:
         nav:
-          oauth2_provider: 'I-Fish Dev'
+          oauth2_provider: 'FishPanel Dev'
           applications: 'Applications'
       application:
         title: 'OAuth authorize required'
