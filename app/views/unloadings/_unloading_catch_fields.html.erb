@@ -40,7 +40,7 @@
   </div>
 
   <div class="col-xs-2">
-    <%= f.select :type, UnloadingCatch::CATCH_TYPES.map{ |t| [I18n.t("catch_types.#{t}"), t] }, {}, { class: 'form-control', placeholder: UnloadingCatch.human_attribute_name(:type) } %>
+    <%= f.select :catch_type, UnloadingCatch::CATCH_TYPES.map{ |t| [I18n.t("catch_types.#{t}"), t] }, {}, { class: 'form-control', placeholder: UnloadingCatch.human_attribute_name(:type) } %>
   </div>
 
 
