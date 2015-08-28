@@ -16,19 +16,22 @@ class UnloadingPresenter < BasePresenter
   end
 
   def yft
-    best_in_place_if (can? :edit, unloading), unloading, :yft, as: :input, place_holder: '--', inner_class: 'col-xs-1'
+    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'YFT') ).sum(:quantity) 
   end
 
   def bet
-    best_in_place_if (can? :edit, unloading), unloading, :bet, as: :input, place_holder: '--', inner_class: 'col-xs-1'
+    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'BET') ).sum(:quantity) 
+    #best_in_place_if (can? :edit, unloading), unloading, :bet, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
   def skj
-    best_in_place_if (can? :edit, unloading), unloading, :skj, as: :input, place_holder: '--', inner_class: 'col-xs-1'
+    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'SKJ') ).sum(:quantity) 
+    #best_in_place_if (can? :edit, unloading), unloading, :skj, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
   def kaw
-    best_in_place_if (can? :edit, unloading), unloading, :kaw, as: :input, place_holder: '--', inner_class: 'col-xs-1'
+    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'KAW') ).sum(:quantity) 
+    #best_in_place_if (can? :edit, unloading), unloading, :kaw, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
   def byproduct
