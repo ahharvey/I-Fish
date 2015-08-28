@@ -99,6 +99,42 @@ class Vessel < ActiveRecord::Base
       )
   end
 
+  def attributes_for_import_email
+
+    company   = Company.find( companuy_id ).name    rescue 'none'
+    port      = Port.find( port_id ).name           rescue 'none'
+
+    {
+      name: name,
+      name_changed: name_changed,
+      captain: captain,
+      owner: owner,
+      company: company,
+      port: port,
+      relationship_type: relationship_type,
+      length: length,
+      tonnage: tonnage,
+      material_type: material_type,
+      machine_type: machine_type,
+      capacity: capacity,
+      flag_state: flag_state,
+      flag_state_changed: flag_state_changed,
+      year_built: year_built,
+      crew: crew,
+      hooks: hooks,
+      sipi_number: sipi_number,
+      sipi_expiry: sipi_expiry,
+      siup_number: siup_number,
+      radio: radio,
+      vms: vms,
+      tracker: tracker
+    }
+  end
+
+  def pending_vessel
+    super || build_pending_vessel
+  end
+
   
   private
 
@@ -113,7 +149,6 @@ class Vessel < ActiveRecord::Base
 
   def self.accessible_attributes
    [
-      'ap2hi_ref',
       'name',
       'name_changed',
       'captain',

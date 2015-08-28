@@ -29,6 +29,7 @@
   <div class='col-xs-12 col-sm-6'>
     <%= form_for @vessel_import, class: "form-inline"  do |f| %>
       <%= import_errors_for(@vessel_import) %>
+      <%= f.hidden_field :label, value: 'vessels' %>
       <div class="input-group">
         <%= f.file_field :file, class: 'form-control input-lg' %>
         <span class="input-group-btn">

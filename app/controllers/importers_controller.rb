@@ -28,9 +28,9 @@ class ImportersController < ApplicationController
   def create
     @importer = Importer.new(importer_params)
     if @importer.save
-	    UnloadingImporterJob.perform_later( @currently_signed_in.id, @currently_signed_in.class.name, @importer.id )
-	    #UnloadingImporterJob.perform_later( 64, 'Admin', @importer.id )
-	  end
+      UnloadingImporterJob.perform_later( @currently_signed_in.id, @currently_signed_in.class.name, @importer.id )
+      #UnloadingImporterJob.perform_later( 64, 'Admin', @importer.id )
+    end
     respond_with @importer, location: -> { after_save_path_for(@importer) }
   end
 
@@ -58,15 +58,18 @@ class ImportersController < ApplicationController
   end
 
   def after_save_path_for(resource)
-  	if resource.label == 'unloadings'
-  		#flash[:success] = "Your file was uploaded successfully and is being processed. We'll send you an email when it's finished."
-  		new_unloading_import_path
-		elsif resource.label == 'bait_loadings'
-  		#flash[:success] = "Your file was uploaded successfully and is being processed. We'll send you an email when it's finished."
-  		new_bait_loading_import_path
-  	else
-	    importer_path(resource)
-	  end
+    if resource.label == 'unloadings'
+      #flash[:success] = "Your file was uploaded successfully and is being processed. We'll send you an email when it's finished."
+      new_unloading_import_path
+    elsif resource.label == 'bait_loadings'
+      #flash[:success] = "Your file was uploaded successfully and is being processed. We'll send you an email when it's finished."
+      new_bait_loading_import_path
+    elsif resource.label == 'vessels'
+      #flash[:success] = "Your file was uploaded successfully and is being processed. We'll send you an email when it's finished."
+      new_vessel_import_path
+    else
+      importer_path(resource)
+    end
   end
 
   def interpolation_options

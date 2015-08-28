@@ -25,6 +25,8 @@ class UnloadingImporterJob < ActiveJob::Base
       import_unloadings
     elsif @importer.label == 'bait_loadings'
       import_bait_loadings
+    elsif @importer.label == 'vessels'
+      import_vessels
     end
     
 
@@ -90,6 +92,30 @@ class UnloadingImporterJob < ActiveJob::Base
 
       @importer.rejected!
       
+      Rails.logger.info '------------IMPORT FAILED------------'
+
+    end
+  end
+
+  def import_vessels
+    @vessel_import = VesselImporter.new( { file: @importer.file }  )
+
+    if @vessel_import.save( @owner.id, @owner.class.name )
+
+      rows = @vessel_import.imported_vessels
+      UserMailer.import_success( @owner.id, @owner.class.name, rows ).deliver_later
+
+      @importer.approved!
+
+      Rails.logger.info '------------IMPORT SAVED SUCCESSFULLY------------'
+
+    else
+
+      error_messages = @vessel_import.errors.messages[:base]
+      UserMailer.import_failure( @owner.id, @owner.class.name, error_messages ).deliver_later
+
+      @importer.rejected!
+
       Rails.logger.info '------------IMPORT FAILED------------'
 
     end
