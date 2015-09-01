@@ -175,7 +175,7 @@ class ActivityPresenter < SimpleDelegator
 		[
 			"activities/#{@activity.trackable_type.underscore}/#{@activity.action}",
 			"activities/#{@activity.trackable_type.underscore}",
-			"activities/activity"
+			"activities/activity_template"
 		]
 	end
 

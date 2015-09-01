@@ -62,7 +62,7 @@ class Ability
 
   def abilities_for_all_admins(admin)
     # Admins can view all users and admins, and can manage their own profile.
-    can :read, [Fishery, Fish, Gear, Company, Engine, Vessel]
+    can :read, [Fishery, Fish, Gear, Company, Engine, Vessel, Office]
 
     can :read, User
     can :read, Admin
@@ -127,6 +127,9 @@ class Ability
 
     can :create, Company
     can :manage, Company, id: admin.managed_companies.map(&:id)
+    cannot :destroy, Company
+
+    can :manage, Office, id: admin.office_id
     cannot :destroy, Company
 
     can :create, Audit

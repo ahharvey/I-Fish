@@ -1,0 +1,7 @@
+<% if pending_vessel %>
+  submitted a vessel audit to the registry: 
+  <br />
+  <%= link_to "#{pending_vessel.name} (#{pending_vessel.vessel.ap2hi_ref})", pending_vessel.vessel %>
+<% else %>
+  submitted a vessel audit that has since been deleted
+<% end %>

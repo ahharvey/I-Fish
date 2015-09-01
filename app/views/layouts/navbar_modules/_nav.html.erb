@@ -6,7 +6,7 @@
   </li>
   <li class="divider-vertical"></li>
   <% if admin_signed_in? %>
-    <% if current_admin.admin? %> 
+    <% if current_admin.admin? || current_admin.supervisor? || current_admin.staff? %> 
       <li id="nav_upload" class="navbar-red">
         <%= link_to home_import_path, class: "", title: t("navbar.upload") do %>
           <%= icon fa_submit, "", class: 'fa-2x' %>
