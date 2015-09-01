@@ -15,6 +15,7 @@ class VesselsController < ApplicationController
       sticker_filename = "VesselStickers_#{Date.today.strftime("%Y%m%d")}.pdf"
     end
     respond_with(@vessels) do |format|
+      format.csv { send_data @vessels.to_csv }
       format.pdf do
         pdf = StickerPdf.new(@vessels, view_context)
         send_data pdf.render, filename: 

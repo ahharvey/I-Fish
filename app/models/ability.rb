@@ -145,6 +145,8 @@ class Ability
 
     can :manage, 'staff/dashboard'
     can :index, 'staff/dashboard'
+    can :import, :home
+    can :manage, Importer
   end
 
   def supervisor(admin)

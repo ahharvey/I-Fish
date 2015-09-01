@@ -135,6 +135,15 @@ class Vessel < ActiveRecord::Base
     super || build_pending_vessel
   end
 
+  def self.to_csv(options = {})
+    CSV.generate(options) do |csv|
+      csv << column_names
+      all.each do |vessel|
+        csv << vessel.attributes.values_at(*column_names)
+      end
+    end
+  end
+
   
   private
 
