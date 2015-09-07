@@ -127,6 +127,7 @@ class Ability
 
     can :create, Company
     can :manage, Company, id: admin.managed_companies.map(&:id)
+    can :report, Company, id: admin.managed_companies.map(&:id)
     cannot :destroy, Company
 
     can :manage, Office, id: admin.office_id
