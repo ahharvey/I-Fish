@@ -115,6 +115,8 @@ IFish::Application.routes.draw do
       resources :pending_vessels, only: [:new, :create]
     end
     resources :engines
+    resources :ports
+    resources :wpps
     resources :graticules
     resources :vessel_types
     resources :districts

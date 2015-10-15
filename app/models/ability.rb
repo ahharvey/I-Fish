@@ -22,7 +22,7 @@ class Ability
   end
 
   def abilities_for_all # Abilities for guests and all users
-    can [:index, :show], [Fishery, Fish, Gear, Company, Engine, Vessel] # Guests can read public models, including viewing reports
+    can [:index, :show], [Fishery, Fish, Gear, Company, Engine, Vessel, Port, Wpp] # Guests can read public models, including viewing reports
     can :index, :home # home page
     can [
       :current_catch_composition, 

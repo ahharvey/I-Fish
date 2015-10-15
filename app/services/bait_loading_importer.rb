@@ -22,6 +22,10 @@ class BaitLoadingImporter
         # UnloadingSaverJob.perform_later(unloading, owner_id, owner_type)
         whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
         bait_loading.whodunnit(whodunnit) do 
+          bait_loading.approve!
+          if owner_type.to_s == 'Admin'
+            bait_loading.reviewer_id = owner_id
+          end
           bait_loading.save!
         end
         Activity.create! action: 'create', trackable: bait_loading, ownable_id: owner_id, ownable_type: owner_type

@@ -1,0 +1,30 @@
+<%= simple_form_for @wpp, html: {class: 'form form-horizontal'} do |f| %>
+  
+
+  <div class="row">
+
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <%= f.input :name %>
+    </div>
+
+  </div>
+
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
+
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+        Save
+      <% end %>
+
+
+      <% if !f.object.new_record? %>
+        <%= link_to "Cancel", @wpp, :class=>"btn pull-right" %>
+
+      <% else %>
+        <%= link_to "Cancel", wpps_path, :class=>"btn pull-right" %>
+      <% end %> 
+    </div>
+  </div>
+<% end %>
+
+<br />

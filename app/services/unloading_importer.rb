@@ -23,6 +23,10 @@ class UnloadingImporter
         whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
         unloading.whodunnit(whodunnit) do 
           unloading.send("#{owner_type.underscore}_id=",owner_id)
+          unloading.approve!
+          if owner_type.to_s == 'Admin'
+            unloading.reviewer_id = owner_id
+          end
           unloading.save!
         end
         Activity.create! action: 'create', trackable: unloading, ownable_id: owner_id, ownable_type: owner_type

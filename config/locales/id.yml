@@ -163,6 +163,16 @@ id:
       title: "Update Vessel"
     index: 
       title: "Pending Updates"
+  ports:
+    title: "Pelabuhan pelabuhan"
+    index:
+      title: "Pelabuhan pelabuhan"
+    show:
+      title: "Profil pelabuhan"
+    edit: 
+      title: "Mengedit pelabuhan"
+    new: 
+      title: "Pelabuhan baru"
   protocols:
     title: "Protokol Protokol"
     index:
@@ -235,6 +245,16 @@ id:
   vessel_imports:
     new:
       title: "Impor Kapal Kapal"
+  wpps:
+    title: "WPPs"
+    index:
+      title: "WPPs"
+    show:
+      title: "Profil WPP"
+    edit: 
+      title: "Mengedit WPP"
+    new: 
+      title: "WPP baru"
   navbar:
     home: "Pulang"
     data: "Review"
