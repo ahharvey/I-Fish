@@ -23,7 +23,7 @@ class UnloadingImporter
         whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
         unloading.whodunnit(whodunnit) do 
           unloading.send("#{owner_type.underscore}_id=",owner_id)
-          unloading.approve!
+          unloading.approved!
           if owner_type.to_s == 'Admin'
             unloading.reviewer_id = owner_id
           end
@@ -53,10 +53,16 @@ class UnloadingImporter
       row = Hash[[header, spreadsheet.row(i)].transpose]
       unloading = Unloading.find_by_id(row["id"]) || Unloading.new
       unloading.attributes = row.to_hash.slice(*( Unloading.accessible_attributes - ['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ) )
-      row.to_hash.slice(*['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ).each do |catch|
-        unless catch.nil? || catch == 0 
-          Rails.logger.info catch
-          unloading.send(catch[0]+'=', catch[1])
+
+#      #convert date to correct format
+#      unloading.time_out = DateTime.new(1899, 12, 30) + row["time_out"]
+#      unloading.time_in  = DateTime.new(1899, 12, 30) + row["time_in"]
+
+      #add catch data
+      row.to_hash.slice(*['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ).each do |sp_catch|
+        unless sp_catch[1].nil? || sp_catch[1] == 0 
+          Rails.logger.info sp_catch
+          unloading.send(sp_catch[0]+'=', sp_catch[1])
         end
       end
       unloading
