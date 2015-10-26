@@ -88,12 +88,20 @@ class BaitLoading < ActiveRecord::Base
     BaitLoading.where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
   end
 
+  def self.uploaded_this_month
+    BaitLoading.where( created_at: Date.today.beginning_of_month..Date.today.end_of_month ).size
+  end
+
+  def self.uploaded_last_month
+    BaitLoading.where( created_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
+  end
+
   def self.approved_this_month
-    BaitLoading.where( date: Date.today.beginning_of_month..Date.today.end_of_month, review_state: 'approved' ).size
+    BaitLoading.where( reviewed_at: Date.today.beginning_of_month..Date.today.end_of_month, review_state: 'approved' ).size
   end
 
   def self.approved_last_month
-    BaitLoading.where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
+    BaitLoading.where( reviewed_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 
   def attributes_for_import_email

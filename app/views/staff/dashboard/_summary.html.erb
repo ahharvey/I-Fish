@@ -13,9 +13,9 @@
     <tr>
       <th rowspan="2" >Unloadings</th>
       <td>Submitted</td>
-      <td><%= Unloading.completed_this_month >= Unloading.completed_last_month ? up_arrow : down_arrow %></td>
-      <td><%= Unloading.completed_this_month %></td>
-      <td><%= Unloading.completed_last_month %></td>
+      <td><%= Unloading.uploaded_this_month >= Unloading.uploaded_last_month ? up_arrow : down_arrow %></td>
+      <td><%= Unloading.uploaded_this_month %></td>
+      <td><%= Unloading.uploaded_last_month %></td>
     </tr>
     <tr>
       <td>Approved</td>
@@ -26,9 +26,9 @@
     <tr>
       <th rowspan="2">Bait Loadings</th>
       <td>Submitted</td>
-      <td><%= BaitLoading.completed_this_month >= BaitLoading.completed_last_month ? up_arrow : down_arrow %></td>
-      <td><%= BaitLoading.completed_this_month %></td>
-      <td><%= BaitLoading.completed_last_month %></td>
+      <td><%= BaitLoading.uploaded_this_month >= BaitLoading.uploaded_last_month ? up_arrow : down_arrow %></td>
+      <td><%= BaitLoading.uploaded_this_month %></td>
+      <td><%= BaitLoading.uploaded_last_month %></td>
     </tr>
     <tr>
       <td>Approved</td>
