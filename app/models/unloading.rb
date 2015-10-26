@@ -108,6 +108,10 @@ class Unloading < ActiveRecord::Base
     time_out.try(:to_s, :short)
   end
 
+  def long_time_out
+    time_out.try(:to_s, :long)
+  end
+
   attr_writer :formatted_time_in
   before_validation :save_formatted_time_in 
   def formatted_time_in
@@ -120,6 +124,10 @@ class Unloading < ActiveRecord::Base
 
   def short_time_in
     time_in.try(:to_s, :short)
+  end
+
+  def long_time_in
+    time_in.try(:to_s, :long)
   end
 
   def number_of_bait_loadings
