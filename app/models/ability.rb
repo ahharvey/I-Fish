@@ -111,6 +111,9 @@ class Ability
     can :manage, CarrierLoading, id: admin.managed_carrier_loadings.map(&:id)
     cannot :destroy, CarrierLoading
 
+    can :create, Port
+    cannot :destroy, Port
+
     can :create, Unloading
     can :manage, Unloading, id: admin.managed_unloadings.map(&:id)
     cannot :destroy, Unloading
