@@ -162,8 +162,7 @@ class Unloading < ActiveRecord::Base
     Unloading.where( reviewed_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 
-  def komo_kg
-  end
+  
   def komu_kg=(value)
     fish = Fish.find_by(code: 'KAW')
     build_unloading_record(fish, value)
@@ -196,6 +195,45 @@ class Unloading < ActiveRecord::Base
       cut_type: 'wholeround',
       catch_type: 'landed'
       )
+  end
+
+  def komo_kg
+    Rails.cache.fetch(["komo_kg", self], expires_in: 5.minutes) do
+      fishId  = Fish.find_by(code: 'KAW').id
+      calculate_production_for( fishId )
+    end
+  end
+
+  def kaw_kg
+    Rails.cache.fetch(["kaw_kg", self], expires_in: 5.minutes) do
+      fishId  = Fish.find_by(code: 'KAW').id
+      calculate_production_for( fishId )
+    end
+  end
+
+  def bet_kg
+    Rails.cache.fetch(["bet_kg", self], expires_in: 5.minutes) do
+      fishId  = Fish.find_by(code: 'BET').id
+      calculate_production_for( fishId )
+    end
+  end
+
+  def yft_kg
+    Rails.cache.fetch(["yft_kg", self], expires_in: 5.minutes) do
+      fishId  = Fish.find_by(code: 'YFT').id
+      calculate_production_for( fishId )
+    end
+  end
+
+  def skj_kg
+    Rails.cache.fetch(["skj_kg", self], expires_in: 5.minutes) do
+      fishId  = Fish.find_by(code: 'SKJ').id
+      calculate_production_for( fishId )
+    end
+  end
+
+  def calculate_production_for( fishId )
+    unloading_catches.where(fish_id: fishId ).sum(:quantity) 
   end
 
   def attributes_for_import_email

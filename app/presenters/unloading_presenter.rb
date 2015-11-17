@@ -16,21 +16,21 @@ class UnloadingPresenter < BasePresenter
   end
 
   def yft
-    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'YFT') ).sum(:quantity) 
+    unloading.yft_kg 
   end
 
   def bet
-    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'BET') ).sum(:quantity) 
+    unloading.bet_kg 
     #best_in_place_if (can? :edit, unloading), unloading, :bet, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
   def skj
-    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'SKJ') ).sum(:quantity) 
+    unloading.skj_kg 
     #best_in_place_if (can? :edit, unloading), unloading, :skj, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
   def kaw
-    unloading.unloading_catches.where(fish_id: Fish.find_by(code: 'KAW') ).sum(:quantity) 
+    unloading.kaw_kg 
     #best_in_place_if (can? :edit, unloading), unloading, :kaw, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 

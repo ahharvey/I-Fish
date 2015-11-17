@@ -6,7 +6,7 @@ ruby "2.2.0"
 gem 'rails', '~> 4.2.0' #3.2.11'
 gem 'pg', '~> 0.18.0'
 #gem 'unicorn', '~> 4.8.0'
-gem 'puma', '~> 2.11.0' 
+gem 'puma', '~> 2.15.0' 
 gem 'rack-timeout', '~> 0.2.0'
 gem 'hirefire-resource', '~> 0.3.5'
 
@@ -44,7 +44,7 @@ gem 'uglifier', '~> 2.7.0'
 ##
 ## CSS AND STYLING
 gem 'bootstrap-sass', '~> 3.3.0'                
-gem 'font-awesome-sass', '~> 4.3.0'
+gem 'font-awesome-sass', '~> 4.4.0'
 gem 'simple_form', '~> 3.1.0'
 gem 'kaminari', '~> 0.16.0'
 gem 'rails4-autocomplete', '~> 1.1.1'
@@ -67,7 +67,7 @@ gem 'chartkick', '~> 1.3.2' # adds ChartKick
 # gem 'wicked_pdf', '~> 0.11.0'
 # gem 'wkhtmltopdf-heroku', '~> 2.12.0'
 gem 'rabl', '~> 0.11.0' # JSON templates
-gem 'oj', '~> 2.12.0' #high performance JSON parser for rabl
+gem 'oj', '~> 2.13.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
 gem 'rqrcode-with-patches', '~>0.6.0'
 gem 'prawn', '~> 2.0.1'
@@ -78,11 +78,11 @@ gem 'prawn-qrcode', '~> 0.2.2.1'
 ## UPLOADS AND INCOMING
 gem 'carrierwave', '~> 0.10.0'
 gem 'carrierwave_direct', '~> 0.0.15'
-gem 'fog', '~> 1.31.0'
+gem 'fog', '~> 1.36.0'
 gem 'roo', '~> 2.0.0'
 gem 'roo-xls', '~> 1.0.0'
-gem 'mini_magick', '~> 4.2.0'
-gem 'rmagick', '~> 2.15.0'
+gem 'mini_magick', '~> 4.3.0'
+#gem 'rmagick', '~> 2.15.0'
 gem 'griddler', '~> 1.2.0'  #Mandril API for incoming email handling
 gem 'griddler-mandrill', '~> 1.1.0'
 gem 'rubyzip', '~> 1.1.0'

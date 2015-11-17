@@ -14,7 +14,8 @@ IFish::Application.routes.draw do
       path_prefix: 'session',
       controllers: { 
         registrations: 'users/registrations',
-        sessions: 'users/sessions'
+        sessions: 'users/sessions',
+        passwords: 'users/passwords'
       },
       path_names: {  
         sign_in: 'signin',

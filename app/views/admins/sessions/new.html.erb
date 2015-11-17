@@ -24,11 +24,13 @@
   	<%= f.input :remember_me, as: :boolean, label: false, inline_label: 'Remember me'  %>
   <% end -%>
 
-  <div class="form-actions">
-  	<%= content_tag :button, type: :submit, class: 'btn btn-primary', style:"margin-left:20px" do %>
-        Sign in
-      <% end %>
+  <br />
+  <div class="form-actions text-center">
+    <%= f.submit "Sign in", class: "btn btn-primary btn-lg"  %>
   </div>
 <% end %>
 
-<%= render "devise/shared/links" %>
+<br />
+<div class="text-center">
+  <%= render "devise/shared/links" %>
+</div>
