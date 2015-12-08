@@ -100,6 +100,10 @@ class ApplicationController < ActionController::Base
       devise_parameter_sanitizer.for(:sign_up) << [:name, :office_id]
       devise_parameter_sanitizer.for(:invite) << [:office_id, :approved]
       devise_parameter_sanitizer.for(:accept_invitation) << [:name]
+    else
+      devise_parameter_sanitizer.for(:sign_up) << []
+      devise_parameter_sanitizer.for(:invite) << []
+      devise_parameter_sanitizer.for(:accept_invitation) << []
     end
 
   end

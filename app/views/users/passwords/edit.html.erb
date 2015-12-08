@@ -8,8 +8,9 @@
   },
   wrapper: :horizontal_form do |f| %>
   
-  <%= devise_error_messages! %>
-  <%= f.hidden_field :reset_password_token %>
+  <%= f.error_notification %>
+  <%= f.input :reset_password_token, as: :hidden %>
+  <%= f.full_error :reset_password_token %>
 
   <%= f.input :password %>
   <br />
