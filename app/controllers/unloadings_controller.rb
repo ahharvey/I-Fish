@@ -12,6 +12,10 @@ class UnloadingsController < ApplicationController
       @unloading = Unloading.new( vessel_id: params[:vessel_id])
       @vessel = Vessel.find(params[:vessel_id])
       
+    elsif params[:company_id]
+      @unloadings = Company.find( params[:company_id] ).unloadings
+      @unloading = Unloading.new( company_id: params[:company_id])
+      @company = Company.find(params[:company_id])
     else
       @unloadings = Unloading.all
     end
