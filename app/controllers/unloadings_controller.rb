@@ -14,7 +14,7 @@ class UnloadingsController < ApplicationController
       
     elsif params[:company_id]
       @unloadings = Company.find( params[:company_id] ).unloadings
-      @unloading = Unloading.new( company_id: params[:company_id])
+      #@unloading = Unloading.new( company_id: params[:company_id])
       @company = Company.find(params[:company_id])
     else
       @unloadings = Unloading.all
