@@ -204,7 +204,7 @@ RSpec.describe UnloadingsController, type: :controller do
       before :each do
         post :create, {:unloading => valid_attributes}
       end
-      it 'does some stuff', :focus do
+      it 'does some stuff' do
         expect {
           post :create, {:unloading => build(:unloading).attributes }
         }.to change(Unloading, :count).by(1)
