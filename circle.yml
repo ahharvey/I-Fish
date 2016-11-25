@@ -1,0 +1,21 @@
+deployment:
+  production:
+    branch: master
+    commands:
+      - heroku maintenance:on --app fishstat-production
+      - heroku scale worker=0 --app fishstat-production
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git push git@heroku.com:fishstat-production.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app fishstat-production:
+          timeout: 400 # if your deploys take a long time
+      - heroku maintenance:off --app fishstat-production
+  staging:
+    branch: staging
+    commands:
+      - heroku maintenance:on --app fishstat-staging
+      - heroku scale worker=0 --app fishstat-staging
+      - "[[ ! -s \"$(git rev-parse --git-dir)/shallow\" ]] || git fetch --unshallow"
+      - git push git@heroku.com:fishstat-staging.git $CIRCLE_SHA1:refs/heads/master
+      - heroku run rake db:migrate --app fishstat-staging:
+          timeout: 400 # if your deploys take a long time
+      - heroku maintenance:off --app fishstat-staging
