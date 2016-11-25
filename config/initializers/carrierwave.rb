@@ -4,9 +4,9 @@
 #	AWS_SECRET = AWS_CONFIG['aws_secret_access_key']
 #	AWS_DIRECTORY = AWS_CONFIG['directory']
 #else
-	AWS_KEY = ENV['S3_KEY']
-	AWS_SECRET = ENV['S3_SECRET']
-	AWS_DIRECTORY = ENV['S3_directory']
+	AWS_KEY = ENV.fetch('S3_KEY')
+	AWS_SECRET = ENV.fetch('S3_SECRET')
+	AWS_DIRECTORY = ENV.fetch('S3_directory')
 #end
 
 
@@ -18,11 +18,10 @@ CarrierWave.configure do |config|
     config.storage = :fog
   end
   config.fog_directory  = AWS_DIRECTORY
-  
+
   config.fog_credentials = {
       :provider => 'AWS',
       :aws_access_key_id => AWS_KEY,
       :aws_secret_access_key => AWS_SECRET
   }
 end
-
