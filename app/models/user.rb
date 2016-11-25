@@ -34,14 +34,14 @@
 #
 
 class User < ActiveRecord::Base
-  
+
   has_paper_trail
 
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, #:validatable,
          :lockable, :timeoutable, :omniauthable, :invitable # :confirmable
 
-  
+
   validates :email, presence: true, uniqueness: true
   validate :avatar_size
 
@@ -54,11 +54,11 @@ class User < ActiveRecord::Base
   has_many :companies, through: :company_positions
   has_many :company_positions
 
-  
+
   mount_uploader :avatar, AvatarUploader
-#  validates :avatar, 
-#    file_size: { 
-#      maximum: 1.megabytes.to_i 
+#  validates :avatar,
+#    file_size: {
+#      maximum: 1.megabytes.to_i
 #    }
 
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h #,:password, :password_confirmation, :current_password
@@ -84,7 +84,7 @@ class User < ActiveRecord::Base
   after_create :set_default_role
 
   def set_default_role
-    self.roles.push Role.find_by_name("public")
+    self.roles.push Role.where(name: "public").first_or_create
     self.save!
   end
 
@@ -116,7 +116,7 @@ class User < ActiveRecord::Base
   def firstname
     self.name.blank? ? "" : self.name.split(" ").first
   end
-  
+
   def lastname
     self.name.blank? ? "" : self.name.split(" ").last
   end
@@ -130,11 +130,11 @@ class User < ActiveRecord::Base
   end
 
   private
- 
+
   def avatar_size
     errors[:avatar] << "should be less than 1MB" if avatar.size > 1.megabytes
   end
 
-  
+
 
 end

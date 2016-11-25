@@ -6,17 +6,17 @@ class DocumentsController < ApplicationController
   respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
 
   def index
-    @documents = Document.all
-    respond_with(@documents)
+    @documents = Document.default
+    respond_to do |format|
+      format.html
+    end
   end
 
   def show
-    respond_with(@document)
   end
 
   def new
     @document = Document.new
-    respond_with(@document)
   end
 
   def edit
@@ -24,34 +24,52 @@ class DocumentsController < ApplicationController
 
   def create
     @document = Document.new(document_params)
-    @document.save
-    respond_with @document, location: -> { after_save_path_for(@document) }
+    respond_to do |format|
+      if @document.save
+        format.html { redirect_to @document.documentable, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @document }
+      else
+        format.html { render :new }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
-    @document.update(document_params)
-    respond_with @document, location: -> { after_save_path_for(@document) }
+    respond_to do |format|
+      if @document.update(document_params)
+        format.html { redirect_to @document.documentable, notice: t('.notice') }
+        format.json { render :show, status: :ok, location: @document }
+      else
+        format.html { render :edit }
+        format.json { render json: @document.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
+    documentable = @document.documentable
     @document.destroy
-    respond_with(@document)
+    respond_to do |format|
+      format.html { redirect_to documentable, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   private
-  
+
   def set_document
     @document = Document.find(params[:id])
   end
 
   def document_params
     params.require(:document).permit(
-      :title, 
-      :description, 
-      :file, 
-      :content_type, 
-      :file_size, 
-      :documentable_id, 
+      :title,
+      :description,
+      :file,
+      :content_type,
+      :file_size,
+      :documentable_id,
       :documentable_type
       )
   end
@@ -61,6 +79,3 @@ class DocumentsController < ApplicationController
   end
 
 end
-
-
-

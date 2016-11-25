@@ -7,30 +7,23 @@ class UnloadingsController < ApplicationController
   respond_to :html, :xml, :json, :csv, :xls, :js
 
   def index
-    if params[:vessel_id]
-      @unloadings = Vessel.find( params[:vessel_id] ).unloadings
-      @unloading = Unloading.new( vessel_id: params[:vessel_id])
-      @vessel = Vessel.find(params[:vessel_id])
-      
-    elsif params[:company_id]
-      @unloadings = Company.find( params[:company_id] ).unloadings
-      #@unloading = Unloading.new( company_id: params[:company_id])
-      @company = Company.find(params[:company_id])
-    else
-      @unloadings = Unloading.all
+    fetch_index_records
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"unloadings-#{Date.current}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
     end
-    respond_with(@unloadings)
   end
 
   def show
-    respond_with(@unloading)
   end
 
   def new
     @unloading = Unloading.new( vessel_id: params[:vessel_id])
     @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
     build_nested_forms( @unloading, @vessel ) if params[:vessel_id]
-    respond_with(@unloading)
   end
 
   def edit
@@ -42,46 +35,49 @@ class UnloadingsController < ApplicationController
     #temp_params[:time_out] = Date.strptime(temp_params[:time_out], '%m/%d/%Y %I:%M %p') rescue ''
     #temp_params[:time_in] = Date.strptime(temp_params[:time_in], '%m/%d/%Y %I:%M %p') rescue ''
     @unloading = Unloading.new(unloading_params.merge( user_id: current_user.try(:id), admin_id: current_admin.try(:id) ) )
-    track_activity @unloading if @unloading.save
-    respond_with @unloading, location: -> { after_save_path_for(@unloading) }
-#    respond_to do |format|
-#      if @unloading.save
-#        format.html { redirect_to after_save_path_for(@unloading), notice: 'Person was successfully created.' }
-#        format.json { render action: 'index', status: :created, location: @unloading }
-#        # added:
-#        format.js   { render action: 'index', status: :created, location: @unloading }
-#      else
-#        flash[:error] = @unloading.errors.full_messages.join(", ")
-#        format.html { render action: 'new' }
-#        format.json { render json: @unloading.errors, status: :unprocessable_entity }
-#        # added:
-#        format.js   { render json: @unloading.errors, status: :unprocessable_entity }
-#      end
-#    end
+    respond_to do |format|
+      if @unloading.save
+        track_activity @unloading
+        format.html { redirect_to @unloading, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @unloading }
+      else
+        format.html { render :new }
+        format.json { render json: @unloading.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
     @vessel = Vessel.find(params[:vessel_id]) if params[:vessel_id]
-    if @unloading.update(unloading_params)
-      track_activity @unloading
-      if params[:unloading][:bait_loading_attributes].present?
-        flash[:success] = "Bait Loading updated successfully!"
-      else 
-        flash[:success] = "Unloading Record updated successfully!"
+    respond_to do |format|
+      if @unloading.update(unloading_params)
+        track_activity @unloading
+        if params[:unloading][:bait_loading_attributes].present?
+          msg = "Bait Loading updated successfully!"
+        else
+          msg = "Unloading Record updated successfully!"
+        end
+        format.html { redirect_to @unloading, notice: msg }
+        format.json { respond_with_bip(@unloading) }
+      else
+        #flash[:error] = @unloading.errors.full_messages.join(", ")
+        format.html { render :edit }
+        format.json { respond_with_bip(@unloading) }
       end
-    else
-      flash[:error] = @unloading.errors.full_messages.join(", ")
     end
 
-    respond_with @unloading, location: -> { after_save_path_for(@unloading) } do |format|
-      format.json { respond_with_bip @unloading } 
-    end
+#    respond_with @unloading, location: -> { after_save_path_for(@unloading) } do |format|
+#      format.json { respond_with_bip @unloading }
+#    end
 
   end
 
   def destroy
     track_activity @unloading if @unloading.destroy
-    respond_with(@unloading)
+    respond_to do |format|
+      format.html { redirect_to unloadings_url, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   def approve
@@ -124,46 +120,80 @@ class UnloadingsController < ApplicationController
   end
 
   private
-  
+
+  def fetch_index_records
+    if klass = [Vessel, Company].detect { |k| params["#{k.name.underscore}_id"]}
+      @unloadings = klass.
+        find( params["#{klass.name.underscore}_id"] ).
+        unloadings.
+        default.
+        page(params[:page])
+    else
+      @unloadings = Unloading.
+        default.
+        page(params[:page])
+    end
+  end
+
   def set_unloading
     @unloading = Unloading.find(params[:id])
   end
 
   def unloading_params
     params.require(:unloading).permit(
+      :port_id,
+      :wpp_id,
       :vessel_id,
-      :port, 
-      :time_out,
-      :time_in,
       :formatted_time_out,
       :formatted_time_in,
-      :yft,
-      :bet,
-      :skj,
-      :kaw,
-      :byproduct,
-      :discard,
       :etp,
       :location,
       :fuel,
       :ice,
-      unloading_catches_attributes: [
-        :id,
-        :fish_id,
-        :cut_type,
-        :quantity,
-        :_destroy
-        ],
-      bait_loadings_attributes: [
-        :id, 
-        :date,
-        :quantity, 
-        :location,
-        :fish_id,
-        :vessel_id,
-        :formatted_date,
-        :_destroy
-        ]
+      :review_state,
+      :byproduct,
+      :discard,
+      :yft,
+      :bet,
+      :skj,
+      :kaw,
+      :catch_certificate
+
+
+#      :vessel_id,
+#      :port_id,
+#      :wpp_id,
+#      :time_out,
+#      :time_in,
+#      :formatted_time_out,
+#      :formatted_time_in,
+#      :yft,
+#      :bet,
+#      :skj,
+#      :kaw,
+#      :byproduct,
+#      :discard,
+#      :etp,
+#      :location,
+#      :fuel,
+#      :ice,
+#      unloading_catches_attributes: [
+#        :id,
+#        :fish_id,
+#        :cut_type,
+#        :quantity,
+#        :_destroy
+#        ],
+#      bait_loadings_attributes: [
+#        :id,
+#        :date,
+#        :quantity,
+#        :location,
+#        :fish_id,
+#        :vessel_id,
+#        :formatted_date,
+#        :_destroy
+#        ]
       )
   end
 
@@ -199,7 +229,7 @@ class UnloadingsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to unloading  }
       format.js {
-        @unloading = unloading 
+        @unloading = unloading
         render :refresh_supervisor_controls
       }
     end
@@ -214,4 +244,3 @@ class UnloadingsController < ApplicationController
   end
 
 end
-

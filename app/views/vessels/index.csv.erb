@@ -1,0 +1,24 @@
+<%- headers = ["id", "name", "vessel type", "gear", "flag_state", "year_built", "length", "tonnage", "imo_number", "company_id", "ap2hi_ref", "material_type", "machine_type", "capacity", "status"] -%>
+
+<%= CSV.generate_line headers %>
+<%- @vessels.each do |vessel| -%>
+<%= CSV.generate_line(
+	[
+		vessel.id,
+		vessel.name,
+    vessel.vessel_type.try(:name),
+    vessel.gear.try(:name),
+    vessel.flag_state,
+    vessel.year_built,
+    vessel.length,
+    vessel.tonnage,
+    vessel.imo_number,
+    vessel.compani.try(:name),
+    vessel.ap2hi_ref,
+    vessel.material_type,
+    vessel.machine_type,
+    vessel.capacity,
+    vessel.status
+	]
+) -%>
+<%- end -%>

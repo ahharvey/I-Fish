@@ -11,52 +11,64 @@ class BaitLoadingsController < ApplicationController
   respond_to :xml, :json, :except => [ :edit, :new, :update, :create ]
 
   def index
-    if params[:vessel_id]
-      @bait_loadings = BaitLoading.where(vessel_id: params[:vessel_id])
-      @vessel = Vessel.find(params[:vessel_id]) if params[:vessel_id]
-    elsif params[:company_id]
-      @vessels = Vessel.where(company_id: params[:company_id] )
-      @company = Company.find(params[:company_id])
-      @bait_loadings = BaitLoading.where(vessel_id: @vessels.pluck(:id) )
+    fetch_index_records
+    respond_to do |format|
+      format.html
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"unloadings-#{Date.current}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
     end
-    @vessels = Vessel.default unless params[:company_id]
-
-    respond_with(@bait_loadings )
   end
 
   def show
-    respond_with(@bait_loading)
   end
 
   def new
     @bait_loading = BaitLoading.new( vessel_id: params[:vessel_id])
-    initialize_form 
-    respond_with(@bait_loading)
+    # initialize_form
   end
 
   def edit
-    @vessels = Vessel.where(company_id: params[:company_id] ) if params[:company_id]
-    @vessels = Vessel.default unless params[:company_id]
+#    @vessels = Vessel.where(company_id: params[:company_id] ) if params[:company_id]
+#    @vessels = Vessel.default unless params[:company_id]
   end
 
   def create
     @bait_loading = BaitLoading.new(bait_loading_params)
-    if @bait_loading.save
-    else
-      initialize_form 
-      Rails.logger.info @bait_loading.errors.to_yaml
+    respond_to do |format|
+      if @bait_loading.save
+        format.html { redirect_to @bait_loading.vessel, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @bait_loading }
+      else
+        # initialize_form
+        format.html { render :new }
+        format.json { render json: @bait_loading.errors, status: :unprocessable_entity }
+      end
     end
-    respond_with @bait_loading, location: -> { after_save_path_for(@bait_loading) }
   end
 
   def update
-    initialize_form unless @bait_loading.update(bait_loading_params)
-    respond_with @bait_loading, location: -> { after_save_path_for(@bait_loading) }
+
+    respond_to do |format|
+      if @bait_loading.update(bait_loading_params)
+        format.html { redirect_to @bait_loading.vessel, notice: t('.notice') }
+        format.json { render :show, status: :ok, location: @bait_loading }
+      else
+        # initialize_form
+        format.html { render :edit }
+        format.json { render json: @bait_loading.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
+    vessel = @bait_loading.vessel
     @bait_loading.destroy
-    respond_with(@bait_loading)
+    respond_to do |format|
+      format.html { redirect_to vessel, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   def approve
@@ -99,21 +111,35 @@ class BaitLoadingsController < ApplicationController
   end
 
   private
-  
+
+  def fetch_index_records
+    if klass = [Vessel, Company].detect { |k| params["#{k.name.underscore}_id"]}
+      @bait_loadings = klass.
+        find( params["#{klass.name.underscore}_id"] ).
+        bait_loadings.
+        default.
+        page(params[:page])
+    else
+      @bait_loadings = BaitLoading.
+        default.
+        page(params[:page])
+    end
+  end
+
   def set_bait_loading
     @bait_loading = BaitLoading.find(params[:id])
   end
 
   def initialize_form
     @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
-    @company = Company.find( params[:company_id] ) if params[:company_id]  
-    
+    @company = Company.find( params[:company_id] ) if params[:company_id]
+
     if @vessel
       @vessels = Vessel.default
-      @bait_fishes = @vessel.bait_fishes 
+      @bait_fishes = @vessel.bait_fishes
     elsif @company
       @vessels = Vessel.where(company_id: params[:company_id] )
-      @bait_fishes = @company.bait_fishes 
+      @bait_fishes = @company.bait_fishes
     else
       @vessels = Vessel.default
       @bait_fishes = Fish.default
@@ -124,13 +150,12 @@ class BaitLoadingsController < ApplicationController
     params.require(:bait_loading).permit(
       :vessel_id,
       :formatted_date,
-      :fish_id,
       :bait_id,
       :secondary_bait_id,
       :quantity,
       :price,
       :location,
-      :method_type,
+      :method_type
 
       )
   end
@@ -143,7 +168,7 @@ class BaitLoadingsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to bait_loading  }
       format.js {
-        @bait_loading = bait_loading 
+        @bait_loading = bait_loading
         render :refresh_supervisor_controls
       }
     end
@@ -158,4 +183,3 @@ class BaitLoadingsController < ApplicationController
   end
 
 end
-

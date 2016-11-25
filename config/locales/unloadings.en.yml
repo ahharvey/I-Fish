@@ -1,0 +1,44 @@
+en:
+  unloadings:
+    title: "Unloading Reports"
+    index:
+      title: "Unloading Reports"
+    show:
+      title: "Unloading Report"
+    new:
+      title: "New Unloading Report"
+    edit:
+      title: "Edit Unloading Report"
+    update:
+      notice: Your edits were successfully submitted and are pending review.
+    create:
+      notice: Unloading was successfully created.
+    destroy:
+      notice: Unloading was successfully destroyed.
+  activerecord:
+    attributes:
+      unloading:
+        port: "Port"
+        time_out: "Dep."
+        time_in: "Arr."
+        etp: "ETP"
+        location: "Location"
+        fuel: "Fuel (L)"
+        ice: "Ice (Block)"
+        byproduct: "Byproduct"
+        discard: "Discard"
+        yft: "YFT"
+        bet: "BET"
+        skj: "SKJ"
+        kaw: "KAW"
+        landed: "Landed"
+        discarded: "Discarded"
+        wpp: "WPP"
+    errors:
+      models:
+        company:
+  unauthorized:
+    new:
+      unloading: You don't have permission to create unloadings.
+    edit:
+      unloading: You don't have permission to edit this unloading.

@@ -15,10 +15,13 @@ class VesselsController < ApplicationController
       sticker_filename = "VesselStickers_#{Date.today.strftime("%Y%m%d")}.pdf"
     end
     respond_with(@vessels) do |format|
-      format.csv { send_data @vessels.to_csv }
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"vessels-#{Date.current}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
       format.pdf do
         pdf = StickerPdf.new(@vessels, view_context)
-        send_data pdf.render, filename: 
+        send_data pdf.render, filename:
         sticker_filename,
         type: "application/pdf"
       end
@@ -31,7 +34,7 @@ class VesselsController < ApplicationController
     respond_with(@vessel) do |format|
       format.pdf do
         pdf = StickerPdf.new(@vessels)
-        send_data pdf.render, filename: 
+        send_data pdf.render, filename:
         "VesselStickers_#{@vessel.ap2hi_ref}_#{Date.today.strftime("%Y%m%d")}.pdf",
         type: "application/pdf"
       end
@@ -40,7 +43,6 @@ class VesselsController < ApplicationController
 
   def new
     @vessel = Vessel.new(company_id: params[:company_id], ap2hi_ref: params[:ap2hi_ref], return_to: params[:company_id])
-    respond_with(@vessel)
   end
 
   def edit
@@ -48,18 +50,38 @@ class VesselsController < ApplicationController
 
   def create
     @vessel = Vessel.new(vessel_params)
-    track_activity @vessel if @vessel.save
-    respond_with @vessel, location: -> { after_save_path_for(@vessel) }
+    respond_to do |format|
+      if @vessel.save
+        track_activity @vessel
+        format.html { redirect_to @vessel, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @vessel }
+      else
+        format.html { render :new }
+        format.json { render json: @vessel.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
-    track_activity @vessel if @vessel.update(vessel_params)
-    respond_with @vessel, location: -> { after_save_path_for(@vessel) }
+    @vessel.attributes = vessel_params
+    respond_to do |format|
+      if @vessel.save_draft
+        track_activity @vessel
+        format.html { redirect_to @vessel, notice: t('.notice') }
+        format.json { render :show, status: :ok, location: @vessel }
+      else
+        format.html { render :edit }
+        format.json { render json: @vessel.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     track_activity @vessel if @vessel.destroy
-    respond_with(@vessel)
+    respond_to do |format|
+      format.html { redirect_to vessels_url, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   def generate_stickers
@@ -80,24 +102,24 @@ class VesselsController < ApplicationController
   end
 
   private
-  
+
   def set_vessel
     @vessel = Vessel.find(params[:id])
   end
 
   def vessel_params
     params.require(:vessel).permit(
-      :name, 
-      :vessel_type_id, 
-      :gear_id, 
-      :flag_state, 
-      :year_built, 
-      :length, 
-      :tonnage, 
-      :imo_number, 
-      :shark_policy, 
-      :iuu_list, 
-      :code_of_conduct, 
+      :name,
+      :vessel_type_id,
+      :gear_id,
+      :flag_state,
+      :year_built,
+      :length,
+      :tonnage,
+      :imo_number,
+      :shark_policy,
+      :iuu_list,
+      :code_of_conduct,
       :company_id,
       :ap2hi_ref,
       :issf_ref,
@@ -114,12 +136,12 @@ class VesselsController < ApplicationController
       :radio,
       :relationship_type,
       :formatted_sipi_expiry,
-      :return_to, 
-      :material_type, 
-      :machine_type, 
-      :capacity, 
-      :vms, 
-      :tracker, 
+      :return_to,
+      :material_type,
+      :machine_type,
+      :capacity,
+      :vms,
+      :tracker,
       :port,
       :operational_type
       )
@@ -135,4 +157,3 @@ class VesselsController < ApplicationController
   end
 
 end
-

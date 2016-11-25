@@ -1,0 +1,15 @@
+<%- headers = ["id", "company", "vessel", "port", "time_out", "time in"] -%>
+
+<%= CSV.generate_line headers %>
+<%- @unloadings.each do |unloading| -%>
+<%= CSV.generate_line(
+	[
+		unloading.id,
+		unloading.company.try(:name),
+    unloading.vessel.try(:ap2hi_ref),
+    unloading.port.try(:name),
+    unloading.time_out,
+    unloading.time_in
+	]
+) -%>
+<%- end -%>

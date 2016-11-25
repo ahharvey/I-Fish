@@ -24,7 +24,7 @@
 #      params.require(:company).permit()
 #    end#
 
-#    
+#
 #end
 
 
@@ -33,34 +33,39 @@
 class CompaniesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_company, 
+  before_action :set_company,
     only: [
-      :show, 
-      :edit, 
-      :update, 
-      :destroy, 
-      :report, 
-      :current_monthly_production, 
+      :show,
+      :edit,
+      :update,
+      :destroy,
+      :report,
+      :current_monthly_production,
       :average_monthly_production,
       :current_catch_composition,
-      :average_catch_composition 
+      :average_catch_composition
     ]
-  respond_to :html
-  respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
-  respond_to :js, only: [:catch_composition, :current_monthly_production, :average_monthly_production, :current_fuel_utilization]
+  #respond_to :html
+  #respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
+  #respond_to :js, only: [:catch_composition, :current_monthly_production, :average_monthly_production, :current_fuel_utilization]
 
   def index
-    @companies = Company.all
-    respond_with(@companies)
+    @companies = Company.default
+    respond_to do |format|
+      format.html
+      format.js
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"companies-#{Date.current}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def show
-    respond_with(@company)
   end
 
   def new
     @company = Company.new(name: params[:name], fishery_id: params[:fishery_id] )
-    respond_with(@company)
   end
 
   def edit
@@ -68,20 +73,36 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(company_params)
-    @company.save
-    
-
-    respond_with @company, location: -> { after_save_path_for(@company) }
+    respond_to do |format|
+      if @company.save
+        format.html { redirect_to @company, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @company }
+      else
+        format.html { render :new }
+        format.json { render json: @company.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
-    @company.update(company_params)
-    respond_with @company, location: -> { after_save_path_for(@company) }
+    @company.attributes = company_params
+    respond_to do |format|
+      if @company.save_draft
+        format.html { redirect_to @company, notice: t('.notice') }
+        format.json { render :show, status: :ok, location: @company }
+      else
+        format.html { render :edit }
+        format.json { render json: @company.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @company.destroy
-    respond_with(@company)
+    respond_to do |format|
+      format.html { redirect_to companies_url, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   def crop
@@ -97,13 +118,13 @@ class CompaniesController < ApplicationController
       else
        @company.vessels.push vessel
        flash[:success]= I18n.t("fisheries.vessels.created")
-      end 
+      end
       redisplay_vessels
     else
       render js: "window.location = #{new_vessel_path(company_id: params[:id], ap2hi_ref: params[:get_vessel]).to_json}"
       #flash[:success]= I18n.t("fisheries.vessels.created")
     end
-    
+
   end
 
   def delete_vessel
@@ -116,7 +137,7 @@ class CompaniesController < ApplicationController
   def report
     respond_with(@company)
   end
-  
+
   def current_catch_composition
     render json: @company.current_catch_composition_chart
   end
@@ -124,7 +145,7 @@ class CompaniesController < ApplicationController
   def average_catch_composition
     render json: @company.average_catch_composition_chart
   end
-  
+
   def current_monthly_production
     render json: @company.current_monthly_production_chart.chart_json
   end
@@ -132,17 +153,17 @@ class CompaniesController < ApplicationController
   def average_monthly_production
     render json: @company.average_monthly_production_chart.chart_json
   end
-  
+
   def current_monthly_cpue
     @company = Company.find(params[:id])
     fishes   = Fish.default
-    cpue = fishes.map{ |fish| 
-      { 
-        name: fish.code, 
+    cpue = fishes.map{ |fish|
+      {
+        name: fish.code,
         data: Unloading.
           where( vessel_id: @company.vessels.map(&:id), time_in: Date.today.beginning_of_year..Date.today  ).
           group_by_month_of_year(:time_in, format: '%b' ).
-          average(:cpue) 
+          average(:cpue)
         }
       }
     cpue = cpue.delete_if { |k, v| v.blank? }
@@ -151,13 +172,13 @@ class CompaniesController < ApplicationController
   def average_monthly_cpue
     @company = Company.find(params[:id])
     fishes   = Fish.default
-    cpue = fishes.map{ |fish| 
-      { 
-        name: fish.code, 
+    cpue = fishes.map{ |fish|
+      {
+        name: fish.code,
         data: Unloading.
           where( vessel_id: @company.vessels.map(&:id)  ).
           group_by_month_of_year(:time_in, format: '%b' ).
-          average(:cpue) 
+          average(:cpue)
         }
       }
     cpue = cpue.delete_if { |k, v| v.blank? }
@@ -183,13 +204,13 @@ class CompaniesController < ApplicationController
       else
        @company.company_positions.create(user_id: user.id, status: 'active')
        flash[:success]= I18n.t("companies.users.created")
-      end 
+      end
       redisplay_users
     else
       email = params[:get_user]
       name  = email[0,email.index('@')]
-      
-      
+
+
       # user = User.invite!({ email: email, name: name }, @currently_signed_in).company_positions.create( user_id: user.id, status: 'active' )
       #@company
       user = User.new( email: email, name: name )
@@ -211,22 +232,22 @@ class CompaniesController < ApplicationController
 
 
   private
-  
+
   def set_company
     @company = Company.find(params[:id])
   end
 
   def company_params
     params.require(:company).permit(
-      :name, 
-      :shark_policy, 
-      :iuu_list, 
-      :code_of_conduct, 
+      :name,
+      :shark_policy,
+      :iuu_list,
+      :code_of_conduct,
       :member,
-      :avatar, 
-      :crop_x, 
-      :crop_y, 
-      :crop_w, 
+      :avatar,
+      :crop_x,
+      :crop_y,
+      :crop_w,
       :crop_h,
       :fishery_id
       )

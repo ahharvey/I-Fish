@@ -3,6 +3,13 @@ require "application_responder"
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
 
+  before_action :user_for_draftsman
+  before_action :set_draftsman_whodunnit
+
+  before_action :set_locale
+
+  before_filter :set_currently_signed_in
+  after_filter :flash_to_headers
 
   self.responder = ApplicationResponder
   respond_to :html
@@ -24,17 +31,16 @@ class ApplicationController < ActionController::Base
 
   # in production redirects to 404 if url does not exist
   # in other environments displays real exceptions
-  unless Rails.application.config.consider_all_requests_local 
+  unless Rails.application.config.consider_all_requests_local
     rescue_from ActionController::RoutingError, with: -> { render_404  }
   end
 
   #add_flash_types :error, :success, :info
 
   protect_from_forgery
-  before_filter :set_locale
+
   #before_filter :authenticate!
-  before_filter :set_currently_signed_in
-  after_filter :flash_to_headers
+
   # Override default Cancan current ability to fetch a specific one
   def current_ability
     @current_ability ||= case
@@ -42,7 +48,7 @@ class ApplicationController < ActionController::Base
         Ability.new(current_user)
       when current_admin
         Ability.new(current_admin)
-      else Ability.new(User.new) 
+      else Ability.new(User.new)
       end
   end
 
@@ -72,8 +78,10 @@ class ApplicationController < ActionController::Base
   end
 
 
+
+
   def track_activity(trackable, action = params[:action])
-    @currently_signed_in.activities.create! action: action, trackable: trackable 
+    @currently_signed_in.activities.create! action: action, trackable: trackable
   end
 
   def restrict_access
@@ -82,7 +90,7 @@ class ApplicationController < ActionController::Base
     end
   end
 
-  before_filter :staff_dashboard 
+  before_filter :staff_dashboard
   def staff_dashboard
     if admin_signed_in?
       pendingVessels      = PendingVessel.pending.size
@@ -97,25 +105,39 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     if resource_class == Admin
-      devise_parameter_sanitizer.for(:sign_up) << [:name, :office_id]
-      devise_parameter_sanitizer.for(:invite) << [:office_id, :approved]
-      devise_parameter_sanitizer.for(:accept_invitation) << [:name]
-    else
-      devise_parameter_sanitizer.for(:sign_up) << []
-      devise_parameter_sanitizer.for(:invite) << []
-      devise_parameter_sanitizer.for(:accept_invitation) << []
+      #devise_parameter_sanitizer.for(:sign_up) << [:name, :office_id]
+      #devise_parameter_sanitizer.for(:invite) << [:office_id, :approved]
+      #devise_parameter_sanitizer.for(:accept_invitation) << [:name]
+      devise_parameter_sanitizer.permit(:sign_up, keys: [:name, :office_id])
+      devise_parameter_sanitizer.permit(:invite, keys: [:office_id, :approved])
+      devise_parameter_sanitizer.permit(:accept_invitation, keys: [:name])
+#    else
+#      devise_parameter_sanitizer.for(:sign_up) << []
+#      devise_parameter_sanitizer.for(:invite) << []
+#      devise_parameter_sanitizer.for(:accept_invitation) << []
     end
 
   end
 
+
   private
 
-  def set_locale
-    I18n.locale = params[:locale] if params[:locale].present?
+  def user_for_draftsman
+    return nil                unless ( user_signed_in? || admin_signed_in? )
+    return current_user.id    if user_signed_in?
+    return current_admin.id   if admin_signed_in?
   end
 
-  def self.default_url_options(options = {})
-    options.merge({locale: I18n.locale})
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
+
+#  def default_url_options(options = {})
+#    { locale: I18n.locale }.merge options
+#  end
+
+  def default_url_options
+    { locale: I18n.locale }
   end
 
   def flash_to_headers
@@ -154,5 +176,5 @@ class ApplicationController < ActionController::Base
   end
 
 
-    
+
 end

@@ -1,0 +1,12 @@
+<%- headers = ["id", "code", "name"] -%>
+
+<%= CSV.generate_line headers %>
+<%- @fisheries.each do |fishery| -%>
+<%= CSV.generate_line(
+	[
+		fishery.id,
+		fishery.code,
+    fishery.name 
+	]
+) -%>
+<%- end -%>

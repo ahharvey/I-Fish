@@ -20,8 +20,11 @@
 
 class BaitLoading < ActiveRecord::Base
 
+  METHOD_TYPES = %w{ bagan purse beach bouke }
+
   has_paper_trail
-  
+  include Reviewable
+
   belongs_to :vessel, touch: true
   belongs_to :fish, touch: true
   belongs_to :secondary_fish, class_name: 'Fish', foreign_key: 'secondary_fish_id'
@@ -31,6 +34,13 @@ class BaitLoading < ActiveRecord::Base
   belongs_to :secondary_bait, class_name: 'Bait', foreign_key: 'secondary_bait_id'
   belongs_to :reviewer, :class_name => 'User'
 
+  scope :default,   -> { order('bait_loadings.date DESC') }
+  scope :completed_this_month, -> { where( date: Date.today.beginning_of_month..Date.today.end_of_month ).size }
+  scope :completed_last_month, -> { where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size }
+  scope :uploaded_this_month, -> { where( created_at: Date.today.beginning_of_month..Date.today.end_of_month ).size }
+  scope :uploaded_last_month, -> { where( created_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size }
+  scope :approved_this_month, -> { where( reviewed_at: Date.today.beginning_of_month..Date.today.end_of_month, review_state: 'approved' ).size }
+  scope :approved_last_month, -> { where( reviewed_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size }
 
   validates :vessel,
     presence: true
@@ -39,70 +49,36 @@ class BaitLoading < ActiveRecord::Base
   validates :quantity,
     presence: true,
     numericality: {
-      only_integer: true
-    },
-    inclusion: {
-      in: 1..999
+      only_integer: true,
+      greater_than_or_equal_to: 1,
+      less_than_or_equal_to: 999
     }
-#  validates :method_type,
+  validates :method_type,
+    inclusion: { in: METHOD_TYPES },
+    allow_blank: true
 #    presence: true
 #  validates :grid,
 #    presence: true
 
 
 
-  METHOD_TYPES = ["bagan", "purse", "beach", "bouke"]
 
-  STATES = %w{ pending rejected approved }
 
-  STATES.each do |state|
-    define_method("#{state}?") do
-      self.review_state == state
-    end
 
-    define_method("#{state}!") do
-      self.update_attributes(
-        review_state: state,
-        reviewed_at: DateTime.now
-        )
-    end
-  end
-  
+
   attr_writer :formatted_date
-  before_validation :save_formatted_date 
+  before_validation :save_formatted_date
   validate :validates_date
   def formatted_date
     @formatted_date || date.try(:to_s, :long)
   end
-  
+
   def save_formatted_date
     self.date = Chronic.parse(@formatted_date) if @formatted_date.present?
   end
 
 
-  def self.completed_this_month
-    BaitLoading.where( date: Date.today.beginning_of_month..Date.today.end_of_month ).size
-  end
 
-  def self.completed_last_month
-    BaitLoading.where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
-  end
-
-  def self.uploaded_this_month
-    BaitLoading.where( created_at: Date.today.beginning_of_month..Date.today.end_of_month ).size
-  end
-
-  def self.uploaded_last_month
-    BaitLoading.where( created_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
-  end
-
-  def self.approved_this_month
-    BaitLoading.where( reviewed_at: Date.today.beginning_of_month..Date.today.end_of_month, review_state: 'approved' ).size
-  end
-
-  def self.approved_last_month
-    BaitLoading.where( reviewed_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
-  end
 
   def attributes_for_import_email
 
@@ -112,14 +88,14 @@ class BaitLoading < ActiveRecord::Base
     bait1     = Bait.find( bait_id ).code             rescue 'none'
     bait2     = Bait.find( secondary_bait_id ).code   rescue 'none'
 
-    
+
     {
-      date: loadDate, 
+      date: loadDate,
       vessel: vessel,
       method: method_type,
       grid: grid,
       quantity: quantity,
-      price: price, 
+      price: price,
       primary: bait1,
       secondary: bait2
     }
@@ -134,17 +110,19 @@ class BaitLoading < ActiveRecord::Base
   end
 
   def self.accessible_attributes
-    [ 
-      "date", 
-      "vessel_id", 
-      "method_type", 
-      "grid_id",  
-      "quantity", 
+    [
+      "date",
+      "vessel_id",
+      "method_type",
+      "grid_id",
+      "quantity",
       "price",
-      "bait_id", 
-      "secondary_bait_id", 
+      "bait_id",
+      "secondary_bait_id",
     ]
   end
 
   
+
+
 end

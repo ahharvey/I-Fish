@@ -20,6 +20,16 @@ class Document < ActiveRecord::Base
 
   before_save :update_document_attributes
 
+  validates :documentable,
+    presence: true
+
+  validates :file,
+    integrity: true,
+    processing: true,
+    presence: true
+
+  scope :default, -> { order('documents.created_at DESC') }
+
   def is_word?
     doc   = 'application/msword'
     docx  = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'

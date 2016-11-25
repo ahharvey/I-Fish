@@ -11,11 +11,12 @@
 #
 
 class Fishery < ActiveRecord::Base
-  
+
   has_paper_trail
+  has_drafts
 
   has_many :documents, as: :documentable
-  
+
   has_many :surveys, dependent: :destroy
   has_many :landings, through: :surveys
   has_many :catches, through: :landings
@@ -28,6 +29,7 @@ class Fishery < ActiveRecord::Base
   has_many :districts, through: :surveys
 
   belongs_to :protocol
+  scope :default, -> { order('fisheries.name ASC') }
 
   has_and_belongs_to_many :target_fishes,
     join_table: "target_fishes",
@@ -36,15 +38,15 @@ class Fishery < ActiveRecord::Base
     class_name: "Fish",
     before_add: :validates_target_fishes
   has_and_belongs_to_many :used_gears, class_name: "Gear", before_add: :validates_used_gears
-  has_and_belongs_to_many :member_companies, 
+  has_and_belongs_to_many :member_companies,
     join_table: "fisheries_companies",
     foreign_key: :fishery_id,
     association_foreign_key:  :company_id,
-    class_name: "Company", 
+    class_name: "Company",
     before_add: :validates_member_companies
   has_and_belongs_to_many :member_offices, class_name: "Office", before_add: :validates_member_offices
 
-  has_and_belongs_to_many :bait_fishes, 
+  has_and_belongs_to_many :bait_fishes,
     join_table: "bait_fishes",
     foreign_key: :fishery_id,
     association_foreign_key:  :fish_id,
@@ -75,12 +77,12 @@ class Fishery < ActiveRecord::Base
 
   def approved_landing_ids
     Rails.cache.fetch(["approved_landing_ids", self], expires_in: 5.minutes) do
-      Landing.where(survey_id: self.approved_survey_ids ).map(&:id) 
+      Landing.where(survey_id: self.approved_survey_ids ).map(&:id)
     end
   end
 
   def approved_catches
-    Catch.includes(:landing, :survey).where(landing_id: self.approved_landing_ids ) 
+    Catch.includes(:landing, :survey).where(landing_id: self.approved_landing_ids )
   end
 
   def category_name

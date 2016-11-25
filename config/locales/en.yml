@@ -23,7 +23,7 @@ en:
     title: "Audit Report"
     new:
       title: "Audit Report"
-    edit: 
+    edit:
       title: "Audit Report"
   admins:
     title: "Officers"
@@ -40,17 +40,17 @@ en:
         title: "Sign up"
   baits:
     title: "Bait"
-    index: 
+    index:
       title: "Bait"
-    new: 
+    new:
       title: "New bait"
-    edit: 
+    edit:
       title: "Edit bait"
   bait_loadings:
     title: "Bait Loadings"
-    index: 
+    index:
       title: "Bait Loadings"
-    show: 
+    show:
       title: "Bait Loading Report"
   bait_loading_imports:
     title: "Import Bait Loadings"
@@ -62,18 +62,6 @@ en:
       title: "Catch Composition"
     show:
       title: "Catch Report"
-  companies:
-    title: "Companies"
-    index:
-      title: "Companies"
-    show:
-      title: "Company"
-    new:
-      title: "New company"
-    edit:
-      title: "Edit company"
-    report:
-      title: "Company Report"
   desas:
     title: "Villages"
     index:
@@ -104,22 +92,6 @@ en:
       title: "Edit engine"
     new:
       title: "New engine"
-  fisheries:
-    title: "Fisheries"
-    index:
-      title: "Fisheries"
-    show:
-      title: "Fishery"
-    report:
-      title: "Fishery Report"
-    target_fishes:
-      exists: "Target fish already set"
-      created: "Target fish added"
-      removed: "Target fish removed"
-    bait_fishes:
-      exists: "Bait fish already set"
-      created: "Bait fish added"
-      removed: "Bait fish removed"
   fishes:
     title: "Fish"
     index:
@@ -168,11 +140,11 @@ en:
       title: "Office"
   pending_vessels:
     title: "Update Vessel"
-    new: 
+    new:
       title: "Update Vessel"
-    edit: 
+    edit:
       title: "Update Vessel"
-    index: 
+    index:
       title: "Pending Updates"
   ports:
     title: "Ports"
@@ -180,9 +152,9 @@ en:
       title: "Ports"
     show:
       title: "Port Profile"
-    edit: 
+    edit:
       title: "Edit port"
-    new: 
+    new:
       title: "New port"
   protocols:
     title: "Protocols"
@@ -228,17 +200,7 @@ en:
       edit:
         title: "Security"
       new:
-        title: "Sign up"
-  unloadings:
-    title: "Unloading Reports"
-    index:
-      title: "Unloading Reports"
-    show:
-      title: "Unloading Report"
-    new:
-      title: "New Unloading Report"
-    edit:
-      title: "Edit Unloading Report"
+        title: "Sign up"    
   unloading_imports:
     title: "Import Unloadings"
     new:
@@ -263,9 +225,9 @@ en:
       title: "WPPs"
     show:
       title: "WPP Profile"
-    edit: 
+    edit:
       title: "Edit WPP"
-    new: 
+    new:
       title: "New WPP"
   navbar:
     home: "Home"
@@ -315,7 +277,7 @@ en:
           text: "This spreadsheet is used to enter and submit fishers' logbook data."
   activerecord:
     attributes:
-      bait_loading: 
+      bait_loading:
         date: "Date"
         ap2hi_ref: "AP2HI UVI"
         formatted_date: "Date"
@@ -343,13 +305,6 @@ en:
         landing_id: "Landing"
         length: "Length"
         width: "Width"
-      company:
-        name: "Name"
-        code: "Abbreviation"
-        shark_policy: "Shark policy?"
-        iuu_list: "IUU list?"
-        code_of_conduct: "Code of conduct?"
-        member: "AP2HI member?"
       desa:
         name: "Name"
         code: "Code"
@@ -359,9 +314,6 @@ en:
       district:
         name: "Name"
       engine:
-        name: "Name"
-        code: "Code"
-      fishery:
         name: "Name"
         code: "Code"
       fish:
@@ -431,7 +383,7 @@ en:
       office:
         name: "Name"
         district_id: "District"
-      pending_vessel: 
+      pending_vessel:
         operational_type: "Operational Status"
         admin: "Auditor"
       province:
@@ -450,24 +402,7 @@ en:
         admin_id: "Admin"
         supervisor:
           unapproved: "Some are unapproved!!"
-      unloading:
-        port: "Port"
-        time_out: "Dep."
-        time_in: "Arr."
-        etp: "ETP"
-        location: "Location"
-        fuel: "Fuel (L)"
-        ice: "Ice (Block)"
-        byproduct: "Byproduct"
-        discard: "Discard"
-        yft: "YFT"
-        bet: "BET"
-        skj: "SKJ"
-        kaw: "KAW"
-        landed: "Landed"
-        discarded: "Discarded"
-        wpp: "WPP"
-      unloading_catch: 
+      unloading_catch:
         fish: 'Species'
         cut_type: 'Cut'
         size_class: 'Size'
@@ -508,12 +443,12 @@ en:
       models:
         bait_loading:
           invalid_date: "is invalid"
-          attributes: 
+          attributes:
             vessel:
               blank: "Please select a vessel"
-            fish: 
+            fish:
               blank: "Please select a dominant bait species"
-            quantity: 
+            quantity:
               blank: "Please enter the number of bait buckets"
             method_type:
               blank: "Please enter a catching method"

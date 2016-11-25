@@ -28,7 +28,8 @@
 class Unloading < ActiveRecord::Base
 
   has_paper_trail
-  
+  include Reviewable
+
   belongs_to :vessel
   has_one :company, through: :vessel
   belongs_to :wpp
@@ -42,49 +43,37 @@ class Unloading < ActiveRecord::Base
 
   scope :default, -> { order('unloadings.time_in DESC') }
 
-  validates :time_out, 
+  validates :vessel,
+    presence: true
+  validates :port,
+    presence: true
+  validates :wpp,
+    presence: true
+  validates :time_out,
     timeliness: {
-      type: :datetime
+      type: :datetime,
+      allow_blank: true
     }
-  validates :time_in, 
+  validates :time_in,
     timeliness: {
       on_or_after: :time_out,
-      type: :datetime
+      type: :datetime,
+      allow_blank: true
     }
-  validates :vessel_id,
-    presence: true 
-  validates :port_id,
-    presence: true
-  validates :wpp_id,
-    presence: true  
+
 
   before_save :set_cpue
 
 
 #  validates :yft, :bet, :skj, :kaw, :byproduct, :discard, :fuel, :ice,
 #    presence: {
-#      message: " cannot be blank." 
+#      message: " cannot be blank."
 #    },
 #    numericality: {
 #      message: " is not a number."
 #    }
 
 
-
-  STATES = %w{ pending rejected approved }
-
-  STATES.each do |state|
-    define_method("#{state}?") do
-      self.review_state == state
-    end
-
-    define_method("#{state}!") do
-      self.update_attributes(
-        review_state: state,
-        reviewed_at: DateTime.now
-        )
-    end
-  end
 
 #  def formatted_time_out
 #    time_out.try(:strftime, "%d-%b-%Y %H:%M")
@@ -95,11 +84,11 @@ class Unloading < ActiveRecord::Base
 #  end
 
   attr_writer :formatted_time_out
-  before_validation :save_formatted_time_out 
+  before_validation :save_formatted_time_out
   def formatted_time_out
     @formatted_time_out || time_out.try(:to_s, :long)
   end
-  
+
   def save_formatted_time_out
     self.time_out = Chronic.parse(@formatted_time_out) if @formatted_time_out.present?
   end
@@ -113,11 +102,11 @@ class Unloading < ActiveRecord::Base
   end
 
   attr_writer :formatted_time_in
-  before_validation :save_formatted_time_in 
+  before_validation :save_formatted_time_in
   def formatted_time_in
     @formatted_time_in || time_in.try(:to_s, :long)
   end
-  
+
   def save_formatted_time_in
     self.time_in = Chronic.parse(@formatted_time_in) if @formatted_time_in.present?
   end
@@ -145,7 +134,7 @@ class Unloading < ActiveRecord::Base
   def self.completed_last_month
     Unloading.where( time_in: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size
   end
-  
+
   def self.uploaded_this_month
     Unloading.where( created_at: Date.today.beginning_of_month..Date.today.end_of_month ).size
   end
@@ -162,7 +151,7 @@ class Unloading < ActiveRecord::Base
     Unloading.where( reviewed_at: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month, review_state: 'approved' ).size
   end
 
-  
+
   def komu_kg=(value)
     fish = Fish.find_by(code: 'KAW')
     build_unloading_record(fish, value)
@@ -233,7 +222,7 @@ class Unloading < ActiveRecord::Base
   end
 
   def calculate_production_for( fishId )
-    unloading_catches.where(fish_id: fishId ).sum(:quantity) 
+    unloading_catches.where(fish_id: fishId ).sum(:quantity)
   end
 
   def attributes_for_import_email
@@ -244,13 +233,13 @@ class Unloading < ActiveRecord::Base
     timeout  = time_out.try(:to_s, :long)
     timein   = time_in.try(:to_s, :long)
     etpBool  = etp.present? ? 'Yes' : 'No'
-    
+
     {
-      vessel: vessel, 
+      vessel: vessel,
       port: port,
-      wpp: wpp, 
+      wpp: wpp,
       time_out: timeout,
-      time_in: timein, 
+      time_in: timein,
       etp: etpBool,
       fuel: fuel,
       ice: ice
@@ -260,12 +249,12 @@ class Unloading < ActiveRecord::Base
   #private
 
   def set_cpue
-    f     = Fish.find_by(code: 'SKJ')
-    c     = unloading_catches.where(fish_id: f.id )
-    t     = c.sum(:quantity)
-    d     = (time_in - time_out )/60/60/24
-    gt    = vessel.try(:tonnage).to_i || 0
-    cpue  = t / d / gt
+#    f     = Fish.find_by(code: 'SKJ')
+#    c     = unloading_catches.where(fish_id: f.id )
+#    t     = c.sum(:quantity)
+#    d     = (time_in - time_out )/60/60/24
+#    gt    = vessel.try(:tonnage).to_i || 0
+#    cpue  = t / d / gt
   end
 
   def self.accessible_attributes
@@ -282,7 +271,7 @@ class Unloading < ActiveRecord::Base
       'komu_kg',
       'kaw_kg',
       'yft_kg',
-      'skj_kg'      
+      'skj_kg'
     ]
   end
 end

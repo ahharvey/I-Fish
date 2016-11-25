@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150815174500) do
+ActiveRecord::Schema.define(version: 20160827152123) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -164,6 +164,9 @@ ActiveRecord::Schema.define(version: 20150815174500) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.string   "code"
+    t.integer  "draft_id"
+    t.datetime "published_at"
+    t.datetime "trashed_at"
   end
 
   create_table "company_positions", force: :cascade do |t|
@@ -205,6 +208,25 @@ ActiveRecord::Schema.define(version: 20150815174500) do
     t.datetime "updated_at",        null: false
   end
 
+  create_table "drafts", force: :cascade do |t|
+    t.string   "item_type",      null: false
+    t.integer  "item_id",        null: false
+    t.string   "event",          null: false
+    t.string   "whodunnit"
+    t.json     "object"
+    t.json     "previous_draft"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
+    t.json     "object_changes"
+  end
+
+  add_index "drafts", ["created_at"], name: "index_drafts_on_created_at", using: :btree
+  add_index "drafts", ["event"], name: "index_drafts_on_event", using: :btree
+  add_index "drafts", ["item_id"], name: "index_drafts_on_item_id", using: :btree
+  add_index "drafts", ["item_type"], name: "index_drafts_on_item_type", using: :btree
+  add_index "drafts", ["updated_at"], name: "index_drafts_on_updated_at", using: :btree
+  add_index "drafts", ["whodunnit"], name: "index_drafts_on_whodunnit", using: :btree
+
   create_table "engines", force: :cascade do |t|
     t.string   "name",       limit: 255
     t.string   "code",       limit: 255
@@ -222,11 +244,14 @@ ActiveRecord::Schema.define(version: 20150815174500) do
   end
 
   create_table "fisheries", force: :cascade do |t|
-    t.string   "name",        limit: 255
-    t.string   "code",        limit: 255
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
+    t.string   "name",         limit: 255
+    t.string   "code",         limit: 255
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
     t.integer  "protocol_id"
+    t.integer  "draft_id"
+    t.datetime "published_at"
+    t.datetime "trashed_at"
   end
 
   create_table "fisheries_companies", id: false, force: :cascade do |t|
@@ -260,6 +285,9 @@ ActiveRecord::Schema.define(version: 20150815174500) do
     t.integer  "max"
     t.integer  "opt"
     t.boolean  "threatened",                  default: false
+    t.integer  "draft_id"
+    t.datetime "published_at"
+    t.datetime "trashed_at"
   end
 
   create_table "gears", force: :cascade do |t|
@@ -709,6 +737,9 @@ ActiveRecord::Schema.define(version: 20150815174500) do
     t.string   "dkp_ref"
     t.string   "status"
     t.string   "operational_type"
+    t.integer  "draft_id"
+    t.datetime "published_at"
+    t.datetime "trashed_at"
   end
 
   add_index "vessels", ["company_id"], name: "index_vessels_on_company_id", using: :btree

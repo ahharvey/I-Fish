@@ -33,9 +33,9 @@
 #
 
 class Admin < ActiveRecord::Base
-  
+
   has_paper_trail
-  
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :confirmable,
   # :lockable, :timeoutable and :omniauthable
@@ -43,7 +43,7 @@ class Admin < ActiveRecord::Base
 
   # Setup accessible (or protected) attributes for your model
 
-  
+
   validates :name, presence: true
   validates :office, presence: true
   validates :email, presence: true, uniqueness: true
@@ -72,7 +72,7 @@ class Admin < ActiveRecord::Base
 
   # sets default role to public
   def set_default_role
-    self.roles.push Role.find_by_name("enumerator")
+    self.roles.push Role.where(name: "enumerator").first_or_create
     self.save!
   end
 
@@ -101,7 +101,7 @@ class Admin < ActiveRecord::Base
   end
 
   def public?
-  	
+
   end
 
   def developer?
@@ -113,18 +113,18 @@ class Admin < ActiveRecord::Base
   end
 
   mount_uploader :avatar, AvatarUploader
-#  validates :avatar, 
-#    file_size: { 
-#      maximum: 1.megabytes.to_i 
-#    } 
-  
+#  validates :avatar,
+#    file_size: {
+#      maximum: 1.megabytes.to_i
+#    }
+
   attr_accessor :crop_x, :crop_y, :crop_w, :crop_h
   after_update :crop_avatar
-  
+
   def crop_avatar
     avatar.recreate_versions! if crop_x.present?
   end
-  
+
   #enables change avatar without password
   def update_with_password(params={})
     if params[:password].blank?
@@ -136,29 +136,29 @@ class Admin < ActiveRecord::Base
 
   #rollsback new role if exists
   def validates_role(role)
-    
+
     if self.roles.include? role
       errors[:base] << "error in value enter male or female"
-      raise ActiveRecord::Rollback 
+      raise ActiveRecord::Rollback
     end
   end
 
-  def active_for_authentication? 
-    super && approved? 
-  end 
+  def active_for_authentication?
+    super && approved?
+  end
 
-  def inactive_message 
-    if !approved? 
-      :not_approved 
-    else 
-      super # Use whatever other message 
-    end 
+  def inactive_message
+    if !approved?
+      :not_approved
+    else
+      super # Use whatever other message
+    end
   end
 
   def firstname
     self.name.blank? ? "" : self.name.split(" ").first
   end
-  
+
   def lastname
     self.name.blank? ? "" : self.name.split(" ").last
   end
@@ -217,7 +217,7 @@ class Admin < ActiveRecord::Base
   end
 
   def created_by_invitation?
-    invitation_created_at? && encrypted_password.blank? 
+    invitation_created_at? && encrypted_password.blank?
   end
 
   def pending_invitation?
@@ -231,12 +231,12 @@ class Admin < ActiveRecord::Base
   end
 
   private
- 
+
   def avatar_size
     errors[:avatar] << "should be less than 1MB" if avatar.size > 1.megabytes
   end
 
-  
-  
+
+
 
 end

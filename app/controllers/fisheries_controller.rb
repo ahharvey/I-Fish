@@ -1,26 +1,33 @@
 class FisheriesController < ApplicationController
   load_and_authorize_resource
-
   before_action :set_fishery, only: [:show, :edit, :update, :destroy]
 
+  layout :select_layout
+
   skip_before_filter :authenticate!
-  respond_to :html
-  respond_to :xml, :json, :except => [ :edit, :new, :update, :create ]
+
+  #respond_to :html
+  #respond_to :xml, :json, :except => [ :edit, :new, :update, :create ]
 
   autocomplete :fish, :scientific_name
 
   def index
-    @fisheries = Fishery.all
-    respond_with(@fisheries)
+    @fisheries = Fishery.default
+    respond_to do |format|
+      format.html
+      format.js
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"fisheries-#{Date.current}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def show
-    respond_with(@fishery)
   end
 
   def new
     @fishery = Fishery.new
-    respond_with(@fishery)
   end
 
   def edit
@@ -28,18 +35,36 @@ class FisheriesController < ApplicationController
 
   def create
     @fishery = Fishery.new(fishery_params)
-    @fishery.save
-    respond_with @fishery, location: -> { after_save_path_for(@fishery) }
+    respond_to do |format|
+      if @fishery.save
+        format.html { redirect_to @fishery, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @fishery }
+      else
+        format.html { render :new }
+        format.json { render json: @fishery.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
-    @fishery.update(fishery_params)
-    respond_with @fishery, location: -> { after_save_path_for(@fishery) }
+    @fishery.attributes = fishery_params
+    respond_to do |format|
+      if @fishery.save_draft
+        format.html { redirect_to @fishery, notice: t('.notice') }
+        format.json { render :show, status: :ok, location: @fishery }
+      else
+        format.html { render :edit }
+        format.json { render json: @fishery.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @fishery.destroy
-    respond_with(@fishery)
+    respond_to do |format|
+      format.html { redirect_to fisheries_url, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   def get_fish
@@ -55,12 +80,12 @@ class FisheriesController < ApplicationController
       else
        @fishery.target_fishes.push fish
        flash[:success]= I18n.t("fisheries.target_fishes.created")
-      end 
+      end
       redisplay_target_fishes
     else
       render js: "window.location = #{new_fish_path(fishery_id: params[:id], code: params[:get_fish]).to_json}"
     end
-    
+
   end
 
   def delete_target_fish
@@ -77,12 +102,12 @@ class FisheriesController < ApplicationController
       else
        @fishery.bait_fishes.push fish
        flash[:success]= I18n.t("fisheries.bait_fishes.created")
-      end 
+      end
       redisplay_bait_fishes
     else
       render js: "window.location = #{new_fish_path(fishery_id: params[:id], code: params[:get_bait]).to_json}"
     end
-    
+
   end
 
   def delete_bait_fish
@@ -99,12 +124,12 @@ class FisheriesController < ApplicationController
       else
        @fishery.used_gears.push gear
        flash[:success]= I18n.t("fisheries.used_gears.created")
-      end 
+      end
       redisplay_used_gears
     else
       render js: "window.location = #{new_gear_path(fishery_id: params[:id], alpha_code: params[:get_gear]).to_json}"
     end
-    
+
   end
 
   def delete_used_gear
@@ -121,10 +146,10 @@ class FisheriesController < ApplicationController
       else
        @fishery.member_companies.push company
        flash[:success]= I18n.t("fisheries.member_companies.created")
-      end 
+      end
       redisplay_member_companies
     else
-    
+
       render js: "window.location = #{new_company_path(fishery_id: params[:id], name: params[:get_company]).to_json}"
     end
   end
@@ -143,7 +168,7 @@ class FisheriesController < ApplicationController
       else
        @fishery.member_offices.push office
        flash[:success]= I18n.t("fisheries.member_offices.created")
-      end 
+      end
       redisplay_member_offices
     else
       render js: "window.location = #{new_office_path(fishery_id: params[:id], name: params[:get_office]).to_json}"
@@ -175,10 +200,10 @@ class FisheriesController < ApplicationController
         graph_catch_composition() if params[:method] == "catch_composition"
         graph_fishing_activity() if params[:method] == "activity"
         render :json=>@fishery.to_json(include: { :surveys => {include: { :landings => { include: :catches }}}} ) unless params.has_key?(:method)
-        
+
       end
       format.xls {
-        headers["Content-Disposition"] = "attachment; filename=\"#{@fishery.name}_#{Date.today}\"" 
+        headers["Content-Disposition"] = "attachment; filename=\"#{@fishery.name}_#{Date.today}\""
       }
     end
   end
@@ -199,13 +224,13 @@ class FisheriesController < ApplicationController
         col_headers.push "#{Date::MONTHNAMES[m].slice(0,3)} #{y.to_s.slice(2,2)}"
         surveys_from = Date.new(y,m,15).beginning_of_month
         surveys_to = Date.new(y,m,15).end_of_month
-        landings = Landing.joins(:survey).where('surveys.date_published >= ? AND surveys.date_published <= ? AND surveys.fishery_id = ?', surveys_from, surveys_to, @fishery.id) 
+        landings = Landing.joins(:survey).where('surveys.date_published >= ? AND surveys.date_published <= ? AND surveys.fishery_id = ?', surveys_from, surveys_to, @fishery.id)
 
         res = []
         ls=landings.where('landings.time_out != landings.time_in')
-        ls.each do |l| 
+        ls.each do |l|
           if l.weight.zero? && l.quantity.zero?
-            cpue = 0.to_i 
+            cpue = 0.to_i
           elsif !l.weight.zero?
             cpue = l.weight / ((l.time_in.to_time - l.time_out.to_time) / 1.hour)
             cpue = cpue / 1000
@@ -285,13 +310,13 @@ class FisheriesController < ApplicationController
         col_headers.push "#{Date::MONTHNAMES[m].slice(0,3)} #{y.to_s.slice(2,2)}"
         surveys_from = Date.new(y,m,15).beginning_of_month
         surveys_to = Date.new(y,m,15).end_of_month
-        landings = Landing.joins(:survey).where('surveys.date_published >= ? AND surveys.date_published <= ? AND surveys.fishery_id = ?', surveys_from, surveys_to, @fishery.id) 
+        landings = Landing.joins(:survey).where('surveys.date_published >= ? AND surveys.date_published <= ? AND surveys.fishery_id = ?', surveys_from, surveys_to, @fishery.id)
         res = []
         ls=landings.where('landings.time_out != landings.time_in')
-        ls.each do |l| 
+        ls.each do |l|
           if l.value.zero?
-            value = 0.to_i 
-          else 
+            value = 0.to_i
+          else
             value = l.value/ ((l.time_in.to_time - l.time_out.to_time) / 1.hour)
           end
           res.push value
@@ -305,14 +330,14 @@ class FisheriesController < ApplicationController
   end
 
   private
-  
+
   def set_fishery
     @fishery = Fishery.find(params[:id])
   end
 
   def fishery_params
     params.require(:fishery).permit(
-      :code, 
+      :code,
       :name
       )
   end
@@ -356,6 +381,8 @@ class FisheriesController < ApplicationController
     end
   end
 
+  def select_layout
+    'application'
+  end
+
 end
-
-

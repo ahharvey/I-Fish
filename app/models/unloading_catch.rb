@@ -16,7 +16,7 @@ class UnloadingCatch < ActiveRecord::Base
   belongs_to :unloading
   belongs_to :size_class
 
-  validates :fish_id,
+  validates :fish,
   	presence: true
 
   CUT_TYPES = ["wholeround", "dirtyloin", "cleanloin", "gg"]

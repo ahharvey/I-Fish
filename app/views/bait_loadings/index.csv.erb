@@ -1,0 +1,14 @@
+<%- headers = ["id", "date", "vessel", "bait", "quantity"] -%>
+
+<%= CSV.generate_line headers %>
+<%- @bait_loadings.each do |bait_loading| -%>
+<%= CSV.generate_line(
+	[
+		bait_loading.id,
+		bait_loading.date,
+    bait_loading.vessel.try(:name),
+    bait_loading.bait.try(:code),
+    bait_loading.quantity
+	]
+) -%>
+<%- end -%>

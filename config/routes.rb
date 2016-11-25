@@ -1,37 +1,39 @@
 require 'sidekiq/web'
 
-IFish::Application.routes.draw do
+Rails.application.routes.draw do
 
   use_doorkeeper
   mount_griddler
-  
 
 
-  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/  do
 
-    
-    devise_for :users,  
+  scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
+
+
+
+
+    devise_for :users,
       path_prefix: 'session',
-      controllers: { 
+      controllers: {
         registrations: 'users/registrations',
         sessions: 'users/sessions',
         passwords: 'users/passwords'
       },
-      path_names: {  
+      path_names: {
         sign_in: 'signin',
         sign_out: 'signout',
         registration: 'account',
         sign_up: 'signup'
       }
 
-    devise_for :admins,  
+    devise_for :admins,
       path_prefix: 'session',
-      controllers: { 
+      controllers: {
         registrations: 'admins/registrations',
         sessions: 'admins/sessions',
         passwords: 'admins/passwords'
       },
-      path_names: {  
+      path_names: {
         sign_in: 'signin',
         sign_out: 'signout',
         registration: 'account',
@@ -165,8 +167,8 @@ IFish::Application.routes.draw do
         get :template
       end
     end
-    
-    resources :unloadings do 
+
+    resources :unloadings do
       member do
         put :approve
         put :pend
@@ -176,7 +178,7 @@ IFish::Application.routes.draw do
     resources :unloading_catches
     resources :carrier_loadings
     resources :size_classes
-    
+
     resources :companies do
       resources :unloadings
       resources :bait_loadings
@@ -214,14 +216,14 @@ IFish::Application.routes.draw do
 
     resources :protocols
 
-    resources :users, :only => [:index, :show, :edit, :update] do
+    resources :users, only: [:index, :show, :edit, :update], constraints: { id: /[0-9]+/ } do
       member do
         get 'welcome' => 'users#welcome', :as => :welcome
         get :report
         get :crop
       end
     end
-    resources :admins, :only => [:index, :show, :edit, :update] do
+    resources :admins, only: [:index, :show, :edit, :update], constraints: { id: /[0-9]+/ } do
       member do
         get :welcome
         get :crop
@@ -247,13 +249,13 @@ IFish::Application.routes.draw do
       end
     end
 
-    
+
 
 
     get 'home/index'
     get 'home/upload_data'
     get 'home/import'
-    get '/reports' => 'home#reports' 
+    get '/reports' => 'home#reports'
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'
     get "/email_processor", to: proc { [200, {}, ["OK"]] }, as: "mandrill_head_test_request"
@@ -265,7 +267,7 @@ IFish::Application.routes.draw do
     post 'home/process_upload_data'
 
     #authenticate :admin, lambda { |a| a.admin? } do
-      
+
     #end
     authenticated :admin do
       root :to => "home#index", as: :admin_root
@@ -276,19 +278,20 @@ IFish::Application.routes.draw do
       root to: 'users#home', as: :user_root
     end
     # handles /valid-locale
+    get '/:locale' => 'home#index'
     root to: 'home#index'
     # handles /valid-locale/fake-path
     #match '*path', to: redirect { |params, request| "/#{params[:locale]}" }
 
   end
 
-  
 
- 
+
+
 
   # handles /bad-locale|anything/valid-path
   match '/*locale/*path', to: redirect("/#{I18n.default_locale}/%{path}"), via: :get
-  
+
   # handles /anything|valid-path-but-no-locale
   match '/*path', to: redirect("/#{I18n.default_locale}/%{path}"), constraints: lambda { |req| !req.path.starts_with? "/#{I18n.default_locale}/" }, via: :get
 
@@ -296,6 +299,6 @@ IFish::Application.routes.draw do
   #root to: redirect("/#{I18n.default_locale}")
   match '', to: redirect("/#{I18n.default_locale}"), via: :get
 
-  
+
 
 end

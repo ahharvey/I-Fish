@@ -1,0 +1,15 @@
+<%- headers = ["id", "code", "name", "shark_policy", "iuu_list", "code_of_conduct"] -%>
+
+<%= CSV.generate_line headers %>
+<%- @companies.each do |company| -%>
+<%= CSV.generate_line(
+	[
+		company.id,
+		company.code,
+    company.name,
+    company.shark_policy,
+    company.iuu_list,
+    company.code_of_conduct
+	]
+) -%>
+<%- end -%>

@@ -1,0 +1,28 @@
+en:
+  bait_loadings:
+    title: "Bait Loadings"
+    index:
+      title: "Bait Loadings"
+    show:
+      title: "Bait Loading"
+    new:
+      title: "New bait loading"
+    edit:
+      title: "Edit bait loading"
+    update:
+      notice: Bait loading report was successfully updated.
+    create:
+      notice: Bait loading report was successfully created.
+    destroy:
+      notice: Bait loading report was successfully destroyed.
+  activerecord:
+    attributes:
+      bait_loading:
+    errors:
+      models:
+        bait_loading:
+  unauthorized:
+    new:
+      bait_loading: You don't have permission to create bait loading reports.
+    edit:
+      bait_loading: You don't have permission to edit this bait loading report.

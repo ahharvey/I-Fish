@@ -47,6 +47,7 @@
 
 class Vessel < ActiveRecord::Base
   acts_as_vessel
+  has_drafts
 
   has_one :pending_vessel # Or has_many, see the last paragraph
 
@@ -59,6 +60,9 @@ class Vessel < ActiveRecord::Base
 
   scope :default, -> { order('vessels.ap2hi_ref ASC') }
 
+  validates :ap2hi_ref,
+  	presence: true
+
   def bait_fishes
     company.try(:bait_fishes)
   end
@@ -70,8 +74,8 @@ class Vessel < ActiveRecord::Base
       'updated_at',
       'audit_id',
       'admin_id',
-      'vessel_id', 
-      'review_state', 
+      'vessel_id',
+      'review_state',
       'reviewed_at'
       )
   end
@@ -83,8 +87,8 @@ class Vessel < ActiveRecord::Base
       'updated_at',
       'audit_id',
       'admin_id',
-      'vessel_id', 
-      'review_state', 
+      'vessel_id',
+      'review_state',
       'reviewed_at',
       'imo_number',
       'shark_policy',
@@ -144,7 +148,7 @@ class Vessel < ActiveRecord::Base
     end
   end
 
-  
+
   private
 
   def send_pvr_request
@@ -186,5 +190,5 @@ class Vessel < ActiveRecord::Base
 
 
 
-  
+
 end
