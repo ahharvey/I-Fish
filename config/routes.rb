@@ -175,7 +175,7 @@ Rails.application.routes.draw do
         put :reject
       end
     end
-    resources :unloading_catches
+    resources :unloading_catches, only: [:create,:update,:destroy]
     resources :carrier_loadings
     resources :size_classes
 
@@ -231,6 +231,10 @@ Rails.application.routes.draw do
     end
 
     resources :importers
+
+    namespace :review do
+      resources :unloadings,    only: [:update]
+    end
 
     namespace :api, defaults: {format: 'json'} do
       scope module: :v1, constraints: ApiConstraints.new(version: 1, default: :true) do

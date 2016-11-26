@@ -1,0 +1,4 @@
+$('#supervisor_controls').replaceWith("<%= escape_javascript( render partial: 'unloadings/supervisor_controls', locals: {unloading: @unloading } ) %>");
+$('#unloading_catch_table').replaceWith("<%= escape_javascript( render partial: 'unloadings/unloading_catch_table' ) %>");
+$('#new_unloading_catch')[0].reset();
+$('.select2-select').val(null).trigger("change"); 

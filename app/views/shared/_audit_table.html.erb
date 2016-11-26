@@ -15,7 +15,7 @@
     <tbody>
       <% for version in parent.versions.order(:created_at).reverse %>
         <tr>
-          <td><small><%= local_time(version.created_at.to_s(:rfc822)) %></small></td>
+          <td><small><%= local_time_ago(version.created_at.to_s(:rfc822)) %></small></td>
           <td>
             <% if version.whodunnit == "Guest" %>
               Guest
@@ -23,25 +23,36 @@
               Unknown
             <% elsif version.whodunnit.is_a? Integer %>
               <% admin = Admin.find(version.whodunnit.to_i) %>
-              <%= image_tag( admin.avatar_url(:thumb), 
-                width: "30px", 
-                height: "30px", 
-                title: admin.name, 
-                alt: admin.name) 
+              <%= image_tag( admin.avatar_url(:thumb),
+                width: "30px",
+                height: "30px",
+                title: admin.name,
+                alt: admin.name)
+              %>
+            <% elsif version.whodunnit.class == Admin %>
+              <% owner = version.whodunnit %>
+              <%= image_tag( owner.avatar_url(:thumb),
+                width: "30px",
+                height: "30px",
+                title: owner.name,
+                alt: owner.name)
               %>
             <% else %>
-              <% owner = version.whodunnit %>
-              <%= image_tag( owner.avatar_url(:thumb), 
-                width: "30px", 
-                height: "30px", 
-                title: owner.name, 
-                alt: owner.name) 
+
+              <% target_klass, target_id = version.whodunnit.split(':') %>
+              <% owner = eval(target_klass).find(target_id) %>
+
+              <%= image_tag( owner.avatar_url(:thumb),
+                width: "30px",
+                height: "30px",
+                title: owner.name,
+                alt: owner.name)
               %>
             <% end %>
           </td>
           <td><small><%= version.event.titlecase %></small></td>
           <td><small>
-            
+
             <% version.changeset.except(:updated_at, :created_at, :id).each do |c| %>
               <% if version.event == 'create' %>
                 <i><%= parent.class.human_attribute_name(c[0].to_sym) %></i>:

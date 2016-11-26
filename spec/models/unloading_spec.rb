@@ -20,7 +20,7 @@ RSpec.describe Unloading do
       it { is_expected.to belong_to(:user) }
       it {
         is_expected.to belong_to(:reviewer).
-          class_name('User')
+          class_name('Admin')
         }
     end
     context 'has many' do

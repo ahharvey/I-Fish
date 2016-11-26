@@ -1,1 +1,3 @@
 $('#unloading_<%= @unloading.id %>').replaceWith("<%= escape_javascript( render partial: 'tablerow', locals: {unloading: @unloading } ) %>");
+
+$('#supervisor_controls').replaceWith("<%= escape_javascript( render partial: 'unloadings/supervisor_controls', locals: {unloading: @unloading } ) %>");

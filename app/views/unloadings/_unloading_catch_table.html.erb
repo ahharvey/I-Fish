@@ -1,0 +1,22 @@
+<table id="unloading_catch_table" class="table table-condensed">
+  <tr>
+    <th><%= UnloadingCatch.human_attribute_name(:fish_id) %></th>
+    <th class='text-right'><%= UnloadingCatch.human_attribute_name(:quantity) %></th>
+    <th class='text-right'><%= UnloadingCatch.human_attribute_name(:cut_type) %></th>
+    <th class='text-right'><%= UnloadingCatch.human_attribute_name(:type) %></th>
+    <th class='text-right'><%= UnloadingCatch.human_attribute_name(:size_class_id) %></th>
+
+  </tr>
+
+  <% for unloading_catch in @unloading.unloading_catches %>
+    <% present unloading_catch do |unloading_catch_presenter| %>
+      <tr>
+        <td><%= unloading_catch_presenter.fish %></td>
+        <td class='text-right'><%= unloading_catch_presenter.quantity %></td>
+        <td class='text-right'><%= unloading_catch_presenter.cut_type %></td>
+        <td class='text-right'><%= unloading_catch_presenter.type %></td>
+        <td class='text-right'><%= unloading_catch_presenter.size_class %></td>
+      </tr>
+    <% end %>
+  <% end %>
+</table>

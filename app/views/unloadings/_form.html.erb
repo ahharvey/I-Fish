@@ -1,153 +1,74 @@
 
+<div class='row'>
+  <div class='col-xs-12 col-sm-6 col-sm-offset-3'>
 
-<%# Conditionally set remote: true. Also, passing model name as data attribute %>
-<% modal ||= false %>
-<% remote = modal ? true : false %>
-<%= simple_form_for @unloading, 
-  wrapper: :horizontal_form,
-  html: { 
-    role: :form, 
-    class: 'form form-horizontal', 
-    data: { 
-      model: 'unloading' 
-    } 
-  } do |f| %>
-
+    <%= simple_form_for @unloading,
+      wrapper: :vertical_form,
+      html: {
+        role: :form,
+        class: 'form form-horizontal',
+        data: {
+          model: 'unloading'
+        }
+      } do |f| %>
 
 
-  <div class="form-group required integer">
-    <span class="col-md-3 control-label integer required"><b>Vessel</b></span>
-    <div class="col-md-9">
-      <div class="form-group row">
-
-        <label for="unloading_port" class="control-label sr-only"><%= Vessel.human_attribute_name(:ap2hi_ref) %></label>
-        <div class="col-md-6">
-          <% if @vessel.present? %>
-            <h5><%= @vessel.name %> <i><small>(<%= @vessel.ap2hi_ref %>)</small></i><h5>
-            <%= f.input :vessel_id, as: :hidden %>
-          <% else %>
-            <%= f.association :vessel, label: false %>
-          <% end %>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <%= f.input :port, collection: Port.all, input_html: { class: 'form-control select2-select' }, placeholder: Unloading.human_attribute_name(:port) %>
-
-
-  
-  <%= f.input :wpp, collection: Wpp.all, input_html: { class: 'form-control select2-select' }, placeholder: Unloading.human_attribute_name(:wpp) %>
-
-  <br />
-  <br />
-
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b><%= Unloading.human_attribute_name(:time_out) %></b></span>
-      <div class="col-md-9">
-        <div class="form-group row">
-
-          <label for="unloading_time_out" class="control-label sr-only"><%= Unloading.human_attribute_name(:time_out) %></label>
-          <div class="col-md-12">
-            <%= f.input_field :formatted_time_out, class: 'datetimepicker form-control' %>
-          </div>
-
-        </div>
-      </div>
-  </div>
-
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b><%= Unloading.human_attribute_name(:time_in) %></b></span>
-      <div class="col-md-9">
-        <div class="form-group row">
-
-          <label for="unloading_time_in" class="control-label sr-only"><%= Unloading.human_attribute_name(:time_in) %></label>
-          <div class="col-md-12 datetime-select-wrapper">
-            <%= f.input_field :formatted_time_in, class: 'datetimepicker form-control' %>
-          </div>
-
-        </div>
-      </div>
-  </div>
-
-  <br />
-  <br />
-
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b>Catch (kg)</b></span>
-      <div class="col-md-9">
-
-        <%= f.simple_fields_for :unloading_catches do |builder| %>
-          <%= render 'unloading_catch_fields', f: builder %>
+      <div class="form-group required vessel">
+        <label class="control-label required" for="vessel">Vessel</label>
+        <% if @vessel.present? %>
+          <h5><%= @vessel.name %> <i><small>(<%= @vessel.ap2hi_ref %>)</small></i><h5>
+          <%= f.input :vessel_id, as: :hidden %>
+        <% else %>
+          <%= f.association :vessel, label: false %>
         <% end %>
-
-        <%= link_to_add_fields icon('plus', 'Add production record'), f, :unloading_catches %>
       </div>
-  </div>
 
-  <br />
-  <br />
+      <%= f.association :port, collection: Port.all, input_html: { class: 'form-control select2-select' }, placeholder: Unloading.human_attribute_name(:port) %>
 
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b>Inputs</b></span>
-      <div class="col-md-9">
-        <div class="form-group row">
+      <%= f.association :wpp, collection: Wpp.all, input_html: { class: 'form-control select2-select' }, placeholder: Unloading.human_attribute_name(:wpp) %>
 
-          <label for="unloading_fuel" class="control-label sr-only"><%= Unloading.human_attribute_name(:fuel) %></label>
-          <div class="col-md-6">
-            <%= f.input_field :fuel, class: 'form-control', placeholder: Unloading.human_attribute_name(:fuel) %>
-          </div>
+      <%= f.input :formatted_time_out, label: 'Dep.', input_html: { class: 'datetimepicker' } %>
 
-          <label for="unloading_ice" class="control-label sr-only"><%= Unloading.human_attribute_name(:ice) %></label>
-          <div class="col-md-6">
-              <%= f.input_field :ice, class: 'form-control', placeholder: Unloading.human_attribute_name(:ice) %>
-          </div>
+      <%= f.input :formatted_time_in, label: 'Arr.', input_html: { class: 'datetimepicker' } %>
 
-        </div>
+      <%= f.input :fuel %>
+
+      <%= f.input :ice %>
+
+      <div class="form-group required vessel">
+        <label class="control-label required" for="etp"><%= Unloading.human_attribute_name(:etp) %></label>
+        <br />
+        <%= f.input_field :etp,
+          class: 'toggle-switch',
+          data: {
+            size: 'normal',
+            'on-color' => 'success',
+            'off-color' => 'danger',
+            'on-text' => "Yes",
+            'off-text' => "No"
+          } %>
       </div>
-  </div>
+
+      <div class="form-action text-center">
 
 
-  <div class="form-group required integer">
-      <span class="col-md-3 control-label integer required"><b>ETP</b></span>
-      <div class="col-md-9">
-        <div class="form-group row">
 
-          <label for="unloading_etp" class="control-label sr-only"><%= Unloading.human_attribute_name(:etp) %></label>
-          <div class="col-md-12">
-            <%= f.input_field :etp,
-              class: 'toggle-switch', 
-              data: { 
-                size: 'normal',
-                'on-color' => 'success',
-                'off-color' => 'danger',
-                'on-text' => "Yes",
-                'off-text' => "No"
-              } %>
 
-          </div>
+          <% if @vessel %>
+            <%= link_to "Cancel", vessel_path( @vessel ) %>
+          <% elsif @unloading.vessel_id? %>
+            <%= link_to "Cancel", vessel_path( @unloading.vessel_id ) %>
+          <% else %>
+            <%= link_to "Cancel", vessels_path %>
+          <% end %>
 
-        </div>
+          <%= content_tag :button, type: :submit, class: 'btn btn-primary btn-lg' do %>
+            Save
+          <% end %>
+
+
       </div>
+    <% end %>
+
   </div>
-
-  <div class="form-group">
-    <div class="col-md-9 col-md-offset-3 text-center">
-
-      
-
-      <% if @vessel %>
-        <%= link_to "Cancel", vessel_unloadings_path( @vessel ) %>
-      <% elsif @unloading.vessel_id? %>
-        <%= link_to "Cancel", vessel_unloadings_path( @unloading.vessel_id ) %>
-      <% else %>
-        <%= link_to "Cancel", vessels_path %>
-      <% end %> 
-
-      <%= content_tag :button, type: :submit, class: 'btn btn-primary btn-lg' do %>
-        Save
-      <% end %>
-
-    </div>
-  </div>
-<% end %>
+</div>

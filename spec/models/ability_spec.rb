@@ -41,6 +41,9 @@ RSpec.describe "Admin" do
 
       it { is_expected.to have_abilities([:index, :show, :new, :create, :edit, :update], BaitLoading) }
       it { is_expected.to not_have_abilities([:destroy], BaitLoading) }
+
+      it { is_expected.to have_abilities([:index, :show, :new, :create, :edit, :update], UnloadingCatch) }
+      it { is_expected.to not_have_abilities([:destroy], UnloadingCatch) }
     end
 
     context "when is an Administrator" do

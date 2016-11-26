@@ -35,7 +35,7 @@ class Unloading < ActiveRecord::Base
   belongs_to :wpp
   belongs_to :port
   belongs_to :user
-  belongs_to :reviewer, :class_name => 'User'
+  belongs_to :reviewer, :class_name => 'Admin'
   has_many :unloading_catches
   accepts_nested_attributes_for :unloading_catches, allow_destroy: true, reject_if: :all_blank
   has_many :bait_loadings

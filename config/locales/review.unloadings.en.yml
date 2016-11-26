@@ -1,0 +1,8 @@
+en:
+  review:
+    unloadings:
+      update:
+        approved: Unloading approved!
+        rejected: Unloading rejected!
+        pending: Unloading marked as pending!
+        error: There was a problem saving your unloading review.

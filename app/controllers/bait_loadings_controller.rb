@@ -26,6 +26,7 @@ class BaitLoadingsController < ApplicationController
 
   def new
     @bait_loading = BaitLoading.new( vessel_id: params[:vessel_id])
+    @vessel = Vessel.find( params[:vessel_id] ) if params[:vessel_id]
     # initialize_form
   end
 

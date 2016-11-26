@@ -75,7 +75,6 @@ RSpec.describe UnloadingsController, type: :controller do
         admin.roles.push Role.where(name: 'administrator').first_or_create
         sign_in admin
         get :index, { company_id: company_with_unloading.id }
-        require 'pry'; binding.pry
       end
       it { is_expected.to respond_with :ok }
       it { is_expected.to respond_with_content_type :html }
@@ -292,7 +291,6 @@ RSpec.describe UnloadingsController, type: :controller do
     before :each do
       admin.roles.push Role.where(name: 'administrator').first_or_create
       sign_in admin
-      #require 'pry'; binding.pry
       delete :destroy, {:id => unloading1.to_param}
     end
     it { expect {

@@ -18,6 +18,15 @@ class UnloadingCatch < ActiveRecord::Base
 
   validates :fish,
   	presence: true
+  validates :unloading,
+  	presence: true
+  validates :quantity,
+  	presence: true,
+    numericality: {
+      only_integer: true,
+      greater_than_or_equal_to: 1,
+      less_than_or_equal_to: 9999
+    }
 
   CUT_TYPES = ["wholeround", "dirtyloin", "cleanloin", "gg"]
 

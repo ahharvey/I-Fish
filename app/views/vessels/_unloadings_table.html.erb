@@ -1,0 +1,38 @@
+
+  <div id="unloading_table" class="panel panel-default hidden-xs">
+    <div class="panel-heading">
+      <h3 class="panel-title">Recent Unloadings</h3>
+    </div>
+    <% if @vessel.unloadings.any? %>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th class='hidden-xs'><%= Unloading.human_attribute_name(:time_out) %></th>
+            <th><%= Unloading.human_attribute_name(:time_in) %></th>
+            <th><%= Unloading.human_attribute_name(:port) %></th>
+            <th class='hidden-xs'><%= Unloading.human_attribute_name(:fuel) %></th>
+            <th class='hidden-xs'><%= Unloading.human_attribute_name(:ice) %></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @vessel.unloadings.default.first(5).each do |unloading| %>
+            <tr>
+              <td><%= unloading.formatted_time_out %></td>
+              <td><%= unloading.formatted_time_in %></td>
+              <td><%= unloading.port.try(:name) %></td>
+              <td><%= unloading.fuel %></td>
+              <td><%= unloading.ice %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p class='text-center'><i>None</i></p>
+    <% end %>
+    <% if can? :index, Unloading.new(vessel_id: @vessel.id ) %>
+      <div class="panel-footer text-right">
+        <%= link_to "View all", vessel_unloadings_path(@vessel) %>
+      </div>
+    <% end %>
+
+  </div>

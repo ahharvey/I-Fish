@@ -8,6 +8,10 @@ module Reviewable
     scope :pending, 	-> { where( review_state: 'pending' ) }
     scope :approved, 	-> { where( review_state: 'approved' ) }
     scope :rejected, 	-> { where( review_state: 'rejected' ) }
+
+    validates :review_state,
+      inclusion: { in: STATES },
+      allow_blank: true
   end
 
   STATES.each do |state|

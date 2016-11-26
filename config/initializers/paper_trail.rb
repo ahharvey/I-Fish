@@ -15,5 +15,10 @@ module PaperTrail
       eval(target_klass).find(target_id)
     end
 
+    def person
+      target_klass, target_id = self[:whodunnit].split(':')
+      eval(target_klass).find(target_id)
+    end
+
   end
 end

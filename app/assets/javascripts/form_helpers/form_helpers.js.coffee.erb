@@ -1,0 +1,13 @@
+jQuery ->
+  InitializeAjaxForms.init()
+
+@InitializeAjaxForms =
+
+  init: ->
+    if $("input:radio.submit-on-select").length
+      $("input:radio.submit-on-select").change ->
+        $.ajax
+          type: $(this.form).attr('method')
+          url: $(this.form).attr('action')
+          data: $(this.form).serialize()
+          dataType: 'script'

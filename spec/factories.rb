@@ -53,6 +53,12 @@ FactoryGirl.define do
     wpp
   end
 
+  factory :unloading_catch do
+    fish
+    unloading
+    quantity {rand(1..999)}
+  end
+
   factory :bait_loading do
     vessel
     bait
@@ -62,6 +68,14 @@ FactoryGirl.define do
   factory :bait do
     sequence(:name) { |n| "Bait#{n}" }
     sequence(:code) { |n| "B#{n}" }
+  end
+
+  factory :fish do
+    sequence(:scientific_name) { |n| "Fish#{n}" }
+    sequence(:english_name) { |n| "Fish#{n}" }
+    sequence(:order) { |n| "Fish#{n}" }
+    sequence(:family) { |n| "Fish#{n}" }
+    sequence(:code) { |n| "F#{n}" }
   end
 
   factory :document do

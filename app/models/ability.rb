@@ -54,6 +54,12 @@ class Ability
     #can :manage, BaitLoading, vessel_id: user.managed_vessels.map(&:id)
     cannot :destroy, BaitLoading
 
+    cannot :manage, UnloadingCatch
+    can :create, UnloadingCatch
+    #can :manage, BaitLoading, vessel_id: user.managed_vessels.map(&:id)
+    cannot :destroy, UnloadingCatch
+
+
     can :report, Company, id: user.companies.map(&:id)
     can :read, SizeClass
     can :create, SizeClass
@@ -118,6 +124,10 @@ class Ability
     can :create, Unloading
     can :manage, Unloading, id: admin.managed_unloadings.map(&:id)
     cannot :destroy, Unloading
+
+    can :create, UnloadingCatch
+    can :manage, UnloadingCatch, id: admin.managed_unloading_catches.map(&:id)
+    cannot :destroy, UnloadingCatch
 
     can :create, BaitLoading
     can :manage, BaitLoading, id: admin.managed_bait_loadings.map(&:id)

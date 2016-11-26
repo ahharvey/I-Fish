@@ -35,10 +35,10 @@ gem 'doorkeeper', '~> 4.2.0'
 
 ##
 ## INCLUDES
-gem 'jquery-rails', '~> 4.0.0'
+gem 'jquery-rails', '~> 4.2.0'
 gem 'jquery-ui-rails', '~> 5.0.0'
 gem 'sass-rails',   '~> 5.0.0'
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.0'
 gem 'uglifier', '~> 3.0.0'
 
 
@@ -188,4 +188,7 @@ group :test do
   gem 'faker', '~> 1.6.0'
   # current version of shoulda-matchers, and it adds the 'respond_with_content_type' matcher back in
   gem "shoulda-kept-respond-with-content-type"
+
+  gem 'poltergeist'
+
 end

@@ -1,0 +1,71 @@
+
+
+<%= simple_form_for UnloadingCatch.new, remote: true do |f| %>
+  <div class='row'>
+    <div class='col-xs-2'>
+      <%= f.input :unloading_id, input_html: { value: @unloading.id }, as: :hidden %>
+      <%= f.association :fish,
+        collection: Fish.default.map { |f| [f.code, f.id] },
+        label_html: {
+          class: 'sr-only'
+        },
+        input_html: {
+          class: 'select2-select',
+          data: {
+            placeholder: UnloadingCatch.human_attribute_name(:fish)
+          }
+        }  %>
+    </div>
+    <div class='col-xs-2'>
+      <%= f.input :quantity,
+        label_html: {
+          class: 'sr-only'
+        },
+        placeholder: UnloadingCatch.human_attribute_name(:quantity)
+        %>
+    </div>
+    <div class='col-xs-2'>
+      <%= f.input :cut_type,
+        collection: UnloadingCatch::CUT_TYPES.map { |s| [I18n.t("cut_types.#{s}"), s] },
+        label_html: {
+          class: 'sr-only'
+        },
+        input_html: {
+          class: 'select2-select',
+          data: {
+            placeholder: UnloadingCatch.human_attribute_name(:cut_type)
+          }
+        }  %>
+    </div>
+    <div class='col-xs-2'>
+      <%= f.input :catch_type,
+        collection: UnloadingCatch::CATCH_TYPES.map { |s| [I18n.t("catch_types.#{s}"), s] },
+        label_html: {
+          class: 'sr-only'
+        },
+        input_html: {
+          class: 'select2-select',
+          data: {
+            placeholder: UnloadingCatch.human_attribute_name(:catch_type)
+          }
+        } %>
+    </div>
+    <div class='col-xs-2'>
+      <%= f.association :size_class,
+        label_html: {
+          class: 'sr-only'
+        },
+        input_html: {
+          class: 'select2-select',
+          data: {
+            placeholder: UnloadingCatch.human_attribute_name(:size_class)
+          }
+        } %>
+    </div>
+    <div class='col-xs-2'>
+      <%= f.submit 'Save', class: 'btn btn-success' %>
+    </div>
+  </div>
+
+
+<% end %>

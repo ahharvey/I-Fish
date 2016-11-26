@@ -5,7 +5,7 @@ RSpec.shared_examples_for "reviewable" do
   let(:model) 	   { described_class } # the class that includes the concern
   let(:reviewable) { create model.to_s.underscore.to_sym } #an instance of the class that includes the concern
   let(:admin)         { create :admin }
-  
+
   describe 'scopes' do
     it ".pending" do
       expect( model.pending.where_values_hash.with_indifferent_access ).to include( review_state: 'pending' )
@@ -16,6 +16,14 @@ RSpec.shared_examples_for "reviewable" do
     it ".rejected" do
       expect( model.rejected.where_values_hash.with_indifferent_access ).to include( review_state: 'rejected' )
     end
+  end
+
+  describe "validations" do
+    it {
+      is_expected.to validate_inclusion_of(:review_state).
+        in_array( %w{ approved rejected pending } )
+    }
+
   end
 
   # pending

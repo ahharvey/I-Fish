@@ -12,14 +12,13 @@
         <%= render partial: "audit_panel" %>
       </div>
       <div class="col-xs-12">
-        <% if can? :read, Unloading %>
-          <%= link_to "View unloading reports", vessel_unloadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
+        <% if can? :create, Unloading.new(vessel_id: @vessel.id ) %>
+          <%= link_to "New Unloading Report", new_vessel_unloading_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
         <% end %>
-        <% unless @vessel.vessel_type.try(:code) == 'ca' %>
-          <% if can? :read, BaitLoading %>
-            <%= link_to "View bait loading reports", vessel_bait_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
-          <% end %>
+        <% if can? :create, BaitLoading.new(vessel_id: @vessel.id ) %>
+          <%= link_to "New Bait Loading Report", new_vessel_bait_loading_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
         <% end %>
+        
         <% if @vessel.vessel_type.try(:code) == 'ca' %>
           <% if can? :read, CarrierLanding %>
             <%= link_to "View carrier loading reports", vessel_carrier_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
@@ -27,11 +26,11 @@
           <% end %>
         <% end %>
         <% if can? :update, @vessel %>
-          
+
           <%= render partial: "issf_uvi_request" %>
           <br />
         <% end %>
-        
+
         <%= render partial: 'qrcode_panel' %>
       </div>
     </div>
@@ -58,6 +57,16 @@
         </div>
       </div>
     <% end %>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'unloadings_table' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: 'bait_loadings_table' %>
+      </div>
+    </div>
     <% if can? :edit, @vessel %>
       <div class="row">
         <div class="col-xs-12">
@@ -66,7 +75,7 @@
       </div>
     <% end %>
   </div>
-  
+
 </div>
 
 <% if can? :create, Audit %>
