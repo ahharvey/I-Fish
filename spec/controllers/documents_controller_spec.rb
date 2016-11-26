@@ -163,7 +163,7 @@ RSpec.describe DocumentsController, type: :controller do
       before :each do
         post :create, {:document => valid_attributes}
       end
-      it 'does some stuff', :focus do
+      it 'does some stuff' do
         expect {
           post :create, {:document => attributes_for(
             :document,
