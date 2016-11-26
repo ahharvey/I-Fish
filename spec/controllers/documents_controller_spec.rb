@@ -163,9 +163,14 @@ RSpec.describe DocumentsController, type: :controller do
       before :each do
         post :create, {:document => valid_attributes}
       end
-      it 'does some stuff' do
+      it 'does some stuff', :focus do
         expect {
-          post :create, {:document => attributes_for(:document, documentable_id: vessel.id, documentable_type: vessel.class.name ) }
+          post :create, {:document => attributes_for(
+            :document,
+            documentable_id: vessel2.id,
+            documentable_type: vessel2.class.name
+            )
+          }
         }.to change(Document, :count).by(1)
       end
       it { expect(assigns(:document)).to be_a(Document) }

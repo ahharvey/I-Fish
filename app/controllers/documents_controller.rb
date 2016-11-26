@@ -23,9 +23,14 @@ class DocumentsController < ApplicationController
   end
 
   def create
+    Rails.logger.info 'HHHHHHHHHHHHHHHHHHHHHHHHHHHHHH'
+    Rails.logger.info Document.all.size
     @document = Document.new(document_params)
+    Rails.logger.info @document.valid?
+    Rails.logger.info @document.to_yaml
     respond_to do |format|
       if @document.save
+        Rails.logger.info Document.all.size
         format.html { redirect_to @document.documentable, notice: t('.notice') }
         format.json { render :show, status: :created, location: @document }
       else

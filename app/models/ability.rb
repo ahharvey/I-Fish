@@ -46,8 +46,7 @@ class Ability
 
     cannot :manage, Unloading
     can :create, Unloading
-    can :manage, Unloading, vessel_id: user.managed_vessels.map(&:id)
-    can :index, Unloading, vessel_id: user.managed_vessels.map(&:id)
+    can :update, Unloading, vessel_id: user.managed_vessels.map(&:id)
     cannot :destroy, Unloading
 
     cannot :manage, BaitLoading

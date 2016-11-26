@@ -65,7 +65,7 @@ FactoryGirl.define do
   end
 
   factory :document do
-    file { File.open(File.join(Rails.root, 'spec', 'support', 'images', 'test_image.jpg')) }
+    file { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'test_image.jpg')) }
     association :documentable, factory: :vessel
   end
 

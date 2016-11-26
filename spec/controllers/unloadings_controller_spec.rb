@@ -35,7 +35,7 @@ RSpec.describe UnloadingsController, type: :controller do
   let(:unloading3)   { create :unloading, vessel: vessel_with_unloading }
 
 
-  let(:vessel_with_company) { create :vessel, company_id: company_with_unloading }
+  let(:vessel_with_company) { create :vessel, company: company_with_unloading }
 
   let(:vessel_with_unloading) { vessel }
   let(:company_with_unloading) { company }
@@ -43,32 +43,39 @@ RSpec.describe UnloadingsController, type: :controller do
   let(:unloading_with_company) { unloading2 }
 
   describe "GET #index" do
-    context 'when user is logged in' do
+    context 'when admin is logged in' do
       before :each do
-        sign_in user
-
+        admin.roles.push Role.where(name: 'administrator').first_or_create
+        sign_in admin
         get :index
-
       end
       it { is_expected.to respond_with :ok }
       it { is_expected.to respond_with_content_type :html }
       it { is_expected.to render_with_layout :application }
       it { is_expected.to render_template :index }
       it { expect( assigns(:unloadings) ).to match_array( [unloading1, unloading2, unloading3] ) }
+    end
+    context 'when user is logged in' do
+      before :each do
+        sign_in user
+        get :index
+      end
+      it { is_expected.to redirect_to root_path }
+      it { expect( flash[:alert] ).to have_content "You are not authorized to access this page." }
     end
     context 'when user is logged out' do
       before :each do
         get :index
       end
-      it { is_expected.to respond_with :ok }
-      it { is_expected.to respond_with_content_type :html }
-      it { is_expected.to render_with_layout :application }
-      it { is_expected.to render_template :index }
-      it { expect( assigns(:unloadings) ).to match_array( [unloading1, unloading2, unloading3] ) }
+      it { is_expected.to redirect_to new_user_session_path }
+      it { expect( flash[:alert] ).to have_content "You must log in to continue." }
     end
-    context 'when nested by company' do
+    context 'when nested by company', :focus do
       before :each do
+        admin.roles.push Role.where(name: 'administrator').first_or_create
+        sign_in admin
         get :index, { company_id: company_with_unloading.id }
+        require 'pry'; binding.pry
       end
       it { is_expected.to respond_with :ok }
       it { is_expected.to respond_with_content_type :html }
@@ -78,6 +85,8 @@ RSpec.describe UnloadingsController, type: :controller do
     end
     context 'when nested by vessel' do
       before :each do
+        admin.roles.push Role.where(name: 'administrator').first_or_create
+        sign_in admin
         get :index, { vessel_id: vessel_with_unloading.id }
       end
       it { is_expected.to respond_with :ok }
@@ -88,6 +97,8 @@ RSpec.describe UnloadingsController, type: :controller do
     end
     context 'when params[:format] == csv' do
       before :each do
+        admin.roles.push Role.where(name: 'administrator').first_or_create
+        sign_in admin
         get :index, { format: :csv }
       end
       it { is_expected.to respond_with :ok }
