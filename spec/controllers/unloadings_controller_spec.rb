@@ -70,7 +70,7 @@ RSpec.describe UnloadingsController, type: :controller do
       it { is_expected.to redirect_to new_user_session_path }
       it { expect( flash[:alert] ).to have_content "You must log in to continue." }
     end
-    context 'when nested by company', :focus do
+    context 'when nested by company' do
       before :each do
         admin.roles.push Role.where(name: 'administrator').first_or_create
         sign_in admin
