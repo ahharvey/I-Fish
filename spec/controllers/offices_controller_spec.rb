@@ -20,7 +20,7 @@ RSpec.describe OfficesController, type: :controller do
 
   let(:user)      { create :user }
   let(:admin)     { create :admin }
-  let(:office1)   { create :office }
+  let!(:office1)   { create :office }
   let(:office2)   { create :office }
   let(:office3)   { create :office }
 
@@ -36,7 +36,7 @@ RSpec.describe OfficesController, type: :controller do
       it { is_expected.to respond_with_content_type :html }
       it { is_expected.to render_with_layout :application }
       it { is_expected.to render_template :index }
-      it { expect( assigns(:offices) ).to match_array( [office1, office2, office3] ) }
+      it { expect( assigns(:offices) ).to match_array( [office1, office2, office3, admin.office] ) }
     end
     context 'when user is logged in' do
       before :each do
@@ -55,6 +55,8 @@ RSpec.describe OfficesController, type: :controller do
     end
     context 'when params[:format] == csv' do
       before :each do
+        admin.roles.push Role.where(name: 'administrator').first_or_create
+        sign_in admin
         get :index, { format: :csv }
       end
       it { is_expected.to respond_with :ok }
@@ -62,7 +64,7 @@ RSpec.describe OfficesController, type: :controller do
       it { is_expected.to_not render_with_layout }
       it { is_expected.to render_template :index }
       it { expect( response.headers["Content-Type"] ).to have_text('text/csv') }
-      it { expect( assigns(:offices) ).to match_array( [office1, office2, office3] ) }
+      it { expect( assigns(:offices) ).to match_array( [office1, office2, office3, admin.office] ) }
     end
   end
 
@@ -221,20 +223,18 @@ RSpec.describe OfficesController, type: :controller do
   end
 
   describe "DELETE #destroy" do
-    let!(:office) { create :office }
+    let!(:office4) { create :office }
     #Rails.logger.info Fishery.size
     # we will only test with superadmin
     # other roles are covered by ability_spec
     before :each do
-
       admin.roles.push Role.where(name: 'administrator').first_or_create
       sign_in admin
       delete :destroy, {:id => office1.to_param}
-
     end
     it {
       expect {
-        delete :destroy, {:id => office.to_param}
+        delete :destroy, {:id => office4.to_param}
       }.to change(Office, :count).by(-1)
     }
     it { is_expected.to redirect_to(offices_path) }

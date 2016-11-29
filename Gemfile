@@ -195,7 +195,9 @@ group :test do
   gem 'poltergeist'
 
   # brings back assigns and assert_template, which were deprecated in Rails 5.
-  # gradually update controller tests to remove this 
+  # gradually update controller tests to remove this
   gem 'rails-controller-testing'
+
+  gem 'friendly_id'
 
 end

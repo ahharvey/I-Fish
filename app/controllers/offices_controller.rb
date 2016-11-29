@@ -52,6 +52,7 @@ class OfficesController < ApplicationController
   end
 
   def destroy
+    @office = Office.find(params[:id])
     @office.destroy
     respond_to do |format|
       format.html { redirect_to offices_url, notice: t('.notice') }

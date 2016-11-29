@@ -60,6 +60,7 @@ class FisheriesController < ApplicationController
   end
 
   def destroy
+    @fishery = Fishery.find(params[:id])
     @fishery.destroy
     respond_to do |format|
       format.html { redirect_to fisheries_url, notice: t('.notice') }
