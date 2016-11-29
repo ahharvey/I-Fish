@@ -23,7 +23,7 @@ RSpec.describe "Staff Creates Unloading" do
       port
       wpp
       fish
-      
+
       admin.roles.push Role.where(name: 'staff').first_or_create
       login_as( admin, scope: :admin )
       visit root_path

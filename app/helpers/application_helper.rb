@@ -2,7 +2,7 @@ module ApplicationHelper
   def is_active?(page_name)
     "active" if current_page?(page_name)
   end
-  
+
   def title(page_title, show_title = true)
     page_title = page_title.join(' ') if page_title.respond_to? :join
     content_for(:title) { h(page_title.to_s) }
@@ -42,9 +42,9 @@ module ApplicationHelper
   end
 
   def current_url(new_params)
-    url_for params.merge(new_params)
+    url_for params.permit(:controller, :action, :id, :locale).merge( new_params.slice(:format) )
   end
-  
+
   def fa_home
     "home"
   end
@@ -161,7 +161,7 @@ module ApplicationHelper
     'square-o'
   end
 
-  
+
 
 
 
@@ -209,7 +209,7 @@ module ApplicationHelper
             content_tag(:i, "", class: 'icon-cloud-download icon-white icon-2x')
           end
 
-  
+
 
           def edit_profile_icon
             content_tag(:i, "", class: 'icon-cogs')
@@ -235,7 +235,7 @@ module ApplicationHelper
             content_tag(:i, "", class: 'icon-signout')
           end
 
-  
+
 
   def excel_icon
     icon 'table'
@@ -245,9 +245,9 @@ module ApplicationHelper
     icon 'file'
   end
 
-  
 
-  
+
+
 
   def excel_image
     image_tag("excel.png", class: "", alt: "Excel", width: 16)
@@ -275,6 +275,6 @@ module ApplicationHelper
     link_to(name, '#', class: "add_fields btn btn-success btn-block", data: {id: id, fields: fields.gsub("\n", "")})
   end
 
-  
+
 
 end

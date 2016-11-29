@@ -1,36 +1,32 @@
-
-<div id="supervisor_controls" class= "col-xs-8">
+<div id="supervisor_controls" class= "col-xs-12 col-sm-6 col-sm-offset-3">
   <% if can? :update, @unloading %>
-    <div class="row">
-      <div class="col-xs-4">
-        <%= link_to :back  do %>
-          <%= icon 'arrow-left', "Back" %>
-        <% end %>
-      </div>
 
-      <div class="col-xs-6 col-xs-offset-2">
-        <div class="row">
+    <div class='btn-group btn-group-justified' role="group" aria-label="Review Controls">
+      <%= link_to review_unloading_path(@unloading, {unloading: { review_state: 'rejected' } }),
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "btn btn-lg #{@unloading.rejected? ? 'active btn-danger' : 'btn-default'}" do %>
+        <%= icon( 'remove', "<span class='hidden-xs'>Rejected</span>".html_safe, class: 'fa-fw') %>
+      <% end %>
 
 
-          <div class="text-center">
-            <%= form_for(@unloading, url: review_unloading_path(@unloading), remote: true, data: { confirm: "Are you sure?"}) do |fa| %>
-              <%= fa.hidden_field :review_state, value: 'pending' %>
-              <div class="btn-group" role="group">
-                <%= button_tag type: 'submit', class: "btn btn-lg #{@unloading.rejected? ? 'active btn-danger' : 'btn-default'}", onclick: "unloading_review_state.value = 'rejected'" do %>
-                  <%= icon 'remove', "Rejected", class: 'fa-fw' %>
-                <% end %>
-                <%= button_tag type: 'submit', class: "btn btn-lg #{@unloading.pending? ? 'active btn-warning' : 'btn-default'}", onclick: "unloading_review_state.value = 'pending'" do %>
-                  <%= icon 'warning', "Pending", class: 'fa-fw' %>
-                <% end %>
-                <%= button_tag type: 'submit', class: "btn btn-lg #{@unloading.approved? ? 'active btn-success' : 'btn-default'}", onclick: "unloading_review_state.value = 'approved'" do %>
-                  <%= icon 'warning', "Approved", class: 'fa-fw' %>
-                <% end %>
-              </div>
-            <% end %>
-          </div>
+      <%= link_to review_unloading_path(@unloading, {unloading: { review_state: 'pending' } }),
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "btn btn-lg #{@unloading.pending? ? 'active btn-warning' : 'btn-default'}" do %>
+        <%= icon( 'warning', "<span class='hidden-xs'>Pending</span>".html_safe, class: 'fa-fw') %>
+      <% end %>
 
-        </div>
-      </div>
+
+      <%= link_to review_unloading_path(@unloading, {unloading: { review_state: 'approved' } }),
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "btn btn-lg #{@unloading.approved? ? 'active btn-success' : 'btn-default'}" do %>
+        <%= icon( 'check', "<span class='hidden-xs'>Approved</span>".html_safe, class: 'fa-fw') %>
+      <% end %>
     </div>
 
   <% end %>

@@ -27,17 +27,13 @@ RSpec.describe Review::UnloadingsController, type: :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
-      vessel_id:  vessel.id,
-      port_id:    port.id,
-      wpp_id:     wpp.id
+      review_state:  'pending'
     }
   }
 
   let(:invalid_attributes) {
     {
-      vessel_id:  nil,
-      port_id:    nil,
-      wpp_id:     nil
+      review_state:  'invalid'
     }
   }
 

@@ -2,7 +2,7 @@ class FisheriesController < ApplicationController
   load_and_authorize_resource
   #before_action :set_fishery, only: [:show, :edit, :update, :destroy]
 
-  layout :select_layout
+  #layout :select_layout
 
   #skip_before_filter :authenticate!
 

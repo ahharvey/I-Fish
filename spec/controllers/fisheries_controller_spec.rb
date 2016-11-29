@@ -214,17 +214,31 @@ RSpec.describe FisheriesController, type: :controller do
   end
 
   describe "DELETE #destroy"  do
-    let!(:fishery) { create :fishery }
+    let!(:fisheryx) { create :fishery }
+    #Rails.logger.info Fishery.size
     # we will only test with superadmin
     # other roles are covered by ability_spec
     before :each do
+      Rails.logger.info "AAAAAAAAAAAAAAAAA"
+      Rails.logger.info Fishery.all.size
+      fishery1
+      Rails.logger.info "BBBBBBBBBBBBBBBBB"
+      Rails.logger.info Fishery.all.size
       admin.roles.push Role.where(name: 'administrator').first_or_create
       sign_in admin
       delete :destroy, {:id => fishery1.to_param}
+      Rails.logger.info "CCCCCCCCCCCCCCCCC"
+      Rails.logger.info Fishery.all.size
     end
-    it { expect {
-        delete :destroy, {:id => fishery.to_param}
-      }.to change(Fishery, :count).by(-1) }
+    it 'does stuff', :focus do
+      expect {
+      
+        delete :destroy, {:id => fisheryx.to_param}
+        Rails.logger.info "DDDDDDDDDDDDDDDDD"
+        Rails.logger.info Fishery.all.size
+        Rails.logger.info fisheryx.errors.messages
+      }.to change(Fishery, :count).by(-1)
+    end
     it { is_expected.to redirect_to(fisheries_path) }
     it { expect( flash[:notice] ).to have_content "Fishery was successfully destroyed." }
   end

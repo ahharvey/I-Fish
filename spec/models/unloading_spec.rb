@@ -59,6 +59,10 @@ RSpec.describe Unloading do
     it { is_expected.to validate_presence_of(:vessel) }
     it { is_expected.to validate_presence_of(:port) }
     it { is_expected.to validate_presence_of(:wpp) }
+    it {
+      is_expected.to validate_inclusion_of(:review_state).
+        in_array( %w{ approved rejected pending } )
+    }
   end
 
 

@@ -30,36 +30,36 @@ RSpec.describe "Staff Creates Unloading" do
       visit unloading_path(unloading)
     end
 
-    it "approves the unloaidng", :js do
+    it "approves the unloaidng" do
 
       expect(unloading.approved?).to be false
 
-      expect(page).to have_button 'Approved'
-      find_button("Approved").trigger('click')
+      expect(page).to have_link 'Approved'
+      click_link("Approved")
 
       expect(page).to have_content 'Unloading approved!'
       unloading.reload
       expect(unloading.approved?).to be true
     end
 
-    it "rejects the unloading", :js do
+    it "rejects the unloading" do
 
       expect(unloading.rejected?).to be false
 
-      expect(page).to have_button 'Rejected'
-      find_button("Rejected").trigger('click')
+      expect(page).to have_link 'Rejected'
+      click_link("Rejected")
 
       expect(page).to have_content 'Unloading rejected!'
       unloading.reload
       expect(unloading.rejected?).to be true
     end
 
-    it "marks the unloaidng as pending", :js do
+    it "marks the unloaidng as pending" do
 
       expect(unloading.pending?).to be true
 
-      expect(page).to have_button 'Pending'
-      find_button("Pending").trigger('click')
+      expect(page).to have_link 'Pending'
+      click_link("Pending")
 
       expect(page).to have_content 'Unloading marked as pending!'
       unloading.reload
