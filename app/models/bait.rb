@@ -1,3 +1,3 @@
-class Bait < ActiveRecord::Base
-	has_many :bait_loadings 
+class Bait < ApplicationRecord
+	has_many :bait_loadings
 end

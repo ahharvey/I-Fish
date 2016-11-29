@@ -25,7 +25,7 @@
 #  grid_id           :integer
 #
 
-class Unloading < ActiveRecord::Base
+class Unloading < ApplicationRecord
 
   has_paper_trail
   include Reviewable

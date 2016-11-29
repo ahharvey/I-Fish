@@ -9,7 +9,7 @@
 #  updated_at :datetime         not null
 #
 
-class Grid < ActiveRecord::Base
+class Grid < ApplicationRecord
 	validates_uniqueness_of :xaxis, :scope => :yaxis
 
 	has_many :bait_loadings

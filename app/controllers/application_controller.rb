@@ -1,6 +1,7 @@
 require "application_responder"
 
 class ApplicationController < ActionController::Base
+  protect_from_forgery with: :exception, prepend: true
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   before_action :user_for_draftsman
@@ -8,8 +9,8 @@ class ApplicationController < ActionController::Base
 
   before_action :set_locale
 
-  before_filter :set_currently_signed_in
-  after_filter :flash_to_headers
+  before_action :set_currently_signed_in
+  after_action :flash_to_headers
 
   self.responder = ApplicationResponder
   respond_to :html
@@ -37,19 +38,20 @@ class ApplicationController < ActionController::Base
 
   #add_flash_types :error, :success, :info
 
-  protect_from_forgery
+
+
 
   #before_filter :authenticate!
 
   # Override default Cancan current ability to fetch a specific one
   def current_ability
     @current_ability ||= case
-      when current_user
-        Ability.new(current_user)
-      when current_admin
-        Ability.new(current_admin)
-      else Ability.new(User.new)
-      end
+    when current_user
+      Ability.new(current_user)
+    when current_admin
+      Ability.new(current_admin)
+    else Ability.new(User.new)
+    end
   end
 
   # Custom authenticate to handle current user or admin

@@ -9,8 +9,8 @@
 #  district_id :integer
 #
 
-class Office < ActiveRecord::Base
-  
+class Office < ApplicationRecord
+
   has_paper_trail
 
   # attr_accessible :name, :district_id

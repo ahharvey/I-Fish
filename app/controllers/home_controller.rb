@@ -1,7 +1,8 @@
 class HomeController < ApplicationController
   require 'mail'
   authorize_resource :class => false
-  skip_before_filter :authenticate!, :verify_authenticity_token, :only => [:import_mail, :multipart_import]
+  skip_before_filter :authenticate!, :verify_authenticity_token, :only => [:import_mail, :multipart_import], raise: false
+
   skip_authorize_resource :only => :multipart_import
 
   def index
@@ -12,7 +13,7 @@ class HomeController < ApplicationController
     authorize! :reports, :home
   end
 
- 
+
 
   def multipart_import
     #authorize! :multipart_import, :home
@@ -136,7 +137,7 @@ class HomeController < ApplicationController
             "Database_#{Digest::SHA1.hexdigest("--#{Time.now.to_s}--")[0,6]}.#{attached}"
           end
         end
-        
+
         logger.info("testing... lihat aku woyyy "+message.attachments.first.content_transfer_encoding.to_s)
         attach_code = message.attachments.first.decoded
         File.open(Rails.root+"/tmp/"+filename, "w") { |file| file.write(attach_code) }
@@ -145,7 +146,7 @@ class HomeController < ApplicationController
         parameters = {file: excel_info, user_id: email.id}
         excel_file = ExcelFile.new(parameters)
         logger.info(excel_file)
-        
+
         if excel_file.save
           excel_info.close
           logger.info("import by email : Successfully upload data to database")

@@ -34,8 +34,8 @@
 #  aborted        :string(255)
 #
 
-class Landing < ActiveRecord::Base
-	
+class Landing < ApplicationRecord
+
 	has_paper_trail
 
 	self.inheritance_column = nil
@@ -74,7 +74,7 @@ class Landing < ActiveRecord::Base
 		presence: true
 	validates :engine,
 		presence: {
-			message: " is not valid" 
+			message: " is not valid"
 		}
 	validates :fuel,
 		numericality: {
@@ -105,13 +105,13 @@ class Landing < ActiveRecord::Base
 #		inclusion: {
 #			in: 1..999
 #		}
-	validates :gear, 
+	validates :gear,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
-	validates :fish, 
+	validates :fish,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
 	# Do not validate presence of survey_id if this model is being imported from an excel file
 	# as the parent survey will be saved later and currently doesn't have an ID.
@@ -157,16 +157,16 @@ class Landing < ActiveRecord::Base
 #		presence: true
 
 	@@condition_data = { 1 => "Calm" , 2 => "Moderate" , 3 => "High" }
-  
+
   def condition_as_text
     @@condition_data[conditions]
   end
 
 	def calculate_cpue
 		unless quantity.nil?
-			self.cpue = quantity / ( ( ( time_in - time_out ) * crew ) / 1.hour ) 
+			self.cpue = quantity / ( ( ( time_in - time_out ) * crew ) / 1.hour )
 		end
-#		self.cpue_kg = weight.to_i / ( ( ( time_in.to_i - time_out.to_i ) * crew.to_i ) / 1.hour ) 
+#		self.cpue_kg = weight.to_i / ( ( ( time_in.to_i - time_out.to_i ) * crew.to_i ) / 1.hour )
 		#self.cpue_idr = ( self.value.to_i * self.weight.to_i ) / ( ( self.time_in.to_i - self.time_out.to_i ) / 1.hour )
 		#self.cpue_fuel = weight.to_i / fuel.to_i
 	end

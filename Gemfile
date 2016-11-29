@@ -3,7 +3,7 @@ ruby "2.3.3"
 
 ##
 ## STACK
-gem 'rails', '~> 4.2.0' #3.2.11'
+gem 'rails', '~> 5.0.0' #3.2.11'
 gem 'pg', '~> 0.19.0'
 #gem 'unicorn', '~> 4.8.0'
 gem 'puma', '~> 3.6.0'
@@ -56,8 +56,8 @@ gem 'rails4-autocomplete', '~> 1.1.1'
 gem 'best_in_place', '~> 3.1.0' #in-line editing for logbooks and surveys
 gem 'gmaps4rails', '~> 2.1.0'
 gem 'local_time', '~> 1.0.0'
-gem 'country_select', '~> 2.5.0'
-gem 'countries', '~> 1.2.0'
+gem 'country_select', '~> 3.0.0' #'~> 2.5.0'
+gem 'countries', '~> 2.0.0' #'~> 1.2.0'
 gem 'modernizr-rails', '~> 2.7.0'
 gem 'groupdate', '~> 3.1.1' # formats data for charts
 gem 'chartkick', '~> 2.1.0' # adds ChartKick
@@ -68,7 +68,7 @@ gem 'chartkick', '~> 2.1.0' # adds ChartKick
 # gem 'wicked_pdf', '~> 0.11.0'
 # gem 'wkhtmltopdf-heroku', '~> 2.12.0'
 gem 'rabl', '~> 0.13.0' # JSON templates
-gem 'oj', '~> 2.17.0' #high performance JSON parser for rabl
+gem 'oj', '~> 2.18.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
 gem 'rqrcode-with-patches', '~>0.6.0'
 gem 'prawn', '~> 2.1.0'
@@ -80,13 +80,13 @@ gem 'prawn-qrcode', '~> 0.2.2.1'
 gem 'carrierwave', '~> 0.11.0'
 gem 'carrierwave_direct', '~> 0.0.15'
 gem 'fog', '~> 1.38.0'
-gem 'roo', '~> 2.0.0'
+gem 'roo', '~> 2.5.0'
 gem 'roo-xls', '~> 1.0.0'
 gem 'mini_magick', '~> 4.5.0'
 #gem 'rmagick', '~> 2.15.0'
 gem 'griddler', '~> 1.3.0'  #Mandril API for incoming email handling
 gem 'griddler-mandrill', '~> 1.1.0'
-gem 'rubyzip', '~> 1.1.0'
+gem 'rubyzip', '~> 1.2.0'
 # gem 'zip-zip', '~> 0.2'
 
 
@@ -95,6 +95,9 @@ gem 'whenever', '~> 0.9.4'
 
 gem 'sinatra', require: nil
 
+# temporarily added after Rails 5 upgrade
+# div_for and content_tag_for have been removed
+gem 'record_tag_helper', '~> 1.0'
 
 # gem 'axlsx_rails', '~> 0.2.0'
 #gem 'rinruby', '~> 2.0.3'
@@ -130,7 +133,7 @@ group :development, :test do
   gem 'capybara-email'
 
   # turns off the Rails asset pipeline log
-  gem 'quiet_assets'
+  # gem 'quiet_assets'
 
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -190,5 +193,9 @@ group :test do
   gem "shoulda-kept-respond-with-content-type"
 
   gem 'poltergeist'
+
+  # brings back assigns and assert_template, which were deprecated in Rails 5.
+  # gradually update controller tests to remove this 
+  gem 'rails-controller-testing'
 
 end

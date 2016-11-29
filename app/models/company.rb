@@ -14,7 +14,7 @@
 #  code            :string
 #
 
-class Company < ActiveRecord::Base
+class Company < ApplicationRecord
   has_paper_trail
   has_drafts
 

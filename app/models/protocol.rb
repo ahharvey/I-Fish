@@ -9,7 +9,7 @@
 #  updated_at  :datetime         not null
 #
 
-class Protocol < ActiveRecord::Base
+class Protocol < ApplicationRecord
   has_many :documents, as: :documentable
   has_many :fisheries
   has_paper_trail

@@ -1,10 +1,10 @@
 class FisheriesController < ApplicationController
   load_and_authorize_resource
-  before_action :set_fishery, only: [:show, :edit, :update, :destroy]
+  #before_action :set_fishery, only: [:show, :edit, :update, :destroy]
 
   layout :select_layout
 
-  skip_before_filter :authenticate!
+  #skip_before_filter :authenticate!
 
   #respond_to :html
   #respond_to :xml, :json, :except => [ :edit, :new, :update, :create ]
@@ -12,7 +12,7 @@ class FisheriesController < ApplicationController
   autocomplete :fish, :scientific_name
 
   def index
-    @fisheries = Fishery.default
+    @fisheries = @fisheries.default.page(params[:page])
     respond_to do |format|
       format.html
       format.js
@@ -27,7 +27,7 @@ class FisheriesController < ApplicationController
   end
 
   def new
-    @fishery = Fishery.new
+    #@fishery = Fishery.new
   end
 
   def edit

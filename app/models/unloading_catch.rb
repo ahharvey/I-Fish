@@ -11,7 +11,7 @@
 #  cut_type     :string
 #
 
-class UnloadingCatch < ActiveRecord::Base
+class UnloadingCatch < ApplicationRecord
   belongs_to :fish
   belongs_to :unloading
   belongs_to :size_class

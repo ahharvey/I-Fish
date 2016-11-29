@@ -14,7 +14,7 @@
 #  string       :string           default("pending")
 #
 
-class CarrierLoading < ActiveRecord::Base
+class CarrierLoading < ApplicationRecord
 	belongs_to :vessel, touch: true
   belongs_to :fish, touch: true
 
@@ -32,13 +32,13 @@ class CarrierLoading < ActiveRecord::Base
         )
     end
   end
-  
+
   attr_writer :formatted_date
-  before_validation :save_formatted_date 
+  before_validation :save_formatted_date
   def formatted_date
     @formatted_date || date.try(:to_s, :long)
   end
-  
+
   def save_formatted_date
     self.date = Chronic.parse(@formatted_date) if @formatted_date.present?
   end

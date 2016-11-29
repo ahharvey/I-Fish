@@ -20,13 +20,13 @@
 #  threatened      :boolean          default(FALSE)
 #
 
-class Fish < ActiveRecord::Base
-  
+class Fish < ApplicationRecord
+
   has_paper_trail
 
   # default_scope order('fishes.order ASC, family ASC, scientific_name ASC')
   default_scope -> { order('fishes.order ASC, family ASC, scientific_name ASC') }
-  
+
   self.table_name = "fishes"
 
   attr_accessor :fishery_id
@@ -42,13 +42,13 @@ class Fish < ActiveRecord::Base
   has_many :unloading_catches
   has_many :unloadings, through: :unloading_catches
 
-  has_and_belongs_to_many :target_fisheries, 
+  has_and_belongs_to_many :target_fisheries,
     class_name: "Fishery",
-    join_table: 'target_fishes', 
+    join_table: 'target_fishes',
     uniq: true
-  has_and_belongs_to_many :bait_fisheries, 
+  has_and_belongs_to_many :bait_fisheries,
     class_name: "Fishery",
-    join_table: 'bait_fishes', 
+    join_table: 'bait_fishes',
     uniq: true
 
 

@@ -1,4 +1,4 @@
-class Importer < ActiveRecord::Base
+class Importer < ApplicationRecord
 	mount_uploader :file, ExcelFileUploader
 
 	before_create :set_status

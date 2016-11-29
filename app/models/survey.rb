@@ -20,8 +20,8 @@
 #  reviewed_at           :datetime
 #
 
-class Survey < ActiveRecord::Base
-	
+class Survey < ApplicationRecord
+
 	has_paper_trail
 
 	belongs_to :admin
@@ -39,7 +39,7 @@ class Survey < ActiveRecord::Base
 
   attr_writer :start_time_input, :end_time_input
 
-  before_save :save_start_at, :save_end_at  
+  before_save :save_start_at, :save_end_at
   validate :check_start_at if @start_time_input.present?
   validate :check_end_at if @end_time_input.present?
 
@@ -47,47 +47,47 @@ class Survey < ActiveRecord::Base
 
 	validates :date_published,
 		presence: {
-			message: " is not defined." 
+			message: " is not defined."
 		}
 	validates :desa,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
 	validates :start_time,
 		presence: {
-			message: " is not defined." 
+			message: " is not defined."
 		}
 	validates :end_time,
 		presence: {
-			message: " is not defined." 
+			message: " is not defined."
 		}
 	validates :fishery,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
 	validates :admin,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
-	validates :landing_enumerator, 
+	validates :landing_enumerator,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
-	validates :catch_scribe, 
+	validates :catch_scribe,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
-	validates :catch_measurer, 
+	validates :catch_measurer,
 		presence: {
-			message: " is not recognized." 
+			message: " is not recognized."
 		}
-	validates :vessel_count, 
+	validates :vessel_count,
 		numericality: {
       message: " is not a number."
     }
 
 #	validate :uniqueness_of_survey
-	
+
 	STATES = %w{ pending rejected approved }
 
   STATES.each do |state|
@@ -109,7 +109,7 @@ class Survey < ActiveRecord::Base
 			errors.add(:base, "Survey has been uploaded already.")
 		end
 	end
-	
+
 	after_create :format_approval_mail
 
 	def format_approval_mail
@@ -135,7 +135,7 @@ class Survey < ActiveRecord::Base
 				desa_id = Desa.where("LOWER(code) = ?", code_desa).first.id rescue nil
 				fishery_id = Fishery.where("LOWER(code) = ?", fishery).first.id rescue nil
 
-				puts Survey.create(fishery_id: fishery_id, desa_id: desa_id, date_published: date_published, 
+				puts Survey.create(fishery_id: fishery_id, desa_id: desa_id, date_published: date_published,
 					start_time: start_time, end_time: end_time, fleet_observer: fleet_observer,
 					catch_scribe: catch_scribe, catch_measure: catch_measure, user_id: user_id)
 			end
@@ -186,17 +186,17 @@ class Survey < ActiveRecord::Base
   def end_time_input
     @end_time_input || end_time.try(:strftime, "%H:%M")
   end
-  
-  # combines time and date to set value of start_time 
+
+  # combines time and date to set value of start_time
   def save_start_at
     self.start_time = Time.zone.parse("#{date_published} #{@start_time_input}" ) if ( @start_time_input.present? && date_published.present? )
   end
 
-  # combines time and date to set value of end_time 
+  # combines time and date to set value of end_time
   def save_end_at
     self.end_time = Time.zone.parse("#{date_published} #{@end_time_input}" ) if ( @end_time_input.present? && date_published.present? )
   end
-  
+
   # validates start time
   def check_start_at
     if  ( @start_time_input.present? && date_published.present? ) && Time.zone.parse( "#{date_published} #{@start_time_input}" ).nil?
@@ -207,7 +207,7 @@ class Survey < ActiveRecord::Base
       errors.add :start_time, "cannot be blank"
     end
   rescue ArgumentError
-    errors.add :start_time, "is not defined"   
+    errors.add :start_time, "is not defined"
   end
 
   # validates end time
@@ -220,7 +220,7 @@ class Survey < ActiveRecord::Base
       errors.add :end_time, "cannot be blank"
     end
   rescue ArgumentError
-    errors.add :end_time, "is not defined"   
+    errors.add :end_time, "is not defined"
   end
 
   def formatted_admin

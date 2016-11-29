@@ -10,7 +10,7 @@
 #  protocol_id :integer
 #
 
-class Fishery < ActiveRecord::Base
+class Fishery < ApplicationRecord
 
   has_paper_trail
   has_drafts

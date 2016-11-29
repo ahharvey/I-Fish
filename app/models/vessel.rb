@@ -45,7 +45,7 @@
 #  dkp_ref            :string
 #
 
-class Vessel < ActiveRecord::Base
+class Vessel < ApplicationRecord
   acts_as_vessel
   has_drafts
 

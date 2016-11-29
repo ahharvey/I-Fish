@@ -8,11 +8,11 @@
 #  updated_at :datetime         not null
 #
 
-class Role < ActiveRecord::Base
-  
+class Role < ApplicationRecord
+
   has_paper_trail
 
-  validates :name, 
+  validates :name,
   	presence: true,
   	uniqueness: true
 end

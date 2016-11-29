@@ -9,8 +9,8 @@
 #  updated_at :datetime         not null
 #
 
-class Engine < ActiveRecord::Base
-  
+class Engine < ApplicationRecord
+
   has_paper_trail
 
   has_many :landings

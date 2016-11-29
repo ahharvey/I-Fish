@@ -10,8 +10,8 @@
 #  code        :integer
 #
 
-class District < ActiveRecord::Base
-  
+class District < ApplicationRecord
+
   has_paper_trail
 
   attr_accessor :year
@@ -35,5 +35,5 @@ class District < ActiveRecord::Base
   def approved_surveys
     self.surveys.where( review_state: 'approved' )
   end
-  
+
 end

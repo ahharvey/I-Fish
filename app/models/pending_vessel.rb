@@ -38,7 +38,7 @@
 #  updated_at         :datetime         not null
 #
 
-class PendingVessel <  ActiveRecord::Base
+class PendingVessel <  ApplicationRecord
 	acts_as_vessel
 	acts_as_reviewable
 
@@ -73,8 +73,8 @@ class PendingVessel <  ActiveRecord::Base
       'updated_at',
       'audit_id',
       'admin_id',
-      'vessel_id', 
-      'review_state', 
+      'vessel_id',
+      'review_state',
       'reviewed_at'
       )
   end
@@ -110,5 +110,5 @@ class PendingVessel <  ActiveRecord::Base
       tracker: tracker
     }
   end
-	
+
 end

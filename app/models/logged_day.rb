@@ -26,105 +26,105 @@
 #  notes        :text
 #
 
-class LoggedDay < ActiveRecord::Base
-  
+class LoggedDay < ApplicationRecord
+
   has_paper_trail
 
   belongs_to :fish
   belongs_to :graticule
   belongs_to :logbook
   has_one :fishery, through: :logbook
-  
+
   attr_writer :start_time_input, :end_time_input, :date_input
 
-  before_save :save_start_at, :save_end_at  
+  before_save :save_start_at, :save_end_at
   validate :check_start_at, :check_end_at
 
 
   validates :condition,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     },
-    inclusion: { 
+    inclusion: {
       in: 1..3,
-      message: " is not recognized." 
+      message: " is not recognized."
     },
     unless: [ :aborted?, :inactive? ]
-  
+
   validates :end_time,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     }
   validates :gear_time,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     }
 
 #  validates :line,
 #    inclusion: {
 #      in: [true, false],
-#      message: " is not defined." 
+#      message: " is not defined."
 #    },
 #    if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
 #  validates :net,
 #    inclusion: {
 #      in: [true, false],
-#      message: " is not defined." 
+#      message: " is not defined."
 #    }
 #    #,
 #    #if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
 #  validates :sail,
 #    inclusion: {
 #      in: [true, false],
-#      message: " is not defined." 
+#      message: " is not defined."
 #    }
 #    #,
 #    #if: Proc.new { |l| l.fishery.code == 'LOM-PS' }
   validates :aborted,
     inclusion: {
       in: [true, false],
-      message: " is not defined." 
+      message: " is not defined."
     },
     unless: [ :inactive? ]
 
   validates :crew,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     },
     numericality: {
       message: " is not a number."
     }
   validates :fuel,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     },
     numericality: {
       message: " is not a number."
     }
   validates :quantity,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     },
     numericality: {
       message: " is not a number."
     }
   validates :value,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     },
     numericality: {
       message: " is not a number."
     }
 #  validates :weight,
 #    presence: {
-#      message: " is not defined." 
+#      message: " is not defined."
 #    },
 #    numericality: {
 #      message: " is not a number."
 #    }
   validates :ice,
     presence: {
-      message: " is not defined." 
+      message: " is not defined."
     },
     numericality: {
       message: " is not a number."
@@ -132,12 +132,12 @@ class LoggedDay < ActiveRecord::Base
 
   validates :fish,
     presence: {
-      message: " is not recognized." 
+      message: " is not recognized."
     },
     unless: [ :aborted?, :inactive?, :nofish? ]
   validates :graticule,
     presence: {
-      message: " is not recognized." 
+      message: " is not recognized."
     },
     unless: [ :aborted?, :inactive? ]
 
@@ -167,17 +167,17 @@ class LoggedDay < ActiveRecord::Base
   def date_input
     @date_input || start_time.try(:strftime, "%Y-%m-%d")
   end
-  
-  # combines time and date to set value of start_time 
+
+  # combines time and date to set value of start_time
   def save_start_at
     self.start_time = Time.zone.parse("#{@date_input} #{@start_time_input}" ) if ( @start_time_input.present? && @date_input.present? )
   end
 
-  # combines time and date to set value of end_time 
+  # combines time and date to set value of end_time
   def save_end_at
     self.end_time = Time.zone.parse("#{@date_input} #{@end_time_input}" ) if ( @end_time_input.present? && @date_input.present? )
   end
-  
+
   # validates start time
   def check_start_at
     if  ( @start_time_input.present? && @date_input.present? ) && Time.zone.parse( "#{@date_input} #{@start_time_input}" ).nil?
@@ -188,7 +188,7 @@ class LoggedDay < ActiveRecord::Base
       errors.add :start_time_input, "cannot be blank"
     end
   rescue ArgumentError
-    errors.add :start_date_input, "is not defined"   
+    errors.add :start_date_input, "is not defined"
   end
 
   # validates end time
@@ -201,7 +201,7 @@ class LoggedDay < ActiveRecord::Base
       errors.add :end_time_input, "cannot be blank"
     end
   rescue ArgumentError
-    errors.add :end_date_input, "is not defined"   
+    errors.add :end_date_input, "is not defined"
   end
 
   #private

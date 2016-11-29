@@ -12,11 +12,11 @@
 #  district_id :integer
 #
 
-class Desa < ActiveRecord::Base
-  
+class Desa < ApplicationRecord
+
   has_paper_trail
-  
-  
+
+
 
   has_many :surveys, dependent: :destroy
   has_many :landings, through: :surveys

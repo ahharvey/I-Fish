@@ -32,7 +32,7 @@
 #  access_token           :string
 #
 
-class Admin < ActiveRecord::Base
+class Admin < ApplicationRecord
 
   has_paper_trail
 

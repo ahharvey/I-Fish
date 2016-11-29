@@ -17,8 +17,8 @@
 #  updated_at  :datetime         not null
 #
 
-class Gear < ActiveRecord::Base
-  
+class Gear < ApplicationRecord
+
   has_paper_trail
 
   # default_scope order('num_code ASC')

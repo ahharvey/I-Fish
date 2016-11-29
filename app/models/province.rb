@@ -10,8 +10,8 @@
 #  alpha_code :string(255)
 #
 
-class Province < ActiveRecord::Base
-  
+class Province < ApplicationRecord
+
   has_paper_trail
 
   attr_accessor :year

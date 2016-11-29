@@ -18,7 +18,7 @@
 #  secondary_fish_id :integer
 #
 
-class BaitLoading < ActiveRecord::Base
+class BaitLoading < ApplicationRecord
 
   METHOD_TYPES = %w{ bagan purse beach bouke }
 
@@ -122,7 +122,7 @@ class BaitLoading < ActiveRecord::Base
     ]
   end
 
-  
+
 
 
 end

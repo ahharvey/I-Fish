@@ -8,8 +8,8 @@
 #  updated_at :datetime         not null
 #
 
-class Graticule < ActiveRecord::Base
-  
+class Graticule < ApplicationRecord
+
   has_paper_trail
 
   has_many :landings

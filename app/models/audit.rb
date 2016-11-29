@@ -12,7 +12,7 @@
 #  updated_at     :datetime         not null
 #
 
-class Audit < ActiveRecord::Base
+class Audit < ApplicationRecord
   belongs_to :admin
   belongs_to :auditable, polymorphic: true
   has_one :pending_vessel

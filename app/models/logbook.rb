@@ -14,8 +14,8 @@
 #  reviewed_at  :datetime
 #
 
-class Logbook < ActiveRecord::Base
-  
+class Logbook < ApplicationRecord
+
   has_paper_trail
 
   belongs_to :user
@@ -24,24 +24,24 @@ class Logbook < ActiveRecord::Base
   belongs_to :fishery
   has_many :logged_days
 
-  validates :date, 
+  validates :date,
     presence: {
       message: " is not defined."
     },
-    uniqueness: { 
-      scope: [ :user_id, :fishery_id ] 
+    uniqueness: {
+      scope: [ :user_id, :fishery_id ]
     }
   validates :fishery,
     presence: {
-      message: " is not recognized." 
+      message: " is not recognized."
     }
   validates :user,
     presence: {
-      message: " is not recognized." 
+      message: " is not recognized."
     }
   validates :admin,
     presence: {
-      message: " is not recognized." 
+      message: " is not recognized."
     }
 
   STATES = %w{ pending rejected approved }

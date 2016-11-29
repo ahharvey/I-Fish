@@ -1,7 +1,7 @@
-class PdfGeneratedJob < ActiveJob::Base
+class PdfGeneratedJob < ApplicationJob
   queue_as :default
- 
-  def perform(admin_id, filename, vessel_ids) 
+
+  def perform(admin_id, filename, vessel_ids)
   	@vessels = Vessel.where(id: vessel_ids)
   	pdf = StickerPdf.new(@vessels)
   	file = StringIO.new(pdf.render) #mimic a real upload file
@@ -12,5 +12,5 @@ class PdfGeneratedJob < ActiveJob::Base
 	  generated_report.file = file
 	  generated_report.save!
 	  UserMailer.generated_report_ready(admin_id, generated_report.id).deliver_later
-	end 
+	end
 end

@@ -9,8 +9,8 @@
 #  updated_at :datetime         not null
 #
 
-class VesselType < ActiveRecord::Base
-  
+class VesselType < ApplicationRecord
+
   has_paper_trail
 
   has_many :landings

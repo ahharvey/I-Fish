@@ -13,11 +13,11 @@
 #  measurement :string(255)
 #
 
-class Catch < ActiveRecord::Base
-	
+class Catch < ApplicationRecord
+
 	has_paper_trail
-	
-	
+
+
 
 	belongs_to :fish
 	belongs_to :landing
@@ -67,7 +67,7 @@ class Catch < ActiveRecord::Base
 	end
 
 	@@measurement_data = { 'fl' => "Fork Length" , 'dw' => "Disc Width" , 'fin' => "Fin Length" }
-  
+
   def measurement_as_text
     @@measurement_data[measurement]
   end

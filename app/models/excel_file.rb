@@ -13,8 +13,8 @@
 
 require 'import_excel_data'
 
-class ExcelFile < ActiveRecord::Base
-  
+class ExcelFile < ApplicationRecord
+
   before_validation :import_excel_data
   before_save :update_asset_attributes
   mount_uploader :file, ExcelFileUploader
@@ -81,7 +81,7 @@ class ExcelFile < ActiveRecord::Base
         puts survey.to_yaml
         PaperTrail.whodunnit = survey.admin_id
         survey.save!
-        
+
       end
 
       for landing in @models.select{|m| m[:model].is_a? Landing}
@@ -103,7 +103,7 @@ class ExcelFile < ActiveRecord::Base
         puts catch_tab.to_yaml
         PaperTrail.whodunnit = catch_tab.survey.admin_id
         catch_tab.save!
-        
+
       end
 
 
@@ -122,7 +122,7 @@ class ExcelFile < ActiveRecord::Base
 #          Rails.logger.info c[:model].to_yaml
 #          puts c[:model].to_yaml
 #        end
-      
+
 
       # We need to save the logbook first if it exists and then add each of the landings to it
       if @models.select{|m| m[:model].is_a? Logbook}.count > 0

@@ -14,7 +14,7 @@
 #  updated_at        :datetime         not null
 #
 
-class Document < ActiveRecord::Base
+class Document < ApplicationRecord
   belongs_to :documentable, polymorphic: true
   mount_uploader :file, DocumentUploader
 
