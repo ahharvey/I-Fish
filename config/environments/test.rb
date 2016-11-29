@@ -42,4 +42,6 @@ Rails.application.configure do
 
   # disables papertrail in tests
   config.paper_trail.enabled = false
+
+  config.action_mailer.default_url_options = { :host => 'http://i-fish.dev', :locale => I18n.locale  }
 end

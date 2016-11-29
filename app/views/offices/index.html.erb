@@ -20,11 +20,11 @@
     <% @offices.each do |office| %>
       <tr>
         <td><%= link_to show_icon, office %> </td>
-        <td><%= office.name %></td>
+        <td><%= link_to office.name, office %></td>
         <td><%= office.district.try(:name) %></td>
         <td>
           <% if can? :update, office %>
-            <%= link_to edit_icon, edit_office_path(office) %> 
+            <%= link_to edit_icon, edit_office_path(office) %>
           <% end %>
           <% if can? :destroy, office %>
             <%= link_to destroy_icon, office, method: :delete, data: { confirm: "This will permanently delete this record and all associated records.\nAre you sure?" } %>

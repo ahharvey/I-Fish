@@ -3,12 +3,13 @@
     <h3 class="panel-title">Staff</h3>
   </div>
   <div class="panel-body">
-    <% if can? :create, Admin && can? :update, Office %>
+    <% if ( can? :create, Admin ) && ( can? :update, Office ) %>
       <%= form_tag [:add_admin, @office], class: "form", :remote=>true do %>
         <div class="input-group">
+          <%= label_tag 'get_admin', 'Add a team member', class: 'hidden-xs' %>
           <%= text_field_tag :get_admin, "", class: "form-control", placeholder: "Add a team member...", autocomplete: "off", data: { autocomplete_source: Admin.order(:email).map(&:email) } %>
           <div class="input-group-btn">
-            <%= button_tag add_icon, class: "btn btn-success" %>
+            <%= button_tag add_icon, class: "btn btn-success", id: 'add_admin' %>
           </div>
         </div>
       <% end %>

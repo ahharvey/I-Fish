@@ -1,22 +1,26 @@
 class OfficesController < ApplicationController
   load_and_authorize_resource
 
-  before_action :set_office, only: [:show, :edit, :update, :destroy, :add_admin]
+  #before_action :set_office, only: [:show, :edit, :update, :destroy, :add_admin]
   respond_to :html
   respond_to :xml, :json, :csv, :xls, :js, :except => [ :edit, :new, :update, :create ]
 
   def index
-    @offices = Office.all
-    respond_with(@offices)
+    @offices = @offices.default.page(params[:page])
+    respond_to do |format|
+      format.html
+      format.js
+      format.csv do
+        headers['Content-Disposition'] = "attachment; filename=\"offices-#{Date.current}.csv\""
+        headers['Content-Type'] ||= 'text/csv'
+      end
+    end
   end
 
   def show
-    respond_with(@office)
   end
 
   def new
-    @office = Office.new(name: params[:name], fishery_id: params[:fishery_id] )
-    respond_with(@offcie)
   end
 
   def edit
@@ -24,20 +28,35 @@ class OfficesController < ApplicationController
 
   def create
     @office = Office.new(office_params)
-    @office.save
-    
-
-    respond_with @office, location: -> { after_save_path_for(@office) }
+    respond_to do |format|
+      if @office.save
+        format.html { redirect_to @office, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @office }
+      else
+        format.html { render :new }
+        format.json { render json: @office.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
-    @office.update(office_params)
-    respond_with @office, location: -> { after_save_path_for(@office) }
+    respond_to do |format|
+      if @office.update(office_params)
+        format.html { redirect_to @office, notice: t('.notice') }
+        format.json { render :show, status: :ok, location: @office }
+      else
+        format.html { render :edit }
+        format.json { render json: @office.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
     @office.destroy
-    respond_with(@office)
+    respond_to do |format|
+      format.html { redirect_to offices_url, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   def crop
@@ -53,13 +72,13 @@ class OfficesController < ApplicationController
       else
        @office.admins.push admin
        flash[:success]= I18n.t("offices.admins.created")
-      end 
+      end
       redisplay_admins
     else
       email = params[:get_admin]
       name  = email[0,email.index('@')]
       Admin.invite!({ email: email, name: name, office_id: @office.id, approved: true }, current_admin)
-      flash[:success]= I18n.t("offices.admins.invited")
+      flash[:success]= I18n.t("offices.admins.invited", office: @office.name )
       redisplay_admins
     end
 
@@ -73,16 +92,15 @@ class OfficesController < ApplicationController
   end
 
   private
-  
+
   def set_office
     @office = Office.find(params[:id])
   end
 
   def office_params
     params.require(:office).permit(
-      :name, 
-      :district_id, 
-      :fishery_id
+      :name,
+      :district_id
       )
   end
 

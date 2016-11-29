@@ -14,6 +14,7 @@ class Office < ApplicationRecord
   has_paper_trail
 
   # attr_accessible :name, :district_id
+  scope :default, -> { order('offices.name ASC') }
 
   has_many :admins
   belongs_to :district
