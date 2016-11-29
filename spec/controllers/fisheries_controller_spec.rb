@@ -230,9 +230,9 @@ RSpec.describe FisheriesController, type: :controller do
       Rails.logger.info "CCCCCCCCCCCCCCCCC"
       Rails.logger.info Fishery.all.size
     end
-    it 'does stuff', :focus do
+    it 'does stuff' do
       expect {
-      
+
         delete :destroy, {:id => fisheryx.to_param}
         Rails.logger.info "DDDDDDDDDDDDDDDDD"
         Rails.logger.info Fishery.all.size
