@@ -1,7 +1,7 @@
 class LogbooksController < ApplicationController
   load_and_authorize_resource
 
-  skip_before_filter :authenticate!
+  #skip_before_filter :authenticate!
 
   before_action :set_logbook, only: [:show, :edit, :update, :destroy]
   respond_to :html
@@ -99,19 +99,19 @@ class LogbooksController < ApplicationController
   end
 
   private
-  
+
   def set_logbook
     @logbook = Logbook.includes(:admin, :fishery, :logged_days, :versions, user: [:desa] ).find(params[:id])
   end
 
   def logbook_params
     params.require(:vessel).permit(
-      :date, 
-      :user_id, 
-      :admin_id, 
-      :fishery_id, 
-      :review_state, 
-      :reviewed_at, 
+      :date,
+      :user_id,
+      :admin_id,
+      :fishery_id,
+      :review_state,
+      :reviewed_at,
       :reviewer_id
       )
   end
@@ -124,7 +124,7 @@ class LogbooksController < ApplicationController
     respond_to do |format|
       format.html { redirect_to logbook  }
       format.js {
-        @logbook = logbook 
+        @logbook = logbook
         render :refresh_supervisor_controls
       }
     end
@@ -139,5 +139,3 @@ class LogbooksController < ApplicationController
   end
 
 end
-
-
