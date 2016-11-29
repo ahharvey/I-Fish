@@ -13,13 +13,25 @@
 #
 
 class Audit < ApplicationRecord
+
+  STATES = %w{ approved rejected reviewed}
+
+
   belongs_to :admin
   belongs_to :auditable, polymorphic: true
   has_one :pending_vessel
 
   scope :default, -> { order('audits.created_at DESC') }
 
-  STATES = %w{ approved rejected reviewed}
+  validates :admin,
+    presence: true
+  validates :auditable,
+    presence: true
+  validates :status,
+    inclusion: { in: STATES }
+
+
+
 
   STATES.each do |state|
     define_method("#{state}?") do

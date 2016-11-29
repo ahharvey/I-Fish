@@ -1,6 +1,6 @@
 class AuditsController < ApplicationController
   load_and_authorize_resource
-  before_filter :load_auditable
+  before_filter :load_auditable, only: [:index, :new, :create]
 
   before_action :set_audit, only: [:show, :edit, :update, :destroy]
   respond_to :html
@@ -8,41 +8,60 @@ class AuditsController < ApplicationController
 
   def index
     @audits = @auditable.audits.default.page(params[:page])
-    respond_with(@audits)
   end
 
   def show
-    respond_with(@audit)
   end
 
   def new
     @audit = @auditable.audits.new
-    respond_with(@audit)
-  end
-
-  def edit
   end
 
   def create
-    Rails.logger.info "ZZZZZZZZZZ"
-    @admin = current_admin.id
-    Rails.logger.info "YYYYYYYYYYYY"
-    @audit = @auditable.audits.create( audit_params.merge(:admin_id => @admin))
-    Rails.logger.info "XXXXXXXXXXXXX"
-    Rails.logger.info @audit.to_yaml
-    respond_with @audit, location: -> { after_save_path_for(@audit) }
+    @admin = current_admin
+    @audit = @auditable.audits.build(
+      audit_params.merge( admin_id: @admin.id )
+      )
+
+    if @audit.rejected?
+      next_page = edit_polymorphic_path(@audit.auditable)
+    else
+      next_page = @audit.auditable if @audit.approved?
+    end
+
+    respond_to do |format|
+      if @audit.save
+        format.html { redirect_to next_page, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @audit }
+      else
+        format.html { render :new }
+        format.json { render json: @audit.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def update
-    respond_with @audit, location: -> { after_save_path_for(@audit) }
+    respond_to do |format|
+      if @audit.update(audit_params)
+        format.html { redirect_to @audit.auditable, notice: t('.notice') }
+        format.json { render :show, status: :created, location: @audit }
+      else
+        format.html { render :edit }
+        format.json { render json: @audit.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
   def destroy
-    respond_with(@audit)
+    @audit.destroy
+    respond_to do |format|
+      format.html { redirect_to @audit.auditable, notice: t('.notice') }
+      format.json { head :no_content }
+    end
   end
 
   private
-  
+
   def set_audit
     @audit = Audit.find(params[:id])
   end
@@ -57,7 +76,7 @@ class AuditsController < ApplicationController
 
   def audit_params
     params.require(:audit).permit(
-      :comment, 
+      :comment,
       :status
       )
   end

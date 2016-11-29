@@ -47,6 +47,12 @@ FactoryGirl.define do
     sequence(:ap2hi_ref) { |n| "Vessel#{n}" }
   end
 
+  factory :audit do
+    admin
+    association :auditable, factory: :vessel
+    status { %w{ approved rejected reviewed }.sample }
+  end
+
   factory :unloading do
     vessel
     port
