@@ -26,7 +26,7 @@ RSpec.describe "Staff audits Vessel" do
       visit vessel_path(vessel)
     end
 
-    it "creates with valid data" do
+    it "rejects and creates draft" do
 
       expect(page).to have_content vessel.name
       expect(current_path).to eq vessel_path(vessel)
@@ -36,48 +36,61 @@ RSpec.describe "Staff audits Vessel" do
       expect(current_path).to eq new_vessel_audit_path(vessel)
 
       expect(page).to have_selector 'textarea[name="audit[comment]"]'
-      expect(page).to have_selector 'input[type="radio"][value="approved"]'
-      expect(page).to have_selector 'input[type="radio"][value="rejected"]'
+      expect(page).to have_selector 'input[type="submit"][value="Approve"]'
+      expect(page).to have_selector 'input[type="submit"][value="Reject"]'
 
       #find('input[type="radio"][value="approved"]').click
 
-      choose('audit_status_approved')
+      click_button("Reject")
+
 
       expect(page).to have_content 'SUCCESS! Audit was successfully created.'
 
-      expect(page).to have_link company.name, href: company_path(company)
-      click_link company.name
-      expect(current_path).to eq company_path(company)
 
-      expect(page).to have_link vessel.ap2hi_ref, href: vessel_path(vessel)
-      click_link vessel.ap2hi_ref
+      expect(current_path).to eq edit_vessel_path(vessel)
+
+
+      fill_in 'GT',   with: '5'
+      fill_in 'No. hooks',  with: '10'
+      click_button 'Save'
+
+
+      expect(current_path).to eq vessel_path(vessel)
+      expect(page).to have_content 'Your edits were successfully submitted and are pending review.'
+      expect(page).to have_content "Rejected by #{admin.name}"
+      vessel.reload
+      expect(vessel.draft?).to be true
+
+      expect(page).to have_content 'Pending Edits'
+      expect(page).to have_link 'Approve', href: draft_path(vessel.draft)
+      expect(page).to have_link 'Reject', href: draft_path(vessel.draft)
+
+    end
+
+    it "approves" do
+
+      expect(page).to have_content vessel.name
       expect(current_path).to eq vessel_path(vessel)
 
+      expect(page).to have_link 'Audit', href: new_vessel_audit_path(vessel)
+      click_link('Audit')
+      expect(current_path).to eq new_vessel_audit_path(vessel)
 
-      expect(page).to have_link 'New Unloading Report', href: new_vessel_unloading_path(vessel)
-      click_link 'New Unloading Report'
-      expect(current_path).to eq new_vessel_unloading_path(vessel)
+      expect(page).to have_selector 'textarea[name="audit[comment]"]'
+      expect(page).to have_selector 'input[type="submit"][value="Approve"]'
+      expect(page).to have_selector 'input[type="submit"][value="Reject"]'
+
+      #find('input[type="radio"][value="approved"]').click
+
+      click_button("Approve")
 
 
-      select port.name, from: 'Port'
-      select wpp.name,  from: 'WPP'
-      fill_in 'Dep',  with: Date.yesterday
-      fill_in 'Arr',  with: Date.today
-      fill_in 'Fuel', with: 5
-      fill_in 'Ice',  with: 5
+      expect(current_path).to eq vessel_path(vessel)
+      expect(page).to have_content 'SUCCESS! Audit was successfully created.'
+      expect(page).to have_content "Approved by #{admin.name}"
 
-      click_button 'Save'
 
-      expect(page).to have_content 'Unloading was successfully created'
-      expect(current_path).to eq unloading_path(Unloading.last)
 
-      expect( page.all('table#unloading_catch_table tr').count ).to eq 1
-
-      select fish.code, from: 'Species'
-      fill_in 'Quantity',  with: 300
-      click_button 'Save'
-
-      expect( page.all('table#unloading_catch_table tr').count ).to eq 2
     end
 
 

@@ -4,7 +4,9 @@
       <h3 class="panel-title">Audits</h3>
     </div>
 
+
     <div class="list-group">
+      <% if false %>
       <% if @vessel.pending_vessel.present? %>
         <% if @vessel.pending_vessel.pending? %>
           <%= link_to @vessel.pending_vessel, class: 'list-group-item list-group-item-danger' do %>
@@ -18,6 +20,7 @@
           <% end %>
         <% end %>
       <% end %>
+      <% end %>
       <% @vessel.audits.default.first(5).each do |audit| %>
         <li class="list-group-item">
           <p><small>
@@ -28,15 +31,15 @@
             <% else %>
               <%= icon fa_danger, '', class: 'fa-fw fa-2x text-danger' %>
             <% end %>
-            <%= image_tag audit.admin.avatar_url(:thumb), 
-              width: "30px", 
-              height: "30px", 
+            <%= image_tag audit.admin.avatar_url(:thumb),
+              width: "30px",
+              height: "30px",
               style: 'vertical-align:text-bottom;',
-              title: audit.admin.name, 
+              title: audit.admin.name,
               alt: audit.admin.name
               %>
             <%= audit.status.capitalize %> by
-            <%= link_to audit.admin.try(:name), audit.admin %> on 
+            <%= link_to audit.admin.try(:name), audit.admin %> on
             <%= audit.created_at.to_s(:long) %>
           </small></p>
         </li>

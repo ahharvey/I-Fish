@@ -1,5 +1,4 @@
 <% title t ".title" %>
-
 <div class='row'>
   <div class='col-xs-12'>
     <%= render 'operational_status' %>
@@ -8,6 +7,9 @@
 <div class="row">
   <div class="col-xs-12 col-md-4 col-md-push-8">
     <div class="row">
+      <div class="col-xs-12">
+        <%= render partial: "pending_edits" %>
+      </div>
       <div class="col-xs-12">
         <%= render partial: "audit_panel" %>
       </div>
@@ -18,7 +20,7 @@
         <% if can? :create, BaitLoading.new(vessel_id: @vessel.id ) %>
           <%= link_to "New Bait Loading Report", new_vessel_bait_loading_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
         <% end %>
-        
+
         <% if @vessel.vessel_type.try(:code) == 'ca' %>
           <% if can? :read, CarrierLanding %>
             <%= link_to "View carrier loading reports", vessel_carrier_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>

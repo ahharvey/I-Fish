@@ -34,6 +34,17 @@ RSpec.describe "Admin" do
     context "when is a Staff" do
       let(:admin) { create :admin }
       before :each do
+        admin.roles.push Role.where(name: 'enumerator').first_or_create
+      end
+      it { is_expected.to have_abilities([:index, :show, :edit, :update], Vessel) }
+      it { is_expected.to not_have_abilities([:new, :create, :destroy], Vessel) }
+
+      it { is_expected.to have_abilities([:new, :create], Audit ) }
+      it { is_expected.to not_have_abilities([:index, :show, :edit, :update], Audit ) }
+    end
+    context "when is a Staff" do
+      let(:admin) { create :admin }
+      before :each do
         admin.roles.push Role.where(name: 'staff').first_or_create
       end
 

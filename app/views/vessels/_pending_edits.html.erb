@@ -1,0 +1,21 @@
+<% if @vessel.draft? %>
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Pending Edits</h3>
+    </div>
+    <div class="panel-body">
+      <dl class="dl-horizontal">
+        <% @vessel.draft.changeset.each do |c| %>
+          <% unless c[1][0].to_s == c[1][1].to_s %>
+            <dt><%= Vessel.human_attribute_name(c[0]) %></dt>
+            <dd><%= c[1][1] %></dd>
+          <% end %>
+        <% end %>
+      </dl>
+      <div class='btn-group btn-group-justified' role="group" aria-label="audit_status_buttons">
+        <%= link_to "Reject" , draft_path(@vessel.draft), method: :destroy, class: 'btn btn-danger' %>
+        <%= link_to "Approve" , draft_path(@vessel.draft), method: :patch, class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+<% end %>

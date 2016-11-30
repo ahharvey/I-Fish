@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "unloadings/show", type: :view do
+RSpec.describe "unloadings/show", type: :view, broken: true do
 
   before(:each) do
     @unloading = assign(:unloading, unloading )

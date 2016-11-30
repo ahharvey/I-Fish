@@ -8,9 +8,9 @@ RSpec.describe AuditsController, type: :controller do
   # adjust the attributes here as well.
   let(:valid_attributes) {
     {
-      admin_id: admin.id,
-      auditable_id: vessel1.id,
-      auditable_type: vessel1.class.name,
+#      admin_id: admin.id,
+#      auditable_id: vessel1.id,
+#      auditable_type: vessel1.class.name,
       status: 'rejected'
     }
   }
@@ -134,11 +134,11 @@ RSpec.describe AuditsController, type: :controller do
     end
     context "with valid params and approved" do
       before :each do
-        post :create, { audit: valid_attributes.merge(status: 'approved'), vessel_id: vessel1.id}
+        post :create, { audit: valid_attributes, vessel_id: vessel1.id, commit: 'Approve' }
       end
       it {
         expect {
-          post :create, { audit: attributes_for(:audit), vessel_id: vessel2.id }
+          post :create, { audit: attributes_for(:audit), vessel_id: vessel2.id, commit: 'Approve' }
         }.to change(Audit, :count).by(1)
       }
       it { expect(assigns(:audit)).to be_a(Audit) }
@@ -148,11 +148,11 @@ RSpec.describe AuditsController, type: :controller do
     end
     context "with valid params and rejected" do
       before :each do
-        post :create, { audit: valid_attributes, vessel_id: vessel1.id}
+        post :create, { audit: valid_attributes, vessel_id: vessel1.id, commit: 'Reject' }
       end
       it {
         expect {
-          post :create, { audit: attributes_for(:audit).merge(status: 'rejected'), vessel_id: vessel2.id }
+          post :create, { audit: attributes_for(:audit), vessel_id: vessel2.id, commit: 'Reject' }
         }.to change(Audit, :count).by(1)
       }
       it { expect(assigns(:audit)).to be_a(Audit) }

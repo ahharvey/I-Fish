@@ -18,9 +18,11 @@ class AuditsController < ApplicationController
   end
 
   def create
+    status = 'approved' if params[:commit] == 'Approve'
+    status = 'rejected' if params[:commit] == 'Reject'
     @admin = current_admin
     @audit = @auditable.audits.build(
-      audit_params.merge( admin_id: @admin.id )
+      audit_params.merge( admin_id: @admin.id, status: status )
       )
 
     if @audit.rejected?
@@ -28,6 +30,8 @@ class AuditsController < ApplicationController
     else
       next_page = @audit.auditable if @audit.approved?
     end
+
+    Rails.logger.info @audit.to_yaml
 
     respond_to do |format|
       if @audit.save
@@ -76,6 +80,7 @@ class AuditsController < ApplicationController
 
   def audit_params
     params.require(:audit).permit(
+
       :comment,
       :status
       )

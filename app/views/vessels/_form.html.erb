@@ -1,10 +1,10 @@
 <%= simple_form_for @vessel, html: {class: 'form form-horizontal'} do |f| %>
-  
+
 
   <div class="row">
 
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-    
+
     <%= f.input :return_to, as: :hidden %>
 
     <%= f.input :ap2hi_ref %>
@@ -28,14 +28,14 @@
     <%= f.input :name %>
 
     <%= f.input :name_changed, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
 
     <%= f.input :operational_type, collection: Vessel::OPERATIONAL_TYPES, input_type: lambda { |s| I18n.t("operational_types.#{s}") } %>
@@ -60,26 +60,26 @@
     <%= f.input :capacity %>
 
     <%= f.input :vms, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
 
-    
+
     <%= f.input :tracker, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
 
     <%= f.input :port %>
@@ -88,33 +88,33 @@
 
 
     <%= f.input :flag_state_changed, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
 
     <%= f.input :radio, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
-    
+
     <%= f.input :year_built %>
 
     <%= f.input :location_built %>
 
     <%= f.input :captain %>
-    
+
     <%= f.association :gear, label_method: :alpha_code, value_method: :id %>
 
     <%= f.input :hooks %>
@@ -126,43 +126,43 @@
     <%= f.input :crew %>
 
     <%= f.input :shark_policy, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
 
     <%= f.input :iuu_list, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
-    
+
     <%= f.input :code_of_conduct, input_html: {
-      class: 'toggle-switch', 
-      data: { 
+      class: 'toggle-switch',
+      data: {
         size: 'mini',
         'on-color' => 'success',
         'off-color' => 'danger',
         'on-text' => "Yes",
         'off-text' => "No"
-        } 
+        }
       } %>
-    
-  
+
+
     </div>
 
   </div>
-    
+
   <div class="row">
     <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
 
@@ -176,7 +176,7 @@
 
       <% else %>
         <%= link_to "Cancel", vessels_path, :class=>"btn pull-right" %>
-      <% end %> 
+      <% end %>
     </div>
   </div>
 <% end %>

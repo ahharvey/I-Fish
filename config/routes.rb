@@ -136,6 +136,7 @@ Rails.application.routes.draw do
     resources :responders
 
     resources :tests
+    resources :drafts, only: [:update,:destroy]
 
     resources :vessels do
       resources :unloadings

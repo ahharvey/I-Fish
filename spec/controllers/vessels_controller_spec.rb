@@ -132,7 +132,7 @@ RSpec.describe VesselsController, type: :controller do
     end
     context 'when user is logged in' do
       before :each do
-        sign_in admin
+        sign_in user
         get :edit, { id: vessel1.id }
       end
       it { is_expected.to redirect_to root_path }

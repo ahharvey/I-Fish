@@ -5,11 +5,13 @@ require 'rails_helper'
 
 RSpec.describe "Staff adds Admin to Office" do
 
+  let(:admin)     { create :admin, office: office }
+  let(:user)      { create :user }
+  let(:office)    { create :office }
+  let(:office2)   { create :office }
+  let(:fishery)   { create :fishery }
+
   describe "with signed in staff" do
-    let(:admin)     { create :admin, office: office }
-    let(:office)    { create :office }
-    let(:office2)   { create :office }
-    let(:fishery)   { create :fishery }
 
     before :each do
       fishery
@@ -36,15 +38,24 @@ RSpec.describe "Staff adds Admin to Office" do
 
     end
 
+  end
+
+  describe "with signed in user" do
+
+
+    before :each do
+      fishery
+      office2
+      login_as( user, scope: :user )
+      visit root_path
+    end
+
     it "does not create admins for unowned office" do
 
-      expect(page).to have_link 'Offices'
-      click_link 'Offices'
+      expect(page).to_not have_link 'Offices'
 
-      expect(page).to have_content office2.name
-      expect(page).to have_link office2.name
-      click_link office2.name
-
+      visit office_path(office)
+      
       expect(page).to_not have_field 'Add a team member'
       expect(page).to_not have_button 'add_admin'
 

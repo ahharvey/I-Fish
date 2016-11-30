@@ -71,6 +71,7 @@ class Ability
     # Admins can view all users and admins, and can manage their own profile.
     can :read, [Fishery, Fish, Gear, Company, Engine, Vessel, Office]
 
+    can [:edit,:update], Vessel
     can :read, User
     can :read, Admin
     can :manage, Admin, id: admin.id
