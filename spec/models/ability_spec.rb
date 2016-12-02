@@ -20,6 +20,12 @@ RSpec.describe "User" do
 
       it { is_expected.to have_abilities([:new, :create], BaitLoading.new) }
       it { is_expected.to not_have_abilities([:index, :show, :edit, :update, :destroy], BaitLoading.new) }
+
+      it { is_expected.to not_have_abilities([:index], Charts::ProductionsController ) }
+      it { is_expected.to not_have_abilities([:index], Charts::CpuesController ) }
+      it { is_expected.to not_have_abilities([:index], Charts::FuelUtilizationsController ) }
+      it { is_expected.to not_have_abilities([:index], Charts::CatchCompositionsController ) }
+      it { is_expected.to not_have_abilities([:index], Charts::BaitEfficienciesController ) }
     end
 
 
@@ -31,7 +37,7 @@ RSpec.describe "Admin" do
     subject(:ability){ Ability.new(admin) }
     let(:admin){ nil }
 
-    context "when is a Staff" do
+    context "when is a Enumerator" do
       let(:admin) { create :admin }
       before :each do
         admin.roles.push Role.where(name: 'enumerator').first_or_create
@@ -41,6 +47,12 @@ RSpec.describe "Admin" do
 
       it { is_expected.to have_abilities([:new, :create], Audit ) }
       it { is_expected.to not_have_abilities([:index, :show, :edit, :update], Audit ) }
+
+      it { is_expected.to have_abilities([:index], Charts::ProductionsController ) }
+      it { is_expected.to have_abilities([:index], Charts::CpuesController ) }
+      it { is_expected.to have_abilities([:index], Charts::FuelUtilizationsController ) }
+      it { is_expected.to have_abilities([:index], Charts::CatchCompositionsController ) }
+      it { is_expected.to have_abilities([:index], Charts::BaitEfficienciesController ) }
     end
     context "when is a Staff" do
       let(:admin) { create :admin }

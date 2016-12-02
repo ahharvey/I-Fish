@@ -1,0 +1,74 @@
+<div class='row'>
+  <div class='col-xs-12 col-sm-4'>
+    <% if can? :index, Charts::ProductionsController %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Production</h3>
+        </div>
+        <div class="panel-body">
+
+          <%= column_chart send("#{object.class.name.underscore}_charts_productions_path", object, period: 'current'), stacked: true, library: { vAxis: { title: 'kg' }, title: "Current (#{Date.today.year})" } %>
+          <%= column_chart send("#{object.class.name.underscore}_charts_productions_path", object), stacked: true, library: { vAxis: { title: 'kg' }, title: "Average (#{object.unloadings.default.last.try(:time_out).try(:year)}-#{Date.today.year})" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-xs-12 col-sm-4'>
+    <% if can? :index, Charts::CpuesController %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">CPUE</h3>
+        </div>
+        <div class="panel-body">
+          <%= column_chart send("#{object.class.name.underscore}_charts_cpues_path", object, period: 'current'), stacked: true, library: { vAxis: {title: 'kg / gt / day' }, title: "Current (#{Date.today.year})" } %>
+          <%= column_chart send("#{object.class.name.underscore}_charts_cpues_path", object), stacked: true, library: { vAxis: {title: 'kg / gt / day' }, title: "Average (#{object.unloadings.default.last.try(:time_out).try(:year)}-#{Date.today.year})" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-xs-12 col-sm-4'>
+    <% if can? :index, Charts::CatchCompositionsController %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Catch Composition</h3>
+        </div>
+        <div class="panel-body">
+          <%= pie_chart send("#{object.class.name.underscore}_charts_catch_compositions_path", object, period: 'current'), library: { title: "Current (#{Date.today.year})" } %>
+          <%= pie_chart send("#{object.class.name.underscore}_charts_catch_compositions_path", object), library: { title: "Average (#{object.unloadings.default.last.try(:time_out).try(:year)}-#{Date.today.year})" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+
+
+
+<div class='row'>
+  <div class='col-xs-12 col-sm-4'>
+    <% if can? :index, Charts::FuelUtilizationsController %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Fuel Utilization</h3>
+        </div>
+        <div class="panel-body">
+          <%= scatter_chart send("#{object.class.name.underscore}_charts_fuel_utilizations_path", object, period: 'current'), library: { vAxis: {title: 'Catch' }, hAxis: {title: 'Fuel'}, title: "Current (#{Date.today.year})" } %>
+          <%= scatter_chart send("#{object.class.name.underscore}_charts_fuel_utilizations_path", object), library: { vAxis: {title: 'Catch' }, hAxis: {title: 'Fuel'}, title: "Average (#{object.unloadings.default.last.try(:time_out).try(:year)}-#{Date.today.year})" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+  <div class='col-xs-12 col-sm-4 col-sm-offset-4'>
+    <% if can? :index, Charts::FuelUtilizationsController %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">Bait:Tuna Ratio</h3>
+        </div>
+        <div class="panel-body">
+          <%= column_chart send("#{object.class.name.underscore}_charts_bait_efficiencies_path", object, period: 'current'), library: { vAxis: {title: '%' }, title: "Current (#{Date.today.year})" } %>
+          <%= column_chart send("#{object.class.name.underscore}_charts_bait_efficiencies_path", object), library: { vAxis: {title: '%' }, title: "Average (#{object.unloadings.default.last.try(:time_out).try(:year)}-#{Date.today.year})" } %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

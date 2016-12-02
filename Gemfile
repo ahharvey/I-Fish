@@ -36,7 +36,7 @@ gem 'doorkeeper', '~> 4.2.0'
 ##
 ## INCLUDES
 gem 'jquery-rails', '~> 4.2.0'
-gem 'jquery-ui-rails', '~> 5.0.0'
+gem 'jquery-ui-rails', '~> 6.0.0'
 gem 'sass-rails',   '~> 5.0.0'
 gem 'coffee-rails', '~> 4.2.0'
 gem 'uglifier', '~> 3.0.0'
@@ -61,6 +61,7 @@ gem 'countries', '~> 2.0.0' #'~> 1.2.0'
 gem 'modernizr-rails', '~> 2.7.0'
 gem 'groupdate', '~> 3.1.1' # formats data for charts
 gem 'chartkick', '~> 2.1.0' # adds ChartKick
+
 #gem 'jquery-datatables-rails', '~> 1.12.1'
 
 ##

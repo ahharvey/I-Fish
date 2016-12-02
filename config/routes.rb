@@ -5,6 +5,16 @@ Rails.application.routes.draw do
   use_doorkeeper
   mount_griddler
 
+  concern :acts_as_chartable do
+    namespace :charts do
+      resources :productions, only: :index
+      resources :cpues, only: :index
+      resources :fuel_utilizations, only: :index
+      resources :catch_compositions, only: :index
+      resources :bait_efficiencies, only: :index
+    end
+  end
+
 
 
   scope "(:locale)", locale: /#{I18n.available_locales.join("|")}/ do
@@ -73,6 +83,7 @@ Rails.application.routes.draw do
       resources :surveys
     end
     resources :fisheries do
+      concerns :acts_as_chartable
       resources :companies, only: [:create, :new]
       resources :gears, only: [:create, :new]
       resources :fishes, only: [:create, :new]
@@ -118,8 +129,12 @@ Rails.application.routes.draw do
       resources :pending_vessels, only: [:new, :create]
     end
     resources :engines
-    resources :ports
-    resources :wpps
+    resources :ports do
+      concerns :acts_as_chartable
+    end
+    resources :wpps do
+      concerns :acts_as_chartable
+    end
     resources :graticules
     resources :vessel_types
     resources :districts
@@ -139,6 +154,7 @@ Rails.application.routes.draw do
     resources :drafts, only: [:update,:destroy]
 
     resources :vessels do
+      concerns :acts_as_chartable
       resources :unloadings
       resources :bait_loadings
       resources :carrier_loadings
@@ -181,6 +197,7 @@ Rails.application.routes.draw do
     resources :size_classes
 
     resources :companies do
+      concerns :acts_as_chartable
       resources :unloadings
       resources :bait_loadings
       resources :carrier_loadings

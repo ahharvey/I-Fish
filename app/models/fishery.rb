@@ -28,6 +28,12 @@ class Fishery < ApplicationRecord
   has_many :provinces, through: :surveys
   has_many :districts, through: :surveys
 
+  
+  has_many :vessels, through: :member_companies
+  has_many :unloadings, through: :vessels
+  has_many :unloading_catches, through: :unloadings
+  has_many :bait_loadings, through: :vessels
+
   belongs_to :protocol
   scope :default, -> { order('fisheries.name ASC') }
 

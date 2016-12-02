@@ -26,6 +26,7 @@ RSpec.describe Unloading do
     context 'has many' do
       it { is_expected.to have_many(:unloading_catches) }
       it { is_expected.to have_many(:bait_loadings) }
+      it { is_expected.to have_many(:fish).through(:unloading_catches) }
 
       it {
         should accept_nested_attributes_for(:unloading_catches).

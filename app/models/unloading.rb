@@ -37,11 +37,13 @@ class Unloading < ApplicationRecord
   belongs_to :user
   belongs_to :reviewer, :class_name => 'Admin'
   has_many :unloading_catches
+  has_many :fish, -> {distinct}, through: :unloading_catches
   accepts_nested_attributes_for :unloading_catches, allow_destroy: true, reject_if: :all_blank
   has_many :bait_loadings
   accepts_nested_attributes_for :bait_loadings, allow_destroy: true, reject_if: :all_blank
 
   scope :default, -> { order('unloadings.time_in DESC') }
+  scope :current, -> { where( 'unloadings.time_in >= ?', Date.today.beginning_of_year ) }
 
   validates :vessel,
     presence: true
@@ -274,4 +276,14 @@ class Unloading < ApplicationRecord
       'skj_kg'
     ]
   end
+
+  def self.to_monthly_fuel_utilization
+    data = [['Fuel', 'Catch']]
+    self.all.each do |unl|
+      data << [unl.fuel, unl.unloading_catches.sum(:quantity)] unless unl.fuel.nil?
+    end
+    data
+  end
+
+
 end

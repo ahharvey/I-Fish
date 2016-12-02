@@ -17,6 +17,7 @@
         storage: storage
         debug: false
         backdrop: false
+        backdropContainer: 'body'
         backdropPadding: 0
         redirect: true
         orphan: false
@@ -52,10 +53,12 @@
         onPrev: (tour) ->
         onPause: (tour, duration) ->
         onResume: (tour, duration) ->
+        onRedirectError: (tour) ->
       , options
 
       @_force = false
       @_inited = false
+      @_current = null
       @backdrop =
         overlay: null
         $element: null
@@ -80,6 +83,7 @@
         $.extend
           id: "step-#{i}"
           path: ''
+          host: ''
           placement: 'right'
           title: ''
           content: '<p></p>' # no empty as default, otherwise popover won't show up
@@ -89,8 +93,10 @@
           container: @_options.container
           autoscroll: @_options.autoscroll
           backdrop: @_options.backdrop
+          backdropContainer: @_options.backdropContainer
           backdropPadding: @_options.backdropPadding
           redirect: @_options.redirect
+          reflexElement: @_options.steps[i].element
           orphan: @_options.orphan
           duration: @_options.duration
           delay: @_options.delay
@@ -103,6 +109,7 @@
           onPrev: @_options.onPrev
           onPause: @_options.onPause
           onResume: @_options.onResume
+          onRedirectError: @_options.onRedirectError
         , @_options.steps[i]
 
     # Setup event bindings and continue a tour that has already started
@@ -175,6 +182,7 @@
     restart: ->
       @_removeState 'current_step'
       @_removeState 'end'
+      @_removeState 'redirect_to'
       @start()
 
     # Pause step timer
@@ -222,8 +230,10 @@
         $element
         .popover('destroy')
         .removeClass "tour-#{@_options.name}-element tour-#{@_options.name}-#{i}-element"
+        $element
+        .removeData('bs.popover')
         if step.reflex
-          $element
+          $ step.reflexElement
           .removeClass('tour-step-element-reflex')
           .off "#{@_reflexEvent(step.reflex)}.tour-#{@_options.name}"
 
@@ -258,14 +268,14 @@
           else step.path
 
         # Redirect to step path if not already there
-        current_path = [document.location.pathname, document.location.hash].join('')
-        if @_isRedirect path, current_path
-          @_redirect step, path
-          return
+        if @_isRedirect step.host, path, document.location
+          @_redirect step, i, path
+
+          return unless @_isJustPathHashDifferent(step.host, path, document.location)
 
         # Skip if step is orphan and orphan options is false
         if @_isOrphan step
-          if not step.orphan
+          if step.orphan is false
             @_debug """Skip the orphan step #{@_current + 1}.
             Orphan option is false and the element does not exist or is hidden."""
             if skipToPrevious then @_showPrevStep() else @_showNextStep()
@@ -274,10 +284,10 @@
           @_debug "Show the orphan step #{@_current + 1}. Orphans option is true."
 
         # Show backdrop
-        @_showBackdrop(step.element unless @_isOrphan step) if step.backdrop
+        @_showBackdrop(step) if step.backdrop
 
         showPopoverAndOverlay = =>
-          return if @getCurrentStep() isnt i
+          return if @getCurrentStep() isnt i or @ended()
 
           @_showOverlayElement step if step.element? and step.backdrop
           @_showPopover step, i
@@ -314,6 +324,10 @@
         @_current = @_getState 'current_step'
         @_current = if @_current is null then null else parseInt @_current, 10
       @
+
+    # Manually trigger a redraw on the overlay element
+    redraw: ->
+      @_showOverlayElement(@getStep(@getCurrentStep()).element, true)
 
     # Set a state in storage
     _setState: (key, value) ->
@@ -371,20 +385,61 @@
       window.console.log "Bootstrap Tour '#{@_options.name}' | #{text}" if @_options.debug
 
     # Check if step path equals current document path
-    _isRedirect: (path, currentPath) ->
+    _isRedirect: (host, path, location) ->
+      if host isnt ''
+        return true if @_isHostDifferent(host, location.href)
+
+      currentPath = [
+        location.pathname,
+        location.search,
+        location.hash
+      ].join('')
+
       path? and path isnt '' and (
-        (({}).toString.call(path) is '[object RegExp]' and not path.test currentPath) or
-        (({}).toString.call(path) is '[object String]' and
-          path.replace(/\?.*$/, '').replace(/\/?$/, '') isnt currentPath.replace(/\/?$/, ''))
+        (({}).toString.call(path) is '[object RegExp]' and not path.test(currentPath)) or
+        (({}).toString.call(path) is '[object String]' and @_isPathDifferent(path, currentPath))
       )
 
+    _isHostDifferent: (host, currentURL) ->
+      @_getProtocol(host) isnt @_getProtocol(currentURL) or
+      @_getHost(host) isnt @_getHost(currentURL)
+
+    _isPathDifferent: (path, currentPath) ->
+      @_getPath(path) isnt @_getPath(currentPath) or not
+      @_equal(@_getQuery(path), @_getQuery(currentPath)) or not
+      @_equal(@_getHash(path), @_getHash(currentPath))
+
+    _isJustPathHashDifferent: (host, path, location) ->
+      if host isnt ''
+        return false if @_isHostDifferent(host, location.href)
+
+      currentPath = [
+        location.pathname,
+        location.search,
+        location.hash
+      ].join('')
+
+      if ({}).toString.call(path) is '[object String]'
+        return @_getPath(path) is @_getPath(currentPath) and
+          @_equal(@_getQuery(path), @_getQuery(currentPath)) and not
+          @_equal(@_getHash(path), @_getHash(currentPath))
+
+      false
+
     # Execute the redirect
-    _redirect: (step, path) ->
+    _redirect: (step, i, path) ->
       if $.isFunction step.redirect
         step.redirect.call this, path
       else if step.redirect is true
-        @_debug "Redirect to #{path}"
-        document.location.href = path
+        @_debug "Redirect to #{step.host}#{path}"
+        if @_getState('redirect_to') is "#{i}"
+          @_debug "Error redirection loop to #{path}"
+          @_removeState 'redirect_to'
+
+          step.onRedirectError @ if step.onRedirectError?
+        else
+          @_setState 'redirect_to', "#{i}"
+          document.location.href = "#{step.host}#{path}"
 
     _isOrphan: (step) ->
       # Do not check for is(':hidden') on svg elements. jQuery does not work properly on svg.
@@ -416,14 +471,17 @@
 
       $.extend options, step.options if step.options
       if step.reflex and not isOrphan
-        $element.addClass('tour-step-element-reflex')
-        $element.off("#{@_reflexEvent(step.reflex)}.tour-#{@_options.name}")
-        $element.on "#{@_reflexEvent(step.reflex)}.tour-#{@_options.name}", =>
+        $ step.reflexElement
+        .addClass('tour-step-element-reflex')
+        .off("#{@_reflexEvent(step.reflex)}.tour-#{@_options.name}")
+        .on "#{@_reflexEvent(step.reflex)}.tour-#{@_options.name}", =>
           if @_isLast() then @next() else @end()
+
+      shouldAddSmart = step.smartPlacement is true and step.placement.search(/auto/i) is -1
 
       $element
       .popover(
-        placement: step.placement
+        placement: if shouldAddSmart then "auto #{step.placement}" else step.placement
         trigger: 'manual'
         title: step.title
         content: step.content
@@ -443,7 +501,12 @@
 
     # Get popover template
     _template: (step, i) ->
-      $template = if $.isFunction step.template then $(step.template i, step) else $(step.template)
+      template = step.template
+
+      if @_isOrphan(step) and ({}).toString.call(step.orphan) isnt '[object Boolean]'
+        template = step.orphan
+
+      $template = if $.isFunction template then $(template i, step) else $(template)
       $navigation = $template.find '.popover-navigation'
       $prev = $navigation.find '[data-role="prev"]'
       $next = $navigation.find '[data-role="next"]'
@@ -451,8 +514,13 @@
 
       $template.addClass 'orphan' if @_isOrphan step
       $template.addClass "tour-#{@_options.name} tour-#{@_options.name}-#{i}"
-      $prev.addClass('disabled') if step.prev < 0
-      $next.addClass('disabled') if step.next < 0
+      $template.addClass "tour-#{@_options.name}-reflex" if step.reflex
+      if step.prev < 0
+        $prev.addClass('disabled')
+        $prev.prop('disabled',true)
+      if step.next < 0
+        $next.addClass('disabled')
+        $next.prop('disabled',true)
       $resume.remove() unless step.duration
       $template.clone().wrap('<div>').parent().html()
 
@@ -578,12 +646,12 @@
       else
         cb.call(@, arg)
 
-    _showBackdrop: (element) ->
+    _showBackdrop: (step) ->
       return if @backdrop.backgroundShown
 
       @backdrop = $ '<div>', class: 'tour-backdrop'
       @backdrop.backgroundShown = true
-      $('body').append @backdrop
+      $(step.backdropContainer).append @backdrop
 
     _hideBackdrop: ->
       @_hideOverlayElement()
@@ -595,20 +663,21 @@
         @backdrop.overlay = null
         @backdrop.backgroundShown = false
 
-    _showOverlayElement: (step) ->
+    _showOverlayElement: (step, force) ->
       $element = $ step.element
 
-      return if not $element or $element.length is 0 or @backdrop.overlayElementShown
+      return if not $element or $element.length is 0 or @backdrop.overlayElementShown and not force
 
-      @backdrop.overlayElementShown = true
-      @backdrop.$element = $element.addClass 'tour-step-backdrop'
-      @backdrop.$background = $ '<div>', class: 'tour-step-background'
+      if !@backdrop.overlayElementShown
+        @backdrop.$element = $element.addClass 'tour-step-backdrop'
+        @backdrop.$background = $ '<div>', class: 'tour-step-background'
+        @backdrop.$background.appendTo(step.backdropContainer)
+        @backdrop.overlayElementShown = true
+
       elementData =
         width: $element.innerWidth()
         height: $element.innerHeight()
         offset: $element.offset()
-
-      @backdrop.$background.appendTo('body')
 
       elementData = @_applyBackdropPadding step.backdropPadding, elementData if step.backdropPadding
       @backdrop
@@ -650,6 +719,48 @@
       @_timer = null
       @_duration = null
 
+    _getProtocol: (url) ->
+      url = url.split('://')
+      return if url.length > 1 then url[0] else 'http'
+
+    _getHost: (url) ->
+      url = url.split('//')
+      url = if url.length > 1 then  url[1] else url[0]
+
+      return url.split('/')[0]
+
+    _getPath: (path) ->
+      return path.replace(/\/?$/, '').split('?')[0].split('#')[0]
+
+    _getQuery: (path) ->
+      return @_getParams(path, '?')
+
+    _getHash: (path) ->
+      return @_getParams(path, '#')
+
+    _getParams: (path, start) ->
+      params = path.split(start)
+      return {} if params.length is 1
+
+      params = params[1].split('&')
+      paramsObject = {}
+
+      for param in params
+        param = param.split('=')
+        paramsObject[param[0]] = param[1] or ''
+
+      return paramsObject
+
+    _equal: (obj1, obj2) ->
+      if ({}).toString.call(obj1) is '[object Object]' and
+      ({}).toString.call(obj2) is '[object Object]'
+        for k,v of obj1
+          return false if obj2[k] isnt v
+        for k,v of obj2
+          return false if obj1[k] isnt v
+        return true
+
+      return obj1 is obj2
   window.Tour = Tour
 
 ) jQuery, window

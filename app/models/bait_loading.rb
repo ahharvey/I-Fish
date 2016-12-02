@@ -35,6 +35,8 @@ class BaitLoading < ApplicationRecord
   belongs_to :reviewer, :class_name => 'User'
 
   scope :default,   -> { order('bait_loadings.date DESC') }
+  scope :current,   -> { where( 'date >= ?', Date.today.beginning_of_year ) }
+
   scope :completed_this_month, -> { where( date: Date.today.beginning_of_month..Date.today.end_of_month ).size }
   scope :completed_last_month, -> { where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size }
   scope :uploaded_this_month, -> { where( created_at: Date.today.beginning_of_month..Date.today.end_of_month ).size }

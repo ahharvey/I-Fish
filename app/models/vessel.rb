@@ -53,6 +53,7 @@ class Vessel < ApplicationRecord
 
   has_many :documents, as: :documentable
   has_many :unloadings
+  has_many :unloading_catches, through: :unloadings
   has_many :bait_loadings
   has_many :audits, as: :auditable
 

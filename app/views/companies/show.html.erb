@@ -1,27 +1,23 @@
 <% title t ".title" %>
 
-<div class="row">
-  <div class="col-xs-6">
 
-  </div>
-</div>
+<%= render partial: 'shared/chartable', locals: { object: @company } %>
+
+
+
+
 
 <div class="row">
   <div id="member_panel" class="col-xs-12 col-md-4 col-md-push-8">
-    
+
     <% if @company.has_carrier_vessels? %>
       <% if can? :read, CarrierLoading %>
         <%= link_to "View carrier loading reports", company_carrier_loadings_path(@company), class: 'btn btn-primary btn-lg btn-block'
         %>
       <% end %>
     <% end %>
-    <% if can? :report, @company %>
-      <%= link_to "Reports", report_company_path(@company), class: 'btn btn-primary btn-lg btn-block' %>
-    <% end %>
-    <% if @company.has_fishing_vessels? || @company.has_carrier_vessels? %>
 
-      <br />
-    <% end %>
+
     <%= render partial: 'admin_panel' %>
     <%= render partial: "vessel_panel" %>
   </div>
@@ -69,3 +65,43 @@
     <% end %>
   </div>
 </div>
+
+
+
+
+<script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+
+
+      function drawChart() {
+        $( ".fuel-utilization" ).each(function( index ) {
+          var url = $( this ).data('url');
+        	var data
+        	$.get( url, function( response ) {
+
+          	data = response  ;
+          	data = google.visualization.arrayToDataTable( data )
+          	var options = {
+  	          title: $( this ).data('title'),
+  	          hAxis: {title: 'Fuel', minValue: 0, maxValue: 15},
+  	          vAxis: {title: 'Catch', minValue: 0, maxValue: 15},
+  	          legend: 'none'
+  	        };
+  	        var chart = new google.visualization.ScatterChart( $( this ) );
+
+  	        chart.draw(data, options);
+          });
+        });
+      }
+
+
+
+
+
+
+
+
+
+
+    </script>

@@ -16,6 +16,7 @@ RSpec.describe Vessel do
     context 'has many' do
       it { is_expected.to have_many(:unloadings) }
       it { is_expected.to have_many(:bait_loadings) }
+      it { is_expected.to have_many(:unloading_catches).through(:unloadings) }
       it { is_expected.to have_many(:audits) }
       it { is_expected.to have_many(:documents) }
     end

@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160827152123) do
+ActiveRecord::Schema.define(version: 20161201123341) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,10 +23,9 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.string   "trackable_type", limit: 255
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
+    t.index ["ownable_id"], name: "index_activities_on_ownable_id", using: :btree
+    t.index ["trackable_id"], name: "index_activities_on_trackable_id", using: :btree
   end
-
-  add_index "activities", ["ownable_id"], name: "index_activities_on_ownable_id", using: :btree
-  add_index "activities", ["trackable_id"], name: "index_activities_on_trackable_id", using: :btree
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "",    null: false
@@ -57,21 +55,19 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.string   "invited_by_type"
     t.integer  "invitations_count",                  default: 0
     t.string   "access_token"
+    t.index ["approved"], name: "index_admins_on_approved", using: :btree
+    t.index ["email"], name: "index_admins_on_email", unique: true, using: :btree
+    t.index ["invitation_token"], name: "index_admins_on_invitation_token", unique: true, using: :btree
+    t.index ["invitations_count"], name: "index_admins_on_invitations_count", using: :btree
+    t.index ["invited_by_id"], name: "index_admins_on_invited_by_id", using: :btree
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "admins", ["approved"], name: "index_admins_on_approved", using: :btree
-  add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
-  add_index "admins", ["invitation_token"], name: "index_admins_on_invitation_token", unique: true, using: :btree
-  add_index "admins", ["invitations_count"], name: "index_admins_on_invitations_count", using: :btree
-  add_index "admins", ["invited_by_id"], name: "index_admins_on_invited_by_id", using: :btree
-  add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
 
   create_table "admins_roles", id: false, force: :cascade do |t|
     t.integer "admin_id"
     t.integer "role_id"
+    t.index ["admin_id", "role_id"], name: "by_admin_and_role", unique: true, using: :btree
   end
-
-  add_index "admins_roles", ["admin_id", "role_id"], name: "by_admin_and_role", unique: true, using: :btree
 
   create_table "audits", force: :cascade do |t|
     t.integer  "admin_id"
@@ -81,18 +77,16 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.string   "status"
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
+    t.index ["admin_id"], name: "index_audits_on_admin_id", using: :btree
+    t.index ["auditable_type", "auditable_id"], name: "index_audits_on_auditable_type_and_auditable_id", using: :btree
   end
-
-  add_index "audits", ["admin_id"], name: "index_audits_on_admin_id", using: :btree
-  add_index "audits", ["auditable_type", "auditable_id"], name: "index_audits_on_auditable_type_and_auditable_id", using: :btree
 
   create_table "bait_fishes", id: false, force: :cascade do |t|
     t.integer "fishery_id", null: false
     t.integer "fish_id",    null: false
+    t.index ["fish_id", "fishery_id"], name: "index_bait_fishes_on_fish_id_and_fishery_id", using: :btree
+    t.index ["fishery_id", "fish_id"], name: "index_bait_fishes_on_fishery_id_and_fish_id", using: :btree
   end
-
-  add_index "bait_fishes", ["fish_id", "fishery_id"], name: "index_bait_fishes_on_fish_id_and_fishery_id", using: :btree
-  add_index "bait_fishes", ["fishery_id", "fish_id"], name: "index_bait_fishes_on_fishery_id_and_fish_id", using: :btree
 
   create_table "bait_loadings", force: :cascade do |t|
     t.date     "date"
@@ -112,16 +106,15 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer  "secondary_bait_id"
     t.integer  "reviewer_id"
     t.datetime "reviewed_at"
+    t.index ["bait_id"], name: "index_bait_loadings_on_bait_id", using: :btree
+    t.index ["fish_id"], name: "index_bait_loadings_on_fish_id", using: :btree
+    t.index ["grid_id"], name: "index_bait_loadings_on_grid_id", using: :btree
+    t.index ["reviewer_id"], name: "index_bait_loadings_on_reviewer_id", using: :btree
+    t.index ["secondary_bait_id"], name: "index_bait_loadings_on_secondary_bait_id", using: :btree
+    t.index ["secondary_fish_id"], name: "index_bait_loadings_on_secondary_fish_id", using: :btree
+    t.index ["unloading_id"], name: "index_bait_loadings_on_unloading_id", using: :btree
+    t.index ["vessel_id"], name: "index_bait_loadings_on_vessel_id", using: :btree
   end
-
-  add_index "bait_loadings", ["bait_id"], name: "index_bait_loadings_on_bait_id", using: :btree
-  add_index "bait_loadings", ["fish_id"], name: "index_bait_loadings_on_fish_id", using: :btree
-  add_index "bait_loadings", ["grid_id"], name: "index_bait_loadings_on_grid_id", using: :btree
-  add_index "bait_loadings", ["reviewer_id"], name: "index_bait_loadings_on_reviewer_id", using: :btree
-  add_index "bait_loadings", ["secondary_bait_id"], name: "index_bait_loadings_on_secondary_bait_id", using: :btree
-  add_index "bait_loadings", ["secondary_fish_id"], name: "index_bait_loadings_on_secondary_fish_id", using: :btree
-  add_index "bait_loadings", ["unloading_id"], name: "index_bait_loadings_on_unloading_id", using: :btree
-  add_index "bait_loadings", ["vessel_id"], name: "index_bait_loadings_on_vessel_id", using: :btree
 
   create_table "baits", force: :cascade do |t|
     t.string "name"
@@ -138,10 +131,9 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer "quantity"
     t.string  "review_state", default: "pending"
     t.string  "string",       default: "pending"
+    t.index ["fish_id"], name: "index_carrier_loadings_on_fish_id", using: :btree
+    t.index ["vessel_id"], name: "index_carrier_loadings_on_vessel_id", using: :btree
   end
-
-  add_index "carrier_loadings", ["fish_id"], name: "index_carrier_loadings_on_fish_id", using: :btree
-  add_index "carrier_loadings", ["vessel_id"], name: "index_carrier_loadings_on_vessel_id", using: :btree
 
   create_table "catches", force: :cascade do |t|
     t.integer  "fish_id"
@@ -173,10 +165,9 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer "user_id"
     t.integer "company_id"
     t.string  "status"
+    t.index ["company_id"], name: "index_company_positions_on_company_id", using: :btree
+    t.index ["user_id"], name: "index_company_positions_on_user_id", using: :btree
   end
-
-  add_index "company_positions", ["company_id"], name: "index_company_positions_on_company_id", using: :btree
-  add_index "company_positions", ["user_id"], name: "index_company_positions_on_user_id", using: :btree
 
   create_table "desas", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -218,14 +209,13 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
     t.json     "object_changes"
+    t.index ["created_at"], name: "index_drafts_on_created_at", using: :btree
+    t.index ["event"], name: "index_drafts_on_event", using: :btree
+    t.index ["item_id"], name: "index_drafts_on_item_id", using: :btree
+    t.index ["item_type"], name: "index_drafts_on_item_type", using: :btree
+    t.index ["updated_at"], name: "index_drafts_on_updated_at", using: :btree
+    t.index ["whodunnit"], name: "index_drafts_on_whodunnit", using: :btree
   end
-
-  add_index "drafts", ["created_at"], name: "index_drafts_on_created_at", using: :btree
-  add_index "drafts", ["event"], name: "index_drafts_on_event", using: :btree
-  add_index "drafts", ["item_id"], name: "index_drafts_on_item_id", using: :btree
-  add_index "drafts", ["item_type"], name: "index_drafts_on_item_type", using: :btree
-  add_index "drafts", ["updated_at"], name: "index_drafts_on_updated_at", using: :btree
-  add_index "drafts", ["whodunnit"], name: "index_drafts_on_whodunnit", using: :btree
 
   create_table "engines", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -361,10 +351,9 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer  "ice"
     t.integer  "conditions"
     t.string   "aborted",        limit: 255
+    t.index ["fish_id"], name: "index_landings_on_fish_id", using: :btree
+    t.index ["vessel_type_id"], name: "index_landings_on_vessel_type_id", using: :btree
   end
-
-  add_index "landings", ["fish_id"], name: "index_landings_on_fish_id", using: :btree
-  add_index "landings", ["vessel_type_id"], name: "index_landings_on_vessel_type_id", using: :btree
 
   create_table "logbooks", force: :cascade do |t|
     t.date     "date"
@@ -376,12 +365,11 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer  "reviewer_id"
     t.string   "review_state", limit: 255, default: "pending"
     t.datetime "reviewed_at"
+    t.index ["admin_id"], name: "index_logbooks_on_admin_id", using: :btree
+    t.index ["fishery_id"], name: "index_logbooks_on_fishery_id", using: :btree
+    t.index ["reviewer_id"], name: "index_logbooks_on_approver_id", using: :btree
+    t.index ["user_id"], name: "index_logbooks_on_user_id", using: :btree
   end
-
-  add_index "logbooks", ["admin_id"], name: "index_logbooks_on_admin_id", using: :btree
-  add_index "logbooks", ["fishery_id"], name: "index_logbooks_on_fishery_id", using: :btree
-  add_index "logbooks", ["reviewer_id"], name: "index_logbooks_on_approver_id", using: :btree
-  add_index "logbooks", ["user_id"], name: "index_logbooks_on_user_id", using: :btree
 
   create_table "logged_days", force: :cascade do |t|
     t.datetime "start_time"
@@ -405,11 +393,10 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.boolean  "aborted"
     t.integer  "ice"
     t.text     "notes"
+    t.index ["fish_id"], name: "index_logged_days_on_fish_id", using: :btree
+    t.index ["graticule_id"], name: "index_logged_days_on_graticule_id", using: :btree
+    t.index ["logbook_id"], name: "index_logged_days_on_logbook_id", using: :btree
   end
-
-  add_index "logged_days", ["fish_id"], name: "index_logged_days_on_fish_id", using: :btree
-  add_index "logged_days", ["graticule_id"], name: "index_logged_days_on_graticule_id", using: :btree
-  add_index "logged_days", ["logbook_id"], name: "index_logged_days_on_logbook_id", using: :btree
 
   create_table "oauth_access_grants", force: :cascade do |t|
     t.integer  "resource_owner_id", null: false
@@ -420,9 +407,8 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.datetime "created_at",        null: false
     t.datetime "revoked_at"
     t.string   "scopes"
+    t.index ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
   end
-
-  add_index "oauth_access_grants", ["token"], name: "index_oauth_access_grants_on_token", unique: true, using: :btree
 
   create_table "oauth_access_tokens", force: :cascade do |t|
     t.integer  "resource_owner_id"
@@ -433,11 +419,10 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.datetime "revoked_at"
     t.datetime "created_at",        null: false
     t.string   "scopes"
+    t.index ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
+    t.index ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
+    t.index ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
   end
-
-  add_index "oauth_access_tokens", ["refresh_token"], name: "index_oauth_access_tokens_on_refresh_token", unique: true, using: :btree
-  add_index "oauth_access_tokens", ["resource_owner_id"], name: "index_oauth_access_tokens_on_resource_owner_id", using: :btree
-  add_index "oauth_access_tokens", ["token"], name: "index_oauth_access_tokens_on_token", unique: true, using: :btree
 
   create_table "oauth_applications", force: :cascade do |t|
     t.string   "name",                      null: false
@@ -447,9 +432,8 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.string   "scopes",       default: "", null: false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
   end
-
-  add_index "oauth_applications", ["uid"], name: "index_oauth_applications_on_uid", unique: true, using: :btree
 
   create_table "offices", force: :cascade do |t|
     t.string   "name",        limit: 255
@@ -496,14 +480,13 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.datetime "reviewed_at"
     t.integer  "audit_id"
     t.string   "operational_type"
+    t.index ["admin_id"], name: "index_pending_vessels_on_admin_id", using: :btree
+    t.index ["audit_id"], name: "index_pending_vessels_on_audit_id", using: :btree
+    t.index ["company_id"], name: "index_pending_vessels_on_company_id", using: :btree
+    t.index ["gear_id"], name: "index_pending_vessels_on_gear_id", using: :btree
+    t.index ["vessel_id"], name: "index_pending_vessels_on_vessel_id", using: :btree
+    t.index ["vessel_type_id"], name: "index_pending_vessels_on_vessel_type_id", using: :btree
   end
-
-  add_index "pending_vessels", ["admin_id"], name: "index_pending_vessels_on_admin_id", using: :btree
-  add_index "pending_vessels", ["audit_id"], name: "index_pending_vessels_on_audit_id", using: :btree
-  add_index "pending_vessels", ["company_id"], name: "index_pending_vessels_on_company_id", using: :btree
-  add_index "pending_vessels", ["gear_id"], name: "index_pending_vessels_on_gear_id", using: :btree
-  add_index "pending_vessels", ["vessel_id"], name: "index_pending_vessels_on_vessel_id", using: :btree
-  add_index "pending_vessels", ["vessel_type_id"], name: "index_pending_vessels_on_vessel_type_id", using: :btree
 
   create_table "ports", force: :cascade do |t|
     t.string "name"
@@ -528,16 +511,14 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.string   "name",       limit: 255
     t.datetime "created_at",             null: false
     t.datetime "updated_at",             null: false
+    t.index ["name"], name: "index_roles_on_name", unique: true, using: :btree
   end
-
-  add_index "roles", ["name"], name: "index_roles_on_name", unique: true, using: :btree
 
   create_table "roles_users", id: false, force: :cascade do |t|
     t.integer "role_id"
     t.integer "user_id"
+    t.index ["user_id", "role_id"], name: "by_user_and_role", unique: true, using: :btree
   end
-
-  add_index "roles_users", ["user_id", "role_id"], name: "by_user_and_role", unique: true, using: :btree
 
   create_table "size_classes", force: :cascade do |t|
     t.decimal "upper"
@@ -562,12 +543,11 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer  "vessel_count"
     t.string   "review_state",          limit: 255, default: "pending"
     t.datetime "reviewed_at"
+    t.index ["catch_measurer_id"], name: "index_surveys_on_catch_measurer_id", using: :btree
+    t.index ["catch_scribe_id"], name: "index_surveys_on_catch_scribe_id", using: :btree
+    t.index ["landing_enumerator_id"], name: "index_surveys_on_landing_enumerator_id", using: :btree
+    t.index ["reviewer_id"], name: "index_surveys_on_approver_id", using: :btree
   end
-
-  add_index "surveys", ["catch_measurer_id"], name: "index_surveys_on_catch_measurer_id", using: :btree
-  add_index "surveys", ["catch_scribe_id"], name: "index_surveys_on_catch_scribe_id", using: :btree
-  add_index "surveys", ["landing_enumerator_id"], name: "index_surveys_on_landing_enumerator_id", using: :btree
-  add_index "surveys", ["reviewer_id"], name: "index_surveys_on_approver_id", using: :btree
 
   create_table "target_fishes", id: false, force: :cascade do |t|
     t.integer "fishery_id"
@@ -577,17 +557,17 @@ ActiveRecord::Schema.define(version: 20160827152123) do
   create_table "unloading_catches", force: :cascade do |t|
     t.integer  "fish_id"
     t.integer  "quantity"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
     t.integer  "unloading_id"
     t.string   "cut_type"
     t.string   "catch_type"
     t.integer  "size_class_id"
+    t.integer  "cpue",          default: 0
+    t.index ["fish_id"], name: "index_unloading_catches_on_fish_id", using: :btree
+    t.index ["size_class_id"], name: "index_unloading_catches_on_size_class_id", using: :btree
+    t.index ["unloading_id"], name: "index_unloading_catches_on_unloading_id", using: :btree
   end
-
-  add_index "unloading_catches", ["fish_id"], name: "index_unloading_catches_on_fish_id", using: :btree
-  add_index "unloading_catches", ["size_class_id"], name: "index_unloading_catches_on_size_class_id", using: :btree
-  add_index "unloading_catches", ["unloading_id"], name: "index_unloading_catches_on_unloading_id", using: :btree
 
   create_table "unloadings", force: :cascade do |t|
     t.string   "port"
@@ -617,15 +597,14 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer  "user_id"
     t.integer  "admin_id"
     t.decimal  "cpue"
+    t.index ["admin_id"], name: "index_unloadings_on_admin_id", using: :btree
+    t.index ["grid_id"], name: "index_unloadings_on_grid_id", using: :btree
+    t.index ["port_id"], name: "index_unloadings_on_port_id", using: :btree
+    t.index ["reviewer_id"], name: "index_unloadings_on_reviewer_id", using: :btree
+    t.index ["user_id"], name: "index_unloadings_on_user_id", using: :btree
+    t.index ["vessel_id"], name: "index_unloadings_on_vessel_id", using: :btree
+    t.index ["wpp_id"], name: "index_unloadings_on_wpp_id", using: :btree
   end
-
-  add_index "unloadings", ["admin_id"], name: "index_unloadings_on_admin_id", using: :btree
-  add_index "unloadings", ["grid_id"], name: "index_unloadings_on_grid_id", using: :btree
-  add_index "unloadings", ["port_id"], name: "index_unloadings_on_port_id", using: :btree
-  add_index "unloadings", ["reviewer_id"], name: "index_unloadings_on_reviewer_id", using: :btree
-  add_index "unloadings", ["user_id"], name: "index_unloadings_on_user_id", using: :btree
-  add_index "unloadings", ["vessel_id"], name: "index_unloadings_on_vessel_id", using: :btree
-  add_index "unloadings", ["wpp_id"], name: "index_unloadings_on_wpp_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -664,16 +643,15 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer  "invited_by_id"
     t.string   "invited_by_type"
     t.integer  "invitations_count",                  default: 0
+    t.index ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
+    t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
+    t.index ["email"], name: "index_users_on_email", using: :btree
+    t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
+    t.index ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
+    t.index ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+    t.index ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
   end
-
-  add_index "users", ["authentication_token"], name: "index_users_on_authentication_token", unique: true, using: :btree
-  add_index "users", ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true, using: :btree
-  add_index "users", ["email"], name: "index_users_on_email", using: :btree
-  add_index "users", ["invitation_token"], name: "index_users_on_invitation_token", unique: true, using: :btree
-  add_index "users", ["invitations_count"], name: "index_users_on_invitations_count", using: :btree
-  add_index "users", ["invited_by_id"], name: "index_users_on_invited_by_id", using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
-  add_index "users", ["unlock_token"], name: "index_users_on_unlock_token", unique: true, using: :btree
 
   create_table "versions", force: :cascade do |t|
     t.string   "item_type",      limit: 255, null: false
@@ -683,9 +661,8 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.text     "object"
     t.datetime "created_at"
     t.text     "object_changes"
+    t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
   end
-
-  add_index "versions", ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id", using: :btree
 
   create_table "vessel_types", force: :cascade do |t|
     t.string   "name",       limit: 255
@@ -740,11 +717,10 @@ ActiveRecord::Schema.define(version: 20160827152123) do
     t.integer  "draft_id"
     t.datetime "published_at"
     t.datetime "trashed_at"
+    t.index ["company_id"], name: "index_vessels_on_company_id", using: :btree
+    t.index ["gear_id"], name: "index_vessels_on_gear_id", using: :btree
+    t.index ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
   end
-
-  add_index "vessels", ["company_id"], name: "index_vessels_on_company_id", using: :btree
-  add_index "vessels", ["gear_id"], name: "index_vessels_on_gear_id", using: :btree
-  add_index "vessels", ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
 
   create_table "wpps", force: :cascade do |t|
     t.string "name"

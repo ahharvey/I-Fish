@@ -70,7 +70,8 @@
           this.newSelection();
 
         // Use these values to update the current selection
-        this.ui.multi[0].update(Jcrop.wrapFromXywh(this.opt.setSelect));
+        this.setSelect(this.opt.setSelect);
+
         // Set to null so it doesn't get called again
         this.opt.setSelect = null;
       }
@@ -84,7 +85,7 @@
       if (this.opt.imgsrc) {
         this.container.before(this.opt.imgsrc);
         this.container.remove();
-        $(this.opt.imgsrc).removeData('Jcrop');
+        $(this.opt.imgsrc).removeData('Jcrop').show();
       } else {
         // @todo: more elegant destroy() process for non-image containers
         this.container.remove();
@@ -279,7 +280,7 @@
     deleteSelection: function(){
       if (this.ui.selection) {
         this.removeSelection(this.ui.selection);
-        this.ui.multi[0].focus();
+        if (this.ui.multi.length) this.ui.multi[0].focus();
         this.ui.selection.refresh();
       }
     },

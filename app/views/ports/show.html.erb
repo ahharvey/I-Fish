@@ -1,3 +1,5 @@
 <% title t ".title" %>
 
 <%= @port.name %>
+
+<%= render partial: 'shared/chartable', locals: { object: @port } %>
