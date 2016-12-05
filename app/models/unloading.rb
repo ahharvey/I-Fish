@@ -103,6 +103,31 @@ class Unloading < ApplicationRecord
     time_out.try(:to_s, :sdate)
   end
 
+  attr_accessor :wpp_code, :port_code
+  def wpp_code=(code)
+    if Wpp.where(name: code).any?
+      self.wpp_id = Wpp.where(name: code).first.try(:id)
+    else
+      self.errors.add(:wpp_code, :invalid_wpp_code)
+    end
+  end
+
+  def wpp_code
+    self.wpp.try(:name)
+  end
+
+  def port_code=(code)
+    if Port.where(name: code).any?
+      self.port_id = Port.where(name: code).first.try(:id)
+    else
+      self.errors.add(:port_code, :invalid_port_code)
+    end
+  end
+
+  def port_code
+    self.port.try(:name)
+  end
+
   attr_writer :formatted_time_in
   before_validation :save_formatted_time_in
   def formatted_time_in
@@ -180,7 +205,7 @@ class Unloading < ApplicationRecord
   end
 
   def build_unloading_record(fish, value)
-    unloading_catches.build(
+    self.unloading_catches.build(
       fish_id: fish.id,
       quantity: value,
       cut_type: 'wholeround',
@@ -261,11 +286,10 @@ class Unloading < ApplicationRecord
 
   def self.accessible_attributes
     [
-      'vessel_id',
       'time_out',
       'time_in',
-      'port_id',
-      'wpp_id',
+      'port_code',
+      'wpp_code',
       'etp',
       'fuel',
       'ice',

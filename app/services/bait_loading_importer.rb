@@ -17,11 +17,11 @@ class BaitLoadingImporter
 
   def save( owner_id, owner_type)
     owner = owner_type.constantize.find owner_id
-    if imported_bait_loadings.map(&:valid?).all?
-      imported_bait_loadings.each do |bait_loading|
+    if imported_rows.map(&:valid?).all?
+      imported_rows.each do |bait_loading|
         # UnloadingSaverJob.perform_later(unloading, owner_id, owner_type)
         whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
-        bait_loading.whodunnit(whodunnit) do 
+        bait_loading.whodunnit(whodunnit) do
           bait_loading.approve!
           if owner_type.to_s == 'Admin'
             bait_loading.reviewer_id = owner_id
@@ -32,7 +32,7 @@ class BaitLoadingImporter
       end
       true
     else
-      imported_bait_loadings.each_with_index do |bait_loading, index|
+      imported_rows.each_with_index do |bait_loading, index|
         bait_loading.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+2}: #{message}"
         end
@@ -41,7 +41,7 @@ class BaitLoadingImporter
     end
   end
 
-  def imported_bait_loadings
+  def imported_rows
     @imported_bait_loadings ||= load_imported_bait_loadings
   end
 

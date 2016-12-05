@@ -1,0 +1,26 @@
+<% title t ".title" %>
+
+<div class='row'>
+  <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+    <table id='importers_table' class='table table-condensed datatable'>
+      <thead>
+        <tr>
+          <th><%= Importer.human_attribute_name(:label) %></th>
+          <th class='nosort'><%= Importer.human_attribute_name(:file) %></th>
+          <th><%= Importer.human_attribute_name(:review_state) %></th>
+          <th><%= Importer.human_attribute_name(:reviewed_at) %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @importers.each do |importer| %>
+          <tr>
+            <td><%= importer.label.try(:titlecase) %></td>
+            <td><%= link_to importer.file.url.try(:split,'/').try(:last), importer.file.url %></td>
+            <td><%= importer.review_state.try(:titlecase) %></td>
+            <td><%= local_relative_time(importer.reviewed_at, 'time-or-date') unless importer.reviewed_at.nil? %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

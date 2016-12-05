@@ -1,0 +1,32 @@
+<% if @label == 'vessels' %>
+  <% title t ".vessels.title" %>
+<% end %>
+
+<% if @label == 'bait_loadings' %>
+  <% title t ".bait_loadings.title" %>
+<% end %>
+
+<% if @label == 'unloadings' %>
+  <% title t ".unloadings.title" %>
+<% end %>
+
+<div class='row'>
+
+  <div class='col-xs-12 col-sm-6 col-sm-push-6'>
+    <% unless @label.nil? %>
+      <%= render 'form' %>
+    <% end %>
+  </div>
+
+  <div class='col-xs-12 col-sm-6 col-sm-pull-6'>
+
+    <%= render 'vessel_instructions' if @label == 'vessels' %>
+
+    <%= render 'bait_loading_instructions' if @label == 'bait_loadings' %>
+
+    <%= render 'unloading_instructions' if @label == 'unloadings' %>
+
+  </div>
+
+
+</div>

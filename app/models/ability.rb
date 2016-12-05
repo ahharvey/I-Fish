@@ -27,7 +27,7 @@ class Ability
 
   def abilities_for_all # Abilities for guests and all users
     can [:index, :show], [Fishery, Fish, Gear, Company, Engine, Vessel, Port, Wpp] # Guests can read public models, including viewing reports
-    can :index, :home # home page
+    can [:show,:index], :home # home page
     can [
       :current_catch_composition,
       :average_catch_composition,
@@ -60,7 +60,7 @@ class Ability
     cannot :destroy, UnloadingCatch
 
 
-    can :report, Company, id: user.companies.map(&:id)
+    can [:update,:report], Company, id: user.companies.map(&:id)
     can :read, SizeClass
     can :create, SizeClass
     cannot :destroy, SizeClass
@@ -104,8 +104,17 @@ class Ability
     can :read, Company, id: admin.managed_companies.map(&:id)
     can :read, Vessel, id: admin.managed_vessels.map(&:id)
 
-    can :create, Unloading, vessel_id: admin.managed_vessels.map(&:id)
+    can :create, Unloading
+    can :manage, Unloading, id: admin.managed_unloadings.map(&:id)
     can :create, BaitLoading, vessel_id: admin.managed_vessels.map(&:id)
+
+    can :create, UnloadingCatch
+    can :manage, UnloadingCatch, id: admin.managed_unloading_catches.map(&:id)
+    cannot :destroy, UnloadingCatch
+
+    can :create, BaitLoading
+    can :manage, BaitLoading, id: admin.managed_bait_loadings.map(&:id)
+    cannot :destroy, BaitLoading
 
     can :create, Audit
     can :create, PendingVessel
@@ -153,6 +162,7 @@ class Ability
     cannot :destroy, Company
 
     can :manage, Office, id: admin.office_id
+
     cannot :destroy, Company
 
     can :create, Audit

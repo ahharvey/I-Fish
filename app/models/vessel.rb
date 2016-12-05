@@ -167,7 +167,6 @@ class Vessel < ApplicationRecord
       'name_changed',
       'captain',
       'owner',
-      'company_id',
       'port',
       'relationship_type',
       'length',

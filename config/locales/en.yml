@@ -200,7 +200,7 @@ en:
       edit:
         title: "Security"
       new:
-        title: "Sign up"    
+        title: "Sign up"
   unloading_imports:
     title: "Import Unloadings"
     new:
@@ -237,7 +237,7 @@ en:
     settings: "Settings"
     user_profile: "User profile"
     fishery_profile: "Fishery profile"
-    upload: "Data Entry"
+    upload: "Import Data"
     panel: "Panel"
     download: "Download templates"
   devise:

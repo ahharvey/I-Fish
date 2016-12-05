@@ -14,20 +14,38 @@ class UnloadingImporterJob < ApplicationJob
 #    end
 #  end
 
-  def perform(owner_id, owner_type, importer_id )
+  def perform(importer_id )
 
     @importer         = Importer.find( importer_id )
-    @owner            = owner_type.constantize.find(owner_id)
+    @owner            = @importer.imported_by
+    @parent           = @importer.parent
+    @label            = @importer.label
 
 
+    @import_service = select_import_service_by(@label)
 
-    if @importer.label == 'unloadings'
-      import_unloadings
-    elsif @importer.label == 'bait_loadings'
-      import_bait_loadings
-    elsif @importer.label == 'vessels'
-      import_vessels
+    if @import_service.imported
+
+      rows = @import_service.imported_rows
+      UserMailer.import_success( @owner.id, @owner.class.name, rows ).deliver_later
+
+      @importer.approved!
+
+      Rails.logger.info '------------IMPORT SAVED SUCCESSFULLY------------'
+
+    else
+
+      error_messages = @import_service.errors.messages[:base]
+      UserMailer.import_failure( @owner.id, @owner.class.name, error_messages ).deliver_later
+
+      @importer.rejected!
+
+      Rails.logger.info '------------IMPORT FAILED------------'
+
     end
+
+
+
 
 
 #    if imported_unloadings.map(&:valid?).all?
@@ -48,6 +66,36 @@ class UnloadingImporterJob < ApplicationJob
   end
 
   private
+
+  def select_import_service_by label
+    case label
+    when 'unloadings'
+      Importers::CreateUnloadings.new(
+        {
+          file: @importer.file,
+          imported_by: @importer.imported_by,
+          parent: @importer.parent
+        }
+      )
+    when 'bait_loadings'
+      Importers::CreateBaitLoadings.new(
+        {
+          file: @importer.file,
+          imported_by: @importer.imported_by,
+          parent: @importer.parent
+        }
+      )
+    when 'vessels'
+      Importers::CreateVessels.new(
+        {
+          file: @importer.file,
+          imported_by: @importer.imported_by,
+          parent: @importer.parent
+        }
+      )
+    else nil
+    end
+  end
 
   def import_unloadings
     @unloading_import = UnloadingImporter.new( { file: @importer.file }  )

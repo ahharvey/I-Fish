@@ -51,7 +51,7 @@ RSpec.describe UnloadingCatch do
 
   describe "validations" do
     it { is_expected.to validate_presence_of(:fish) }
-    it { is_expected.to validate_presence_of(:unloading) }
+    #it { is_expected.to validate_presence_of(:unloading) }
     it { is_expected.to validate_presence_of(:quantity) }
     it {
       is_expected.to validate_numericality_of(:quantity).

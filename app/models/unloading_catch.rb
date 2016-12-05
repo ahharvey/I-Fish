@@ -17,7 +17,7 @@ class UnloadingCatch < ApplicationRecord
   CATCH_TYPES = ['landed', 'discarded']
 
   belongs_to :fish
-  belongs_to :unloading
+  belongs_to :unloading #, required: true
   belongs_to :size_class
   has_one :vessel, through: :unloading
 
@@ -26,8 +26,8 @@ class UnloadingCatch < ApplicationRecord
 
   validates :fish,
   	presence: true
-  validates :unloading,
-  	presence: true
+#  validates :unloading,
+#  	presence: true
   validates :quantity,
   	presence: true,
     numericality: {

@@ -1,15 +1,37 @@
 class Importer < ApplicationRecord
-	mount_uploader :file, ExcelFileUploader
+
+	STATES = %w{ pending rejected approved }
+
+	belongs_to :parent, 			polymorphic: true
+	belongs_to :imported_by, 	polymorphic: true
+
+	scope :default, 	-> { order('importers.reviewed_at DESC') }
+	scope :pending, 	-> { where( review_state: 'pending' ) }
+	scope :approved, 	-> { where( review_state: 'approved' ) }
+	scope :rejected, 	-> { where( review_state: 'rejected' ) }
+
+	validates :file,
+		presence: true
+	validates :imported_by,
+		presence: true
+	validates :parent,
+		presence: true
+	validates :label,
+		presence: true,
+		inclusion: { in: %w{ vessels unloadings bait_loadings } }
+	validates :review_state,
+		inclusion: { in: STATES },
+		allow_blank: true
 
 	before_create :set_status
 
-	STATES = %w{ pending rejected approved }
+	mount_uploader :file, ExcelFileUploader
+
 
   STATES.each do |state|
     define_method("#{state}?") do
       self.review_state == state
     end
-
     define_method("#{state}!") do
       self.update_attributes(
         review_state: state,
@@ -18,7 +40,7 @@ class Importer < ApplicationRecord
     end
   end
 
-  private
+private
 
   def set_status
   	review_state = 'pending'

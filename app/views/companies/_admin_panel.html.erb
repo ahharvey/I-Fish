@@ -4,11 +4,12 @@
   </div>
   <div class="panel-body">
     <% if can? :update, @company %>
-      <%= form_tag [:add_user, @company], class: "form", :remote=>true do %>
+      <%= form_tag company_add_user_path(@company), class: "form", method: :post, remote: true do %>
+        <%= label_tag 'user[email]', 'Add a team member', class: 'sr-only' %>
         <div class="input-group">
-          <%= text_field_tag :get_user, "", class: "form-control", placeholder: "Add a team member...", autocomplete: "off", data: { autocomplete_source: User.order(:email).map(&:email) } %>
+          <%= text_field :user, :email, class: "form-control", placeholder: "Add a team member...", autocomplete: "off", data: { autocomplete_source: User.order(:email).map(&:email) } %>
           <div class="input-group-btn">
-            <%= button_tag add_icon, class: "btn btn-success" %>
+            <%= button_tag add_icon, class: "btn btn-success", id: 'add_user', title: 'Add User' %>
           </div>
         </div>
       <% end %>

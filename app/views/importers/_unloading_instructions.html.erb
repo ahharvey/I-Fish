@@ -1,0 +1,29 @@
+<% unless @object.nil? %>
+  <p>Unloadings will be added to <b><%= @object.name %> (<%= @object.ap2hi_ref %>)</b>.</p>
+<% end %>
+<p>You can import records contained in a CSV or Excel file. The first row must contain the column name. Only the following columns will be imported:</p>
+<small>
+  <ul>
+    <% Unloading.columns.each do |column| %>
+      <% if column.name.in? ["id", *Unloading.accessible_attributes] %>
+        <li>
+          <strong><%= column.name %></strong> -
+          <%= column.type.to_s.titleize %> type
+        </li>
+      <% end %>
+    <% end %>
+    <li><strong>port_code</strong> - String type</li>
+    <li><strong>wpp_code</strong> - String type</li>
+    <li><strong>skj_kg</strong> - Integer type</li>
+    <li><strong>yft_kg</strong> - Integer type</li>
+    <li><strong>bet_kg</strong> - Integer type</li>
+    <li><strong>kaw_kg</strong> - Integer type</li>
+  </ul>
+</small>
+
+<p>If an <strong>id</strong> is supplied it will update the matching record instead of creating a new one.</p>
+<p><b>Important:</b> All imported catches are assumed to be 'wholeround' and 'landed'. No size classes are set. You are strongly encouraged to review and edit catch records after each successful import.</p>
+
+<%= link_to template_unloading_imports_path(format: :xls), class: "btn btn-lg btn-default btn-block", title: "Export to Excel" do %>
+  <%= icon fa_excel, "Download Excel template", class: 'fa-lg' %>
+<% end %>

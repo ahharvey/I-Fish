@@ -2,9 +2,8 @@
 
 <div class='row'>
 	<div class='col-xs-12 col-sm-6 col-sm-offset-3'>
-		<%= link_to 'Unloadings', new_unloading_import_path, class: 'btn btn-default btn-block btn-lg' %>
-		<%= link_to 'Bait Loadings', new_bait_loading_import_path, class: 'btn btn-default btn-block btn-lg' %>
-    <%= link_to 'Vessels', new_vessel_import_path, class: 'btn btn-default btn-block btn-lg' %>
+		<%= link_to 'Import Unloadings', page_path( page: 'select_vessel', label: 'unloadings'), class: 'btn btn-default btn-block btn-lg' %>
+		<%= link_to 'Import Bait Loadings', page_path( page: 'select_vessel', label: 'bait_loadings'), class: 'btn btn-default btn-block btn-lg' %>
+    <%= link_to 'Import Vessels',page_path(page: 'select_company'), class: 'btn btn-default btn-block btn-lg' %>
 	</div>
 </div>
-

@@ -6,9 +6,9 @@
   </li>
   <li class="divider-vertical"></li>
   <% if admin_signed_in? %>
-    <% if current_admin.admin? || current_admin.supervisor? || current_admin.staff? %> 
+    <% if current_admin.admin? || current_admin.supervisor? || current_admin.staff? %>
       <li id="nav_upload" class="navbar-red">
-        <%= link_to home_import_path, class: "", title: t("navbar.upload") do %>
+        <%= link_to page_path(page: 'import'), class: "", title: t("navbar.upload") do %>
           <%= icon fa_submit, "", class: 'fa-2x' %>
         <% end %>
       </li>
@@ -32,7 +32,7 @@
         <% end %>
       </li>
     <% end %>
-  <% end %> 
+  <% end %>
 
   <% if can? :reports, :home %>
     <li id="nav_reports" class="navbar-green">
@@ -46,7 +46,7 @@
   <% if can? :index, Protocol %>
     <li id="nav_protocols">
       <%= link_to protocols_path, class: "", title: t("navbar.download") do %>
-        <%= icon fa_protocols, '', class: 'fa-2x' %>    
+        <%= icon fa_protocols, '', class: 'fa-2x' %>
       <% end %>
     </li>
   <% end %>

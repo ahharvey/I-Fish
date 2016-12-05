@@ -5,7 +5,7 @@ require 'rails_helper'
 
 RSpec.describe "Staff Creates Unloading" do
 
-  describe "with signed in staff" do
+  describe "with signed in enumerator" do
     let(:admin)       { create :admin, office: office }
     let(:office)       { create :office }
     let(:user)       { create :user }
@@ -27,25 +27,18 @@ RSpec.describe "Staff Creates Unloading" do
       bait1
       bait2
 
-      admin.roles.push Role.where(name: 'staff').first_or_create
+      admin.roles.push Role.where(name: 'enumerator').first_or_create
       login_as( admin, scope: :admin )
-      visit root_path
+      visit company_path(company)
     end
 
     it "creates with valid data" do
 
-      expect(page).to have_link fishery.name, href: fishery_path(fishery)
-      click_link fishery.name
-      expect(current_path).to eq fishery_path(fishery)
-
-      expect(page).to have_link company.name, href: company_path(company)
-      click_link company.name
-      expect(current_path).to eq company_path(company)
+      expect(page).to_not have_link 'New Bait Loading Report'
 
       expect(page).to have_link vessel.ap2hi_ref, href: vessel_path(vessel)
       click_link vessel.ap2hi_ref
       expect(current_path).to eq vessel_path(vessel)
-
 
       expect(page).to have_link 'New Bait Loading Report', href: new_vessel_bait_loading_path(vessel)
       click_link 'New Bait Loading Report'

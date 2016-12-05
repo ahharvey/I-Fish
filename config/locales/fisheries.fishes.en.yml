@@ -1,0 +1,22 @@
+en:
+  fisheries:
+    fishes:
+      create:
+        notice: "%{fish} is already assigned to %{fishery}."
+        success: "%{fish} was successfully added to %{fishery}."
+        alert: "%{fish} was successfully invited to %{fishery}."
+        error: We were unable to add the fish to this fishery.
+      destroy:
+        notice: "%{fish} was successfully removed from %{fishery}."
+  activerecord:
+    attributes:
+      company:
+
+    errors:
+      models:
+        company:
+  unauthorized:
+    new:
+      company: You don't have permission to create companies.
+    edit:
+      company: You don't have permission to edit this company.

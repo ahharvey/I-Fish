@@ -79,6 +79,31 @@ class BaitLoading < ApplicationRecord
     self.date = Chronic.parse(@formatted_date) if @formatted_date.present?
   end
 
+  attr_accessor :bait_code, :secondary_bait_code
+  def bait_code=(code)
+    if Bait.where(code: code).any?
+      self.bait_id = Bait.where(code: code).first.try(:id)
+    else
+      self.errors.add(:bait_code, :invalid_bait_code)
+    end
+  end
+
+  def bait_code
+    self.bait.try(:code)
+  end
+
+  def secondary_bait_code=(code)
+    if Bait.where(code: code).any?
+      self.secondary_bait_id = Bait.where(code: code).first.try(:id)
+    elsif code.present?
+      self.errors.add(:secondary_bait_code, :invalid_bait_code)
+    end
+  end
+
+  def secondary_bait_code
+    self.secondary_bait.try(:code)
+  end
+
 
 
 
@@ -114,13 +139,12 @@ class BaitLoading < ApplicationRecord
   def self.accessible_attributes
     [
       "date",
-      "vessel_id",
       "method_type",
       "grid_id",
       "quantity",
       "price",
-      "bait_id",
-      "secondary_bait_id",
+      "bait_code",
+      "secondary_bait_code",
     ]
   end
 

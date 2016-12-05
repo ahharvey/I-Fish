@@ -104,6 +104,12 @@ Rails.application.routes.draw do
         delete :delete_member_office
       end
     end
+    post    "/fisheries/:fishery_id/memberships/gears"     => "memberships/gears#create",  as: "fishery_add_gear"
+    delete  "/fisheries/:fishery_id/memberships/gears/:id" => "memberships/gears#destroy", as: "fishery_remove_gear"
+    post    "/fisheries/:fishery_id/memberships/vessels"     => "memberships/vessels#create",  as: "fishery_add_vessel"
+    delete  "/fisheries/:fishery_id/memberships/vessels/:id" => "memberships/vessels#destroy", as: "fishery_remove_vessel"
+    post    "/fisheries/:fishery_id/memberships/fishes"     => "memberships/fishes#create",  as: "fishery_add_fish"
+    delete  "/fisheries/:fishery_id/memberships/fishes/:id" => "memberships/fishes#destroy", as: "fishery_remove_fish"
     resources :fishes do
       collection do
         post :import
@@ -113,11 +119,16 @@ Rails.application.routes.draw do
     resources :gears
     resources :landings
     resources :offices do
+      namespace :memberships do
+        #resources :admins, only: [:create, :destroy]
+      end
       member do
         post :add_admin
         delete :delete_admin
       end
     end
+    post "/offices/:office_id/memberships/admins" => "memberships/admins#create", as: "office_add_admin"
+    delete "/offices/:office_id/memberships/admins/:id" => "memberships/admins#destroy", as: "office_remove_admin"
     resources :surveys do
       member do
         put :approve
@@ -155,6 +166,7 @@ Rails.application.routes.draw do
 
     resources :vessels do
       concerns :acts_as_chartable
+      resources :importers, only: [:new,:create]
       resources :unloadings
       resources :bait_loadings
       resources :carrier_loadings
@@ -198,6 +210,7 @@ Rails.application.routes.draw do
 
     resources :companies do
       concerns :acts_as_chartable
+      resources :importers, only: [:new,:create]
       resources :unloadings
       resources :bait_loadings
       resources :carrier_loadings
@@ -220,6 +233,8 @@ Rails.application.routes.draw do
         delete :delete_user
       end
     end
+    post    "/companies/:company_id/memberships/users"     => "memberships/users#create",  as: "company_add_user"
+    delete  "/companies/:company_id/memberships/users/:id" => "memberships/users#destroy", as: "company_remove_user"
 
     resources :bait_loadings do
       member do
@@ -248,7 +263,7 @@ Rails.application.routes.draw do
       end
     end
 
-    resources :importers
+    resources :importers, only: [:index]
 
     namespace :review do
       resources :unloadings,    only: [:update]
@@ -274,9 +289,9 @@ Rails.application.routes.draw do
 
 
 
-    get 'home/index'
-    get 'home/upload_data'
-    get 'home/import'
+  #  get 'home/index'
+#    get 'home/upload_data'
+#    get 'home/import'
     get '/reports' => 'home#reports'
     get '/user_profile' => 'home#user_profile'
     get '/fishery_profile' => 'home#fishery_profile'
@@ -287,6 +302,8 @@ Rails.application.routes.draw do
     post '/import_mail' => 'home#import_mail'
 
     post 'home/process_upload_data'
+
+    get "/home/*page"  => "home#show",          as: :page
 
     #authenticate :admin, lambda { |a| a.admin? } do
 

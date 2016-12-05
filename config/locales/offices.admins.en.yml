@@ -1,0 +1,22 @@
+en:
+  offices:
+    admins:
+      create:
+        notice: "%{admin} is already a member of %{office}."
+        success: "%{admin} was successfully added to %{office}."
+        alert: "%{admin} was successfully invited to %{office}."
+        error: We were unable to add the admin to this office.
+      destroy:
+        notice: "%{admin} was successfully removed from %{office}."
+  activerecord:
+    attributes:
+      office:
+
+    errors:
+      models:
+        office:
+  unauthorized:
+    new:
+      office: You don't have permission to create companies.
+    edit:
+      office: You don't have permission to edit this company.

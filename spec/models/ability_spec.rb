@@ -42,6 +42,10 @@ RSpec.describe "Admin" do
       before :each do
         admin.roles.push Role.where(name: 'enumerator').first_or_create
       end
+
+      it { is_expected.to have_abilities([:index, :show, :new, :create, :edit, :update], BaitLoading) }
+      it { is_expected.to not_have_abilities([:destroy], BaitLoading) }
+
       it { is_expected.to have_abilities([:index, :show, :edit, :update], Vessel) }
       it { is_expected.to not_have_abilities([:new, :create, :destroy], Vessel) }
 
@@ -67,6 +71,8 @@ RSpec.describe "Admin" do
 
       it { is_expected.to have_abilities([:index, :show, :new, :create, :edit, :update], UnloadingCatch) }
       it { is_expected.to not_have_abilities([:destroy], UnloadingCatch) }
+
+      it { is_expected.to have_abilities([:index, :show, :edit, :create], Office) }
     end
 
     context "when is an Administrator" do

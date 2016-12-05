@@ -17,11 +17,11 @@ class UnloadingImporter
 
   def save( owner_id, owner_type)
     owner = owner_type.constantize.find owner_id
-    if imported_unloadings.map(&:valid?).all?
-      imported_unloadings.each do |unloading|
+    if imported_rows.map(&:valid?).all?
+      imported_rows.each do |unloading|
         # UnloadingSaverJob.perform_later(unloading, owner_id, owner_type)
         whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
-        unloading.whodunnit(whodunnit) do 
+        unloading.whodunnit(whodunnit) do
           unloading.send("#{owner_type.underscore}_id=",owner_id)
           unloading.approved!
           if owner_type.to_s == 'Admin'
@@ -33,7 +33,7 @@ class UnloadingImporter
       end
       true
     else
-      imported_unloadings.each_with_index do |unloading, index|
+      imported_rows.each_with_index do |unloading, index|
         unloading.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+2}: #{message}"
         end
@@ -42,7 +42,7 @@ class UnloadingImporter
     end
   end
 
-  def imported_unloadings
+  def imported_rows
     @imported_unloadings ||= load_imported_unloadings
   end
 
@@ -60,7 +60,7 @@ class UnloadingImporter
 
       #add catch data
       row.to_hash.slice(*['yft_kg', 'skj_kg', 'bet_kg', 'komu_kg', 'kaw_kg'] ).each do |sp_catch|
-        unless sp_catch[1].nil? || sp_catch[1] == 0 
+        unless sp_catch[1].nil? || sp_catch[1] == 0
           Rails.logger.info sp_catch
           unloading.send(sp_catch[0]+'=', sp_catch[1])
         end

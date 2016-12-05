@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161201123341) do
+ActiveRecord::Schema.define(version: 20161205020752) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -317,8 +317,14 @@ ActiveRecord::Schema.define(version: 20161201123341) do
   create_table "importers", force: :cascade do |t|
     t.text     "file"
     t.string   "label"
-    t.string   "review_state"
-    t.datetime "reviewed_at"
+    t.string   "review_state",     default: "pending"
+    t.datetime "reviewed_at",      default: -> { "now()" }
+    t.string   "parent_type"
+    t.integer  "parent_id"
+    t.string   "imported_by_type"
+    t.integer  "imported_by_id"
+    t.index ["imported_by_type", "imported_by_id"], name: "index_importers_on_imported_by_type_and_imported_by_id", using: :btree
+    t.index ["parent_type", "parent_id"], name: "index_importers_on_parent_type_and_parent_id", using: :btree
   end
 
   create_table "landings", force: :cascade do |t|
@@ -570,7 +576,7 @@ ActiveRecord::Schema.define(version: 20161201123341) do
   end
 
   create_table "unloadings", force: :cascade do |t|
-    t.string   "port"
+    t.string   "old_port"
     t.datetime "time_out"
     t.datetime "time_in"
     t.boolean  "etp"

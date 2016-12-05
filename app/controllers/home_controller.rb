@@ -5,6 +5,19 @@ class HomeController < ApplicationController
 
   skip_authorize_resource :only => :multipart_import
 
+  def show
+    if valid_page?
+      initialize_select_company_page  if params[:page] == 'select_company'
+      initialize_select_vessel_page   if params[:page] == 'select_vessel'
+      render template: "home/#{params[:page]}"
+    else
+      render file: "public/404.html", status: :not_found
+    end
+  end
+
+
+
+
   def index
     @activities = Activity.includes(:ownable, :trackable).page(params[:page]).per(15)
   end
@@ -181,10 +194,24 @@ class HomeController < ApplicationController
   def fishery_profile
   end
 
-  private
+private
 
   def render_upload_data
     @files = ExcelFile.all
     render :action => "upload_data"
   end
+
+  def valid_page?
+    File.exist?(Pathname.new(Rails.root + "app/views/home/#{params[:page]}.html.erb"))
+  end
+
+  def initialize_select_company_page
+    @companies = Company.accessible_by(current_ability).default
+  end
+
+  def initialize_select_vessel_page
+    @vessels = Vessel.accessible_by(current_ability).default
+    @label = params[:label] || nil
+  end
+
 end

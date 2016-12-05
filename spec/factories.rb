@@ -47,6 +47,10 @@ FactoryGirl.define do
     sequence(:ap2hi_ref) { |n| "Vessel#{n}" }
   end
 
+  factory :gear do
+    sequence(:alpha_code) { |n| "G#{n}" }
+  end
+
   factory :audit do
     admin
     association :auditable, factory: :vessel
@@ -87,6 +91,13 @@ FactoryGirl.define do
   factory :document do
     file { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'images', 'test_image.jpg')) }
     association :documentable, factory: :vessel
+  end
+
+  factory :importer do
+    file { Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'test_sheet.xlsx')) }
+    label { %w{ vessels unloadings bait_loadings }.sample }
+    association :imported_by, factory: :admin
+    association :parent, factory: :company
   end
 
 end

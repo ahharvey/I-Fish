@@ -17,11 +17,11 @@ class VesselImporter
 
   def save( owner_id, owner_type)
     owner = owner_type.constantize.find owner_id
-    if imported_vessels.map(&:valid?).all?
-      imported_vessels.each do |vessel|
+    if imported_rows.map(&:valid?).all?
+      imported_rows.each do |vessel|
 
         whodunnit = "#{owner_type.to_s}:#{owner_id}" rescue 'Guest'
-        vessel.whodunnit(whodunnit) do 
+        vessel.whodunnit(whodunnit) do
           if vessel.class.name == 'PendingVessel' && owner_type == 'Admin'
             vessel.send("#{owner_type.underscore}_id=",owner_id)
           end
@@ -31,7 +31,7 @@ class VesselImporter
       end
       true
     else
-      imported_vessels.each_with_index do |vessel, index|
+      imported_rows.each_with_index do |vessel, index|
         vessel.errors.full_messages.each do |message|
           errors.add :base, "Row #{index+2}: #{message}"
         end
@@ -41,7 +41,7 @@ class VesselImporter
   end
 
 
-  def imported_vessels
+  def imported_rows
     @imported_vessels ||= load_imported_vessels
   end
 
@@ -51,7 +51,7 @@ class VesselImporter
     (2..spreadsheet.last_row).map do |i|
       row = Hash[[header, spreadsheet.row(i)].transpose]
       vessel = Vessel.find_by_id(row["id"]).pending_vessel || Vessel.new
-      vessel.attributes = row.to_hash.slice(*Vessel.accessible_attributes) 
+      vessel.attributes = row.to_hash.slice(*Vessel.accessible_attributes)
       vessel
     end
   end

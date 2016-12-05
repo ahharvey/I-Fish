@@ -1,0 +1,31 @@
+<% title 'Select Company' %>
+<div class='row'>
+  <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+    <p class='lead'>
+      Which Company do you want to import vessels for?
+    </p>
+  </div>
+</div>
+
+<div class='row'>
+  <div class='col-xs-12 col-sm-8 col-sm-offset-2'>
+    <table class='table table-condensed datatable'>
+      <thead>
+
+        <th><%= Company.human_attribute_name(:code) %></th>
+        <th><%= Company.human_attribute_name(:name) %></th>
+        <th class='nosort'></th>
+      </thead>
+      <tbody>
+        <% @companies.each do |company| %>
+          <tr>
+            <td><%= company.code %></td>
+            <td><%= company.name %></td>
+            <td><%= link_to 'Import', new_company_importer_path(company, label: 'vessels'), class: 'btn btn-default btn-xs', title: "Import to #{company.code}" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+
+    </table>
+  </div>
+</div>

@@ -37,7 +37,7 @@ class User < ApplicationRecord
 
   has_paper_trail
 
-  devise :invitable, :database_authenticatable, :registerable,
+  devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, #:validatable,
          :lockable, :timeoutable, :omniauthable, :invitable # :confirmable
 

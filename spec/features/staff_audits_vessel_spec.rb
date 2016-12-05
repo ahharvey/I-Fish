@@ -21,7 +21,7 @@ RSpec.describe "Staff audits Vessel" do
       company.member_fisheries.push fishery
       vessel
 
-      admin.roles.push Role.where(name: 'staff').first_or_create
+      admin.roles.push Role.where(name: 'enumerator').first_or_create
       login_as( admin, scope: :admin )
       visit vessel_path(vessel)
     end

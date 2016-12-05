@@ -200,5 +200,7 @@ group :test do
   gem 'rails-controller-testing'
 
   gem 'friendly_id'
+  # Simple testing of Sidekiq jobs via a collection of matchers and helpers
+  gem 'rspec-sidekiq'
 
 end

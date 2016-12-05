@@ -94,7 +94,7 @@ Devise.setup do |config|
   # The period the generated invitation token is valid, after
   # this period, the invited resource won't be able to accept the invitation.
   # When invite_for is 0 (the default), the invitation won't expire.
-  # config.invite_for = 2.weeks
+  config.invite_for = 2.weeks
 
   # Number of invitations users can send.
   # - If invitation_limit is nil, there is no limit for invitations, users can
@@ -170,7 +170,7 @@ Devise.setup do |config|
   # The time you want to timeout the user session without activity. After this
   # time the user will be asked for credentials again. Default is 30 minutes.
   # config.timeout_in = 30.minutes
-  
+
   # If true, expires auth token on session timeout.
   # config.expire_auth_token_on_timeout = false
 
@@ -224,7 +224,7 @@ Devise.setup do |config|
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
   config.scoped_views = true
-  
+
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

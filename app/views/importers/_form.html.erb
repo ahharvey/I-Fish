@@ -1,0 +1,12 @@
+<%= form_for [@object,@importer], class: "form-inline"  do |f| %>
+  <%= import_errors_for(@importer) %>
+  <%= f.hidden_field :label, value: @label %>
+  <%= f.label :file, 'File', class: 'sr-only' %>
+  <div class="input-group danger">
+    <%= f.file_field :file, class: 'form-control input-lg' %>
+    <span class="input-group-btn">
+      <%= f.submit "Import", class: 'btn btn-primary btn-lg', title: 'Import File' %>
+    </span>
+  </div><!-- /input-group -->
+
+<% end %>

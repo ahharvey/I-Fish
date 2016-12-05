@@ -4,11 +4,12 @@
   </div>
   <div class="panel-body">
     <% if can? :update, @fishery %>
-      <%= form_tag [:add_target_fish, @fishery], class: "form", :remote=>true do %>
-        <div class="input-group"> 
-          <%= text_field_tag :get_fish, "", class: "form-control", placeholder: "Add a target fish...", autocomplete: "off", data: { autocomplete_source: Fish.order(:code).map(&:code) } %>
+      <%= form_tag fishery_add_fish_path(@fishery), class: "form", method: :post, remote: true do %>
+        <%= label_tag 'fish[code]', 'Add a fish', class: 'sr-only' %>
+        <div class="input-group">
+          <%= text_field :fish, :code, class: "form-control", placeholder: "Add a target fish...", autocomplete: "off", data: { autocomplete_source: Fish.order(:code).map(&:code) } %>
           <div class="input-group-btn">
-            <%= button_tag add_icon, class: "btn btn-success" %>
+            <%= button_tag add_icon, class: "btn btn-success", id: 'add_fish', title: 'Add Fish' %>
           </div>
         </div>
       <% end %>
