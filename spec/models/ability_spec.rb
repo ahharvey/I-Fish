@@ -18,7 +18,7 @@ RSpec.describe "User" do
       it { is_expected.to have_abilities([:edit, :update], Unloading ) }
       it { is_expected.to not_have_abilities([:index, :show, :destroy], Unloading ) }
 
-      it { is_expected.to have_abilities([:new, :create], BaitLoading.new) }
+      #it { is_expected.to have_abilities([:new, :create], BaitLoading.new) }
       it { is_expected.to not_have_abilities([:index, :show, :edit, :update, :destroy], BaitLoading.new) }
 
       it { is_expected.to not_have_abilities([:index], Charts::ProductionsController ) }

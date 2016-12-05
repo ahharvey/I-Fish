@@ -50,7 +50,7 @@ class Ability
     cannot :destroy, Unloading
 
     cannot :manage, BaitLoading
-    can :create, BaitLoading
+    #can :create, BaitLoading
     #can :manage, BaitLoading, vessel_id: user.managed_vessels.map(&:id)
     cannot :destroy, BaitLoading
 
