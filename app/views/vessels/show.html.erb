@@ -25,7 +25,7 @@
         <% end %>
 
         <% if @vessel.vessel_type.try(:code) == 'ca' %>
-          <% if can? :read, CarrierLanding  && false %>
+          <% if can? :read, CarrierLoading  && false %>
             <%= link_to "View carrier loading reports", vessel_carrier_loadings_path(@vessel), class: 'btn btn-primary btn-lg btn-block' %>
             <br />
           <% end %>
