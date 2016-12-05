@@ -109,7 +109,7 @@ RSpec.describe ImportersController, type: :controller do
     # we will only test with admin
     # other roles are covered by ability_spec
     before :each do
-      admin.roles.push Role.where(name: 'administrator').first_or_create
+      admin.roles.push Role.where(name: 'staff').first_or_create
       sign_in admin
     end
     context "with valid params nested by company" do
