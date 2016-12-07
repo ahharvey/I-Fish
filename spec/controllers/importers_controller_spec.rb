@@ -128,6 +128,7 @@ RSpec.describe ImportersController, type: :controller do
           post :create, { importer: valid_attributes, company_id: company.id }
         }.to have_enqueued_job(UnloadingImporterJob) #.with("users-backup.txt", "products-backup.txt")
       end
+
       it { expect(assigns(:importer)).to be_a(Importer) }
       it { expect(assigns(:importer)).to be_persisted }
       it { expect(assigns(:importer).parent).to eq company }

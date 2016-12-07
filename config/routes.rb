@@ -267,6 +267,7 @@ Rails.application.routes.draw do
 
     namespace :review do
       resources :unloadings,    only: [:update]
+      resources :bait_loadings, only: [:update]
     end
 
     namespace :api, defaults: {format: 'json'} do
@@ -283,6 +284,7 @@ Rails.application.routes.draw do
         # resources :gears
         resources :fishes
         resources :vessels, only: [:index]
+        resources :unloadings, only: [:index]
       end
     end
 

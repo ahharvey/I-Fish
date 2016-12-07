@@ -102,6 +102,14 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def flash_to_headers
+    return unless request.xhr?
+    response.headers['X-Message'] = flash_message
+    response.headers["X-Message-Type"] = twitterized_type( flash_type )
+
+    flash.discard # don't want the flash to appear when you reload page
+  end
+
 
   protected
 
@@ -142,22 +150,18 @@ class ApplicationController < ActionController::Base
     { locale: I18n.locale }
   end
 
-  def flash_to_headers
-    return unless request.xhr?
-    response.headers['X-Message'] = flash_message
-    response.headers["X-Message-Type"] = twitterized_type( flash_type )
 
-    flash.discard # don't want the flash to appear when you reload page
-  end
 
   def flash_message
-    [:alert, :error, :notice, :success].each do |type|
+    [:alert, :error, :notice, :success, nil].each do |type|
+      return "" if type.nil?
       return flash[type] unless flash[type].blank?
     end
   end
 
   def flash_type
-    [:alert, :error, :notice, :success].each do |type|
+    [:alert, :error, :notice, :success, nil].each do |type|
+      return "" if type.nil?
       return type unless flash[type].blank?
     end
   end

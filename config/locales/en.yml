@@ -286,7 +286,7 @@ en:
         fish: "Dominant species"
         secondary_fish: "Secondary species"
         vessel_id: "Vessel"
-        method_types: "Catching method"
+        method_type: "Catching method"
         select_fish: "Select primary species"
         select_secondary_fish: "Select secondary species (if present)"
         select_method: "Select catching method"

@@ -2,7 +2,7 @@
 
 <div class="row">
 
-  <%= render partial: "supervisor_controls" %>
+  <%= render partial: "unloadings/supervisor_controls" %>
 
   <div class="col-sm-3 hidden-xs">
     <%= render partial: "shared/api_links", locals: {json: true, xml: true} %>
@@ -140,9 +140,9 @@
 
     <div class="panel panel-default">
       <div class="panel-heading"><h3 class="panel-title">Catch</h3></div>
-      <%= render partial: 'unloading_catch_table' %>
+      <%= render partial: 'unloadings/unloading_catch_table' %>
       <div class="panel-footer">
-        <%= render partial: 'unloading_catch_form' %>
+        <%= render partial: 'unloadings/unloading_catch_form' %>
       </div>
     </div>
   </div>

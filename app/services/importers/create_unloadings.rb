@@ -1,53 +1,9 @@
 module Importers
-  class CreateUnloadings
-    # switch to ActiveModel::Model in Rails 4
-    include ActiveModel::Model
-    #extend ActiveModel::Naming
-    include ActiveModel::Conversion
-    include ActiveModel::Validations
+  class CreateUnloadings < Base
 
-    attr_accessor :file, :imported_by, :parent, :imported
+  private
 
-    def initialize(attributes = {})
-      attributes.each { |name, value| send("#{name}=", value) }
-    end
-
-    def persisted?
-      false
-    end
-
-    def call
-      owner = imported_by
-      if imported_rows.map(&:valid?).all?
-        imported_rows.each do |unloading|
-          # UnloadingSaverJob.perform_later(unloading, owner_id, owner_type)
-          whodunnit = "#{owner.class.name.to_s}:#{owner.id}" rescue 'Guest'
-          unloading.paper_trail.whodunnit(whodunnit) do
-            unloading.send("#{owner.class.name.underscore}_id=",owner.id)
-            unloading.build_approved(owner) if owner.is_a?(Admin)
-            unloading.save!
-          end
-
-          Activity.create! action: 'create', trackable: unloading, ownable_id: owner.id, ownable_type: owner.class.name
-        end
-        self.imported = true
-        self
-      else
-        imported_rows.each_with_index do |unloading, index|
-          unloading.errors.full_messages.each do |message|
-            errors.add :base, "Row #{index+2}: #{message}"
-          end
-        end
-        self.imported = false
-        self
-      end
-    end
-
-    def imported_rows
-      @imported_unloadings ||= load_imported_unloadings
-    end
-
-    def load_imported_unloadings
+    def load_rows_from_spreadsheet
       spreadsheet = open_spreadsheet
       header = spreadsheet.row(1)
       (2..spreadsheet.last_row).map do |i|
@@ -72,22 +28,5 @@ module Importers
       end
     end
 
-  #  def open_spreadsheet
-  #    case File.extname(file.original_filename)
-  #    when ".csv" then Csv.new(file.path, nil, :ignore)
-  #    when ".xls" then Roo::Excel.new(file.path, nil, :ignore)
-  #    when ".xlsx" then Roo::Excelx.new(file.path, nil, :ignore)
-  #    else raise "Unknown file type: #{file.original_filename}"
-  #    end
-  #  end
-
-    def open_spreadsheet
-      case File.extname(file.file.filename)
-      when ".csv" then Roo::Csv.new(file.url, csv_options: {col_sep: ";"})
-      when ".xls" then Roo::Excel.new(file.url)
-      when ".xlsx" then Roo::Excelx.new(file.url)
-      else raise "Unknown file type: #{file.file.filename}"
-      end
-    end
   end
 end

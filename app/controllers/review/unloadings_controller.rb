@@ -25,7 +25,7 @@ module Review
       #@unloading.attributes = unloading_params
       msg = nil
       if unloading_params.has_key?(:review_state)
-        case unloading_params[:review_state].to_s
+        case unloading_params['review_state'].to_s
         when 'approved'
           @unloading.build_approved(current_admin)
           msg = t('.approved')
@@ -39,6 +39,7 @@ module Review
           @unloading.update_attributes(unloading_params)
         end
       end
+      Rails.logger.info @unloading.to_yaml
       respond_to do |format|
         if @unloading.save
           flash[:notice] = msg

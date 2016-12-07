@@ -24,6 +24,8 @@ class UnloadingImporterJob < ApplicationJob
 
     @import_service = select_import_service_by(@label)
 
+    @import_service.call
+
     if @import_service.imported
 
       rows = @import_service.imported_rows

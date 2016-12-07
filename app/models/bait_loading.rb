@@ -26,6 +26,7 @@ class BaitLoading < ApplicationRecord
   include Reviewable
 
   belongs_to :vessel, touch: true
+  has_one :company, through: :vessel
   belongs_to :fish, touch: true
   belongs_to :secondary_fish, class_name: 'Fish', foreign_key: 'secondary_fish_id'
   belongs_to :grid, touch: true
@@ -34,8 +35,9 @@ class BaitLoading < ApplicationRecord
   belongs_to :secondary_bait, class_name: 'Bait', foreign_key: 'secondary_bait_id'
   belongs_to :reviewer, :class_name => 'User'
 
-  scope :default,   -> { order('bait_loadings.date DESC') }
-  scope :current,   -> { where( 'date >= ?', Date.today.beginning_of_year ) }
+  scope :default,   -> { order( 'bait_loadings.date DESC') }
+  scope :current,   -> { where( 'bait_loadings.date >= ?', Date.today.beginning_of_year ) }
+  scope :historical,-> { where( 'bait_loadings.date >= ?', Date.today.beginning_of_month-1.year) }
 
   scope :completed_this_month, -> { where( date: Date.today.beginning_of_month..Date.today.end_of_month ).size }
   scope :completed_last_month, -> { where( date: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ).size }

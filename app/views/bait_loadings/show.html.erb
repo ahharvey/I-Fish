@@ -16,15 +16,18 @@
 <br />
 
 <dl class="dl-horizontal">
-  
+
   <dt><%= BaitLoading.human_attribute_name(:formatted_date) %></dt>
   <dd><i><%= @bait_loading.formatted_date %></i></dd>
 
   <dt><%= BaitLoading.human_attribute_name(:vessel_id) %></dt>
   <dd><%= @bait_loading.vessel.ap2hi_ref %> </dd>
 
-  <dt><%= BaitLoading.human_attribute_name(:fish) %></dt>
-  <dd><%= @bait_loading.fish.code %> </dd>
+  <dt><%= BaitLoading.human_attribute_name(:bait) %></dt>
+  <dd><%= @bait_loading.bait.try(:code) %> </dd>
+
+  <dt><%= BaitLoading.human_attribute_name(:secondary_bait) %></dt>
+  <dd><%= @bait_loading.secondary_bait.try(:code) %> </dd>
 
   <dt><%= BaitLoading.human_attribute_name(:quantity) %></dt>
   <dd><%= @bait_loading.quantity %> </dd>
@@ -41,5 +44,3 @@
 
 <%= link_to 'Edit', edit_bait_loading_path(@bait_loading) %> |
 <%= link_to 'Back', bait_loadings_path %>
-
-

@@ -1,0 +1,33 @@
+<div id="supervisor_controls" class= "col-xs-12">
+  <% if can? :update, unloading %>
+
+    <div class='btn-group btn-group-justified' role="group" aria-label="Review Controls">
+      <%= link_to review_unloading_path(unloading, {unloading: { review_state: 'rejected' } }),
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "review-control modal-control btn btn-sm #{unloading.rejected? ? 'active btn-danger' : 'btn-default'}" do %>
+        <%= icon( 'remove', "<span class='hidden-xs'>Rejected</span>".html_safe, class: 'fa-fw') %>
+      <% end %>
+
+
+      <%= link_to review_unloading_path(unloading, {unloading: { review_state: 'pending' } }),
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "review-control modal-control btn btn-sm #{unloading.pending? ? 'active btn-warning' : 'btn-default'}" do %>
+        <%= icon( 'warning', "<span class='hidden-xs'>Pending</span>".html_safe, class: 'fa-fw') %>
+      <% end %>
+
+
+      <%= link_to review_unloading_path(unloading, {unloading: { review_state: 'approved' } }),
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "review-control modal-control btn btn-sm #{unloading.approved? ? 'active btn-success' : 'btn-default'}" do %>
+        <%= icon( 'check', "<span class='hidden-xs'>Approved</span>".html_safe, class: 'fa-fw') %>
+      <% end %>
+    </div>
+
+  <% end %>
+</div>

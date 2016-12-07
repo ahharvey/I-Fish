@@ -1,0 +1,13 @@
+
+$('#bait_panel').replaceWith("<%= j render partial: 'staff/dashboard/bait_loadings' %>");
+$('#unloading_panel').replaceWith("<%= j render partial: 'staff/dashboard/unloadings' %>");
+$('#vessel_panel').replaceWith("<%= j render partial: 'staff/dashboard/pending_vessels' %>");
+
+
+$('.view-record').click(function() {
+	$('#approval_modal .modal-title').html('');
+  $('#approval_modal .modal-body').html('');
+	$('#approval_modal .modal-footer').html('');
+	$('#approval_modal').modal('toggle');
+
+});

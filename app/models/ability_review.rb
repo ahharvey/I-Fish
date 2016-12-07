@@ -32,6 +32,7 @@ class AbilityReview
 
   def abilities_for_all_admins(admin)
     can [:update], Unloading
+    can [:update], BaitLoading
   end
 
   def public(admin)

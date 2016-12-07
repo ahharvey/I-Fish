@@ -1,42 +1,55 @@
-<div class="panel panel-default">
+<div id="bait_panel" class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Bait Loadings</h3>
   </div>
-  <table  class="table table-condensed">
+  <table id="bait_loadings" class="table table-condensed">
     <thead>
       <tr>
-        <th></th>
+        <th><%= BaitLoading.human_attribute_name(:company) %></th>
 	      <th><%= BaitLoading.human_attribute_name(:formatted_date) %></th>
-	      <th><%= BaitLoading.human_attribute_name(:ap2hi_ref) %></th>
+        <th><%= BaitLoading.human_attribute_name(:ap2hi_ref) %></th>
 	      <th><%= BaitLoading.human_attribute_name(:bait) %></th>
-	      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:quantity) %></th>
-	      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:method_type) %></th>
-	      <th class='hidden-xs'><%= BaitLoading.human_attribute_name(:location) %></th>
+        <th><%= BaitLoading.human_attribute_name(:secondary_bait) %></th>
+	      <th class='hidden-xs text-right'><%= BaitLoading.human_attribute_name(:quantity) %></th>
+	      <th class='hidden-xs text-right'><%= BaitLoading.human_attribute_name(:method_type) %></th>
+        <th></th>
       </tr>
     </thead>
     <tbody>
       <%if @bait_loadings.empty? %>
         <tr>
-          <td colspan="7"><i>NO UNAPPROVED BAIT LOADINGS</i></td>
+          <td colspan="7" class='text-center'><i>NO UNAPPROVED BAIT LOADINGS</i></td>
         </tr>
       <% else %>
         <% @bait_loadings.each do |bait_loading| %>
         	<% present bait_loading do |bait_loading_presenter| %>
-	          <tr>
-	            <td><%= link_to show_icon, bait_loading %> </td>
-	            <td><%= bait_loading_presenter.date %></td>
-					    <td><%= bait_loading_presenter.ap2hi_ref %></td>
-					    <td><%= bait_loading_presenter.bait %></td>
-					    <td class='hidden-xs'><%= bait_loading_presenter.quantity %></td>
-					    <td class='hidden-xs'><%= bait_loading_presenter.method_type %></td>
-					    <td class='hidden-xs'><%= bait_loading_presenter.location %></td>
-	          </tr>
+            <%= content_tag_for :tr, bait_loading do %>
+              <td><%= bait_loading_presenter.company_avatar %></td>
+              <td><%= bait_loading_presenter.date %></td>
+
+  				    <td><%= bait_loading_presenter.ap2hi_ref %></td>
+  				    <td><%= bait_loading_presenter.bait %></td>
+              <td><%= bait_loading.secondary_bait.try(:code) %></td>
+  				    <td class='hidden-xs text-right'><%= bait_loading_presenter.quantity %></td>
+  				    <td class='hidden-xs text-right'><%= bait_loading_presenter.method_type %></td>
+              <td class='text-right'><%= render partial: 'bait_loadings/minified_supervisor_controls', locals: { bait_loading: bait_loading } %> </td>
+            <% end %>
 	        <% end %>
         <% end %>
       <% end %>
     </tbody>
   </table>
   <div class="panel-footer text-right">
-    <%= link_to "See All", bait_loadings_path %>
+    <%= page_entries_info @bait_loadings %>
+    <%= link_to_previous_page @bait_loadings, icon('chevron-left'),
+      param_name: :bait_page,
+      remote: true,
+      class: 'btn btn-default btn-xs',
+      params: {controller: 'staff/dashboard', action: 'index'} %>
+    <%= link_to_next_page @bait_loadings, icon('chevron-right'),
+      param_name: :bait_page,
+      remote: true,
+      class: 'btn btn-default btn-xs',
+      params: {controller: 'staff/dashboard', action: 'index'} %>
   </div>
 </div>

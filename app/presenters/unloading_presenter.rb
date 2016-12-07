@@ -16,21 +16,21 @@ class UnloadingPresenter < BasePresenter
   end
 
   def yft
-    unloading.yft_kg 
+    unloading.yft_kg
   end
 
   def bet
-    unloading.bet_kg 
+    unloading.bet_kg
     #best_in_place_if (can? :edit, unloading), unloading, :bet, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
   def skj
-    unloading.skj_kg 
+    unloading.skj_kg
     #best_in_place_if (can? :edit, unloading), unloading, :skj, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
   def kaw
-    unloading.kaw_kg 
+    unloading.kaw_kg
     #best_in_place_if (can? :edit, unloading), unloading, :kaw, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
 
@@ -43,7 +43,7 @@ class UnloadingPresenter < BasePresenter
   end
 
   def etp
-    best_in_place_if (can? :edit, unloading), unloading, :etp, as: :checkbox, collection: { false: raw("<i class='fa fa-square-o'></i>"), true: raw("<i class='fa fa-check-square-o'></i>") }, inner_class: 'col-xs-1' 
+    best_in_place_if (can? :edit, unloading), unloading, :etp, as: :checkbox, collection: { false: raw("<i class='fa fa-square-o'></i>"), true: raw("<i class='fa fa-check-square-o'></i>") }, inner_class: 'col-xs-1'
   end
 
   def location
@@ -68,6 +68,12 @@ class UnloadingPresenter < BasePresenter
     end
   end
 
+  def company_avatar
+    handle_none unloading.company do
+      unloading.company.try(:avatar).try(:file).try(:file) 
+    end
+  end
+
   def user
     handle_none unloading.user do
       unloading.user.try(:name)
@@ -81,7 +87,7 @@ class UnloadingPresenter < BasePresenter
 
 
 
-  private 
+  private
 
   def handle_none(value)
     if value.present?

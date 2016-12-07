@@ -25,7 +25,7 @@ class Memberships::AdminsController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to @object }
-      format.js { render :redisplay_admins }
+      format.js { render 'admins/redisplay_admins' }
     end
   end
 

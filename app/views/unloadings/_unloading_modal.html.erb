@@ -1,0 +1,68 @@
+<div class='row'>
+  <div class='col-xs-12'>
+
+    <dl class="dl-horizontal">
+
+      <dt><%= Unloading.human_attribute_name(:company) %></dt>
+      <dd><%= unloading.company.try(:name) %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:vessel_id) %></dt>
+      <dd><%= unloading.vessel.try(:name) %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:time_out) %></dt>
+      <dd><%= unloading.time_out %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:time_in) %></dt>
+      <dd><%= unloading.time_in %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:port_id) %></dt>
+      <dd><%= unloading.port.try(:name) %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:wpp_id) %></dt>
+      <dd><%= unloading.wpp.try(:name) %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:fuel) %></dt>
+      <dd><%= unloading.fuel %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:ice) %></dt>
+      <dd><%= unloading.ice %></dd>
+
+      <dt><%= Unloading.human_attribute_name(:etp) %></dt>
+      <dd><%= unloading.etp %></dd>
+
+    </dl>
+
+
+
+
+
+
+
+
+
+
+
+
+    <table class='table table-condensed'>
+      <thead>
+        <th><%= UnloadingCatch.human_attribute_name(:fish_id) %></th>
+        <th class='text-right'><%= UnloadingCatch.human_attribute_name(:size_class_id) %></th>
+        <th class='text-right'><%= UnloadingCatch.human_attribute_name(:quantity) %></th>
+        <th class='text-right'><%= UnloadingCatch.human_attribute_name(:cut_type) %></th>
+        <th class='text-right'><%= UnloadingCatch.human_attribute_name(:catch_type) %></th>
+      </thead>
+      <tbody>
+        <% unloading.unloading_catches.each do |catching| %>
+          <tr>
+            <td><%= catching.fish.try(:code) %></td>
+            <td class='text-right'><%= catching.size_class.try(:name) %></td>
+            <td class='text-right'><%= catching.quantity %></td>
+            <td class='text-right'><%= catching.cut_type %></td>
+            <td class='text-right'><%= catching.catch_type %></td>
+
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

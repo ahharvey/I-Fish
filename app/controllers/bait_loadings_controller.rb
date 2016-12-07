@@ -8,7 +8,7 @@ class BaitLoadingsController < ApplicationController
   before_action :set_bait_loading, only: [:show, :edit, :update, :destroy]
 
   respond_to :html
-  respond_to :xml, :json, :except => [ :edit, :new, :update, :create ]
+  respond_to :xml, :json, :js, :except => [ :edit, :new, :update, :create ]
 
   def index
     fetch_index_records

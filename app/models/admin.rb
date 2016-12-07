@@ -62,9 +62,19 @@ class Admin < ApplicationRecord
   has_many :approved_logbooks, :class_name => 'Logbook', :foreign_key => 'approver_id'
   has_many :activities, as: :ownable
 
+  has_many :member_fisheries, through: :office
+  has_many :member_companies, through: :member_fisheries
+  has_many :member_vessels, through: :member_companies, source: :vessels
+  has_many :member_unloadings, through: :member_vessels, source: :unloadings
+  has_many :member_unloading_catches, through: :member_unloadings, source: :unloading_catches
+  has_many :member_bait_loadings, through: :member_vessels, source: :bait_loadings
+  has_many :team_members, through: :office, source: :admins
+
   has_many :pending_vessels
   has_many :audits
 
+  scope :approved,  -> { where( approved: true ) }
+  scope :pending,   -> { where( approved: false ) }
 
   after_create :set_default_role
   after_create :send_approval_mail, unless: :created_by_invitation?
@@ -174,32 +184,35 @@ class Admin < ApplicationRecord
     recoverable
   end
 
-  def team_members
-    Admin.where( office_id: self.office_id )
-  end
+#  def team_members
+#    Admin.where( office_id: self.office_id )
+#  end
 
   def office_supervisors
     office.supervisors
   end
 
-  def member_fisheries
-    office.member_fisheries
-  end
+#  def member_fisheries
+#    office.member_fisheries
+#  end
 
   def managed_companies
-    Company.all
+    member_companies
   end
 
   def managed_vessels
-    Vessel.where(company_id: managed_companies)
+    member_vessels
+    #Vessel.where(company_id: managed_companies)
   end
 
   def managed_unloadings
-    Unloading.where(vessel_id: managed_vessels)
+    member_unloadings
+    #Unloading.where(vessel_id: managed_vessels)
   end
 
   def managed_unloading_catches
-    UnloadingCatch.where(unloading_id: managed_unloadings)
+    member_unloading_catches
+    #UnloadingCatch.where(unloading_id: managed_unloadings)
   end
 
   def managed_carrier_loadings
@@ -207,7 +220,8 @@ class Admin < ApplicationRecord
   end
 
   def managed_bait_loadings
-    BaitLoading.where(unloading_id: managed_unloadings)
+    member_bait_loadings
+    #BaitLoading.where(unloading_id: managed_unloadings)
   end
 
   def supervised_surveys

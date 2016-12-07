@@ -42,8 +42,9 @@ class Unloading < ApplicationRecord
   has_many :bait_loadings
   accepts_nested_attributes_for :bait_loadings, allow_destroy: true, reject_if: :all_blank
 
-  scope :default, -> { order('unloadings.time_in DESC') }
-  scope :current, -> { where( 'unloadings.time_in >= ?', Date.today.beginning_of_year ) }
+  scope :default,    -> { order( 'unloadings.time_in DESC') }
+  scope :current,    -> { where( 'unloadings.time_in >= ?', Date.today.beginning_of_year ) }
+  scope :historical, -> { where( 'unloadings.time_in >= ?', Date.today.beginning_of_month-1.year) }
 
   validates :vessel,
     presence: true
@@ -64,7 +65,7 @@ class Unloading < ApplicationRecord
     }
 
 
-  before_save :set_cpue
+  before_save :set_cpue, :save_pending_unloading_catches
 
 
 #  validates :yft, :bet, :skj, :kaw, :byproduct, :discard, :fuel, :ice,
@@ -205,12 +206,16 @@ class Unloading < ApplicationRecord
   end
 
   def build_unloading_record(fish, value)
-    self.unloading_catches.build(
+    pending_unloading_catches << {
       fish_id: fish.id,
       quantity: value,
       cut_type: 'wholeround',
       catch_type: 'landed'
-      )
+    }
+  end
+
+  def pending_unloading_catches
+    @unloading_catches_attributes = @unloading_catches_attributes || Array.new
   end
 
   def komo_kg
@@ -307,6 +312,12 @@ class Unloading < ApplicationRecord
       data << [unl.fuel, unl.unloading_catches.sum(:quantity)] unless unl.fuel.nil?
     end
     data
+  end
+
+  def save_pending_unloading_catches
+    unless pending_unloading_catches.empty?
+      self.unloading_catches_attributes = pending_unloading_catches
+    end
   end
 
 

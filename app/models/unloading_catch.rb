@@ -26,8 +26,8 @@ class UnloadingCatch < ApplicationRecord
 
   validates :fish,
   	presence: true
-#  validates :unloading,
-#  	presence: true
+  validates :unloading,
+  	presence: true
   validates :quantity,
   	presence: true,
     numericality: {

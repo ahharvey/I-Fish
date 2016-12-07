@@ -4,7 +4,7 @@
 <%= @admin.email %>
 <div id="flash"></div>
 <div class="row">
-  <div class="col-xs-4">
+  <div class="col-xs-12 col-sm-4">
     <div class="panel panel-default">
       <div class="panel-heading">
         <h3 class="panel-title">Roles</h3>
@@ -14,7 +14,7 @@
           <% if can? :update, Role %>
             <%= form_tag [:add_role, :panel, @admin], class: "form", :remote=>true do %>
               <div class="input-group">
-              
+
                 <%= text_field_tag :get_role, "", class: "form-control", placeholder: "Assign a role...", autocomplete: "off", data: { autocomplete_source: Role.order(:name).map(&:name) } %>
                 <div class="input-group-btn">
                   <%= button_tag add_icon, class: "btn btn-success" %>

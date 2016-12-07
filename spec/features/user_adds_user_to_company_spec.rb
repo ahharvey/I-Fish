@@ -11,6 +11,7 @@ RSpec.describe "User adds new User to Office" do
   let(:admin)     { create :admin }
   let(:company1)  { create :company }
   let(:company2)  { create :company }
+  let(:fishery)   { create :fishery }
 
 
   describe "with signed in user and owned office" do
@@ -66,7 +67,22 @@ RSpec.describe "User adds new User to Office" do
 
   end
 
-  describe "with signed in enumerator" do
+  describe "with signed in enumerator and managed office" do
+    before :each do
+      admin.roles.push Role.where(name: 'enumerator').first_or_create
+      fishery.member_companies.push company1
+      fishery.member_offices.push admin.office
+      login_as( admin, scope: :admin )
+      visit company_path(company1)
+    end
+    it "does not create admins for unowned office" do
+      expect(page).to_not have_field 'Add a team member'
+      expect(page).to_not have_button 'Add User'
+    end
+  end
+
+
+  describe "with signed in enumerator and unmanaged office" do
     before :each do
       admin.roles.push Role.where(name: 'enumerator').first_or_create
       login_as( admin, scope: :admin )
@@ -78,15 +94,29 @@ RSpec.describe "User adds new User to Office" do
     end
   end
 
-  describe "with signed in staff" do
+  describe "with signed in staff and managed company" do
+    before :each do
+      admin.roles.push Role.where(name: 'staff').first_or_create
+      fishery.member_companies.push company1
+      fishery.member_offices.push admin.office
+      login_as( admin, scope: :admin )
+      visit company_path(company1)
+    end
+    it "adds users to managed company" do
+      expect(page).to have_field 'Add a team member'
+      expect(page).to have_button 'Add User'
+    end
+  end
+
+  describe "with signed in staff and unmanaged company" do
     before :each do
       admin.roles.push Role.where(name: 'staff').first_or_create
       login_as( admin, scope: :admin )
       visit company_path(company1)
     end
-    it "does not create admins for unowned office" do
-      expect(page).to have_field 'Add a team member'
-      expect(page).to have_button 'Add User'
+    it "does not create admins for unmanaged office" do
+      expect(page).to_not have_field 'Add a team member'
+      expect(page).to_not have_button 'Add User'
     end
   end
 

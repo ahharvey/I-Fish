@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div id='vessel_panel' class="panel panel-default">
   <div class="panel-heading">
     <h3 class="panel-title">Pending Vessel Audits</h3>
   </div>
@@ -17,7 +17,7 @@
     <tbody>
       <%if @pending_vessels.empty? %>
         <tr>
-          <td colspan="7"><i>NO PENDING VESSEL AUDITS</i></td>
+          <td colspan="7" class='text-center'><i>NO PENDING VESSEL AUDITS</i></td>
         </tr>
       <% else %>
         <% @pending_vessels.each do |vessel| %>
@@ -35,6 +35,16 @@
     </tbody>
   </table>
   <div class="panel-footer text-right">
-    <%= link_to "See All", pending_vessels_path %>
+    <%= page_entries_info @pending_vessels %>
+    <%= link_to_previous_page @pending_vessels, icon('chevron-left'),
+      param_name: :vessel_page,
+      remote: true,
+      class: 'btn btn-default btn-xs',
+      params: {controller: 'staff/dashboard', action: 'index'} %>
+    <%= link_to_next_page @pending_vessels, icon('chevron-right'),
+      param_name: :vessel_page,
+      remote: true,
+      class: 'btn btn-default btn-xs',
+      params: {controller: 'staff/dashboard', action: 'index'} %>
   </div>
 </div>

@@ -1,0 +1,8 @@
+en:
+  review:
+    bait_loadings:
+      update:
+        approved: Bait Loading approved!
+        rejected: Bait Loading rejected!
+        pending: Bait Loading marked as pending!
+        error: There was a problem saving your bait loading review.

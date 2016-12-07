@@ -1,0 +1,30 @@
+<div class='row'>
+  <div class='col-xs-12'>
+
+    <dl class="dl-horizontal">
+
+      <dt><%= BaitLoading.human_attribute_name(:company_id) %></dt>
+      <dd><%= bait_loading.company.try(:name) %></dd>
+
+      <dt><%= BaitLoading.human_attribute_name(:vessel_id) %></dt>
+      <dd><%= bait_loading.vessel.try(:name) %></dd>
+
+      <dt><%= BaitLoading.human_attribute_name(:date) %></dt>
+      <dd><%= bait_loading.date %></dd>
+
+      <dt><%= BaitLoading.human_attribute_name(:bait_id) %></dt>
+      <dd><%= bait_loading.bait.try(:code) %></dd>
+
+      <dt><%= BaitLoading.human_attribute_name(:secondary_bait_id) %></dt>
+      <dd><%= bait_loading.secondary_bait.try(:code) %></dd>
+
+      <dt><%= BaitLoading.human_attribute_name(:quantity) %></dt>
+      <dd><%= bait_loading.quantity %></dd>
+
+      <dt><%= BaitLoading.human_attribute_name(:method_type) %></dt>
+      <dd><%= bait_loading.method_type %></dd>
+
+    </dl>
+
+  </div>
+</div>

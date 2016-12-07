@@ -75,6 +75,7 @@ gem 'rqrcode-with-patches', '~>0.6.0'
 gem 'prawn', '~> 2.1.0'
 #gem 'prawn-labels', '~> 1.2.3'
 gem 'prawn-qrcode', '~> 0.2.2.1'
+gem 'active_model_serializers', '~> 0.10.0rc4'
 
 ##
 ## UPLOADS AND INCOMING

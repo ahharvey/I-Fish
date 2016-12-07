@@ -1,0 +1,36 @@
+<div id="bait_loading_<%= bait_loading.id %>" class="supervisor_controls">
+  <% if can? :update, bait_loading %>
+
+    <div class='btn-group ' role="group" aria-label="Review Controls">
+      <%= link_to review_bait_loading_path(bait_loading, {bait_loading: { review_state: 'rejected' } }),
+        title: 'Rejected',
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "review-control btn btn-xs #{bait_loading.rejected? ? 'active btn-danger' : 'btn-default'}" do %>
+        <%= icon( 'remove', "", class: 'fa-fw') %>
+      <% end %>
+
+
+      <%= link_to review_bait_loading_path(bait_loading, {bait_loading: { review_state: 'pending' } }),
+        title: 'Pending',
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "review-control btn btn-xs #{bait_loading.pending? ? 'active btn-warning' : 'btn-default'}" do %>
+        <%= icon( 'warning', "", class: 'fa-fw') %>
+      <% end %>
+
+
+      <%= link_to review_bait_loading_path(bait_loading, {bait_loading: { review_state: 'approved' } }),
+        title: 'Approved',
+        method: :patch,
+        role: "button",
+        remote: true,
+        class: "review-control btn btn-xs #{bait_loading.approved? ? 'active btn-success' : 'btn-default'}" do %>
+        <%= icon( 'check', "", class: 'fa-fw') %>
+      <% end %>
+    </div>
+
+  <% end %>
+</div>

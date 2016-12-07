@@ -17,7 +17,8 @@ RSpec.describe Importers::CreateBaitLoadings do
         file: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'valid_bait_loadings.xlsx'))
     }
 
-		it 'creates the record, activity and version' do
+		it 'creates the record, activity and version', :focus do
+
 			Importers::CreateBaitLoadings.new(
         file: importer.file,
         imported_by: importer.imported_by,
@@ -117,16 +118,16 @@ RSpec.describe Importers::CreateBaitLoadings do
         file: importer.file,
         imported_by: importer.imported_by,
         parent: importer.parent
-        ).call.errors.messages[:base]
+        ).call.errors.messages[:base].to_yaml
       ).to eq(
         [
           "Row 2: Bait can't be blank",
           "Row 2: Quantity (buckets) must be greater than or equal to 1",
-          "Row 2: Method type is not included in the list",
+          "Row 2: Catching method is not included in the list",
           "Row 3: Bait can't be blank",
           "Row 3: Quantity (buckets) must be greater than or equal to 1",
-          "Row 3: Method type is not included in the list"
-        ]
+          "Row 3: Catching method is not included in the list"
+        ].to_yaml
       )
 		end
   end

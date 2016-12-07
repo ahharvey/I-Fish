@@ -16,7 +16,7 @@ jQuery ->
 jQuery ->
   if Modernizr.touch # or !Modernizr.inputtypes.date
     # If user is on a touch enabled device
-    # we use OS's native date and time selectors 
+    # we use OS's native date and time selectors
     $("input.datepicker[type=text]").attr('type', 'date')
     $("input.datetimepicker[type=text]").attr('type', 'datetime')
   else
@@ -97,7 +97,7 @@ jQuery ->
 
     $('.select2-select').select2
       placeholder: $(this).attr('prompt') || "Select..."
-      allowClear: true 
+      allowClear: true
 
 jQuery ->
   $(".approve-toggle:checkbox").on 'switchChange.bootstrapSwitch', (event, state) ->
@@ -109,17 +109,20 @@ jQuery ->
         approved: $(this).prop('checked')
 
 show_ajax_message = (msg, type) ->
-  $(".flash-container").html "<div class='alert alert-#{type} fade in' data-alert='alert' style='margin-top:17px'><a class='close' href='#' onclick='$('.alert').remove();''>×</a><p>#{msg}</p></div>"
+  
+  $(".flash-container").html("<div class='alert alert-#{type} fade in' data-alert='alert' style='margin-top:17px'><a class='close' href='#' onclick='$('.alert').remove();''>×</a><p>#{msg}</p></div>")
   $(".alert-#{type}").delay(7000).slideUp 'slow'
- 
+
 $(document).ajaxComplete (event, request) ->
   msg = request.getResponseHeader("X-Message")
   type = request.getResponseHeader("X-Message-Type")
-  show_ajax_message msg, type #use whatever popup, notification or whatever plugin you want
+  if msg
+    show_ajax_message msg, type #use whatever popup, notification or whatever plugin you want
+
 
 $(document).ready ->
-  
-  # Activating Best In Place 
+
+  # Activating Best In Place
   jQuery(".best_in_place").best_in_place()
 
 
@@ -162,4 +165,3 @@ jQuery -> #initialize Twitter Bootstrap tooltips
     window.alert extErrorMessage
     $(inputFile).val ""
   return
-

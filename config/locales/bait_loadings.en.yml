@@ -18,6 +18,7 @@ en:
   activerecord:
     attributes:
       bait_loading:
+        method_type: Method
     errors:
       models:
         bait_loading:

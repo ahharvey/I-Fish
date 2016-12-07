@@ -126,7 +126,7 @@ RSpec.describe Importers::CreateUnloadings do
         file: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'invalid_unloadings.xlsx'))
     }
     it 'does not create the record, activity and version' do
-      Importers::CreateBaitLoadings.new(
+      Importers::CreateUnloadings.new(
         file: importer.file,
         imported_by: importer.imported_by,
         parent: importer.parent
@@ -151,12 +151,10 @@ RSpec.describe Importers::CreateUnloadings do
         ).call.errors.messages[:base]
       ).to eq(
         [
-          "Row 2: Unloading catches quantity is not a number",
           "Row 2: Port can't be blank",
           "Row 2: WPP can't be blank",
           "Row 2: Dep. is not a valid datetime",
           "Row 2: Arr. is not a valid datetime",
-          "Row 3: Unloading catches quantity is not a number",
           "Row 3: Port can't be blank",
           "Row 3: WPP can't be blank",
           "Row 3: Dep. is not a valid datetime",

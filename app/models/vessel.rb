@@ -185,6 +185,7 @@ class Vessel < ApplicationRecord
       'radio',
       'vms',
       'tracker',
+      'ap2hi_ref'
     ]
   end
 

@@ -16,7 +16,7 @@ class BaitLoadingPresenter < BasePresenter
   def bait
     best_in_place bait_loading, :bait_id, as: :select, collection: Bait.all.map{ |g| [g.id, g.code] }, inner_class: 'col-xs-1'
   end
-  
+
   def quantity
     best_in_place bait_loading, :quantity, as: :input, place_holder: '--', inner_class: 'col-xs-1'
   end
@@ -33,9 +33,14 @@ class BaitLoadingPresenter < BasePresenter
     best_in_place bait_loading, :method_type, as: :select, collection: BaitLoading::METHOD_TYPES.map{ |s| [I18n.t("method_types.#{s}"), s] }, inner_class: 'col-xs-1'
   end
 
-  
+  def company_avatar
+    handle_none bait_loading.company do
+      bait_loading.company.try(:avatar).try(:file).try(:file)
+    end
+  end
 
-  private 
+
+  private
 
   def handle_none(value)
     if value.present?

@@ -1,4 +1,16 @@
-$('#supervisor_controls').replaceWith("<%= escape_javascript( render partial: 'unloadings/supervisor_controls', locals: {unloading: @unloading } ) %>");
-$('#unloading_catch_table').replaceWith("<%= escape_javascript( render partial: 'unloadings/unloading_catch_table' ) %>");
-$('#new_unloading_catch')[0].reset();
-$('.select2-select').val(null).trigger("change"); 
+if ( $('#approval_modal').length ) {
+  $('.modal-title').html("Unloading");
+  $('.modal-body').html("<%= j render partial: 'unloadings/unloading_modal', locals: { unloading: @unloading } %>");
+  $('.modal-footer').html("<%= j render partial: 'unloadings/minified_supervisor_controls', locals: { unloading: @unloading } %>");
+
+  $('.review-control.modal-control').click(function() {
+  	$('#approval_modal').modal('toggle');
+  });
+
+} else {
+  $('#supervisor_controls').replaceWith("<%= escape_javascript( render partial: 'unloadings/supervisor_controls', locals: {unloading: @unloading } ) %>");
+  $('#unloading_catch_table').replaceWith("<%= escape_javascript( render partial: 'unloadings/unloading_catch_table' ) %>");
+  $('#new_unloading_catch')[0].reset();
+  $('.select2-select').val(null).trigger("change");
+
+}

@@ -8,6 +8,7 @@ RSpec.describe BaitLoading do
 
   let(:bait_loading1) { create :bait_loading, date: Time.now-1.hour }
   let(:bait_loading2) { create :bait_loading, date: Time.now }
+  let(:bait)          { create :bait }
 
   it_behaves_like "reviewable"
 
@@ -61,6 +62,32 @@ RSpec.describe BaitLoading do
         in_array( %w{ bagan purse beach bouke } )
     }
 
+  end
+
+  describe "#bait_code" do
+    let(:bait_loading) { create :bait_loading, bait_code: bait.code }
+    before :each do
+      bait
+    end
+    it "sets the bait_id" do
+      expect( BaitLoading.new(bait_code: bait.code).bait_id ).to eq bait.id
+    end
+    it "returns the wpp code" do
+      expect(bait_loading.bait_code).to eq bait.code
+    end
+  end
+
+  describe "#secondary_bait_code" do
+    let(:bait_loading) { create :bait_loading, secondary_bait_code: bait.code }
+    before :each do
+      bait
+    end
+    it "sets the bait_id" do
+      expect( BaitLoading.new(secondary_bait_code: bait.code).secondary_bait_id ).to eq bait.id
+    end
+    it "returns the wpp code" do
+      expect(bait_loading.secondary_bait_code).to eq bait.code
+    end
   end
 
 
