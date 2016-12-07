@@ -41,7 +41,7 @@ class WppsController < ApplicationController
   end
 
   private
-  
+
   def set_wpp
     @wpp = Wpp.find(params[:id])
   end
@@ -53,8 +53,7 @@ class WppsController < ApplicationController
   end
 
   def after_save_path_for(resource)
-    port_path(resource)
+    wpp_path(resource)
   end
 
 end
-

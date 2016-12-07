@@ -41,7 +41,7 @@ class PortsController < ApplicationController
   end
 
   private
-  
+
   def set_port
     @port = Port.find(params[:id])
   end
@@ -53,8 +53,7 @@ class PortsController < ApplicationController
   end
 
   def after_save_path_for(resource)
-    wpp_path(resource)
+    port_path(resource)
   end
 
 end
-
