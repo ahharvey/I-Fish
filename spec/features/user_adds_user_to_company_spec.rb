@@ -3,7 +3,7 @@ require 'rails_helper'
 #include Devise::TestHelpers
 #include Warden::Test::Helpers
 
-RSpec.describe "User adds new User to Office" do
+RSpec.describe "User adds new User to Company" do
 
   let(:user1)     { create :user }
   let(:user2)     { create :user, name: 'User2' }
@@ -12,6 +12,7 @@ RSpec.describe "User adds new User to Office" do
   let(:company1)  { create :company }
   let(:company2)  { create :company }
   let(:fishery)   { create :fishery }
+  let(:vessel)    { create :vessel, company: company1, fishery: fishery }
 
 
   describe "with signed in user and owned office" do
@@ -97,7 +98,7 @@ RSpec.describe "User adds new User to Office" do
   describe "with signed in staff and managed company" do
     before :each do
       admin.roles.push Role.where(name: 'staff').first_or_create
-      fishery.member_companies.push company1
+      vessel
       fishery.member_offices.push admin.office
       login_as( admin, scope: :admin )
       visit company_path(company1)

@@ -269,7 +269,10 @@ RSpec.describe UnloadingsController, type: :controller do
           :bet,
           :skj,
           :kaw,
-          :catch_certificate
+          :catch_certificate,
+          :vms,
+          :observer,
+          :port_sampling
           ).
           for(:update, params: { id: unloading1.to_param, unloading: valid_attributes } ).
           on(:unloading)

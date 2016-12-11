@@ -1,3 +1,11 @@
+# == Schema Information
+#
+# Table name: ports
+#
+#  id   :integer          not null, primary key
+#  name :string
+#
+
 
 
 require 'rails_helper'

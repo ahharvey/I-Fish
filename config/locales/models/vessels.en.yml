@@ -1,0 +1,40 @@
+en:
+  activerecord:
+    attributes:
+      vessel:
+        name: "Name"
+        code: "Code"
+        vms: "VMS"
+        cert_type: "Certification status"
+        vessel_type_id: "Vessel Type"
+        gear_id: "Gear"
+        flag_state: "Flag state"
+        year_built: "Year of Construction"
+        length: "Length"
+        tonnage: "GT"
+        capacity: "Horsepower"
+        imo_number: "IMO reg. no."
+        shark_policy: "Shark policy"
+        iuu_list: "IUU list"
+        code_of_conduct: "Code of Conduct"
+        company_id: "Company"
+        ap2hi_ref: "AP2HI UVI"
+        issf_ref: "ISSF UVI"
+        crew: "No. crew"
+        hooks: "No. hooks"
+        captain: "Captain"
+        owner: "Owner"
+        sipi_number: "SIPI/ SIKPI"
+        sipi_expiry: "SIPI/ SIKPI expiry date"
+        siup_number: "SIUP"
+        formatted_sipi_expiry: "SIPI/ SIKPI expiry date"
+        mmaf_ref: "MMAF UVI"
+        dkp_ref: "DKP UVI"
+        seafdec_ref: "SEAFDEC UVI"
+        fish_capacity: "Hold capacity (kg)"
+        bait_capacity: "Bait capacity (kg)"
+        location_built: "Place of construction"
+        operational_type: "Operational Status"
+    errors:
+      models:
+        vessel:

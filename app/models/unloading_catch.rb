@@ -2,13 +2,16 @@
 #
 # Table name: unloading_catches
 #
-#  id           :integer          not null, primary key
-#  fish_id      :integer
-#  quantity     :integer
-#  created_at   :datetime         not null
-#  updated_at   :datetime         not null
-#  unloading_id :integer
-#  cut_type     :string
+#  id            :integer          not null, primary key
+#  fish_id       :integer
+#  quantity      :integer
+#  created_at    :datetime         not null
+#  updated_at    :datetime         not null
+#  unloading_id  :integer
+#  cut_type      :string
+#  catch_type    :string
+#  size_class_id :integer
+#  cpue          :integer          default(0)
 #
 
 class UnloadingCatch < ApplicationRecord
@@ -23,6 +26,7 @@ class UnloadingCatch < ApplicationRecord
 
   scope :default, -> { joins(:fish).order('fishes.code ASC') }
   scope :current, -> { joins(:unloading).where( 'unloadings.time_in >= ?', Date.today.beginning_of_year ) }
+  scope :last_month, -> { joins(:unloading).where( 'unloadings.time_in > ? AND unloadings.time_in < ?', Date.today.beginning_of_month-1.month, Date.today.end_of_month-1.month ) }
 
   validates :fish,
   	presence: true

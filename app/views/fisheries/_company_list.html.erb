@@ -1,10 +1,17 @@
 <div id="CompanyList">
-  <ul class="list-unstyled">
+  <ul class="list-inline">
     <% @fishery.member_companies.each do |company| %>
       <li>
-        <%= link_to company.name, company %>
+
+          <%= present(company).linked_avatar %>
+
         <% if can? :update, @fishery %>
-          <%= link_to remove_icon, delete_member_company_fishery_path(@fishery, member_company: company.id), method: :delete, confirm: 'Are you sure?', remote: true %>
+          <%= link_to remove_icon,
+            delete_member_company_fishery_path(@fishery, member_company: company.id),
+            method: :delete,
+            confirm: 'Are you sure?',
+            class: 'btn btn-xs btn-default',
+            remote: true %>
         <% end %>
       </li>
     <% end %>

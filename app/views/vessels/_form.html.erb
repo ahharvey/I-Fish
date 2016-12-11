@@ -27,16 +27,8 @@
 
     <%= f.input :name %>
 
-    <%= f.input :name_changed, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
+    <%= f.input :name_changed, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+
 
     <%= f.input :operational_type, collection: Vessel::OPERATIONAL_TYPES, input_type: lambda { |s| I18n.t("operational_types.#{s}") } %>
 
@@ -59,55 +51,17 @@
 
     <%= f.input :capacity %>
 
-    <%= f.input :vms, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
+    <%= f.input :vms, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
-
-    <%= f.input :tracker, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
+    <%= f.input :tracker, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
     <%= f.input :port %>
 
     <%= f.input :flag_state, priority: [ "ID" ], as: :country, include_blank: true   %>
 
+    <%= f.input :flag_state_changed, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
-    <%= f.input :flag_state_changed, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
-
-    <%= f.input :radio, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
+    <%= f.input :radio, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
     <%= f.input :year_built %>
 
@@ -125,57 +79,31 @@
 
     <%= f.input :crew %>
 
-    <%= f.input :shark_policy, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
+    <%= f.input :marked %>
 
-    <%= f.input :iuu_list, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
+    <%= f.input :member %>
 
-    <%= f.input :code_of_conduct, input_html: {
-      class: 'toggle-switch',
-      data: {
-        size: 'mini',
-        'on-color' => 'success',
-        'off-color' => 'danger',
-        'on-text' => "Yes",
-        'off-text' => "No"
-        }
-      } %>
+    <%= f.input :cert_type, collection: Vessel::CERT_TYPES, input_type: lambda {|s| I18n.t("cert_types.#{s}") } %>
 
+    <%= f.input :shark_policy, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+
+    <%= f.input :iuu_list, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+
+    <%= f.input :code_of_conduct, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
     </div>
 
   </div>
 
-  <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
-
-      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
-        Save
-      <% end %>
-
-
-      <% if !f.object.new_record? %>
-        <%= link_to "Cancel", @vessel, :class=>"btn pull-right" %>
-
+  <div class="form-group">
+    <div class="col-xs-12 text-center">
+      <% if f.object.new_record? %>
+        <%= link_to "Cancel", vessels_path, class: "btn" %>
       <% else %>
-        <%= link_to "Cancel", vessels_path, :class=>"btn pull-right" %>
+        <%= link_to "Cancel", @vessel, class: "btn" %>
+      <% end %>
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary' do %>
+        Save
       <% end %>
     </div>
   </div>

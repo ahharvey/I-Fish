@@ -1,10 +1,10 @@
 
 <%= simple_form_for @company, html: {class: 'form form-horizontal'} do |f| %>
-  
+
   <div class="row">
 
     <div class="col-xs-12 col-md-6 col-md-offset-3">
-  
+
       <%= f.input :fishery_id, as: :hidden %>
 
       <%= f.input :name %>
@@ -12,72 +12,32 @@
       <%= f.input :code %>
 
       <%= f.input :avatar %>
-    
-      <%= f.input :shark_policy, input_html: {
-        class: 'toggle-switch', 
-        data: { 
-          size: 'mini',
-          'on-color' => 'success',
-          'off-color' => 'danger',
-          'on-text' => "Yes",
-          'off-text' => "No"
-          } 
-        } %>
-    
-      <%= f.input :iuu_list, input_html: {
-        class: 'toggle-switch', 
-        data: { 
-          size: 'mini',
-          'on-color' => 'success',
-          'off-color' => 'danger',
-          'on-text' => "Yes",
-          'off-text' => "No"
-          } 
-        } %>
-    
-      <%= f.input :code_of_conduct, input_html: {
-        class: 'toggle-switch', 
-        data: { 
-          size: 'mini',
-          'on-color' => 'success',
-          'off-color' => 'danger',
-          'on-text' => "Yes",
-          'off-text' => "No"
-          } 
-        } %>
-    
-      <%= f.input :member, input_html: {
-        class: 'toggle-switch', 
-        data: { 
-          size: 'mini',
-          'on-color' => 'success',
-          'off-color' => 'danger',
-          'on-text' => "Yes",
-          'off-text' => "No"
-          } 
-        } %>
-  
+
+      <%= f.input :harvest, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+      <%= f.input :processing, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+
+
+      <%= f.input :iuu_list, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+
+      <%= f.input :member, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+      <%= f.input :code_of_conduct, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
+      <%= f.input :shark_policy, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
     </div>
 
   </div>
-    
 
-  <div class="row">
-    <div class="col-xs-12 col-md-6 col-md-offset-3 form-actions">
 
-      <%= content_tag :button, type: :submit, class: 'btn btn-primary pull-right', style:"margin-left:20px" do %>
+  <div class="form-group">
+    <div class="col-xs-12 text-center">
+      <% if f.object.new_record? %>
+        <%= link_to "Cancel", @company, class: "btn" %>
+      <% else %>
+        <%= link_to "Cancel", companies_path, class: "btn" %>
+      <% end %>
+      <%= content_tag :button, type: :submit, class: 'btn btn-primary btn-lg' do %>
         Save
       <% end %>
-
-
-      <% if !f.object.new_record? %>
-        <%= link_to "Cancel", @company, :class=>"btn pull-right" %>
-
-      <% else %>
-        <%= link_to "Cancel", companies_path, :class=>"btn pull-right" %>
-      <% end %> 
-
     </div>
   </div>
 <% end %>

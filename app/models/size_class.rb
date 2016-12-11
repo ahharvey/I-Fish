@@ -1,3 +1,14 @@
+# == Schema Information
+#
+# Table name: size_classes
+#
+#  id     :integer          not null, primary key
+#  upper  :decimal(, )
+#  lower  :decimal(, )
+#  median :decimal(, )
+#  name   :string
+#
+
 class SizeClass < ApplicationRecord
 	has_many :unloading_catches
 

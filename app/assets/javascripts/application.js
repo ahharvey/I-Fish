@@ -25,8 +25,7 @@
 //= require gmaps/google
 //= require datatables/media/js/jquery.dataTables
 //= require datatables-bootstrap3/BS3/assets/js/datatables
+//= require switchery/dist/switchery
 //= require autocomplete-rails
 //= require local_time
 //= require_tree .
-
-

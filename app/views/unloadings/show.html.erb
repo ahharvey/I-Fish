@@ -47,6 +47,16 @@
                 <%= @unloading.etp.present? ? 'ETP interactions reported' : 'No ETP interactions reported' %>
               </h3>
             </div>
+            <div class="panel-body">
+              <dl>
+                <dt><%= Unloading.human_attribute_name(:vms) %></dt>
+                <dd><%= unloading_presenter.vms %></dd>
+                <dt><%= Unloading.human_attribute_name(:observer) %></dt>
+                <dd><%= unloading_presenter.observer %></dd>
+                <dt><%= Unloading.human_attribute_name(:port_sampling) %></dt>
+                <dd><%= unloading_presenter.port_sampling %></dd>
+              </dl>
+            </div>
           </div>
 
         </div>

@@ -1,0 +1,22 @@
+en:
+  offices:
+    admins:
+      invited: Team member was invited to %{office}
+    title: "Office"
+    index:
+      title: "Offices"
+    show:
+      title: "Office"
+    report:
+      title: "Office Report"
+    update:
+      notice: Your edits were successfully submitted and are pending review.
+    create:
+      notice: Office was successfully created.
+    destroy:
+      notice: Office was successfully destroyed.
+  unauthorized:
+    new:
+      office: You don't have permission to create offices.
+    edit:
+      office: You don't have permission to edit this office.

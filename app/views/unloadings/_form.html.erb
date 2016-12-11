@@ -35,38 +35,28 @@
 
       <%= f.input :ice %>
 
-      <div class="form-group required vessel">
-        <label class="control-label required" for="etp"><%= Unloading.human_attribute_name(:etp) %></label>
-        <br />
-        <%= f.input_field :etp,
-          class: 'toggle-switch',
-          data: {
-            size: 'normal',
-            'on-color' => 'success',
-            'off-color' => 'danger',
-            'on-text' => "Yes",
-            'off-text' => "No"
-          } %>
-      </div>
+      <%= f.input :vms, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
-      <div class="form-action text-center">
+      <%= f.input :observer, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
+      <%= f.input :port_sampling, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
+      <%= f.input :etp, input_html: {class: 'js-switch', data: { "secondary-color": '#B71C1C'}} %>
 
-
+      <div class="form-group">
+        <div class="col-xs-12 text-center">
           <% if @vessel %>
-            <%= link_to "Cancel", vessel_path( @vessel ) %>
+            <%= link_to "Cancel", vessel_path( @vessel ), class: 'btn' %>
           <% elsif @unloading.vessel_id? %>
-            <%= link_to "Cancel", vessel_path( @unloading.vessel_id ) %>
+            <%= link_to "Cancel", vessel_path( @unloading.vessel_id ), class: 'btn' %>
           <% else %>
-            <%= link_to "Cancel", vessels_path %>
+            <%= link_to "Cancel", vessels_path, class: 'btn' %>
           <% end %>
 
           <%= content_tag :button, type: :submit, class: 'btn btn-primary btn-lg' do %>
             Save
           <% end %>
-
-
+        </div>
       </div>
     <% end %>
 

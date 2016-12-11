@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: importers
+#
+#  id               :integer          not null, primary key
+#  file             :text
+#  label            :string
+#  review_state     :string           default("pending")
+#  reviewed_at      :datetime
+#  parent_type      :string
+#  parent_id        :integer
+#  imported_by_type :string
+#  imported_by_id   :integer
+#
+
 
 
 require 'rails_helper'

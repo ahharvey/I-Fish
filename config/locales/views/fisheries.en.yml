@@ -1,0 +1,28 @@
+en:
+  fisheries:
+    title: "Fisheries"
+    index:
+      title: "Fisheries"
+    show:
+      title: "Fishery"
+    report:
+      title: "Fishery Report"
+    target_fishes:
+      exists: "Target fish already set"
+      created: "Target fish added"
+      removed: "Target fish removed"
+    bait_fishes:
+      exists: "Bait fish already set"
+      created: "Bait fish added"
+      removed: "Bait fish removed"
+    update:
+      notice: Your edits were successfully submitted and are pending review.
+    create:
+      notice: Fishery was successfully created.
+    destroy:
+      notice: Fishery was successfully destroyed.
+  unauthorized:
+    new:
+      fishery: You don't have permission to create fisheries.
+    edit:
+      fishery: You don't have permission to edit this fishery.

@@ -11,9 +11,9 @@
 #  length             :integer
 #  tonnage            :integer
 #  imo_number         :string
-#  shark_policy       :boolean
-#  iuu_list           :boolean
-#  code_of_conduct    :boolean
+#  shark_policy       :boolean          default(FALSE)
+#  iuu_list           :boolean          default(FALSE)
+#  code_of_conduct    :boolean          default(FALSE)
 #  company_id         :integer
 #  ap2hi_ref          :string
 #  issf_ref           :string
@@ -26,16 +26,16 @@
 #  sipi_number        :string
 #  sipi_expiry        :date
 #  siup_number        :string
-#  issf_ref_requested :boolean
+#  issf_ref_requested :boolean          default(FALSE)
 #  material_type      :string
 #  machine_type       :string
 #  capacity           :integer
-#  vms                :boolean
-#  tracker            :boolean
+#  vms                :boolean          default(FALSE)
+#  tracker            :boolean          default(FALSE)
 #  port               :string
-#  name_changed       :boolean
-#  flag_state_changed :boolean
-#  radio              :boolean
+#  name_changed       :boolean          default(FALSE)
+#  flag_state_changed :boolean          default(FALSE)
+#  radio              :boolean          default(FALSE)
 #  relationship_type  :string
 #  fish_capacity      :integer
 #  bait_capacity      :integer
@@ -43,12 +43,20 @@
 #  seafdec_ref        :string
 #  mmaf_ref           :string
 #  dkp_ref            :string
+#  status             :string
+#  operational_type   :string
+#  draft_id           :integer
+#  published_at       :datetime
+#  trashed_at         :datetime
 #
 
 class Vessel < ApplicationRecord
   acts_as_vessel
   has_drafts
+  include HasBaitRatio
 
+  belongs_to :fishery
+  
   has_one :pending_vessel # Or has_many, see the last paragraph
 
   has_many :documents, as: :documentable
@@ -60,6 +68,16 @@ class Vessel < ApplicationRecord
   before_save :send_pvr_request
 
   scope :default, -> { order('vessels.ap2hi_ref ASC') }
+  scope :certified,         -> { where( cert_type: 'certified' ) }
+  scope :in_assessment,     -> { where( cert_type: 'in_assessment' ) }
+  scope :other_elligibles,  -> { where( cert_type: ['none', nil] ) }
+  scope :sm, -> { where( tonnage: 0..10 ) }
+  scope :md, -> { where( tonnage: 10..30 ) }
+  scope :lg, -> { where( tonnage: 30..9999 ) }
+  scope :ap2hi, -> { where( member: true ) }
+  scope :audited_this_year, -> { joins(:audits).where('audits.created_at >= ?', Date.today-1.year) }
+  scope :with_valid_docs, -> { joins(:documents).where('vessels.sipi_number IS NOT NULL AND vessels.sipi_expiry > ?', Date.today) }
+
 
   validates :ap2hi_ref,
   	presence: true

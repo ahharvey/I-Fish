@@ -44,6 +44,32 @@ jQuery ->
   $(".toggle-switch").bootstrapSwitch()
 
 
+jQuery ->
+
+  elems = Array::slice.call(document.querySelectorAll('.js-switch'))
+  elems.forEach (html) ->
+    console.log(html)
+    color              = $(html).data('color') || '#64bd63'
+    secondaryColor     = $(html).data('secondary-color') || '#dfdfdf'
+    jackColor          = $(html).data('jackColor') || '#fff'
+    jackSecondaryColor = $(html).data('jackSecondaryColor')  || null
+    disabled           = $(html).data('disabled')  || false
+    disabledOpacity    = $(html).data('disabledOpacity') || 0.5
+    speed              = $(html).data('speed') || '0.1s'
+    size               = $(html).data('size')  || 'small'
+    switchery = new Switchery(html,
+      color             : color
+      secondaryColor    : secondaryColor
+      jackColor         : jackColor
+      jackSecondaryColor: jackSecondaryColor
+      disabled          : disabled
+      disabledOpacity   : disabledOpacity
+      speed             : speed
+      size              : size )
+
+
+
+
 jQuery ->  #initialize Bootstrap datepicker on date select field
   if $('.datetime-select-input').length
 
@@ -109,7 +135,7 @@ jQuery ->
         approved: $(this).prop('checked')
 
 show_ajax_message = (msg, type) ->
-  
+
   $(".flash-container").html("<div class='alert alert-#{type} fade in' data-alert='alert' style='margin-top:17px'><a class='close' href='#' onclick='$('.alert').remove();''>×</a><p>#{msg}</p></div>")
   $(".alert-#{type}").delay(7000).slideUp 'slow'
 

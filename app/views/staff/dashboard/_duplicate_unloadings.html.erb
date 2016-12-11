@@ -1,0 +1,67 @@
+<%if @duplicate_unloadings.any? %>
+  <div id='duplicate_unloading_panel' class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Possible Duplicate Unloadings</h3>
+    </div>
+    <table id="duplicate_unloadings" class="table table-condensed">
+      <thead>
+        <tr>
+          <th><%= Unloading.human_attribute_name(:company) %></th>
+          <th><%= Unloading.human_attribute_name(:time_in) %></th>
+          <th><%= Unloading.human_attribute_name(:vessel) %></th>
+  	      <th><%= Unloading.human_attribute_name(:port) %></th>
+  	      <th class='text-right'><%= Unloading.human_attribute_name(:wpp) %></th>
+  	      <th class='hidden-xs text-right'><%= Unloading.human_attribute_name(:etp) %></th>
+  	      <th class='hidden-xs text-right'><%= Unloading.human_attribute_name(:fuel) %></th>
+  	      <th class='hidden-xs text-right'><%= Unloading.human_attribute_name(:ice) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%if @duplicate_unloadings.empty? %>
+          <tr>
+            <td colspan="7" class='text-center'><i>NO DUPLICATE UNLOADINGS</i></td>
+          </tr>
+        <% else %>
+          <% @duplicate_unloadings.each do |k,v| %>
+            <tr class='info'>
+              <td colspan=9 class='text-center'>
+                <b><%= v %></b> <small>trips on</small>
+                <b><%= k[0].present? ? k[0].strftime("%b %d, %Y") : '<i>No date</i>'%></b> <small>by</small>
+                <b><%= k[1].present? ? Vessel.find( k[1] ).ap2hi_ref : '<i>No vessel</i>'%></b>
+              </td>
+            </tr>
+            <% Unloading.where(time_out: k[0], vessel_id: k[1] ).each do |unloading| %>
+              <%= content_tag_for :tr, unloading, :dup do %>
+                <% present unloading do |unloading_presenter| %>
+                  <td><%= unloading_presenter.company_avatar %></td>
+                  <td><%= unloading_presenter.time_in %></td>
+                  <td><%= unloading_presenter.vessel %></td>
+                  <td><%= unloading_presenter.port %></td>
+                  <td class='text-right'><%= unloading_presenter.wpp %></td>
+                  <td class='hidden-xs text-right'><%= unloading_presenter.etp %></td>
+                  <td class='hidden-xs text-right'><%= unloading_presenter.fuel %></td>
+                  <td class='hidden-xs text-right'><%= unloading_presenter.ice %></td>
+                  <td class='text-right'><%= link_to 'View', unloading, class: 'btn btn-default btn-xs view-record', remote: true %> </td>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="panel-footer text-right">
+      <%= page_entries_info @duplicate_unloadings, entry_name: 'duplicate unloadings' %>
+      <%= link_to_previous_page @duplicate_unloadings, icon('chevron-left'),
+        param_name: :dup_unloading_page,
+        remote: true,
+        class: 'btn btn-default btn-xs',
+        params: {controller: 'staff/dashboard', action: 'index'} %>
+      <%= link_to_next_page @duplicate_unloadings, icon('chevron-right'),
+        param_name: :dup_unloading_page,
+        remote: true,
+        class: 'btn btn-default btn-xs',
+        params: {controller: 'staff/dashboard', action: 'index'} %>
+    </div>
+  </div>
+<% end %>

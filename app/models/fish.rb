@@ -18,6 +18,9 @@
 #  max             :integer
 #  opt             :integer
 #  threatened      :boolean          default(FALSE)
+#  draft_id        :integer
+#  published_at    :datetime
+#  trashed_at      :datetime
 #
 
 class Fish < ApplicationRecord

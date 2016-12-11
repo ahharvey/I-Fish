@@ -63,8 +63,8 @@ class Admin < ApplicationRecord
   has_many :activities, as: :ownable
 
   has_many :member_fisheries, through: :office
-  has_many :member_companies, through: :member_fisheries
-  has_many :member_vessels, through: :member_companies, source: :vessels
+  has_many :member_vessels, through: :member_fisheries, source: :vessels
+  has_many :member_companies, through: :member_vessels, source: :company
   has_many :member_unloadings, through: :member_vessels, source: :unloadings
   has_many :member_unloading_catches, through: :member_unloadings, source: :unloading_catches
   has_many :member_bait_loadings, through: :member_vessels, source: :bait_loadings
@@ -75,6 +75,7 @@ class Admin < ApplicationRecord
 
   scope :approved,  -> { where( approved: true ) }
   scope :pending,   -> { where( approved: false ) }
+  scope :default,   -> { order( 'admins.name ASC') }
 
   after_create :set_default_role
   after_create :send_approval_mail, unless: :created_by_invitation?

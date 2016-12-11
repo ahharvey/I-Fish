@@ -1,31 +1,12 @@
 # == Schema Information
 #
-# Table name: prereps
+# Table name: offices
 #
-#  id            :integer          not null, primary key
-#  date          :date
-#  guide         :string(255)
-#  lat           :string(255)
-#  lon           :string(255)
-#  count         :integer
-#  grpsize       :integer
-#  depth         :integer
-#  temp          :integer
-#  notes         :text
-#  user_id       :integer
-#  operator_id   :integer
-#  divesite_id   :integer
-#  current_code  :integer
-#  behavior_mask :integer
-#  created_at    :datetime         not null
-#  updated_at    :datetime         not null
-#  published     :boolean
-#  boats         :integer
-#  manta_mask    :integer
-#  time          :time
-#  weather_code  :integer
-#  sea_code      :integer
-#  visibility    :integer
+#  id          :integer          not null, primary key
+#  name        :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  district_id :integer
 #
 
 require 'rails_helper'

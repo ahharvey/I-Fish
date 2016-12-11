@@ -1,0 +1,22 @@
+en:
+  audits:
+    title: "Auidt"
+    index:
+      title: "Auidt"
+    show:
+      title: "Auidt"
+    new:
+      title: "New Audit"
+    edit:
+      title: "Edit Auditg"
+    update:
+      notice: Audit was successfully updated.
+    create:
+      notice: SUCCESS! Audit was successfully created.
+    destroy:
+      notice: Audit was successfully destroyed.
+  unauthorized:
+    new:
+      audit: You don't have permission to create audits.
+    edit:
+      audit: You don't have permission to edit this audit.

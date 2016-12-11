@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    attributes:
+      fishery:
+        name: "Name"
+        code: "Code"
+    errors:
+      models:
+        fishery:

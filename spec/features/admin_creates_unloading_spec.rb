@@ -9,7 +9,7 @@ RSpec.describe "Staff Creates Unloading" do
     let(:admin)     { create :admin, office: office }
     let(:office)    { create :office }
     let(:user)      { create :user }
-    let(:vessel)    { create :vessel, company: company }
+    let(:vessel)    { create :vessel, company: company, fishery: fishery }
     let(:fishery)   { create :fishery }
     let(:company)   { create :company }
     let(:wpp)       { create :wpp }
@@ -18,7 +18,6 @@ RSpec.describe "Staff Creates Unloading" do
 
     before :each do
       office.member_fisheries.push fishery
-      company.member_fisheries.push fishery
       vessel
       port
       wpp
@@ -42,18 +41,32 @@ RSpec.describe "Staff Creates Unloading" do
 
       expect(current_path).to eq new_vessel_unloading_path(vessel)
 
+      expect(page).to have_field 'VMS'
+      expect(page).to have_field 'Port Sampling'
+      expect(page).to have_field 'Observer'
+
 
       select port.name, from: 'Port'
       select wpp.name,  from: 'WPP'
       fill_in 'Dep',  with: Date.yesterday
       fill_in 'Arr',  with: Date.today
       fill_in 'Fuel', with: 5
-      fill_in 'Ice',  with: 5
+      fill_in 'Ice',  with: 20
+      check 'VMS'
+      check 'Port Sampling'
+      check 'Observer'
 
       click_button 'Save'
 
       expect(page).to have_content 'Unloading was successfully created'
       expect(current_path).to eq unloading_path(Unloading.last)
+      expect(page).to have_content port.name
+      expect(page).to have_content wpp.name
+      expect(page).to have_content 'Fuel (L) 5'
+      expect(page).to have_content 'Ice (Block) 20'
+      expect(page).to have_content 'VMS Yes'
+      expect(page).to have_content 'Observer Yes'
+      expect(page).to have_content 'Port Sampling Yes'
 
       expect( page.all('table#unloading_catch_table tr').count ).to eq 1
 

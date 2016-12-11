@@ -24,3 +24,7 @@ fi
 export S3_KEY=AKIAJMGLZKZNA2C5OCJQ
 export S3_SECRET=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
 export S3_directory=imports-dev
+export SMTP_USERNAME=zz
+export SMTP_PASSWORD=zz
+export SMTP_DOMAIN=zz
+export SMTP_ADDRESS=xx

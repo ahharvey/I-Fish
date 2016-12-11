@@ -1,0 +1,10 @@
+en:
+  fisheries:
+    vessels:
+      create:
+        notice: "%{vessel} is already a member of %{fishery}."
+        success: "%{vessel} was successfully added to %{fishery}."
+        alert: "%{vessel} was successfully invited to %{fishery}."
+        error: We were unable to add the vessel to this fishery.
+      destroy:
+        notice: "%{vessel} was successfully removed from %{fishery}."

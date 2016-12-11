@@ -7,8 +7,22 @@ module BaseVessel
     base.has_many :member_fisheries, through: :company
 
     base.validate :validates_sipi_expiry
-
-    base.before_validation :save_formatted_sipi_expiry 
+		base.validates :material_type,
+      inclusion: { in: MATERIAL_TYPES },
+      allow_blank: true
+		base.validates :machine_type,
+      inclusion: { in: MACHINE_TYPES },
+      allow_blank: true
+		base.validates :relationship_type,
+      inclusion: { in: RELATIONSHIP_TYPES },
+      allow_blank: true
+		base.validates :operational_type,
+			inclusion: { in: OPERATIONAL_TYPES },
+			allow_blank: true
+		base.validates :cert_type,
+      inclusion: { in: CERT_TYPES },
+      allow_blank: true
+    base.before_validation :save_formatted_sipi_expiry
 
     base.scope :default, -> { order('vessels.ap2hi_ref ASC') }
 
@@ -21,6 +35,7 @@ module BaseVessel
 	MACHINE_TYPES = ["none", "outboard", "inboard"]
 	RELATIONSHIP_TYPES = ["contracted", "independent"]
   OPERATIONAL_TYPES = ["active", "inactive", "decommissioned"]
+	CERT_TYPES = %w{ none fip in_assessment certified }
 
 
   OPERATIONAL_TYPES.each do |status|
@@ -43,5 +58,3 @@ module BaseVessel
     end
   end
 end
-
-

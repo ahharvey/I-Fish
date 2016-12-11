@@ -16,6 +16,10 @@
 #  review_state      :string           default("pending")
 #  grid_id           :integer
 #  secondary_fish_id :integer
+#  bait_id           :integer
+#  secondary_bait_id :integer
+#  reviewer_id       :integer
+#  reviewed_at       :datetime
 #
 
 class BaitLoading < ApplicationRecord

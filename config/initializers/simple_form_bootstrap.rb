@@ -122,7 +122,7 @@ SimpleForm.setup do |config|
     b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
-  ####CUSTOM 
+  ####CUSTOM
 
   config.wrappers :vertical_input_group, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
     b.use :html5
@@ -150,6 +150,42 @@ SimpleForm.setup do |config|
       ba.use :error, wrap_with: { tag: 'span', class: 'help-block' }
       ba.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
     end
+  end
+
+  config.wrappers :toggle_switch, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+
+    b.use :html5
+    b.optional :readonly
+
+    b.wrapper tag: 'div', class: 'checkbox' do |ba|
+      ba.wrapper :tag => 'label', :class => 'bool-switch' do |bb|
+        bb.use :input, label: false
+        bb.wrapper tag: 'div', class: 'slider round' do |bc|
+        end
+
+      end
+      ba.wrapper tag: 'p', class:'bool-switch-label' do |bd|
+        bd.use :label_text
+      end
+
+    end
+
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
+  end
+
+  config.wrappers :on_off, tag: 'div', class: 'form-group', error_class: 'has-error' do |b|
+
+    b.use :html5
+    b.optional :readonly
+
+    b.wrapper tag: 'div', class: 'onoffswitch' do |ba|
+      ba.use :input, class: "onoffswitch-checkbox"
+      ba.use :label, class: 'onoffswitch-label'
+    end
+
+    b.use :error, wrap_with: { tag: 'span', class: 'help-block' }
+    b.use :hint,  wrap_with: { tag: 'p', class: 'help-block' }
   end
 
   # Wrappers for forms and inputs using the Bootstrap toolkit.

@@ -1,0 +1,22 @@
+en:
+  unloadings:
+    title: "Unloading Reports"
+    index:
+      title: "Unloading Reports"
+    show:
+      title: "Unloading Report"
+    new:
+      title: "New Unloading Report"
+    edit:
+      title: "Edit Unloading Report"
+    update:
+      notice: Your edits were successfully submitted and are pending review.
+    create:
+      notice: Unloading was successfully created.
+    destroy:
+      notice: Unloading was successfully destroyed.
+  unauthorized:
+    new:
+      unloading: You don't have permission to create unloadings.
+    edit:
+      unloading: You don't have permission to edit this unloading.

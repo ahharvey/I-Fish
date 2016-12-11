@@ -1,0 +1,33 @@
+en:
+  activerecord:
+    attributes:
+      bait_loading:
+        date: "Date"
+        ap2hi_ref: "AP2HI UVI"
+        formatted_date: "Date"
+        quantity: "Quantity (buckets)"
+        location: "Location"
+        fish: "Dominant species"
+        secondary_fish: "Secondary species"
+        vessel_id: "Vessel"
+        method_type: "Catching method"
+        select_fish: "Select primary species"
+        select_secondary_fish: "Select secondary species (if present)"
+        select_method: "Select catching method"
+        select_grid: "Select source location"
+        price: "Total price"
+    errors:
+      models:
+        bait_loading:
+          invalid_date: "is invalid"
+          attributes:
+            vessel:
+              blank: "Please select a vessel"
+            fish:
+              blank: "Please select a dominant bait species"
+            quantity:
+              blank: "Please enter the number of bait buckets"
+            method_type:
+              blank: "Please enter a catching method"
+            location:
+              blank: "Please select a catching location"

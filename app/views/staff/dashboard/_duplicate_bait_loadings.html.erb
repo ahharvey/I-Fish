@@ -1,0 +1,66 @@
+<%if @duplicate_bait_loadings.any? %>
+  <div id="duplicate_bait_panel" class="panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Possible Duplicate Bait Loadings</h3>
+    </div>
+    <table id="duplicate_bait_loadings" class="table table-condensed">
+      <thead>
+        <tr>
+          <th><%= BaitLoading.human_attribute_name(:company) %></th>
+  	      <th><%= BaitLoading.human_attribute_name(:formatted_date) %></th>
+          <th><%= BaitLoading.human_attribute_name(:ap2hi_ref) %></th>
+  	      <th><%= BaitLoading.human_attribute_name(:bait) %></th>
+          <th><%= BaitLoading.human_attribute_name(:secondary_bait) %></th>
+  	      <th class='hidden-xs text-right'><%= BaitLoading.human_attribute_name(:quantity) %></th>
+  	      <th class='hidden-xs text-right'><%= BaitLoading.human_attribute_name(:method_type) %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <%if @duplicate_bait_loadings.empty? %>
+          <tr>
+            <td colspan="7" class='text-center'><i>NO UNAPPROVED BAIT LOADINGS</i></td>
+          </tr>
+        <% else %>
+          <% @duplicate_bait_loadings.each do |k,v| %>
+            <tr class='info'>
+              <td colspan=9 class='text-center'>
+                <b><%= v %></b> <small>loadings on</small>
+                <b><%= k[0].present? ? k[0].to_s(:long) : '<i>No date</i>'.html_safe %></b> <small>by</small>
+                <b><%= k[1].present? ? Vessel.find( k[1] ).ap2hi_ref : '<i>No vessel</i>'.html_safe %></b>
+              </td>
+            </tr>
+            <% BaitLoading.where(date: k[0], vessel_id: k[1] ).each do |bait_loading| %>
+              <%= content_tag_for :tr, bait_loading, :dup do %>
+                <% present bait_loading do |bait_loading_presenter| %>
+                  <td><%= bait_loading_presenter.company_avatar %></td>
+                  <td><%= bait_loading_presenter.date %></td>
+
+      				    <td><%= bait_loading_presenter.ap2hi_ref %></td>
+      				    <td><%= bait_loading_presenter.bait %></td>
+                  <td><%= bait_loading.secondary_bait.try(:code) %></td>
+      				    <td class='hidden-xs text-right'><%= bait_loading_presenter.quantity %></td>
+      				    <td class='hidden-xs text-right'><%= bait_loading_presenter.method_type %></td>
+                  <td class='text-right'><%= render partial: 'bait_loadings/minified_supervisor_controls', locals: { bait_loading: bait_loading } %> </td>
+                <% end %>
+              <% end %>
+  	        <% end %>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+    <div class="panel-footer text-right">
+      <%= page_entries_info @duplicate_bait_loadings, entry_name: 'duplicate bait loadings' %>
+      <%= link_to_previous_page @duplicate_bait_loadings, icon('chevron-left'),
+        param_name: :dup_bait_page,
+        remote: true,
+        class: 'btn btn-default btn-xs',
+        params: {controller: 'staff/dashboard', action: 'index'} %>
+      <%= link_to_next_page @duplicate_bait_loadings, icon('chevron-right'),
+        param_name: :dup_bait_page,
+        remote: true,
+        class: 'btn btn-default btn-xs',
+        params: {controller: 'staff/dashboard', action: 'index'} %>
+    </div>
+  </div>
+<% end %>

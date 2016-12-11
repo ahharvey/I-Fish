@@ -1,0 +1,9 @@
+en:
+  activerecord:
+    attributes:
+      office:
+        name: "Name"
+        district_id: "District"
+    errors:
+      models:
+        office:

@@ -9,7 +9,7 @@ RSpec.describe "Staff Creates Unloading" do
     let(:admin)     { create :admin, office: office }
     let(:office)    { create :office }
     let(:user)      { create :user }
-    let(:vessel)    { create :vessel, company: company }
+    let(:vessel)    { create :vessel, company: company, fishery: fishery }
     let(:fishery)   { create :fishery }
     let(:company)   { create :company }
     let(:wpp)       { create :wpp }
@@ -19,7 +19,6 @@ RSpec.describe "Staff Creates Unloading" do
 
     before :each do
       office.member_fisheries.push fishery
-      company.member_fisheries.push fishery
       vessel
       port
       wpp

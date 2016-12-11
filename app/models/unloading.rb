@@ -3,7 +3,7 @@
 # Table name: unloadings
 #
 #  id                :integer          not null, primary key
-#  port              :string
+#  old_port          :string
 #  time_out          :datetime
 #  time_in           :datetime
 #  etp               :boolean
@@ -23,6 +23,13 @@
 #  catch_certificate :string
 #  budget            :integer
 #  grid_id           :integer
+#  port_id           :integer
+#  wpp_id            :integer
+#  reviewer_id       :integer
+#  reviewed_at       :datetime
+#  user_id           :integer
+#  admin_id          :integer
+#  cpue              :decimal(, )
 #
 
 class Unloading < ApplicationRecord
@@ -44,7 +51,11 @@ class Unloading < ApplicationRecord
 
   scope :default,    -> { order( 'unloadings.time_in DESC') }
   scope :current,    -> { where( 'unloadings.time_in >= ?', Date.today.beginning_of_year ) }
+  scope :last_month, -> { where( time_in: Date.today.beginning_of_month-1.month..Date.today.end_of_month-1.month ) }
   scope :historical, -> { where( 'unloadings.time_in >= ?', Date.today.beginning_of_month-1.year) }
+  scope :with_vms,   -> { where( vms: true ) }
+  scope :with_port_sampling,   -> { where( port_sampling: true ) }
+  scope :with_observers,   -> { where( observer: true ) }
 
   validates :vessel,
     presence: true

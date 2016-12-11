@@ -12,14 +12,19 @@
 #  created_at      :datetime         not null
 #  updated_at      :datetime         not null
 #  code            :string
+#  draft_id        :integer
+#  published_at    :datetime
+#  trashed_at      :datetime
 #
 
 class Company < ApplicationRecord
   has_paper_trail
-  has_drafts
+  #has_drafts
+  include HasBaitRatio
 
   has_many :documents, as: :documentable
   has_many :vessels
+  has_many :fisheries, through: :vessels
   has_many :unloadings, through: :vessels
   has_many :unloading_catches, through: :unloadings
   has_many :fishes, through: :unloading_catches
@@ -27,16 +32,20 @@ class Company < ApplicationRecord
   has_many :carier_loadings, through: :vessels
   has_many :users, through: :company_positions
   has_many :company_positions
-
   has_and_belongs_to_many :member_fisheries,
     class_name: "Fishery",
     join_table: "fisheries_companies",
     uniq: true
 
+  scope :default,       -> { order('companies.name ASC') }
+  scope :harvest,       -> { where( harvest: true ) }
+  scope :processing,    -> { where( processing: true ) }
+  scope :unknown_type,  -> { where.not( harvest: true, processing: true ) }
+
   validate :avatar_size
   validates :name,
   	presence: true
-  scope :default, -> { order('companies.name ASC') }
+
 
   mount_uploader :avatar, AvatarUploader
 
@@ -53,6 +62,14 @@ class Company < ApplicationRecord
 
   def has_carrier_vessels?
     vessels.where(vessel_type_id: VesselType.find_by(code: 'ca')).any?
+  end
+
+  def initials
+    if code.present?
+      code.capitalize
+    else
+      "#{self.name.split.last.first.capitalize}#{self.name.split.last.first.capitalize}"
+    end
   end
 
   def bait_fishes

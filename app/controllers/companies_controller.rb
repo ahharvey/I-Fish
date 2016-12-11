@@ -87,7 +87,7 @@ class CompaniesController < ApplicationController
   def update
     @company.attributes = company_params
     respond_to do |format|
-      if @company.save_draft
+      if @company.save
         format.html { redirect_to @company, notice: t('.notice') }
         format.json { render :show, status: :ok, location: @company }
       else
@@ -249,7 +249,10 @@ class CompaniesController < ApplicationController
       :crop_y,
       :crop_w,
       :crop_h,
-      :fishery_id
+      :fishery_id,
+      :code,
+      :harvest,
+      :processing
       )
   end
 

@@ -1,0 +1,12 @@
+en:
+  activerecord:
+    attributes:
+      unloading_catch:
+        fish: 'Species'
+        cut_type: 'Cut'
+        size_class: 'Size'
+        quantity: 'Quantity (kg)'
+        type: 'Type'
+    errors:
+      models:
+        unloading_catches:

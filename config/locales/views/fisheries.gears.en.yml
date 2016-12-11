@@ -1,0 +1,10 @@
+en:
+  fisheries:
+    gears:
+      create:
+        notice: "%{gear} is already assigned to %{fishery}."
+        success: "%{gear} was successfully added to %{fishery}."
+        alert: "%{gear} was successfully invited to %{fishery}."
+        error: We were unable to add the gear to this fishery.
+      destroy:
+        notice: "%{gear} was successfully removed from %{fishery}."

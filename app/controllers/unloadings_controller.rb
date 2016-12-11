@@ -157,7 +157,10 @@ class UnloadingsController < ApplicationController
       :bet,
       :skj,
       :kaw,
-      :catch_certificate
+      :catch_certificate,
+      :vms,
+      :observer,
+      :port_sampling
 
 
 #      :vessel_id,

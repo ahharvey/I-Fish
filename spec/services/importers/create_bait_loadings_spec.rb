@@ -17,7 +17,7 @@ RSpec.describe Importers::CreateBaitLoadings do
         file: Rack::Test::UploadedFile.new(File.join(Rails.root, 'spec', 'support', 'files', 'valid_bait_loadings.xlsx'))
     }
 
-		it 'creates the record, activity and version', :focus do
+		it 'creates the record, activity and version' do
 
 			Importers::CreateBaitLoadings.new(
         file: importer.file,

@@ -66,6 +66,12 @@ RSpec.describe "Admin" do
 
       it { is_expected.to have_abilities([:index, :show, :new, :create, :edit, :update, :destroy], Document) }
 
+      it { is_expected.to have_abilities([:index, :show, :new, :create], Port) }
+      it { is_expected.to not_have_abilities([:edit, :update, :destroy], Port) }
+
+      it { is_expected.to have_abilities([:index, :show, :new, :create], Wpp) }
+      it { is_expected.to not_have_abilities([:edit, :update,:destroy], Wpp) }
+
       it { is_expected.to have_abilities([:index, :show, :new, :create, :edit, :update], BaitLoading) }
       it { is_expected.to not_have_abilities([:destroy], BaitLoading) }
 

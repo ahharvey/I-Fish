@@ -5,16 +5,18 @@ require 'rails_helper'
 
 RSpec.describe "Admin adds new Fish to Fishery" do
 
-  let(:admin)     { create :admin }
+  let(:admin)     { create :admin, office: office }
   let(:user)      { create :user }
   let(:fishery)   { create :fishery }
   let(:fish)      { create :fish }
+  let(:office)    { create :office }
 
 
   describe "with signed in staff and owned fishery" do
 
     before :each do
-      admin.roles.push Role.where(name: 'administrator').first_or_create
+      office.member_fisheries.push fishery
+      admin.roles.push Role.where(name: 'staff').first_or_create
       login_as( admin, scope: :admin )
       visit fishery_path(fishery)
     end

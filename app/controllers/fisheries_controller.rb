@@ -24,6 +24,14 @@ class FisheriesController < ApplicationController
   end
 
   def show
+    respond_to do |format|
+      format.html
+      format.pdf do
+        pdf = FisheryPdf.new(@fishery, view_context)
+        send_data pdf.render, filename: "FisheryReport-#{@fishery.name}-#{Date.today.strftime("%Y%m%d")}",
+        type: "application/pdf"
+      end
+    end
   end
 
   def new

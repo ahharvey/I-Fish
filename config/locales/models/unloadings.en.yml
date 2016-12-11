@@ -1,0 +1,24 @@
+en:
+  activerecord:
+    attributes:
+      unloading:
+        port: "Port"
+        time_out: "Dep."
+        time_in: "Arr."
+        etp: "ETP"
+        location: "Location"
+        fuel: "Fuel (L)"
+        ice: "Ice (Block)"
+        byproduct: "Byproduct"
+        discard: "Discard"
+        yft: "YFT"
+        bet: "BET"
+        skj: "SKJ"
+        kaw: "KAW"
+        landed: "Landed"
+        discarded: "Discarded"
+        wpp: "WPP"
+        vms: "VMS"
+        port_sampling: "Port Sampling"
+    errors:
+      models:

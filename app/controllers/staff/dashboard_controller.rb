@@ -9,6 +9,10 @@ class Staff::DashboardController < ApplicationController
     #@unloadings = current_admin.managed_unloadings.page(params[:page])
     @unloadings = current_admin.managed_unloadings.pending.default.page(params[:unloading_page]).per(10)
     @historical_unloadings = current_admin.managed_unloadings.approved.historical.group_by { |t| t.time_in.beginning_of_month }
+    @duplicate_unloadings = Kaminari.paginate_array(
+      current_admin.managed_unloadings.where.not(review_state: 'rejected').group(:time_out,:vessel_id).having("count(*) > 1").count.to_a
+      ).page(params[:dup_unloading_page]).per(5)
+
     #@unloadings.
 #      where( review_state: 'approved' ).
 #      where('time_in > ?', Date.today.beginning_of_month-1.year).
@@ -17,6 +21,9 @@ class Staff::DashboardController < ApplicationController
     #@bait_loadings = current_admin.managed_bait_loadings.page(params[:page])
     @bait_loadings = current_admin.managed_bait_loadings.pending.default.page(params[:bait_page]).per(10)
     @historical_bait_loadings = current_admin.managed_bait_loadings.approved.historical.group_by { |t| t.date.beginning_of_month }
+    @duplicate_bait_loadings = Kaminari.paginate_array(
+      current_admin.managed_bait_loadings.where.not(review_state: 'rejected').group(:date,:vessel_id).having("count(*) > 1").count.to_a
+      ).page(params[:dup_bait_page]).per(5)
 #      where( review_state: 'approved').
 #      where('date > ?', Date.today.beginning_of_month-1.year).
 #

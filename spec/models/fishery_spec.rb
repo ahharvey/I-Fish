@@ -1,3 +1,18 @@
+# == Schema Information
+#
+# Table name: fisheries
+#
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  code         :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  protocol_id  :integer
+#  draft_id     :integer
+#  published_at :datetime
+#  trashed_at   :datetime
+#
+
 
 
 require 'rails_helper'
@@ -11,8 +26,8 @@ RSpec.describe Fishery do
 
   describe 'associations' do
     context 'has many' do
-
-      it { is_expected.to have_many(:vessels).through(:member_companies) }
+      it { is_expected.to have_many(:vessels) }
+      it { is_expected.to have_many(:companies).through(:vessels) }
       it { is_expected.to have_many(:unloadings).through(:vessels) }
       it { is_expected.to have_many(:unloading_catches).through(:unloadings) }
       it { is_expected.to have_many(:bait_loadings).through(:vessels) }

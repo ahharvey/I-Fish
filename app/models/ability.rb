@@ -138,6 +138,9 @@ class Ability
     can :create, Port
     cannot :destroy, Port
 
+    can :create, Wpp
+    cannot :destroy, Wpp
+
     can :create, Unloading
     can :manage, Unloading, id: admin.managed_unloadings.map(&:id)
     cannot :destroy, Unloading
@@ -182,6 +185,9 @@ class Ability
     can :index, 'staff/dashboard'
     can :import, :home
     can :manage, Importer
+
+    can [:create, :destroy], :memberships_vessels
+
   end
 
   def supervisor(admin)
@@ -192,6 +198,8 @@ class Ability
 
     can :manage, 'supervisor/dashboard'
     can :index, 'supervisor/dashboard'
+
+
 
     #AND#
     # Supervisors can view and edit data owned by staff who share the same office.

@@ -1,0 +1,13 @@
+en:
+  activerecord:
+    attributes:
+      company:
+        name: "Name"
+        code: "Abbreviation"
+        shark_policy: "Shark policy?"
+        iuu_list: "IUU list"
+        code_of_conduct: "Code of conduct?"
+        member: "AP2HI member"
+    errors:
+      models:
+        company:

@@ -11,9 +11,9 @@
 #  length             :integer
 #  tonnage            :integer
 #  imo_number         :string
-#  shark_policy       :boolean
-#  iuu_list           :boolean
-#  code_of_conduct    :boolean
+#  shark_policy       :boolean          default(FALSE)
+#  iuu_list           :boolean          default(FALSE)
+#  code_of_conduct    :boolean          default(FALSE)
 #  company_id         :integer
 #  ap2hi_ref          :string
 #  issf_ref           :string
@@ -26,16 +26,16 @@
 #  sipi_number        :string
 #  sipi_expiry        :date
 #  siup_number        :string
-#  issf_ref_requested :boolean
+#  issf_ref_requested :boolean          default(FALSE)
 #  material_type      :string
 #  machine_type       :string
 #  capacity           :integer
-#  vms                :boolean
-#  tracker            :boolean
+#  vms                :boolean          default(FALSE)
+#  tracker            :boolean          default(FALSE)
 #  port               :string
-#  name_changed       :boolean
-#  flag_state_changed :boolean
-#  radio              :boolean
+#  name_changed       :boolean          default(FALSE)
+#  flag_state_changed :boolean          default(FALSE)
+#  radio              :boolean          default(FALSE)
 #  relationship_type  :string
 #  fish_capacity      :integer
 #  bait_capacity      :integer
@@ -43,6 +43,11 @@
 #  seafdec_ref        :string
 #  mmaf_ref           :string
 #  dkp_ref            :string
+#  status             :string
+#  operational_type   :string
+#  draft_id           :integer
+#  published_at       :datetime
+#  trashed_at         :datetime
 #
 
 class VesselAudit < Vessel

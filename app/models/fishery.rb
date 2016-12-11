@@ -2,18 +2,22 @@
 #
 # Table name: fisheries
 #
-#  id          :integer          not null, primary key
-#  name        :string(255)
-#  code        :string(255)
-#  created_at  :datetime         not null
-#  updated_at  :datetime         not null
-#  protocol_id :integer
+#  id           :integer          not null, primary key
+#  name         :string(255)
+#  code         :string(255)
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  protocol_id  :integer
+#  draft_id     :integer
+#  published_at :datetime
+#  trashed_at   :datetime
 #
 
 class Fishery < ApplicationRecord
 
   has_paper_trail
   has_drafts
+  include HasBaitRatio
 
   has_many :documents, as: :documentable
 
@@ -28,8 +32,9 @@ class Fishery < ApplicationRecord
   has_many :provinces, through: :surveys
   has_many :districts, through: :surveys
 
-  
-  has_many :vessels, through: :member_companies
+
+  has_many :vessels
+  has_many :companies, through: :vessels
   has_many :unloadings, through: :vessels
   has_many :unloading_catches, through: :unloadings
   has_many :bait_loadings, through: :vessels

@@ -1,0 +1,19 @@
+<div id="VesselList">
+  <br />
+  <ul class="list-unstyled">
+    <% @fishery.vessels.each do |vessel| %>
+      <li>
+        <b><%= link_to vessel.ap2hi_ref, vessel %></b>  -
+        <i><%= vessel.name %></i>
+        <% if can? :destroy, :memberships_vessels %>
+          <%= link_to remove_icon,
+            fishery_remove_vessel_path(@fishery, target_vessel: vessel.id),
+            method: :delete,
+            confirm: 'Are you sure?',
+            class: 'btn btn-default btn-xs',
+            remote: true %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>

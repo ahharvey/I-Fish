@@ -196,7 +196,21 @@ RSpec.describe CompaniesController, type: :controller do
       it { expect( assigns(:company).name ).to eq 'New Name' }
       it { expect( flash[:notice] ).to have_content "Your edits were successfully submitted and are pending review." }
       it {
-        is_expected.to permit(:name, :shark_policy, :iuu_list, :code_of_conduct, :member, :avatar, :crop_x, :crop_y, :crop_w, :crop_h, :fishery_id).
+        is_expected.to permit(
+          :name,
+          :shark_policy,
+          :iuu_list,
+          :code_of_conduct,
+          :member,
+          :avatar,
+          :crop_x,
+          :crop_y,
+          :crop_w,
+          :crop_h,
+          :fishery_id,
+          :code,
+          :harvest,
+          :processing).
           for(:update, params: { id: company1.to_param, company: valid_attributes } ).
           on(:company)
         }

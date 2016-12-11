@@ -11,19 +11,18 @@ RSpec.describe "Admin reviews and approves Bait Loadings" do
 
     let(:admin)     { create :admin, office: office  }
     let(:office)    { create :office  }
-    let(:vessel)    { create :vessel, company: company }
+    let(:vessel)    { create :vessel, company: company, fishery: fishery }
     let(:company )  { create :company }
     let(:fishery )  { create :fishery }
     let(:bait_loading)  { create :bait_loading, vessel: vessel }
 
 
     before :each do
+      bait_loading
       10.times do |count|
          create(:bait_loading, vessel: vessel )
       end
-      bait_loading
       fishery.member_offices.push office
-      fishery.member_companies.push company
       admin.roles.push Role.where(name: 'staff').first_or_create
       login_as( admin, scope: :admin )
       visit root_path
@@ -46,7 +45,7 @@ RSpec.describe "Admin reviews and approves Bait Loadings" do
       end
 
       expect(bait_loading.approved?).to be false
-
+      save_and_open_page
       within "tr#bait_loading_#{bait_loading.id}" do
         click_link 'Approved'
       end

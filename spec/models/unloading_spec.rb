@@ -1,3 +1,37 @@
+# == Schema Information
+#
+# Table name: unloadings
+#
+#  id                :integer          not null, primary key
+#  old_port          :string
+#  time_out          :datetime
+#  time_in           :datetime
+#  etp               :boolean
+#  location          :string
+#  fuel              :integer
+#  ice               :integer
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#  vessel_id         :integer
+#  review_state      :string           default("pending")
+#  byproduct         :integer
+#  discard           :integer
+#  yft               :integer
+#  bet               :integer
+#  skj               :integer
+#  kaw               :integer
+#  catch_certificate :string
+#  budget            :integer
+#  grid_id           :integer
+#  port_id           :integer
+#  wpp_id            :integer
+#  reviewer_id       :integer
+#  reviewed_at       :datetime
+#  user_id           :integer
+#  admin_id          :integer
+#  cpue              :decimal(, )
+#
+
 
 
 require 'rails_helper'
@@ -6,8 +40,9 @@ RSpec.describe Unloading do
 
 
 
-  let(:unloading1) { create :unloading, time_out: Time.now-2.hour, time_in: Time.now-1.hour }
-  let(:unloading2) { create :unloading, time_out: Time.now-1.hour, time_in: Time.now }
+  let(:unloading1) { create :unloading, time_out: Time.now-2.hour, time_in: Time.now-1.hour, vms: true }
+  let(:unloading2) { create :unloading, time_out: Time.now-1.hour, time_in: Time.now, port_sampling: true }
+  let(:unloading3) { create :unloading, time_out: Time.now-1.hour, time_in: Time.now, observer: true }
   let(:wpp)        { create :wpp }
   let(:port)        { create :port }
   let(:fish1)        { create :fish, code: 'SKJ' }
@@ -50,6 +85,23 @@ RSpec.describe Unloading do
     end
   end
 
+  describe 'columns' do
+    it { is_expected.to have_db_column(:vessel_id).of_type(:integer) }
+    it { is_expected.to have_db_column(:wpp_id).of_type(:integer) }
+    it { is_expected.to have_db_column(:port_id).of_type(:integer) }
+    it { is_expected.to have_db_column(:time_out).of_type(:datetime) }
+    it { is_expected.to have_db_column(:time_in).of_type(:datetime) }
+    it { is_expected.to have_db_column(:fuel).of_type(:integer) }
+    it { is_expected.to have_db_column(:ice).of_type(:integer) }
+
+    it { is_expected.to have_db_column(:observer).of_type(:boolean).with_options(default: false) }
+    it { is_expected.to have_db_column(:vms).of_type(:boolean).with_options(default: false) }
+    it { is_expected.to have_db_column(:port_sampling).of_type(:boolean).with_options(default: false) }
+
+    it { is_expected.to have_db_column(:review_state).of_type(:string) }
+    it { is_expected.to have_db_column(:reviewer_id).of_type(:integer) }
+    it { is_expected.to have_db_column(:reviewed_at).of_type(:datetime) }
+  end
 
   describe ".default" do
     it "includes all records" do
@@ -59,6 +111,36 @@ RSpec.describe Unloading do
     end
     it "should be ordered by name" do
       expect( Unloading.default).to eq([unloading2, unloading1])
+    end
+  end
+
+  describe ".with_port_sampling" do
+    it "includes all records" do
+      unloading1
+      unloading2
+      unloading3
+      expect( Unloading.with_port_sampling.count).to eq 1
+      expect( Unloading.with_port_sampling).to eq([unloading2])
+    end
+  end
+
+  describe ".with_vms" do
+    it "includes all records" do
+      unloading1
+      unloading2
+      unloading3
+      expect( Unloading.with_vms.count).to eq 1
+      expect( Unloading.with_vms).to eq([unloading1])
+    end
+  end
+
+  describe ".with_observers" do
+    it "includes all records" do
+      unloading1
+      unloading2
+      unloading3
+      expect( Unloading.with_observers.count).to eq 1
+      expect( Unloading.with_observers).to eq([unloading3])
     end
   end
 

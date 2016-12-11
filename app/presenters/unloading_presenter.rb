@@ -70,7 +70,7 @@ class UnloadingPresenter < BasePresenter
 
   def company_avatar
     handle_none unloading.company do
-      unloading.company.try(:avatar).try(:file).try(:file) 
+      unloading.company.try(:avatar).try(:file).try(:file)
     end
   end
 
@@ -82,6 +82,18 @@ class UnloadingPresenter < BasePresenter
 
   def vessel
     best_in_place_if (can? :edit, unloading), unloading, :vessel_id, as: :select, collection: Vessel.all.map{ |g| [g.id, g.ap2hi_ref] }, inner_class: 'col-xs-1'
+  end
+
+  def vms
+    unloading.vms? ? 'Yes' : 'No'
+  end
+
+  def observer
+    unloading.observer? ? 'Yes' : 'No'
+  end
+
+  def port_sampling
+    unloading.port_sampling? ? 'Yes' : 'No'
   end
 
 

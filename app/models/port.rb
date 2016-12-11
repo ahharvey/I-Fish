@@ -1,4 +1,13 @@
+# == Schema Information
+#
+# Table name: ports
+#
+#  id   :integer          not null, primary key
+#  name :string
+#
+
 class Port < ApplicationRecord
+	include HasBaitRatio
 	has_many :unloadings
 	has_many :unloading_catches, through: :unloadings
 	has_many :vessels, through: :unloadings

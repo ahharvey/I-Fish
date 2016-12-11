@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161205020752) do
+ActiveRecord::Schema.define(version: 20161210073741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -153,12 +153,14 @@ ActiveRecord::Schema.define(version: 20161205020752) do
     t.boolean  "code_of_conduct"
     t.boolean  "member"
     t.string   "avatar"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.datetime "created_at",                      null: false
+    t.datetime "updated_at",                      null: false
     t.string   "code"
     t.integer  "draft_id"
     t.datetime "published_at"
     t.datetime "trashed_at"
+    t.boolean  "processing",      default: false
+    t.boolean  "harvest",         default: false
   end
 
   create_table "company_positions", force: :cascade do |t|
@@ -603,6 +605,9 @@ ActiveRecord::Schema.define(version: 20161205020752) do
     t.integer  "user_id"
     t.integer  "admin_id"
     t.decimal  "cpue"
+    t.boolean  "port_sampling",     default: false
+    t.boolean  "vms",               default: false
+    t.boolean  "observer",          default: false
     t.index ["admin_id"], name: "index_unloadings_on_admin_id", using: :btree
     t.index ["grid_id"], name: "index_unloadings_on_grid_id", using: :btree
     t.index ["port_id"], name: "index_unloadings_on_port_id", using: :btree
@@ -692,8 +697,8 @@ ActiveRecord::Schema.define(version: 20161205020752) do
     t.integer  "company_id"
     t.string   "ap2hi_ref"
     t.string   "issf_ref"
-    t.datetime "created_at",                         null: false
-    t.datetime "updated_at",                         null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
     t.integer  "crew"
     t.integer  "hooks"
     t.string   "captain"
@@ -723,7 +728,12 @@ ActiveRecord::Schema.define(version: 20161205020752) do
     t.integer  "draft_id"
     t.datetime "published_at"
     t.datetime "trashed_at"
+    t.boolean  "marked",             default: false
+    t.boolean  "member",             default: false
+    t.string   "cert_type",          default: "none"
+    t.integer  "fishery_id"
     t.index ["company_id"], name: "index_vessels_on_company_id", using: :btree
+    t.index ["fishery_id"], name: "index_vessels_on_fishery_id", using: :btree
     t.index ["gear_id"], name: "index_vessels_on_gear_id", using: :btree
     t.index ["vessel_type_id"], name: "index_vessels_on_vessel_type_id", using: :btree
   end

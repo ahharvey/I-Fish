@@ -18,7 +18,7 @@ gem 'draftsman', '~> 0.6.0'
 gem 'sidekiq', '~> 4.2.0'
 gem 'validates_timeliness', '~> 4.0.0'
 gem 'chronic', '~> 0.10.2'
-
+gem 'switchery-rails'
 ##
 ## CONTROLLERS
 # gem 'inherited_resources', '~> 1.6.0'
@@ -73,6 +73,8 @@ gem 'oj', '~> 2.18.0' #high performance JSON parser for rabl
 gem 'unf', '~> 0.1.3' #Unicode support required by Fog
 gem 'rqrcode-with-patches', '~>0.6.0'
 gem 'prawn', '~> 2.1.0'
+gem 'prawn-table', '~> 0.2.0'  # enables tables in Prawn
+gem 'prawn-svg', '~> 0.25.0'
 #gem 'prawn-labels', '~> 1.2.3'
 gem 'prawn-qrcode', '~> 0.2.2.1'
 gem 'active_model_serializers', '~> 0.10.0rc4'

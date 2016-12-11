@@ -36,6 +36,10 @@
 #  vessel_id          :integer
 #  created_at         :datetime         not null
 #  updated_at         :datetime         not null
+#  review_state       :string           default("pending")
+#  reviewed_at        :datetime
+#  audit_id           :integer
+#  operational_type   :string
 #
 
 class PendingVessel <  ApplicationRecord
