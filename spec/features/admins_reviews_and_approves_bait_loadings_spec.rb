@@ -19,7 +19,7 @@ RSpec.describe "Admin reviews and approves Bait Loadings" do
 
     before :each do
       bait_loading
-      10.times do |count|
+      3.times do |count|
          create(:bait_loading, vessel: vessel )
       end
       fishery.member_offices.push office
@@ -30,7 +30,7 @@ RSpec.describe "Admin reviews and approves Bait Loadings" do
     it "shows 10 unloadings, and navigates to show on view" do
 
       within "#nav_staff" do
-        is_expected.to have_content '11'
+        is_expected.to have_content '4'
         is_expected.to have_link 'Dashboard', href: staff_dashboard_index_path
       end
 
@@ -38,14 +38,13 @@ RSpec.describe "Admin reviews and approves Bait Loadings" do
       expect(current_path).to eq staff_dashboard_index_path
 
       within "table#bait_loadings.table" do
-        is_expected.to have_selector 'tr.bait_loading', count: 10
-        is_expected.to have_link 'Approved', count: 10
-        is_expected.to have_link 'Rejected', count: 10
-        is_expected.to have_link 'Pending', count: 10
+        is_expected.to have_selector 'tr.bait_loading', count: 4
+        is_expected.to have_link 'Approved', count: 4
+        is_expected.to have_link 'Rejected', count: 4
+        is_expected.to have_link 'Pending', count: 4
       end
 
       expect(bait_loading.approved?).to be false
-      save_and_open_page
       within "tr#bait_loading_#{bait_loading.id}" do
         click_link 'Approved'
       end
@@ -61,7 +60,7 @@ RSpec.describe "Admin reviews and approves Bait Loadings" do
     it "with JS is displays a modal form", :js do
 
       within "#nav_staff" do
-        is_expected.to have_content '11'
+        is_expected.to have_content '4'
         is_expected.to have_link 'Dashboard', href: staff_dashboard_index_path
         find('a[title="Dashboard"]').trigger('click')
       end
@@ -71,10 +70,10 @@ RSpec.describe "Admin reviews and approves Bait Loadings" do
       expect(current_path).to eq staff_dashboard_index_path
 
       within "table#bait_loadings.table" do
-        is_expected.to have_selector 'tr.bait_loading', count: 10
-        is_expected.to have_link 'Approved', count: 10
-        is_expected.to have_link 'Rejected', count: 10
-        is_expected.to have_link 'Pending', count: 10
+        is_expected.to have_selector 'tr.bait_loading', count: 4
+        is_expected.to have_link 'Approved', count: 4
+        is_expected.to have_link 'Rejected', count: 4
+        is_expected.to have_link 'Pending', count: 4
       end
 
       within 'div.modal-body', visible: false do

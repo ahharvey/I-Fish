@@ -19,7 +19,7 @@ RSpec.describe "Admin reviews and approves Unloadings" do
 
 
     before :each do
-      10.times do |count|
+      3.times do |count|
          create(:unloading, vessel: vessel )
       end
       unloading
@@ -31,7 +31,7 @@ RSpec.describe "Admin reviews and approves Unloadings" do
     it "shows 10 unloadings, and navigates to show on view" do
 
       within "#nav_staff" do
-        is_expected.to have_content '11'
+        is_expected.to have_content '4'
         is_expected.to have_link 'Dashboard', href: staff_dashboard_index_path
       end
 
@@ -39,8 +39,8 @@ RSpec.describe "Admin reviews and approves Unloadings" do
       expect(current_path).to eq staff_dashboard_index_path
 
       within "table#unloadings.table" do
-        is_expected.to have_selector 'tr.unloading', count: 10
-        is_expected.to have_link 'View', count: 10
+        is_expected.to have_selector 'tr.unloading', count: 4
+        is_expected.to have_link 'View', count: 4
       end
 
       within "tr#unloading_#{unloading.id}" do
@@ -64,7 +64,7 @@ RSpec.describe "Admin reviews and approves Unloadings" do
     it "with JS is displays a modal form", :js do
 
       within "#nav_staff" do
-        is_expected.to have_content '11'
+        is_expected.to have_content '4'
         is_expected.to have_link 'Dashboard', href: staff_dashboard_index_path
         find('a[title="Dashboard"]').trigger('click')
       end
@@ -74,8 +74,8 @@ RSpec.describe "Admin reviews and approves Unloadings" do
       expect(current_path).to eq staff_dashboard_index_path
 
       within "table#unloadings.table" do
-        is_expected.to have_selector 'tr.unloading', count: 10
-        is_expected.to have_link 'View', count: 10
+        is_expected.to have_selector 'tr.unloading', count: 4
+        is_expected.to have_link 'View', count: 4
       end
 
       within 'div.modal-body', visible: false do
